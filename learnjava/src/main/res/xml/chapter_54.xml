@@ -69,6 +69,23 @@
         if we don't do it ourselves. The default values for variable types will be covered in a later course.
         ]]>
     </advanced>
+    <text>
+        <![CDATA[
+        We are not restricted to declare just one variable with on statement. If we need variables with the same
+        type, we can declare them like this:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#DF7401">int </font>x = 5, y = 9, z = -3;
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        As you can see, the we only need to write the type once, and then we can list the variables by name,
+        and separated by commas.
+        ]]>
+    </text>
     <title text="Referencing and assigning"/>
     <text>
         <![CDATA[

@@ -78,8 +78,12 @@
         ]]>
     </text>
     <boxed title="Exam limitations">
+       <![CDATA[
         You will have limited time to complete the exam. Additionally, if you fail an exam you must wait some time to start it again.
-        After completing an exam, you may redo it anytime without limitations.
+        After completing an exam, you may redo it anytime without having to wait.
+        <br><br>
+        The difficulty of the exams can be changed in the settings menu (top right corner).
+       ]]>
     </boxed>
     <title text="Tasks"/>
     <text>

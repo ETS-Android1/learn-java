@@ -224,9 +224,155 @@
     </question>
 
     <!-- Questions about 'The first program' -->
-    
+    <question type="multi_choice">
+        <text>What is true about the main method?</text>
+        <answer>Every Java program must have this method.</answer>
+        <answer>It has no parameters.</answer>
+        <answer>It's the entry point of the application</answer>
+        <answer>It does not return anything.</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="text">
+        <text>Enter th<question type="single_choice">
+            <text>What does application entry point mean?</text>
+            <answer>It's where the compiler starts compiling your source files.</answer>
+            <answer>The first line of the source file.</answer>
+            <answer>It's where the JVM will start to execute your program.</answer>
+            <answer>It's the only method with no return type.</answer>
+            <correct>2</correct>
+        </question>e statement that will print 'Good morning' to the console.</text>
+        <correct>System.out.println("Good morning");</correct>
+    </question>
+    <question type="text">
+        <text>Enter the statement that will print 'ABC' to the console.</text>
+        <correct>System.out.println("ABC");</correct>
+    </question>
+    <question type="true_false">
+        <text>The statement 'System.out.println(Hello, world!);' is valid.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>The statement 'System.out.println("Hello, world!");' is valid.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>The statement 'System.out.println(Hello, world!)' is valid.</text>
+        <correct>false</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is true about statement execution?</text>
+        <answer>Inside a method, statements are executed from bottom to top.</answer>
+        <answer>The statements are executed in the order they were compiled in.</answer>
+        <answer>Inside a method, statements are executed from top to bottom.</answer>
+        <correct>2</correct>
+    </question>
 
     <!-- Questions about 'Variables' -->
+    <question type="true_false">
+        <text>Java is statically typed.</text>
+        <correct>true</correct>
+    </question>
+    <question type="single_choice">
+        <text>What does statically typed mean?</text>
+        <answer>Variables can only have a few different types.</answer>
+        <answer>When declaring a variable, we must say its type.</answer>
+        <answer>We don't need to say a variables type when declaring it.</answer>
+        <answer>Every variable must have a unique identifier, a name.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="true_false">
+        <text>We must initialize our variable in the same statement it was declared in.</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>Something is missing from the variable declaration 'int x = 5' Write the corrected statement.</text>
+        <correct>int x = 5;</correct>
+        <correct>int x=5;</correct>
+        <correct>int x= 5;</correct>
+        <correct>int x =5;</correct>
+    </question>
+    <question type="text">
+        <text>Something is wrong with the 'String data = 32;' statement. Write the corrected statement, without changing the
+        variables name, or value.</text>
+        <correct>int data = 32;</correct>
+        <correct>int data= 32;</correct>
+        <correct>int data =32;</correct>
+        <correct>int data=32;</correct>
+    </question>
+    <question type="text">
+        <text>Something is wrong with the 'String text "my message";' statement. Write the corrected statement, without changing the
+            variables name, or value.</text>
+        <correct>String text = "my message";</correct>
+        <correct>String text= "my message";</correct>
+        <correct>String text ="my message";</correct>
+        <correct>String text="my message";</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which operator is used to check equality?</text>
+        <answer>==</answer>
+        <answer>-></answer>
+        <answer>=</answer>
+        <answer>+</answer>
+        <correct>0</correct>
+    </question>
+    <question type="single_choice">
+        <text>What does this statement do: 'int data = 21;'</text>
+        <answer>Declares an integer variable called 'data', and initializes it with value 21.</answer>
+        <answer>Declares a data variable called 'int', and initializes it with value 21.</answer>
+        <answer>Checks if the variable 'data' is equal to 21.</answer>
+        <answer>This statement is invalid, it won't do anything.</answer>
+        <correct>0</correct>
+    </question>
+    <question type="single_choice">
+        <text>What does this statement do: 'String input;'</text>
+        <answer>Declares an integer variable called 'input'.</answer>
+        <answer>Declares a String variable called 'input' and initializes it to the users input.</answer>
+        <answer>This statement is invalid, it won't do anything.</answer>
+        <answer>Declares a String variable called 'input'.</answer>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>If we assign a value with with a different type to a variable, the variable will update its type.</text>
+        <correct>false</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is a type mismatch?'</text>
+        <answer>The variable and it's assigned value have different types.</answer>
+        <answer>Not giving a type to our variable.</answer>
+        <answer>When the compiler doesn't recognize the variable type we wrote.</answer>
+        <answer>Not having a main method in our program.</answer>
+        <correct>0</correct>
+    </question>
+    <question type="true_false">
+        <text>One statement can only declare one variable.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>It is possible to declare 4 variables with a single statement.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>Is the 'String i1 = "i_1", i2 = "i_2"; valid?</text>
+        <correct>true</correct>
+    </question>
+    <question type="multi_choice">
+        <text>What is not true integer variables?</text>
+        <answer>They can't be reassigned.</answer>
+        <answer>We can perform basic arithmetic like +, -, or * on them.</answer>
+        <answer>They can contain negative numbers.</answer>
+        <correct>0</correct>
+    </question>
+    <question type="multi_choice">
+        <text>What is true about String variables?</text>
+        <answer>They can be reassigned.</answer>
+        <answer>Their values can be printed to the console.</answer>
+        <answer>We can use the '+' operator on them to connect them together.</answer>
+        <answer>They must be printed in the same method they were declared in.</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+    </question>
 
     <!-- Questions about 'Methods' -->
 
