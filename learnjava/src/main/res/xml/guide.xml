@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Contains the guide components -->
+<resources>
+    <chapterdata> <!-- These are unused, just here so parser doesn't throw exception -->
+        <id>-1</id>
+        <name>guide</name>
+    </chapterdata>
+    <title text="Introduction"/>
+    <text>
+        <![CDATA[
+        The purpose of this application is to help you learn the basics of the
+        <font color="#DF7401">Java programming language</font>. This app, however, cannot do that alone.
+        You will need to install <font color="#DF7401">Java</font> on computer and practice actively
+        while using this app.
+        ]]>
+    </text>
+    <title text="Installing an IDE"/>
+    <text>
+        <![CDATA[
+        To make development easier, using an <font color="#DF7401">Integrated Development Environment
+        (IDE)</font> is recommended. These software provide code editors, build tools and various other
+        tools.
+        ]]>
+    </text>
+    <boxed title="Why should I use an IDE?">
+        <![CDATA[
+        Without an IDE, you must manually install the Java Development Kit (JDK) and use the command
+        line to compile and run your code. The IDEs come with a built in JDK and running your entire
+        project is as simple as pressing a button. The IDE also provides code completion and highlights
+        errors in your code, making them easy to spot.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Here are a few recommended IDEs for PCs and laptops:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li> <a href="https://www.eclipse.org/">Eclipse</a>: The most widely used <font color="#DF7401">Java</font> IDE.</li>
+        <li> <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a>: A great IDE developed by JetBrains.</li>
+        <li> <a href="https://netbeans.org/">NetBeans</a>: Another amazing IDE for <font color="#DF7401">Java</font> development.</li>
+        </ul>
+        ]]>
+    </list>
+    <text>
+        <![CDATA[
+        While coding on your phone is much less convenient, there also exist Java IDEs for android. My recommendation is
+        Java N-IDE, you can find it in the Google Play store <a href="https://play.google.com/store/apps/details?id=com.duy.compiler.javanide&hl=en_US">here</a>.
+        ]]>
+    </text>
+    <advanced title="Without an IDE">
+        <![CDATA[
+        If you for any reason can't or don't want to install any IDE, you can read about installing
+        the JDK <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html">
+        here</a>, and about compiling and running your programs from the command line
+        <a href="https://www.wikihow.com/Compile-%26-Run-Java-Program-Using-Command-Prompt">here</a>.
+        ]]>
+    </advanced>
+    <title text="How the app works"/>
+    <text>
+        <![CDATA[
+        This app splits the curriculum into <b>courses</b>, and within courses into <b>chapters</b>.
+        Initially, only the first course is unlocked. You can unlock additional courses by reading
+        through all the chapters and completing the related <b>exam</b>.
+        <br><br>
+        You may read through the chapters of a course in any order, but it's recommended that you follow the
+        given order, as the chapters are built on each other. You will find a button at the bottom of every
+        chapter. Press this to confirm that you understand its content and ready to move on the the next one.
+        ]]>
+    </text>
+    <title text="Exams"/>
+    <text>
+        <![CDATA[
+        Exams will try to measure how well you understood a course. This app obviously has no way to
+        detect is you are using any outside help, but it's recommended that you do not.
+        ]]>
+    </text>
+    <boxed title="Exam limitations">
+        You will have limited time to complete the exam. Additionally, if you fail an exam you must wait some time to start it again.
+        After completing an exam, you may redo it anytime without limitations.
+    </boxed>
+    <title text="Tasks"/>
+    <text>
+        <![CDATA[
+        You will also find <b>tasks</b> within each course. Tasks are projects that allow
+        you to test your knowledge of the course by creating a full program.
+        <br><br>
+        As tasks are complex exercises with an almost infinite amount of possible solutions,
+        your solution won't be checked by the app. You may mark a task as completed at any time. One correct solution is however
+        provided for each task, which you can use if you are stuck.
+        <br><br>
+        Tasks are optional (but recommended), the exam for a course will unlock even if you never opened any of its tasks.
+        ]]>
+    </text>
+</resources>

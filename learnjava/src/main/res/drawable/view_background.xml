@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A standard background with a thin black border and @color/windowBackground. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <stroke android:color="@android:color/black"
+        android:width="@dimen/border_width"/>
+    <solid android:color="@color/windowBackground"/>
+    <corners android:radius="@dimen/radius"/>
+    <padding android:right="@dimen/padding"
+        android:left="@dimen/padding"
+        android:bottom="@dimen/padding"
+        android:top="@dimen/padding"/>
+</shape>

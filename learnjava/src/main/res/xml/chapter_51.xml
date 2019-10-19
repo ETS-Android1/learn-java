@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 'What is Java?', belongs to course 'The basics' -->
+
+<resources>
+    <chapterdata>
+        <id>51</id>
+        <name>What is Java?</name>
+    </chapterdata>
+
+    <text>
+        <![CDATA[
+        Java is a set of specifications for a <b>software platform</b>. It's purpose it to allow programmers to create a wide
+        range of applications for a <b>cross-platform</b> environment. In this chapter and the next one
+        we will take a look at what these terms mean, and how does the Java platform provides all this.
+        ]]>
+    </text>
+    <boxed title="Not just a programming language">
+        Notice that the Java platform is more then just a programming language, however it does contain
+        a language, the one which shares a name with the platform, Java. Several other languages such as
+        Kotlin or Groovy also use the Java platform!
+    </boxed>
+    <text>
+        <![CDATA[
+        The platform was created by <a href="https://en.wikipedia.org/wiki/James_Gosling">James Gosling</a>
+         at Sun Microsystems, and now it's owned by the
+        <a href="https://en.wikipedia.org/wiki/Oracle_Corporation">Oracle Corporation</a>.
+        ]]>
+    </text>
+    <text>
+        <![CDATA[
+        <u>Some important parts of the Java platform are:</u>
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>The Java programming language</li>
+        <li>The Java Compiler (javac): compiles Java code into <b>bytecode</b></li>
+        <li>The Java Virtual Machine (JVM): executes the compiled bytecode, runs Java programs</li>
+        <li>Class libraries: A large set of pre-written and compiled code, which can be used by any Java application.</li>
+        </ul>
+        ]]>
+    </list>
+   <title text="The Java Development Kit"/>
+    <text>
+        <![CDATA[
+        Notice that so far we only talked about a list of specifications for a software platform, and not
+        an actual implementation! These specifications are public, and so anyone can create their own version of the
+        platform, provided that they follow the rules of the specifications.
+        ]]>
+    </text>
+    <text>
+        <![CDATA[
+        But since creating this takes an immense amount of work, Oracle also provides their implementation,
+        called the <b>Java Development Kit (JDK)</b>. This is the most widely used implementation, but others
+        also exist, such as the <a href="https://en.wikipedia.org/wiki/OpenJDK">OpenJDK</a>.
+        ]]>
+    </text>
+    <boxed title="Using an IDE">
+        <![CDATA[
+        The programmer can install the JDK and start to develop and run Java applications with a simple text
+        editor and the command line. As this can be tedious, especially for large projects, usually an
+        <b>integrated development environment</b> is used. More about this topic can be found in the guide!
+        ]]>
+    </boxed>
+    <title text="Cross platform and the WORA principle"/>
+    <text>
+        <![CDATA[
+        Java uses the <b>Write once, Run anywhere (WORA)</b> principle. This means that the programmer only
+        needs to write and compile the source code once, after that, the compiled <b>bytecode</b> can
+        be run with the Java Virtual Machine on any platform, such as Windows or Linux.
+        ]]>
+    </text>
+    <image name="java_platform_structure"/>
+    <text>The above image illustrates how the WORA principle works in Java.</text>
+    <title text="From source code to execution"/>
+    <text>
+        <![CDATA[
+        Lets see what happens when we decide to stop programming, and want to execute our code:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ol>
+        <li>1. - The source code is given to the compiler.</li>
+        <li>2. - The compiler checks if the code is valid, and if it is, compiles it into <b>bytecode</b>.</li>
+        <li>3. - The <b>bytecode</b> is given to the Java Virtual Machine, which executes it.</li>
+        </ol>
+        ]]>
+    </list>
+    <text>
+        <![CDATA[
+        Our IDE provides a <i>run</i> button for us, which will do this process for all our source
+        files in the project. This way we don't have to call the <b>javac</b> and <b>java</b> commands
+        from the command line.
+        ]]>
+    </text>
+    <title text="The Java programming language"/>
+    <text>
+        <![CDATA[
+        Finally, lets take a look at the the programming language of the platform, Java. It is one of the
+        most widely used language as of this day.
+        ]]>
+    </text>
+    <text>
+        <![CDATA[
+        The two most important properties of Java are that it's <b>general-purpose</b> and it's <b>object-oriented</b>.
+        It's not hard to guess what general-purpose means in this context. Indeed, it means that Java can be and is used
+        for a wide range of tasks:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>Web applications</li>
+        <li>Android applications (this very app was written in Java!)</li>
+        <li>Cross-platform desktop applications</li>
+        <li>And many more...</li>
+        </ul>
+        ]]>
+    </list>
+    <advanced title="Object-oriented">
+        <![CDATA[
+        <i>Object-oriented</i> is a more difficult concept, which will be covered in depth in the later courses.
+        ]]>
+    </advanced>
+</resources>

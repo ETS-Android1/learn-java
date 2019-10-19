@@ -1,0 +1,200 @@
+package com.gaspar.learnjava;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.gaspar.learnjava.asynctask.FillCourseActivityTask;
+import com.gaspar.learnjava.curriculum.Chapter;
+import com.gaspar.learnjava.curriculum.Course;
+import com.gaspar.learnjava.curriculum.Exam;
+import com.gaspar.learnjava.curriculum.Status;
+import com.gaspar.learnjava.curriculum.Task;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.material.navigation.NavigationView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Activity of the PARSED_COURSES.
+ */
+public class CoursesActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
+            , UpdatableActivity {
+
+    /**
+     * Used by background threads to indicate if the activity has loaded successfully.
+     */
+    public volatile boolean successfulLoad;
+
+    /**
+     * A list of the course objects parsed by the app.
+     */
+    private static final List<Course> PARSED_COURSES = new ArrayList<>();
+
+    //these constants are used what kind of activity finished.
+    public static final int CHAPTER_REQUEST_CODE = 23;
+    public static final int TASK_REQUEST_CODE = 24;
+    public static final int EXAM_REQUEST_CODE = 25;
+
+    /**
+     * Holds the reference to the view that will be updated when the chapter, task, etc, ...
+     * activity finishes.
+     */
+    private View updateView;
+
+    @Override
+    public void onCreate(Bundle savedState) {
+        super.onCreate(savedState);
+        setContentView(R.layout.courses);
+        setUpUI();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ((AdView)findViewById(R.id.adView)).destroy();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        ((AdView)findViewById(R.id.adView)).pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ((AdView)findViewById(R.id.adView)).resume();
+    }
+
+    private void setUpUI() {
+        new FillCourseActivityTask().execute(this); //fill list view.
+        addCourseOnClickListeners();
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView.setNavigationItemSelectedListener(this);
+
+        AdView adView = findViewById(R.id.adView); //load ad
+        adView.loadAd(new AdRequest.Builder().build());
+    }
+
+    /**
+     * Updates the {@link #updateView}, so the selectors are updated to reflect possible changes.
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode != Activity.RESULT_OK) return;
+        if(data.getExtras() == null) return;
+        switch (requestCode) {
+            case CHAPTER_REQUEST_CODE: //a chapter activity just finished
+                ImageView icon = updateView.findViewById(R.id.chapterStatusIcon);
+                Chapter chapter = (Chapter) data.getExtras().getSerializable(Chapter.CHAPTER_PREFERENCE_STRING);
+                if(chapter == null) return;
+                chapter.queryAndDisplayStatus(icon, CoursesActivity.this);
+                break;
+            case TASK_REQUEST_CODE: //task activity finished
+                ImageView taskIcon = updateView.findViewById(R.id.taskStatusIcon);
+                Task task = (Task)data.getExtras().getSerializable(Task.TASK_PREFERENCE_STRING);
+                if(task == null) return;
+                task.queryAndDisplayStatus(taskIcon, CoursesActivity.this);
+                break;
+            case EXAM_REQUEST_CODE:
+                Exam exam = (Exam)data.getExtras().getSerializable(Exam.EXAM_PREFERENCE_STRING);
+                if(exam == null) return;
+                //update view will be the exam view
+                exam.queryAndDisplayStatus(updateView, CoursesActivity.this);
+                break;
+        }
+    }
+
+    /**
+     * Adds a listener to each list view element. The listener hides or shows the chapter/task/exam
+     * views on click, if the course is unlocked or completed.
+     */
+    private void addCourseOnClickListeners() {
+        ListView courseViews = findViewById(R.id.courseSelectors);
+        courseViews.setOnItemClickListener((adapterView, view, position, l) -> {
+            Course c = PARSED_COURSES.get(position);
+            if(c.getStatus() == Status.LOCKED || c.getStatus()==Status.NOT_QUERIED) return; //nothing happens on locked PARSED_COURSES
+            LinearLayout slideInView = view.findViewById(R.id.slideInView);
+            if(slideInView.getVisibility() == View.GONE) {
+                AnimationUtils.slideIn(slideInView);
+            } else { //visible
+                AnimationUtils.slideOut(slideInView);
+            }
+        });
+    }
+
+    /**
+     * Settings button (in the toolbar) click handler.
+     */
+    public void settingsOnClick(View v) {
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId(); // Handle navigation view item clicks here.
+        Intent intent = null;
+        if(id == R.id.nav_tasks) {
+            intent = new Intent(this, TasksActivity.class);
+        } else if(id == R.id.nav_exams) {
+            intent = new Intent(this, ExamsActivity.class);
+        } else if(id == R.id.nav_guide) {
+            intent = new Intent(this, GuideActivity.class);
+        } else if(id == R.id.nav_starter_screen) {
+            intent = new Intent(this, LearnJavaActivity.class);
+        }
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        if(intent == null) return true;
+        startActivity(intent); //start selected activity
+        return true;
+    }
+
+    public static List<Course> getParsedCourses() {
+        return PARSED_COURSES;
+    }
+
+    public static boolean coursesNotParsed() {
+        return PARSED_COURSES.isEmpty();
+    }
+
+    @Override
+    public void setUpdateView(View updateView) {
+        this.updateView = updateView;
+    }
+}

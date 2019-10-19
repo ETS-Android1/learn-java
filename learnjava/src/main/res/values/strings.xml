@@ -1,0 +1,102 @@
+<resources>
+    <!-- General -->
+    <string name="app_name">Learn Java</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Learn Java</string>
+    <string name="nav_header_subtitle">Browse courses, take exams</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="status_icon">Status icon</string>
+    <string name="loading_error">An error has occurred while loading %1$s!</string>
+    <string name="tap_to_see_details">Tap to see details</string>
+
+    <!-- Ads -->
+    <string name="admob_app_id" translatable="false">ca-app-pub-7754228088611040~7265518837</string>
+    <string name="ad_unit_id_banner_test" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="ad_unit_id_banner_courses" translatable="false">ca-app-pub-7754228088611040/2723638595</string>
+    <string name="ad_unit_id_banner_exams" translatable="false">ca-app-pub-7754228088611040/6293000907</string>
+    <string name="ad_unit_id_banner_tasks" translatable="false">ca-app-pub-7754228088611040/4979919236</string>
+    <string name="ad_unit_id_interstitial_test" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="ad_unit_id_interstitial_chapter" translatable="false">ca-app-pub-7754228088611040/4461539327</string>
+    <string name="ad_unit_id_interstitial_task" translatable="false">ca-app-pub-7754228088611040/2206911076</string>
+
+    <!-- Settings -->
+    <string name="notifications">Notifications</string>
+    <string name="exam_notifications">Enable exam notifications</string>
+    <string name="difficulty">Difficulty</string>
+    <string name="difficulty_easy">Easy: 50% required to pass</string>
+    <string name="difficulty_default">Default: 60% required to pass</string>
+    <string name="difficulty_challenging">Challenging: 80% required to pass, limited time</string>
+    <string name="reset">Reset progress</string>
+    <string name="reset_details">Reset chapter, task and exam progression</string>
+    <string name="reset_warning">This can\'t be undone. Are you sure?</string>
+    <string name="reset_successful">The application was reset</string>
+
+    <!-- Notification data -->
+    <string name="notification_channel_name" translatable="false">LearnJava notification channel</string>
+    <string name="notification_channel_description" translatable="false">…</string>
+    <string name="notification_exam_ready">Exam ready</string>
+    <string name="notification_exam_name_message">\'%1$s\' exam can now be started again!</string>
+
+    <!-- Text for the drawer -->
+    <string name="courses">Courses</string>
+    <string name="tasks">Tasks</string>
+    <string name="exams">Exams</string>
+    <string name="guide">Guide</string>
+    <string name="starter_screen">Starter screen</string>
+
+    <!-- When the user has not started a course yet -->
+    <string name="before_you_start">Read the guide before you start:</string>
+    <string name="start_learning">Start learning</string>
+    <!-- When the user already started some course -->
+    <string name="continue_where_you_left_off">Continue where you left off</string>
+
+    <!-- Exam selection -->
+    <string name="take_exam">Take exam</string>
+    <string name="exam_countdown_prompt">Exam available in</string>
+    <string name="exam_locked">Exam locked</string>
+    <string name="hour_suffix">h</string>
+    <string name="minute_suffix">m</string>
+    <string name="second_suffix">s</string>
+    <string name="exam">Exam</string>
+    <string name="time_remaining">Time remaining:</string>
+    <string name="finish_exam">Finish exam</string>
+    <string name="close_exam">Close exam</string>
+    <string name="confirm_finish_exam">Are you sure you want to finish the exam?</string>
+    <string name="exam_time_expired">The exam time has expired!</string>
+    <string name="unfortunate">Unfortunate</string>
+    <string name="confirm_abandon_exam">Are you sure you want to abandon this exam?</string>
+    <string name="exam_passed">Exam passed!</string>
+    <string name="exam_failed">Exam failed!</string>
+    <string name="points">points</string>
+
+    <!-- Question -->
+    <string name="question_icon">Question status icon</string>
+    <string name="unanswered_question">There is 1 unanswered question!</string>
+    <string name="unanswered_questions">There are %1$s unanswered questions!</string>
+    <string name="multi_choice">multiple choices possible</string>
+    <string name="text_question_hint">Enter your answer here</string>
+    <string name="text_question_solution">A possible solution:</string>
+    <string name="true_answer">TRUE</string>
+    <string name="false_answer">FALSE</string>
+
+    <!-- Tasks -->
+    <string name="must_unlock_course_before_task">
+        You must unlock the course it belongs to before you can start this task.
+    </string>
+    <string name="mark_task_as_completed">Mark this task as completed</string>
+    <string name="show_solution">Show solution</string>
+    <string name="hide_solution">Hide solution</string>
+
+    <!-- Chapter components -->
+    <string name="code">CODE</string>
+    <string name="copy_content">Copy content</string>
+    <string name="copy_successful">Code copied to clipboard</string>
+    <string name="copy_failed">Failed to copy code</string>
+    <string name="advanced">ADVANCED</string>
+    <string name="confirm_chapter">Confirm chapter</string>
+    <string name="image_component_desc">Image component</string>
+</resources>

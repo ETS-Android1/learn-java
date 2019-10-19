@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 'Comments in the code', belongs to course 'The basics' -->
+
+<resources>
+    <chapterdata>
+        <id>57</id>
+        <name>Comments in the code</name>
+    </chapterdata>
+    <text>
+        <![CDATA[
+Comments are special parts of the code, which are <b>for the programmer only</b>. They are used to make it easier
+to understand and document the code we write.
+        ]]>
+    </text>
+    <title text="Single-line comments"/>
+    <text>
+        <![CDATA[
+        Single-line comments can be created with the '<i>//</i> ' symbols. They make the part of the line
+        right of the slashes into a comment.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#999900">String</font> date; <font color="gray">//the date is in YYYY:MM:DD format</font>
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+In the above example we created a variable to store dates as text. Dates, however, can be in many formats.
+    The purpose of this comment is to remind us that we store our dates in the <i>YYYY:MM:DD</i> format, so when
+    we later open our code we don't have to waste time figuring out what format we used.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="gray">//The input isn't validated here!</font>
+<br/><font color="#999900">String</font> userInput = getUserInput();
+<br><br>
+...
+<br><br>
+<font color="#999900">String</font> validInput = validate(userInput);
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        In this example, we warn ourselves that the <i>userInput</i> variable must be checked before we use
+        it in other parts of the program. This might seem obvious when writing the code, but if you continue coding
+        some time later, you might not remember, and use invalid input, which can cause errors!
+        ]]>
+    </text>
+    <title text="Multi-line comments"/>
+    <text>
+        <![CDATA[
+        Sometimes we would like to write long comments, that span multiple lines. One way to achieve this
+        is using multiple single line comments, like this:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="gray">//Numeric input is expected. Not validated here,
+</font>
+<br/><font color="gray">// call validate method before using!
+</font>
+<br/><font color="#999900">String</font> userInput = getUserInput();
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        The problem with this approach is that we must write the slashes in the beginning of every line.
+        <br><br>
+        Java offers a way to more conveniently create multi-lined comments: Text between '<i>/*</i>' and
+        '<i>*/</i> ' symbols will be treated as a comment! Here is out previous code sample, with a proper
+        multi-line comment:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="gray">
+/*<br>
+Numeric input is expected from the user, but it isn't validated here,
+so make sure to call validate method before using!<br>
+*/</font>
+<br/><font color="#999900">String</font> userInput = getUserInput();
+        ]]>
+    </code>
+    <title text="TODO"/>
+    <text>
+        <![CDATA[
+        If our code is not yet complete, and we would like to mark where do we need to work on it, <b>TODO</b>
+        can be used inside a comment. Note that this is not a feature of Java, but our IDE will recognize the TODO
+        word, and highlight it for us, so we can easily find the unfinished part of out code.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="gray">//TODO: finish writing this method!</font>
+<br/>public<font color="#DF7401"> void </font>validate(<font color="#999900">String</font> userInput) {
+<br/>
+<br/>}
+        ]]>
+    </code>
+    <title text="Commenting conventions"/>
+    <text>
+        <![CDATA[
+        The general advice is to <b>always comment your code</b>, to help you and others make sense of it! Yes,
+        writing comments, and not just actual code takes more time and effort, but it pays out in the long run,
+        and saves you from a lot of hard to trace bugs.
+        <br><br>
+        Stating the obvious isn't needed. Only write a comment when it has an added value to the code. See the
+        example below for a completely unnecessary comment.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#DF7401">int </font>x = 5; <font color="gray">//An integer variable named x, with value 5.</font>
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        This comment adds no additional information. The variable type, name and the initial value can easily
+        be read from the code alone.
+        ]]>
+    </text>
+    <advanced title="Javadoc">
+        <![CDATA[
+        Javadoc comments are special type of comments, designed for code documentation. Documentation means
+        that we write detailed messages about our methods and classes, mainly for other programmers, who will
+        use them later.
+        <br><br>
+        The Java Development Kit contains a program, also called <i>javadoc</i>, which can generate neat, HTML-based documentation
+        simply from our javadoc comments! Even the official Java documentation is created using this program, here is an
+        <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/String.html">example</a> for the <i>String</i> class.
+        <br><br>
+        You can find a detailed guide for writing javadoc comments <a href="https://www.tutorialspoint.com/java/java_documentation.htm">here</a>.
+        ]]>
+    </advanced>
+</resources>

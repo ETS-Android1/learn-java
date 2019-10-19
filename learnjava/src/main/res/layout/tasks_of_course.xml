@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- For each course one of this is added to the list view in the tasks activity -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/courseNameBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/courseNameView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:textAppearance="@style/title"
+            tools:text="Course name" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/statusIconView"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="@dimen/side_margin"
+            android:contentDescription="@string/status_icon"
+            tools:srcCompat="@drawable/locked_icon"/>
+    </LinearLayout>
+
+    <!-- Tasks of the course are added to this at runtime -->
+    <LinearLayout
+        android:id="@+id/tasksOfCourse"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:layout_height="100dp"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <include layout="@layout/separator_line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_height"/>
+
+    </LinearLayout>
+
+</LinearLayout>

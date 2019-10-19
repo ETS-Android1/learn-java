@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Background for buttons. Uses primary color and rounded black border. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <stroke android:color="@android:color/black"
+        android:width="@dimen/border_width"/>
+    <padding android:top="@dimen/padding"
+        android:bottom="@dimen/padding"
+        android:left="@dimen/padding"
+        android:right="@dimen/padding"/>
+    <solid android:color="@color/colorPrimary"/>
+    <corners android:radius="@dimen/radius"/>
+</shape>

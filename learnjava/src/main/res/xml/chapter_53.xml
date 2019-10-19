@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 'The first program', belongs to course 'The basics' -->
+
+<resources>
+    <chapterdata>
+        <id>53</id>
+        <name>The first program</name>
+    </chapterdata>
+    <text>
+        <![CDATA[
+        From this point on, it's important that you also write or copy the code samples to your IDE
+        and experiment with them.
+        ]]>
+    </text>
+    <boxed title="How to create a project">
+        <![CDATA[
+        If you are using eclipse, select <b>File -> New -> New project... </b>, then enter a name for your
+        project and click <i>Finish</i>. You will see that your project appears on the left side, with an empty
+        <b>src</b> folder.
+        <br><br>
+        For this simple project we will use the default package. Right click the src folder and select <b>New ->
+        Class</b>, then enter a name for your class. Before clicking <i>Finish</i>, make sure to tick <b>public
+        static void main(String[] args)</b> field!
+        <br><br>
+        If you are using another recommended IDE from the guide, follow the instructions
+         <a href="https://www.tutorialspoint.com/intellij_idea/intellij_idea_create_first_java_project.htm">here</a>
+        for Intellij Idea, and <a href="https://netbeans.org/kb/docs/java/quickstart.html">here</a> for NetBeans.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        The core of the project has been created for you. For Eclipse, you should see something like this on the editor screen (with
+         your own class name, of course):
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        public<font color="#E65100"> class </font>Main {
+<br/>
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;public </font>static<font color="#DF7401"> void </font>main(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">// TODO: Auto-generated method stub</font>
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        The part that begins with <i>public static void main</i> is called the <b>main method</b>. Java apps can have many
+        different methods, but they always have one main method, like this one. This is where the JVM will start to
+        execute our program, and so it is called the application's <b>entry point</b>.
+        ]]>
+    </text>
+    <text>
+        <![CDATA[
+        The line '<font color="gray">// TODO: Auto-generated method stub</font>' inside the method is called a <b>comment</b>,
+        and it will be cowered in a later chapter. Feel free to delete it for now, or you can also just leave it there.
+        ]]>
+    </text>
+    <boxed title="Running our program">
+        <![CDATA[
+        The code that our IDE has generated is valid, and we can run it right away. In Eclipse you can compile run the project
+        by pressing the round green icon with a white arrow in it (see the image below).
+        <br><br>
+        Feel free to run the code, but our main method is practically empty, so our application will not do anything, for now!
+        ]]>
+    </boxed>
+    <image name="run_project"/>
+    <text>
+        <![CDATA[
+        Lets add a statement, so our program will print a line to the console for us. In Java, statements
+        must end with a ';'.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        public static<font color="#DF7401"> void </font>main(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Hello, world!");
+<br/>
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        As you can see, we can print text to the console with the <b>System.out.println()</b> method.
+        Anything we write inside the parentheses, between " " symbols will be shown on the console!
+        You can replace the "Hello, world" with any text of your choosing!
+        ]]>
+    </text>
+    <text>
+        <![CDATA[
+        If we run the project again we can see that the console is opened (somewhere near the bottom of the screen),
+         and it shows our message.
+        ]]>
+    </text>
+    <title text="Getting error messages"/>
+    <text>
+        <![CDATA[
+        If you get some kind of error message, make sure your main method is the same as the one above.
+        It's easy to miss the ';' at the end of the line, or to forget that the message we want printed
+        must be between " " symbols.
+        <br><br>
+        For example, let's suppose we forgot our " " symbols, and our main method looks like this:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        public static<font color="#DF7401"> void </font>main(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(Hello, world!);
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Even before trying to compile and run, our IDE will notice that something is not right, and will
+        highlight the invalid code for us. For example, in Eclipse it will show this message:
+        ]]>
+    </text>
+    <image name="error_highlight"/>
+    <text>
+        <![CDATA[
+        The IDE's error highlighting will greatly help us find errors in our code.
+        ]]>
+    </text>
+    <title text="Let's add more statements"/>
+    <text>
+        <![CDATA[
+        Let us add another print statement for our code, after the previous one:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+public static<font color="#DF7401"> void </font>main(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Hello, world!");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Have a nice day!");
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        We expect that the messages will appear in the console in the same order as they are in the code.
+        Run again, and notice that this is exactly what happens.
+        <br><br>
+        In general, statements inside a method are executed <b>from top to bottom</b>.
+        ]]>
+    </text>
+</resources>

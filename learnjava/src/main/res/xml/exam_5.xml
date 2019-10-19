@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Exam of course 'The basics -->
+
+<resources>
+    <examdata>
+        <id>5</id>
+        <questionAmount>30</questionAmount>
+        <timeLimit>10</timeLimit>
+    </examdata>
+    <!-- Questions about 'What is Java?' -->
+    <question type="multi_choice">
+        <text>When we say 'Java', what can we mean by it?</text>
+        <answer>A platform for software development</answer>
+        <answer>A database</answer>
+        <answer>A programming language</answer>
+        <answer>Bytecode</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+    </question>
+    <question type="true_false">
+        <text>Is Java cross platform?</text>
+        <correct>true</correct>
+    </question>
+    <question type="single_choice">
+        <text>What does cross platform mean?</text>
+        <answer>You only have to compile your programs once.</answer>
+        <answer>You programs will run in multiple environments, operation systems.</answer>
+        <answer>Your programs are guaranteed to run on Linux.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which corporation take or took part in the development of Java?</text>
+        <answer>Sun Microsystems</answer>
+        <answer>Oracle Corporation</answer>
+        <answer>Google</answer>
+        <answer>IBM</answer>
+        <correct>0</correct>
+        <correct>1</correct>
+    </question>
+    <question type="true_false">
+        <text>Java is currently owned by Sun Microsystems.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>Java is currently owned by the Oracle Corporation.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>The Java platform is designed in a way so that only one programming language, Java, can use it.</text>
+        <correct>false</correct>
+    </question>
+    <question type="single_choice">
+        <text>Select what is not part of the Java platform!</text>
+        <answer>The Java programming language.</answer>
+        <answer>Java compiler (javac)</answer>
+        <answer>The JVM</answer>
+        <answer>An integrated development environment (IDE).</answer>
+        <correct>3</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Select what is part of the Java platform!</text>
+        <answer>The Java programming language.</answer>
+        <answer>Java compiler (javac)</answer>
+        <answer>The JVM</answer>
+        <answer>An integrated development environment (IDE).</answer>
+        <correct>0</correct>
+        <correct>1</correct>
+        <correct>2</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is the JDK</text>
+        <answer>An implementation of the Java platform</answer>
+        <answer>A programming language based on Java.</answer>
+        <answer>A compiler for Java.</answer>
+        <correct>0</correct>
+    </question>
+    <question type="text">
+        <text>What does JDK stand for?</text>
+        <correct>Java Development Kit</correct>
+        <correct>Java Development kit</correct>
+        <correct>Java development Kit</correct>
+        <correct>java Development Kit</correct>
+        <correct>java development Kit</correct>
+        <correct>java development kit</correct>
+    </question>
+    <question type="text">
+        <text>What does JVM stand for?</text>
+        <correct>Java Virtual Machine</correct>
+    </question>
+    <question type="text">
+        <text>What does IDE stand for?</text>
+        <correct>Integrated Development Environment</correct>
+        <correct>Integrated Development environment</correct>
+        <correct>Integrated development Environment</correct>
+        <correct>Integrated development environment</correct>
+        <correct>integrated development environment</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is the purpose of the JVM?</text>
+        <answer>Compiles Java code to bytecode.</answer>
+        <answer>Contains the specifications for the Java platform.</answer>
+        <answer>Executes Java applications.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which properties are true for the Java programming language?</text>
+        <answer>It can only be executed over Windows OS.</answer>
+        <answer>Object-oriented</answer>
+        <answer>General-purpose</answer>
+        <answer>Dynamically-typed</answer>
+        <correct>1</correct>
+        <correct>2</correct>
+    </question>
+
+    <!-- Questions about 'File extensions and project structure' -->
+    <question type="true_false">
+        <text>.java files are text files.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>Only the JVM may open .java files.</text>
+        <correct>false</correct>
+    </question>
+    <question type="single_choice">
+        <text>Are there any restrictions on naming .java files.</text>
+        <answer>The name of file must match the name of the public class inside it.</answer>
+        <answer>No restrictions.</answer>
+        <answer>The file names can't contain capital letters.</answer>
+        <answer>The file name must begin with an underscore.</answer>
+        <correct>0</correct>
+    </question>
+    <question type="true_false">
+        <text>.class files contain bytecode</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>The JVM can execute .java files.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>The JVM can execute .class files.</text>
+        <correct>true</correct>
+    </question>
+    <question type="multi_choice">
+        <text>What is true about .class files?</text>
+        <answer>They are readable text files.</answer>
+        <answer>The JVM can execute them.</answer>
+        <asnwer>The Java compiler creates them from .java files.</asnwer>
+        <answer>They are binary files.</answer>
+        <correct>1</correct>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="text">
+        <text>What is the file extension of a Java source file?</text>
+        <correct>.java</correct>
+        <correct>java</correct>
+    </question>
+    <question type="text">
+        <text>What is the file extension of compiled Java source file, containing bytecode?</text>
+        <correct>.class</correct>
+        <correct>class</correct>
+    </question>
+    <question type="text">
+        <text>What is the file extension of a Java archive?</text>
+        <correct>.jar</correct>
+        <correct>jar</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is a Java archive?</text>
+        <answer>Output of the Java compiler.</answer>
+        <answer>A collection of Java source files.</answer>
+        <answer>A compressed file containing data for a Java application.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="true_false">
+        <text>JAR files can be made executable.</text>
+        <correct>true</correct>
+    </question>
+    <question type="multi_choice">
+        <text>What is the purpose of packages?</text>
+        <answer>They separate compiled and not compiled Java files.</answer>
+        <answer>They contain the JDK.</answer>
+        <answer>They are used to organize our classes by their function.</answer>
+        <answer>They give the structure of a project.</answer>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>Packages are not allowed to contain other packages.</text>
+        <correct>false</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which package names are restricted?</text>
+        <answer>java</answer>
+        <answer>org</answer>
+        <answer>project</answer>
+        <answer>javax</answer>
+        <correct>0</correct>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>The package declaration line must always be the last line of the source file.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>There must always be a package declaration line in the source file, on the first line.</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>We would like to import a class named 'Utils' from package 'calculator', which is inside package 'com'.
+        What is the import line we must write?</text>
+        <correct>import com.calculator.Utils;</correct>
+    </question>
+    <question type="text">
+        <text>We are creating a class into package 'utils', which is inside package 'org'. What is the package declaration statement
+        we must write?</text>
+        <correct>package org.utils;</correct>
+    </question>
+    <question type="true_false">
+        <text>Using the default package is discouraged.</text>
+        <correct>true</correct>
+    </question>
+
+    <!-- Questions about 'The first program' -->
+    
+
+    <!-- Questions about 'Variables' -->
+
+    <!-- Questions about 'Methods' -->
+
+    <!-- Questions about 'Naming rules and conventions' -->
+
+    <!-- Questions about 'Comments in the code' -->
+
+</resources>

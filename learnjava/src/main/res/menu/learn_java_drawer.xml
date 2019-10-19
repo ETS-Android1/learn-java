@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:checkableBehavior="none"
+        android:id="@+id/starter_screen_group">
+        <item
+            android:id="@+id/nav_starter_screen"
+            android:title="@string/starter_screen"
+            android:icon="@drawable/starter_screen_icon">
+        </item>
+    </group>
+
+    <group
+        android:checkableBehavior="none"
+        android:id="@+id/essentials_group">
+        <item
+            android:id="@+id/nav_courses"
+            android:icon="@drawable/courses_icon"
+            android:title="@string/courses" />
+        <item
+            android:id="@+id/nav_tasks"
+            android:icon="@drawable/task_icon"
+            android:title="@string/tasks" />
+        <item
+            android:id="@+id/nav_exams"
+            android:icon="@drawable/exam_icon"
+            android:title="@string/exams" />
+    </group>
+
+    <group
+        android:checkableBehavior="none"
+        android:id="@+id/others_group">
+            <item
+                android:id="@+id/nav_guide"
+                android:icon="@drawable/info_icon"
+                android:title="@string/guide"/>
+    </group>
+
+</menu>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.gaspar.learnjava">
+
+    <uses-permission android:name="android.permission.VIBRATE" /> <!-- For notification -->
+
+    <application
+        android:allowBackup="true"
+        android:fullBackupContent="false"
+        android:icon="@mipmap/test_icon"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/test_icon_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".LearnJavaActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="sensorPortrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- Grouping activities -->
+        <activity
+            android:name=".CoursesActivity"
+            android:label="@string/courses" />
+        <activity
+            android:name=".TasksActivity"
+            android:label="@string/tasks"/>
+        <activity
+            android:name=".ExamsActivity"
+            android:label="@string/exams"/>
+        <!-- Guide -->
+        <activity
+            android:name=".GuideActivity"
+            android:label="@string/guide"/>
+        <!-- Settings -->
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/action_settings"/>
+        <activity
+            android:name=".ChapterActivity" />
+        <activity
+            android:name=".TaskActivity" /> <!-- label set at runtime -->
+        <activity
+            android:name=".ExamActivity"
+            android:windowSoftInputMode="stateHidden"
+            android:label="@string/exam"/>
+        <!-- This service posts the notification for the exam -->
+        <receiver
+            android:name=".ExamNotificationReceiver"
+            android:exported="false"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="NOTIFICATION_SERVICE" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/admob_app_id"/>
+    </application>
+</manifest>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/code_component_background"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/small_margin"
+    android:elevation="@dimen/elevation">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/code"
+        android:layout_gravity="start"/>
+
+    <!-- actual formatted code is displayed here -->
+    <TextView
+        android:id="@+id/codeArea"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/code_area_background"
+        android:textColor="@color/code_text_color"
+        android:textSize="@dimen/small_text_size"
+        tools:layout_height="200dp" />
+
+    <ImageButton
+        android:layout_margin="@dimen/margin"
+        android:id="@+id/copyButton"
+        android:layout_width="@dimen/icon_size"
+        android:layout_height="@dimen/icon_size"
+        android:src="@drawable/copy_icon"
+        android:layout_gravity="end"
+        android:backgroundTint="@color/colorPrimary"
+        android:contentDescription="@string/copy_content"/>
+
+</LinearLayout>

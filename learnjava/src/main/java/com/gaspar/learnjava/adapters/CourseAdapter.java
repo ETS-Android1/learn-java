@@ -1,0 +1,130 @@
+package com.gaspar.learnjava.adapters;
+
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.Size;
+
+import com.gaspar.learnjava.CoursesActivity;
+import com.gaspar.learnjava.R;
+import com.gaspar.learnjava.curriculum.Chapter;
+import com.gaspar.learnjava.curriculum.Course;
+import com.gaspar.learnjava.curriculum.Task;
+
+import java.util.List;
+
+/**
+ * Fills the list view in {@link com.gaspar.learnjava.CoursesActivity} with views for each
+ * parsed course object.
+ */
+public class CourseAdapter extends ArrayAdapter<Course> {
+
+    private CoursesActivity activity;
+
+    /**
+     * Alpha animation applied to selectors on click.
+     */
+    private final Animation clickAnimation;
+
+    public CourseAdapter(CoursesActivity activity, @Size(min=1) List<Course> courses) {
+        super(activity, R.layout.course_selector_view, courses);
+        this.activity = activity;
+        clickAnimation = AnimationUtils.loadAnimation(activity, R.anim.click);
+    }
+
+    @Override
+    @NonNull
+    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        CourseViewHolder viewHolder;
+        Course course = getItem(position);
+        if(convertView == null) { //first time
+            LayoutInflater inflater = LayoutInflater.from(activity);
+            convertView = inflater.inflate(R.layout.course_selector_view, parent, false);
+            viewHolder = new CourseViewHolder();
+            viewHolder.courseNameView = convertView.findViewById(R.id.courseNameView); //cache views
+            viewHolder.statusIcon = convertView.findViewById(R.id.statusIconView);
+            viewHolder.chaptersView = convertView.findViewById(R.id.chaptersView);
+            viewHolder.tasksView = convertView.findViewById(R.id.tasksView);
+            viewHolder.examView = convertView.findViewById(R.id.examSelector);
+            convertView.setTag(viewHolder);
+        } else { //recycling
+            viewHolder = (CourseViewHolder)convertView.getTag();
+        }
+        if(course != null) { //fill data here using view holder
+            viewHolder.courseNameView.setText(course.getCourseName());
+            course.queryAndDisplayStatus(viewHolder.statusIcon);
+            addHiddenViews(viewHolder, course); //add chapter, task exam selectors
+        }
+        return convertView;
+    }
+
+    /**
+     * Adds the initially hidden views of chapter, task and exam selectors to the course view.
+     *
+     * @param viewHolder The cache object of this course selector view.
+     * @param course The course object of this view.
+     */
+    private void addHiddenViews(CourseViewHolder viewHolder, Course course) {
+        LayoutInflater inflater = LayoutInflater.from(activity);
+        viewHolder.chaptersView.removeAllViews(); //remove previous chapters
+        for(Chapter chapter: course.getChapters()) { //add all chapters
+            View chapterView = inflater.inflate(R.layout.chapter_selector_view, viewHolder.chaptersView, false);
+            chapter.queryAndDisplayStatus(chapterView.findViewById(R.id.chapterStatusIcon), activity); //query and show status
+            viewHolder.chaptersView.addView(chapterView);
+            setUpChapterView(chapterView, chapter);
+        }
+        viewHolder.tasksView.removeAllViews(); //remove previous tasks
+        for(Task task: course.getTasks()) { //add all tasks
+            View taskView = inflater.inflate(R.layout.task_selector_view, viewHolder.tasksView, false);
+            task.queryAndDisplayStatus(taskView.findViewById(R.id.taskStatusIcon), activity);
+            viewHolder.tasksView.addView(taskView);
+            setUpTaskView(taskView, task);
+        }
+        course.getExam().queryAndDisplayStatus(viewHolder.examView, activity); //set up exam selector
+    }
+
+    /**
+     * Sets the text, listeners and the status icon of a chapter view.
+     */
+    private void setUpChapterView(final View chapterView, @NonNull Chapter chapter) {
+        TextView chapterNameView = chapterView.findViewById(R.id.chapterNameView);
+        chapterNameView.setText(chapter.getName());
+        chapterView.setOnClickListener(view -> { //redirect to chapter activity
+            Chapter.startChapterActivity(activity, chapter, chapterView);
+            view.startAnimation(clickAnimation);
+        });
+    }
+
+    /**
+     * Sets the text, listeners and the status icon of a task view.
+     */
+    private void setUpTaskView(final View taskView, @NonNull Task task) {
+        TextView taskNameView = taskView.findViewById(R.id.taskNameView);
+        taskNameView.setText(task.getName());
+        taskView.setOnClickListener(view -> { //redirect to task activity of not locked.
+            Task.startTaskActivity(activity, task, taskView);
+            view.startAnimation(clickAnimation);
+        });
+    }
+
+    /**
+     * This class caches a course selector view.
+     */
+    static class CourseViewHolder {
+        ImageView statusIcon;
+        TextView courseNameView;
+        LinearLayout chaptersView;
+        LinearLayout tasksView;
+        View examView;
+    }
+
+}

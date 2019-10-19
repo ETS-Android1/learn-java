@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- View of a single course in the courses activity -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/courseRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/courseNameBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/courseNameView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_vertical"
+            android:textAppearance="@style/title"
+            tools:text="Course name" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/statusIconView"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="@dimen/side_margin"
+            android:contentDescription="@string/status_icon"
+            tools:srcCompat="@drawable/locked_icon"/>
+
+    </LinearLayout>
+
+    <!-- This part is only visible when the user selects the course view -->
+    <LinearLayout
+        android:id="@+id/slideInView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <include
+            android:id="@+id/separator0"
+            layout="@layout/separator_line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_height" />
+
+        <!-- Chapter selector views are inserted into this one -->
+        <LinearLayout
+            android:id="@+id/chaptersView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:layout_height="100dp"/>
+
+        <include
+            android:id="@+id/separator1"
+            layout="@layout/separator_line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_height" />
+
+        <!-- Task selector views are inserted into this one -->
+        <LinearLayout
+            android:id="@+id/tasksView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:layout_height="100dp"/>
+
+
+        <include
+            android:id="@+id/include"
+            layout="@layout/separator_line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/separator_height" />
+
+        <!-- Exam selector is added here -->
+        <include
+            layout="@layout/exam_selector_view"
+            android:id="@+id/examSelector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+</LinearLayout>
