@@ -45,7 +45,7 @@
     </code>
     <text>
         <![CDATA[
-        The first <i>int</i> in the first line is the <b>return type</b> if the method. It will return an <i>int</i> to the caller
+        The first <i>int</i> in the first line is the <b>return type</b> of the method. It will return an <i>int</i> to the caller
         after finishing. Then we write the name of the method, now <i>add<i>.
         <br><br>
         Behind the name, comes the <b>parameters</b>, between parentheses. This method has two of them, both <i>int</i>'s, called
@@ -116,7 +116,7 @@
     </code>
     <text>
         <![CDATA[
-        Insultingly simple, right? This method just returns the result of 2+2. No need for any parameters
+        Very simple, right? This method just returns the result of 2+2. No need for any parameters
         to do this.
         <br><br>
         Observe that the lack of parameters isn't indicated with the <i>void</i> keyword! Instead there is simply
@@ -138,6 +138,21 @@
     </advanced>
     <text>
         <![CDATA[
+        It's not allowed to declare other methods inside a method. When you declare a method, you must do it
+        <b>within the class</b> but <b>outside other methods</b>. For example, the following code is invalid:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+static<font color="#DF7401"> int </font>method1() {
+<br/>     <font color="#E65100"> static </font>String method2() {
+<br/>          <font color="#999900">System</font>.out.println("I'm an invalid method!");
+<br/>      }
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
         Make sure all the methods are in your project. Your class will have to look something like this
         (the order of the methods doesn't matter):
         ]]>
@@ -152,7 +167,7 @@
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static </font><font color="#DF7401">int </font>add<font color="#DF7401">(int </font>n1,<font color="#DF7401"> int </font>n2) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>additionResult = n1 + n2;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">;return </font>additionResult;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return </font>additionResult;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static </font><font color="#DF7401">void </font>greetMe(<font color="#999900">String</font> myName) {

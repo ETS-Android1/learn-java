@@ -8,9 +8,9 @@
     <application
         android:allowBackup="true"
         android:fullBackupContent="false"
-        android:icon="@mipmap/test_icon"
+        android:icon="@mipmap/learn_java_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/test_icon_round"
+        android:roundIcon="@mipmap/learn_java_icon_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
@@ -26,29 +26,37 @@
         <!-- Grouping activities -->
         <activity
             android:name=".CoursesActivity"
-            android:label="@string/courses" />
+            android:label="@string/courses"
+            android:screenOrientation="sensorPortrait"/>
         <activity
             android:name=".TasksActivity"
-            android:label="@string/tasks"/>
+            android:label="@string/tasks"
+            android:screenOrientation="sensorPortrait"/>
         <activity
             android:name=".ExamsActivity"
-            android:label="@string/exams"/>
+            android:label="@string/exams"
+            android:screenOrientation="sensorPortrait"/>
         <!-- Guide -->
         <activity
             android:name=".GuideActivity"
-            android:label="@string/guide"/>
+            android:label="@string/guide"
+            android:screenOrientation="sensorPortrait"/>
         <!-- Settings -->
         <activity
             android:name=".SettingsActivity"
-            android:label="@string/action_settings"/>
+            android:label="@string/action_settings"
+            android:screenOrientation="sensorPortrait"/>
         <activity
-            android:name=".ChapterActivity" />
+            android:name=".ChapterActivity"
+            android:screenOrientation="sensorPortrait"/>
         <activity
-            android:name=".TaskActivity" /> <!-- label set at runtime -->
+            android:name=".TaskActivity"
+            android:screenOrientation="sensorPortrait"/> <!-- label set at runtime -->
         <activity
             android:name=".ExamActivity"
             android:windowSoftInputMode="stateHidden"
-            android:label="@string/exam"/>
+            android:label="@string/exam"
+            android:screenOrientation="sensorPortrait"/>
         <!-- This service posts the notification for the exam -->
         <receiver
             android:name=".ExamNotificationReceiver"
