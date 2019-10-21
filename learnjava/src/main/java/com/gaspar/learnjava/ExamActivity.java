@@ -20,6 +20,7 @@ import com.gaspar.learnjava.asynctask.LoadExamQuestionsTask;
 import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.curriculum.Question;
 import com.gaspar.learnjava.curriculum.Status;
+import com.gaspar.learnjava.database.CourseStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 
 import java.util.concurrent.Executors;
@@ -168,8 +169,13 @@ public class ExamActivity extends AppCompatActivity {
         if (percentage >= Exam.getMinimumPassPercentage(this)) {
             resultLayout.setBackgroundResource(R.drawable.correct_answer_background);
             ((TextView)resultLayout.findViewById(R.id.examResultText)).setText(R.string.exam_passed);
-            Executors.newSingleThreadExecutor().execute(() -> LearnJavaDatabase.getInstance(ExamActivity.this)
-                    .getExamDao().updateExamCompletionStatus(exam.getId(), Status.COMPLETED));
+            Executors.newSingleThreadExecutor().execute(() -> {
+                LearnJavaDatabase.getInstance(ExamActivity.this)
+                        .getExamDao().updateExamCompletionStatus(exam.getId(), Status.COMPLETED);
+                int courseId = Exam.findCourseIdForExamId(exam.getId(), ExamActivity.this); //update course status too
+                LearnJavaDatabase.getInstance(ExamActivity.this).getCourseDao()
+                        .updateCourseStatus(new CourseStatus(courseId, Status.COMPLETED));
+            });
         } else {
             resultLayout.setBackgroundResource(R.drawable.incorrect_background);
             ((TextView)resultLayout.findViewById(R.id.examResultText)).setText(R.string.exam_failed);

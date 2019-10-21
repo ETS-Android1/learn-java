@@ -2,16 +2,19 @@ package com.gaspar.learnjava.curriculum;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.gaspar.learnjava.CoursesActivity;
 import com.gaspar.learnjava.LearnJavaActivity;
 import com.gaspar.learnjava.SettingsActivity;
 import com.gaspar.learnjava.asynctask.ExamStatusDisplayerTask;
 import com.gaspar.learnjava.database.ExamStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
+import com.gaspar.learnjava.parsers.CourseParser;
 
 import java.io.Serializable;
 import java.util.List;
@@ -43,6 +46,11 @@ import java.util.concurrent.TimeUnit;
 public class Exam implements Serializable {
 
     /**
+     * Used when passing exams between activities.
+     */
+    public static final String EXAM_PREFERENCE_STRING = "exam_preference_string";
+
+    /**
      * A constant that indicated that an exam wasn't started. This is used to store info
      * about exams in the database.
      */
@@ -51,7 +59,7 @@ public class Exam implements Serializable {
     /**
      * The challenging difficulty reduced exam time, in milliseconds.
      */
-    public static final long REDUCED_EXAM_TIME = 5 * 1000 * 60;
+    public static final long REDUCED_EXAM_TIME = 10 * 1000 * 60;
 
     /**
      * The minimum percentage required to pass an exam.
@@ -139,9 +147,22 @@ public class Exam implements Serializable {
     }
 
     /**
-     * Used when passing exams between activities.
+     * Finds the id of the course, from the id of its exam.
      */
-    public static final String EXAM_PREFERENCE_STRING = "exam_preference_string";
+    public static int findCourseIdForExamId(int examId, Context context) {
+        try {
+            if(CoursesActivity.coursesNotParsed()) { //not parsed before
+                CoursesActivity.getParsedCourses().addAll(CourseParser.getInstance()
+                        .parseCourses(context)); //parse and save courses
+            }
+            for(Course course: CoursesActivity.getParsedCourses()) {
+                if(course.getExam().getId() == examId) return course.getId();
+            }
+        } catch (Exception e) {
+            Log.d("LearnJava", "Exception", e);
+        }
+        throw new RuntimeException("Invalid exam id!");
+    }
 
     @Override
     public boolean equals(Object o) {

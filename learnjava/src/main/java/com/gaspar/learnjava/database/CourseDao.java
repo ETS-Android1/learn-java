@@ -3,6 +3,7 @@ package com.gaspar.learnjava.database;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 /**
  * Operations for querying and manipulating course data.
@@ -12,6 +13,9 @@ public interface CourseDao {
 
     @Insert
     void addCourseStatus(CourseStatus courseStatus);
+
+    @Update
+    void updateCourseStatus(CourseStatus courseStatus);
 
     /**
      * Query the status using the course id.

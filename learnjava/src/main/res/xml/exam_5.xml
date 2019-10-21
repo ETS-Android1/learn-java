@@ -5,8 +5,8 @@
 <resources>
     <examdata>
         <id>5</id>
-        <questionAmount>30</questionAmount>
-        <timeLimit>10</timeLimit>
+        <questionAmount>22</questionAmount>
+        <timeLimit>15</timeLimit>
     </examdata>
     <!-- Questions about 'What is Java?' -->
     <question type="multi_choice">
@@ -19,12 +19,12 @@
         <correct>2</correct>
     </question>
     <question type="true_false">
-        <text>Is Java cross platform?</text>
+        <text>Java is a cross platform programming language.</text>
         <correct>true</correct>
     </question>
     <question type="single_choice">
         <text>What does cross platform mean?</text>
-        <answer>You only have to compile your programs once.</answer>
+        <answer>You have to compile your program for each platform you want it to support.</answer>
         <answer>You programs will run in multiple environments, operation systems.</answer>
         <answer>Your programs are guaranteed to run on Linux.</answer>
         <correct>1</correct>
@@ -234,15 +234,16 @@
         <correct>2</correct>
         <correct>3</correct>
     </question>
-    <question type="text">
-        <text>Enter th<question type="single_choice">
+    <question type="single_choice">
             <text>What does application entry point mean?</text>
             <answer>It's where the compiler starts compiling your source files.</answer>
             <answer>The first line of the source file.</answer>
             <answer>It's where the JVM will start to execute your program.</answer>
             <answer>It's the only method with no return type.</answer>
             <correct>2</correct>
-        </question>e statement that will print 'Good morning' to the console.</text>
+        </question>
+    <question type="text">
+        <text>Write the statement that will print 'Good morning' to the console.</text>
         <correct>System.out.println("Good morning");</correct>
     </question>
     <question type="text">
@@ -256,10 +257,6 @@
     <question type="true_false">
         <text>The statement 'System.out.println("Hello, world!");' is valid.</text>
         <correct>true</correct>
-    </question>
-    <question type="true_false">
-        <text>The statement 'System.out.println(Hello, world!)' is valid.</text>
-        <correct>false</correct>
     </question>
     <question type="single_choice">
         <text>What is true about statement execution?</text>
@@ -354,7 +351,7 @@
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>Is the 'String i1 = "i_1", i2 = "i_2"; valid?</text>
+        <text>Is the 'String i1 = "i_1", i2 = "i_2";' statement valid?</text>
         <correct>true</correct>
     </question>
     <question type="multi_choice">
@@ -489,7 +486,120 @@
     </question>
 
     <!-- Questions about 'Naming rules and conventions' -->
+    <question type="multi_choice">
+        <text>Select the characters which can be the first character in an identifier.</text>
+        <answer>A</answer>
+        <answer>_ (underscore)</answer>
+        <answer>(</answer>
+        <answer>,</answer>
+        <correct>0</correct>
+        <correct>1</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Select the characters which can't be the first character in an identifier.</text>
+        <answer>3</answer>
+        <answer>_ (underscore)</answer>
+        <answer>}</answer>
+        <answer>;</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>Identifiers can't be longer then 100 characters.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>'_myVar' is a valid identifier.</text>
+        <correct>false</correct>
+    </question>  <question type="true_false">
+        <text>'9lives' is an invalid identifier.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>'my_(well_named)_variable' is a valid identifier</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>Write 'web socket' using the camel case notation.</text>
+        <correct>webSocket</correct>
+    </question>
+    <question type="text">
+        <text>Write 'insert to end' using the camel case notation.</text>
+        <correct>insertToEnd</correct>
+    </question>
+    <question type="text">
+        <text>Write 'remove all' using the camel case notation.</text>
+        <correct>removeAll</correct>
+    </question>
+    <question type="single_choice">
+        <text>We would like to name a method which adds an element to a list. Which of these would be the best naming choice
+            (using java conventions)?</text>
+        <answer>add_element</answer>
+        <answer>addElement</answer>
+        <answer>AddElement</answer>
+        <answer>_addelement</answer>
+        <correct>1</correct>
+    </question>
+    <question type="single_choice">
+        <text>We would like to name a variable which stores a prime number. Which of these would be the best naming choice
+            (using java conventions)?</text>
+        <answer>primeNumber</answer>
+        <answer>$prime_number</answer>
+        <answer>prime_number</answer>
+        <answer>PrimeNumber</answer>
+        <correct>1</correct>
+    </question>
+    <question type="single_choice">
+        <text>We would like to name a class related to matrices. Which of these would be the best naming choice
+            (using java conventions)?</text>
+        <answer>matrix</answer>
+        <answer>Matrix</answer>
+        <answer>_Matrix</answer>
+        <answer>matrix_</answer>
+        <correct>1</correct>
+    </question>
+    <question type="single_choice">
+        <text>We would like to name a package which contains database related classes. Which of these would be the best naming choice
+            (using java conventions)?</text>
+        <answer>Database</answer>
+        <answer>_database</answer>
+        <answer>data_base_</answer>
+        <answer>database</answer>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>We would like to name constant to store the value of the speed of light. Which of these would be the best naming choice
+            (using java conventions)?</text>
+        <answer>speedOfLight</answer>
+        <answer>speedoflight</answer>
+        <answer>SPEED_OF_LIGHT</answer>
+        <answer>SpeedOfLight</answer>
+        <correct>2</correct>
+    </question>
 
     <!-- Questions about 'Comments in the code' -->
-
+    <question type="text">
+        <text>Write a single line comment which says 'this is a comment'.</text>
+        <correct>//this is a comment</correct>
+        <correct>// this is a comment</correct>
+    </question>
+    <question type="text">
+        <text>Write a single line comment which says 'remember to comment your code!'.</text>
+        <correct>//remember to comment your code!</correct>
+        <correct>// remember to comment your code!</correct>
+    </question>
+    <question type="text">
+        <text>Write a multi line comment (in one line) which says 'important information'.</text>
+        <correct>/* important information */</correct>
+        <correct>/*important information*/</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which symbols are used to create multi-lined comments?</text>
+        <answer>// and //</answer>
+        <answer>// and \\</answer>
+        <answer>** and **</answer>
+        <answer>/* and */</answer>
+        <correct>3</correct>
+    </question>
 </resources>
