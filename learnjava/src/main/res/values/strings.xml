@@ -84,6 +84,7 @@
     <string name="false_answer">FALSE</string>
 
     <!-- Tasks -->
+    <string name="task">Task:</string>
     <string name="must_unlock_course_before_task">
         You must unlock the course it belongs to before you can start this task.
     </string>

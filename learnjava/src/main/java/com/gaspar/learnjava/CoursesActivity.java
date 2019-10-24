@@ -95,8 +95,8 @@ public class CoursesActivity extends AppCompatActivity implements NavigationView
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        AdView adView = findViewById(R.id.adView); //load ad
-        adView.loadAd(new AdRequest.Builder().build());
+         AdView adView = findViewById(R.id.adView); //load ad
+         adView.loadAd(new AdRequest.Builder().build());
     }
 
     /**
@@ -137,7 +137,9 @@ public class CoursesActivity extends AppCompatActivity implements NavigationView
         ListView courseViews = findViewById(R.id.courseSelectors);
         courseViews.setOnItemClickListener((adapterView, view, position, l) -> {
             Course c = PARSED_COURSES.get(position);
-            if(c.getStatus() == Status.LOCKED || c.getStatus()==Status.NOT_QUERIED) return; //nothing happens on locked PARSED_COURSES
+            if(!LearnJavaActivity.DEBUG) { //nothing happens on locked, except in debug
+                if(c.getStatus() == Status.LOCKED || c.getStatus()==Status.NOT_QUERIED) return;
+            }
             LinearLayout slideInView = view.findViewById(R.id.slideInView);
             if(slideInView.getVisibility() == View.GONE) {
                 AnimationUtils.slideIn(slideInView);

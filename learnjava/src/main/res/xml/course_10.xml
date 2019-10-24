@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Course: 'Primitives, control flow and I/O' -->
+
+<resources>
+    <coursedata>
+        <id>10</id>
+        <name>Primitives, control flow and input</name>
+    </coursedata>
+    <chapter>101</chapter>
+    <chapter>102</chapter>
+    <chapter>103</chapter>
+    <chapter>104</chapter>
+    <chapter>105</chapter>
+    <chapter>106</chapter>
+    <task>101</task>
+    <task>102</task>
+    <exam>10</exam>
+</resources>

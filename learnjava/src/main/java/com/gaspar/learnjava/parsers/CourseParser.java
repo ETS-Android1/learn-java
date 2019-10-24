@@ -21,6 +21,8 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -59,12 +61,18 @@ public class CourseParser {
                 throw new RuntimeException();
             }
             String resourceName = context.getResources().getResourceEntryName(xmlResourceID);
-            if(resourceName.startsWith("course_")) { //found a course
+            if(resourceName.startsWith(TagName.COURSE + "_")) { //found a course
                 parsedCourses.add(parseCourse(xmlResourceID, context));
             }
+            Collections.sort(parsedCourses, courseComparator); //sort by id
         }
         return parsedCourses;
     }
+
+    /**
+     * A comparator that orders courses using their id-s.
+     */
+    private static final Comparator<Course> courseComparator = (course1, course2) -> Integer.compare(course1.getId(), course2.getId());
 
     /**
      * Parses a {@link Course} object from an xml file. The chapters and tasks of this object will
@@ -88,17 +96,17 @@ public class CourseParser {
         while(eventType != XmlPullParser.END_DOCUMENT) {
             String tagName = parser.getName();
             if(eventType == XmlPullParser.START_TAG) { //a tag is starting
-                if(tagName.equalsIgnoreCase("id")) { //id tag
+                if(tagName.equalsIgnoreCase(TagName.ID)) { //id tag
                     courseID = Integer.parseInt(parser.nextText());
-                } else if(tagName.equalsIgnoreCase("name")) { //course name tag
+                } else if(tagName.equalsIgnoreCase(TagName.NAME)) { //course name tag
                     courseName = parser.nextText();
-                } else if(tagName.equalsIgnoreCase("chapter")) { //chapter tag
+                } else if(tagName.equalsIgnoreCase(TagName.CHAPTER)) { //chapter tag
                     int chapterId = Integer.parseInt(parser.nextText());
                     chapters.add(parseChapter(chapterId,false, context));
-                } else if(tagName.equalsIgnoreCase("task")) { //task tag
+                } else if(tagName.equalsIgnoreCase(TagName.TASK)) { //task tag
                     int taskId = Integer.parseInt(parser.nextText());
                     tasks.add(TaskParser.getInstance().parseTask(taskId, false, context));
-                } else if(tagName.equalsIgnoreCase("exam")) { //the exam tag.
+                } else if(tagName.equalsIgnoreCase(TagName.EXAM)) { //the exam tag.
                     int examId = Integer.parseInt(parser.nextText());
                     exam = ExamParser.getInstance().parseExam(examId, false, context);
                 }
@@ -129,7 +137,7 @@ public class CourseParser {
                 throw new RuntimeException();
             }
             String resourceName = context.getResources().getResourceEntryName(xmlResourceID);
-            if(resourceName.startsWith("chapter_") && resourceName.endsWith(String.valueOf(chapterID))) {
+            if(resourceName.startsWith(TagName.CHAPTER + "_") && resourceName.endsWith(String.valueOf(chapterID))) {
                 parsedChapter = parseChapterData(xmlResourceID, parseComponents, context);
                 break;
             }
@@ -152,7 +160,7 @@ public class CourseParser {
                 throw new RuntimeException();
             }
             String resourceName = context.getResources().getResourceEntryName(xmlResourceID);
-            if(resourceName.startsWith("course_")) { //select the first course
+            if(resourceName.startsWith(TagName.COURSE + "_")) { //select the first course
                 Course firstCourse = parseCourse(xmlResourceID, context);
                 firstChapter = firstCourse.getChapters().get(0);
                 break;
@@ -232,7 +240,7 @@ public class CourseParser {
                 throw new RuntimeException();
             }
             String resourceName = context.getResources().getResourceEntryName(xmlResourceID);
-            if(resourceName.equalsIgnoreCase("guide")) {
+            if(resourceName.equalsIgnoreCase(TagName.GUIDE)) {
                 //use chapter parses method
                 components = parseChapterData(xmlResourceID, true, context).getComponents();
                 break;

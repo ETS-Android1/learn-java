@@ -65,7 +65,7 @@ public class ExamParser {
                 throw new RuntimeException();
             }
             String resourceName = context.getResources().getResourceEntryName(xmlResourceID);
-            if(resourceName.startsWith("exam_") && resourceName.endsWith(String.valueOf(examId))) {
+            if(resourceName.startsWith(TagName.EXAM + "_") && resourceName.endsWith(String.valueOf(examId))) {
                 parsedExam = parseExamData(xmlResourceID, parseQuestions, context);
             }
         }

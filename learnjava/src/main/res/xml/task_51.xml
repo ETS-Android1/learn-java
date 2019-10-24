@@ -5,10 +5,160 @@
 <resources>
     <taskdata>
         <id>51</id>
-        <name>To be decided</name>
+        <name>Create arithmetic methods</name>
+    </taskdata>
+        <text>
+            <![CDATA[
+            In the chapter '<i>Methods: return types and parameters</i>' you can see a method which adds two integers (see below). Your task
+            is to create similar methods for subtraction, multiplication and division.
+            ]]>
+        </text>
+        <code>
+            <![CDATA[
+<font color="#E65100">static</font> <font color="#DF7401">int</font> add(<font color="#DF7401">int </font>n1,<font color="#DF7401"> int </font>n2) {
+<br/><font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>additionResult = n1 + n2;
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;return </font>additionResult;
+<br/>}
+        ]]>
+        </code>
+        <text>
+            <![CDATA[
+            Write all your methods to the same class, and make sure to have the <b>main method</b> in this class, as
+            you'll have to call the newly declared methods. You can create a package for the project, or simply use the
+            default package.
+            ]]>
+        </text>
+        <text>
+            <![CDATA[
+            <u>List of all methods you have to create:</u>
+            ]]>
+        </text>
+        <list>
+            <![CDATA[
+            <ul>
+            <li> 1. A method that takes two integers and returns the <b>difference</b> (x-y) of them.</li>
+            <li> 2. A method that takes two integers and returns the <b>product</b> (x*y) of them.</li>
+            <li> 3. A method that takes two integers and returns the <b>quotient</b> (x/y) of them.</li>
+            <li> 4. A method that takes 3 integers, and prints the result of their sum to the console (no return value).</li>
+            </ul>
+            ]]>
+        </list>
+        <advanced title="Division with zero">
+            <![CDATA[
+            The most secure way for the division method is to use <b>exception handling</b>. This, however, will be
+            covered in a later course, and not required for this task.
+            <br><br>
+            If you would like to try to use exception handling in this project, you can find a great tutorial for
+            it <a href="https://www.javatpoint.com/exception-handling-in-java">here</a>. The very first example of this
+            tutorial is, in fact, how to handle division with zero!
+            ]]>
+        </advanced>
+        <advanced title="The result of division">
+            <![CDATA[
+            Your divide method may not give the result you expect. This is because Java performs
+            <b>integer division</b> on your variables. Simply put, this means that the result will be rounded down
+            to an integer, even if that's not the actual result.
+            ]]>
+        </advanced>
+        <text>
+            <![CDATA[
+            Once you have finished writing the methods, <b>call the first 3 of them in the main method</b> and save the return
+            values in <b>integer variables</b>.
+            <br><br>
+            Choose any integers as parameters for the methods. Feel free to use negative numbers, or large numbers! Only divide with
+            zero if you implemented exception handling as well!
+            <br><br>
+            Finally, <b>call the fourth method, using the newly created three integer variables</b>, the return values of the previous methods.
+            ]]>
+        </text>
+        <title text="Follow the conventions in this project"/>
+        <text>
+            <![CDATA[
+            When creating the project, be sure to name your class, methods and variables according to the naming
+            conventions.
+            <br><br>
+            <b>Add comments to your code</b>. Write at least one single lined comment for each method, which
+            briefly explains what it does.
+            ]]>
+        </text>
+        <boxed title="And not just in this project">
+            <![CDATA[
+            In the following tasks these won't be explicitly said. You are always expected to follow the
+            coding conventions and properly comment your source code.
+            ]]>
+        </boxed>
 
         <solution>
-
+            <text>
+                <![CDATA[
+                This project required you create one class. Here is one good solution:
+                ]]>
+            </text>
+            <code>
+                <![CDATA[
+<font color="#E65100">package</font> task;
+<br/>
+<br/><font color="#E65100">public class</font> <font color="#999900">Main</font> {
+<br/>
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;public static</font><font color="#DF7401"> void </font>main(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//call the first 3 methods
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>subRes = subtract(-2145, 45231);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>mulRes = multiply(31, -8713);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>divRes = divide(16, 4);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//call the add and print method
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;addAndPrint(subRes, mulRes, divRes);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">// Subtracts the second parameter from the first one and returns the result.
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font><font color="#DF7401"> int </font>subtract(<font color="#DF7401">int </font>n1,<font color="#DF7401"> int </font>n2) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;return </font>n1 - n2;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">// Multiplies the parameters and returns the result.
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font><font color="#DF7401"> int </font>multiply(<font color="#DF7401">int </font>n1,<font color="#DF7401"> int </font>n2) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;return </font>n1 * n2;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">// Divides the parameters and returns the result.
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font><font color="#DF7401"> int </font>divide(<font color="#DF7401">int </font>n1,<font color="#DF7401"> int </font>n2) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;return </font>n1 / n2;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">// Sums the parameters and prints the result.
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font><font color="#DF7401"> void </font>addAndPrint(<font color="#DF7401">int </font>n1,<font color="#DF7401"> int </font>n2,<font color="#DF7401"> int </font>n3) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>additionResult = n1 + n2 + n3;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("The result is " + additionResult);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+                ]]>
+            </code>
+            <text>
+                <![CDATA[
+                If you want to use exception handling for the division method, here is a possible
+                solution:
+                ]]>
+            </text>
+            <code>
+                <![CDATA[
+                <font color="gray">/*
+<br/>Subtracts the second parameter from the first one and returns the result. If the second parameter is 0, it returns 0.
+<br/> */</font>
+<br/><font color="#E65100">static</font><font color="#DF7401"> int </font>subtract(<font color="#DF7401">int </font>n1,<font color="#DF7401"> int </font>n2) {
+<br/><font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>divRes = 0;
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;try </font>{
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;divRes = n1 / n2;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}<font color="#E65100"> catch </font>(<font color="#999900">ArithmeticException</font> e) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("An exception occurred!");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;return </font>divRes;
+<br/>}
+                ]]>
+            </code>
         </solution>
-    </taskdata>
 </resources>

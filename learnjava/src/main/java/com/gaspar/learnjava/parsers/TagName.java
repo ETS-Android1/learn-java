@@ -7,6 +7,11 @@ import androidx.annotation.StringDef;
  */
 @StringDef
 @interface TagName {
+    String COURSE = "course";
+    String CHAPTER = "chapter";
+    String TASK = "task";
+    String EXAM = "exam";
+    String GUIDE = "guide";
 
     String ID = "id";
     String NAME = "name";

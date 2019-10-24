@@ -47,11 +47,9 @@
             android:label="@string/action_settings"
             android:screenOrientation="sensorPortrait"/>
         <activity
-            android:name=".ChapterActivity"
-            android:screenOrientation="sensorPortrait"/>
+            android:name=".ChapterActivity"/>
         <activity
-            android:name=".TaskActivity"
-            android:screenOrientation="sensorPortrait"/> <!-- label set at runtime -->
+            android:name=".TaskActivity" /> <!-- label set at runtime -->
         <activity
             android:name=".ExamActivity"
             android:windowSoftInputMode="stateHidden"

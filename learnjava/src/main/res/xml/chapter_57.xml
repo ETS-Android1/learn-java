@@ -135,4 +135,28 @@ so make sure to call validate method before using!<br>
         You can find a detailed guide for writing javadoc comments <a href="https://www.tutorialspoint.com/java/java_documentation.htm">here</a>.
         ]]>
     </advanced>
+    <text>
+        <![CDATA[
+        In the following chapters and tasks, you may see code samples like this:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="gray">// This</font> method is very advanced, so a long and detailed comment is necessary to properly explain its usage.</font>
+<font color="#DF7401">
+<br/>int </font>advancedMethod() {
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;return </font>-1;
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        If your device width is large, there is nothing wrong, however, it's likely that your screen isn't
+        wide enough, and the single-line comment is wrapped into multiple lines.
+        <br><br>
+        At first glance, this looks like invalid code, but note that the comment is only displayed in multiple lines
+        because of screen restrictions. If you tilt your phone, you will most likely see how the line is shown
+        then there is enough space.
+        ]]>
+    </text>
 </resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Exam of course 'Primitives, control flow and I/O' -->
+
+<resources>
+    <examdata>
+        <id>10</id>
+        <questionAmount>22</questionAmount>
+        <timeLimit>15</timeLimit>
+    </examdata>
+
+</resources>

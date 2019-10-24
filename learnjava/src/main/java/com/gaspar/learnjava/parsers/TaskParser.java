@@ -55,7 +55,7 @@ public class TaskParser {
                     throw new RuntimeException();
                 }
                 String resourceName = context.getResources().getResourceEntryName(xmlResourceID);
-                if(resourceName.startsWith("task_") && resourceName.endsWith(String.valueOf(taskId))) {
+                if(resourceName.startsWith(TagName.TASK + "_") && resourceName.endsWith(String.valueOf(taskId))) {
                     parsedTask = parseTaskData(xmlResourceID, parseComponents, context);
                 }
             }
