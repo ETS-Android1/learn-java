@@ -22,7 +22,6 @@ import com.gaspar.learnjava.asynctask.FillTaskActivityTask;
 import com.gaspar.learnjava.curriculum.Task;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.database.TaskStatus;
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.material.navigation.NavigationView;
 
@@ -62,9 +61,7 @@ public class TaskActivity extends AppCompatActivity implements NavigationView.On
         } else {
             setTitle(passedTask.getName());
             setUpUI(passedTask);
-            interstitialAd = new InterstitialAd(this);
-            interstitialAd.setAdUnitId(getString(R.string.ad_unit_id_interstitial_test)); //TODO: change to real id
-            interstitialAd.loadAd(new AdRequest.Builder().build());
+            interstitialAd = LearnJavaAds.loadInterstitialAd(this, R.string.ad_unit_id_interstitial_task);
         }
     }
 

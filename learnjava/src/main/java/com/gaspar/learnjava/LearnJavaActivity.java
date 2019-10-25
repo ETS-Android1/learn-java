@@ -35,6 +35,11 @@ public class LearnJavaActivity extends AppCompatActivity
     public static final boolean DEBUG = true;
 
     /**
+     * Constant that determines if ads will or won't be loaded in debug mode.
+     */
+    public static final boolean LOAD_DEBUG_ADS = false;
+
+    /**
      * The name of the application's shared preferences.
      */
     public static final String APP_PREFERENCES_NAME = "learn_java_prefs";

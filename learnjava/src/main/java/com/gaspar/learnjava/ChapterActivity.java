@@ -17,7 +17,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.gaspar.learnjava.asynctask.FillChapterActivityTask;
 import com.gaspar.learnjava.curriculum.Chapter;
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.material.navigation.NavigationView;
 
@@ -50,9 +49,7 @@ public class ChapterActivity extends AppCompatActivity implements NavigationView
             finish();
         }
         setUpUI(passedChapter);
-        interstitialAd = new InterstitialAd(this);
-        interstitialAd.setAdUnitId(getString(R.string.ad_unit_id_interstitial_test)); //TODO: change to real id
-        interstitialAd.loadAd(new AdRequest.Builder().build());
+        interstitialAd = LearnJavaAds.loadInterstitialAd(this, R.string.ad_unit_id_interstitial_chapter);
     }
 
     private void setUpUI(Chapter receivedChapter) {

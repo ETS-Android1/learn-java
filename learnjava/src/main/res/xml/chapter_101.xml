@@ -5,6 +5,259 @@
 <resources>
     <chapterdata>
         <id>101</id>
-        <name>Primitives</name>
+        <name>Primitives types</name>
     </chapterdata>
+    <text>
+        <![CDATA[
+        Primitives are the most basic types of variables that we can use. In this chapter we will
+        go through all of them to see how they work and what they can be used for.
+        ]]>
+    </text>
+    <boxed title="Wrappers">
+        <![CDATA[
+        In a later course we will see how creating classes allows us to write useful methods for out data types. Primitives
+        are not classes however, they can't have methods! To counter this, <b>wrapper classes</b> are provided. They "wrap"
+        a primitive type into a class, and give us access to utility methods.
+        ]]>
+    </boxed>
+    <title text="int"/>
+    <text>
+        <![CDATA[
+        We already know the <b>int</b> primitive. It's a numeric type to store signed integers.
+        <br><br>
+        <u>Wrapper:</u> The wrapper class of the <i>int</i> primitive is <b>Integer</b>.
+        <br><br>
+        <u>Range:</u> 32 bits are used to store an <i>int</i>, and so they can have a minimum value of -2^31 and a maximum value of 2^31-1.
+        These values are stored as constants of the wrapper class:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#DF7401">int</font> min = <font color="#999900">Integer</font>.MIN_VALUE;
+        <br/><font color="#DF7401">int</font> max = <font color="#999900">Integer</font>.MAX_VALUE;
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        <u>Default value:</u> The default value of an <i>int</i> is 0.
+        ]]>
+    </text>
+    <advanced title="Under-, and overflow">
+        <![CDATA[
+        You may wonder what happens when we add 1 to an <i>int</i> which has maximum value. An intuitive answer is that
+        it won't grow any more, but this isn't the case. Instead, it <b>overflows</b>, and becomes the smallest possible value.
+        <br><br>
+        You can read more about this on it's <a href="https://en.wikipedia.org/wiki/Integer_overflow">Wikipedia article</a>
+        <br><br>
+        The following numeric types also exhibit this behaviour, with their respective minimum and maximum values.
+        ]]>
+    </advanced>
+    <title text="long"/>
+    <text>
+        <![CDATA[
+        Long is another numeric type. It can be used when we wish to work with values so big, that they are outside the
+        range of <i>int</i>.
+        <br><br>
+        <u>Wrapper:</u> The wrapper class of the <i>long</i> primitive is <b>Long</b>.
+        <br><br>
+        <u>Range:</u> 64 bits are used to store a <i>long</i>. It can have a minimum value of -2^63 and a maximum value of 2^63-1.
+        Just like with <i>int</i>, you can get the these bounds as wrapper class constants.
+        <br><br>
+        <u>Default value:</u> The default value of a <i>long</i> is 0.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#DF7401">long </font>big = <font color="#999900">Integer</font>.<font color="#999900">MAX_VALUE</font> * 2;
+        <br/><font color="#DF7401">long</font> l1 = 1418284149L;
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        As an example, and a demonstration that the <i>long</i> type has a wider range, we can see that this variable has the
+        value of twice the upper bound of an <i>int</i>, and still, it <b>won't overflow</b>.
+        <br><br>
+        The second example shows that the <b>l or L</b> characters can be used at the end of declaration
+        to emphasise that we declared a <i>long</i>. Note that this is optional.
+        ]]>
+    </text>
+    <title text="byte and short"/>
+    <text>
+        <![CDATA[
+        More numeric types. Their range is smaller then <i>int</i>, so they use less memory. They are rarely used, since
+        nowadays our computers have access to an excess amount of memory.
+        <br><br>
+        <u>Wrapper:</u> The wrapper classes are <b>Byte and Short</b>.
+        <br><br>
+        <u>Range:</u> 8 bits for <i>byte</i> and 16 bits for <i>short</i>. This leaves the bounds at [-128,127] for <i>byte</i>
+        and [-32768,32767] for <i>short</i>.
+        <br><br>
+        <u>Default value:</u> 0 for both types.
+        ]]>
+    </text>
+    <title text="double"/>
+    <text>
+        <![CDATA[
+        Yet another numeric type, but unlike the previous ones, this can store real numbers, not just integers.
+        <br><br>
+        <u>Wrapper:</u> The wrapper class is <b>Double</b>.
+        <br><br>
+        <u>Range:</u> Their range is far greater then any previous types, and for almost all applications, you
+        can assume it's boundless.
+        <br><br>
+        <u>Default value:</u> 0.0
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#DF7401">double </font>d1 = 3.65;
+<font color="#DF7401">
+<br/>double </font>d2 = -21.941743242;
+<br/><font color="gray">//Don't need to write 423.0, but we can</font>
+<br/><font color="#DF7401">double</font> d3 = 423;
+<br/>
+<br/><font color="#DF7401">double</font> res = d1 + d2;
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Observe the above examples to see that a <b>dot</b> is used to declare <i>double</i>s. Arithmetic can
+        also be performed on them.
+        ]]>
+    </text>
+    <title text="float"/>
+    <text>
+        <![CDATA[
+        A primitive to store real numbers, but it has a smaller range then double, and thus uses less memory.
+        It's rarely used, for the same reason as <i>byte</i> and <i>short</i>.
+        <br><br>
+        <u>Wrapper:</u> The wrapper class is <b>Float</b>.
+        <br><br>
+        <u>Default value:</u> 0f
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#DF7401">float</font> f1 = 0.424242f;
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        It's declared similarly as a <i>double</i>, but notice the <b>f</b> at the end. It <b>must</b> be used to
+        tell the compiler we are declaring a <i>float</i>.
+        ]]>
+    </text>
+    <title text="boolean"/>
+    <text>
+        <![CDATA[
+        Our first non numeric primitive type. It can only have two possible values, <b>true and false</b>.
+        <br><br>
+        <u>Wrapper:</u> The wrapper class is <b>Boolean</b>.
+        <br><br>
+        <u>Default value:</u> false
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#DF7401">int </font>i1 = 1, i2 = 2;
+<br/><font color="#DF7401">boolean</font> b1 = i1 &gt; 7; <font color="gray">//false</font>
+<br/><font color="#DF7401">boolean</font> b2 = i2 &lt;= 1; <font color="gray">//true</font>
+<br/><font color="#DF7401">boolean</font> b3 = i2 == 3; <font color="gray">//false</font>
+<br/><font color="#DF7401">boolean</font> b4 = i1 != i2; <font color="gray">//true</font>
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        As you can see, additional <b>comparison operators</b> are at our disposal when using <i>boolean</i>s. They can <b>compare</b>
+        other (mostly numeric) primitives. The comparison is either true of false, so the result can be assigned to a <i>boolean</i>.
+        <br><br>
+        These are pretty straightforward, the only ones that may need explanation are <b>&lt;= and &gt;=</b> (greater-or-equal, less-or-equal),
+        and <b>!=</b> (not equal).
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#DF7401">boolean </font>b = <font color="#E65100">true</font>;
+<br/>b = !b; <font color="gray">//b will be false</font>
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        This example illustrates the <b>negate operator</b>. You can use it on a boolean to quickly "swap"
+        it's value.
+        <br><br>
+        We can also use the <b>AND, OR and XOR</b> operators on <i>boolean</i>s:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li> AND (a && b): Will only result in true of both <i>a</i> and <i>b</i> are true.</li>
+        <li> AND (a || b): Will only result in true of either <i>a</i> or <i>b</i> are true.</li>
+        <li> XOR (a ^ b): Will only result in true of either <i>a</i> or <i>b</i>, but not both are true.</li>
+        </ul>
+        ]]>
+    </list>
+    <code>
+        <![CDATA[
+        <font color="#DF7401">boolean </font>a = true, b = false;
+<font color="#DF7401">
+<br/>boolean </font>c = a && b; <font color="gray">//false
+</font>
+<br/>c = a || b; <font color="gray">//true
+</font>
+<br/>c = a ^ b; <font color="gray">//true</font>
+        ]]>
+    </code>
+    <title text="char"/>
+    <text>
+        <![CDATA[
+        The last primitive, it's used to represent unicode characters. They use 16 bits to store the integer
+        representation of the unicode characters.
+        <br><br>
+        <u>Wrapper:</u> The wrapper class is <b>Character</b>.
+        <br><br>
+        <u>Default value:</u> '\u0000'
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#DF7401">char </font>c1 = '\u0011';
+<font color="#DF7401">
+<br/>char </font>c2 = 'A';
+<font color="#DF7401">
+<br/>char </font>c3 = 'ä';
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        As you can see, we must always put the declared character between apostrophes, but we aren't required
+        to use the unicode integer codes, it's enough to simply place any character there.
+        ]]>
+    </text>
+    <boxed title="Not a String">
+        <![CDATA[
+        We have already seen the <b>String</b> class. We use quotation marks to declare them, and they aren't primitives.
+        A <i>char</i> is not a String with only one character!
+        <br><br>
+        Despite this, Java allows us to use them together in certain situations.
+        ]]>
+    </boxed>
+    <code>
+        <![CDATA[
+ <font color="#999900">String</font> s = "mam";
+<font color="#DF7401">
+<br/>char </font>aChar = 'a';
+<br/>s = s + aChar;
+<br/><font color="gray">//will print mama
+</font>
+<br/><font color="#999900">System</font>.out.println(s);
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Notice that the + operator that is used to "join" two strings together is now used on a String
+        and a <i>char</i>.
+        ]]>
+    </text>
 </resources>

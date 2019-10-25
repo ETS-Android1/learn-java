@@ -22,7 +22,6 @@ import com.gaspar.learnjava.curriculum.Course;
 import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.curriculum.Status;
 import com.gaspar.learnjava.curriculum.Task;
-import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -56,6 +55,11 @@ public class CoursesActivity extends AppCompatActivity implements NavigationView
      */
     private View updateView;
 
+    /**
+     * View that displays ads in this activity.
+     */
+    private AdView adView;
+
     @Override
     public void onCreate(Bundle savedState) {
         super.onCreate(savedState);
@@ -66,19 +70,19 @@ public class CoursesActivity extends AppCompatActivity implements NavigationView
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ((AdView)findViewById(R.id.adView)).destroy();
+        adView.destroy();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        ((AdView)findViewById(R.id.adView)).pause();
+        adView.pause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        ((AdView)findViewById(R.id.adView)).resume();
+        adView.resume();
     }
 
     private void setUpUI() {
@@ -95,8 +99,7 @@ public class CoursesActivity extends AppCompatActivity implements NavigationView
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-         AdView adView = findViewById(R.id.adView); //load ad
-         adView.loadAd(new AdRequest.Builder().build());
+       adView = LearnJavaAds.loadBannerAd(R.string.ad_unit_id_banner_courses, findViewById(R.id.adContainer));
     }
 
     /**
