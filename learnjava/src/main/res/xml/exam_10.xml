@@ -5,8 +5,238 @@
 <resources>
     <examdata>
         <id>10</id>
-        <questionAmount>22</questionAmount>
-        <timeLimit>15</timeLimit>
+        <questionAmount>25</questionAmount>
+        <timeLimit>20</timeLimit>
     </examdata>
+
+    <!-- Questions for primitives -->
+    <question type="multi_choice">
+        <text>Which primitive types can you use to store real, non-integer numbers?</text>
+        <answer>long</answer>
+        <answer>float</answer>
+        <answer>byte</answer>
+        <answer>double</answer>
+        <correct>1</correct>
+        <correct>3</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which primitive types can you use to store integer numbers?</text>
+        <answer>char</answer>
+        <answer>boolean</answer>
+        <answer>double</answer>
+        <answer>int</answer>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which of these primitives is not numeric?</text>
+        <answer>boolean</answer>
+        <answer>float</answer>
+        <answer>int</answer>
+        <answer>short</answer>
+        <correct>0</correct>
+    </question>
+    <question type="text">
+        <text>What is the name the of the classes used to provide additional functionality for primitives?</text>
+        <correct>wrapper</correct>
+        <correct>wrapper class</correct>
+        <correct>Wrapper</correct>
+        <correct>Wrapper class</correct>
+        <correct>Wrapper Class</correct>
+    </question>
+    <question type="text">
+        <text>What is the wrapper class for the 'float' primitive type?</text>
+        <correct>Float</correct>
+    </question>
+    <question type="text">
+        <text>What is the wrapper class for the 'char' primitive type?</text>
+        <correct>Character</correct>
+    </question>
+    <question type="true_false">
+        <text>Int can store bigger numbers then long.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>Long can store bigger numbers then byte.</text>
+        <correct>true</correct>
+    </question>
+    <question type="single_choice">
+        <text>What happens when we increase the value of a numeric primitive already at its maximum value?</text>
+        <answer>It won't increase.</answer>
+        <answer>It will overflow, and become negative.</answer>
+        <answer>An error will be raised, and the program stops.</answer>
+        <answer>It's automatically converted to a primitive with a larger range.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="text">
+        <text>What is the default value of a boolean?</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>What is the default value of a double?</text>
+        <correct>0</correct>
+        <correct>0.0</correct>
+    </question>
+    <question type="true_false">
+        <text>When declaring a double, we must use a dot.</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>Declare a short with name 's' and value -124.</text>
+        <correct>short s = -124;</correct>
+        <correct>short s= -124;</correct>
+        <correct>short s =-124;</correct>
+        <correct>short s=-124;</correct>
+    </question>
+    <question type="text">
+        <text>Declare a double with name 'div' and value 22.435</text>
+        <correct>double div = 22.435;</correct>
+        <correct>double div= 22.435;</correct>
+        <correct>double div =22.435;</correct>
+        <correct>double div=22.435;</correct>
+    </question>
+    <question type="text">
+        <text>Declare a float with name 'conv' and a value of half.</text>
+        <correct>float conv = 0.5f;</correct>
+        <correct>float conv= 0.5f;</correct>
+        <correct>float conv =0.5f;</correct>
+        <correct>float conv=0.5f;</correct>
+    </question>
+    <question type="text">
+        <text>Declare a char with with name 'firstLetter' and a value of c.</text>
+        <correct>char firstLetter = 'c';</correct>
+        <correct>char firstLetter= 'c';</correct>
+        <correct>char firstLetter ='c';</correct>
+        <correct>char firstLetter='c';</correct>
+    </question>
+    <question type="text">
+        <text>Enter the not-equal operator.</text>
+        <correct>!=</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these operators can be used to compare two integers?</text>
+        <answer><![CDATA[
+            <=
+        ]]></answer>
+        <answer>!=</answer>
+        <answer> == </answer>
+        <answer> + </answer>
+        <correct>0</correct>
+        <correct>1</correct>
+        <correct>2</correct>
+    </question>
+    <question type="single_choice">
+        <text>On which primitive type can we use the negate operator?</text>
+        <answer>char</answer>
+        <answer>long</answer>
+        <answer>float</answer>
+        <answer>boolean</answer>
+        <correct>3</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these operators can we use to perform logical operations on two booleans?</text>
+        <answer><![CDATA[
+        &&
+        ]]></answer>
+        <answer><![CDATA[
+        ||
+        ]]></answer>
+        <answer><![CDATA[
+        =
+        ]]></answer>
+        <answer><![CDATA[
+        /
+        ]]></answer>
+        <correct>0</correct>
+        <correct>1</correct>
+    </question>
+    <question type="true_false">
+        <text>If we have a boolean called 'sel', the correct way to negate it is '!sel'.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>If we have a boolean called 'sel', the correct way to negate it is '!=sel'.</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>Enter the AND operator.</text>
+        <correct><![CDATA[
+        &&
+        ]]></correct>
+        <correct><![CDATA[
+        &
+        ]]></correct>
+    </question>
+    <question type="text">
+        <text>Enter the OR operator.</text>
+        <correct><![CDATA[
+        ||
+        ]]></correct>
+        <correct><![CDATA[
+        |
+        ]]></correct>
+    </question>
+    <question type="multi_choice">
+        <text>We have two booleans, a is true, b is false. Which of these operations will be true?</text>
+        <answer><![CDATA[
+        a && b
+        ]]></answer>
+        <answer><![CDATA[
+        a || b
+        ]]></answer>
+        <answer><![CDATA[
+        a ^ b
+        ]]></answer>
+        <correct>1</correct>
+        <correct>2</correct>
+    </question>
+    <question type="multi_choice">
+        <text>We have two booleans, both a and b are true. Which of these operations will be true?</text>
+        <answer><![CDATA[
+        a && b
+        ]]></answer>
+        <answer><![CDATA[
+        a || b
+        ]]></answer>
+        <answer><![CDATA[
+        a ^ b
+        ]]></answer>
+        <correct>0</correct>
+        <correct>1</correct>
+    </question>
+
+    <!-- Questions for if-else -->
+
+    <!--
+    <question type="single_choice">
+        <text></text>
+        <answer></answer>
+        <answer></answer>
+        <answer></answer>
+        <answer></answer>
+        <correct></correct>
+    </question>
+
+    <question type="multi_choice">
+        <text></text>
+        <answer></answer>
+        <answer></answer>
+        <answer></answer>
+        <answer></answer>
+        <correct></correct>
+        <correct></correct>
+    </question>
+
+    <question type="true_false">
+        <text></text>
+        <correct></correct>
+    </question>
+
+    <question type="text">
+        <text></text>
+        <correct></correct>
+        <correct></correct>
+    </question>
+    -->
 
 </resources>

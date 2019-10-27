@@ -65,7 +65,7 @@ public class TextQuestion extends Question implements Serializable {
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                enteredAnswer = charSequence.toString();
+                enteredAnswer = charSequence.toString().trim();
             }
             @Override
             public void afterTextChanged(Editable editable) { }

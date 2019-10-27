@@ -186,7 +186,7 @@
         This example illustrates the <b>negate operator</b>. You can use it on a boolean to quickly "swap"
         it's value.
         <br><br>
-        We can also use the <b>AND, OR and XOR</b> operators on <i>boolean</i>s:
+        We can also use the <b>AND, OR and XOR</b> logical operators on <i>boolean</i>s:
         ]]>
     </text>
     <list>

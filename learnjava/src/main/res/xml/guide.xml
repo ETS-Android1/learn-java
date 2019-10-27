@@ -12,6 +12,10 @@
         <font color="#DF7401">Java programming language</font>. This app, however, cannot do that alone.
         You will need to install <font color="#DF7401">Java</font> on computer and practice actively
         while using this app.
+        <br><br>
+        This app is aimed towards those who never coded in their life. However, you're familiar with other
+        languages, you'll also find it useful. If you already have experience with <b>C++ or C#</b> you'll learn
+        fast and easily, as these languages are quite similar to Java.
         ]]>
     </text>
     <title text="Installing an IDE"/>

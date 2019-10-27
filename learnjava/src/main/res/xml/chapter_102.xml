@@ -7,4 +7,181 @@
         <id>102</id>
         <name>Controlling the flow: if-else</name>
     </chapterdata>
+    <text>
+        <![CDATA[
+        The following ways will allow us to check for certain conditions, and only execute
+        parts of our code if they are true. To do this, we rely heavily on <b>booleans</b>, so be sure
+        to revise the <i>Primitives</i> chapter if you are unsure about your knowledge about booleans.
+        ]]>
+    </text>
+    <title text="The if block"/>
+    <text>
+        <![CDATA[
+        The if block is the simplest tool at our disposal. The statements inside it will only be executed if
+        it's condition is true! Observe the example for the correct syntax:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#DF7401">char </font>testChar = 'a';
+<br/><font color="#E65100">if</font>(testChar == 'a') {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("The test char is a!");
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        <p>
+        When the execution arrives at the if statement, the condition is evaluated. In this case, Java will check
+        if the <i>testChar</i> variable equals to 'a'. It obviously is, we just assigned it in the previous statement!
+        </p><p>
+        The condition is true, and so the statement inside the <b>if block</b> (the part between the curly braces) is executed.</p>
+        <br><br>
+        Run this code and confirm that the text will be printed! Now, change the value of the variable to something that is not 'a',
+        and run again. Will anything be printed?
+        ]]>
+    </text>
+    <boxed title="Multiple conditions">
+        <![CDATA[
+        We said that the if block can have one condition. But what if we want to check if multiple conditions are true?
+        Well, one not-so-elegant way would be to use another if block inside the the first one:
+        ]]>
+    </boxed>
+    <code>
+        <![CDATA[
+        <font color="#DF7401">int </font>n1 = 2, n2 = 3;
+<br/><font color="#E65100">if</font>(n1 == 2) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(n2 == 3) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("n1=2,n2=3");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        This is where the <b>logical operators</b> come in to the rescue. The AND operator is perfect for this example:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#DF7401">int </font>n1 = 2, n2 = 3;
+<br/><font color="#E65100">if</font>(n1 == 2 && n2 == 3) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("n1=2,n2=3");
+<br/>}
+        ]]>
+    </code>
+    <title text="The if-else blocks"/>
+    <text>
+        <![CDATA[
+        There are cases, where we would like to evaluate a condition, but not only run some statements when it's
+        true, but also when it's false! We could use the <b>negate operator</b> to achieve this, but the if-else blocks
+        should be used instead:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#DF7401">char </font>testChar = 'b';
+<br/><font color="#E65100">if</font>(testChar == 'a') {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("The char is a!");	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>}<font color="#E65100"> else </font>{
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("The char is NOT a!");
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        We extended our <i>testChar</i> example with an <b>else block</b>. Notice that the condition is now false, so the
+        statements in the else block will be executed, instead of the ones in the if block!
+        ]]>
+    </text>
+    <boxed title="Always one, never both">
+        <![CDATA[
+        When using if-else blocks, always <b>exactly one</b> of the blocks are executed! A condition must be true or false,
+        so one of the blocks will run. It is impossible for the condition to be true and false at the same time, so both blocks
+        will never run.
+        ]]>
+    </boxed>
+    <title text="Additional else-if blocks"/>
+    <text>
+        <![CDATA[
+        It is possible to add additional, so called <b>else-if blocks</b> to an if block or to if-else blocks. What they do is
+        quite intuitive, see the example:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#DF7401">double </font>d = 3.14;
+<br/><font color="#E65100">if</font>(d > 5) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Bigger then 5");
+<br/>}<font color="#E65100"> else if</font>(d > 3) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//this block is run</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Bigger then 3");
+<br/>}<font color="#E65100"> else if</font>(d > 1) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Bigger then 1");
+<br/>}<font color="#E65100"> else </font>{
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Smaller then 1");
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        A very important detail to know about these else-if blocks, is the conditions are evaluated from top
+        to bottom, and if Java finds a condition that is <b>true</b>, the block of that condition will be executed,
+        <b>and no other blocks</b>!
+        <br><br>
+        If you run this example, you will notice that only <i>'Bigger then 3'</i> is printed, but our number is also bigger
+        then 1! This is because the previously mentioned rule, that only one block can be executed.
+        ]]>
+    </text>
+    <boxed title="Infinite possibilities">
+        <![CDATA[
+        We can add any number of additional <i>else-if</i> blocks to an existing if block. We can also nest other
+        blocks, method calls inside them. This behaviour, in combination with reading user input (later chapter)
+        allows us to write complex code, that takes many factors into account.
+        ]]>
+    </boxed>
+    <title text="The switch block"/>
+    <text>
+        <![CDATA[
+        The switch block can be used, when otherwise a lot of <i>else-if</i> blocks would be needed. See this example for
+        the syntax. Assume that the <i>assignGrade</i> method returns an integer between 1 and 5.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#DF7401">int </font>grade = assignGrade();
+<br/><font color="#999900">String</font> output;
+<br/><font color="#E65100">switch</font>(grade) {
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;case </font>1: output = "You failed!";
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">break</font>;
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;case </font>2: output = "You almost failed...";
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">break</font>;
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;case </font>3: output = "Not bad, not good.";
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">break</font>;
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;case </font>4: output = "Very good!";
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">break</font>;
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;case </font>5: output = "Perfect!";
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; 	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">break</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">default</font>: output = "Invalid grade!";
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;        <font color="#E65100">break</font>;
+<br/>}
+<br/><font color="#999900">System</font>.out.println(output);
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        <p>
+        As you can see, we can give a variable to the switch statement, and list it's states we are interested in
+        using <b>case</b> labels. A <b>default</b> label can be used, this will be reached when no other state was equal
+        to our variables value.
+        </p><p>The <b>break</b> statements are necessary, they tell the switch statement that we would like to "jump out"
+        out the switch statement when we found out variables value.
+        ]]>
+    </text>
+    <advanced title="Limitations of switch">
+        <![CDATA[
+        While the switch statement is useful in some cases, it can only compare certain types of variables. To see a list of allowed
+        types, and to read more about the switch statement, see the <a href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/switch.html">official documentation</a>.
+        ]]>
+    </advanced>
 </resources>
