@@ -206,6 +206,19 @@
     </question>
 
     <!-- Questions for if-else -->
+    <question type="true_false">
+        <text>For each if block, there must be an else block as well.</text>
+        <correct>false</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these blocks can stand alone, without any other block?</text>
+        <answer>else</answer>
+        <answer>if</answer>
+        <answer>else if</answer>
+        <answer>switch</answer>
+        <correct>1</correct>
+        <correct>3</correct>
+    </question>
 
     <!--
     <question type="single_choice">

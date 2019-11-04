@@ -70,6 +70,16 @@
 <br/>}
         ]]>
     </code>
+    <advanced title="One statement">
+        <![CDATA[
+        It is not required to write the curly braces of the <i>if</i> block. In this case, <b>only one
+        statement</b> (the next one) will belong to the "block". For example, something like this is allowed:
+        <br><br>
+        if(condition) statement;
+        <br><br>
+        While not always necessary, it's never a bad practice to write the curly braces.
+        ]]>
+    </advanced>
     <title text="The if-else blocks"/>
     <text>
         <![CDATA[
