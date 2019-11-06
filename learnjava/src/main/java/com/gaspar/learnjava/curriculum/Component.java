@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Build;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 
@@ -100,6 +102,7 @@ public class Component implements Serializable {
                 }
                 ImageButton copyButton = componentView.findViewById(R.id.copyButton); //set up copy button
                 copyButton.setOnClickListener(view -> copyOnClick(codeArea, context));
+                initZoomButtons(componentView); //set up zoom buttons
                 break;
             case ComponentType.TEXT: //standard text component
                 componentView = inflater.inflate(R.layout.text_component, parent, false);
@@ -160,6 +163,31 @@ public class Component implements Serializable {
         } else {
             Snackbar.make(copyFromThis, R.string.copy_failed, Snackbar.LENGTH_SHORT).show();
         }
+    }
+
+    /**
+     * The amount of font size (in pixels) that the zoom buttons increase/decrease.
+     */
+    private static final int ZOOM_SIZE_CHANGE = 10;
+
+    /**
+     * Adds listeners to the zoom in and zoom out button of code sample component.
+     *
+     * @param codeSampleView The code sample view.
+     */
+    @UiThread
+    private static void initZoomButtons(@NonNull View codeSampleView) {
+        ImageButton zoomIn = codeSampleView.findViewById(R.id.zoomInButton);
+        ImageButton zoomOut = codeSampleView.findViewById(R.id.zoomOutButton);
+        final int minFontSize = (int)codeSampleView.getContext().getResources().getDimension(R.dimen.code_text_size);
+        final TextView codeArea = codeSampleView.findViewById(R.id.codeArea);
+        zoomIn.setOnClickListener(view ->
+                codeArea.setTextSize(TypedValue.COMPLEX_UNIT_PX, codeArea.getTextSize() + ZOOM_SIZE_CHANGE));
+        zoomOut.setOnClickListener(view -> {
+            float newSize = codeArea.getTextSize() - ZOOM_SIZE_CHANGE;
+            if(newSize < minFontSize) return;
+            codeArea.setTextSize(TypedValue.COMPLEX_UNIT_PX, newSize);
+        });
     }
 
     /**

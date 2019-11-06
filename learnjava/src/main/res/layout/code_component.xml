@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
@@ -21,17 +22,49 @@
         android:layout_height="wrap_content"
         android:background="@drawable/code_area_background"
         android:textColor="@color/code_text_color"
-        android:textSize="@dimen/small_text_size"
+        android:textSize="@dimen/code_text_size"
         tools:layout_height="200dp" />
 
-    <ImageButton
-        android:layout_margin="@dimen/margin"
-        android:id="@+id/copyButton"
-        android:layout_width="@dimen/icon_size"
-        android:layout_height="@dimen/icon_size"
-        android:src="@drawable/copy_icon"
-        android:layout_gravity="end"
-        android:backgroundTint="@color/colorPrimary"
-        android:contentDescription="@string/copy_content"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin"
+        android:layout_marginEnd="@dimen/margin"
+        android:padding="@dimen/padding">
 
+        <ImageButton
+            android:id="@+id/copyButton"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:backgroundTint="@color/colorPrimary"
+            android:contentDescription="@string/copy_content"
+            android:src="@drawable/copy_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/zoomInButton"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:backgroundTint="@color/colorPrimary"
+            android:contentDescription="@string/zoom_in"
+            android:src="@drawable/zoom_in_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/zoomOutButton"
+            android:layout_marginStart="@dimen/margin"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:backgroundTint="@color/colorPrimary"
+            android:contentDescription="@string/zoom_out"
+            android:src="@drawable/zoom_out_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/zoomInButton"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

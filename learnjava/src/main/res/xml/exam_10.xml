@@ -220,6 +220,115 @@
         <correct>3</correct>
     </question>
 
+    <!-- Questions for loops -->
+    <question type="single_choice">
+        <text>Which loop should be used when we know beforehand how many times a statement must be executed?</text>
+        <answer>for loop</answer>
+        <answer>while loop</answer>
+        <answer>do-while loop</answer>
+        <correct>0</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which loop should be used when we don't know beforehand how many times a statement must be executed?</text>
+        <answer>for loop</answer>
+        <answer>while loop</answer>
+        <correct>1</correct>
+    </question>
+    <question type="true_false">
+        <text>All 3 components of a for loop (iterator initialization, terminating condition, iterator updating) are mandatory.</text>
+        <correct>false</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which are, by convention, good names for iterator variables</text>
+        <answer>x</answer>
+        <answer>var</answer>
+        <answer>i</answer>
+        <answer>j</answer>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is correct about the terminating condition of a loop?</text>
+        <answer>It doesn't allow infinite loops.</answer>
+        <answer>When this condition becomes false, the loop stops.</answer>
+        <answer>When this condition becomes true, the loop stops.</answer>
+        <answer>When creating a for loop, this is the last component.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="single_choice">
+        <text>What does i++ do?</text>
+        <answer>Increments the variable i.</answer>
+        <answer>Creates a for loop where i is the iterator variable.</answer>
+        <answer>Decrements the variable i.</answer>
+        <answer>Sets the value of i to 0.</answer>
+        <correct>0</correct>
+    </question>
+    <question type="single_choice">
+        <text>What does j-- do?</text>
+        <answer>Creates a while loop where j is the iterator variable.</answer>
+        <answer>Increments the variable j.</answer>
+        <answer>Decrements the variable j.</answer>
+        <answer>Deletes j, it can't be used again.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="text">
+        <text>Write the STATEMENT that decrements the value of k.</text>
+        <correct>k--;</correct>
+        <correct>--k;</correct>
+    </question>
+    <question type="text">
+        <text>Write the STATEMENT that increments the value of j.</text>
+        <correct>j++;</correct>
+        <correct>++j;</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is the difference between the while and the do-while loop?</text>
+        <answer>Nothing.</answer>
+        <answer>A do-while loop can never be infinite, a while loop can be.</answer>
+        <answer>The while loop has special syntax to declare an iterator variable, the do-while loop doesn't.</answer>
+        <answer>The do-while loop is guaranteed to iterate at least once, the while loop isn't.</answer>
+        <correct>3</correct>
+    </question>
+    <question type="multi_choice">
+        <text>What is the same in the for and the while loops?</text>
+        <answer>They can be infinite loops.</answer>
+        <answer>Both have special syntax for iterator variables.</answer>
+        <answer>The break and continue statements can be used in both.</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+    </question>
+    <question type="single_choice">
+        <text>What does the break statement do?</text>
+        <answer>Updates the value of the iterator variable.</answer>
+        <answer>Immediately stops a loop.</answer>
+        <answer>Skips the the next iteration of the loop.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="text">
+        <text>Enter the statement that stops a loop.</text>
+        <correct>break;</correct>
+    </question>
+    <question type="single_choice">
+        <text>What does the continue statement do?</text>
+        <answer>Used after a break statement, it restarts the loop.</answer>
+        <answer>Updates the value of the iterator variable.</answer>
+        <answer>Immediately stops a loop.</answer>
+        <answer>Skips the the next iteration of the loop.</answer>
+        <correct>3</correct>
+    </question>
+    <question type="text">
+        <text>Enter the statement that advances a loop the the next iteration.</text>
+        <correct>continue;</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is an infinite loop?</text>
+        <answer>A loop, where the terminating condition never becomes false.</answer>
+        <answer>A special while loop.</answer>
+        <answer>A behaviour which happens when we forget to write the closing curly brace for a loop.</answer>
+        <answer>A special for loop.</answer>
+        <correct>0</correct>
+    </question>
+
     <!--
     <question type="single_choice">
         <text></text>

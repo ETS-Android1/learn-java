@@ -22,6 +22,7 @@
     <dimen name="radius_big">20dp</dimen>
 
     <!-- Text sizes -->
+    <dimen name="code_text_size">18sp</dimen>
     <dimen name="small_text_size">14sp</dimen>
     <dimen name="medium_text_size">16sp</dimen>
     <dimen name="big_text_size">20sp</dimen>

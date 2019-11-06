@@ -89,7 +89,7 @@
     </boxed>
     <text>
         <![CDATA[
-        By convention, the iterator variable is usually called <i>i</i>, or <i>k, j, etc</i> if for any reason <i>i</i> is taken.
+        By convention, the iterator variable is usually called <i>i</i>, or <i>j, k, etc</i> if <i>i</i> is taken.
         ]]>
     </text>
     <advanced title="Optional for loop components">
@@ -197,6 +197,12 @@
         the <b>if and break</b> statements.
         ]]>
     </text>
+    <advanced title="Return from a loop">
+        <![CDATA[
+        It is possible to <b>return</b> from inside a loop. This will also stop the loop, just like the
+        break statement. There is only one exception for this, the <b>finally block</b>, which will be covered in a later course.
+        ]]>
+    </advanced>
     <title text="To the next step: continue"/>
     <text>
         <![CDATA[
@@ -230,7 +236,7 @@
     <text>
         <![CDATA[
         You may have already wondered about or experimented with the possibility of using a terminating condition
-        that can <b>never become true</b>. In this case out loop will iterate ever onwards, unless explicitly using a break
+        that can <b>never become false</b>. In this case out loop will iterate ever onwards, unless explicitly using a break
         statement (or shutting down the program or the computer, of course).
         ]]>
     </text>

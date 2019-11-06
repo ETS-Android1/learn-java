@@ -100,4 +100,6 @@
     <string name="advanced">ADVANCED</string>
     <string name="confirm_chapter">Confirm chapter</string>
     <string name="image_component_desc">Image component</string>
+    <string name="zoom_in">Zoom in</string>
+    <string name="zoom_out">Zoom out</string>
 </resources>
