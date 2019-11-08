@@ -26,6 +26,11 @@ abstract class AnimationUtils {
     }
 
     /**
+     * Animation duration time, in milliseconds.
+     */
+    private static final int DURATION = 800;
+
+    /**
      * Slides in a previously 'GONE' view. Up/Down animation.
      *
      * @author neoteknic, StackOverflow.com
@@ -49,8 +54,8 @@ abstract class AnimationUtils {
                 return true;
             }
         };
-        // 1dp/ms
-        a.setDuration((int) (targetHeight / v.getContext().getResources().getDisplayMetrics().density));
+        a.setDuration(DURATION);
+        //a.setDuration((int) (targetHeight / v.getContext().getResources().getDisplayMetrics().density));
         a.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -86,8 +91,8 @@ abstract class AnimationUtils {
                 return true;
             }
         };
-        // 1dp/ms
-        a.setDuration((int)(initialHeight / v.getContext().getResources().getDisplayMetrics().density));
+        a.setDuration(DURATION);
+        //a.setDuration((int)(initialHeight / v.getContext().getResources().getDisplayMetrics().density));
         a.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) { }

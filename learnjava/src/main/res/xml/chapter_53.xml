@@ -36,9 +36,9 @@
     </text>
     <code>
         <![CDATA[
-        public<font color="#E65100"> class </font>Main {
+        <font color="#E65100">public class </font>Main {
 <br/>
-<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;public </font>static<font color="#DF7401"> void </font>main(<font color="#999900">String</font>[] args) {
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;public static</font><font color="#DF7401"> void </font>main(<font color="#999900">String</font>[] args) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">// TODO: Auto-generated method stub</font>
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}

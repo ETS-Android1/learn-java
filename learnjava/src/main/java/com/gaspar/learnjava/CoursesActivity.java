@@ -153,6 +153,19 @@ public class CoursesActivity extends AppCompatActivity implements NavigationView
     }
 
     /**
+     * Shows the user which component to tap for details by shaking it a bit. This is always
+     * the first course displayer in the list view
+     */
+    public void showTapPrompt(View tapView) {
+        ListView courseSelectors = findViewById(R.id.courseSelectors);
+        if(courseSelectors.getChildCount() == 0) return;
+        View shakeThis = courseSelectors.getChildAt(0).findViewById(R.id.courseNameBar);
+
+        shakeThis.startAnimation(android.view.animation.AnimationUtils.loadAnimation(
+                CoursesActivity.this, R.anim.shake));
+    }
+
+    /**
      * Settings button (in the toolbar) click handler.
      */
     public void settingsOnClick(View v) {

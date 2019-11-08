@@ -7,4 +7,261 @@
         <id>104</id>
         <name>Arrays</name>
     </chapterdata>
+    <text>
+        <![CDATA[
+        If a large numbers of variables (of the same type) must be created, we can use an <b>array</b>.
+        ]]>
+    </text>
+    <title text="Declaration and initialization"/>
+    <text>
+        <![CDATA[
+        The declaration of arrays is similar to the declaration of single variables. You must specify the
+        type and the name, then use the <b>[]</b>(square brackets) symbols to indicate it is an array.
+        <p>
+        To initialize it, the <b>new</b> keyword must be used, then again the square brackets, to specify
+        the <b>length</b> of the array (number of variables it contains).
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#DF7401">int</font>[] numbers; <font color="gray">//declaration</font>
+<br/>numbers = <font color="#E65100">new</font> <font color="#DF7401">int</font>[100]; <font color="gray">//initialization</font>
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        The above code creates an array of integers. The array will hold 100 integer variables. Just like with
+        variables, the declaration and initialization can be written in one statement:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#DF7401">int</font>[] numbers = <font color="#E65100">new</font> <font color="#DF7401">int</font>[100];
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        It is of course possible to create an array not only from primitive types, but from classes as well. For example,
+        the following code creates an array of <i>String</i>s, which will contain 25 string objects:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#999900">String</font>[] strings = <font color="#E65100">new</font> <font color="#999900">String</font>[25];
+        ]]>
+    </code>
+    <boxed title="Default value of the elements">
+        <![CDATA[
+        When creating an <b>array of primitives</b> (int, double, char, ...), Java will automatically initialize
+        all elements to their default value.
+        <p>
+        If we create an <b>array from a class</b>, then each element will be initialized to <b>null</b>. Null will be covered in the
+        course of classes, for now it's enough to know that the programmer must initialize the elements of such arrays.
+        ]]>
+    </boxed>
+    <title text="Reference the elements"/>
+    <text>
+        <![CDATA[
+        For arrays to be useful, the programmer must be able to reference each element they contain. Again, the square brackets
+        are used to achieve this.
+        ]]>
+    </text>
+    <boxed title="Array indexing">
+        <![CDATA[
+        Arrays are <b>INDEXED FROM 0</b>! This means the that first element in the array will have index 0, the second one
+        will have index 1, and so on.
+        ]]>
+    </boxed>
+    <code>
+        <![CDATA[
+        <font color="gray">//array of 3 doubles</font>
+<br/><font color="#DF7401">double</font>[] reals = <font color="#E65100">new</font> <font color="#DF7401">double</font>[3];
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/><font color="gray">/**
+<br/> * Values are now 0 for all 3
+<br/> * doubles in the array.
+<br/> */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>reals[0] = 3.14;
+<br/>reals[1] = -22.43;
+<br/>reals[2] = 5.5;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/><font color="gray">/**
+<br/> * We assigned our own values
+<br/> * for the elements.
+<br/>*/</font>
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Notice how that we used indices <i>0,1,2</i> to reference the elements, and not indices <i>1,2,3</i>!
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="gray">//array of 4 strings
+</font>
+<br/><font color="#999900">String</font>[] words = <font color="#E65100">new</font> <font color="#999900">String</font>[4];
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/><font color="gray">/**
+<br/> * Values are now null for all
+<br/> * elements. We should initialize:
+<br/>*/</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>words[0] = "Cat";
+<br/>words[1] = "Car";
+<br/>words[2] = "Java";
+<br/>words[3] = "Programming";
+<br/>
+<br/><font color="gray">/**
+<br/> * Now we can safely do something
+<br/> * with the words!
+<br/> */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/><font color="#999900">System</font>.out.print(words[2] + " " + words[3]);
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        In java, we can always get the length (number of elements) of an array this way:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#DF7401">char</font>[] chars = <font color="#E65100">new</font> <font color="#DF7401">char</font>[50];
+<br/><font color="gray">//charAmount will be 50	&nbsp;&nbsp;&nbsp;&nbsp;
+</font>
+<br/><font color="#DF7401">int</font> charAmount = chars.length;
+        ]]>
+    </code>
+    <title text="Dangers of arrays"/>
+    <text>
+        <![CDATA[
+        When using arrays, we must be careful to only reference existing elements, otherwise
+        our program will stop with an <b>ArrayIndexOutOfBoundsException</b>.
+        <p>
+        The following code sample is faulty, and the image shows what happens if we run it:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="gray">//indices are from 0 to 9!</font>
+<br/><font color="#DF7401">int</font>[] nums = <font color="#E65100">new</font> <font color="#DF7401">int</font>[10];
+<br/>
+<br/><font color="gray">//there is no element with index 10!</font>
+<br/><font color="#999900">System</font>.out.println(nums[10]);
+        ]]>
+    </code>
+    <image name="array_index_exception"/>
+    <text>
+        <![CDATA[
+        When creating arrays from classes, it's important to initialize the values before using them!
+        Trying to call a method of the class while our variable is actually null will cause a
+        <b>NullPointerException</b>.
+        <p>
+        See this code and the exception it throws:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#999900">String</font>[] words = <font color="#E65100">new</font> <font color="#999900">String</font>[6];
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/><font color="gray">//words[0] is null here!</font>
+<br/><font color="#DF7401">int</font> charNum = words[0].length();
+        ]]>
+    </code>
+    <image name="null_pointer_exception"/>
+    <text>
+        <![CDATA[
+        Note that both of these "faulty" examples are <b>valid code</b>. They will compile without any
+        error! These exceptions are thrown when we run the code.
+        ]]>
+    </text>
+    <title text="Iterate arrays"/>
+    <text>
+        <![CDATA[
+        Though it's possible to initialize and modify the elements of an array the way the above examples show,
+        but in most cases, this isn't how we do it. Instead, the usage of the <b>for loop</b> is recommended!
+        <p>
+        In this example, an array of 100 integers is created. In it, we would like to store first 100 positive numbers:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#DF7401">int</font>[] posNums = <font color="#E65100">new</font> <font color="#DF7401">int</font>[100];
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/><font color="gray">/**
+<br/> * There are only 0-s in the
+<br/> * array here.
+<br/> */</font>
+<br/>
+<br/><font color="#E65100">for</font>(<font color="#DF7401">int</font> i=0; i&lt;posNums.length; i++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;posNums[i] = i + 1;
+<br/>}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/><font color="gray">/**
+<br/> * Now the array stores the
+<br/> * numbers from 1 to 100.
+<br/>*/</font>
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        As you can see, the iterator variable <i>i</i> is used to initialize all elements in our array.
+        At first, the value of <i>i</i> is 0, because that is the index of the first element.
+        <p>
+        The loop will stop when <i>i</i> is no longer smaller then the length of the array (100). This will occur
+        when <i>i</i> is 100. It's important that we stop here, since <b>posNums[100]</b> would throw an <i>
+        ArrayIndexOutOfBoundsException</i>!
+        ]]>
+    </text>
+    <advanced title="For-each loop">
+        <![CDATA[
+        The for loop has a special version to iterate arrays, called <b>for-each loop</b>. It's more compact
+        and easier to write then a normal for loop.
+        <p>
+        It can, for example, be used when we would like to print all elements of an array:
+        ]]>
+    </advanced>
+    <code>
+        <![CDATA[
+        <font color="#999900">String</font>[] textData = <font color="#E65100">new</font> <font color="#999900">String</font>[50];
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/><font color="gray">/**
+<br/> * Suppose that we initialize the
+<br/> * values here!
+<br/> */</font>
+<br/>initValues(textData);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/><font color="#E65100">for</font>(<font color="#999900">String</font> text: textData) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(text);
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Note that the iterator variable here isn't a number! Instead, it's a <b>String</b> called <i>text</i>.
+        The for each loop will always load the next element in the array into this variable. It will also automatically
+        stop when the end of our array is reached.
+        ]]>
+    </text>
+    <title text="Another look at the main method"/>
+    <text>
+        <![CDATA[
+        Now that we know about arrays, we'll understand a part of the <b>main method</b>, which we previously didn't.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+    <font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;public static</font><font color="#DF7401"> void </font>main(<font color="#999900">String</font>[] args) {
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">// TODO: Auto-generated method stub</font>
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        The parameter called <b>args</b> is actually an array of strings! This special array is loaded by the JVM, and will
+        contain the command line arguments. More about this in the next chapter.
+        ]]>
+    </text>
 </resources>

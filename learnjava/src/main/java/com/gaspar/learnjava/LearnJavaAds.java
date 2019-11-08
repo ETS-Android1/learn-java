@@ -48,7 +48,11 @@ abstract class LearnJavaAds {
             adView.loadAd(new AdRequest.Builder().build());
         } else { //load test ad in debug, but only when debug ads are enabled
             adView.setAdUnitId(context.getString(R.string.ad_unit_id_banner_test));
-            if(LearnJavaActivity.LOAD_DEBUG_ADS) adView.loadAd(new AdRequest.Builder().build());
+            if(LearnJavaActivity.LOAD_DEBUG_ADS) {
+                adView.loadAd(new AdRequest.Builder().build());
+            } else {
+                parent.getLayoutParams().height = 0;
+            }
         }
         parent.addView(adView); //add to parent
         return adView;
