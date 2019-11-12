@@ -14,10 +14,11 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import com.gaspar.learnjava.curriculum.Course;
-import com.gaspar.learnjava.parsers.CourseParser;
 import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.database.ExamStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
+import com.gaspar.learnjava.parsers.CourseParser;
+import com.gaspar.learnjava.parsers.ThemeUtils;
 
 import java.util.concurrent.Executors;
 
@@ -62,11 +63,11 @@ public class ExamNotificationReceiver extends BroadcastReceiver {
                 .setContentText(context.getString(R.string.notification_exam_name_message, examName))
                 .setVibrate(VIBRATE_PATTERN)
                 .setColorized(true)
-                .setColor(ContextCompat.getColor(context, R.color.windowBackground))
+                .setColor(ContextCompat.getColor(context, ThemeUtils.getBackgroundColor()))
                 .setAutoCancel(true);
         mBuilder.setContentIntent(pi);
         mBuilder.setAutoCancel(true);
-        mBuilder.setLights(ContextCompat.getColor(context, R.color.colorPrimary), 500, 500);
+        mBuilder.setLights(ContextCompat.getColor(context, ThemeUtils.getPrimaryColor()), 500, 500);
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if(mNotificationManager == null) {
             Log.d("LearnJava", "Can't post notification...");

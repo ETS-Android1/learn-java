@@ -59,6 +59,35 @@
         course of classes, for now it's enough to know that the programmer must initialize the elements of such arrays.
         ]]>
     </boxed>
+    <title text="Array initializer"/>
+    <text>
+        <![CDATA[
+        Java provides special syntax for <b>quickly initializing small arrays</b>. We simply have to list the elements
+        of our array between curly braces! Here are a few examples:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+ <font color="gray">//an array of 4 booleans</font>
+<br/><font color="#DF7401">boolean</font>[] logicals = {false, true, false, false};
+<br/><font color="gray">//an array of 3 strings</font>
+<br/><font color="#999900">String</font>[] words = {"Fast", "Array", "Initialization"};
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Using this technique initializes not only the array itself, but each element individually. We also don't
+        have to explicitly write the length of the array, it will be determined automatically.
+        <p>
+        We must, however, be careful not to put elements of different types between the curly braces!
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="gray">//INVALID CODE!	&nbsp;&nbsp;&nbsp;&nbsp;</font>
+<br/><font color="#DF7401">int</font>[] integers = {1,2,3,"four"};
+        ]]>
+    </code>
     <title text="Reference the elements"/>
     <text>
         <![CDATA[
@@ -243,6 +272,58 @@
         Note that the iterator variable here isn't a number! Instead, it's a <b>String</b> called <i>text</i>.
         The for each loop will always load the next element in the array into this variable. It will also automatically
         stop when the end of our array is reached.
+        ]]>
+    </text>
+    <title text="Multi-dimensional arrays"/>
+    <text>
+        <![CDATA[
+        Java supports multi-dimensional arrays. Such array is essentially an array of other arrays.
+        ]]>
+    </text>
+    <image name="multi_dim_array"/>
+    <text>
+        <![CDATA[
+        Those with knowledge of linear algebra may also think of such arrays as <b>matrices</b>.
+        <br><br>
+        Note that we can use the array initializer for multi-dimensional arrays too:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#DF7401">int</font>[][] matrix = {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;{1, 5, -2},
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;{3, 7, 2},
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;{2, -1, 1}
+<br/>};
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        To traverse these arrays, we can use <b>nested loops</b> (loop inside loop). This example prints
+        the elements of our multi dimensional array, formatted as a matrix:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#DF7401">int</font>[][] matrix = {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;{1, 5, -2},
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;{3, 7, 2},
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;{2, -1, 1}
+<br/>};
+<br/><font color="gray">//this outer loop iterates all rows</font>
+<br/><font color="#E65100">for</font>(<font color="#DF7401">int</font> i=0; i&lt;matrix.length; i++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//this inner loop iterates inside a row	&nbsp;&nbsp;&nbsp;&nbsp;</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> j=0; j&lt;matrix[i].length; j++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.print(matrix[i][j] + " ");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(); <font color="gray">//line <font color="#E65100">break</font>
+</font>
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Though harder to visualize, you can create more then just 2 dimensional arrays as well.
         ]]>
     </text>
     <title text="Another look at the main method"/>

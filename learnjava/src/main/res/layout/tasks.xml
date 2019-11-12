@@ -21,7 +21,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorPrimary"
+                android:background="?android:colorPrimary"
                 app:popupTheme="@style/AppTheme.PopupOverlay">
 
                 <RelativeLayout
@@ -38,8 +38,8 @@
                         android:layout_centerInParent="true"
                         android:layout_gravity="end"
                         android:layout_marginEnd="@dimen/margin"
-                        android:backgroundTint="@color/colorPrimary"
                         android:contentDescription="@string/action_settings"
+                        android:elevation="0dp"
                         android:onClick="settingsOnClick"
                         android:src="@drawable/settings_icon" />
 

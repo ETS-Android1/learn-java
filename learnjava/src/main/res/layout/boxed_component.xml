@@ -19,7 +19,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/separator_height"
-        android:background="@color/colorAccent"/>
+        android:background="?android:colorAccent"/>
 
     <TextView
         android:layout_width="match_parent"

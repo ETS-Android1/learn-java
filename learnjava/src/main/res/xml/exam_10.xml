@@ -329,6 +329,86 @@
         <correct>0</correct>
     </question>
 
+    <!-- Questions for arrays -->
+    <question type="single_choice">
+        <text>Which of these is a correct statement for declaring an integer array?</text>
+        <answer>int[] data = new int[];</answer>
+        <answer>String[] data = new String[5];</answer>
+        <answer>int[] data = new int[10];</answer>
+        <answer>[]int data = new [10]int;</answer>
+        <correct>2</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which of these is a correct statement for declaring a string array, with length 20?</text>
+        <answer>int[] texts = new int[20];</answer>
+        <answer>String[] texts = new String[5];</answer>
+        <answer>String[20] texts = new String[];</answer>
+        <answer>String[] texts = new String[20]</answer>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>Elements in a boolean array are automatically initialized to false.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>Elements in a string array are automatically initialized to 0.</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>What is the index of the first element in an array?</text>
+        <correct>0</correct>
+    </question>
+    <question type="text">
+        <text>What is the index of the 10. element in an array?</text>
+        <correct>9</correct>
+    </question>
+    <question type="single_choice">
+        <text>An array has a length of N. What happens when get reference the element with index N?</text>
+        <answer>We get the referenced element.</answer>
+        <answer>An ArrayIndexOutOfBoundsException occurs.</answer>
+        <answer>A NullPointerException occurs.</answer>
+        <answer>The JVM skips this statement.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="single_choice">
+        <text>An array has a length of N. What happens when get reference the element with index N-1?</text>
+        <answer>We get the referenced element, the last element of the array.</answer>
+        <answer>An ArrayIndexOutOfBoundsException occurs.</answer>
+        <answer>A NullPointerException occurs.</answer>
+        <answer>We get the referenced element, the first element of the array.</answer>
+        <correct>0</correct>
+    </question>
+    <question type="text">
+        <text>Declare an array of characters (using primitive or wrapper), with name 'letters' and length 25.</text>
+        <correct>char[] letters = new char[25];</correct>
+        <correct>char[] letters=new char[25];</correct>
+        <correct>char[] letters =new char[25];</correct>
+        <correct>char[] letters= new char[25];</correct>
+        <correct>char letters[] = new char[25];</correct>
+        <correct>char letters[]=new char[25];</correct>
+        <correct>char letters[] =new char[25];</correct>
+        <correct>char letters[]= new char[25];</correct>
+        <correct>Character[] letters = new Character[25];</correct>
+        <correct>Character[] letters=new Character[25];</correct>
+        <correct>Character[] letters= new Character[25];</correct>
+        <correct>Character[] letters =new Character[25];</correct>
+        <correct>Character letters[] = new Character[25];</correct>
+        <correct>Character letters[]=new Character[25];</correct>
+        <correct>Character letters[] =new Character[25];</correct>
+        <correct>Character letters[]= new Character[25];</correct>
+    </question>
+    <question type="text">
+        <text>Declare an array of strings called 'sentences' with length 100.</text>
+        <correct>String[] sentences = new String[100];</correct>
+        <correct>String[] sentences=new String[100];</correct>
+        <correct>String[] sentences= new String[100];</correct>
+        <correct>String[] sentences =new String[100];</correct>
+        <correct>String sentences[] = new String[100];</correct>
+        <correct>String sentences[]=new String[100];</correct>
+        <correct>String sentences[]= new String[100];</correct>
+        <correct>String sentences[] =new String[100];</correct>
+    </question>
+
     <!--
     <question type="single_choice">
         <text></text>

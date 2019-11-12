@@ -21,7 +21,7 @@
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/colorPrimary"
+                android:background="?android:colorPrimary"
                 app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
         </com.google.android.material.appbar.AppBarLayout>
@@ -131,7 +131,6 @@
                 android:id="@+id/resetButton"
                 android:layout_width="@dimen/icon_size"
                 android:layout_height="@dimen/icon_size"
-                android:background="@drawable/button_background"
                 android:contentDescription="@string/reset_details"
                 android:onClick="resetButtonOnClick"
                 app:layout_constraintBottom_toBottomOf="@+id/textView7"

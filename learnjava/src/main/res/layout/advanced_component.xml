@@ -28,6 +28,6 @@
         tools:text="Advanced info here..."
         android:textSize="@dimen/medium_text_size"
         tools:layout_height="100dp"
-        android:textColorLink="@color/windowBackground"/>
+        android:textColorLink="?android:windowBackground"/>
 
 </LinearLayout>

@@ -1,12 +1,13 @@
 <resources>
     <style name="AppTheme" parent="Theme.AppCompat.Light"> <!-- Base application theme. -->
         <!-- Colors -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowBackground">@color/windowBackground</item>
+        <item name="colorPrimary">@color/colorPrimaryOrange</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkOrange</item>
+        <item name="colorAccent">@color/colorAccentOrange</item>
+        <item name="android:windowBackground">@color/windowBackgroundOrange</item>
         <!-- Button styling -->
-        <item name="buttonStyle">@style/button_style</item>
+        <item name="buttonStyle">@style/button_style_orange</item>
+        <item name="imageButtonStyle">@style/image_button_style_orange</item>
         <!-- Text view style -->
         <item name="android:textViewStyle">@style/text_view_style</item>
     </style>
@@ -22,7 +23,7 @@
     </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
-        <item name="android:colorBackground">@color/windowBackground</item>
+        <item name="android:colorBackground">?android:windowBackground</item>
     </style>
 
     <!-- Custom text appearances -->
@@ -35,10 +36,15 @@
     </style>
 
     <!-- Custom button appearance -->
-    <style name="button_style" parent="TextAppearance.AppCompat.Button">
-        <item name="android:background">@drawable/button_background_selector</item>
+    <style name="button_style_orange" parent="TextAppearance.AppCompat.Button">
+        <item name="android:background">@drawable/button_background_selector_orange</item>
         <item name="android:textSize">@dimen/medium_text_size</item>
         <item name="android:elevation">@dimen/elevation</item>
+    </style>
+    <style name="image_button_style_orange" parent="TextAppearance.AppCompat.Button">
+        <item name="android:background">@drawable/image_button_background_orange</item>
+        <item name="android:backgroundTint">@color/colorPrimaryOrange</item>
+        <item name="android:elevation">0dp</item>
     </style>
 
     <!-- Text view customization -->

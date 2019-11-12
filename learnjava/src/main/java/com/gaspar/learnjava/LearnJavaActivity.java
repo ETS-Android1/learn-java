@@ -21,6 +21,7 @@ import com.gaspar.learnjava.asynctask.InitStarterViewTask;
 import com.gaspar.learnjava.curriculum.Chapter;
 import com.gaspar.learnjava.database.CourseStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
+import com.gaspar.learnjava.parsers.ThemeUtils;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.navigation.NavigationView;
 
@@ -69,6 +70,7 @@ public class LearnJavaActivity extends AppCompatActivity
             createNotificationChannel(); //initialize the notification channel
             SettingsActivity.initSettings(this); //initialize settings
             MobileAds.initialize(this, getString(R.string.admob_app_id)); //initialize admob
+            ThemeUtils.initSelectedTheme(this); //initialize themes
         });
         setContentView(R.layout.learn_java);
         setUpUI(); //init toolbar and drawer here
