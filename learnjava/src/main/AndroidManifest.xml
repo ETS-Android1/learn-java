@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/learn_java_icon_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme.NoActionBar"
+        android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".LearnJavaActivity"
@@ -55,6 +55,7 @@
             android:windowSoftInputMode="stateHidden"
             android:label="@string/exam"
             android:screenOrientation="sensorPortrait"/>
+        <activity android:name=".ThemedActivity" />
         <!-- This service posts the notification for the exam -->
         <receiver
             android:name=".ExamNotificationReceiver"

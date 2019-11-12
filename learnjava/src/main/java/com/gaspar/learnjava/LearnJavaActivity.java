@@ -12,7 +12,6 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -21,13 +20,12 @@ import com.gaspar.learnjava.asynctask.InitStarterViewTask;
 import com.gaspar.learnjava.curriculum.Chapter;
 import com.gaspar.learnjava.database.CourseStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
-import com.gaspar.learnjava.parsers.ThemeUtils;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.concurrent.Executors;
 
-public class LearnJavaActivity extends AppCompatActivity
+public class LearnJavaActivity extends ThemedActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     /**

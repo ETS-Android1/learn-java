@@ -9,7 +9,6 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -22,7 +21,7 @@ import com.google.android.material.navigation.NavigationView;
 /**
  * Activity that displays all exams.
  */
-public class ExamsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, UpdatableActivity {
+public class ExamsActivity extends ThemedActivity implements NavigationView.OnNavigationItemSelectedListener, UpdatableActivity {
 
     public volatile boolean successfulLoad;
 

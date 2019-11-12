@@ -11,7 +11,6 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -31,7 +30,7 @@ import java.util.List;
 /**
  * Activity of the PARSED_COURSES.
  */
-public class CoursesActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
+public class CoursesActivity extends ThemedActivity implements NavigationView.OnNavigationItemSelectedListener
             , UpdatableActivity {
 
     /**

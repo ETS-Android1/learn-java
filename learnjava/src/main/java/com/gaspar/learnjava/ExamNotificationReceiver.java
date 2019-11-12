@@ -18,7 +18,6 @@ import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.database.ExamStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.parsers.CourseParser;
-import com.gaspar.learnjava.parsers.ThemeUtils;
 
 import java.util.concurrent.Executors;
 

@@ -1,4 +1,4 @@
-package com.gaspar.learnjava.parsers;
+package com.gaspar.learnjava;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -6,9 +6,7 @@ import android.content.SharedPreferences;
 import androidx.annotation.ColorRes;
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
-
-import com.gaspar.learnjava.LearnJavaActivity;
-import com.gaspar.learnjava.R;
+import androidx.annotation.StyleRes;
 
 /**
  * Gets runtime color values.
@@ -26,7 +24,7 @@ public abstract class ThemeUtils {
     /**
      * Called on start of the application, initialized the selected theme from preferences.
      */
-    public static void initSelectedTheme(final @NonNull Context context) {
+    static void initSelectedTheme(final @NonNull Context context) {
         SharedPreferences prefs = context.getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
         if(prefs.contains(THEME_PREF_NAME)) {
             selectedTheme = prefs.getInt(THEME_PREF_NAME, Themes.ORANGE);
@@ -47,20 +45,27 @@ public abstract class ThemeUtils {
     }
 
     /**
+     * Saves a new selected theme in {@link #selectedTheme} and in the preferences as well.
+     */
+    static void updateSelectedTheme(final @NonNull Context context, @Themes int newTheme) {
+        selectedTheme = newTheme;
+        SharedPreferences prefs = context.getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
+        prefs.edit().putInt(THEME_PREF_NAME, newTheme).apply();
+    }
+
+    /**
      * Gets the primary color.
      *
      * @return The XML code of the primary color.
      */
     @ColorRes
-    public static int getPrimaryColor() {
+    static int getPrimaryColor() {
         if (selectedTheme == Themes.ORANGE) {
             return R.color.colorPrimaryOrange;
         } else if(selectedTheme == Themes.BLUE) {
-            //TODO
-            throw new RuntimeException();
+            return R.color.colorPrimaryBlue;
         } else if(selectedTheme == Themes.DARK) { //dark
-            //TODO
-            throw new RuntimeException();
+            return R.color.colorPrimary_Dark;
         }
         throw new RuntimeException("Theme error!");
     }
@@ -71,15 +76,28 @@ public abstract class ThemeUtils {
      * @return The XML code of the window background color.
      */
     @ColorRes
-    public static int getBackgroundColor() {
+    static int getBackgroundColor() {
         if (selectedTheme == Themes.ORANGE) {
             return R.color.windowBackgroundOrange;
         } else if(selectedTheme == Themes.BLUE) {
-            //TODO
-            throw new RuntimeException();
+            return R.color.windowBackgroundBlue;
         } else if(selectedTheme == Themes.DARK) { //dark
-            //TODO
-            throw new RuntimeException();
+            return R.color.windowBackground_Dark;
+        }
+        throw new RuntimeException("Theme error!");
+    }
+
+    /**
+     * @return The style resource of the currently selected theme.
+     */
+    @StyleRes
+    public static int getTheme() {
+        if (selectedTheme == Themes.ORANGE) {
+            return R.style.AppTheme;
+        } else if(selectedTheme == Themes.BLUE) {
+            return R.style.BlueTheme;
+        } else if(selectedTheme == Themes.DARK) { //dark
+            return R.style.DarkTheme;
         }
         throw new RuntimeException("Theme error!");
     }

@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 
@@ -13,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringDef;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -28,7 +28,7 @@ import java.util.concurrent.Executors;
 /**
  * Activity to show app settings.
  */
-public class SettingsActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class SettingsActivity extends ThemedActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     @Override
     public void onCreate(Bundle savedState) {
@@ -61,6 +61,27 @@ public class SettingsActivity extends AppCompatActivity implements NavigationVie
      * Constant for the 'app difficulty' preference.
      */
     public static final String DIFFICULTY_PREF_NAME = "difficulty";
+
+    /**
+     * Called when a style selector button is clicked.
+     */
+    public void styleSelected(View styleSelector) {
+        styleSelector.startAnimation(AnimationUtils.loadAnimation(SettingsActivity.this, R.anim.tick));
+        @ThemeUtils.Themes int newTheme;
+        int buttonId = styleSelector.getId();
+        if(buttonId == R.id.orangeThemeButton) {
+            newTheme = ThemeUtils.Themes.ORANGE;
+        } else if(buttonId == R.id.blueThemeButton) {
+            newTheme = ThemeUtils.Themes.BLUE;
+        } else if(buttonId == R.id.darkThemeButton) {
+            newTheme = ThemeUtils.Themes.DARK;
+        } else {
+            throw new RuntimeException("Unknown theme selector button!");
+        }
+        ThemeUtils.updateSelectedTheme(SettingsActivity.this, newTheme); //update
+        setTheme(ThemeUtils.getTheme()); //restyle settings activity
+        recreate();
+    }
 
     /**
      * Possible difficulties.

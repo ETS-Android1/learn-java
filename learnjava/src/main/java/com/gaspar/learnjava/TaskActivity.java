@@ -13,7 +13,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -30,7 +29,7 @@ import java.util.concurrent.Executors;
 /**
  * Activity that shows a task.
  */
-public class TaskActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class TaskActivity extends ThemedActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     public volatile boolean successfulLoad;
 

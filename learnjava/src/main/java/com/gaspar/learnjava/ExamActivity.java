@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.gaspar.learnjava.asynctask.LoadExamQuestionsTask;
@@ -31,7 +30,7 @@ import cn.iwgang.countdownview.CountdownView;
  * The activity that shows an exam and it's questions. This activity doesn't have access to the
  * drawer menu.
  */
-public class ExamActivity extends AppCompatActivity {
+public class ExamActivity extends ThemedActivity {
 
     /**
      * Used when loading the questions.

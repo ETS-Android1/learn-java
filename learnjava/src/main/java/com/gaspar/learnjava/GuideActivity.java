@@ -7,7 +7,6 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -18,7 +17,7 @@ import com.google.android.material.navigation.NavigationView;
 /**
  * Activity where the application guide is displayed.
  */
-public class GuideActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class GuideActivity extends ThemedActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     /**
      * Used at component loading.

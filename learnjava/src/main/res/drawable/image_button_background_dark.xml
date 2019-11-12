@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Background for dark themed image buttons. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <stroke android:color="@color/colorAccent_Dark"
+        android:width="@dimen/border_width"/>
+    <solid android:color="@color/colorPrimary_Dark"/>
+    <corners android:radius="@dimen/radius"/>
+</shape>

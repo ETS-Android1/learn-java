@@ -10,7 +10,6 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -20,7 +19,7 @@ import com.gaspar.learnjava.curriculum.Chapter;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.material.navigation.NavigationView;
 
-public class ChapterActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class ChapterActivity extends ThemedActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     /**
      * The chapter that was passed with the intent. It has no components.

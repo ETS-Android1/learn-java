@@ -10,11 +10,37 @@
         <item name="imageButtonStyle">@style/image_button_style_orange</item>
         <!-- Text view style -->
         <item name="android:textViewStyle">@style/text_view_style</item>
-    </style>
 
-    <style name="AppTheme.NoActionBar" parent="AppTheme"> <!-- App theme, no toolbar version. -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="BlueTheme" parent="AppTheme"> <!-- Blue application theme. -->
+        <!-- Colors -->
+        <item name="colorPrimary">@color/colorPrimaryBlue</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkBlue</item>
+        <item name="colorAccent">@color/colorAccentBlue</item>
+        <item name="android:windowBackground">@color/windowBackgroundBlue</item>
+        <!-- Button styling -->
+        <item name="buttonStyle">@style/button_style_blue</item>
+        <item name="imageButtonStyle">@style/image_button_style_blue</item>
+        <!-- Text view style -->
+        <item name="android:textViewStyle">@style/text_view_style</item>
+    </style>
+
+    <style name="DarkTheme" parent="AppTheme"> <!-- Dark application theme. -->
+        <!-- Colors -->
+        <item name="colorPrimary">@color/colorPrimary_Dark</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark_Dark</item>
+        <item name="colorAccent">@color/colorAccent_Dark</item>
+        <item name="android:windowBackground">@color/windowBackground_Dark</item>
+        <!-- Button styling -->
+        <item name="buttonStyle">@style/button_style_dark</item>
+        <item name="imageButtonStyle">@style/image_button_style_dark</item>
+        <!-- Text view style -->
+        <item name="android:textViewStyle">@style/text_view_style</item>
+        <item name="android:textColor">@color/darkThemeTextColor</item>
+        <item name="android:textColorPrimary">@color/darkThemeTextColor</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="AppTheme">
@@ -40,12 +66,44 @@
         <item name="android:background">@drawable/button_background_selector_orange</item>
         <item name="android:textSize">@dimen/medium_text_size</item>
         <item name="android:elevation">@dimen/elevation</item>
+        <item name="android:animateOnClick">true</item>
+        <item name="android:textAlignment">center</item>
     </style>
     <style name="image_button_style_orange" parent="TextAppearance.AppCompat.Button">
         <item name="android:background">@drawable/image_button_background_orange</item>
         <item name="android:backgroundTint">@color/colorPrimaryOrange</item>
         <item name="android:elevation">0dp</item>
+        <item name="android:animateOnClick">true</item>
     </style>
+    <style name="button_style_blue" parent="TextAppearance.AppCompat.Button">
+        <item name="android:background">@drawable/button_background_blue</item>
+        <item name="android:textSize">@dimen/medium_text_size</item>
+        <item name="android:elevation">@dimen/elevation</item>
+        <item name="android:animateOnClick">true</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+    <style name="image_button_style_blue" parent="TextAppearance.AppCompat.Button">
+        <item name="android:background">@drawable/image_button_background_blue</item>
+        <item name="android:backgroundTint">@color/colorPrimaryBlue</item>
+        <item name="android:elevation">0dp</item>
+        <item name="android:animateOnClick">true</item>
+    </style>
+    <style name="button_style_dark" parent="TextAppearance.AppCompat.Button">
+        <item name="android:background">@drawable/button_background_dark</item>
+        <item name="android:textSize">@dimen/medium_text_size</item>
+        <item name="android:textColor">@color/darkThemeTextColor</item>
+        <item name="android:textColorPrimary">@color/darkThemeTextColor</item>
+        <item name="android:elevation">@dimen/elevation</item>
+        <item name="android:animateOnClick">true</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+    <style name="image_button_style_dark" parent="TextAppearance.AppCompat.Button">
+        <item name="android:background">@drawable/image_button_background_dark</item>
+        <item name="android:backgroundTint">@color/colorPrimary_Dark</item>
+        <item name="android:elevation">0dp</item>
+        <item name="android:animateOnClick">true</item>
+    </style>
+
 
     <!-- Text view customization -->
     <style name="text_view_style" parent="TextAppearance.AppCompat.Title">
