@@ -37,4 +37,6 @@
 
     <!-- Elevation heights -->
     <dimen name="elevation">5dp</dimen>
+
+    <dimen name="notification_height">64dp</dimen>
 </resources>

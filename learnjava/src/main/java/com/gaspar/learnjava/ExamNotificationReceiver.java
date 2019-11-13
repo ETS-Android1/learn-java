@@ -39,7 +39,7 @@ public class ExamNotificationReceiver extends BroadcastReceiver {
     /**
      * Notification channel id for creating builder object.
      */
-    private static final String NOTIFICATION_CHANNEL_ID = String.valueOf(19970828);
+    static final String NOTIFICATION_CHANNEL_ID = String.valueOf(19970828);
 
     /**
      * Name of the string passed with the intent.
@@ -56,7 +56,7 @@ public class ExamNotificationReceiver extends BroadcastReceiver {
         Intent intent = new Intent(context, ExamsActivity.class);
         PendingIntent pi = PendingIntent.getActivity(context, NOTIFICATION_REQUEST_CODE, intent, 0);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
-                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.test_icon_round))
+                .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.learn_java_icon_round))
                 .setSmallIcon(R.drawable.exam_icon)
                 .setContentTitle(context.getString(R.string.notification_exam_ready))
                 .setContentText(context.getString(R.string.notification_exam_name_message, examName))
@@ -65,7 +65,6 @@ public class ExamNotificationReceiver extends BroadcastReceiver {
                 .setColor(ContextCompat.getColor(context, ThemeUtils.getBackgroundColor()))
                 .setAutoCancel(true);
         mBuilder.setContentIntent(pi);
-        mBuilder.setAutoCancel(true);
         mBuilder.setLights(ContextCompat.getColor(context, ThemeUtils.getPrimaryColor()), 500, 500);
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if(mNotificationManager == null) {

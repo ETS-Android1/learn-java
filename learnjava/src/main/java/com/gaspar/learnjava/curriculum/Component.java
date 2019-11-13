@@ -18,9 +18,11 @@ import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
+import androidx.core.content.ContextCompat;
 
 import com.gaspar.learnjava.ListTagHandler;
 import com.gaspar.learnjava.R;
+import com.gaspar.learnjava.ThemeUtils;
 import com.gaspar.learnjava.parsers.RawParser;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -90,6 +92,11 @@ public class Component implements Serializable {
                     advancedArea.setText(Html.fromHtml(data, Html.FROM_HTML_MODE_COMPACT));
                 } else {
                     advancedArea.setText(Html.fromHtml(data)); //deprecated but new android wont use this anyways
+                }
+                if(ThemeUtils.isDarkTheme()) { //some special formatting for dark theme
+                    int color = ContextCompat.getColor(context, android.R.color.black);
+                    titleView.setTextColor(color);
+                    advancedArea.setTextColor(color);
                 }
                 break;
             case ComponentType.CODE: //code example

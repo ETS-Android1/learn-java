@@ -41,6 +41,9 @@
         <item name="android:textViewStyle">@style/text_view_style</item>
         <item name="android:textColor">@color/darkThemeTextColor</item>
         <item name="android:textColorPrimary">@color/darkThemeTextColor</item>
+
+        <!-- toolbar style -->
+        <item name="toolbarStyle">@style/DarkToolbarStyle</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="AppTheme">
@@ -91,8 +94,6 @@
     <style name="button_style_dark" parent="TextAppearance.AppCompat.Button">
         <item name="android:background">@drawable/button_background_dark</item>
         <item name="android:textSize">@dimen/medium_text_size</item>
-        <item name="android:textColor">@color/darkThemeTextColor</item>
-        <item name="android:textColorPrimary">@color/darkThemeTextColor</item>
         <item name="android:elevation">@dimen/elevation</item>
         <item name="android:animateOnClick">true</item>
         <item name="android:textAlignment">center</item>
@@ -100,10 +101,16 @@
     <style name="image_button_style_dark" parent="TextAppearance.AppCompat.Button">
         <item name="android:background">@drawable/image_button_background_dark</item>
         <item name="android:backgroundTint">@color/colorPrimary_Dark</item>
+        <item name="android:tint">@color/darkThemeTextColor</item>
         <item name="android:elevation">0dp</item>
         <item name="android:animateOnClick">true</item>
     </style>
 
+    <!-- special style for toolbar for dark mode -->
+    <style name="DarkToolbarStyle" parent="Widget.AppCompat.Toolbar">
+        <item name="android:textColor">@color/darkThemeTextColor</item>
+        <item name="android:background">@color/colorPrimary_Dark</item>
+    </style>
 
     <!-- Text view customization -->
     <style name="text_view_style" parent="TextAppearance.AppCompat.Title">

@@ -1,7 +1,11 @@
 package com.gaspar.learnjava;
 
 import android.app.Activity;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.SoundEffectConstants;
@@ -9,11 +13,14 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 import com.gaspar.learnjava.asynctask.LoadExamQuestionsTask;
 import com.gaspar.learnjava.curriculum.Exam;
@@ -220,6 +227,62 @@ public class ExamActivity extends ThemedActivity {
         if(remainingTime < LOW_REMAINING_TIME) { //time is short
             countdownView.playSoundEffect(SoundEffectConstants.CLICK);
             countdownView.startAnimation(TICK_ANIMATION);
+        }
+    }
+
+    /**
+     * Request code for ongoing exam notification.
+     */
+    private static final int NOTIFICATION_REQUEST_CODE = 31278;
+
+    /**
+     * The object that posts and cancels notifications.
+     */
+    private NotificationManager notificationManager;
+
+    /**
+     * Posts the ongoing exam warning. (called when the user leaves to the activity while the exam is not yet finished)
+     */
+    private void showOngoingExamNotification() {
+        RemoteViews contentView = buildCustomView(((CountdownView)findViewById(R.id.countdownView)).getRemainTime());
+        Intent intent = new Intent(this, ExamsActivity.class);
+        PendingIntent pi = PendingIntent.getActivity(this, NOTIFICATION_REQUEST_CODE, intent, 0);
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, ExamNotificationReceiver.NOTIFICATION_CHANNEL_ID)
+                .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.learn_java_icon_round))
+                .setSmallIcon(R.drawable.exam_icon)
+                .setCustomContentView(contentView)
+                .setColorized(true)
+                .setColor(ContextCompat.getColor(this, ThemeUtils.getBackgroundColor()))
+                .setAutoCancel(true);
+        mBuilder.setContentIntent(pi);
+        mBuilder.setLights(ContextCompat.getColor(this, ThemeUtils.getPrimaryColor()), 500, 500);
+        if(notificationManager == null) {
+            notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            if(notificationManager == null) {
+                Log.d("LearnJava", "Can't post notification...");
+            } else {
+                notificationManager.notify(NOTIFICATION_REQUEST_CODE, mBuilder.build());
+            }
+        }
+    }
+
+    /**
+     * Creates the ongoing exam notification custom view.
+     *
+     * @param millisecsRemaining The amount of milliseconds left from the exam. Can get this from the countdown view.
+     */
+    private RemoteViews buildCustomView(long millisecsRemaining) {
+        RemoteViews contentView = new RemoteViews(getPackageName(), R.layout.ongoing_exam_notification); //build the custom view
+        //TODO: set countdown text
+        return contentView;
+    }
+
+    /**
+     * Cancels the ongoing exam warning. (called when the user returns to the activity)
+     */
+    private void cancelOngoingExamNotifcation() {
+        if(notificationManager != null) {
+            notificationManager.cancel(NOTIFICATION_REQUEST_CODE);
         }
     }
 

@@ -2,11 +2,13 @@ package com.gaspar.learnjava;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.StyleRes;
+import androidx.core.content.ContextCompat;
 
 /**
  * Gets runtime color values.
@@ -102,4 +104,52 @@ public abstract class ThemeUtils {
         throw new RuntimeException("Theme error!");
     }
 
+    /**
+     * @return The color id of the text color of the selected theme.
+     */
+    @ColorRes
+    static int getTextColor() {
+        if (selectedTheme == Themes.ORANGE) {
+            return android.R.color.black;
+        } else if(selectedTheme == Themes.BLUE) {
+            return android.R.color.black;
+        } else if(selectedTheme == Themes.DARK) { //dark
+            return R.color.darkThemeTextColor;
+        }
+        throw new RuntimeException("Theme error!");
+    }
+
+    public static boolean isDarkTheme() {
+        return selectedTheme == Themes.DARK;
+    }
+
+    /**
+     * @return A color list that can be applied to an image button for tint.
+     */
+    static ColorStateList getImageButtonTintList(@NonNull final Context context) {
+        if (selectedTheme == Themes.ORANGE) {
+            return ContextCompat.getColorStateList(context, R.color.image_button_orange_tint);
+        } else if(selectedTheme == Themes.BLUE) {
+            return ContextCompat.getColorStateList(context, R.color.image_button_blue_tint);
+        } else if(selectedTheme == Themes.DARK) { //dark
+            return ContextCompat.getColorStateList(context, R.color.image_button_dark_tint);
+        }
+        throw new RuntimeException("Theme error!");
+
+    }
+
+    /**
+     * @return A color list that can be applied to an image button for background tint.
+     */
+    static ColorStateList getImageButtonBackgroundTintList(@NonNull final Context context) {
+        if (selectedTheme == Themes.ORANGE) {
+            return ContextCompat.getColorStateList(context, R.color.image_button_orange_background_tint);
+        } else if(selectedTheme == Themes.BLUE) {
+            return ContextCompat.getColorStateList(context, R.color.image_button_blue_background_tint);
+        } else if(selectedTheme == Themes.DARK) { //dark
+            return ContextCompat.getColorStateList(context, R.color.image_button_dark_background_tint);
+        }
+        throw new RuntimeException("Theme error!");
+
+    }
 }

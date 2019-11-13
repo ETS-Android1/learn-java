@@ -76,11 +76,11 @@
                    android:layout_marginEnd="@dimen/margin"
                    android:gravity="center" />
 
-               <TextView
+               <Button
                    android:id="@+id/tapPrompt"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:background="@drawable/button_background_orange"
+                   android:theme="?android:buttonStyle"
                    android:onClick="showTapPrompt"
                    android:text="@string/tap_to_see_details"
                    android:textAppearance="@style/subtitle" />
