@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.RemoteViews;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -95,10 +94,13 @@ public class ExamActivity extends ThemedActivity {
         if(examFinished) { //safe to leave
             super.onBackPressed();
         } else {
-            AlertDialog.Builder builder = new AlertDialog.Builder(ExamActivity.this);
+            AlertDialog.Builder builder = new AlertDialog.Builder(ThemeUtils.createDialogWrapper(ExamActivity.this));
             builder.setMessage(R.string.confirm_abandon_exam);
             builder.setIcon(R.drawable.warning_icon);
-            builder.setPositiveButton(R.string.ok, ((dialogInterface, i) -> super.onBackPressed()));
+            builder.setPositiveButton(R.string.ok, ((dialogInterface, i) -> {
+                examFinished = true;
+                onBackPressed();
+            }));
             builder.setNegativeButton(R.string.cancel, (dialogInterface, i) -> dialogInterface.dismiss());
             builder.create().show();
         }
@@ -114,7 +116,7 @@ public class ExamActivity extends ThemedActivity {
            for(Question question: exam.getQuestions()) { //count unanswered questions
                if(!question.isAnswered()) unansweredQuestions++;
            }
-           AlertDialog.Builder builder = new AlertDialog.Builder(ExamActivity.this);
+           AlertDialog.Builder builder = new AlertDialog.Builder(ThemeUtils.createDialogWrapper(ExamActivity.this));
            builder.setTitle(R.string.confirm_finish_exam);
            builder.setIcon(R.drawable.warning_icon);
            builder.setView(inflateUnansweredWarningView(unansweredQuestions)); //warn about unanswered
@@ -200,8 +202,9 @@ public class ExamActivity extends ThemedActivity {
      */
     public void onExamTimeExpired(CountdownView countdownView) {
         countdownView.pause();
+        if(notificationVisible) showExamNotification(false); //update notification if it's active
         finishExam(findViewById(R.id.finishExamButton)); //exam will be locked and corrected
-        AlertDialog.Builder builder = new AlertDialog.Builder(ExamActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(ThemeUtils.createDialogWrapper(ExamActivity.this));
         builder.setMessage(R.string.exam_time_expired);
         builder.setIcon(R.drawable.problem_icon);
         builder.setPositiveButton(R.string.unfortunate, (dialogIF, i) -> dialogIF.dismiss());
@@ -225,10 +228,17 @@ public class ExamActivity extends ThemedActivity {
      */
     public void onExamTimeTicked(CountdownView countdownView, long remainingTime) {
         if(remainingTime < LOW_REMAINING_TIME) { //time is short
-            countdownView.playSoundEffect(SoundEffectConstants.CLICK);
+            if(!notificationVisible) { //only play sound effect when activity is in foreground
+                countdownView.playSoundEffect(SoundEffectConstants.CLICK);
+            }
             countdownView.startAnimation(TICK_ANIMATION);
         }
     }
+
+    /**
+     * Tracks if the notification is visible.
+     */
+    private boolean notificationVisible;
 
     /**
      * Request code for ongoing exam notification.
@@ -242,48 +252,60 @@ public class ExamActivity extends ThemedActivity {
 
     /**
      * Posts the ongoing exam warning. (called when the user leaves to the activity while the exam is not yet finished)
+     *
+     * @param ongoing True if the exam is still active, false if it finished while the user was in another activity.
      */
-    private void showOngoingExamNotification() {
-        RemoteViews contentView = buildCustomView(((CountdownView)findViewById(R.id.countdownView)).getRemainTime());
-        Intent intent = new Intent(this, ExamsActivity.class);
+    private void showExamNotification(boolean ongoing) {
+        String title = ongoing ? getString(R.string.ongoing_exam) : getString(R.string.exam_locked);
+        String text = ongoing ? getString(R.string.ongoing_exam_detail) : getString(R.string.exam_time_expired);
+
+        Intent intent = new Intent(this, getClass());
         PendingIntent pi = PendingIntent.getActivity(this, NOTIFICATION_REQUEST_CODE, intent, 0);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, ExamNotificationReceiver.NOTIFICATION_CHANNEL_ID)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.learn_java_icon_round))
                 .setSmallIcon(R.drawable.exam_icon)
-                .setCustomContentView(contentView)
+                .setContentTitle(title)
+                .setContentText(text)
                 .setColorized(true)
                 .setColor(ContextCompat.getColor(this, ThemeUtils.getBackgroundColor()))
                 .setAutoCancel(true);
         mBuilder.setContentIntent(pi);
         mBuilder.setLights(ContextCompat.getColor(this, ThemeUtils.getPrimaryColor()), 500, 500);
-        if(notificationManager == null) {
-            notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-            if(notificationManager == null) {
-                Log.d("LearnJava", "Can't post notification...");
-            } else {
-                notificationManager.notify(NOTIFICATION_REQUEST_CODE, mBuilder.build());
-            }
+        if(notificationManager == null) notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if(notificationManager == null) { //system service may return null
+            Log.d("LearnJava", "Can't post notification...");
+        } else {
+            notificationManager.notify(NOTIFICATION_REQUEST_CODE, mBuilder.build());
+            notificationVisible = true;
         }
-    }
-
-    /**
-     * Creates the ongoing exam notification custom view.
-     *
-     * @param millisecsRemaining The amount of milliseconds left from the exam. Can get this from the countdown view.
-     */
-    private RemoteViews buildCustomView(long millisecsRemaining) {
-        RemoteViews contentView = new RemoteViews(getPackageName(), R.layout.ongoing_exam_notification); //build the custom view
-        //TODO: set countdown text
-        return contentView;
     }
 
     /**
      * Cancels the ongoing exam warning. (called when the user returns to the activity)
      */
-    private void cancelOngoingExamNotifcation() {
+    private void cancelExamNotification() {
+        notificationVisible = false;
         if(notificationManager != null) {
             notificationManager.cancel(NOTIFICATION_REQUEST_CODE);
         }
+    }
+
+    /**
+     * Cancels the 'ongoing exam notification' if necessary.
+     */
+    @Override
+    protected void onResume() {
+        super.onResume();
+        cancelExamNotification();
+    }
+
+    /**
+     * Starts the 'ongoing exam notification' if necessary.
+     */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(!examFinished) showExamNotification(true);
     }
 
     public boolean isLoadSuccessful() {

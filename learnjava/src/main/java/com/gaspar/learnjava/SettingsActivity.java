@@ -144,7 +144,7 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
      * Called when the reset button is clicked. Asks for confirmation before resetting.
      */
     public void resetButtonOnClick(View resetButton) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(SettingsActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(ThemeUtils.createDialogWrapper(SettingsActivity.this));
         builder.setMessage(R.string.reset_warning);
         builder.setPositiveButton(R.string.ok, (dialogInterface, i) -> {
             //deletes the contents of the database, and then re-validates it, filling it with default values.

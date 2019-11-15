@@ -1,16 +1,17 @@
 package com.gaspar.learnjava.asynctask;
 
-import android.app.AlertDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
 import androidx.annotation.Size;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gaspar.learnjava.CoursesActivity;
 import com.gaspar.learnjava.R;
+import com.gaspar.learnjava.ThemeUtils;
 import com.gaspar.learnjava.adapters.CourseAdapter;
 import com.gaspar.learnjava.parsers.CourseParser;
 
@@ -54,7 +55,7 @@ public class FillCourseActivityTask extends AsyncTask<CoursesActivity, Void, Cou
     }
 
     static void showFailDialog(AppCompatActivity activity, String errorLocation) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(ThemeUtils.createDialogWrapper(activity));
         String message = activity.getString(R.string.loading_error, errorLocation);
         builder.setMessage(message);
         builder.setOnCancelListener(dialogInterface -> {

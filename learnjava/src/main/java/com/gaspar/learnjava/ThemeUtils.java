@@ -3,11 +3,13 @@ package com.gaspar.learnjava;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
+import android.view.ContextThemeWrapper;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.StyleRes;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 /**
@@ -150,6 +152,16 @@ public abstract class ThemeUtils {
             return ContextCompat.getColorStateList(context, R.color.image_button_dark_background_tint);
         }
         throw new RuntimeException("Theme error!");
+    }
 
+    public static ContextThemeWrapper createDialogWrapper(AppCompatActivity activity) {
+        if (selectedTheme == Themes.ORANGE) {
+            return new ContextThemeWrapper(activity, R.style.dialog_orange);
+        } else if(selectedTheme == Themes.BLUE) {
+            return new ContextThemeWrapper(activity, R.style.dialog_blue);
+        } else if(selectedTheme == Themes.DARK) { //dark
+            return new ContextThemeWrapper(activity, R.style.dialog_dark);
+        }
+        throw new RuntimeException("Theme error!");
     }
 }

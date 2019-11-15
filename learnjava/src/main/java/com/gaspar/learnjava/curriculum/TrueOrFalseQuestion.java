@@ -9,8 +9,10 @@ import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import androidx.annotation.IntDef;
+import androidx.core.content.ContextCompat;
 
 import com.gaspar.learnjava.R;
+import com.gaspar.learnjava.ThemeUtils;
 
 import java.io.Serializable;
 
@@ -78,13 +80,17 @@ public class TrueOrFalseQuestion extends Question implements Serializable {
             falseTextView.setBackgroundResource(R.drawable.unselected_background);
             trueTextView.startAnimation(tickAnimation);
         });
-
         falseTextView.setOnClickListener((view) -> {
             selectedValue = SelectedValues.FALSE;
             falseTextView.startAnimation(tickAnimation);
             falseTextView.setBackgroundResource(R.drawable.selected_background);
             trueTextView.setBackgroundResource(R.drawable.unselected_background);
         });
+        if(ThemeUtils.isDarkTheme()) { //additional styling on dark theme
+            int black = ContextCompat.getColor(context, android.R.color.black);
+            trueTextView.setTextColor(black);
+            falseTextView.setTextColor(black);
+        }
         return questionView;
     }
 
@@ -107,7 +113,7 @@ public class TrueOrFalseQuestion extends Question implements Serializable {
         TextView trueTextView = questionView.findViewById(R.id.trueTextView);
         TextView falseTextView = questionView.findViewById(R.id.falseTextView);
         (trueAnswer ? trueTextView : falseTextView).setBackgroundResource(R.drawable.correct_answer_background);
-        if(!isCorrect()) { //user marked the wrong answer
+        if(!isCorrect() && isAnswered()) { //user marked the wrong answer
             (trueAnswer ? falseTextView : trueTextView).setBackgroundResource(R.drawable.incorrect_background);
         }
     }

@@ -1,5 +1,6 @@
 package com.gaspar.learnjava;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.widget.ImageButton;
 
@@ -59,6 +60,9 @@ public class ThemedActivity extends AppCompatActivity {
             }
             if(toggle != null) {
                 toggle.getDrawerArrowDrawable().setColor(ContextCompat.getColor(this, ThemeUtils.getTextColor()));
+            } else { //no drawer, there is a back arrow
+                Drawable arrow = toolbar.getNavigationIcon();
+                if(arrow != null) arrow.setTint(ContextCompat.getColor(this, ThemeUtils.getTextColor()));
             }
         }
     }

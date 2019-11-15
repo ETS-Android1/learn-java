@@ -76,7 +76,8 @@
     <string name="exam_passed">Exam passed!</string>
     <string name="exam_failed">Exam failed!</string>
     <string name="points">points</string>
-    <string name="ongoing_exam">Ongoing exam, time remaining:</string>
+    <string name="ongoing_exam">Ongoing exam</string>
+    <string name="ongoing_exam_detail">Don\'t forget to finish the exam!</string>
 
     <!-- Question -->
     <string name="question_icon">Question status icon</string>

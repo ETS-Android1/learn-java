@@ -44,6 +44,10 @@
 
         <!-- toolbar style -->
         <item name="toolbarStyle">@style/DarkToolbarStyle</item>
+
+        <item name="editTextStyle">@style/edit_text_dark</item>
+        <item name="radioButtonStyle">@style/radio_button_dark</item>
+        <item name="checkboxStyle">@style/checkbox_dark</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="AppTheme">
@@ -116,4 +120,37 @@
     <style name="text_view_style" parent="TextAppearance.AppCompat.Title">
         <item name="android:padding">@dimen/padding</item>
     </style>
+
+    <!-- custom components styles for dark mode -->
+    <style name="edit_text_dark" parent="Widget.AppCompat.EditText">
+        <item name="android:backgroundTint">@color/colorAccent_Dark</item>
+        <item name="android:textColor">@color/colorAccent_Dark</item>
+        <item name="android:textColorHint">@color/darkThemeTextColor</item>
+    </style>
+    <style name="radio_button_dark" parent="Widget.AppCompat.CompoundButton.RadioButton">
+        <item name="android:buttonTint">@color/colorAccent_Dark</item>
+        <item name="android:textColor">@color/darkThemeTextColor</item>
+    </style>
+    <style name="checkbox_dark" parent="Widget.AppCompat.CompoundButton.CheckBox">
+        <item name="android:buttonTint">@color/colorAccent_Dark</item>
+        <item name="android:textColor">@color/darkThemeTextColor</item>
+    </style>
+
+    <!-- For some reason this needs to be set programmatically for all dialogs -->
+    <style name="dialog_dark" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:windowBackground">@color/windowBackground_Dark</item>
+        <item name="android:textColor">@color/darkThemeTextColor</item>
+        <item name="buttonStyle">@style/button_style_dark</item>
+    </style>
+    <style name="dialog_orange" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:windowBackground">@color/windowBackgroundOrange</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="buttonStyle">@style/button_style_orange</item>
+    </style>
+    <style name="dialog_blue" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:windowBackground">@color/windowBackgroundBlue</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="buttonStyle">@style/button_style_blue</item>
+    </style>
+
 </resources>

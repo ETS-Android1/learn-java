@@ -9,6 +9,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import com.gaspar.learnjava.R;
 
 import java.io.Serializable;
@@ -108,14 +110,19 @@ public class SingleChoiceQuestion extends Question implements Serializable {
         ImageView iconView = questionView.findViewById(R.id.questionIcon);
         RadioGroup answersLayout = questionView.findViewById(R.id.answersLayout);
         //correct answer marked regardless on answer
-        answersLayout.getChildAt(correctAnswerIndex).setBackgroundResource(R.drawable.correct_answer_background);
+        RadioButton correctButton = (RadioButton) answersLayout.getChildAt(correctAnswerIndex);
+        correctButton.setBackgroundResource(R.drawable.correct_answer_background);
+        correctButton.setTextColor(ContextCompat.getColor(correctButton.getContext(), android.R.color.black));
+        correctButton.setButtonTintList(ContextCompat.getColorStateList(correctButton.getContext(), R.color.black_color_list));
         if(isAnswered()) { //question as been answered
             if(isCorrect()) { //answered correctly
                 iconView.setImageResource(R.drawable.tick_icon);
             } else { //incorrect
                 iconView.setImageResource(R.drawable.problem_icon);
                 //mark incorrect answer with red
-                answersLayout.getChildAt(selectedAnswerIndex).setBackgroundResource(R.drawable.incorrect_background);
+                correctButton.setBackgroundResource(R.drawable.incorrect_background);
+                correctButton.setTextColor(ContextCompat.getColor(correctButton.getContext(), android.R.color.black));
+                correctButton.setButtonTintList(ContextCompat.getColorStateList(correctButton.getContext(), R.color.black_color_list));
             }
         } else { //question has not been answered
             iconView.setImageResource(R.drawable.problem_icon);

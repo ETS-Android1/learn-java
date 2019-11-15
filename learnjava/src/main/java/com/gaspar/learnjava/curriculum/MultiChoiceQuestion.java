@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import com.gaspar.learnjava.R;
 
 import java.io.Serializable;
@@ -104,10 +106,16 @@ public class MultiChoiceQuestion extends Question implements Serializable {
         LinearLayout answersLayout = questionView.findViewById(R.id.answersLayout);
         for(int i=0; i<answersLayout.getChildCount(); i++) {
             if(correctAnswerIndices.contains(i)) { //mark the correct answers with green
-                answersLayout.getChildAt(i).setBackgroundResource(R.drawable.correct_answer_background);
+                CheckBox checkBox = (CheckBox)answersLayout.getChildAt(i);
+                checkBox.setBackgroundResource(R.drawable.correct_answer_background);
+                checkBox.setTextColor(ContextCompat.getColor(checkBox.getContext(), android.R.color.black));
+                checkBox.setButtonTintList(ContextCompat.getColorStateList(checkBox.getContext(), R.color.black_color_list));
             } else { //this is not a correct answer
                 if(selectedAnswerIndices.contains(i)) { //wrong answer marked
-                    answersLayout.getChildAt(i).setBackgroundResource(R.drawable.incorrect_background);
+                    CheckBox checkBox = (CheckBox)answersLayout.getChildAt(i);
+                    checkBox.setBackgroundResource(R.drawable.incorrect_background);
+                    checkBox.setTextColor(ContextCompat.getColor(checkBox.getContext(), android.R.color.black));
+                    checkBox.setButtonTintList(ContextCompat.getColorStateList(checkBox.getContext(), R.color.black_color_list));
                 }
             }
         }
