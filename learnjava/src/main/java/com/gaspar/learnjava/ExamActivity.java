@@ -66,6 +66,9 @@ public class ExamActivity extends ThemedActivity {
             setUpUI();
         }
         TICK_ANIMATION = AnimationUtils.loadAnimation(this, R.anim.tick);
+
+        Intent serviceIntent = new Intent(this, ExamSwipeClosedService.class);
+        startService(serviceIntent); //start the swipe listener service
     }
 
     private void setUpUI() {
@@ -92,6 +95,7 @@ public class ExamActivity extends ThemedActivity {
     @Override
     public void onBackPressed() {
         if(examFinished) { //safe to leave
+            stopService(new Intent(this, ExamSwipeClosedService.class)); //stop dismiss listening service
             super.onBackPressed();
         } else {
             AlertDialog.Builder builder = new AlertDialog.Builder(ThemeUtils.createDialogWrapper(ExamActivity.this));
@@ -243,7 +247,7 @@ public class ExamActivity extends ThemedActivity {
     /**
      * Request code for ongoing exam notification.
      */
-    private static final int NOTIFICATION_REQUEST_CODE = 31278;
+    public static final int NOTIFICATION_REQUEST_CODE = 31278;
 
     /**
      * The object that posts and cancels notifications.
@@ -290,21 +294,17 @@ public class ExamActivity extends ThemedActivity {
         }
     }
 
-    /**
-     * Cancels the 'ongoing exam notification' if necessary.
-     */
     @Override
     protected void onResume() {
         super.onResume();
+        //Cancels the 'ongoing exam notification' if necessary.
         cancelExamNotification();
     }
 
-    /**
-     * Starts the 'ongoing exam notification' if necessary.
-     */
     @Override
     protected void onPause() {
         super.onPause();
+        //Starts the 'ongoing exam notification' if necessary.
         if(!examFinished) showExamNotification(true);
     }
 
