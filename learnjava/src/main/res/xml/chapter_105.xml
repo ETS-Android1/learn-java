@@ -7,4 +7,122 @@
         <id>105</id>
         <name>Getting input</name>
     </chapterdata>
+    <text>
+        <![CDATA[
+        Knowing how to get input from the user, and how to read files is essential. This will allow us
+        to perform some tasks according to the given input!
+        <p>
+        Consider this example: our application must be able to add 2 given numbers together. The user selects
+        the numbers when starting the app.
+        ]]>
+    </text>
+    <title text="Command line arguments"/>
+    <text>
+        <![CDATA[
+        This is a straightforward way provided by Java to get some input. We have already seen parts of it at the
+        end of the previous chapter.
+        ]]>
+    </text>
+    <advanced title="Set arguments without an IDE">
+        <![CDATA[
+        If you are using the command line, providing arguments is actually simpler. You must simply enter the arguments
+        (separated by whitespaces) at the end of the <b>java</b> command.
+        <p>
+        For an example, you can check the <a href="https://docs.oracle.com/javase/tutorial/essential/environment/cmdLineArgs.html">
+        official oracle tutorial</a> of command line arguments.
+        ]]>
+    </advanced>
+    <text>
+        <![CDATA[
+        When using an IDE, we don't have access to the console, however, the we can give the arguments to the IDE and
+        it will pass it to the JVM instead.
+        <p>
+        In Eclipse, follow these steps to set arguments:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>1. Click on <b>Run</b> -> <b>Run Configurations</b>
+        <li>2. Click on <b>Arguments</b> tab</li>
+        <li>3. In <b>Program Arguments section</b>, Enter your arguments.
+        <li>4. Click <b>Apply</b></li>
+        </ul>
+        ]]>
+    </list>
+    <image name="eclipse_arguments"/>
+    <boxed title="For other IDEs">
+        <![CDATA[
+        If you are using one of the other recommended environments, see <a href="https://stackoverflow.com/questions/2066307/how-do-you-input-commandline-argument-in-intellij-idea">this</a>
+        StackOverflow question for Intellij Idea, and <a href="https://stackoverflow.com/questions/9168759/netbeans-how-to-set-command-line-arguments-in-java">this one</a> for Netbeans.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Now that we know how to set the arguments, let's look at how we can access them at runtime. The JVM will place them
+        in the <b>String array parameter</b> of the main method (called <i>args</i> by default).
+        <p>
+        For example, let's print all the command line arguments to the console:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#E65100">public</font> static <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">String</font> argument: args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(argument);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        The <b>for-each</b> loop is used due to it's simple syntax.
+        <br><br>
+        Finally, let's solve out initial example of adding numbers, using the command line arguments! The user will
+        enter 2 numbers as arguments, and the program will use these.
+        ]]>
+    </text>
+    <boxed title="parseInt">
+        <![CDATA[
+        The arguments are given to us as <b>strings</b>, but to add them together they must be converted to
+        integers! A utility method, <b>Integer.parseInt</b> is provided for this:
+        <br><br>
+        <i>int one = Integer.parseInt("1");</i>
+        <br><br>
+        Note that <i>parseInt</i> will throw a <b>NumberFormatException</b> if the given string is not actually an integer.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        We haven't covered exception handling yet, so suppose that the user will only enter valid integers as
+        command line arguments. If this isn't the case, out app will crash.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#E65100">public</font> static <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//we can check <font color="#E65100">if</font> we actually got 2 arguments
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(args.length != 2) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Wrong number of arguments!");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;return;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//convert the strings using parseInt
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> num1 = <font color="#999900">Integer</font>.parseInt(args[0]);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> num2 = <font color="#999900">Integer</font>.parseInt(args[1]);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//print the result
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> res = num1 + num2;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("The result is " + res);
+<br/>}
+        ]]>
+    </code>
+    <title text="Using System.in"/>
+    <text>
+        <![CDATA[
+                
+        ]]>
+    </text>
 </resources>
