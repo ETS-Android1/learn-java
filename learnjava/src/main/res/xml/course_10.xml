@@ -5,7 +5,7 @@
 <resources>
     <coursedata>
         <id>10</id>
-        <name>Primitives, control flow and input</name>
+        <name>Primitives, control flow and I/O</name>
     </coursedata>
     <chapter>101</chapter>
     <chapter>102</chapter>
