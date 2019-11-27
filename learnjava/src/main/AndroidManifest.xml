@@ -17,7 +17,8 @@
         <activity
             android:name=".LearnJavaActivity"
             android:label="@string/app_name"
-            android:screenOrientation="sensorPortrait">
+            android:screenOrientation="sensorPortrait"
+            android:launchMode="singleInstance">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -27,29 +28,36 @@
         <activity
             android:name=".CoursesActivity"
             android:label="@string/courses"
-            android:screenOrientation="sensorPortrait"/>
+            android:screenOrientation="sensorPortrait"
+            android:launchMode="singleInstance"/>
         <activity
             android:name=".TasksActivity"
             android:label="@string/tasks"
-            android:screenOrientation="sensorPortrait"/>
+            android:screenOrientation="sensorPortrait"
+            android:launchMode="singleInstance"/>
         <activity
             android:name=".ExamsActivity"
             android:label="@string/exams"
-            android:screenOrientation="sensorPortrait"/>
+            android:screenOrientation="sensorPortrait"
+            android:launchMode="singleInstance"/>
         <!-- Guide -->
         <activity
             android:name=".GuideActivity"
             android:label="@string/guide"
-            android:screenOrientation="sensorPortrait"/>
+            android:screenOrientation="sensorPortrait"
+            android:launchMode="singleInstance"/>
         <!-- Settings -->
         <activity
             android:name=".SettingsActivity"
             android:label="@string/action_settings"
-            android:screenOrientation="sensorPortrait"/>
+            android:screenOrientation="sensorPortrait"
+            android:launchMode="singleInstance"/>
         <activity
-            android:name=".ChapterActivity"/>
+            android:name=".ChapterActivity"
+            android:launchMode="singleInstance"/>
         <activity
-            android:name=".TaskActivity" /> <!-- label set at runtime -->
+            android:name=".TaskActivity"
+            android:launchMode="singleInstance"/> <!-- label set at runtime -->
         <activity
             android:name=".ExamActivity"
             android:windowSoftInputMode="stateHidden"
@@ -62,6 +70,11 @@
             android:stopWithTask="false"/>
         <activity
             android:name=".ThemedActivity" />
+        <activity
+            android:name=".ContactActivity"
+            android:label="@string/contact_me"
+            android:screenOrientation="sensorPortrait"
+            android:launchMode="singleInstance"/>
         <!-- This service posts the notification for the exam -->
         <receiver
             android:name=".ExamNotificationReceiver"

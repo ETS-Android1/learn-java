@@ -108,4 +108,19 @@
     <string name="image_component_desc">Image component</string>
     <string name="zoom_in">Zoom in</string>
     <string name="zoom_out">Zoom out</string>
+
+
+    <!-- Contact and rate -->
+    <string name="contact_me">Contact me</string>
+    <string name="contact_prompt">Help me improve the application by contacting me when you notice one of the followings:</string>
+    <string-array name="contact_me_when">
+        <item>- A typo, or sentence that does not make sense.</item>
+        <item>- One of the code samples contains invalid code (and this is not explicitly mentioned).</item>
+        <item>- A chapter is can\'t be understood, something is wrong with it\'s structure.</item>
+        <item>- A faulty exam question. No correct answer, correct answer is not accepted, etc.</item>
+        <item>- You have a general improvement suggestion, idea.</item>
+    </string-array>
+    <string name="write_email">Write email</string>
+    <string name="my_email">gaspar.tamas97@protonmail.com</string>
+    <string name="default_email_subject">About the LearnJava app</string>
 </resources>

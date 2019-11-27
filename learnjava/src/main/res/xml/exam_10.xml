@@ -87,6 +87,10 @@
         <correct>short s= -124;</correct>
         <correct>short s =-124;</correct>
         <correct>short s=-124;</correct>
+        <correct>Short s = -124;</correct>
+        <correct>Short s= -124;</correct>
+        <correct>Short s =-124;</correct>
+        <correct>Short s=-124;</correct>
     </question>
     <question type="text">
         <text>Declare a double with name 'div' and value 22.435</text>
@@ -94,6 +98,10 @@
         <correct>double div= 22.435;</correct>
         <correct>double div =22.435;</correct>
         <correct>double div=22.435;</correct>
+        <correct>Double div = 22.435;</correct>
+        <correct>Double div= 22.435;</correct>
+        <correct>Double div =22.435;</correct>
+        <correct>Double div=22.435;</correct>
     </question>
     <question type="text">
         <text>Declare a float with name 'conv' and a value of half.</text>
@@ -101,6 +109,10 @@
         <correct>float conv= 0.5f;</correct>
         <correct>float conv =0.5f;</correct>
         <correct>float conv=0.5f;</correct>
+        <correct>Float conv = 0.5f;</correct>
+        <correct>Float conv= 0.5f;</correct>
+        <correct>Float conv =0.5f;</correct>
+        <correct>Float conv=0.5f;</correct>
     </question>
     <question type="text">
         <text>Declare a char with with name 'firstLetter' and a value of c.</text>
@@ -108,6 +120,10 @@
         <correct>char firstLetter= 'c';</correct>
         <correct>char firstLetter ='c';</correct>
         <correct>char firstLetter='c';</correct>
+        <correct>Character firstLetter = 'c';</correct>
+        <correct>Character firstLetter= 'c';</correct>
+        <correct>Character firstLetter ='c';</correct>
+        <correct>Character firstLetter='c';</correct>
     </question>
     <question type="text">
         <text>Enter the not-equal operator.</text>
@@ -408,6 +424,91 @@
         <correct>String sentences[]= new String[100];</correct>
         <correct>String sentences[] =new String[100];</correct>
     </question>
+
+    <!-- Questions for getting input -->
+    <question type="single_choice">
+        <text>How can we access the command line arguments at runtime?</text>
+        <answer>We can't, they are lost.</answer>
+        <answer>They are passed as a parameter of the main method, an array of integers.</answer>
+        <answer>They are passed as a parameter of the main method, an array of strings.</answer>
+        <answer>They are loaded into a static variable of the main class called args.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="text">
+        <text>We have a string named 'textData'. Write a statement that parses it into an newly created integer called 'data'!</text>
+        <correct>int data = Integer.parseInt("textData");</correct>
+        <correct>int data= Integer.parseInt("textData");</correct>
+        <correct>int data =Integer.parseInt("textData");</correct>
+        <correct>int data=Integer.parseInt("textData");</correct>
+    </question>
+    <question type="single_choice">
+        <text>What happens when the parameter of Integer.parseInt is not a string format of an integer?</text>
+        <answer>The method returns 0.</answer>
+        <answer>A NumberFormatException is thrown.</answer>
+        <answer>The method returns Integer.MIN_VALUE</answer>
+        <answer>A NullPointerException is thrown.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="true_false">
+        <text>It is possible to write code that checks how many command line arguments did the program get.</text>
+        <correct>true</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is System.in?</text>
+        <answer>It's a Scanner object that is initialized by Java.</answer>
+        <answer>It's a InputStream object that is initialized by Java. It listens to file input.</answer>
+        <answer>A variable, to which the JVM loads the command line arguments.</answer>
+        <answer>It's a InputStream object that is initialized by Java. It listens to keyboard input.</answer>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>A Scanner object must be closed when we finish using it.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>A Scanner object should be closed when we finish using it.</text>
+        <correct>true</correct>
+    </question>
+    <question type="text">
+        <text>Write a statement that creates a Scanner called 's' set to the standard input!</text>
+        <correct>Scanner s = new Scanner(System.in);</correct>
+        <correct>Scanner s= new Scanner(System.in);</correct>
+        <correct>Scanner s =new Scanner(System.in);</correct>
+        <correct>Scanner s=new Scanner(System.in);</correct>
+    </question>
+    <question type="text">
+        <text>We have a scanner called 's', tuned to the standard input. Write a statement that captures a line of text
+        from the user, and saves it in a string called 'userInput'!</text>
+        <correct>String userInput = s.nextLine();</correct>
+        <correct>String userInput =s.nextLine();</correct>
+        <correct>String userInput= s.nextLine();</correct>
+        <correct>String userInput=s.nextLine();</correct>
+    </question>
+    <question type="text">
+        <text>We have a scanner called 's', tuned to the standard input. Write a statement that captures a line of text
+            from the user, and saves it in an integer called 'userInput'!</text>
+        <correct>int userInput = s.nextInt();</correct>
+        <correct>int userInput =s.nextInt();</correct>
+        <correct>int userInput= s.nextInt();</correct>
+        <correct>int userInput=s.nextInt();</correct>
+        <correct>Integer userInput = s.nextInt();</correct>
+        <correct>Integer userInput =s.nextInt();</correct>
+        <correct>Integer userInput= s.nextInt();</correct>
+        <correct>Integer userInput=s.nextInt();</correct>
+    </question>
+    <question type="text">
+        <text>Which utility class did we use to read the contents of a file?</text>
+        <correct>Files</correct>
+    </question>
+    <question type="single_choice">
+        <text>What happens when we try to read a file that does not exists?</text>
+        <answer>A NoSuchFileException or a FileNotFoundException is thrown.</answer>
+        <answer>An empty list is returned.</answer>
+        <answer>The file is created, and the reading is re-done.</answer>
+        <answer>A NumberFormatException is thrown.</answer>
+        <correct>0</correct>
+    </question>
+
 
     <!--
     <question type="single_choice">

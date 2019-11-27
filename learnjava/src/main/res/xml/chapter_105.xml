@@ -119,8 +119,8 @@
     <title text="Using System.in and a Scanner"/>
     <text>
         <![CDATA[
-        <i>System.in</i> is an <b>input stream</b> provided by Java, which corresponds to the keyboard input. To save the user's
-        input from the console, we use this input stream in combination with a <b>java.util.Scanner</b>.
+        <i>System.in</i> is an <b>input stream</b> provided by Java, which corresponds to the keyboard input (also knows as standard input).
+        To save the user's input from the console, we use this input stream in combination with a <b>java.util.Scanner</b>.
         <p>
         The scanner is used to create primitive types and strings (which we can use in our code) from the raw bytes of the input stream.
         ]]>
@@ -174,8 +174,8 @@
         The scanner's <b>nextLine</b> method <b>halts the program</b>, until a line of text arrives from the input stream! In
         our case, this is until the user types a line to the console, and presses enter. After this, it returns the line as a string.
         <p>
-        The scanner has other similar methods (<i>nextX</i>), they behave the same: wait until an <i>X</i> is detected in the input stream,
-        then return this <i>X</i>.
+        The scanner has other similar methods (<i>nextX</i>), they behave the same: wait until an <i>enter key press</i> is detected,
+        then return an <i>X</i> (or throw an exception if the line can't be converted to an <i>X</i>).
         ]]>
     </boxed>
     <text>
@@ -226,10 +226,19 @@
         The first idea that comes to mind is using an array to store the lines. There is, however, a problem with this approach.
         An array has fixed length, but we want our program to work, no matter the number of lines in the file!
         <p>
-        To counter this, we can use a <b>List</b>. This is a class that provides methods to add and remove elements,
-        and it will "resize" itself when necessary.
+        To counter this, we can use a <b>List</b>. This is a class (an interface, actually, but more on that later) that provides
+         methods to add and remove elements, and it will "resize" itself when necessary.
         ]]>
     </boxed>
+    <advanced title="Data structures">
+        <![CDATA[
+        A list is a type of <b>data structure</b> (they are called <b>collections</b> in Java). These store data in a way that
+        certain operations (getting the largest elements for example) are guaranteed to be efficient.
+        <p>
+        The JDK contains many data structure implementations, which will be covered in a later course, but feel free to browse the
+        <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Collection.html">collection subclasses</a> for other examples!
+        ]]>
+    </advanced>
     <text>
         <![CDATA[
         Before we can read text files, let's look at how we can create, and where should we place them. The simplest way is
@@ -286,6 +295,17 @@
         You might be wondering what the <b>throws Exception</b> means at the end of the main method declaration. In
         some cases, Java forces us to do exception handling. Reading files is one of these cases. However, we don't know
         how to do that yet, so this "hacky" solution can be used instead.
+        <p>
+        After you've learned about exception handling, <b>DON't</b> use such a solution. Exceptions should be handled.
+        ]]>
+    </advanced>
+    <advanced title="The first touch of generics">
+        <![CDATA[
+        At the declaration of the list the <b>&lt;String></b> syntax can be seen. List is a <b>generic</b> interface, which means it can
+        contain <b>any type of elements</b>, but we must write the type of the future elements at declaration. This is what that piece of
+        code does.
+        <p>
+        Generics will be covered more in-depth in a later course.
         ]]>
     </advanced>
     <text>
@@ -294,6 +314,16 @@
         and that the name of the file matches with what you written in the code.
         ]]>
     </text>
+    <boxed title="The old ways">
+        <![CDATA[
+        The classes we used to read the file were introduced in <b>Java 7</b> with the <b>java.nio</b> package. Before this, a
+        <a href="https://docs.oracle.com/javase/7/docs/api/java/io/BufferedReader.html">BufferedReader</a> was used.
+        <p>
+        This method of reading a file is a bit longer, but still widely used, so if you want to familiarize yourself with
+        it, follow the answers of <a href="https://stackoverflow.com/questions/16104616/using-bufferedreader-to-read-text-file">this</a>
+        StackOverflow question.
+        ]]>
+    </boxed>
     <title text="The ultimate solution"/>
     <text>
         <![CDATA[
@@ -325,7 +355,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//iterate the lines</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">String</font> line: lines) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//convert the line (string) to <font color="#DF7401">int</font></font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//convert the line (string) to int</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> lineAsInt = <font color="#999900">Integer</font>.parseInt(line);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//increase the sum with it's value</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum = sum + lineAsInt;

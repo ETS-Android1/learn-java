@@ -183,6 +183,8 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
             intent = new Intent(this, LearnJavaActivity.class);
         } else if (id == R.id.nav_courses) {
             intent = new Intent(this, CoursesActivity.class);
+        } else if(id == R.id.nav_contact) {
+            intent = new Intent(this, ContactActivity.class);
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

@@ -29,14 +29,21 @@ public class LearnJavaActivity extends ThemedActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     /**
-     * Debug constant. If this is set to true the application is in debug mode.
+     * Debug constant. If this is set to true the application is in debug mode. This makes all courses and tasks openable,
+     * all exams can be started at any time.
      */
     public static final boolean DEBUG = true;
 
     /**
-     * Constant that determines if ads will or won't be loaded in debug mode.
+     * Constant that determines if ads will or won't be test(debug) ads. This only has a real effect if {@value LOAD_ADS}
+     * is true.
      */
-    public static final boolean LOAD_DEBUG_ADS = false;
+    public static final boolean DEBUG_ADS = true;
+
+    /**
+     * A constant that determines if ads will be loaded or not.
+     */
+    public static final boolean LOAD_ADS = false;
 
     /**
      * The name of the application's shared preferences.
@@ -172,6 +179,8 @@ public class LearnJavaActivity extends ThemedActivity
             intent = new Intent(this, ExamsActivity.class);
         } else if(id == R.id.nav_guide) {
             intent = new Intent(this, GuideActivity.class);
+        } else if(id == R.id.nav_contact) {
+            intent = new Intent(this, ContactActivity.class);
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

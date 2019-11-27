@@ -33,7 +33,8 @@ abstract class LearnJavaAds {
     private static final Random random = new Random();
 
     /**
-     * Loads a banner ad, then adds it to the given parent view.
+     * Loads a banner ad, then adds it to the given parent view, according to debug preferences: {@value LearnJavaActivity#DEBUG_ADS}
+     * and {@value LearnJavaActivity#LOAD_ADS}.
      *
      * @param realId The non-test id of the ad unit. Only used in non debug mode.
      * @param parent The parent view to which the ad view will be added.
@@ -43,12 +44,12 @@ abstract class LearnJavaAds {
         Context context = parent.getContext();
         AdView adView = new AdView(context);
         adView.setAdSize(AdSize.BANNER);
-        if(!LearnJavaActivity.DEBUG) { //load real ad only when not in debug
+        if(!LearnJavaActivity.DEBUG_ADS) { //load real ad only when not in debug
             adView.setAdUnitId(context.getString(realId));
-            adView.loadAd(new AdRequest.Builder().build());
-        } else { //load test ad in debug, but only when debug ads are enabled
+            if(LearnJavaActivity.LOAD_ADS) adView.loadAd(new AdRequest.Builder().build());
+        } else { //load test ad in debug, but only when ad loading is enabled
             adView.setAdUnitId(context.getString(R.string.ad_unit_id_banner_test));
-            if(LearnJavaActivity.LOAD_DEBUG_ADS) {
+            if(LearnJavaActivity.LOAD_ADS) {
                 adView.loadAd(new AdRequest.Builder().build());
             } else {
                 parent.getLayoutParams().height = 0;
@@ -59,21 +60,21 @@ abstract class LearnJavaAds {
     }
 
     /**
-     * Starts the loading of an interstitial ad, according to debug preferences:
-     * {@value LearnJavaActivity#DEBUG}, {@value LearnJavaActivity#LOAD_DEBUG_ADS}.
+     * Starts the loading of an interstitial ad, according to debug preferences: {@value LearnJavaActivity#DEBUG_ADS}
+     * and {@value LearnJavaActivity#LOAD_ADS}.
      *
      * @param realId The non-test id of the ad unit. Only used in non debug mode.
-     * @return The interstitial ad that started loading.
+     * @return The interstitial ad that may or may not have started loading.
      */
     static InterstitialAd loadInterstitialAd(Context context, @StringRes int realId) {
         InterstitialAd interstitialAd = new InterstitialAd(context);
-        if(!LearnJavaActivity.DEBUG) { //only show real ad in non debug mode
+        if(!LearnJavaActivity.DEBUG_ADS) { //only show real ad if non debug mode is enabled for ads
             interstitialAd.setAdUnitId(context.getString(realId));
-            interstitialAd.loadAd(new AdRequest.Builder().build());
-        } else { //only load test ad in debug, and only if it's enabled
+        } else { //only load test ad in debug ad mode
             interstitialAd.setAdUnitId(context.getString(R.string.ad_unit_id_interstitial_test));
-            if (LearnJavaActivity.LOAD_DEBUG_ADS)
-                interstitialAd.loadAd(new AdRequest.Builder().build());
+        }
+        if(LearnJavaActivity.LOAD_ADS) { //only initiate loading if its enabled
+            interstitialAd.loadAd(new AdRequest.Builder().build());
         }
         return interstitialAd;
     }

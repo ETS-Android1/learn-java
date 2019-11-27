@@ -39,4 +39,13 @@
                 android:title="@string/guide"/>
     </group>
 
+    <group
+        android:checkableBehavior="none"
+        android:id="@+id/contact_group">
+        <item
+            android:id="@+id/nav_contact"
+            android:icon="@drawable/contact_icon"
+            android:title="@string/contact_me"/>
+    </group>
+
 </menu>

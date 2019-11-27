@@ -75,6 +75,8 @@ public class GuideActivity extends ThemedActivity implements NavigationView.OnNa
             intent = new Intent(this, LearnJavaActivity.class);
         } else if(id == R.id.nav_tasks) {
             intent = new Intent(this, TasksActivity.class);
+        } else if(id == R.id.nav_contact) {
+            intent = new Intent(this, ContactActivity.class);
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
