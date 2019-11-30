@@ -15,15 +15,21 @@
         android:text="@string/code"
         android:layout_gravity="start"/>
 
-    <!-- actual formatted code is displayed here -->
-    <TextView
-        android:id="@+id/codeArea"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/code_area_background"
-        android:textColor="@color/code_text_color"
-        android:textSize="@dimen/code_text_size"
-        tools:layout_height="200dp" />
+   <HorizontalScrollView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+       <!-- actual formatted code is displayed here -->
+       <TextView
+           android:id="@+id/codeArea"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:background="@drawable/code_area_background"
+           android:textColor="@color/code_text_color"
+           android:textSize="@dimen/code_text_size"
+           tools:layout_height="200dp" />
+
+   </HorizontalScrollView>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

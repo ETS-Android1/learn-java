@@ -3,7 +3,6 @@ package com.gaspar.learnjava;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,14 +54,9 @@ public class ContactActivity extends ThemedActivity {
      * Called when the user clicks the write email button. Brings up an email activity selection.
      */
     public void contactOnClick(View view) {
-        Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
-        intent.putExtra(Intent.EXTRA_EMAIL, getString(R.string.my_email));
-        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.default_email_subject));
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        } else {
-            Log.d("LearnJava", "Couldn't send email...");
-        }
+        Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"
+                + getString(R.string.my_email)));
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.default_email_subject));
+        startActivity(Intent.createChooser(emailIntent, getString(R.string.email_chooser)));
     }
 }

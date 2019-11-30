@@ -74,6 +74,12 @@
         chapter. Press this to confirm that you understand its content and ready to move on the the next one.
         ]]>
     </text>
+    <boxed title="Code samples">
+        <![CDATA[
+        The chapters contain <b>code samples</b>. If the displayed code is wide enough, these are horizontally
+        scrollable! You can also increase the code size, or copy their contents.
+        ]]>
+    </boxed>
     <title text="Exams"/>
     <text>
         <![CDATA[

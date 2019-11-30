@@ -123,4 +123,5 @@
     <string name="write_email">Write email</string>
     <string name="my_email">gaspar.tamas97@protonmail.com</string>
     <string name="default_email_subject">About the LearnJava app</string>
+    <string name="email_chooser">Select an e-mail app</string>
 </resources>
