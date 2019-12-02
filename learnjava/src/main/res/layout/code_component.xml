@@ -17,7 +17,8 @@
 
    <HorizontalScrollView
        android:layout_width="match_parent"
-       android:layout_height="wrap_content">
+       android:layout_height="wrap_content"
+       android:fillViewport="true">
 
        <!-- actual formatted code is displayed here -->
        <TextView
@@ -27,7 +28,8 @@
            android:background="@drawable/code_area_background"
            android:textColor="@color/code_text_color"
            android:textSize="@dimen/code_text_size"
-           tools:layout_height="200dp" />
+           tools:layout_height="200dp"
+           tools:ignore="ScrollViewSize" />
 
    </HorizontalScrollView>
 

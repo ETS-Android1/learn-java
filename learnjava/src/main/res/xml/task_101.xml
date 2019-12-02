@@ -5,10 +5,144 @@
 <resources>
     <taskdata>
         <id>101</id>
-        <name>TBD, task 1 of course 2</name>
+        <name>Handle user data</name>
     </taskdata>
 
+    <text>
+        <![CDATA[
+        Your task is to create a program that reads input from the user (name, age, etc...) and performs some
+        operations according to this data. It will then finally display its operations in the console and also save
+        it to a text file.
+        ]]>
+    </text>
+    <boxed title="Current year">
+        <![CDATA[
+        This program will need to know the current year. Hardcoding it is bad practice, as the code will give wrong results
+        next year. Instead, take a look at the following code sample which shows how to get the current year as an integer
+        variable:
+        ]]>
+    </boxed>
+    <code>
+        <![CDATA[
+        <font color="#DF7401">int</font> year = <font color="#999900">Year</font>.now().getValue();
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        This code uses <a href="https://docs.oracle.com/javase/8/docs/api/java/time/package-summary.html">java.time</a>, which was added with Java 8.
+        ]]>
+    </text>
+    <title text="Required inputs"/>
+    <text>
+        <![CDATA[
+        The program will need one command line argument. This can either be SAVE or NO_SAVE. If it is <b>SAVE</b>, the
+        program must perform the tasks detailed in the 'save to file' paragraph. If it is <b>NO_SAVE</b>, these tasks must
+        not be performed.
+        ]]>
+    </text>
+    <boxed title="Wrong argument">
+        <![CDATA[
+        If no argument is given, or it's neither SAVE not NO_SAVE, then the <b>System.err</b> channel must be used to
+        indicate the problem, and the program should halt. Use the code sample below to terminate the program.
+        <br><br>
+        To compare strings, use the <a href="https://www.tutorialspoint.com/java/java_string_equals.htm">equals method</a>
+        instead of the <b>==</b> operator! The reasons behind this are explained in a later course.
+        ]]>
+    </boxed>
+    <code>
+        <![CDATA[
+        <font color="#999900">System</font>.exit();
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        At start, after checking the command line argument, the program must ask the user their name, age and profession. Store these
+        in appropriate variables, as they will be used later.
+        ]]>
+    </text>
+    <boxed title="Wrong inputs">
+        <![CDATA[
+        Try to validate the given data as much as possible. For example, your program should not accept if the user entered
+        nothing for name or profession or a negative age.
+        ]]>
+    </boxed>
+    <advanced title="Handle age related exceptions">
+        <![CDATA[
+        The given age will be parsed to an integer. To make your program more stable, you can try to implement simple
+        exception handling for the <b>NumberFormatException</b>.
+        <p>
+        Use the <a href="https://www.javatpoint.com/try-catch-block">try-catch block</a> to notify the user of the problem
+        instead of crashing the program.
+        ]]>
+    </advanced>
+    <title text="Handle the user data"/>
+    <text>
+        <![CDATA[
+        At this point the inputs should be validated. Calculate and print the following things to the console:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>The year the user was born.</li>
+        <li>The year the user turned 18. If he has not yet turned 18, print that.</li>
+        <li>All the years the user was alive in (see below for details).</li>
+        </ul>
+        ]]>
+    </list>
+    <boxed title="Years">
+        <![CDATA[
+        The years the user was alive should be stored in a <b>list</b>. They should be printed to the
+        console separated by commas in a way that there is a <b>line break after every 6.</b> of them.
+        ]]>
+    </boxed>
+    <title text="Save to file"/>
+    <text>
+        <![CDATA[
+        If the user passed the <b>SAVE</b> command line argument, perform the following things:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>Create a file called 'userdata.txt'</li>
+        <li>Overwrite and don't append if it exists.</li>
+        <li>Write the name, age and profession into the file, in a formatted way.</li>
+        <li>Write the years the user was alive in using the same formatting specified above.</li>
+        </ul>
+        ]]>
+    </list>
+    <text>
+        <![CDATA[
+        Feel free to use the way shown in chapters 'input' and 'output' to bypass file related exception
+        handling.
+        ]]>
+    </text>
+    <advanced title="File related exceptions">
+        <![CDATA[
+        If you wish to make your code better, try to handle the file related exceptions instead of "suppressing"
+        them with <i>throws Exception</i>.
+        ]]>
+    </advanced>
+    <boxed title="Reminder: conventions">
+        <![CDATA[
+        Don't forget to abide the coding conventions. Comment your code! Write methods for the subtasks and use
+        parameters and return values to communicate between them!
+        ]]>
+    </boxed>
+
     <solution>
+    <text>
+        <![CDATA[
+        This solution only uses one class, and a few methods. Exception handling was not mandatory, but
+        this program implements it.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+
+        ]]>
+    </code>
 
     </solution>
 </resources>

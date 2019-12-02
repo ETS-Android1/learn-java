@@ -21,6 +21,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDarkBlue</item>
         <item name="colorAccent">@color/colorAccentBlue</item>
         <item name="android:windowBackground">@color/windowBackgroundBlue</item>
+        <item name="android:textColor">@color/darkThemeTextColor</item>
         <!-- Button styling -->
         <item name="buttonStyle">@style/button_style_blue</item>
         <item name="imageButtonStyle">@style/image_button_style_blue</item>
@@ -86,6 +87,7 @@
         <item name="android:background">@drawable/button_background_blue</item>
         <item name="android:textSize">@dimen/medium_text_size</item>
         <item name="android:elevation">@dimen/elevation</item>
+        <item name="android:textColor">@color/darkThemeTextColor</item>
         <item name="android:animateOnClick">true</item>
         <item name="android:textAlignment">center</item>
     </style>

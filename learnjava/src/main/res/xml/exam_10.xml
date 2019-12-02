@@ -5,8 +5,8 @@
 <resources>
     <examdata>
         <id>10</id>
-        <questionAmount>25</questionAmount>
-        <timeLimit>20</timeLimit>
+        <questionAmount>24</questionAmount>
+        <timeLimit>16</timeLimit>
     </examdata>
 
     <!-- Questions for primitives -->
@@ -510,6 +510,44 @@
     </question>
 
     <!-- Questions for output -->
+    <question type="text">
+        <text>What is the line break character in Java?</text>
+        <correct><![CDATA[
+            \n
+        ]]></correct>
+    </question>
+    <question type="true_false">
+        <text>Println is short for printline.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>The 'print' methods of the PrintWriter also write a line break after printing their parameter.</text>
+        <correct>false</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these are true for the PrintWriter class?</text>
+        <answer>It is used to read input from the user.</answer>
+        <answer>It is in InputStream.</answer>
+        <answer>It is used to write text to the console.</answer>
+        <answer>It is used to print text to files.</answer>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>What happens (be default) when a new PrintWriter starts to print to an existing file?</text>
+        <answer>The lines are appended to the end of the file.</answer>
+        <answer>An exception is thrown.</answer>
+        <answer>The content of the file is erased before printing.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="true_false">
+        <text>A PrintWriter can't be configured to append to an existing file.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>The Files utility class provides methods for reading from and writing to files.</text>
+        <correct>true</correct>
+    </question>
 
 
     <!--

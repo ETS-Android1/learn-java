@@ -114,7 +114,7 @@ public abstract class ThemeUtils {
         if (selectedTheme == Themes.ORANGE) {
             return android.R.color.black;
         } else if(selectedTheme == Themes.BLUE) {
-            return android.R.color.black;
+            return R.color.darkThemeTextColor;
         } else if(selectedTheme == Themes.DARK) { //dark
             return R.color.darkThemeTextColor;
         }
