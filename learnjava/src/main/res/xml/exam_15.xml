@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Exam of OOP and classes -->
+
+<resources>
+    <examdata>
+        <id>15</id>
+        <questionAmount>24</questionAmount>
+        <timeLimit>16</timeLimit>
+    </examdata>
+</resources>

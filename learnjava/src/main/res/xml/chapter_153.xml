@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <chapterdata>
+        <id>153</id>
+        <name>Inheritance and polymorphism</name>
+    </chapterdata>
+
+    <!-- how to do inheritance: Object, extends, super, final keywords, polymorphism: instanceof -->
+
+</resources>

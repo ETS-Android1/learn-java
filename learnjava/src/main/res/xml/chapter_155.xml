@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <chnapterdata>
+        <id>155</id>
+        <name>Abstract classes and interfaces</name>
+    </chnapterdata>
+
+    <!-- abstract class meaning, the abstract keyword: for class and for method
+    special class: interface (static and default methods) and the implements keyword -->
+
+</resources>

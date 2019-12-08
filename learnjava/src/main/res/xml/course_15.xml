@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Course: Classes -->
+
+<resources>
+    <coursedata>
+        <id>15</id>
+        <name>Classes and objects</name>
+    </coursedata>
+    <chapter>151</chapter>
+    <chapter>152</chapter>
+    <chapter>153</chapter>
+    <chapter>154</chapter>
+    <chapter>155</chapter>
+    <chapter>156</chapter>
+    <task>151</task>
+    <task>152</task>
+    <exam>15</exam>
+</resources>

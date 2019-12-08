@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <chapterdata>
+        <id>152</id>
+        <name>Encapsulation, overloading and constructors</name>
+    </chapterdata>
+
+    <!-- visibility (why?), class visibility
+    overloading (why, how, examples)
+    constructors (how ,default, overloading)-->
+
+</resources>

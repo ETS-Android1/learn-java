@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <chapterdata>
+        <id>154</id>
+        <name>Static members and enums</name>
+    </chapterdata>
+
+    <!-- static variables, methods
+    enumerations: basic, more advanced -->
+
+</resources>

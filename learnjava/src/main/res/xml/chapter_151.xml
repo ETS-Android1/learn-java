@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <chapterdata>
+        <id>151</id>
+        <name>Creating classes</name>
+    </chapterdata>
+
+    <text>
+        <![CDATA[
+        Classes have been mentioned many times in the previous courses. It's time to explain what they are,
+        and how they can be created.
+        ]]>
+    </text>
+    <boxed title="OOP">
+        <![CDATA[
+                
+        ]]>
+    </boxed>
+
+    <!-- mention OOP and concepts: details in chapter 152, 153
+    class: blueprint, object: can be built using blueprint
+    identity: usage of equals method
+    also mention 'this' keyword' -->
+</resources>
