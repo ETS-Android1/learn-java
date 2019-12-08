@@ -14,9 +14,291 @@
     </text>
     <boxed title="OOP">
         <![CDATA[
-                
+        <b>Object oriented programming (OOP)</b> has 3 basic principles. These are <b>encapsulation, inheritance and
+        polymorphism</b>. In the following chapters it'll be explained what these terms mean and how they are implemented
+        in Java.
         ]]>
     </boxed>
+    <text>
+        <![CDATA[
+        A <u>class</u> is an abstract data type, but it's more then just a bundle of primitive types. We can also define
+        behaviour for it by creating methods.
+        <p>
+        The class defines the structure. It's a blueprint for objects.
+        <br><br>
+        An <u>object</u> is what we get when a class is <b>instantiated</b>. Let's demonstrate this with an example project:
+        ]]>
+    </text>
+    <boxed title="Example project">
+        <![CDATA[
+        Create a project, and add a class which has the main method (This is what we've been doing so far). Then,
+        add another class in the same package. This abstract data type will represent cats, because everyone likes cats.
+        Name the class <b>Cat</b>.
+        <br><br>
+        See the code samples and instructions below for details!
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Your <b>Main</b> class should look something like this:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#E65100">package</font> oop;
+<br/>
+<br/><font color="#E65100">public</font> class <font color="#999900">Main</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> static <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>}
+<br/>
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Create the <b>Cat</b> class. In Eclipse this can be done by right clicking your package, then
+        <b>New > Class</b>. This will create a file called <i>Cat.java</i>, and write the skeleton of the class for us:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#E65100">package</font> oop;
+<br/>
+<br/><font color="#E65100">public</font> class <font color="#999900">Cat</font> {
+<br/>
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Remember that we are now creating the abstract type cat! Let's encode the following information in our data type (
+        these are called <b>members</b> of the class):
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li><u>Name</u>: stored in a <i>String</i>.</li>
+        <li><u>Age</u>: stored in an <i>int</i>.</li>
+        <li><u>Gender</u>: we can use a <i>boolean</i>, since each cat is either male or female.</li>
+        <li></li>
+        </ul>
+        ]]>
+    </list>
+    <text>
+        <![CDATA[
+        Here is our class after we include these members. As you can see, it's like local variable declaration,
+        but in this case these are written <b>outside methods, but inside the class</b>.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#E65100">package</font> oop;
+<br/>
+<br/><font color="#E65100">public</font> class <font color="#999900">Cat</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> name;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> age;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//if it's true the cat is male, otherwise it's female.
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> isMale;
+<br/>
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Let's also add some behaviour to this cat class using methods. One method will print the properties of
+        the cat to the console, the other will calculate and return it's birth year.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#E65100">package</font> oop;
+<br/>
+<br/><font color="#E65100">import</font> java.time.<font color="#999900">Year</font>;
+<br/>
+<br/><font color="#E65100">public</font> class <font color="#999900">Cat</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> name;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> age;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//if it's true the cat is male, otherwise it's female.
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> isMale;
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> getBirthYear() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> currentYear = <font color="#999900">Year</font>.now().getValue();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> currentYear - age;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> printCatProperties() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Name: " + name);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Age: " + age);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(isMale) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("This cat is a male.");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("This cat is a female.");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        ]]>
+    </code>
+    <boxed title="Get current year">
+        <![CDATA[
+        Those who did the tasks of the previous course are already familiar with this, but for those who did not, here it is again:
+        <br><br>
+        The <i>Year.now().getValue()</i> returns the current year as an integer. This is a better way then 'hardcoding' the year into
+        our code.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Now that we have the 'blueprint' (class) for cats, we can create actual cat <b>objects</b> in our program! For this, we'll use
+        the main method:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#E65100">package</font> oop;
+<br/>
+<br/><font color="#E65100">public</font> class <font color="#999900">Main</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> static <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create a cat and set its members
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Cat</font> cat1 = <font color="#E65100">new</font> <font color="#999900">Cat</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;cat1.name = "Cirmi";
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;cat1.age = 13;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;cat1.isMale = true;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create another cat, also set members
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Cat</font> cat2 = <font color="#E65100">new</font> <font color="#999900">Cat</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;cat2.name = "Murci";
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;cat2.age = 11;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;cat2.isMale = true;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//print information about cat1
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;cat1.printCatProperties();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//get the birth year of cat2
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("\nCat2 (" + cat2.name + ") was born in " + cat2.getBirthYear());
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Notice that the objects are created using the <b>new</b> keyword.
+        ]]>
+    </text>
+    <boxed title="Referencing members and methods">
+        <![CDATA[
+        As you can see in this example, to reference the member variables and methods of an object, the
+        <b>dot operator</b> can be used.
+        ]]>
+    </boxed>
+    <advanced title="Default values">
+        <![CDATA[
+        When creating the object all members are set to their <b>default values</b>. For example, if we didn't explicitly
+        give a name to the cat, it would be null. If we didn't initialize the age, it would be 0.
+        ]]>
+    </advanced>
+    <title text="Object identity"/>
+    <text>
+        <![CDATA[
+        Each object has an <b>identity</b>. This means that even if they are of the same class and all their members are equal,
+        that still does not mean they themselves are equal!
+        <br><br>
+        This code sample demonstrates this:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="gray">//create a cat and set its members
+</font>
+<br/><font color="#999900">Cat</font> cat1 = <font color="#E65100">new</font> <font color="#999900">Cat</font>();
+<br/>cat1.name = "Cirmi";
+<br/>cat1.age = 13;
+<br/>cat1.isMale = true;
+<br/>
+<br/><font color="gray">//create another cat, all members are equal
+</font>
+<br/><font color="#999900">Cat</font> cat2 = <font color="#E65100">new</font> <font color="#999900">Cat</font>();
+<br/>cat2.name = "Cirmi";
+<br/>cat2.age = 13;
+<br/>cat2.isMale = true;
+<br/>
+<br/><font color="#E65100">if</font>(cat1 == cat2) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("The cats are equal!");
+<br/>} <font color="#E65100">else</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//this will be printed
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("The cats are NOT equal!");
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        This isn't very intuitive in most cases, we want to have a way to check 'equality' between our objects. As this example
+        demonstrates, the <b>==</b> operator won't work. Java offers a solution, and it's called the <b>equals</b> method. More on this
+        when we've already learned about <i>inheritance and method overwriting</i>.
+        ]]>
+    </text>
+    <title text="The this keyword"/>
+    <text>
+        <![CDATA[
+        The <b>this</b> keyword is used to reference the current object in the class. If that sounds confusing,
+        don't worry. Here are some examples of it's usage:
+        <br><br>
+        Suppose we need a method for our <i>Cat</i> class that increases the age of the cat by one, then returns the
+        <i>Cat</i> object.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#999900">Cat</font> incrementAge() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;age = age + 1;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return this</font>;
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Without the <b>this</b> keyword, we wouldn't have any way of referencing the current cat object!
+        <br><br>
+        For the next example, we need a method that updates the value of the cats name, and for the sake of clarity the
+        parameter of this method is also called <i>name</i>, just like the member variable.
+        <p>
+        <b>this</b> will now be used to remove the ambiguity of the variable <i>name</i>!
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#DF7401">void</font> setName(<font color="#999900">String</font> name) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;When we write 'name' here, it'll mean the parameter, and not the
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;member variable! To reference the member, the this keyword can be used.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.name = name;
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        These types of methods that update member values are called <b>setters</b>. You can see that the naming of the method
+        reflects this.
+        ]]>
+    </text>
 
     <!-- mention OOP and concepts: details in chapter 152, 153
     class: blueprint, object: can be built using blueprint
