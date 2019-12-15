@@ -5,6 +5,275 @@
         <id>152</id>
         <name>Encapsulation, overloading and constructors</name>
     </chapterdata>
+    <title text="Overloading"/>
+    <text>
+        <![CDATA[
+        Overloading allows us to create different methods that have the <b>same name</b>. How does Java distinguishes
+        these methods then, you might ask. Well, they must have different parameters, and this will be used to tell which
+        of them is called!
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#E65100">public</font> class <font color="#999900">Arithmetic</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> add(<font color="#DF7401">int</font> num1, <font color="#DF7401">int</font> num2) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> num1 + num2;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> add(<font color="#DF7401">double</font> num1, <font color="#DF7401">double</font> num2) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> num1 + num2;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        As you can see, this class has two <i>add</i> methods, but one of them takes integers, the other doubles. Here is how we
+        can use them:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#E65100">public</font> static <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Arithmetic</font> a = <font color="#E65100">new</font> <font color="#999900">Arithmetic</font>(); <font color="gray">//create the object
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(a.add(1, 3)); <font color="gray">//uses the integer add method
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(a.add(3.14, 1.22)); <font color="gray">//uses the <font color="#DF7401">double</font> add method
+</font>
+<br/>}
+        ]]>
+    </code>
+    <advanced title="Return type difference">
+        <![CDATA[
+        Note that we can't overload a method by changing only the return type! If we were to insert a new <i>add</i> method
+        into the previous example with two integer parameters, but with return type <i>int</i> instead of <i>double</i>, that
+        would cause a compile time error.
+        <p>
+        However, changing the return type when we also change the parameters is allowed.
+        ]]>
+    </advanced>
+    <text>
+        <![CDATA[
+        The reason for overloading are pretty straightforward. It allows us to use one method name to perform similar task (
+        like adding integers or doubles, as seen before), instead of cluttering the class with a different name for all tasks.
+        <p>
+        It is also essential for constructors.
+        ]]>
+    </text>
+    <title text="Constructors"/>
+    <text>
+        <![CDATA[
+        Constructors are special methods that are used to create objects (they are the ones after the <b>new</b> keyword).
+        ]]>
+    </text>
+    <boxed title="Naming rule">
+        <![CDATA[
+        Constructors must have the same name as the class. If for example or class is called <i>Data</i>, then
+        this must also be the name of all of its constructors.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        If we don't write a constructor in the class, Java will create one for us. This won't have any parameters and is
+        called the <b>default constructor</b> (it does nothing other then creating to object). This is what we've been
+        using in the previous examples to create objects!
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#E65100">public</font> class <font color="#999900">Animal</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> species;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> age;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; Constructor with 2 parameters, sets the values of both members.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Animal</font>(<font color="#999900">String</font> species, <font color="#DF7401">int</font> age) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//the <font color="#E65100">this</font> keyword is used to reference members
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;this.species = species;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;this.age = age;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Constructor with 1 parameter, defaults the value of
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;'age' to 0.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;*/</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Animal</font>(<font color="#999900">String</font> species) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;this.species = species;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> printData() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Species: " + species +
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;", age: " + age);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        You can see that overloading is essential here, as it allows us to have different constructors (we couldn't use
+        different names for them). Now we have multiple ways to create animal objects:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#E65100">public</font> static <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Animal</font> parrot = <font color="#E65100">new</font> <font color="#999900">Animal</font>("Parrot", 21);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;parrot.printData();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Animal</font> bear = <font color="#E65100">new</font> <font color="#999900">Animal</font>("Bear"); <font color="gray">//age is defaulted to 0
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;bear.printData();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;This is not allowed now! See the next section for the reason.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Animal animal = new Animal();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;*/</font>
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        When we create our own constructors, the default one will no longer be created! This is why the commented code in
+        the code sample is not allowed. If we want a constructor without any parameters as well, we'll have to create that
+        ourselves.
+        ]]>
+    </text>
+    <title text="Encapsulation and visibility"/>
+    <text>
+        <![CDATA[
+        <b>Encapsulation</b> is an important principle of OOP. It means that we only show as much of our
+        classes as necessary (ofter referred to as the 'interface'), the rest ('implementation') is hidden away.
+        <br><br>
+        Why is this done? For two main reasons:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li><u>Security</u>: those who use the class will only see what they SHOULD use. For example, they won't be able to change
+        member values that would break the class.</li>
+        <li><u>Simplicity</u>: the class implementation can be complex. The programmer who later uses this class doesn't
+        need to see and bother with it, so it's hidden.</li>
+        </ul>
+        ]]>
+    </list>
+    <boxed title="Encapsulation in Java">
+        <![CDATA[
+        Encapsulation is Java is implemented with <b>visibility classes</b>. There are 4 of them, <b>public,
+        protected, private, and package private (default)</b>. Let's illustrate them with some examples!
+        ]]>
+    </boxed>
+    <title text="Public visibility"/>
+    <text>
+        <![CDATA[
+        The methods and members marked <b>public</b> will be visible from everywhere. This means inside and outside of
+        the class, even outside of the current package.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+         <font color="gray">/*
+<br/> Represents a rational number (numerator/denominator).
+<br/> */</font>
+<br/><font color="#E65100">public</font> class <font color="#999900">Rational</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> numerator;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> denominator;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Rational</font>(<font color="#DF7401">int</font> numerator, <font color="#DF7401">int</font> denominator) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;this.numerator = numerator;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;this.denominator = denominator;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;This constructor basically creates an 'integer'.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;*/</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Rational</font>(<font color="#DF7401">int</font> numerator) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;this.numerator = numerator;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;this.denominator = 1;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; Returns the value of the rational as a double.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> asDouble() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//needed because 'integer division'
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> dNumerator = numerator;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> dNumerator/denominator;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Everything inside this class is marked public, so we can use them in another class (even in another package),
+        for example in the main method:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#E65100">public</font> static <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Rational</font> r1 = <font color="#E65100">new</font> <font color="#999900">Rational</font>(3, 4); <font color="gray">//represents 3/4
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(r1.asDouble()); <font color="gray">//will print 0.75
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;r1.numerator = 2; <font color="gray">//can also change member values
+</font>
+<br/>}
+        ]]>
+    </code>
+    <advanced title="Public classes">
+        <![CDATA[
+        Classes can also be marked public, as it can be seen in all previous examples. A public class will be visible
+        from <b>any package</b>.
+        <p>
+        We don't need to mark the class public. Non-public classes are called package private classes, so it's easy to guess
+        that such class is only visible <b>in its own package</b>.
+        ]]>
+    </advanced>
+    <title text="Private visibility"/>
+    <text>
+        <![CDATA[
+        Methods and members marked public will only be visible inside the class. They can't be referenced our called from
+        any other class!
+        <p>
+        We can use the <i>Rational</i> class to create the following situation:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#999900">Rational</font> r1 = <font color="#E65100">new</font> <font color="#999900">Rational</font>(3, 4); <font color="gray">//represents 3/4
+</font>
+<br/><font color="#999900">System</font>.out.println(r1.asDouble()); <font color="gray">//will print 0.75S
+</font>
+<br/>
+<br/>r1.denominator = 0;
+<br/><font color="#999900">System</font>.out.println(r1.asDouble()); <font color="gray">//problem, division by 0</font>
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        We can use private visibility to prevent the value of <i>denominator</i> being set to 0:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+                
+        ]]>
+    </code>
+
 
     <!-- visibility (why?), class visibility
     overloading (why, how, examples)

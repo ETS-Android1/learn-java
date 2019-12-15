@@ -257,8 +257,8 @@
     <title text="The this keyword"/>
     <text>
         <![CDATA[
-        The <b>this</b> keyword is used to reference the current object in the class. If that sounds confusing,
-        don't worry. Here are some examples of it's usage:
+        The <b>this</b> keyword is used to reference the current object in the methods of the class. If that sounds confusing,
+        don't worry. Here are some examples of it's usage that should clear it up:
         <br><br>
         Suppose we need a method for our <i>Cat</i> class that increases the age of the cat by one, then returns the
         <i>Cat</i> object.

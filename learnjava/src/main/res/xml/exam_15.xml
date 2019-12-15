@@ -8,4 +8,101 @@
         <questionAmount>24</questionAmount>
         <timeLimit>16</timeLimit>
     </examdata>
+
+    <!-- Questions for creating classes -->
+    <question type="text">
+        <text>What does OOP stand for?</text>
+        <correct>Object oriented programming</correct>
+        <correct>object oriented programming</correct>
+        <correct>Object Oriented Programming</correct>
+        <correct>Object Oriented programming</correct>
+        <correct>Object oriented Programming</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is a class?</text>
+        <answer>A different name for object.</answer>
+        <answer>An abstract data type with behaviour, and a 'blueprint' for objects.</answer>
+        <answer>A file that contains Java source code.</answer>
+        <answer>A file that contains Java bytecode.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is an object?</text>
+        <answer>A 'blueprint' for creating classes.</answer>
+        <answer>A different name for class.</answer>
+        <answer>An instantiated class.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to create a class?</text>
+        <correct>class</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to create objects?</text>
+        <correct>new</correct>
+    </question>
+    <question type="true_false">
+        <text>The class defines the structure of the objects that can be created from it.</text>
+        <correct>true</correct>
+    </question>
+    <question type="text">
+        <text>We have an object called 'custom', and it has a 'getValue' method. How do we call this method?</text>
+        <correct>custom.getValue()</correct>
+        <correct>custom.getValue();</correct>
+    </question>
+    <question type="text">
+        <text>We have an object called 'handler', and it has a 'value' member. How do we reference this variable?</text>
+        <correct>handler.value</correct>
+        <correct>handler.value;</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these can a class contain?</text>
+        <answer>Methods.</answer>
+        <answer>Packages.</answer>
+        <answer>Member variables.</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+    </question>
+    <question type="true_false">
+        <text>Class members are initialized to their default values.</text>
+        <correct>true</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to reference the current object in the methods of the class?</text>
+        <correct>this</correct>
+    </question>
+
+    <!-- Questions for Encapsulation, overloading and constructors -->
+
+    <!--
+   <question type="single_choice">
+       <text></text>
+       <answer></answer>
+       <answer></answer>
+       <answer></answer>
+       <answer></answer>
+       <correct></correct>
+   </question>
+
+   <question type="multi_choice">
+       <text></text>
+       <answer></answer>
+       <answer></answer>
+       <answer></answer>
+       <answer></answer>
+       <correct></correct>
+       <correct></correct>
+   </question>
+
+   <question type="true_false">
+       <text></text>
+       <correct></correct>
+   </question>
+
+   <question type="text">
+       <text></text>
+       <correct></correct>
+       <correct></correct>
+   </question>
+   -->
 </resources>
