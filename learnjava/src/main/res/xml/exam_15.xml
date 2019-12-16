@@ -73,6 +73,127 @@
     </question>
 
     <!-- Questions for Encapsulation, overloading and constructors -->
+    <question type="single_choice">
+        <text>What is overloading?</text>
+        <answer>Having multiple classes with the same name.</answer>
+        <answer>Having multiple packages with the same name.</answer>
+        <answer>Having multiple members with the same name.</answer>
+        <answer>Having multiple methods with the same name.</answer>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>How are overloaded methods distinguished?</text>
+        <answer>By their name.</answer>
+        <answer>By their parameters.</answer>
+        <answer>They're just called randomly.</answer>
+        <answer>By return type.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="true_false">
+        <text>Overloaded methods must have different return types.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>Overloaded methods can have different return types.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>Overloaded methods must have different parameters.</text>
+        <correct>true</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these are true for constructors?</text>
+        <answer>They create new objects.</answer>
+        <answer>They can't be overloaded.</answer>
+        <answer>They must be named 'Constructor'</answer>
+        <answer>They stand after the new keyword.</answer>
+        <correct>0</correct>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>A default constructor is always created.</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>How many parameters does the default constructor have?</text>
+        <correct>0</correct>
+        <correct>zero</correct>
+    </question>
+    <question type="text">
+        <text>We have a class called 'Complex'. What must be the name of it's constructors?</text>
+        <correct>Complex</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these are valid visibility classes in Java?</text>
+        <answer>public</answer>
+        <answer>hidden</answer>
+        <answer>protected</answer>
+        <answer>portable</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is encapsulation?</text>
+        <answer>The principle of hiding all classes in one package.</answer>
+        <answer>It's another name for overloading.</answer>
+        <answer>Marking all the members of a class private.</answer>
+        <answer>The principle of hiding the 'implementation' of a class.</answer>
+        <correct>3</correct>
+    </question>
+    <question type="text">
+        <text>How many visibility classes are there in Java?</text>
+        <correct>4</correct>
+        <correct>four</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which visibility class is the 'strictest'? (meaning it's the least visible)</text>
+        <answer>public</answer>
+        <answer>default</answer>
+        <answer>private</answer>
+        <answer>protected</answer>
+        <correct>2</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which visibility class should we use if we want something to be visible only in it's own package?</text>
+        <answer>public</answer>
+        <answer>private</answer>
+        <answer>protected</answer>
+        <answer>default</answer>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which visibility class should we use if we want something to be visible everywhere?</text>
+        <answer>public</answer>
+        <answer>private</answer>
+        <answer>protected</answer>
+        <answer>default</answer>
+        <correct>0</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which visibility class should we use if we want to ensure something is visible inside subclasses?</text>
+        <answer>public</answer>
+        <answer>protected</answer>
+        <answer>default</answer>
+        <answer>private</answer>
+        <correct>1</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which visibility classes can be used on classes?</text>
+        <answer>public</answer>
+        <answer>private</answer>
+        <answer>protected</answer>
+        <answer>package-private</answer>
+        <correct>0</correct>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is a setter?</text>
+        <answer>A class that assigns values to variables.</answer>
+        <answer>A method that assigns a value to a member.</answer>
+        <answer>A method that returns the value of a hidden member.</answer>
+        <correct>1</correct>
+    </question>
+
 
     <!--
    <question type="single_choice">
