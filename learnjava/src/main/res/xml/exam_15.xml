@@ -194,6 +194,87 @@
         <correct>1</correct>
     </question>
 
+    <!-- Questions about inheritance -->
+    <question type="single_choice">
+        <text>What is polymorphism?</text>
+        <answer>Multiple methods can have the same name.</answer>
+        <answer>An object can behave like any class that is above him (superclass) in the inheritance hierarchy.</answer>
+        <answer>Multiple classes can have the same name.</answer>
+        <answer>An object can behave like any class that is below him (subclass) in the inheritance hierarchy.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these does a subclass inherit from its parent class?</text>
+        <answer>public methods</answer>
+        <answer>protected methods</answer>
+        <answer>public members</answer>
+        <answer>private members</answer>
+        <correct>0</correct>
+        <correct>1</correct>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>A class can have multiple subclasses.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>A class can have multiple superclasses.</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to define inheritance between classes?</text>
+        <correct>extends</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to disable subclassing from a class?</text>
+        <correct>final</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is overriding?</text>
+        <answer>Creating a subclass with the same name.</answer>
+        <answer>Redefining a member in a subclass.</answer>
+        <answer>Redefining a method in a subclass.</answer>
+        <answer>Another name for method overloading.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="text">
+        <text>Which class is at the top of the inheritance hierarchy?</text>
+        <correct>Object</correct>
+        <correct>java.lang.Object</correct>
+    </question>
+    <question type="true_false">
+        <text>It's possible to make a method non-overridable.</text>
+        <correct>true</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to call the constructor (or a method) of the superclass?</text>
+        <correct>super</correct>
+    </question>
+    <question type="true_false">
+        <text>The call to the superclass' constructor must be the last statement in the subclass' constructor.</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to check the type of an object?</text>
+        <correct>instanceof</correct>
+    </question>
+    <question type="true_false">
+        <text>Upcasting is safe.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>Downcasting is safe.</text>
+        <correct>false</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is casting?</text>
+        <answer>Changing the type of an object.</answer>
+        <answer>Redefining a method in a subclass.</answer>
+        <answer>Creating multiple methods with the same name in a class.</answer>
+        <answer>Having multiple subclasses for a class.</answer>
+        <correct>0</correct>
+    </question>
 
     <!--
    <question type="single_choice">
