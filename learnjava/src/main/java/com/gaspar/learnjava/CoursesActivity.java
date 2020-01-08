@@ -1,10 +1,14 @@
 package com.gaspar.learnjava;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -21,6 +25,8 @@ import com.gaspar.learnjava.curriculum.Course;
 import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.curriculum.Status;
 import com.gaspar.learnjava.curriculum.Task;
+import com.gaspar.learnjava.database.CourseStatus;
+import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.google.android.gms.ads.AdView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -28,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Activity of the PARSED_COURSES.
+ * Activity that displays all courses. They can be opened to display the chapters.
  */
 public class CoursesActivity extends ThemedActivity implements NavigationView.OnNavigationItemSelectedListener
             , UpdatableActivity {
@@ -43,7 +49,7 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
      */
     private static final List<Course> PARSED_COURSES = new ArrayList<>();
 
-    //these constants are used what kind of activity finished.
+    //these constants are used to determine what kind of activity finished.
     public static final int CHAPTER_REQUEST_CODE = 23;
     public static final int TASK_REQUEST_CODE = 24;
     public static final int EXAM_REQUEST_CODE = 25;
@@ -64,6 +70,7 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
         super.onCreate(savedState);
         setContentView(R.layout.courses);
         setUpUI();
+        showCongratulationPrompt();
     }
 
     @Override
@@ -202,6 +209,38 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
         if(intent == null) return true;
         startActivity(intent); //start selected activity
         return true;
+    }
+
+    public static final String CONGRATULATION_PROMPT = "congratulation_prompt";
+
+    /**
+     * Shows a dialog that congratulates the user upon completing all exams. By default, it comes on every
+     * time the courses activity opens and the user finished all exams, but can be turned off.
+     * <p>
+     *     The {@link CourseStatus#getCourseCount()} method handles the reactivation of this dialog, when a new
+     *     course has been added.
+     * </p>
+     */
+    private void showCongratulationPrompt() {
+        SharedPreferences prefs = getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
+        List<Integer> statuses = LearnJavaDatabase.getInstance(this).getExamDao().getAllExamStatus();
+        int counter = 0;
+        for(int status: statuses) {
+            if (status == Status.COMPLETED) counter++;
+        }
+        if(counter == statuses.size()) { //all exams completed
+            AlertDialog.Builder builder = new AlertDialog.Builder(ThemeUtils.createDialogWrapper(this));
+            View congratulationsView = View.inflate(CoursesActivity.this, R.layout.congratulation_prompt, null);
+            builder.setView(congratulationsView);
+
+            AlertDialog dialog = builder.create();
+            congratulationsView.findViewById(R.id.congratulationsOkButton).setOnClickListener(v -> {
+                CheckBox checkBox = congratulationsView.findViewById(R.id.congratulationsCheckBox);
+                prefs.edit().putBoolean(CONGRATULATION_PROMPT, checkBox.isChecked()).apply(); //update show policy
+                dialog.dismiss(); //close dialog
+            });
+            dialog.show();
+        }
     }
 
     public static List<Course> getParsedCourses() {

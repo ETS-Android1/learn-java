@@ -81,6 +81,10 @@
     <text>
         <![CDATA[
         Each time a new user is created the counter is increased (in the constructor).
+        <p>
+        Note that non-static members and methods can't be referenced from a static context! We can't use the <i>email
+        </i> member in the <i>makeReport</i> method (emails belong to users, and we have no individual user in that static method). <i>Static members and methods,
+        on the other hand, can be referenced or called from every method of the class.
         ]]>
     </text>
     <boxed title="Referencing and calling static">
@@ -101,7 +105,7 @@
     </code>
     <text>
         <![CDATA[
-        Note that when we referenced the static member in the constructor, there is no <b>User.</b> part. In that context,
+        Observe that when we referenced the static member in the constructor, there is no <b>User.</b> part. In that context,
         Java is able to deduce which variable we mean by <b>userCounter</b>, even without putting the class name there (because
         we are inside the class).
         <p>
@@ -138,13 +142,36 @@
     <image name="final_error"/>
     <text>
         <![CDATA[
+        There is one exception to final variable assignment. A final member can also be assigned in the constructor,
+        instead of at declaration:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#E65100">public</font> class User {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//final, but isn't assigned here</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> final String email;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> User(String email) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.email = email; <font color="gray">//gets its final value here</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> String getEmail() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> email;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
         Final is often combined with static to create global (accessible everywhere) constants. For example, the JDK
         has the value of the famous constant pi stored in such a variable:
         ]]>
     </text>
     <code>
         <![CDATA[
-System.out.println("Pi is " + <font color="#999900">Math</font>.PI);
+<font color="#999900">System</font>.out.println("Pi is " + <font color="#999900">Math</font>.PI);
         ]]>
     </code>
     <title text="Enums"/>
@@ -179,8 +206,8 @@ System.out.println("Pi is " + <font color="#999900">Math</font>.PI);
     <code>
         <![CDATA[
 <font color="#E65100">public static</font> <font color="#999900">Day</font> nextDay(<font color="#999900">Day</font> today) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Day</font>[] allDays = Day.values(); <font color="gray">//built-in enum method, returns the in order of declaration!
-</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//built-in enum method, returns them in order of declaration!</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Day</font>[] allDays = Day.values();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Day</font> tomorrow = null;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(today == <font color="#999900">Day</font>.SUNDAY) { <font color="gray">//handle special <font color="#E65100">case</font> sunday

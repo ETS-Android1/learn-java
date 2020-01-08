@@ -21,7 +21,7 @@ public class ChapterStatus {
     @Status
     private int status;
 
-    public ChapterStatus() {}
+    ChapterStatus() {}
 
     @Ignore
     public ChapterStatus(int chapterId, @Status int status) {
@@ -29,11 +29,11 @@ public class ChapterStatus {
         this.status = status;
     }
 
-    public int getChapterId() {
+    int getChapterId() {
         return chapterId;
     }
 
-    public void setChapterId(int chapterId) {
+    void setChapterId(int chapterId) {
         this.chapterId = chapterId;
     }
 

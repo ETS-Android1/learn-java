@@ -80,6 +80,15 @@
         scrollable! You can also increase the code size, or copy their contents.
         ]]>
     </boxed>
+    <advanced title="Share your clipboard">
+        <![CDATA[
+        A great way to use this app is to share your clipboard with your PC! This way the code samples you copy on your
+        phone can be easily pasted into the code on PC!
+        <p>
+        Many apps can do this, you can select from <a href="https://www.guidingtech.com/apps-sync-clipboard-between-pc-android/">this
+        </a> list or search in the Play Store.
+        ]]>
+    </advanced>
     <title text="Exams"/>
     <text>
         <![CDATA[

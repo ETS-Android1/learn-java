@@ -137,7 +137,7 @@ public class CourseParser {
                 throw new RuntimeException();
             }
             String resourceName = context.getResources().getResourceEntryName(xmlResourceID);
-            if(resourceName.startsWith(TagName.CHAPTER + "_") && resourceName.endsWith(String.valueOf(chapterID))) {
+            if(resourceName.startsWith(TagName.CHAPTER + "_") && resourceName.endsWith("_" + chapterID)) {
                 parsedChapter = parseChapterData(xmlResourceID, parseComponents, context);
                 break;
             }

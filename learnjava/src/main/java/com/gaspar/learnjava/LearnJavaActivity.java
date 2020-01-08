@@ -70,7 +70,7 @@ public class LearnJavaActivity extends ThemedActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Executors.newSingleThreadExecutor().execute(() -> { //initialize the database related variables
-            CourseStatus.setCourseCount(LearnJavaDatabase.getInstance(this).getCourseDao().countCourses());
+            CourseStatus.setCourseCount(LearnJavaDatabase.getInstance(this).getCourseDao().countCourses(), this);
             LearnJavaDatabase.validateDatabase(this); //check/add all elements
             createNotificationChannel(); //initialize the notification channel
             SettingsActivity.initSettings(this); //initialize settings

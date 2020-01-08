@@ -6,6 +6,8 @@ import androidx.room.Query;
 
 import com.gaspar.learnjava.curriculum.Status;
 
+import java.util.List;
+
 /**
  * Handles operations on the exam status table.
  */
@@ -26,4 +28,7 @@ public interface ExamDao {
 
     @Query("DELETE FROM exam_status")
     void deleteRecords();
+
+    @Query("SELECT status FROM exam_status")
+    List<Integer> getAllExamStatus();
 }

@@ -277,6 +277,78 @@
     </question>
 
     <!-- Questions about static and enum -->
+    <question type="text">
+        <text>Which keyword is used to make a member shared between all objects of a class?</text>
+        <correct>static</correct>
+    </question>
+    <question type="true_false">
+        <text>Static members can also be final.</text>
+        <correct>true</correct>
+    </question>
+    <question type="single_choice">
+        <text>How can a static method be called?</text>
+        <answer>Using the the object it belongs to and the dot operator.</answer>
+        <answer>They can't be called.</answer>
+        <answer>Using the the class it belongs to and the '==' operator.</answer>
+        <answer>Using the the class it belongs to and the dot operator.</answer>
+        <correct>3</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these can be marked static?</text>
+        <answer>Members.</answer>
+        <answer>Classes.</answer>
+        <answer>Methods.</answer>
+        <answer>local variables.</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these can be marked final?</text>
+        <answer>Members.</answer>
+        <answer>Classes.</answer>
+        <answer>Methods.</answer>
+        <answer>local variables.</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to declare an enum?</text>
+        <correct>enum</correct>
+    </question>
+    <question type="multi_choice">
+        <text>How can we create constants?</text>
+        <answer>Using the final keyword.</answer>
+        <answer>Using the static keyword.</answer>
+        <answer>Constants can't be created, every variable can be reassigned.</answer>
+        <answer>Using enums.</answer>
+        <correct>0</correct>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>Final variables must always be assigned in the statement which declares them.</text>
+        <correct>false</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which one of these names is conventional for a constant?</text>
+        <answer>SpeedOfLight</answer>
+        <answer>SPEED_OF_LIGHT</answer>
+        <answer>speedoflight</answer>
+        <answer>speedOfLight</answer>
+        <correct>1</correct>
+    </question>
+    <question type="true_false">
+        <text>Enum values can be safely compared with the '==' operator.</text>
+        <correct>true</correct>
+    </question>
+    <question type="single_choice">
+        <text>What are enums?</text>
+        <answer>Classes that can't be inherited from.</answer>
+        <answer>Variables marked both final and static.</answer>
+        <answer>Classes with only static members and methods.</answer>
+        <answer>Classes that only contain related constants.</answer>
+        <correct>3</correct>
+    </question>
 
 
     <!--
