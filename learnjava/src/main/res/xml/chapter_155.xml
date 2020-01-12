@@ -1,10 +1,169 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <chnapterdata>
+    <chapterdata>
         <id>155</id>
         <name>Abstract classes and interfaces</name>
-    </chnapterdata>
+    </chapterdata>
+    <text>
+        <![CDATA[
+        An abstract class is a class which can't be instantiated (can't explicitly create objects of this class).
+        <p>
+        We can use the <b>abstract</b> keyword to mark a class as abstract:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#E65100">public abstract class</font> Computer {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//...</font>
+<br/>}
+<br/>
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Trying to instantiate such a class will result in a compile time error:
+        ]]>
+    </text>
+    <image name="abstract_class_error"/>
+    <title text="What is the point?"/>
+    <text>
+        <![CDATA[
+        So what is the point of this? Creating objects is the most fundamental principle of OOP. Why disable this
+        for some classes?
+        <p>
+        <u>Firstly</u>, for <b>utility classes</b>.
+        ]]>
+    </text>
+    <boxed text="Utility class">
+        <![CDATA[
+        A utility class is a class which contains only static, helper methods. The JDK contains such classes, for example
+        <b>Arrays</b> (helper methods for arrays, like sorting), and <b>Collections</b> (similar methods as in <i>Arrays</i>
+        but for data structure implementations).
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        As the utility class only has static methods, there is not reason to create objects from it. As such, the programmers can
+        disable instantiation altogether by making it abstract.
+        ]]>
+    </text>
+    <advanced title="Bad practice?">
+        <![CDATA[
+        Some programmers believe that the <i>abstract</i> keyword should not be used for utility classes, and they suggest a
+        private constructor instead. You can find a discussion about this topic <a href="https://stackoverflow.com/questions/25223553/how-can-i-create-an-utility-class">here</a>.
+        ]]>
+    </advanced>
+    <text>
+        <![CDATA[
+        <u>Secondly</u>, to allow us to better map our models into Java code. Let's understand this through an example:
+        <br><br>
+        We are operating a computer service. The clients bring computers, each of them is either a <b>PC</b> or a <b>Laptop</b>. So,
+        which classes will we need?
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>PC and Laptop classes, of course.</li>
+        <li>A Computer superclass, since PCs and laptops share lots of things, and we can model this using a common superclass.</li>
+        </ul>
+        ]]>
+    </list>
+    <image name="abstract_hierarchy"/>
+    <text>
+        <![CDATA[
+        Since each computer brought to us is either a PC or a laptop, we never need to instantiate the <i>Computer</i> class. To emphasise
+        this, we can mark it as abstract. It's only used as a common superclass. We'll continue with this example later in this
+        chapter.
+        ]]>
+    </text>
+    <title text="Abstract methods"/>
+    <text>
+        <![CDATA[
+        Methods can also be marked as abstract (in this case, the class has to be abstract as well). An abstract methods is a method
+        which is <b>declared, but not implemented</b>:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#E65100">public abstract class</font> Computer {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> String processor;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> <font color="#DF7401">int</font> ram; <font color="gray">//in gigabytes
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> Computer(String processor, <font color="#DF7401">int</font> ram) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.processor = processor;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.ram = ram;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public abstract</font> <font color="#DF7401">void</font> printProperties();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        This class not only has an abstract method, but also has a constructor! Where will this constructor be used, if the class
+        can't be instantiated anyways? How can the abstract method be called, if it's not even implemented?
+        <p>
+        The answer is the subclass. It's constructor will call this class' constructor, and it'll implement the abstract method!
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#E65100">public class</font> <font color="#999900">PC</font> <font color="#E65100">extends</font> <font color="#999900">Computer</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">PC</font>(<font color="#999900">String</font> processor, <font color="#DF7401">int</font> ram) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>(processor, ram); <font color="gray">//call superclass constructor
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//implement the abstract method of the superclass
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> printProperties() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("This is a PC.\n" +
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;"Processor: " + processor + "\n" +
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;"RAM> amount: " + ram + " GB");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        ]]>
+    </code>
+    <code>
+        <![CDATA[
+        <font color="#E65100">public class</font> <font color="#999900">Laptop</font> <font color="#E65100">extends</font> <font color="#999900">Computer</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">int</font> accumulatorTime; <font color="gray">//in minutes
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Laptop</font>(<font color="#999900">String</font> processor, <font color="#DF7401">int</font> ram, <font color="#DF7401">int</font> accumulatorTime) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>(processor, ram); <font color="gray">//call superclass constructor
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.accumulatorTime = accumulatorTime;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//implement the abstract method of the superclass
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> printProperties() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("This is a laptop.\n" +
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;"Processor: " + processor + "\n" +
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;"RAM amount: " + ram + " GB\n" +
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;"It can operate for " + accumulatorTime + " minutes if fully charged.");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        You may have noticed that this is similar to method overriding. Note that, however, in this case the subclass is <b>forced</b>
+        to implement (and also override, hence the annotation there) the method.
+        ]]>
+    </text>
+    <title text="Interfaces"/>
 
     <!-- abstract class meaning, the abstract keyword: for class and for method
     special class: interface (static and default methods) and the implements keyword -->

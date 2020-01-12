@@ -1,14 +1,10 @@
 package com.gaspar.learnjava;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -20,13 +16,13 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.gaspar.learnjava.asynctask.FillCourseActivityTask;
+import com.gaspar.learnjava.asynctask.ShowCongratulationTask;
 import com.gaspar.learnjava.curriculum.Chapter;
 import com.gaspar.learnjava.curriculum.Course;
 import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.curriculum.Status;
 import com.gaspar.learnjava.curriculum.Task;
 import com.gaspar.learnjava.database.CourseStatus;
-import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.google.android.gms.ads.AdView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -220,27 +216,12 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
      *     The {@link CourseStatus#getCourseCount()} method handles the reactivation of this dialog, when a new
      *     course has been added.
      * </p>
+     * <p>
+     *     See {@link com.gaspar.learnjava.asynctask.ShowCongratulationTask} for implementation.
+     * </p>
      */
     private void showCongratulationPrompt() {
-        SharedPreferences prefs = getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
-        List<Integer> statuses = LearnJavaDatabase.getInstance(this).getExamDao().getAllExamStatus();
-        int counter = 0;
-        for(int status: statuses) {
-            if (status == Status.COMPLETED) counter++;
-        }
-        if(counter == statuses.size()) { //all exams completed
-            AlertDialog.Builder builder = new AlertDialog.Builder(ThemeUtils.createDialogWrapper(this));
-            View congratulationsView = View.inflate(CoursesActivity.this, R.layout.congratulation_prompt, null);
-            builder.setView(congratulationsView);
-
-            AlertDialog dialog = builder.create();
-            congratulationsView.findViewById(R.id.congratulationsOkButton).setOnClickListener(v -> {
-                CheckBox checkBox = congratulationsView.findViewById(R.id.congratulationsCheckBox);
-                prefs.edit().putBoolean(CONGRATULATION_PROMPT, checkBox.isChecked()).apply(); //update show policy
-                dialog.dismiss(); //close dialog
-            });
-            dialog.show();
-        }
+        new ShowCongratulationTask().execute(this);
     }
 
     public static List<Course> getParsedCourses() {

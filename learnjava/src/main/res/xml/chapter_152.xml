@@ -13,6 +13,12 @@
         of them is called!
         ]]>
     </text>
+    <boxed title="Static polymorphism">
+        <![CDATA[
+        Overloading is sometimes called static polymorphism. Polymorphism, because there can be multiple methods with the
+        same name. Static, because it's determined at compile time which of these methods is called (by the parameters).
+        ]]>
+    </boxed>
     <code>
         <![CDATA[
         <font color="#E65100">public</font> class <font color="#999900">Arithmetic</font> {

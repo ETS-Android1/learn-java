@@ -3,7 +3,7 @@
 <resources>
     <chapterdata>
         <id>153</id>
-        <name>Inheritance and polymorphism</name>
+        <name>Inheritance</name>
     </chapterdata>
 
     <text>
@@ -185,10 +185,10 @@
         for more details.
         ]]>
     </text>
-    <title text="Polymorphism"/>
+    <title text="Use child as parent"/>
     <text>
         <![CDATA[
-        Polymorphism is a term in object-oriented programming. It means that classes can also be used as their superclasses.
+        In Java we can also use an object as its superclass.
         Let's look at some code samples to explain this more clearly.
         <br><br>
         Another way to put it is that an object can behave like any other class above him in the inheritance hierarchy.
@@ -221,7 +221,7 @@
     <text>
         <![CDATA[
         Both lines are printed, so a pug object is also a dog object! This is the behaviour that we want, intuitively we know that
-        a pug is special dog, and with polymorphism, Java also produces this behaviour.
+        a pug is special dog, Java also produces this behaviour.
         ]]>
     </text>
     <code>
@@ -245,7 +245,7 @@
     </code>
     <text>
         <![CDATA[
-        Without polymorphism, we wouldn't be able to add the pugs into the list of dogs!
+        Without this property of objects, we wouldn't be able to add the pugs into the list of dogs!
         ]]>
     </text>
     <title text="Casting objects"/>
@@ -263,7 +263,7 @@
     <text>
         <![CDATA[
         There are two types of valid casts: upcast, and downcast. <b>Upcast</b> means that we cast from subclass to superclass.
-        Due to polymorphism (the subclass is also a superclass at the same time), such a cast is always safe, meaning it never
+        Due to the fact that an object can behave like its superclass (see above), such a cast is always safe, meaning it never
         results in an error.
         ]]>
     </text>
