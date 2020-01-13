@@ -15,6 +15,9 @@ import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.curriculum.Task;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * A singleton class representing the app database.
@@ -48,6 +51,7 @@ public abstract class LearnJavaDatabase extends RoomDatabase {
      */
     public static void validateDatabase(@NonNull Context context) {
         final Field[] fields = R.xml.class.getDeclaredFields();
+        List<Integer> courseIdList = new ArrayList<>();
         for (Field field : fields) {
             final int xmlResourceID;
             try {
@@ -57,7 +61,7 @@ public abstract class LearnJavaDatabase extends RoomDatabase {
             }
             String resourceName = context.getResources().getResourceEntryName(xmlResourceID);
             if(resourceName.startsWith("course_")) {
-                Course.validateCourseStatus(parseId(resourceName), context);
+                courseIdList.add(parseId(resourceName)); //courses must be sorted by id before validating, see below
             } else if(resourceName.startsWith("chapter_")) {
                 Chapter.validateChapterStatus(parseId(resourceName), context);
             } else if(resourceName.startsWith("task_")) {
@@ -65,6 +69,11 @@ public abstract class LearnJavaDatabase extends RoomDatabase {
             } else if(resourceName.startsWith("exam_")) {
                 Exam.validateExamStatus(parseId(resourceName), context);
             } //other resource like guide is not tracked in the database
+        }
+        /* important, as the one with the smallest id is the first course, and that must get unlocked by default. */
+        Collections.sort(courseIdList);
+        for(int courseId: courseIdList) {
+            Course.validateCourseStatus(courseId, context);
         }
     }
 

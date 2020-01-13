@@ -35,7 +35,7 @@
         <u>Firstly</u>, for <b>utility classes</b>.
         ]]>
     </text>
-    <boxed text="Utility class">
+    <boxed title="Utility class">
         <![CDATA[
         A utility class is a class which contains only static, helper methods. The JDK contains such classes, for example
         <b>Arrays</b> (helper methods for arrays, like sorting), and <b>Collections</b> (similar methods as in <i>Arrays</i>
@@ -127,7 +127,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> printProperties() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("This is a PC.\n" +
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;"Processor: " + processor + "\n" +
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;"RAM> amount: " + ram + " GB");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;"RAM amount: " + ram + " GB");
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
         ]]>
@@ -160,12 +160,86 @@
     <text>
         <![CDATA[
         You may have noticed that this is similar to method overriding. Note that, however, in this case the subclass is <b>forced</b>
-        to implement (and also override, hence the annotation there) the method.
+        to implement the method (and also override, hence the annotation there).
         ]]>
     </text>
     <title text="Interfaces"/>
-
+    <text>
+        <![CDATA[
+        Interfaces are fully abstract classes. They can be <b>implemented</b> by other classes (which means that the implementing
+        class will have to give implementations for all abstract methods in the interface).
+        <p>
+        They are declared similarly to classes, but with the keyword <b>interface</b> instead:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="gray">//an <font color="#E65100">interface</font> for classes that can be printed
+</font>
+<br/><font color="#E65100">public interface</font> <font color="#999900">Printable</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> print(); <font color="gray">//prints the object</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> printedLines(); <font color="gray">//returns how many lines the printed object uses</font>
+<br/>
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        By default all methods are <b>abstract, and public</b>. It's redundant to write the modifiers there. Since interfaces represent
+        a property, their name is by convention an adjective (like <i>Printable</i> in this case).
+        ]]>
+    </text>
+    <boxed title="Reasons for interfaces">
+        <![CDATA[
+        Interfaces are a good way to force a class to have a set of methods. They're also used to simulate inheritance from
+        multiple classes. A class can only inherit from one superclass, it can however implement any number of interfaces (while also
+        having a superclass).
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Now, let's create a simple class that implements the <i>Printable</i> interface (the <b>implements</b> keyword is used):
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="gray">//a <font color="#E65100">class</font> that stores an array of strings</font>
+<br/><font color="#E65100">class</font> <font color="#999900">Data</font> <font color="#E65100">implements</font> <font color="#999900">Printable</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font>[] strings;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> print() { <font color="gray">//prints all strings, each to 1 line</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">String</font> s: strings) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(s);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> printedLines() { <font color="gray">//returns the number of strings</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> strings.length;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        When implementing multiple interfaces, their names must be separated by commas, after the <i>implements</i> keyword.
+        <br><br>
+        Do not try to create objects from interfaces, as that isn't allowed (they are abstract classes after all).
+        ]]>
+    </text>
+    <advanced title="Additional interface functions">
+        <![CDATA[
+        Interfaces overgone multiple changes when Java 8 was introduced. You can now add static methods, and members, and even
+        give implementations for methods, using the <b>default</b> keyword. Read <a href="https://www.journaldev.com/2752/java-8-interface-changes-static-method-default-method">this</a>
+        article, for more information.
+        <p>
+        It isn't necessary true anymore that an interface is fully abstract, yet this definition is still often used (even in this chapter).
+        ]]>
+    </advanced>
     <!-- abstract class meaning, the abstract keyword: for class and for method
     special class: interface (static and default methods) and the implements keyword -->
-
 </resources>

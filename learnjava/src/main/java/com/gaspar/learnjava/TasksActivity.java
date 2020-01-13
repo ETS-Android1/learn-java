@@ -156,4 +156,7 @@ public class TasksActivity extends ThemedActivity implements NavigationView.OnNa
     public void setUpdateView(View updateView) {
         this.updateView = updateView;
     }
+
+    @Override
+    public void setExtraExamView(View extraExamView) { } //only does something in courses activity
 }

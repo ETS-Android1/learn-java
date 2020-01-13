@@ -5,8 +5,8 @@
 <resources>
     <examdata>
         <id>15</id>
-        <questionAmount>24</questionAmount>
-        <timeLimit>16</timeLimit>
+        <questionAmount>25</questionAmount>
+        <timeLimit>30</timeLimit>
     </examdata>
 
     <!-- Questions for creating classes -->
@@ -351,7 +351,61 @@
     </question>
 
     <!-- Abstract classes and interfaces -->
+    <question type="single_choice">
+        <text>What is an abstract class?</text>
+        <answer>A class with no members, only methods.</answer>
+        <answer>A class that isn't completely coded yet.</answer>
+        <answer>A class that can't be instantiated.</answer>
+        <answer>A class that has at least one abstract method.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to mark that a method has no implementation?</text>
+        <correct>abstract</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these can be marked abstract?</text>
+        <answer>Classes.</answer>
+        <answer>Methods.</answer>
+        <answer>Members.</answer>
+        <answer>Packages.</answer>
+        <correct>0</correct>
+        <correct>1</correct>
+    </question>
+    <question type="true_false">
+        <text>Abstract classes can't have a constructor.</text>
+        <correct>false</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is an interface?</text>
+        <answer>A fully abstract class.</answer>
+        <answer>A class with only methods, no members.</answer>
+        <answer>Another name for abstract class.</answer>
+        <answer>A class with no constructors.</answer>
+        <correct>0</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to declare a fully abstract class?</text>
+        <correct>interface</correct>
+    </question>
+    <question type="single_choice">
+        <text>When a class implements an interface, what must it do with its methods?</text>
+        <answer>Nothing needs to be done with them.</answer>
+        <answer>They must be implemented, or we won't be able to instantiate the class.</answer>
+        <answer>These methods are deleted.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="multi_choice">
+        <text>What is the purpose of interfaces?</text>
+        <answer>Forcing a class to follow a scheme by implementing a set of methods.</answer>
+        <answer>To type less by not giving an implementation to our methods.</answer>
+        <answer>To create objects from them.</answer>
+        <answer>Simulating inheritance from multiple superclasses.</answer>
+        <correct>0</correct>
+        <correct>3</correct>
+    </question>
 
+    <!-- Questions about exception handling -->
 
     <!--
    <question type="single_choice">

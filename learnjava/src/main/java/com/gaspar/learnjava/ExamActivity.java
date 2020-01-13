@@ -168,13 +168,18 @@ public class ExamActivity extends ThemedActivity {
     }
 
     /**
-     * Displays the result to the user. If the result is a pass than also updates the
-     * database. If the result is fail, a notification gets posted that will display when
-     * the exam is ready to be started again.
+     * Displays the result to the user. Updates the database with new top score and completed status (if necessary).
+     * If the result is fail, a notification gets posted that will display when the exam is ready to be started again.
      *
-     * @param correctQuestions The amount of questions correctly answered.
+     * @param correctQuestions The amount of questions correctly answered (points).
      */
-    private void displayAndUpdateExamResult(double correctQuestions) {
+    private void displayAndUpdateExamResult(int correctQuestions) {
+        Executors.newSingleThreadExecutor().execute(() -> { //first launch the top score updating
+            int prevScore = LearnJavaDatabase.getInstance(this).getExamDao().queryTopScore(exam.getId());
+            if(correctQuestions > prevScore) { //this works for NEVER_STARTED as well, as its value is -1
+                LearnJavaDatabase.getInstance(this).getExamDao().updateTopScore(exam.getId(), correctQuestions);
+            }
+        });
         int percentage = Double.valueOf((correctQuestions/exam.getQuestions().size()) * 100).intValue();
         findViewById(R.id.remainingTimeLayout).setVisibility(View.GONE);
         View resultLayout = findViewById(R.id.examResultLayout);

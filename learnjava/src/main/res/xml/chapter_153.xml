@@ -188,8 +188,7 @@
     <title text="Use child as parent"/>
     <text>
         <![CDATA[
-        In Java we can also use an object as its superclass.
-        Let's look at some code samples to explain this more clearly.
+        In Java we can also use an object as its superclass. Let's look at some code samples to explain this more clearly.
         <br><br>
         Another way to put it is that an object can behave like any other class above him in the inheritance hierarchy.
         ]]>
@@ -248,6 +247,15 @@
         Without this property of objects, we wouldn't be able to add the pugs into the list of dogs!
         ]]>
     </text>
+    <boxed title="Dynamic polymorphism">
+        <![CDATA[
+        Note that when iterating through the list and reaching the <i>Pug</i> object, the correct <i>printDogData</i> method
+        will be called (meaning the one implemented in the <i>Pug</i> class). This is called <b>dynamic polymorphism</b>.
+        <p>
+        Polymorphism, since the method has multiple implementations, dynamic, since it's determined at runtime (from the objects
+        original type) which of them is called.
+        ]]>
+    </boxed>
     <title text="Casting objects"/>
     <text>
         <![CDATA[

@@ -118,6 +118,10 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
                 Chapter chapter = (Chapter) data.getExtras().getSerializable(Chapter.CHAPTER_PREFERENCE_STRING);
                 if(chapter == null) return;
                 chapter.queryAndDisplayStatus(icon, CoursesActivity.this);
+                if(!data.getExtras().containsKey(Exam.EXAM_PREFERENCE_STRING)) return; //no exam, stop updating
+                Exam exam = (Exam)data.getExtras().getSerializable(Exam.EXAM_PREFERENCE_STRING);
+                if(extraExamView == null) return; //no exam view, stop updating
+                if(exam != null) exam.queryAndDisplayStatus(extraExamView, CoursesActivity.this);
                 break;
             case TASK_REQUEST_CODE: //task activity finished
                 ImageView taskIcon = updateView.findViewById(R.id.taskStatusIcon);
@@ -126,10 +130,10 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
                 task.queryAndDisplayStatus(taskIcon, CoursesActivity.this);
                 break;
             case EXAM_REQUEST_CODE:
-                Exam exam = (Exam)data.getExtras().getSerializable(Exam.EXAM_PREFERENCE_STRING);
-                if(exam == null) return;
+                Exam examData = (Exam)data.getExtras().getSerializable(Exam.EXAM_PREFERENCE_STRING);
+                if(examData == null) return;
                 //update view will be the exam view
-                exam.queryAndDisplayStatus(updateView, CoursesActivity.this);
+                examData.queryAndDisplayStatus(updateView, CoursesActivity.this);
                 break;
         }
     }
@@ -235,5 +239,15 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
     @Override
     public void setUpdateView(View updateView) {
         this.updateView = updateView;
+    }
+
+    /**
+     * This is only used when a chapter activity is started. See {@link UpdatableActivity#setExtraExamView(View)}.
+     */
+    private View extraExamView;
+
+    @Override
+    public void setExtraExamView(View extraExamView) {
+        this.extraExamView = extraExamView;
     }
 }

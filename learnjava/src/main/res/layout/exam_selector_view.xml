@@ -8,19 +8,19 @@
 
     <!-- Normal layout: if exam is unlocked and not on cool down -->
    <LinearLayout
+       android:id="@+id/unlockedLayout"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:layout_centerInParent="true"
-       android:gravity="center">
+       android:gravity="center"
+       android:visibility="gone">
 
        <Button
            android:id="@+id/takeExamButton"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
            android:text="@string/take_exam"
-           android:layout_margin="@dimen/margin"
-           android:visibility="gone"
-           tools:visibility="visible"/>
+           android:layout_margin="@dimen/margin" />
 
        <ImageView
            android:id="@+id/examStatusIcon"
@@ -29,6 +29,28 @@
            android:contentDescription="@string/status_icon"
            tools:srcCompat="@drawable/tick_icon"
            android:layout_margin="@dimen/margin"/>
+
+       <LinearLayout
+           android:id="@+id/topScoreView"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:visibility="gone"
+           android:layout_gravity="center"
+           android:padding="@dimen/padding">
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="@string/top_score"
+               android:layout_marginEnd="@dimen/margin"/>
+
+           <TextView
+               android:id="@+id/topScoreDisplayer"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"/>
+
+       </LinearLayout>
+
    </LinearLayout>
 
     <!-- Countdown timer layout: exam unlocked but on cool down -->

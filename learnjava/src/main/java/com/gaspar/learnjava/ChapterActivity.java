@@ -16,6 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.gaspar.learnjava.asynctask.FillChapterActivityTask;
 import com.gaspar.learnjava.curriculum.Chapter;
+import com.gaspar.learnjava.curriculum.Exam;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.material.navigation.NavigationView;
 
@@ -25,6 +26,11 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
      * The chapter that was passed with the intent. It has no components.
      */
     private Chapter passedChapter;
+
+    /**
+     * The exam of the course of this chapter. This may be needed, if the completion of this chapter unlocks the exam.
+     */
+    private Exam passedExam;
 
     /**
      * Ad object that is used to display interstitial (full screen) ad on activity close.
@@ -46,6 +52,9 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
         } else {
             Log.d("LearnJava", "Incorrect behaviour: No chapter passed in extras!");
             finish();
+        }
+        if(getIntent().getExtras().containsKey(Exam.EXAM_PREFERENCE_STRING)) { //get passed exam, if included
+            passedExam = (Exam) getIntent().getExtras().getSerializable(Exam.EXAM_PREFERENCE_STRING);
         }
         setUpUI(passedChapter);
         interstitialAd = LearnJavaAds.loadInterstitialAd(this, R.string.ad_unit_id_interstitial_chapter);
@@ -81,6 +90,9 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
         passedChapter.markChapterAsCompleted(ChapterActivity.this); //update database, check is all chapters are confirmed
         Intent result = new Intent();
         result.putExtra(Chapter.CHAPTER_PREFERENCE_STRING, passedChapter); //return the chapter object
+        if(passedExam != null) { //return the exam object, if it was passed
+            result.putExtra(Exam.EXAM_PREFERENCE_STRING, passedExam);
+        }
         setResult(Activity.RESULT_OK, result);
         //show ad with some possibility
         if(LearnJavaAds.rollForAd()) LearnJavaAds.showInterstitialAd(interstitialAd);

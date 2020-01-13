@@ -29,7 +29,7 @@ public class ChapterStatus {
         this.status = status;
     }
 
-    int getChapterId() {
+    public int getChapterId() {
         return chapterId;
     }
 

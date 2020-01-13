@@ -80,7 +80,7 @@ public class CourseStatus {
         if(!prefs.contains(COURSE_COUNT)) { //first time
             prefs.edit().putInt(COURSE_COUNT, courseCount).apply();
         }
-        if(!prefs.contains(CoursesActivity.CONGRATULATION_PROMPT)) { //first time
+        if(!prefs.contains(CoursesActivity.CONGRATULATION_PROMPT)) { //this is handled here, since if course count changes then this must be reactivated
             prefs.edit().putBoolean(CoursesActivity.CONGRATULATION_PROMPT, true).apply();
         }
         if(prefs.getInt(COURSE_COUNT, 0) != courseCount) { //new course detected

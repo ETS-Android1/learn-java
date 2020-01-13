@@ -22,8 +22,8 @@ public interface ChapterDao {
     @Query("SELECT * FROM chapter_status WHERE chapter_id == :chapterId")
     ChapterStatus queryChapterStatus(int chapterId);
 
-    @Query("SELECT status FROM chapter_status")
-    List<Integer> getAllChapterStatuses();
+    @Query("SELECT * FROM chapter_status")
+    List<ChapterStatus> getAllChapterStatuses();
 
     @Query("DELETE FROM chapter_status")
     void deleteRecords();

@@ -78,6 +78,7 @@
     <string name="points">points</string>
     <string name="ongoing_exam">Ongoing exam</string>
     <string name="ongoing_exam_detail">Don\'t forget to finish the exam!</string>
+    <string name="top_score">Top score:</string>
 
     <!-- Question -->
     <string name="question_icon">Question status icon</string>

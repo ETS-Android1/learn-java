@@ -5,8 +5,8 @@
 <resources>
     <examdata>
         <id>10</id>
-        <questionAmount>24</questionAmount>
-        <timeLimit>16</timeLimit>
+        <questionAmount>25</questionAmount>
+        <timeLimit>30</timeLimit>
     </examdata>
 
     <!-- Questions for primitives -->

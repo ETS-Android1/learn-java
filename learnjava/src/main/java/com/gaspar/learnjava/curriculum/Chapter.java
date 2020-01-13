@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AppCompatActivity;
@@ -50,6 +51,13 @@ import java.util.concurrent.Executors;
 public class Chapter implements Serializable {
 
     public static final String CHAPTER_PREFERENCE_STRING = "passed_chapter";
+
+    /**
+     * This variable stores if a chapter status is being updated (See {@link #markChapterAsCompleted(Context)}. If this is
+     * true, then {@link com.gaspar.learnjava.asynctask.ExamStatusDisplayerTask}s will wait until it ends, to avoid showing
+     * wrong exam statuses.
+     */
+    public static volatile boolean chapterStatusUpdatePending = false;
 
     /**
      * The id of the chapter.
@@ -101,18 +109,22 @@ public class Chapter implements Serializable {
 
     /**
      * Starts a chapter activity for result for result. It will pass the chapter and the status icon
-     * of this chapter.
+     * of this chapter. Exam data and view are also needed, as a completed chapter may unlock the exam in its course,
+     * if it was the last uncompleted chapter.
      *
      * @param updateView The view that will be updated when the started activity finishes.
      */
-    public static void startChapterActivity(AppCompatActivity fromActivity, Chapter chapter, View updateView) {
+    public static void startChapterActivity(AppCompatActivity fromActivity, Chapter chapter, @Nullable View updateView,
+                                            @Nullable Exam exam, @Nullable View extraExamView) {
         SharedPreferences prefs = fromActivity.
                 getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE); //save started chapter
         prefs.edit().putInt(LearnJavaActivity.ACTIVE_CHAPTER_ID_PREFERENCE, chapter.id).apply();
         Intent intent = new Intent(fromActivity, ChapterActivity.class);
         intent.putExtra(CHAPTER_PREFERENCE_STRING, chapter);
+        if(exam != null) intent.putExtra(Exam.EXAM_PREFERENCE_STRING, exam); //also pass the exam, as it may be needed for update
         if(fromActivity instanceof UpdatableActivity) {
             ((UpdatableActivity)fromActivity).setUpdateView(updateView); //save update view
+            ((UpdatableActivity)fromActivity).setExtraExamView(extraExamView); //also pass exam view
         }
         fromActivity.startActivityForResult(intent, CoursesActivity.CHAPTER_REQUEST_CODE); //start with chapters code
     }
@@ -123,6 +135,7 @@ public class Chapter implements Serializable {
      */
     @UiThread
     public void markChapterAsCompleted(Context context) {
+        chapterStatusUpdatePending = true; //start a chapter status update
         Executors.newSingleThreadExecutor().execute(() -> {
             ChapterStatus newStatus = new ChapterStatus(id,
                     com.gaspar.learnjava.curriculum.Status.COMPLETED);
@@ -150,9 +163,10 @@ public class Chapter implements Serializable {
                     .queryExamStatus(courseOfChapter.getExam().getId());
             if(eStatus.getStatus() != Status.LOCKED) return; //if already completed/unlocked the no need to check
             boolean allConfirmed = true;
-            List<Integer> statuses = LearnJavaDatabase.getInstance(context).getChapterDao().getAllChapterStatuses();
-            for(@Status int status: statuses) {
-                if(status != Status.COMPLETED) { //found a chapter in the course that is not completed
+            List<ChapterStatus> statuses = LearnJavaDatabase.getInstance(context).getChapterDao().getAllChapterStatuses();
+            for(ChapterStatus chapterStatus: statuses) {
+                if(chapterStatus.getStatus() != Status.COMPLETED && inThisCourse(chapterStatus.getChapterId(), courseOfChapter)) {
+                    //found a chapter in the course that is not completed
                     allConfirmed = false;
                     break;
                 }
@@ -162,7 +176,15 @@ public class Chapter implements Serializable {
                 LearnJavaDatabase.getInstance(context).getExamDao().
                         updateExamCompletionStatus(courseOfChapter.getExam().getId(), Status.UNLOCKED);
             }
+            chapterStatusUpdatePending = false; //when the background thread is done, no more chapter updating
         });
+    }
+
+    private boolean inThisCourse(int chapterId, Course course) {
+        for(Chapter chapter: course.getChapters()) {
+            if(chapter.getId() == chapterId) return true;
+        }
+        return false;
     }
 
     /**

@@ -5,8 +5,8 @@
 <resources>
     <examdata>
         <id>5</id>
-        <questionAmount>22</questionAmount>
-        <timeLimit>15</timeLimit>
+        <questionAmount>25</questionAmount>
+        <timeLimit>30</timeLimit>
     </examdata>
     <!-- Questions about 'What is Java?' -->
     <question type="multi_choice">

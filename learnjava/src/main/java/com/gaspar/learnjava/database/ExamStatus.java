@@ -28,20 +28,28 @@ public class ExamStatus {
     @ColumnInfo(name = "last_started")
     private long lastStarted;
 
+    /**
+     * Stores the value of the users top score on the exam (regardless of failing or succeeding). If this exam was never started
+     * then {@value com.gaspar.learnjava.curriculum.Exam#EXAM_NEVER_STARTED} is stored.
+     */
+    @ColumnInfo(name = "top_score")
+    private int topScore;
+
     ExamStatus() {}
 
     @Ignore
-    public ExamStatus(int examId, @Status int status, long lastStarted) {
+    public ExamStatus(int examId, @Status int status, long lastStarted, int topScore) {
         this.examId = examId;
         this.status = status;
         this.lastStarted = lastStarted;
+        this.topScore = topScore;
     }
 
-    public int getExamId() {
+    int getExamId() {
         return examId;
     }
 
-    public void setExamId(int examId) {
+    void setExamId(int examId) {
         this.examId = examId;
     }
 
@@ -57,7 +65,15 @@ public class ExamStatus {
         return lastStarted;
     }
 
-    public void setLastStarted(long lastStarted) {
+    void setLastStarted(long lastStarted) {
         this.lastStarted = lastStarted;
+    }
+
+    public int getTopScore() {
+        return topScore;
+    }
+
+    public void setTopScore(int topScore) {
+        this.topScore = topScore;
     }
 }

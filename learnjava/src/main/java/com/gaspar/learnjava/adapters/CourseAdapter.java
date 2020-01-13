@@ -13,11 +13,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.Size;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.gaspar.learnjava.CoursesActivity;
 import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.curriculum.Chapter;
 import com.gaspar.learnjava.curriculum.Course;
+import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.curriculum.Task;
 
 import java.util.List;
@@ -80,7 +82,7 @@ public class CourseAdapter extends ArrayAdapter<Course> {
             View chapterView = inflater.inflate(R.layout.chapter_selector_view, viewHolder.chaptersView, false);
             chapter.queryAndDisplayStatus(chapterView.findViewById(R.id.chapterStatusIcon), activity); //query and show status
             viewHolder.chaptersView.addView(chapterView);
-            setUpChapterView(chapterView, chapter);
+            setUpChapterView(chapterView, chapter, course.getExam(), viewHolder.examView);
         }
         viewHolder.tasksView.removeAllViews(); //remove previous tasks
         for(Task task: course.getTasks()) { //add all tasks
@@ -93,13 +95,14 @@ public class CourseAdapter extends ArrayAdapter<Course> {
     }
 
     /**
-     * Sets the text, listeners and the status icon of a chapter view.
+     * Sets the text, listeners and the status icon of a chapter view. See {@link Chapter#startChapterActivity(AppCompatActivity, Chapter, View, Exam, View)}
+     * for explanation on why exam components are needed.
      */
-    private void setUpChapterView(final View chapterView, @NonNull Chapter chapter) {
+    private void setUpChapterView(final View chapterView, @NonNull Chapter chapter, @Nullable Exam exam, final View extraExamView) {
         TextView chapterNameView = chapterView.findViewById(R.id.chapterNameView);
         chapterNameView.setText(chapter.getName());
         chapterView.setOnClickListener(view -> { //redirect to chapter activity
-            Chapter.startChapterActivity(activity, chapter, chapterView);
+            Chapter.startChapterActivity(activity, chapter, chapterView, exam, extraExamView);
             view.startAnimation(clickAnimation);
         });
     }

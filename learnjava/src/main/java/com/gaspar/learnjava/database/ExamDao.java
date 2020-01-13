@@ -31,4 +31,10 @@ public interface ExamDao {
 
     @Query("SELECT status FROM exam_status")
     List<Integer> getAllExamStatus();
+
+    @Query("UPDATE exam_status SET top_score = :topScore WHERE exam_id == :examId")
+    void updateTopScore(int examId, int topScore);
+
+    @Query("SELECT top_score FROM exam_status WHERE exam_id == :examId")
+    int queryTopScore(int examId);
 }

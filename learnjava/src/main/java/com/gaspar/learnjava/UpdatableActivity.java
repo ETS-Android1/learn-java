@@ -11,4 +11,10 @@ public interface UpdatableActivity {
 
     void setUpdateView(View updateView);
 
+    /**
+     * Chapter activities also set this, as they may need to update the exam status from locked to unlocked, not
+     * only their own view.
+     */
+    void setExtraExamView(View extraExamView);
+
 }

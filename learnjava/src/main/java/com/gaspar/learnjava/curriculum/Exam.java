@@ -54,7 +54,7 @@ public class Exam implements Serializable {
      * A constant that indicated that an exam wasn't started. This is used to store info
      * about exams in the database.
      */
-    public static final long EXAM_NEVER_STARTED = -1;
+    public static final int EXAM_NEVER_STARTED = -1;
 
     /**
      * The challenging difficulty reduced exam time, in milliseconds.
@@ -72,8 +72,14 @@ public class Exam implements Serializable {
     private int id;
 
     /**
-     * The number of displayed questions. Initially all questions are parsed, but only this much
-     * randomly selected ones will be displayed in the {@link com.gaspar.learnjava.ExamActivity}.
+     * <p>
+     *     The number of displayed questions. Initially all questions are parsed, but only this much
+     *     randomly selected ones will be displayed in the {@link com.gaspar.learnjava.ExamActivity}.
+     * </p>
+     * <p>
+     *     Since each question is worth 1 point, this is also the amount of the maximum score that can be
+     *     reached on this exam.
+     * </p>
      */
     private int questionAmount;
 
@@ -141,7 +147,8 @@ public class Exam implements Serializable {
         ExamStatus status = LearnJavaDatabase.getInstance(context).getExamDao().queryExamStatus(examId);
         if(status == null) { //not found in the database
             @Status final int DEF_STATUS = Status.LOCKED;
-            ExamStatus newStatus = new ExamStatus(examId, DEF_STATUS, EXAM_NEVER_STARTED);
+            //both last_started and top_score are marked with exam never started
+            ExamStatus newStatus = new ExamStatus(examId, DEF_STATUS, EXAM_NEVER_STARTED, EXAM_NEVER_STARTED);
             LearnJavaDatabase.getInstance(context).getExamDao().addExamStatus(newStatus); //add to database
         }
     }
