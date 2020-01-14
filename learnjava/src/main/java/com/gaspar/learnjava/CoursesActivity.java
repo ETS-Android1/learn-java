@@ -51,12 +51,6 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
     public static final int EXAM_REQUEST_CODE = 25;
 
     /**
-     * Holds the reference to the view that will be updated when the chapter, task, etc, ...
-     * activity finishes.
-     */
-    private View updateView;
-
-    /**
      * View that displays ads in this activity.
      */
     private AdView adView;
@@ -105,7 +99,8 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
     }
 
     /**
-     * Updates the {@link #updateView}, so the selectors are updated to reflect possible changes.
+     * Updates the {@link #updateViews}, so the selectors are updated to reflect possible changes. Exam or course unlocked,
+     * for example.
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -114,27 +109,47 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
         if(data.getExtras() == null) return;
         switch (requestCode) {
             case CHAPTER_REQUEST_CODE: //a chapter activity just finished
-                ImageView icon = updateView.findViewById(R.id.chapterStatusIcon);
+                if(updateViews.length == 0) return; //should not happen
+                ImageView icon = updateViews[0].findViewById(R.id.chapterStatusIcon);
                 Chapter chapter = (Chapter) data.getExtras().getSerializable(Chapter.CHAPTER_PREFERENCE_STRING);
                 if(chapter == null) return;
                 chapter.queryAndDisplayStatus(icon, CoursesActivity.this);
                 if(!data.getExtras().containsKey(Exam.EXAM_PREFERENCE_STRING)) return; //no exam, stop updating
                 Exam exam = (Exam)data.getExtras().getSerializable(Exam.EXAM_PREFERENCE_STRING);
-                if(extraExamView == null) return; //no exam view, stop updating
-                if(exam != null) exam.queryAndDisplayStatus(extraExamView, CoursesActivity.this);
+                if(updateViews.length > 1 && exam != null) { // exam view and exam object found, update them
+                    exam.queryAndDisplayStatus(updateViews[1], CoursesActivity.this);
+                }
                 break;
             case TASK_REQUEST_CODE: //task activity finished
-                ImageView taskIcon = updateView.findViewById(R.id.taskStatusIcon);
+                if(updateViews.length == 0) return; //should not happen
+                ImageView taskIcon = updateViews[0].findViewById(R.id.taskStatusIcon);
                 Task task = (Task)data.getExtras().getSerializable(Task.TASK_PREFERENCE_STRING);
                 if(task == null) return;
                 task.queryAndDisplayStatus(taskIcon, CoursesActivity.this);
                 break;
             case EXAM_REQUEST_CODE:
+                if(updateViews.length == 0) return; //should not happen
                 Exam examData = (Exam)data.getExtras().getSerializable(Exam.EXAM_PREFERENCE_STRING);
                 if(examData == null) return;
-                //update view will be the exam view
-                examData.queryAndDisplayStatus(updateView, CoursesActivity.this);
+                examData.queryAndDisplayStatus(updateViews[0], CoursesActivity.this); //update view will be the exam view
+                updateNextCourseDisplay(examData.getId()); //if there is a next course, and it's unlocked, update it
                 break;
+        }
+    }
+
+    //helper method, called when an exam finishes and the user returns to the course activity
+    private void updateNextCourseDisplay(int currentExamId) {
+        int i;
+        for(i=0; i<PARSED_COURSES.size(); i++) {
+            if(PARSED_COURSES.get(i).getExam().getId() == currentExamId) break;
+        }
+        if(i < PARSED_COURSES.size() - 1) { //there is a course after this one
+            Course nextCourse = PARSED_COURSES.get(i+1);
+            ListView listView = findViewById(R.id.courseSelectors);
+            View nextCourseView = listView.getChildAt((i+1) - listView.getFirstVisiblePosition());
+            if(nextCourseView != null) { //next course view is null when it isn't visible, but then it gets updated when it appears
+                nextCourse.queryAndDisplayStatus(nextCourseView.findViewById(R.id.statusIconView));
+            }
         }
     }
 
@@ -146,8 +161,12 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
         ListView courseViews = findViewById(R.id.courseSelectors);
         courseViews.setOnItemClickListener((adapterView, view, position, l) -> {
             Course c = PARSED_COURSES.get(position);
-            if(!LearnJavaActivity.DEBUG) { //nothing happens on locked, except in debug
-                if(c.getStatus() == Status.LOCKED || c.getStatus()==Status.NOT_QUERIED) return;
+            if(!LearnJavaActivity.DEBUG) { //only some shaking happens on locked, except in debug
+                if(c.getStatus() == Status.LOCKED || c.getStatus()==Status.NOT_QUERIED) {
+                    view.findViewById(R.id.statusIconView).
+                            startAnimation(android.view.animation.AnimationUtils.loadAnimation(this, R.anim.shake));
+                    return;
+                }
             }
             LinearLayout slideInView = view.findViewById(R.id.slideInView);
             if(slideInView.getVisibility() == View.GONE) {
@@ -236,18 +255,16 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
         return PARSED_COURSES.isEmpty();
     }
 
-    @Override
-    public void setUpdateView(View updateView) {
-        this.updateView = updateView;
-    }
-
     /**
-     * This is only used when a chapter activity is started. See {@link UpdatableActivity#setExtraExamView(View)}.
+     * The views that will be updated when the ongoing activity finished.
+     *
+     * @see UpdatableActivity
      */
-    private View extraExamView;
+    private View[] updateViews;
 
     @Override
-    public void setExtraExamView(View extraExamView) {
-        this.extraExamView = extraExamView;
+    public void setUpdateViews(View... updateViews) {
+        this.updateViews = updateViews;
     }
+
 }

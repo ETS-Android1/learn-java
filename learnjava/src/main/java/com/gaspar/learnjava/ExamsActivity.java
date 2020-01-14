@@ -131,10 +131,7 @@ public class ExamsActivity extends ThemedActivity implements NavigationView.OnNa
     }
 
     @Override
-    public void setUpdateView(View updateView) {
-        this.updateView = updateView;
+    public void setUpdateViews(View... updateViews) {
+        this.updateView = updateViews[0];
     }
-
-    @Override
-    public void setExtraExamView(View extraExamView) { } //only does something in courses activity
 }

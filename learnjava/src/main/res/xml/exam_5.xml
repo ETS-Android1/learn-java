@@ -274,7 +274,7 @@
     <question type="single_choice">
         <text>What does statically typed mean?</text>
         <answer>Variables can only have a few different types.</answer>
-        <answer>When declaring a variable, we must say its type.</answer>
+        <answer>When declaring a variable, we must say its type, and this type can't be changed.</answer>
         <answer>We don't need to say a variables type when declaring it.</answer>
         <answer>Every variable must have a unique identifier, a name.</answer>
         <correct>1</correct>
@@ -355,11 +355,12 @@
         <correct>true</correct>
     </question>
     <question type="multi_choice">
-        <text>What is not true integer variables?</text>
+        <text>What is true integer variables?</text>
         <answer>They can't be reassigned.</answer>
         <answer>We can perform basic arithmetic like +, -, or * on them.</answer>
         <answer>They can contain negative numbers.</answer>
-        <correct>0</correct>
+        <correct>1</correct>
+        <correct>2</correct>
     </question>
     <question type="multi_choice">
         <text>What is true about String variables?</text>
@@ -383,7 +384,7 @@
         <correct>3</correct>
     </question>
     <question type="true_false">
-        <text>All methods except the main method must return a value</text>
+        <text>All methods except the main method must return a value.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
@@ -448,7 +449,7 @@
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>The return statement must be the last statement in the method.</text>
+        <text>The return statement must be the last statement that is executed in the method.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">

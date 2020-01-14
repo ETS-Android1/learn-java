@@ -119,7 +119,7 @@ public class Task implements Serializable {
         Intent intent = new Intent(fromActivity, TaskActivity.class);
         intent.putExtra(TASK_PREFERENCE_STRING, task);
         if(fromActivity instanceof UpdatableActivity) {
-            ((UpdatableActivity)fromActivity).setUpdateView(updateView); //save update view
+            ((UpdatableActivity)fromActivity).setUpdateViews(updateView); //save update view
         }
         fromActivity.startActivityForResult(intent, CoursesActivity.TASK_REQUEST_CODE); //start with task code
     }

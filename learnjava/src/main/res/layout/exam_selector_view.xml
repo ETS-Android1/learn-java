@@ -1,116 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <!-- Normal layout: if exam is unlocked and not on cool down -->
-   <LinearLayout
-       android:id="@+id/unlockedLayout"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:layout_centerInParent="true"
-       android:gravity="center"
-       android:visibility="gone">
+    <RelativeLayout android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-       <Button
-           android:id="@+id/takeExamButton"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="@string/take_exam"
-           android:layout_margin="@dimen/margin" />
+        <!-- Normal layout: if exam is unlocked and not on cool down -->
+        <LinearLayout
+            android:id="@+id/unlockedLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:visibility="gone">
 
-       <ImageView
-           android:id="@+id/examStatusIcon"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:contentDescription="@string/status_icon"
-           tools:srcCompat="@drawable/tick_icon"
-           android:layout_margin="@dimen/margin"/>
+            <Button
+                android:id="@+id/takeExamButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/take_exam"
+                android:layout_margin="@dimen/margin" />
 
-       <LinearLayout
-           android:id="@+id/topScoreView"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:visibility="gone"
-           android:layout_gravity="center"
-           android:padding="@dimen/padding">
+            <ImageView
+                android:id="@+id/examStatusIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/status_icon"
+                tools:srcCompat="@drawable/tick_icon"
+                android:layout_margin="@dimen/margin"/>
+        </LinearLayout>
 
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="@string/top_score"
-               android:layout_marginEnd="@dimen/margin"/>
+        <!-- Countdown timer layout: exam unlocked but on cool down -->
+        <LinearLayout
+            android:id="@+id/countdownLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/margin"
+            android:gravity="center">
 
-           <TextView
-               android:id="@+id/topScoreDisplayer"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/exam_countdown_prompt"
+                android:layout_marginEnd="@dimen/margin"/>
 
-       </LinearLayout>
+            <cn.iwgang.countdownview.CountdownView
+                android:id="@+id/countdownView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:isShowDay="false"
+                app:isShowHour="true"
+                app:isShowMinute="true"
+                app:isShowSecond="true"
+                app:isShowMillisecond="false"
+                app:timeTextColor="@android:color/black"
+                app:timeTextSize="@dimen/big_text_size"
+                app:isTimeTextBold="true"
+                app:suffixGravity="bottom"
+                app:suffixTextColor="@android:color/black"
+                app:suffixTextSize="@dimen/small_text_size"
+                app:suffixHour="@string/hour_suffix"
+                app:suffixMinute="@string/minute_suffix"
+                app:suffixSecond="@string/second_suffix" />
+        </LinearLayout>
 
-   </LinearLayout>
+        <!-- Exam locked layout -->
+        <LinearLayout
+            android:id="@+id/lockedLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/margin"
+            android:gravity="center"
+            tools:ignore="UseCompoundDrawables">
 
-    <!-- Countdown timer layout: exam unlocked but on cool down -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/exam_locked"
+                android:layout_marginEnd="@dimen/margin"/>
+
+            <ImageView
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:contentDescription="@string/status_icon"
+                app:srcCompat="@drawable/locked_icon"/>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!-- Shows the top score if there is one -->
     <LinearLayout
-        android:id="@+id/countdownLayout"
+        android:id="@+id/topScoreView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:visibility="gone"
-        android:layout_centerInParent="true"
-        android:layout_margin="@dimen/margin"
+        android:layout_gravity="center"
         android:gravity="center">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/exam_countdown_prompt"
-            android:layout_marginEnd="@dimen/margin"/>
-
-        <cn.iwgang.countdownview.CountdownView
-            android:id="@+id/countdownView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:isShowDay="false"
-            app:isShowHour="true"
-            app:isShowMinute="true"
-            app:isShowSecond="true"
-            app:isShowMillisecond="false"
-            app:timeTextColor="@android:color/black"
-            app:timeTextSize="@dimen/big_text_size"
-            app:isTimeTextBold="true"
-            app:suffixGravity="bottom"
-            app:suffixTextColor="@android:color/black"
-            app:suffixTextSize="@dimen/small_text_size"
-            app:suffixHour="@string/hour_suffix"
-            app:suffixMinute="@string/minute_suffix"
-            app:suffixSecond="@string/second_suffix" />
-    </LinearLayout>
-
-    <!-- Exam locked layout -->
-    <LinearLayout
-        android:id="@+id/lockedLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:visibility="gone"
-        android:layout_centerInParent="true"
-        android:layout_margin="@dimen/margin"
-        android:gravity="center">
+            android:text="@string/top_score"
+            android:layout_marginEnd="@dimen/margin"
+            android:textSize="@dimen/small_text_size"/>
 
         <TextView
+            android:id="@+id/topScoreDisplayer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/exam_locked"
-            android:layout_marginEnd="@dimen/margin"/>
-
-        <ImageView
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
-            android:contentDescription="@string/status_icon"
-            app:srcCompat="@drawable/locked_icon"/>
+            android:textSize="@dimen/small_text_size"/>
     </LinearLayout>
-</RelativeLayout>
+
+</LinearLayout>

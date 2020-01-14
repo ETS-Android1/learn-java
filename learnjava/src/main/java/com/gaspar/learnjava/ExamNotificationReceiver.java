@@ -3,6 +3,7 @@ package com.gaspar.learnjava;
 import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -53,8 +54,12 @@ public class ExamNotificationReceiver extends BroadcastReceiver {
             Log.d("LearnJava", "No exam name string passed with intent!");
             examName = "";
         }
-        Intent intent = new Intent(context, ExamsActivity.class);
-        PendingIntent pi = PendingIntent.getActivity(context, NOTIFICATION_REQUEST_CODE, intent, 0);
+        Intent intent = new Intent(context, CoursesActivity.class); //intent of activity
+        // Create the TaskStackBuilder and add the intent, which inflates the back stack
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+        stackBuilder.addNextIntentWithParentStack(intent);
+        // Get the PendingIntent containing the entire back stack
+        PendingIntent pendingIntent = stackBuilder.getPendingIntent(NOTIFICATION_REQUEST_CODE, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
                 .setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.mipmap.learn_java_icon_round))
                 .setSmallIcon(R.drawable.exam_icon)
@@ -64,7 +69,7 @@ public class ExamNotificationReceiver extends BroadcastReceiver {
                 .setColorized(true)
                 .setColor(ContextCompat.getColor(context, ThemeUtils.getBackgroundColor()))
                 .setAutoCancel(true);
-        mBuilder.setContentIntent(pi);
+        mBuilder.setContentIntent(pendingIntent);
         mBuilder.setLights(ContextCompat.getColor(context, ThemeUtils.getPrimaryColor()), 500, 500);
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if(mNotificationManager == null) {
@@ -105,7 +110,7 @@ public class ExamNotificationReceiver extends BroadcastReceiver {
                 return;
             }
             long examTime = System.currentTimeMillis() - examStatus.getLastStarted(); //time it took the user to finish exam
-            long displayInMillis = Exam.EXAM_COOL_DOWN_TIME - examTime;
+            long displayInMillis = (1000*Exam.EXAM_COOL_DOWN_TIME) - examTime;
 
             Intent intent = new Intent(context, ExamNotificationReceiver.class);
             intent.putExtra(PASSED_EXAM_NAME, examName); //pass exam name
@@ -114,7 +119,7 @@ public class ExamNotificationReceiver extends BroadcastReceiver {
             if(am == null) {
                 Log.d("LearnJava", "No alarm service found!");
             } else {
-                am.set(AlarmManager.RTC, displayInMillis, pendingIntent); //will not wake up phone
+                am.setExact(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + displayInMillis, pendingIntent);
             }
         });
     }

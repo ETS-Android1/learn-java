@@ -29,23 +29,27 @@
             android:name=".CoursesActivity"
             android:label="@string/courses"
             android:screenOrientation="sensorPortrait"
-            android:launchMode="singleInstance"/>
+            android:launchMode="singleInstance"
+            android:parentActivityName=".LearnJavaActivity"/>
         <activity
             android:name=".TasksActivity"
             android:label="@string/tasks"
             android:screenOrientation="sensorPortrait"
-            android:launchMode="singleInstance"/>
+            android:launchMode="singleInstance"
+            android:parentActivityName=".LearnJavaActivity"/>
         <activity
             android:name=".ExamsActivity"
             android:label="@string/exams"
             android:screenOrientation="sensorPortrait"
-            android:launchMode="singleInstance"/>
+            android:launchMode="singleInstance"
+            android:parentActivityName=".LearnJavaActivity"/>
         <!-- Guide -->
         <activity
             android:name=".GuideActivity"
             android:label="@string/guide"
             android:screenOrientation="sensorPortrait"
-            android:launchMode="singleInstance"/>
+            android:launchMode="singleInstance"
+            android:parentActivityName=".LearnJavaActivity"/>
         <!-- Settings -->
         <activity
             android:name=".SettingsActivity"

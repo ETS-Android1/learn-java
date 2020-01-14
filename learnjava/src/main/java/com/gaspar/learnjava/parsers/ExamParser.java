@@ -50,7 +50,7 @@ public class ExamParser {
      * Parses an exam object from XML.
      *
      * @param examId The id of the exam that will be parsed.
-     * @param parseQuestions If the questions should be parsed, or only the name and id.
+     * @param parseQuestions If the question objects should be parsed.
      * @return The parsed exam object.
      */
     public Exam parseExam(int examId, boolean parseQuestions, @NonNull Context context)
@@ -108,7 +108,7 @@ public class ExamParser {
         if(parseQuestions) {
             return new Exam(examId, questions, questionAmount, timeLimit);
         } else {
-            return new Exam(examId);
+            return new Exam(examId, null, questionAmount, timeLimit);
         }
     }
 

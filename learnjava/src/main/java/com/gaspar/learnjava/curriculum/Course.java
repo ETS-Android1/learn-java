@@ -3,8 +3,10 @@ package com.gaspar.learnjava.curriculum;
 import android.content.Context;
 import android.widget.ImageView;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
+import com.gaspar.learnjava.CoursesActivity;
 import com.gaspar.learnjava.asynctask.CourseStatusDisplayerTask;
 import com.gaspar.learnjava.database.CourseStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
@@ -124,6 +126,28 @@ public class Course implements Serializable {
             LearnJavaDatabase.getInstance(context).getCourseDao().addCourseStatus(newStatus); //add to database
             CourseStatus.incrementCourseCount();
         }
+    }
+
+    /**
+     * Finds the course AFTER the exam's course. This is called when the exam is completed, and
+     * the next course is unlocked. Assumes the courses are already parsed.
+     *
+     * @param examId The id of the completed exam.
+     * @return The next course.
+     */
+    @Nullable
+    public static Course findNextCourse(int examId) {
+        for(int i=0; i<CoursesActivity.getParsedCourses().size(); i++) {
+            Course course = CoursesActivity.getParsedCourses().get(i);
+            if(course.getExam().getId() == examId) { //found CURRENT course
+                try {
+                    return CoursesActivity.getParsedCourses().get(i+1); //if there is more
+                } catch (IndexOutOfBoundsException e) {
+                    return null; //no more course
+                }
+            }
+        }
+        return null; //should not get here
     }
 
     public int getId() {

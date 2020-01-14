@@ -123,8 +123,7 @@ public class Chapter implements Serializable {
         intent.putExtra(CHAPTER_PREFERENCE_STRING, chapter);
         if(exam != null) intent.putExtra(Exam.EXAM_PREFERENCE_STRING, exam); //also pass the exam, as it may be needed for update
         if(fromActivity instanceof UpdatableActivity) {
-            ((UpdatableActivity)fromActivity).setUpdateView(updateView); //save update view
-            ((UpdatableActivity)fromActivity).setExtraExamView(extraExamView); //also pass exam view
+            ((UpdatableActivity)fromActivity).setUpdateViews(updateView, extraExamView); //save update view, also pass exam view
         }
         fromActivity.startActivityForResult(intent, CoursesActivity.CHAPTER_REQUEST_CODE); //start with chapters code
     }

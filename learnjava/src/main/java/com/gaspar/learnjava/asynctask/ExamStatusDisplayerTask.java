@@ -1,8 +1,11 @@
 package com.gaspar.learnjava.asynctask;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -44,7 +47,6 @@ public class ExamStatusDisplayerTask extends AsyncTask<Object, Void, ExamStatusD
                 e.printStackTrace();
             }
         }
-
         ExamStatus queriedExamStatus = LearnJavaDatabase.getInstance(activity).
                 getExamDao().queryExamStatus(exam.getId());
         //variables needed for result
@@ -66,10 +68,10 @@ public class ExamStatusDisplayerTask extends AsyncTask<Object, Void, ExamStatusD
         } else if (queriedExamStatus.getLastStarted() == Exam.EXAM_NEVER_STARTED) { //was never started, not on cool down
             onCoolDown = false;
             secondsRemaining = -1; //not important
-        } else if(Exam.moreThenADayAgo(lastStarted)) { //exam was started more then a day ago, not on cool down
+        } else if(Exam.coolDownTimeAgo(lastStarted)) { // not on cool down
             onCoolDown = false;
             secondsRemaining = -1; //not important
-        } else { //exam was started less then a day ago, on cool down
+        } else { //cool down time not yet passed, on cool down
             onCoolDown = true;
             secondsRemaining = ((long)(lastStarted/1000.0) + Exam.EXAM_COOL_DOWN_TIME) - (long)(System.currentTimeMillis()/1000.0);
         }
@@ -83,17 +85,12 @@ public class ExamStatusDisplayerTask extends AsyncTask<Object, Void, ExamStatusD
         hideExamComponents(result.examView); //in case something was already visible
         if(result.status == com.gaspar.learnjava.curriculum.Status.LOCKED && !LearnJavaActivity.DEBUG) { //show locked view
             result.examView.findViewById(R.id.lockedLayout).setVisibility(View.VISIBLE);
+            addShakeOnClick(result.activity, result.examView);
         } else if(!result.onCoolDown) { //exam not locked, on not cool down, show button view
 
             result.examView.findViewById(R.id.unlockedLayout).setVisibility(View.VISIBLE);
             examStatusIcon.setImageResource(result.status == com.gaspar.learnjava.curriculum.Status.COMPLETED
                     ? R.drawable.completed_icon : R.drawable.unlocked_icon); //cant be locked here
-            if(result.topScore != Exam.EXAM_NEVER_STARTED) { //there is a displayable top score
-                TextView scoreDisplayer = result.examView.findViewById(R.id.topScoreDisplayer);
-                String text = result.topScore + "/" + exam.getQuestionAmount() + " " + result.activity.getString(R.string.points);
-                scoreDisplayer.setText(text);
-                result.examView.findViewById(R.id.topScoreView).setVisibility(View.VISIBLE);
-            }
 
         }  else { //exam is on cool down, show cool down view
 
@@ -102,12 +99,21 @@ public class ExamStatusDisplayerTask extends AsyncTask<Object, Void, ExamStatusD
             CountdownView countdownView = result.examView.findViewById(R.id.countdownView);
             countdownView.setOnCountdownEndListener(cv -> { //on countdown end hide this and show start button
                 countdownLayout.setVisibility(View.GONE);
-                takeExamButton.setVisibility(View.VISIBLE);
+                result.examView.findViewById(R.id.unlockedLayout).setVisibility(View.VISIBLE);
+                result.examView.setOnClickListener(null); //remove shake
             });
             countdownView.start(result.secondsRemaining * 1000);
-
+            addShakeOnClick(result.activity, result.examView);
         }
-        takeExamButton.setOnClickListener(view -> {
+
+        if(result.topScore != Exam.EXAM_NEVER_STARTED) { //if there is a displayable top score (regardless of locked or not)
+            TextView scoreDisplayer = result.examView.findViewById(R.id.topScoreDisplayer);
+            String text = result.topScore + "/" + exam.getQuestionAmount() + " " + result.activity.getString(R.string.points);
+            scoreDisplayer.setText(text);
+            result.examView.findViewById(R.id.topScoreView).setVisibility(View.VISIBLE);
+        }
+
+        takeExamButton.setOnClickListener(view -> { //button always gets a listener
             Executors.newSingleThreadExecutor().execute(() -> { //register current epoch in database
                 LearnJavaDatabase.getInstance(result.activity).getExamDao()
                         .updateExamLastStarted(exam.getId(), System.currentTimeMillis());
@@ -115,16 +121,24 @@ public class ExamStatusDisplayerTask extends AsyncTask<Object, Void, ExamStatusD
             Intent intent = new Intent(result.activity, ExamActivity.class);
             intent.putExtra(Exam.EXAM_PREFERENCE_STRING, exam); //pass exam
             if(result.activity instanceof UpdatableActivity) {
-                ((UpdatableActivity)result.activity).setUpdateView(result.examView); //save update view
+                ((UpdatableActivity)result.activity).setUpdateViews(result.examView); //save update view
             }
             result.activity.startActivityForResult(intent, CoursesActivity.EXAM_REQUEST_CODE);
         });
     }
 
     private void hideExamComponents(View examView) {
+        examView.setOnClickListener(null);
         examView.findViewById(R.id.unlockedLayout).setVisibility(View.GONE);
         examView.findViewById(R.id.countdownLayout).setVisibility(View.GONE);
         examView.findViewById(R.id.lockedLayout).setVisibility(View.GONE);
+        examView.findViewById(R.id.topScoreView).setVisibility(View.GONE);
+    }
+
+    //adds a shake animation. to not collapse the course view
+    private void addShakeOnClick(Context context, View examViewPart) {
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.shake);
+        examViewPart.setOnClickListener(v -> examViewPart.startAnimation(animation));
     }
 
     static class Result {

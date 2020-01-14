@@ -22,10 +22,10 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
 import com.gaspar.learnjava.asynctask.LoadExamQuestionsTask;
+import com.gaspar.learnjava.curriculum.Course;
 import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.curriculum.Question;
 import com.gaspar.learnjava.curriculum.Status;
-import com.gaspar.learnjava.database.CourseStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 
 import java.util.concurrent.Executors;
@@ -102,8 +102,8 @@ public class ExamActivity extends ThemedActivity {
             builder.setMessage(R.string.confirm_abandon_exam);
             builder.setIcon(R.drawable.warning_icon);
             builder.setPositiveButton(R.string.ok, ((dialogInterface, i) -> {
-                examFinished = true;
-                onBackPressed();
+                finishExam(findViewById(R.id.finishExamButton)); //finishes, updates database
+                onBackPressed(); // instantly closes
             }));
             builder.setNegativeButton(R.string.cancel, (dialogInterface, i) -> dialogInterface.dismiss());
             builder.create().show();
@@ -168,32 +168,40 @@ public class ExamActivity extends ThemedActivity {
     }
 
     /**
-     * Displays the result to the user. Updates the database with new top score and completed status (if necessary).
-     * If the result is fail, a notification gets posted that will display when the exam is ready to be started again.
+     * <p>
+     *     Displays the result to the user. Updates the database with new top score and completed status (if necessary).
+     *     If the result is fail, a notification gets posted that will display when the exam is ready to be started again.
+     * </p>
+     * <p>
+     *     There is a reason why correctQuestions is double!!! To perform double division.
+     * </p>
      *
      * @param correctQuestions The amount of questions correctly answered (points).
      */
-    private void displayAndUpdateExamResult(int correctQuestions) {
+    private void displayAndUpdateExamResult(double correctQuestions) {
         Executors.newSingleThreadExecutor().execute(() -> { //first launch the top score updating
             int prevScore = LearnJavaDatabase.getInstance(this).getExamDao().queryTopScore(exam.getId());
             if(correctQuestions > prevScore) { //this works for NEVER_STARTED as well, as its value is -1
-                LearnJavaDatabase.getInstance(this).getExamDao().updateTopScore(exam.getId(), correctQuestions);
+                LearnJavaDatabase.getInstance(this).getExamDao()
+                        .updateTopScore(exam.getId(), Double.valueOf(correctQuestions).intValue());
             }
         });
-        int percentage = Double.valueOf((correctQuestions/exam.getQuestions().size()) * 100).intValue();
+        double percentageAsDouble = 100 * (correctQuestions/exam.getQuestionAmount());
+        int percentage =Double.valueOf(percentageAsDouble).intValue();
         findViewById(R.id.remainingTimeLayout).setVisibility(View.GONE);
         View resultLayout = findViewById(R.id.examResultLayout);
-        if (percentage >= Exam.getMinimumPassPercentage(this)) {
+        if (percentage >= Exam.getMinimumPassPercentage(this)) { //pass
             resultLayout.setBackgroundResource(R.drawable.correct_answer_background);
             ((TextView)resultLayout.findViewById(R.id.examResultText)).setText(R.string.exam_passed);
             Executors.newSingleThreadExecutor().execute(() -> {
-                LearnJavaDatabase.getInstance(ExamActivity.this)
+                LearnJavaDatabase.getInstance(ExamActivity.this) //set this exam completed
                         .getExamDao().updateExamCompletionStatus(exam.getId(), Status.COMPLETED);
-                int courseId = Exam.findCourseIdForExamId(exam.getId(), ExamActivity.this); //update course status too
-                LearnJavaDatabase.getInstance(ExamActivity.this).getCourseDao()
-                        .updateCourseStatus(new CourseStatus(courseId, Status.COMPLETED));
+                Course nextCourse = Course.findNextCourse(exam.getId());
+                if(nextCourse != null) { //if there is a next course, unlock it
+                    LearnJavaDatabase.getInstance(this).getCourseDao().updateCourseStatus(nextCourse.getId(), Status.UNLOCKED);
+                }
             });
-        } else {
+        } else { //fail
             resultLayout.setBackgroundResource(R.drawable.incorrect_background);
             ((TextView)resultLayout.findViewById(R.id.examResultText)).setText(R.string.exam_failed);
             ExamNotificationReceiver.postExamNotification(exam, this); //post the notification that shows on cool down.

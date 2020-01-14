@@ -2,19 +2,16 @@ package com.gaspar.learnjava.curriculum;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.gaspar.learnjava.CoursesActivity;
 import com.gaspar.learnjava.LearnJavaActivity;
 import com.gaspar.learnjava.SettingsActivity;
 import com.gaspar.learnjava.asynctask.ExamStatusDisplayerTask;
 import com.gaspar.learnjava.database.ExamStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
-import com.gaspar.learnjava.parsers.CourseParser;
 
 import java.io.Serializable;
 import java.util.List;
@@ -126,16 +123,16 @@ public class Exam implements Serializable {
 
     /**
      * A constant that stores the number of seconds the user must wait before they can retry a
-     * failed exam. This is exactly one day.
+     * failed exam.
      */
-    public static final long EXAM_COOL_DOWN_TIME = TimeUnit.DAYS.toSeconds(1);
+    public static final long EXAM_COOL_DOWN_TIME = TimeUnit.HOURS.toSeconds(5);
 
     /**
-     * Checks if the given epoch time was more then a day ago. Accepts exactly 1 day ago as well.
+     * Checks if the given epoch time was more then {@link #EXAM_COOL_DOWN_TIME} ago.
      */
-    public static boolean moreThenADayAgo(long lastStarted) {
-        long currentTime = (long)(System.currentTimeMillis()/1000.0);
-        return currentTime - lastStarted >= EXAM_COOL_DOWN_TIME;
+    public static boolean coolDownTimeAgo(long lastStarted) {
+        long currentTime = System.currentTimeMillis();
+        return currentTime - lastStarted >= (1000*EXAM_COOL_DOWN_TIME);
     }
 
     /**
@@ -151,24 +148,6 @@ public class Exam implements Serializable {
             ExamStatus newStatus = new ExamStatus(examId, DEF_STATUS, EXAM_NEVER_STARTED, EXAM_NEVER_STARTED);
             LearnJavaDatabase.getInstance(context).getExamDao().addExamStatus(newStatus); //add to database
         }
-    }
-
-    /**
-     * Finds the id of the course, from the id of its exam.
-     */
-    public static int findCourseIdForExamId(int examId, Context context) {
-        try {
-            if(CoursesActivity.coursesNotParsed()) { //not parsed before
-                CoursesActivity.getParsedCourses().addAll(CourseParser.getInstance()
-                        .parseCourses(context)); //parse and save courses
-            }
-            for(Course course: CoursesActivity.getParsedCourses()) {
-                if(course.getExam().getId() == examId) return course.getId();
-            }
-        } catch (Exception e) {
-            Log.d("LearnJava", "Exception", e);
-        }
-        throw new RuntimeException("Invalid exam id!");
     }
 
     @Override
