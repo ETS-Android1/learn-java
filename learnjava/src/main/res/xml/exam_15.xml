@@ -406,6 +406,76 @@
     </question>
 
     <!-- Questions about exception handling -->
+    <question type="multi_choice">
+        <text>Which of these are subclasses of Throwable?</text>
+        <answer>Integer</answer>
+        <answer>Exception</answer>
+        <answer>Error</answer>
+        <answer>RuntimeException</answer>
+        <correct>1</correct>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which of these indicate a more severe problem?</text>
+        <answer>Errors.</answer>
+        <answer>Exceptions.</answer>
+        <correct>0</correct>
+    </question>
+    <question type="true_false">
+        <text>The base class for all unchecked exceptions is RuntimeException.</text>
+        <correct>true</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to raise an exception?</text>
+        <correct>throw</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to declare that a method may produce an exception?</text>
+        <correct>throws</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which of these is used to handle exception?</text>
+        <answer>The else-if block.</answer>
+        <answer>The while-loop.</answer>
+        <answer>The for-loop.</answer>
+        <answer>The try-catch block.</answer>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>How can we create custom unchecked exceptions?</text>
+        <answer>By inheriting from the Exception class.</answer>
+        <answer>By inheriting from the Error class.</answer>
+        <answer>Custom exceptions can't be created.</answer>
+        <answer>By inheriting from the RuntimeException class.</answer>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is a checked exception?</text>
+        <answer>An exception that the programmer is forced to handle.</answer>
+        <answer>An exception surrounded with a try-catch block</answer>
+        <answer>An exception that crashed the application.</answer>
+        <answer>It's another name for errors.</answer>
+        <correct>0</correct>
+    </question>
+    <question type="true_false">
+        <text>Throwable is the base class for all exception and error related classes.</text>
+        <correct>true</correct>
+    </question>
+    <question type="text">
+        <text>What is the base class for all exceptions?</text>
+        <correct>Exception</correct>
+        <correct>java.lang.Exception</correct>
+    </question>
+    <question type="text">
+        <text>What is the base class for all unchecked exceptions?</text>
+        <correct>RuntimeException</correct>
+        <correct>java.lang.RuntimeException</correct>
+    </question>
+    <question type="true_false">
+        <text>Errors should always be handled with try-catch blocks.</text>
+        <correct>false</correct>
+    </question>
 
     <!--
    <question type="single_choice">
