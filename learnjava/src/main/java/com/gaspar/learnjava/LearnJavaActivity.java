@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -20,6 +21,7 @@ import com.gaspar.learnjava.asynctask.InitStarterViewTask;
 import com.gaspar.learnjava.curriculum.Chapter;
 import com.gaspar.learnjava.database.CourseStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
+import com.gaspar.learnjava.parsers.CourseParser;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.navigation.NavigationView;
 
@@ -32,7 +34,7 @@ public class LearnJavaActivity extends ThemedActivity
      * Debug constant. If this is set to true the application is in debug mode. This makes all courses and tasks openable,
      * all exams can be started at any time.
      */
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
 
     /**
      * Constant that determines if ads will or won't be test(debug) ads. This only has a real effect if {@value LOAD_ADS}
@@ -70,7 +72,12 @@ public class LearnJavaActivity extends ThemedActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Executors.newSingleThreadExecutor().execute(() -> { //initialize the database related variables
-            CourseStatus.setCourseCount(LearnJavaDatabase.getInstance(this).getCourseDao().countCourses(), this);
+            try { //parse course objects
+                CoursesActivity.getParsedCourses().addAll(CourseParser.getInstance().parseCourses(this));
+            } catch (Exception e) {
+                Log.d("LearnJava", "Failed to parse courses!");
+            }
+            CourseStatus.initCourseCount(CoursesActivity.getParsedCourses().size(), this); //pass in new course size for check
             LearnJavaDatabase.validateDatabase(this); //check/add all elements
             createNotificationChannel(); //initialize the notification channel
             SettingsActivity.initSettings(this); //initialize settings

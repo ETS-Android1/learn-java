@@ -1,10 +1,12 @@
 package com.gaspar.learnjava.curriculum;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.gaspar.learnjava.CoursesActivity;
 import com.gaspar.learnjava.asynctask.CourseStatusDisplayerTask;
@@ -17,7 +19,8 @@ import java.util.List;
 /**
  * <p>
  *    Represents a course in the curriculum. Courses can have any number of chapters, tasks and
- *    exactly one exam.
+ *    exactly one exam. They may be finished or unfinished. If a course is unlocked, but unfinished then the user
+ *    will see that, and it's exam can't be started.
  * </p>
  *
  * <p>
@@ -29,6 +32,7 @@ import java.util.List;
  *  *     <coursedata>
  *  *         <id>*id here*</id>
  *  *         <name>*name here*</name>
+ *            <finished>true</finished>
  *  *     </coursedata>
  *  *     <chapter>*id of the chapter*</chapter>
  *  *     ...
@@ -72,7 +76,10 @@ public class Course implements Serializable {
      */
     private Exam exam;
 
-    private transient Context context;
+    /**
+     * Stores if this course is finished.
+     */
+    private final boolean finished;
 
     /**
      * The completion/unlock status of this course. Queried from the database.
@@ -80,14 +87,13 @@ public class Course implements Serializable {
     @Status
     private volatile int status;
 
-    public Course(int id, String name, List<Chapter> chapters,
-                  List<Task> tasks, Exam exam, Context context) {
+    public Course(int id, String name, List<Chapter> chapters, List<Task> tasks, Exam exam, boolean finished) {
         this.id = id;
         this.courseName = name;
         this.chapters = chapters;
         this.tasks = tasks;
         this.exam = exam;
-        this.context = context;
+        this.finished = finished;
         status = Status.NOT_QUERIED;
     }
 
@@ -96,16 +102,16 @@ public class Course implements Serializable {
      * This will also start querying the database for the status of this course, and then
      * displaying the status using the image view.
      */
-    public void queryAndDisplayStatus(final ImageView imageView) {
-        new CourseStatusDisplayerTask(this).execute(imageView, context);
+    public void queryAndDisplayStatus(final ImageView imageView, final AppCompatActivity activity) {
+        new CourseStatusDisplayerTask(this).execute(imageView, activity);
     }
 
     /**
      * Same as the method above but with an additional runnable that will be called when the task
      * ends, on the UI thread.
      */
-    public void queryAndDisplayStatus(final ImageView imageView, Runnable callAtEnd) {
-        new CourseStatusDisplayerTask(this, callAtEnd).execute(imageView, context);
+    public void queryAndDisplayStatus(final ImageView imageView, Runnable callAtEnd, final AppCompatActivity activity) {
+        new CourseStatusDisplayerTask(this, callAtEnd).execute(imageView, activity);
     }
 
     /**
@@ -117,6 +123,7 @@ public class Course implements Serializable {
         CourseStatus status = LearnJavaDatabase.getInstance(context).getCourseDao().queryCourseStatus(courseId);
         if(status == null) { //not found in the database
             CourseStatus newStatus;
+            Log.d("LearnJava", "Validating new course, count: " + CourseStatus.getCourseCount());
             if(CourseStatus.getCourseCount() == 0) { //this is first course to be added to the database
                 newStatus = new CourseStatus(courseId, Status.UNLOCKED); //first one is unlocked
             } else { //there are other courses already
@@ -124,8 +131,8 @@ public class Course implements Serializable {
                 newStatus = new CourseStatus(courseId, DEFAULT_STATUS);
             }
             LearnJavaDatabase.getInstance(context).getCourseDao().addCourseStatus(newStatus); //add to database
-            CourseStatus.incrementCourseCount();
         }
+        CourseStatus.incrementCourseCount(); //increment course counter variable
     }
 
     /**
@@ -176,5 +183,9 @@ public class Course implements Serializable {
 
     public void setStatus(@Status int status) {
         this.status = status;
+    }
+
+    public boolean isFinished() {
+        return finished;
     }
 }

@@ -15,6 +15,7 @@ import androidx.annotation.StringDef;
 
     String ID = "id";
     String NAME = "name";
+    String FINISHED = "finished";
     String TEXT = "text";
     String CODE  = "code";
     String TITLE = "title";

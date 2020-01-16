@@ -91,6 +91,7 @@ public class CourseParser {
         Exam exam = null;
         int courseID = NO_ID_FOUND;
         String courseName = null;
+        boolean finished = false;
 
         int eventType = parser.getEventType();
         while(eventType != XmlPullParser.END_DOCUMENT) {
@@ -100,6 +101,8 @@ public class CourseParser {
                     courseID = Integer.parseInt(parser.nextText());
                 } else if(tagName.equalsIgnoreCase(TagName.NAME)) { //course name tag
                     courseName = parser.nextText();
+                } else if(tagName.equalsIgnoreCase(TagName.FINISHED)) {
+                    finished = Boolean.parseBoolean(parser.nextText());
                 } else if(tagName.equalsIgnoreCase(TagName.CHAPTER)) { //chapter tag
                     int chapterId = Integer.parseInt(parser.nextText());
                     chapters.add(parseChapter(chapterId,false, context));
@@ -115,7 +118,7 @@ public class CourseParser {
         }
         if(courseID == NO_ID_FOUND || courseName == null || exam == null ||
             chapters.size() == 0 || tasks.size() == 0) throw new RuntimeException();
-        return new Course(courseID, courseName, chapters, tasks, exam, context);
+        return new Course(courseID, courseName, chapters, tasks, exam, finished);
     }
 
     /**

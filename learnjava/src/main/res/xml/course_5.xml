@@ -6,6 +6,7 @@
     <coursedata>
         <id>5</id>
         <name>The basics</name>
+        <finished>true</finished>
     </coursedata>
     <chapter>51</chapter>
     <chapter>52</chapter>

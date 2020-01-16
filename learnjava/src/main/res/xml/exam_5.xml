@@ -7,6 +7,7 @@
         <id>5</id>
         <questionAmount>25</questionAmount>
         <timeLimit>30</timeLimit>
+        <finished>true</finished>
     </examdata>
     <!-- Questions about 'What is Java?' -->
     <question type="multi_choice">

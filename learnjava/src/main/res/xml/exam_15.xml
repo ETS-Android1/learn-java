@@ -7,6 +7,7 @@
         <id>15</id>
         <questionAmount>25</questionAmount>
         <timeLimit>30</timeLimit>
+        <finished>true</finished>
     </examdata>
 
     <!-- Questions for creating classes -->
@@ -106,7 +107,7 @@
         <answer>They create new objects.</answer>
         <answer>They can't be overloaded.</answer>
         <answer>They must be named 'Constructor'</answer>
-        <answer>They stand after the new keyword.</answer>
+        <answer>They're called with the new keyword.</answer>
         <correct>0</correct>
         <correct>3</correct>
     </question>
@@ -309,7 +310,7 @@
         <answer>Methods.</answer>
         <answer>local variables.</answer>
         <correct>0</correct>
-        <correct>2</correct>
+        <correct>1</correct>
         <correct>3</correct>
     </question>
     <question type="text">

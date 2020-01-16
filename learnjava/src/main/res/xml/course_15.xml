@@ -6,6 +6,7 @@
     <coursedata>
         <id>15</id>
         <name>Classes and objects</name>
+        <finished>true</finished>
     </coursedata>
     <chapter>151</chapter>
     <chapter>152</chapter>

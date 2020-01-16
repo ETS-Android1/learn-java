@@ -33,6 +33,7 @@ public class ShowCongratulationTask extends AsyncTask<CoursesActivity, Void, Sho
     protected void onPostExecute(Result result) {
         super.onPostExecute(result);
         SharedPreferences prefs = result.activity.getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
+        if(!prefs.getBoolean(CoursesActivity.CONGRATULATION_PROMPT, false)) return; //don't show anything is disabled
         int counter = 0;
         for(int status: result.examStatuses) {
             if (status == com.gaspar.learnjava.curriculum.Status.COMPLETED) counter++;

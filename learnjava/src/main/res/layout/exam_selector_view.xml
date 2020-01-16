@@ -97,6 +97,31 @@
                 android:contentDescription="@string/status_icon"
                 app:srcCompat="@drawable/locked_icon"/>
         </LinearLayout>
+
+        <!-- Exam unfinished layout -->
+        <LinearLayout
+            android:id="@+id/unfinishedLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/margin"
+            android:gravity="center"
+            tools:ignore="UseCompoundDrawables">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/exam_unfinished"
+                android:layout_marginEnd="@dimen/margin"/>
+
+            <ImageView
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:contentDescription="@string/status_icon"
+                app:srcCompat="@drawable/unfinished_icon"/>
+        </LinearLayout>
     </RelativeLayout>
 
     <!-- Shows the top score if there is one -->

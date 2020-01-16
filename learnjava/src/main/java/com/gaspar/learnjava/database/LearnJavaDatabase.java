@@ -86,7 +86,7 @@ public abstract class LearnJavaDatabase extends RoomDatabase {
         database.getChapterDao().deleteRecords();
         database.getExamDao().deleteRecords();
         database.getTaskDao().deleteRecords();
-        CourseStatus.setCourseCount(0, context); //also reset course counter variable
+        CourseStatus.initCourseCount(0, context); //also reset course counter variable
     }
 
     private static int parseId(String resourceName) throws IllegalArgumentException {

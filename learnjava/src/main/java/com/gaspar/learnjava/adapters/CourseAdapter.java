@@ -63,7 +63,7 @@ public class CourseAdapter extends ArrayAdapter<Course> {
         }
         if(course != null) { //fill data here using view holder
             viewHolder.courseNameView.setText(course.getCourseName());
-            course.queryAndDisplayStatus(viewHolder.statusIcon);
+            course.queryAndDisplayStatus(viewHolder.statusIcon, activity);
             addHiddenViews(viewHolder, course); //add chapter, task exam selectors
         }
         return convertView;

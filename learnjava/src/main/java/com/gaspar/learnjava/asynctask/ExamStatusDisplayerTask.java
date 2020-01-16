@@ -11,12 +11,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Size;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gaspar.learnjava.CoursesActivity;
 import com.gaspar.learnjava.ExamActivity;
 import com.gaspar.learnjava.LearnJavaActivity;
 import com.gaspar.learnjava.R;
+import com.gaspar.learnjava.ThemeUtils;
 import com.gaspar.learnjava.UpdatableActivity;
 import com.gaspar.learnjava.curriculum.Chapter;
 import com.gaspar.learnjava.curriculum.Exam;
@@ -83,7 +85,11 @@ public class ExamStatusDisplayerTask extends AsyncTask<Object, Void, ExamStatusD
         final Button takeExamButton = result.examView.findViewById(R.id.takeExamButton);
         ImageView examStatusIcon = result.examView.findViewById(R.id.examStatusIcon);
         hideExamComponents(result.examView); //in case something was already visible
-        if(result.status == com.gaspar.learnjava.curriculum.Status.LOCKED && !LearnJavaActivity.DEBUG) { //show locked view
+
+        if(!exam.isFinished()) { //unfinished exams will look similar to locked exams
+            result.examView.findViewById(R.id.unfinishedLayout).setVisibility(View.VISIBLE);
+            addDialogOnClick(result.activity, result.examView);
+        } else if(result.status == com.gaspar.learnjava.curriculum.Status.LOCKED && !LearnJavaActivity.DEBUG) { //show locked view
             result.examView.findViewById(R.id.lockedLayout).setVisibility(View.VISIBLE);
             addShakeOnClick(result.activity, result.examView);
         } else if(!result.onCoolDown) { //exam not locked, on not cool down, show button view
@@ -106,7 +112,7 @@ public class ExamStatusDisplayerTask extends AsyncTask<Object, Void, ExamStatusD
             addShakeOnClick(result.activity, result.examView);
         }
 
-        if(result.topScore != Exam.EXAM_NEVER_STARTED) { //if there is a displayable top score (regardless of locked or not)
+        if(result.topScore != Exam.EXAM_NEVER_STARTED) { //if there is a displayable top score
             TextView scoreDisplayer = result.examView.findViewById(R.id.topScoreDisplayer);
             String text = result.topScore + "/" + exam.getQuestionAmount() + " " + result.activity.getString(R.string.points);
             scoreDisplayer.setText(text);
@@ -133,12 +139,24 @@ public class ExamStatusDisplayerTask extends AsyncTask<Object, Void, ExamStatusD
         examView.findViewById(R.id.countdownLayout).setVisibility(View.GONE);
         examView.findViewById(R.id.lockedLayout).setVisibility(View.GONE);
         examView.findViewById(R.id.topScoreView).setVisibility(View.GONE);
+        examView.findViewById(R.id.unfinishedLayout).setVisibility(View.GONE);
     }
 
     //adds a shake animation. to not collapse the course view
     private void addShakeOnClick(Context context, View examViewPart) {
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.shake);
         examViewPart.setOnClickListener(v -> examViewPart.startAnimation(animation));
+    }
+
+    //adds a dialog that notifies about unfinished exams on click
+    private void addDialogOnClick(AppCompatActivity activity, View examView) {
+        examView.setOnClickListener(v -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(ThemeUtils.createDialogWrapper(activity));
+            builder.setTitle(R.string.in_development);
+            builder.setMessage(R.string.exam_development_info);
+            builder.setPositiveButton(R.string.ok, (dialog, which) -> dialog.dismiss());
+            builder.create().show();
+        });
     }
 
     static class Result {

@@ -60,7 +60,6 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
         super.onCreate(savedState);
         setContentView(R.layout.courses);
         setUpUI();
-        showCongratulationPrompt();
     }
 
     @Override
@@ -79,6 +78,7 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
     protected void onResume() {
         super.onResume();
         adView.resume();
+        showCongratulationPrompt();
     }
 
     private void setUpUI() {
@@ -148,7 +148,7 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
             ListView listView = findViewById(R.id.courseSelectors);
             View nextCourseView = listView.getChildAt((i+1) - listView.getFirstVisiblePosition());
             if(nextCourseView != null) { //next course view is null when it isn't visible, but then it gets updated when it appears
-                nextCourse.queryAndDisplayStatus(nextCourseView.findViewById(R.id.statusIconView));
+                nextCourse.queryAndDisplayStatus(nextCourseView.findViewById(R.id.statusIconView), this);
             }
         }
     }

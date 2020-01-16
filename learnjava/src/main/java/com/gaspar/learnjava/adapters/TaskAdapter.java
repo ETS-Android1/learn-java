@@ -65,7 +65,7 @@ public class TaskAdapter extends ArrayAdapter<Course> {
                     holder.tasksLayout.setVisibility(View.VISIBLE);
                 }
             };
-            course.queryAndDisplayStatus(holder.courseStatusIcon, showTasksAtEnd);
+            course.queryAndDisplayStatus(holder.courseStatusIcon, showTasksAtEnd, activity);
             addTasksToCourse(course, holder.tasksLayout); //add tasks selectors
         }
         return convertView;

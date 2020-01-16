@@ -81,6 +81,7 @@ public class ExamParser {
         int examId = CourseParser.NO_ID_FOUND;
         int questionAmount = CourseParser.NO_ID_FOUND;
         int timeLimit = CourseParser.NO_ID_FOUND;
+        boolean finished = false;
         List<Question> questions = new ArrayList<>();
         XmlResourceParser parser = context.getResources().getXml(xmlResourceId);
 
@@ -96,6 +97,8 @@ public class ExamParser {
                     timeLimit = Integer.parseInt(parser.nextText());
                 } else if(tagName.equalsIgnoreCase(TagName.QUESTION) && parseQuestions) {
                     questions.add(parseQuestion(parser));
+                } else if(tagName.equalsIgnoreCase(TagName.FINISHED)) {
+                    finished = Boolean.parseBoolean(parser.nextText());
                 }
             }
             eventType = parser.next();
@@ -106,9 +109,9 @@ public class ExamParser {
                     questionAmount + ", timeLimit: " + timeLimit);
         }
         if(parseQuestions) {
-            return new Exam(examId, questions, questionAmount, timeLimit);
+            return new Exam(examId, questions, questionAmount, timeLimit, finished);
         } else {
-            return new Exam(examId, null, questionAmount, timeLimit);
+            return new Exam(examId, null, questionAmount, timeLimit, finished);
         }
     }
 

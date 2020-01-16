@@ -12,6 +12,8 @@
     <string name="status_icon">Status icon</string>
     <string name="loading_error">An error has occurred while loading %1$s!</string>
     <string name="tap_to_see_details">Tap to see details</string>
+    <string name="in_development">In development</string>
+    <string name="course_development_info">This course is in development! More chapters will be released in the future.</string>
 
     <!-- Ads -->
     <string name="admob_app_id" translatable="false">ca-app-pub-7754228088611040~7265518837</string>
@@ -62,6 +64,8 @@
     <string name="take_exam">Take exam</string>
     <string name="exam_countdown_prompt">Exam available in</string>
     <string name="exam_locked">Exam locked</string>
+    <string name="exam_unfinished">Exam in development</string>
+    <string name="exam_development_info">This exam is currently in development! It can\'t be used for now.</string>
     <string name="hour_suffix">h</string>
     <string name="minute_suffix">m</string>
     <string name="second_suffix">s</string>

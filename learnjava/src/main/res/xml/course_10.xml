@@ -6,6 +6,7 @@
     <coursedata>
         <id>10</id>
         <name>Primitives, control flow and I/O</name>
+        <finished>true</finished>
     </coursedata>
     <chapter>101</chapter>
     <chapter>102</chapter>

@@ -20,7 +20,9 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * <p>
- *     Represents an exam in the curriculum. Exams can have any number of questions.
+ *     Represents an exam in the curriculum. Exams can have any number of questions. Exams can be finished or
+ *     unfinished. An unfinished courses exam should be unfinished. Unfinished exams show to the user that they
+ *     are unfinished, and they can't be started.
  * </p>
  *
  * <p>
@@ -33,6 +35,7 @@ import java.util.concurrent.TimeUnit;
  *  *         <id>*id here*</id>
  *            <questionAmount>*number of displayed questions</questionAmount>
  *            <timeLimit>*exam time limit in minutes*</timeLimit>
+ *            <finished>true</finished>
  *  *     </examdata>
  *  *     <question>*question data*</question>
  *  *     ...
@@ -96,19 +99,26 @@ public class Exam implements Serializable {
     @Status
     private volatile int status;
 
-    public Exam(int id, List<Question> questions, int questionAmount, int timeLimit) {
+    /**
+     * Stores if this exam is finished. Should be the same value as its course.
+     */
+    private final boolean finished;
+
+    public Exam(int id, List<Question> questions, int questionAmount, int timeLimit, boolean finished) {
         this.id = id;
         this.timeLimit = timeLimit;
         this.questionAmount = questionAmount;
         this.questions = questions;
+        this.finished = finished;
         status = Status.NOT_QUERIED;
     }
 
     /**
      * Exam with no question objects, only an ID. Used when displaying the questions isn't necessary.
      */
-    public Exam(int id) {
+    public Exam(int id, boolean finished) {
         this.id = id;
+        this.finished = finished;
         status = Status.NOT_QUERIED;
     }
 
@@ -209,5 +219,9 @@ public class Exam implements Serializable {
 
     public static void setMinimumPassPercentage(int minimumPassPercentage) {
         Exam.minimumPassPercentage = minimumPassPercentage;
+    }
+
+    public boolean isFinished() {
+        return finished;
     }
 }
