@@ -179,6 +179,12 @@
         be the <b>caller of the method</b> who has to handle the exception.
         ]]>
     </text>
+    <boxed title="Write throws">
+        <![CDATA[
+        It's good practice to use the <i>throws</i> keyword to indicate all exceptions that your method may throw,
+        even if they are unchecked exceptions. This way the caller will always know what kind of exceptions can he expect.
+        ]]>
+    </boxed>
 
     <!-- try-catch-finally, Throwable, Exception, Error, RuntimeException
      throw and throws keywords -->
