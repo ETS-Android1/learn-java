@@ -34,7 +34,7 @@ public class LearnJavaActivity extends ThemedActivity
      * Debug constant. If this is set to true the application is in debug mode. This makes all courses and tasks openable,
      * all exams can be started at any time.
      */
-    public static final boolean DEBUG = true;
+    public static final boolean DEBUG = false;
 
     /**
      * Constant that determines if ads will or won't be test(debug) ads. This only has a real effect if {@value LOAD_ADS}
@@ -45,7 +45,7 @@ public class LearnJavaActivity extends ThemedActivity
     /**
      * A constant that determines if ads will be loaded or not.
      */
-    public static final boolean LOAD_ADS = false;
+    public static final boolean LOAD_ADS = true;
 
     /**
      * The name of the application's shared preferences.
@@ -73,7 +73,7 @@ public class LearnJavaActivity extends ThemedActivity
         super.onCreate(savedInstanceState);
         Executors.newSingleThreadExecutor().execute(() -> { //initialize the database related variables
             try { //parse course objects
-                CoursesActivity.getParsedCourses().addAll(CourseParser.getInstance().parseCourses(this));
+                CoursesActivity.setParsedCourses(CourseParser.getInstance().parseCourses(this));
             } catch (Exception e) {
                 Log.d("LearnJava", "Failed to parse courses!");
             }

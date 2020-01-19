@@ -150,30 +150,6 @@ public class CourseParser {
     }
 
     /**
-     * Parses the first chapter in the curriculum (without components).
-     */
-    public Chapter parseFirstChapter(@NonNull Context context) throws XmlPullParserException, IOException {
-        Chapter firstChapter = null;
-        final Field[] fields = R.xml.class.getDeclaredFields();
-        for (Field field : fields) {
-            final int xmlResourceID;
-            try {
-                xmlResourceID = field.getInt(R.xml.class);
-            } catch (Exception e) {
-                throw new RuntimeException();
-            }
-            String resourceName = context.getResources().getResourceEntryName(xmlResourceID);
-            if(resourceName.startsWith(TagName.COURSE + "_")) { //select the first course
-                Course firstCourse = parseCourse(xmlResourceID, context);
-                firstChapter = firstCourse.getChapters().get(0);
-                break;
-            }
-        }
-        if(firstChapter == null) throw new RuntimeException();
-        return firstChapter;
-    }
-
-    /**
      * Helper method for chapter parsing.
      */
     private Chapter parseChapterData(@XmlRes int xmlResourceId, boolean parseComponents, @NonNull Context context)

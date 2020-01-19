@@ -43,7 +43,7 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
     /**
      * A list of the course objects parsed by the app.
      */
-    private static final List<Course> PARSED_COURSES = new ArrayList<>();
+    private static List<Course> PARSED_COURSES = new ArrayList<>();
 
     //these constants are used to determine what kind of activity finished.
     public static final int CHAPTER_REQUEST_CODE = 23;
@@ -249,6 +249,10 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
 
     public static List<Course> getParsedCourses() {
         return PARSED_COURSES;
+    }
+
+    public static void setParsedCourses(List<Course> parsedCourses) {
+        PARSED_COURSES = parsedCourses;
     }
 
     public static boolean coursesNotParsed() {

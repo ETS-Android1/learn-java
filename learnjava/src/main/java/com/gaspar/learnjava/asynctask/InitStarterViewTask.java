@@ -12,11 +12,12 @@ import androidx.annotation.WorkerThread;
 import com.gaspar.learnjava.CoursesActivity;
 import com.gaspar.learnjava.LearnJavaActivity;
 import com.gaspar.learnjava.R;
+import com.gaspar.learnjava.curriculum.Chapter;
 import com.gaspar.learnjava.curriculum.Course;
-import com.gaspar.learnjava.parsers.CourseParser;
 import com.gaspar.learnjava.database.ChapterStatus;
 import com.gaspar.learnjava.database.CourseStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
+import com.gaspar.learnjava.parsers.CourseParser;
 import com.google.android.material.snackbar.Snackbar;
 
 /**
@@ -57,8 +58,9 @@ public class InitStarterViewTask extends AsyncTask<Object, Void, LearnJavaActivi
                     activity.setStartedChapter(CourseParser.getInstance().parseChapter(nextId,
                             false, activity));
                 }
-            } else { //parse the first chapter in curriculum
-                activity.setStartedChapter(CourseParser.getInstance().parseFirstChapter(activity));
+            } else { //use the first chapter in curriculum
+                Chapter firstChapter = CoursesActivity.getParsedCourses().get(0).getChapters().get(0);
+                activity.setStartedChapter(firstChapter);
             }
         } catch (Exception e) {
             Log.e("LearnJava", "Exception", e);

@@ -90,6 +90,7 @@ public class CourseStatus {
         if(!prefs.contains(CoursesActivity.CONGRATULATION_PROMPT)) { //this is handled here, since if course count changes then this must be reactivated
             prefs.edit().putBoolean(CoursesActivity.CONGRATULATION_PROMPT, true).apply();
         }
+        //Log.d("LearnJava", "pref: " + prefs.getInt(COURSE_COUNT,0) + " xml: " + xmlCourseCount);
         if(prefs.getInt(COURSE_COUNT, 0) != xmlCourseCount) { //new course detected
             newCourseDetected(prefs, context);
         }
