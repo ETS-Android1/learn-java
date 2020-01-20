@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 
 import com.gaspar.learnjava.R;
+import com.gaspar.learnjava.ThemeUtils;
 
 import java.io.Serializable;
 import java.util.List;
@@ -88,7 +89,19 @@ public class SingleChoiceQuestion extends Question implements Serializable {
             });
             answersGroup.addView(answerButton, i);
         }
+        if(ThemeUtils.isDarkTheme()) {
+            recolorSeparator(questionView, context);
+            questionView.setBackground(context.getDrawable(R.drawable.question_background_dark));
+        }
         return questionView;
+    }
+
+    /**
+     * Sets a better color for separator lines, only if in dark mode.
+     */
+    private void recolorSeparator(View questionView, final Context context) {
+        int accent = context.getResources().getColor(R.color.colorAccent_Dark);
+        questionView.findViewById(R.id.questionSep1).setBackgroundColor(accent);
     }
 
     @Override
@@ -120,9 +133,10 @@ public class SingleChoiceQuestion extends Question implements Serializable {
             } else { //incorrect
                 iconView.setImageResource(R.drawable.problem_icon);
                 //mark incorrect answer with red
-                correctButton.setBackgroundResource(R.drawable.incorrect_background);
-                correctButton.setTextColor(ContextCompat.getColor(correctButton.getContext(), android.R.color.black));
-                correctButton.setButtonTintList(ContextCompat.getColorStateList(correctButton.getContext(), R.color.black_color_list));
+                RadioButton wrongButton = (RadioButton)answersLayout.getChildAt(selectedAnswerIndex);
+                wrongButton.setBackgroundResource(R.drawable.incorrect_background);
+                wrongButton.setTextColor(ContextCompat.getColor(correctButton.getContext(), android.R.color.black));
+                wrongButton.setButtonTintList(ContextCompat.getColorStateList(correctButton.getContext(), R.color.black_color_list));
             }
         } else { //question has not been answered
             iconView.setImageResource(R.drawable.problem_icon);

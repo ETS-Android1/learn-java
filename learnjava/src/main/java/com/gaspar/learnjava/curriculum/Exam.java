@@ -57,7 +57,7 @@ public class Exam implements Serializable {
     public static final int EXAM_NEVER_STARTED = -1;
 
     /**
-     * The challenging difficulty reduced exam time, in milliseconds.
+     * The amount of time challenging difficulty reduces exam time, in milliseconds.
      */
     public static final long REDUCED_EXAM_TIME = 10 * 1000 * 60;
 

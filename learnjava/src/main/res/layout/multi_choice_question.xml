@@ -34,6 +34,7 @@
     </RelativeLayout>
 
     <View
+        android:id="@+id/questionSep1"
         android:layout_width="match_parent"
         android:layout_height="@dimen/separator_height"
         android:background="@android:color/black" />
@@ -47,6 +48,7 @@
         tools:layout_height="100dp"/>
 
     <View
+        android:id="@+id/questionSep2"
         android:layout_width="match_parent"
         android:layout_height="@dimen/separator_height"
         android:background="@android:color/black" />

@@ -11,8 +11,8 @@ import com.gaspar.learnjava.ExamActivity;
 import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.SettingsActivity;
 import com.gaspar.learnjava.curriculum.Exam;
-import com.gaspar.learnjava.parsers.ExamParser;
 import com.gaspar.learnjava.curriculum.Question;
+import com.gaspar.learnjava.parsers.ExamParser;
 
 import java.util.Collections;
 import java.util.Random;
@@ -69,7 +69,8 @@ public class LoadExamQuestionsTask extends AsyncTask<ExamActivity, Void, ExamAct
             activity.findViewById(R.id.loadingIndicator).setVisibility(View.GONE); //hide loading
             activity.findViewById(R.id.examActivityContent).setVisibility(View.VISIBLE); //show questions
             if(SettingsActivity.isOnChallengingDifficulty(activity)) {
-                countdownView.start(Exam.REDUCED_EXAM_TIME); //reduced time in challenging difficulty
+                long reducedTime = (activity.getExam().getTimeLimit() * 60 * 1000) - Exam.REDUCED_EXAM_TIME;
+                countdownView.start(reducedTime); //reduced time in challenging difficulty
             } else {
                 countdownView.start(activity.getExam().getTimeLimit() * 60 * 1000); //start timer
             }

@@ -90,6 +90,7 @@ public class TrueOrFalseQuestion extends Question implements Serializable {
             int black = ContextCompat.getColor(context, android.R.color.black);
             trueTextView.setTextColor(black);
             falseTextView.setTextColor(black);
+            questionView.setBackground(context.getDrawable(R.drawable.question_background_dark));
         }
         return questionView;
     }

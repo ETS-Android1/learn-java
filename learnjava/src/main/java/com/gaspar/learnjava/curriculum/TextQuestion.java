@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.gaspar.learnjava.R;
+import com.gaspar.learnjava.ThemeUtils;
 
 import java.io.Serializable;
 import java.util.List;
@@ -70,7 +71,20 @@ public class TextQuestion extends Question implements Serializable {
             @Override
             public void afterTextChanged(Editable editable) { }
         });
+        if(ThemeUtils.isDarkTheme()) {
+            recolorSeparators(questionView, context);
+            questionView.setBackground(context.getDrawable(R.drawable.question_background_dark));
+        }
         return questionView;
+    }
+
+    /**
+     * Sets a better color for separator lines, only if in dark mode.
+     */
+    private void recolorSeparators(View questionView, final Context context) {
+        int accent = context.getResources().getColor(R.color.colorAccent_Dark);
+        questionView.findViewById(R.id.questionSep1).setBackgroundColor(accent);
+        questionView.findViewById(R.id.questionSep2).setBackgroundColor(accent);
     }
 
     @Override
