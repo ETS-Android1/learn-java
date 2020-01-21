@@ -98,7 +98,7 @@ public class MultiChoiceQuestion extends Question implements Serializable {
      * Sets a better color for separator lines, only if in dark mode.
      */
     private void recolorSeparators(View questionView, final Context context) {
-        int accent = context.getResources().getColor(R.color.colorAccent_Dark);
+        int accent = ContextCompat.getColor(context, R.color.colorAccent_Dark);
         questionView.findViewById(R.id.questionSep1).setBackgroundColor(accent);
         questionView.findViewById(R.id.questionSep2).setBackgroundColor(accent);
     }

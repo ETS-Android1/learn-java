@@ -83,6 +83,7 @@
     <string name="ongoing_exam">Ongoing exam</string>
     <string name="ongoing_exam_detail">Don\'t forget to finish the exam!</string>
     <string name="top_score">Top score:</string>
+    <string name="no_answer_given">No answer given…</string>
 
     <!-- Question -->
     <string name="question_icon">Question status icon</string>
@@ -127,7 +128,6 @@
     <string-array name="contact_me_when">
         <item>- A typo, or sentence that does not make sense.</item>
         <item>- One of the code samples contains invalid code (and this is not explicitly mentioned).</item>
-        <item>- A chapter is can\'t be understood, something is wrong with it\'s structure.</item>
         <item>- A faulty exam question. No correct answer, correct answer is not accepted, etc.</item>
         <item>- You have a general improvement suggestion, idea.</item>
     </string-array>

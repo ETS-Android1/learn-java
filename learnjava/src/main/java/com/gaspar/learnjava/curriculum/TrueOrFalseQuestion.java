@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.IntDef;
@@ -117,6 +118,8 @@ public class TrueOrFalseQuestion extends Question implements Serializable {
         if(!isCorrect() && isAnswered()) { //user marked the wrong answer
             (trueAnswer ? falseTextView : trueTextView).setBackgroundResource(R.drawable.incorrect_background);
         }
+        ImageView icon = questionView.findViewById(R.id.questionIcon);
+        icon.setImageResource(isCorrect() ? R.drawable.tick_icon : R.drawable.problem_icon);
     }
 
     @Override

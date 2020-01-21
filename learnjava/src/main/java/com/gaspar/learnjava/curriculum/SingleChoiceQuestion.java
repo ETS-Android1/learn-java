@@ -100,7 +100,7 @@ public class SingleChoiceQuestion extends Question implements Serializable {
      * Sets a better color for separator lines, only if in dark mode.
      */
     private void recolorSeparator(View questionView, final Context context) {
-        int accent = context.getResources().getColor(R.color.colorAccent_Dark);
+        int accent = ContextCompat.getColor(context, R.color.colorAccent_Dark);
         questionView.findViewById(R.id.questionSep1).setBackgroundColor(accent);
     }
 

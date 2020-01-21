@@ -135,18 +135,4 @@ so make sure to call validate method before using!<br>
         You can find a detailed guide for writing javadoc comments <a href="https://www.tutorialspoint.com/java/java_documentation.htm">here</a>.
         ]]>
     </advanced>
-    <text>
-        <![CDATA[
-        In the following chapters and tasks, you may see code samples like this:
-        ]]>
-    </text>
-    <code>
-        <![CDATA[
-        <font color="gray">// This</font> method is very advanced, so a long and detailed comment is necessary to properly explain its usage.</font>
-<font color="#DF7401">
-<br/>int </font>advancedMethod() {
-<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;return </font>-1;
-<br/>}
-        ]]>
-    </code>
 </resources>

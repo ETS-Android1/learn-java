@@ -48,6 +48,14 @@
         android:padding="@dimen/padding"
         android:layout_margin="@dimen/small_margin"/>
 
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/answerDisplayerTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding"
+        android:layout_margin="@dimen/small_margin"/>
+
     <LinearLayout
         android:id="@+id/solutionDisplayerLayout"
         android:layout_width="match_parent"

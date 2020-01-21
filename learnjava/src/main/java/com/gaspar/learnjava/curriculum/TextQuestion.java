@@ -10,6 +10,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.UiThread;
+import androidx.core.content.ContextCompat;
+
 import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.ThemeUtils;
 
@@ -82,7 +85,7 @@ public class TextQuestion extends Question implements Serializable {
      * Sets a better color for separator lines, only if in dark mode.
      */
     private void recolorSeparators(View questionView, final Context context) {
-        int accent = context.getResources().getColor(R.color.colorAccent_Dark);
+        int accent = ContextCompat.getColor(context, R.color.colorAccent_Dark);
         questionView.findViewById(R.id.questionSep1).setBackgroundColor(accent);
         questionView.findViewById(R.id.questionSep2).setBackgroundColor(accent);
     }
@@ -107,13 +110,25 @@ public class TextQuestion extends Question implements Serializable {
      * Reveals the correct answer part of the question.
      */
     @Override
+    @UiThread
     public void showCorrectAnswer() {
+        EditText answerEditText = questionView.findViewById(R.id.answerEditText);
+        //using this extra text view is the only way I found to show correct color...
+        TextView answerDisplayer = questionView.findViewById(R.id.answerDisplayerTextView);
+        final Context context = questionView.getContext();
+        if(ThemeUtils.isDarkTheme()) { //recolor text on dark theme for better visibility
+            answerDisplayer.setTextColor(ContextCompat.getColor(context, android.R.color.black));
+        }
+        answerDisplayer.setText(answerEditText.getText());
+        answerDisplayer.setVisibility(View.VISIBLE);
+        answerEditText.setVisibility(View.GONE);
         if(isCorrect()) {
             ((ImageView)questionView.findViewById(R.id.questionIcon)).setImageResource(R.drawable.tick_icon);
-            questionView.findViewById(R.id.answerEditText).setBackgroundResource(R.drawable.correct_answer_background);
+            answerDisplayer.setBackgroundResource(R.drawable.correct_answer_background);
         } else {
+            if(!isAnswered()) answerDisplayer.setText(context.getString(R.string.no_answer_given));
             ((ImageView)questionView.findViewById(R.id.questionIcon)).setImageResource(R.drawable.problem_icon);
-            questionView.findViewById(R.id.answerEditText).setBackgroundResource(R.drawable.incorrect_background);
+            answerDisplayer.setBackgroundResource(R.drawable.incorrect_background);
             questionView.findViewById(R.id.solutionDisplayerLayout).setVisibility(View.VISIBLE);
         }
     }
