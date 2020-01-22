@@ -11,9 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.gaspar.learnjava.CoursesActivity;
 import com.gaspar.learnjava.R;
-import com.gaspar.learnjava.ThemeUtils;
 import com.gaspar.learnjava.adapters.CourseAdapter;
 import com.gaspar.learnjava.parsers.CourseParser;
+import com.gaspar.learnjava.utils.ThemeUtils;
 
 /**
  * Parses the courses from XML and fill the list view in the {@link com.gaspar.learnjava.CoursesActivity}

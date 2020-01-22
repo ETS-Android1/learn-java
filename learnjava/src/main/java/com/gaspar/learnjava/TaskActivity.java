@@ -21,6 +21,7 @@ import com.gaspar.learnjava.asynctask.FillTaskActivityTask;
 import com.gaspar.learnjava.curriculum.Task;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.database.TaskStatus;
+import com.gaspar.learnjava.utils.AnimationUtils;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.material.navigation.NavigationView;
 

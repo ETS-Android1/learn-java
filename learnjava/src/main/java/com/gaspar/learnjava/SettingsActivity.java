@@ -20,6 +20,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
+import com.gaspar.learnjava.utils.ThemeUtils;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 

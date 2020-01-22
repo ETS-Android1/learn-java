@@ -50,26 +50,21 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <!-- Actual activity content -->
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/code_image_1"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:activity=".LearnJavaActivity"
             tools:showIn="@layout/learn_java">
 
+            <!-- The main view -->
             <RelativeLayout
+                android:id="@+id/learnJavaMainView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.30">
+                android:layout_marginTop="@dimen/starter_view_margin"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true">
 
                 <LinearLayout
                     android:id="@+id/startedView"
@@ -89,10 +84,10 @@
 
                     <Button
                         android:id="@+id/continueLearningButton"
-                        android:onClick="continueLearningOnClick"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin"
+                        android:onClick="continueLearningOnClick"
                         tools:text="Chapter name" />
                 </LinearLayout>
 
@@ -122,8 +117,8 @@
 
                         <ImageButton
                             android:id="@+id/guideButton"
-                            android:layout_height="@dimen/icon_size"
                             android:layout_width="@dimen/icon_size"
+                            android:layout_height="@dimen/icon_size"
                             android:layout_weight="1"
                             android:contentDescription="@string/guide"
                             android:onClick="guideButtonOnClick"
@@ -133,15 +128,21 @@
 
                     <Button
                         android:id="@+id/startLearningButton"
-                        android:onClick="continueLearningOnClick"
                         android:layout_width="wrap_content"
                         android:layout_height="0dp"
                         android:layout_marginTop="@dimen/margin"
                         android:layout_weight="1"
+                        android:onClick="continueLearningOnClick"
                         android:text="@string/start_learning" />
                 </LinearLayout>
             </RelativeLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- The layout for background images -->
+            <RelativeLayout
+                android:id="@+id/backgroundImagesLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </RelativeLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

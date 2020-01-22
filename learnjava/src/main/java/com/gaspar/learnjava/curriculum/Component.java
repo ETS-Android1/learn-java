@@ -20,10 +20,10 @@ import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.core.content.ContextCompat;
 
-import com.gaspar.learnjava.ListTagHandler;
 import com.gaspar.learnjava.R;
-import com.gaspar.learnjava.ThemeUtils;
 import com.gaspar.learnjava.parsers.RawParser;
+import com.gaspar.learnjava.utils.ListTagHandler;
+import com.gaspar.learnjava.utils.ThemeUtils;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.Serializable;

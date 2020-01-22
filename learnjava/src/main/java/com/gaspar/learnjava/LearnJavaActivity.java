@@ -1,15 +1,20 @@
 package com.gaspar.learnjava;
 
+import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -22,9 +27,15 @@ import com.gaspar.learnjava.curriculum.Chapter;
 import com.gaspar.learnjava.database.CourseStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.parsers.CourseParser;
+import com.gaspar.learnjava.parsers.RawParser;
+import com.gaspar.learnjava.utils.AnimationUtils;
+import com.gaspar.learnjava.utils.OnSwipeTouchListener;
+import com.gaspar.learnjava.utils.ThemeUtils;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.Executors;
 
 public class LearnJavaActivity extends ThemedActivity
@@ -92,6 +103,10 @@ public class LearnJavaActivity extends ThemedActivity
     protected void onResume() {
         super.onResume();
         showStartContinueComponent();
+        RelativeLayout backgroundLayout = findViewById(R.id.backgroundImagesLayout); //show another background image
+        backgroundLayout.getChildAt(visibleCodeIndex).setVisibility(View.GONE);
+        visibleCodeIndex = new Random().nextInt(backgroundLayout.getChildCount()); //start with random image
+        backgroundLayout.getChildAt(visibleCodeIndex).setVisibility(View.VISIBLE);
     }
 
     private void setUpUI() {
@@ -104,7 +119,56 @@ public class LearnJavaActivity extends ThemedActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-        showStartContinueComponent(); //set up the component that prompts start/continue
+        createSwipeBackground();
+        findViewById(R.id.learnJavaMainView).bringToFront();
+    }
+
+    private int visibleCodeIndex; //helper for the swipe background
+
+    /**
+     * Creates and fills the layout for background code images. User can swipe between backgrounds.
+     */
+    @SuppressLint("ClickableViewAccessibility")
+    private void createSwipeBackground() {
+        RelativeLayout backgroundLayout = findViewById(R.id.backgroundImagesLayout); //set up the swipe background
+        List<Drawable> drawables = RawParser.parseCodeImages(this);
+        for(Drawable codeImage: drawables) { //create and add all image views
+            ImageView iw = new ImageView(this);
+            iw.setVisibility(View.GONE);
+            iw.setBackground(codeImage);
+            iw.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            backgroundLayout.addView(iw);
+        }
+        backgroundLayout.setOnTouchListener(new OnSwipeTouchListener(this) {
+            @Override
+            public void onSwipeLeft() { //on left animate in next image
+                View slideIn, slideOut = backgroundLayout.getChildAt(visibleCodeIndex);
+                if(visibleCodeIndex == backgroundLayout.getChildCount() - 1) { //last image is visible
+                    slideIn = backgroundLayout.getChildAt(0);
+                    visibleCodeIndex = 0;
+                } else { //not the last image is visible
+                    slideIn = backgroundLayout.getChildAt(visibleCodeIndex + 1);
+                    visibleCodeIndex++;
+                }
+                AnimationUtils.slideOutHorizontal(slideOut, AnimationUtils.Direction.LEFT, LearnJavaActivity.this);
+                AnimationUtils.slideInHorizontal(slideIn, AnimationUtils.Direction.RIGHT, LearnJavaActivity.this);
+            }
+            @Override
+            public void onSwipeRight() { //on right animate in previous image
+                View slideIn, slideOut = backgroundLayout.getChildAt(visibleCodeIndex);
+                if(visibleCodeIndex == 0) { //first image is visible
+                    slideIn = backgroundLayout.getChildAt(backgroundLayout.getChildCount() - 1);
+                    visibleCodeIndex = backgroundLayout.getChildCount() - 1;
+                } else { //not the first image is visible
+                    slideIn = backgroundLayout.getChildAt(visibleCodeIndex - 1);
+                    visibleCodeIndex--;
+                }
+                AnimationUtils.slideOutHorizontal(slideOut, AnimationUtils.Direction.RIGHT, LearnJavaActivity.this);
+                AnimationUtils.slideInHorizontal(slideIn, AnimationUtils.Direction.LEFT, LearnJavaActivity.this);
+            }
+        });
+        visibleCodeIndex = new Random().nextInt(backgroundLayout.getChildCount()); //start with random image
+        backgroundLayout.getChildAt(visibleCodeIndex).setVisibility(View.VISIBLE);
     }
 
     private void showStartContinueComponent() {

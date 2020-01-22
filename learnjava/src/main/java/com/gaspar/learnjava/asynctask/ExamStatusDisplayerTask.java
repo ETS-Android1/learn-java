@@ -18,12 +18,12 @@ import com.gaspar.learnjava.CoursesActivity;
 import com.gaspar.learnjava.ExamActivity;
 import com.gaspar.learnjava.LearnJavaActivity;
 import com.gaspar.learnjava.R;
-import com.gaspar.learnjava.ThemeUtils;
 import com.gaspar.learnjava.UpdatableActivity;
 import com.gaspar.learnjava.curriculum.Chapter;
 import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.database.ExamStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
+import com.gaspar.learnjava.utils.ThemeUtils;
 
 import java.util.concurrent.Executors;
 

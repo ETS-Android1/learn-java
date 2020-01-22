@@ -12,8 +12,8 @@ import androidx.annotation.Size;
 import com.gaspar.learnjava.CoursesActivity;
 import com.gaspar.learnjava.LearnJavaActivity;
 import com.gaspar.learnjava.R;
-import com.gaspar.learnjava.ThemeUtils;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
+import com.gaspar.learnjava.utils.ThemeUtils;
 
 import java.util.List;
 

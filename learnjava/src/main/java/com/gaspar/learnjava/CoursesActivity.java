@@ -23,6 +23,7 @@ import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.curriculum.Status;
 import com.gaspar.learnjava.curriculum.Task;
 import com.gaspar.learnjava.database.CourseStatus;
+import com.gaspar.learnjava.utils.AnimationUtils;
 import com.google.android.gms.ads.AdView;
 import com.google.android.material.navigation.NavigationView;
 

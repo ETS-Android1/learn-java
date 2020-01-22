@@ -1,4 +1,4 @@
-package com.gaspar.learnjava;
+package com.gaspar.learnjava.utils;
 
 /*
  * Copyright (C) 2016 Matthias Stevens for InThePocket.mobi

@@ -14,7 +14,7 @@ import androidx.annotation.UiThread;
 import androidx.core.content.ContextCompat;
 
 import com.gaspar.learnjava.R;
-import com.gaspar.learnjava.ThemeUtils;
+import com.gaspar.learnjava.utils.ThemeUtils;
 
 import java.io.Serializable;
 import java.util.List;

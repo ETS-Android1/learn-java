@@ -1,4 +1,4 @@
-package com.gaspar.learnjava;
+package com.gaspar.learnjava.utils;
 
 import android.content.Context;
 import android.view.View;
@@ -10,11 +10,13 @@ import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
 
+import com.gaspar.learnjava.R;
+
 /**
  * Contains methods that animate views.
  */
 @UiThread
-abstract class AnimationUtils {
+public abstract class AnimationUtils {
 
     /**
      * Direction constants.
@@ -35,7 +37,7 @@ abstract class AnimationUtils {
      *
      * @author neoteknic, StackOverflow.com
      */
-    static void slideIn(final View v) {
+    public static void slideIn(final View v) {
         v.measure(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
         final int targetHeight = v.getMeasuredHeight();
         // Older versions of android (pre API 21) cancel animations for views with a height of 0.
@@ -74,7 +76,7 @@ abstract class AnimationUtils {
      *
      * @author neoteknic, StackOverflow.com
      */
-    static void slideOut(final View v) {
+    public static void slideOut(final View v) {
         final int initialHeight = v.getMeasuredHeight();
         Animation a = new Animation() {
             @Override
@@ -109,7 +111,7 @@ abstract class AnimationUtils {
     /**
      * Slides a view in to the given direction.
      */
-    static void slideInHorizontal(@NonNull final View v, @Direction int direction, final Context context) {
+    public static void slideInHorizontal(@NonNull final View v, @Direction int direction, final Context context) {
         Animation animation = android.view.animation.AnimationUtils.loadAnimation(context ,direction == Direction.LEFT ?
                 R.anim.slide_in_left : R.anim.slide_in_right);
         v.setVisibility(View.VISIBLE);
@@ -119,7 +121,7 @@ abstract class AnimationUtils {
     /**
      * Slides a view out to the given direction.
      */
-    static void slideOutHorizontal(@NonNull final View v, @Direction int direction, final Context context) {
+    public static void slideOutHorizontal(@NonNull final View v, @Direction int direction, final Context context) {
         Animation animation = android.view.animation.AnimationUtils.loadAnimation(context ,direction == Direction.LEFT ?
                 R.anim.slide_out_left : R.anim.slide_out_right);
         animation.setAnimationListener(new Animation.AnimationListener() {

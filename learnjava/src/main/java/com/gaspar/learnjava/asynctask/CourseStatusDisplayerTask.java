@@ -10,10 +10,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gaspar.learnjava.R;
-import com.gaspar.learnjava.ThemeUtils;
 import com.gaspar.learnjava.curriculum.Course;
 import com.gaspar.learnjava.database.CourseStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
+import com.gaspar.learnjava.utils.ThemeUtils;
 
 /**
  * Queries and displays the status of a course. This depends on if it's unlocked or not, and if it's finished or not.

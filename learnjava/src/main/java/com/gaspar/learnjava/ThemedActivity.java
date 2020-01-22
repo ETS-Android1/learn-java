@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
+import com.gaspar.learnjava.utils.ThemeUtils;
+
 /**
  * The base activity for this application. It supports swapping themes at runtime.
  */

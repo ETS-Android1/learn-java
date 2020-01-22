@@ -1,4 +1,4 @@
-package com.gaspar.learnjava;
+package com.gaspar.learnjava.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,6 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
+
+import com.gaspar.learnjava.LearnJavaActivity;
+import com.gaspar.learnjava.R;
 
 /**
  * Gets runtime color values.
@@ -28,7 +31,7 @@ public abstract class ThemeUtils {
     /**
      * Called on start of the application, initialized the selected theme from preferences.
      */
-    static void initSelectedTheme(final @NonNull Context context) {
+    public static void initSelectedTheme(final @NonNull Context context) {
         SharedPreferences prefs = context.getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
         if(prefs.contains(THEME_PREF_NAME)) {
             selectedTheme = prefs.getInt(THEME_PREF_NAME, Themes.ORANGE);
@@ -51,7 +54,7 @@ public abstract class ThemeUtils {
     /**
      * Saves a new selected theme in {@link #selectedTheme} and in the preferences as well.
      */
-    static void updateSelectedTheme(final @NonNull Context context, @Themes int newTheme) {
+    public static void updateSelectedTheme(final @NonNull Context context, @Themes int newTheme) {
         selectedTheme = newTheme;
         SharedPreferences prefs = context.getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
         prefs.edit().putInt(THEME_PREF_NAME, newTheme).apply();
@@ -63,7 +66,7 @@ public abstract class ThemeUtils {
      * @return The XML code of the primary color.
      */
     @ColorRes
-    static int getPrimaryColor() {
+    public static int getPrimaryColor() {
         if (selectedTheme == Themes.ORANGE) {
             return R.color.colorPrimaryOrange;
         } else if(selectedTheme == Themes.BLUE) {
@@ -80,7 +83,7 @@ public abstract class ThemeUtils {
      * @return The XML code of the window background color.
      */
     @ColorRes
-    static int getBackgroundColor() {
+    public static int getBackgroundColor() {
         if (selectedTheme == Themes.ORANGE) {
             return R.color.windowBackgroundOrange;
         } else if(selectedTheme == Themes.BLUE) {
@@ -110,7 +113,7 @@ public abstract class ThemeUtils {
      * @return The color id of the text color of the selected theme.
      */
     @ColorRes
-    static int getTextColor() {
+    public static int getTextColor() {
         if (selectedTheme == Themes.ORANGE) {
             return android.R.color.black;
         } else if(selectedTheme == Themes.BLUE) {
@@ -128,7 +131,7 @@ public abstract class ThemeUtils {
     /**
      * @return A color list that can be applied to an image button for tint.
      */
-    static ColorStateList getImageButtonTintList(@NonNull final Context context) {
+    public static ColorStateList getImageButtonTintList(@NonNull final Context context) {
         if (selectedTheme == Themes.ORANGE) {
             return ContextCompat.getColorStateList(context, R.color.image_button_orange_tint);
         } else if(selectedTheme == Themes.BLUE) {
@@ -143,7 +146,7 @@ public abstract class ThemeUtils {
     /**
      * @return A color list that can be applied to an image button for background tint.
      */
-    static ColorStateList getImageButtonBackgroundTintList(@NonNull final Context context) {
+    public static ColorStateList getImageButtonBackgroundTintList(@NonNull final Context context) {
         if (selectedTheme == Themes.ORANGE) {
             return ContextCompat.getColorStateList(context, R.color.image_button_orange_background_tint);
         } else if(selectedTheme == Themes.BLUE) {
