@@ -184,19 +184,6 @@
                        android:textColor="@android:color/black"/>
 
                    <Button
-                       android:id="@+id/blueThemeButton"
-                       android:layout_width="0dp"
-                       android:layout_height="wrap_content"
-                       android:layout_weight="1"
-                       android:text="@string/blue_theme"
-                       android:background="@drawable/button_background_blue"
-                       android:onClick="styleSelected"
-                       android:layout_marginStart="@dimen/margin"
-                       android:layout_marginEnd="@dimen/margin"
-                       tools:ignore="ButtonStyle"
-                       android:textColor="@android:color/black"/>
-
-                   <Button
                        android:id="@+id/darkThemeButton"
                        android:layout_width="0dp"
                        android:layout_height="wrap_content"

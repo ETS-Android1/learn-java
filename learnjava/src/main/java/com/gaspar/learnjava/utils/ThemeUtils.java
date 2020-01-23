@@ -47,7 +47,6 @@ public abstract class ThemeUtils {
     @IntDef
     public @interface Themes {
         int ORANGE = 0; //the default orange theme
-        int BLUE = 1;
         int DARK = 2;
     }
 
@@ -62,15 +61,12 @@ public abstract class ThemeUtils {
 
     /**
      * Gets the primary color.
-     *
      * @return The XML code of the primary color.
      */
     @ColorRes
     public static int getPrimaryColor() {
         if (selectedTheme == Themes.ORANGE) {
             return R.color.colorPrimaryOrange;
-        } else if(selectedTheme == Themes.BLUE) {
-            return R.color.colorPrimaryBlue;
         } else if(selectedTheme == Themes.DARK) { //dark
             return R.color.colorPrimary_Dark;
         }
@@ -79,15 +75,12 @@ public abstract class ThemeUtils {
 
     /**
      * Gets the window background color.
-     *
      * @return The XML code of the window background color.
      */
     @ColorRes
     public static int getBackgroundColor() {
         if (selectedTheme == Themes.ORANGE) {
             return R.color.windowBackgroundOrange;
-        } else if(selectedTheme == Themes.BLUE) {
-            return R.color.windowBackgroundBlue;
         } else if(selectedTheme == Themes.DARK) { //dark
             return R.color.windowBackground_Dark;
         }
@@ -101,8 +94,6 @@ public abstract class ThemeUtils {
     public static int getTheme() {
         if (selectedTheme == Themes.ORANGE) {
             return R.style.AppTheme;
-        } else if(selectedTheme == Themes.BLUE) {
-            return R.style.BlueTheme;
         } else if(selectedTheme == Themes.DARK) { //dark
             return R.style.DarkTheme;
         }
@@ -116,8 +107,6 @@ public abstract class ThemeUtils {
     public static int getTextColor() {
         if (selectedTheme == Themes.ORANGE) {
             return android.R.color.black;
-        } else if(selectedTheme == Themes.BLUE) {
-            return R.color.darkThemeTextColor;
         } else if(selectedTheme == Themes.DARK) { //dark
             return R.color.darkThemeTextColor;
         }
@@ -134,8 +123,6 @@ public abstract class ThemeUtils {
     public static ColorStateList getImageButtonTintList(@NonNull final Context context) {
         if (selectedTheme == Themes.ORANGE) {
             return ContextCompat.getColorStateList(context, R.color.image_button_orange_tint);
-        } else if(selectedTheme == Themes.BLUE) {
-            return ContextCompat.getColorStateList(context, R.color.image_button_blue_tint);
         } else if(selectedTheme == Themes.DARK) { //dark
             return ContextCompat.getColorStateList(context, R.color.image_button_dark_tint);
         }
@@ -149,8 +136,6 @@ public abstract class ThemeUtils {
     public static ColorStateList getImageButtonBackgroundTintList(@NonNull final Context context) {
         if (selectedTheme == Themes.ORANGE) {
             return ContextCompat.getColorStateList(context, R.color.image_button_orange_background_tint);
-        } else if(selectedTheme == Themes.BLUE) {
-            return ContextCompat.getColorStateList(context, R.color.image_button_blue_background_tint);
         } else if(selectedTheme == Themes.DARK) { //dark
             return ContextCompat.getColorStateList(context, R.color.image_button_dark_background_tint);
         }
@@ -160,8 +145,6 @@ public abstract class ThemeUtils {
     public static ContextThemeWrapper createDialogWrapper(AppCompatActivity activity) {
         if (selectedTheme == Themes.ORANGE) {
             return new ContextThemeWrapper(activity, R.style.dialog_orange);
-        } else if(selectedTheme == Themes.BLUE) {
-            return new ContextThemeWrapper(activity, R.style.dialog_blue);
         } else if(selectedTheme == Themes.DARK) { //dark
             return new ContextThemeWrapper(activity, R.style.dialog_dark);
         }

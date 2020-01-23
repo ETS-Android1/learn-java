@@ -1,6 +1,6 @@
 <resources>
     <!-- General -->
-    <string name="app_name">Learn Java</string>
+    <string name="app_name">Java Programming</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Learn Java</string>
@@ -14,6 +14,7 @@
     <string name="tap_to_see_details">Tap to see details</string>
     <string name="in_development">In development</string>
     <string name="course_development_info">This course is in development! More chapters will be released in the future.</string>
+    <string name="swipe_horizontally">Swipe horizontally</string>
 
     <!-- Ads -->
     <string name="admob_app_id" translatable="false">ca-app-pub-7754228088611040~7265518837</string>

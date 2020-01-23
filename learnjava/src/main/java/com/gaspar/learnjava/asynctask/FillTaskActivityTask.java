@@ -2,6 +2,7 @@ package com.gaspar.learnjava.asynctask;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
@@ -60,7 +61,8 @@ public class FillTaskActivityTask extends AsyncTask<TaskActivity, Void, TaskActi
             }
             LinearLayout solutionComponentsView = activity.findViewById(R.id.solutionComponents);
             for(Component component: activity.getDisplayedTask().getSolutionComponents()) {
-                solutionComponentsView.addView(component.createComponentView(activity, solutionComponentsView)); //add solution views
+                View componentView = component.createComponentView(activity, solutionComponentsView);
+                solutionComponentsView.addView(componentView); //add solution views
             }
             CheckBox completedCheckBox = activity.findViewById(R.id.taskCompletedCheckBox);
             boolean taskCompleted = (activity.getDisplayedTask().getTaskStatus() ==
@@ -72,6 +74,4 @@ public class FillTaskActivityTask extends AsyncTask<TaskActivity, Void, TaskActi
             FillCourseActivityTask.showFailDialog(activity, activity.getString(R.string.tasks));
         }
     }
-
-
 }

@@ -5,11 +5,6 @@
     <color name="colorAccentOrange">#E65100</color>
     <color name="windowBackgroundOrange">#F5B65A</color>
 
-    <color name="colorPrimaryBlue">#0041C2</color>
-    <color name="colorPrimaryDarkBlue">#0000A0</color>
-    <color name="colorAccentBlue">#4B0082</color>
-    <color name="windowBackgroundBlue">#357EC7</color>
-
     <color name="colorPrimary_Dark">#001014</color>
     <color name="colorPrimaryDark_Dark">#000000</color>
     <color name="colorAccent_Dark">#E65100</color>

@@ -11,6 +11,7 @@
     <!-- Margins -->
     <dimen name="small_margin">5dp</dimen>
     <dimen name="margin">10dp</dimen>
+    <dimen name="huge_margin">50dp</dimen>
     <dimen name="side_margin">16dp</dimen>
     <dimen name="starter_view_margin">150dp</dimen>
 

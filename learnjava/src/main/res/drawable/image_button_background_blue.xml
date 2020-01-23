@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Background for blue themed image buttons. -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <stroke android:color="@android:color/black"
-        android:width="@dimen/border_width"/>
-    <solid android:color="@color/colorPrimaryBlue"/>
-    <corners android:radius="@dimen/radius"/>
-</shape>

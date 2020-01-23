@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -124,6 +126,7 @@ public class LearnJavaActivity extends ThemedActivity
     }
 
     private int visibleCodeIndex; //helper for the swipe background
+    private static final String SHOW_SWIPE = "show_swipe";
 
     /**
      * Creates and fills the layout for background code images. User can swipe between backgrounds.
@@ -169,6 +172,34 @@ public class LearnJavaActivity extends ThemedActivity
         });
         visibleCodeIndex = new Random().nextInt(backgroundLayout.getChildCount()); //start with random image
         backgroundLayout.getChildAt(visibleCodeIndex).setVisibility(View.VISIBLE);
+
+        SharedPreferences prefs = getSharedPreferences(APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
+       if(!prefs.contains(SHOW_SWIPE)) { //on first start show swiping function
+           prefs.edit().putBoolean(SHOW_SWIPE, false).apply();
+           animateTouchIcon();
+        }
+    }
+
+    /**
+     * Moves the swipe icon first right, then left.
+     */
+    private void animateTouchIcon() {
+        ImageView touchIcon = findViewById(R.id.touchIcon);
+        Animation right = new TranslateAnimation(0, -750,0, 0);
+        right.setDuration(2000);
+        right.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                touchIcon.setVisibility(View.VISIBLE);
+            }
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                touchIcon.setVisibility(View.GONE);
+            }
+            @Override
+            public void onAnimationRepeat(Animation animation) { }
+        });
+        touchIcon.startAnimation(right);
     }
 
     private void showStartContinueComponent() {

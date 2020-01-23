@@ -215,4 +215,8 @@ public class Component implements Serializable {
     public void setTitle(@Nullable String title) {
         this.title = title;
     }
+
+    public int getType() {
+        return type;
+    }
 }

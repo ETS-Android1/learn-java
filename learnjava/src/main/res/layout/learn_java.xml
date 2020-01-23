@@ -142,6 +142,20 @@
                 android:id="@+id/backgroundImagesLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+
+            <!-- The swipe prompt icon -->
+            <ImageView
+                android:id="@+id/touchIcon"
+                tools:visibility="visible"
+                android:visibility="gone"
+                android:contentDescription="@string/swipe_horizontally"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/touch_icon"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/huge_margin"
+                android:layout_marginBottom="@dimen/huge_margin"/>
         </RelativeLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

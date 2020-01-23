@@ -72,8 +72,6 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
         int buttonId = styleSelector.getId();
         if(buttonId == R.id.orangeThemeButton) {
             newTheme = ThemeUtils.Themes.ORANGE;
-        } else if(buttonId == R.id.blueThemeButton) {
-            newTheme = ThemeUtils.Themes.BLUE;
         } else if(buttonId == R.id.darkThemeButton) {
             newTheme = ThemeUtils.Themes.DARK;
         } else {

@@ -107,8 +107,6 @@ public class TaskActivity extends ThemedActivity implements NavigationView.OnNav
     /**
      * Called when the hide/show layout is tapped. Slides in/out solution, also
      * updates the displayed text and icon.
-     *
-     * TODO: convert the entire solution layout to constraint and set scroller to match constraint height?
      */
     public void hideShowSolutionOnClick(View view) {
         if(clickAnimation == null) {
