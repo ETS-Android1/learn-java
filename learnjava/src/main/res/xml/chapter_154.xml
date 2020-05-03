@@ -13,15 +13,15 @@
     </text>
     <code>
         <![CDATA[
-        <font color="#E65100">public</font> class User {
+        <font color="#E65100">public</font> class <font color="#999900">User</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> String email;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font> email;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> User(String email) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">User</font>(<font color="#999900">String</font> email) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.email = email;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> String getEmail() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> getEmail() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> email;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
@@ -47,7 +47,7 @@
     </text>
     <code>
         <![CDATA[
-        <font color="#E65100">public</font> class User {
+        <font color="#E65100">public</font> class <font color="#999900">User</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//every user objects shares this member ('belongs to the class')
 </font>
@@ -55,9 +55,9 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//belongs to the object
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> String email;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font> email;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> User(String email) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">User</font>(<font color="#999900">String</font> email) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.email = email;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//new user created, increase counter
 </font>
@@ -72,7 +72,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//belongs to the object
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> String getEmail() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> getEmail() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> email;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
@@ -95,7 +95,7 @@
     </boxed>
     <code>
         <![CDATA[
-        <font color="#E65100">public static</font> <font color="#DF7401">void</font> main(String[] args) {
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">User</font> u1 = <font color="#E65100">new</font> User("email@email.com");
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">User</font> u2 = <font color="#E65100">new</font> User("email2@email.com");
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
@@ -148,16 +148,16 @@
     </text>
     <code>
         <![CDATA[
-        <font color="#E65100">public</font> class User {
+        <font color="#E65100">public class</font> <font color="#999900">User</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//final, but isn't assigned here</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> final String email;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private final</font> <font color="#999900">String</font> email;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> User(String email) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">User</font>(<font color="#999900">String</font> email) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.email = email; <font color="gray">//gets its final value here</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> String getEmail() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> getEmail() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> email;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}

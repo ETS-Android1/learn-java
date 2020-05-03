@@ -47,7 +47,7 @@ public class LearnJavaActivity extends ThemedActivity
      * Debug constant. If this is set to true the application is in debug mode. This makes all courses and tasks openable,
      * all exams can be started at any time.
      */
-    public static final boolean DEBUG = false;
+    public static final boolean DEBUG = true;
 
     /**
      * Constant that determines if ads will or won't be test(debug) ads. This only has a real effect if {@value LOAD_ADS}

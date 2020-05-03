@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <chapterdata>
+        <id>201</id>
+        <name>Problems with arrays</name>
+    </chapterdata>
+    <text>
+        <![CDATA[
+        We've learned about arrays, which are useful tools to handle groups of data, but they do have
+        serious limitations. In this chapter we'll see a few examples, and introduce the solution.
+        ]]>
+    </text>
+    <title text="Examples"/>
+    <text>
+        <![CDATA[
+        Suppose that we need a simple program that asks numbers from the user, and calculates their sum.
+        Let's create a solution using an array!
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> reading = <font color="#E65100">true</font>; <font color="gray">//create the variables needed
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> counter = 0;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> input = <font color="#E65100">null</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Scanner</font> scanner = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(System.in);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font>[] numbers = <font color="#E65100">new</font> <font color="#DF7401">int</font>[5]; <font color="gray">//how big should the array be?!
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">while</font>(reading) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.print("Enter the " + counter + ". number or 'q' to stop: ");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;input = scanner.next(); <font color="gray">//save number
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;numbers[counter++] = <font color="#999900">Integer</font>.parseInt(input);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">NumberFormatException</font> e) { <font color="gray">//not a number, maybe 'q'?
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>("q".equals(input)) reading = false; <font color="gray">//'q' was entered, stop
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> sum = 0; <font color="gray">//sum the numbers
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i: numbers) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum += i;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Sum is " + sum);	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;scanner.close();
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        The code works, but only if we are careful. It's easy to see that we run out of array indices, if we try to enter
+        more then 5 numbers (because that is the array size):
+        ]]>
+    </text>
+    <image name="array_problem"/>
+    <text>
+        <![CDATA[
+        Well, the solution is elementary, no? Just increase the array size to some large integer, like
+        <b>1000</b>. The user will surely not enter 1000 numbers. But this is not a good solution, maybe not
+        a solution at all, since:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>Inefficient usage of memory.</li>
+        <li>It's still possible to get errors if the user decides to actually enter that much numbers.</li>
+        <li>It's not an elegant way to write code, it's bad practice.</li>
+        </ul>
+        ]]>
+    </list>
+    <boxed title="Inefficient memory usage">
+        <![CDATA[
+        What does the first point mean? If we allocate an array for 1000 integers, and the user only enters
+        3 for example, we are wasting the amount of memory needed to store 997 integers. Not too terrible, considering the
+        amount of <i>RAM</i> there is in computers nowadays, but still.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        This leads us to the conclusion that we need more efficient and easy to use ways to store and manage
+        sets of data. These are called advanced data structures.
+        ]]>
+    </text>
+    <advanced title="Solution with arrays only">
+        <![CDATA[
+        Some of you may've realized that arrays can still be used to solve this problem, we just need to
+        catch some more possible exceptions, and increase the array size if needed, by allocating a new
+        arrays and copying the numbers there. This, however leads to complicated code and instead the usage of
+        other data structures is preferred.
+        ]]>
+    </advanced>
+    <title text="What is a data structure?"/>
+    <text>
+        <![CDATA[
+        A data structure can be anything that stores data in an organized way. Each data structure has it's
+        own advantages and disadvantages, so we must take care to choose the appropriate structure for the problems.
+        ]]>
+    </text>
+    <boxed title="Collections">
+        <![CDATA[
+        Advanced data structures are called <b>collections</b> in Java. All of them in the <i>JDK</i> implement the
+        interface <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Collection.html">java.util.Collection</a>.
+        It contains basic methods to add and remove elements, get the size of the collection and so on.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Java collections are often <b>generic</b> (for those with a background in <i>C++</i>, this is the Java word for template).
+        It's enough to know for now that a generic collection allows us to add any type of object into it, but the type of
+        elements must be declared together with the object:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="gray">//A list of strings, empty for now</font>
+<br/><font color="#999900">ArrayList</font>&lt;<font color="#999900">String</font>> strings = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Note that writing the type of elements for the second time (after the <i>new</i> keyword) is not necessary after
+        Java 7, the compiler can do that for us. This is sometimes called the <b>diamond operator</b>, named after the empty
+        <i>&lt;></i> symbols.
+        ]]>
+    </text>
+    <advanced title="Writing generic code">
+        <![CDATA[
+        Writing generic data structures (or any generics in Java, actually) is not an easy job. It'll be covered
+        in a later course. For now we'll use the generic classes of the <i>JDK</i>, but when implementing our your own in the
+        tasks of this course, only non-generic data structures will be required.
+        ]]>
+    </advanced>
+    <text>
+        <![CDATA[
+        It must be noted that generic collections can only take in other classes as element types. They cannot accept primitives.
+        Something like <i>LinkedList&lt;int></i> is <b>invalid code</b>!
+        <p>
+        Fortunately this is not a serious problem, since we already learned about wrapper classes in the chapter of primitives.
+        Use these wrappers as element types instead (<i>List&lt;Integer></i>)!
+        ]]>
+    </text>
+</resources>
