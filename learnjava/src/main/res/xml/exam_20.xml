@@ -147,6 +147,73 @@
         <correct>false</correct>
     </question>
 
+    <!-- Questions about queues and stacks -->
+    <question type="text">
+        <text>Which acronym is used to describe queues?</text>
+        <correct>FIFO</correct>
+        <correct>fifo</correct>
+    </question>
+    <question type="text">
+        <text>Which acronym is used to describe stacks?</text>
+        <correct>LIFO</correct>
+        <correct>lifo</correct>
+    </question>
+    <question type="multi_choice">
+        <text>What is true about queues?</text>
+        <answer>They are special lists.</answer>
+        <answer>They are last-in-first-out data structures.</answer>
+        <answer>They only allow adding and removing elements on the ends.</answer>
+        <answer>They are special maps.</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+    </question>
+    <question type="multi_choice">
+        <text>What is true about stacks?</text>
+        <answer>They are last-in-first-out data structures.</answer>
+        <answer>They are special maps.</answer>
+        <answer>They only allow adding and removing elements at the 'top'.</answer>
+        <answer>They are first-in-first-out data structures.</answer>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>A stack is a FIFO data structure.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>A stack is a LIFO data structure.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>A queue is a FIFO data structure.</text>
+        <correct>true</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these methods does a stack usually have?</text>
+        <answer>push</answer>
+        <answer>collect</answer>
+        <answer>pop</answer>
+        <answer>peek</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is the difference between double ended and standard queues?</text>
+        <answer>A double ended queue is a data structure which only accepts and removes elements from one side.</answer>
+        <answer>Double ended queues can accept and remove elements at both sides.</answer>
+        <answer>A double ended queue is a data structure which consists of two queues.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="text">
+        <text>What is the name of the interface in the JDK for double ended queues?</text>
+        <correct>Deque</correct>
+        <correct>java.util.Deque</correct>
+    </question>
+    <question type="true_false">
+        <text>Stacks cannot be generic.</text>
+        <correct>false</correct>
+    </question>
 
     <!--
     <question type="single_choice">

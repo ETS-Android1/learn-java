@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Chapter about stacks and double sided queues -->
+
+<resources>
+    <chapterdata>
+        <id>203</id>
+        <name>Queues and stacks</name>
+    </chapterdata>
+    <text>
+        <![CDATA[
+        In this chapter we'll take a look at two data structures, which are similar to lists, yet
+        offer some extra functionality.
+        ]]>
+    </text>
+    <title text="Queue"/>
+    <text>
+        <![CDATA[
+        A queue is basically a list, which imposes some restrictions on where can we insert and remove elements
+        from it, in the following ways:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>Elements can only be added to the 'back' of the queue.</li>
+        <li>Elements can only be removed from the 'front' (sometimes called head) of the queue.</li>
+        </ul>
+        ]]>
+    </list>
+    <image name="queue"/>
+    <boxed title="FIFO">
+        <![CDATA[
+        When reading about queues, you'll undoubtedly come across the term <b>FIFO</b>. This means <b>first-in-first-out</b>
+        and it refers to the fact that the first item you placed into the structure is going to be the first you
+        can extract from it.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        The <i>JDK</i> contains the <b>java.util.Queue</b> interface, which is then implemented by the collections
+        that <b>CAN</b> be used as queues. Here is an example:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="gray">//Wow, LinkedList implements Queue</font>
+<br/><font color="#999900">Queue</font>&lt;<font color="#999900">Integer</font>> queue = <font color="#E65100">new</font> <font color="#999900">LinkedList</font>&lt;>();
+<br/>
+<br/><font color="gray">//Typical queue method: add element to the back.</font>
+<br/>queue.add(1);
+<br/>queue.add(2);
+<br/>queue.add(3);
+<br/>
+<br/><font color="gray">//Returns the element at the front, but DOES NOT remove it.
+</font>
+<br/>queue.element();
+<br/><font color="gray">//Same as queue.element().
+</font>
+<br/>queue.peek();
+<br/>
+<br/><font color="gray">/*
+<br/> * Typical queue method: remove elements from the front
+<br/> * (also returns it).
+<br/> */</font>
+<br/>queue.remove();
+<br/>queue.remove();
+<br/>queue.remove();
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Queues can be useful when some system that takes elements has limited capacity, and you need to
+        store the elements somewhere that don't fit in. A queue will make sure that the element that's been
+        waiting for the longest will get into the system first (<i>FIFO</i>).
+        ]]>
+    </text>
+    <title text="Double ended queues"/>
+    <text>
+        <![CDATA[
+        These special queues permit elements to be added or removed from <b>both sides</b>. This means that they can
+        be used as a standard queues, but permit more. Such queues are sometimes called <b>deques</b>.
+        ]]>
+    </text>
+    <boxed title="Deques in Java">
+        <![CDATA[
+        The <i>JDK</i> comes with the interface <b>java.util.Deque</b>. Implementations include <i>LinkedList</i> and
+        a class we haven't seen before: <b>java.util.ArrayDeque</b>.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Let's see some code samples with <i>ArrayDeque</i>:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#999900">Deque</font>&lt;<font color="#999900">Integer</font>> queue = <font color="#E65100">new</font> <font color="#999900">ArrayDeque</font>&lt;>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/><font color="gray">//Elements can be added at both ends.
+</font>
+<br/>queue.addFirst(1);
+<br/>queue.addLast(2);
+<br/>queue.addFirst(4);
+<br/>queue.add(3); <font color="gray">//same as addFirst
+</font>
+<br/>queue.addLast(-5);
+<br/>
+<br/><font color="gray">//We can check the last and first elements without removing them.
+</font>
+<br/>queue.peekFirst();
+<br/>queue.peekLast();
+<br/>
+<br/><font color="gray">//Elements can be removed from both sides.
+</font>
+<br/>queue.removeFirst();
+<br/>queue.removeLast();
+<br/>queue.remove(); <font color="gray">//same as removeLast</font>
+        ]]>
+    </code>
+    <title text="Stacks"/>
+    <text>
+        <![CDATA[
+        Stacks are special lists which only allow to add and remove elements on one end, the front. Here is an
+        image for illustration:
+        ]]>
+    </text>
+    <image name="stack"/>
+    <text>
+        <![CDATA[
+        Adding an element is called <i>pushing</i> and removing one is <i>popping</i>. The <i>peek</i> operation
+        is also supported to check the element at the top.
+        ]]>
+    </text>
+    <boxed title="LIFO">
+        <![CDATA[
+        Stacks are called <b>LIFO</b> data structures, which stands for <b>last-in-first-out</b>. This is because the
+        last element that we pushed in the stack is going to be that first that can be popped out.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        We can use the <b>java.util.Stack</b> class for a stack implementation. The <i>Deque</i> interface can
+        also be used like a stack, as it has the <i>push</i> and <i>pop</i> methods (equivalent to the <i>addFirst</i>,
+        <i>removeFirst</i> methods).
+        ]]>
+    </text>
+    <text>
+        <![CDATA[
+        Instead of just listing the methods, let's see a proper application for stacks, string reversing.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#E65100">public static</font> <font color="#999900">String</font> reverseString(<font color="#999900">String</font> text) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Any Deque implementation can also be used
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Stack</font>&lt;<font color="#999900">Character</font>> stack = <font color="#E65100">new</font> <font color="#999900">Stack</font>&lt;>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">char</font> c: text.toCharArray()) { <font color="gray">//push in every character
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;stack.push(c);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">char</font>[] reversedArray = <font color="#E65100">new</font> <font color="#DF7401">char</font>[text.length()];
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=0; i&lt;text.length(); i++) { <font color="gray">//lets pop out every character
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;reversedArray[i] = stack.pop();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//String has a char array constructor
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return new</font> <font color="#999900">String</font>(reversedArray);
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Before you move on, think about why the stack makes this solution work. Obviously this is by no way the most
+        efficient solution, more like a demonstration of stacks.
+        ]]>
+    </text>
+</resources>
