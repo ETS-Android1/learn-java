@@ -550,7 +550,7 @@
         <answer>$prime_number</answer>
         <answer>prime_number</answer>
         <answer>PrimeNumber</answer>
-        <correct>1</correct>
+        <correct>0</correct>
     </question>
     <question type="single_choice">
         <text>We would like to name a class related to matrices. Which of these would be the best naming choice

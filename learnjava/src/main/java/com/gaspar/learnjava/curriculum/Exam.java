@@ -1,14 +1,18 @@
 package com.gaspar.learnjava.curriculum;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.View;
 
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.gaspar.learnjava.CoursesActivity;
+import com.gaspar.learnjava.ExamActivity;
 import com.gaspar.learnjava.LearnJavaActivity;
 import com.gaspar.learnjava.SettingsActivity;
+import com.gaspar.learnjava.UpdatableActivity;
 import com.gaspar.learnjava.asynctask.ExamStatusDisplayerTask;
 import com.gaspar.learnjava.database.ExamStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
@@ -16,6 +20,7 @@ import com.gaspar.learnjava.database.LearnJavaDatabase;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -158,6 +163,24 @@ public class Exam implements Serializable {
             ExamStatus newStatus = new ExamStatus(examId, DEF_STATUS, EXAM_NEVER_STARTED, EXAM_NEVER_STARTED);
             LearnJavaDatabase.getInstance(context).getExamDao().addExamStatus(newStatus); //add to database
         }
+    }
+
+    /**
+     * Starts an exam activity. This is called from {@link ExamStatusDisplayerTask}.
+     * @param result The result of the exam display task.
+     * @param exam The exam that must be started.
+     */
+    public static void startExamActivity(ExamStatusDisplayerTask.Result result, Exam exam) {
+        Executors.newSingleThreadExecutor().execute(() -> { //register current epoch in database
+            LearnJavaDatabase.getInstance(result.activity).getExamDao()
+                    .updateExamLastStarted(exam.getId(), System.currentTimeMillis());
+        });
+        Intent intent = new Intent(result.activity, ExamActivity.class);
+        intent.putExtra(Exam.EXAM_PREFERENCE_STRING, exam); //pass exam
+        if(result.activity instanceof UpdatableActivity) {
+            ((UpdatableActivity)result.activity).setUpdateViews(result.examView); //save update view
+        }
+        result.activity.startActivityForResult(intent, CoursesActivity.EXAM_REQUEST_CODE);
     }
 
     @Override

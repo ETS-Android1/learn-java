@@ -7,7 +7,7 @@
         <id>20</id>
         <questionAmount>25</questionAmount>
         <timeLimit>30</timeLimit>
-        <finished>false</finished>
+        <finished>true</finished>
     </examdata>
 
     <!-- Questions for 'problems with arrays' -->
@@ -17,7 +17,7 @@
         <answer>Collections are always unordered, while arrays keep an order of their elements.</answer>
         <answer>Arrays are a built in concept of Java, while the collections are classes.</answer>
         <answer>Collections have no size limit, while arrays can only support up to 1000 elements.</answer>
-        <correct>3</correct>
+        <correct>2</correct>
     </question>
     <question type="multi_choice">
         <text>What is true about JDK collections?</text>
@@ -113,7 +113,7 @@
         <answer>Only array lists can dynamically make space for any amount of elements.</answer>
         <answer>Their internal workings.</answer>
         <answer>Nothing, an array list is just an alias for linked list.</answer>
-        <correct>3</correct>
+        <correct>2</correct>
     </question>
     <question type="single_choice">
         <text>What operation can array lists efficiently perform?</text>
@@ -213,6 +213,108 @@
     <question type="true_false">
         <text>Stacks cannot be generic.</text>
         <correct>false</correct>
+    </question>
+
+    <!-- Questions about maps -->
+    <question type="single_choice">
+        <text>What is the difference between lists and maps?</text>
+        <answer>Maps are not data structures, lists are.</answer>
+        <answer>JDK maps are not generic, but lists are.</answer>
+        <answer>Maps contain pairs of elements, while lists contain single elements.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is another name for maps?</text>
+        <answer>stack</answer>
+        <answer>dictionary</answer>
+        <answer>queue</answer>
+        <answer>pair</answer>
+        <correct>1</correct>
+    </question>
+    <question type="true_false">
+        <text>In Java, maps are built into the language itself, map classes are not needed.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>In Java, lists are built into the language, list classes are not needed.</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>What interface do dictionaries in the JDK implement?</text>
+        <correct>Map</correct>
+        <correct>java.util.Map</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these can a map contain?</text>
+        <answer>keys</answer>
+        <answer>collections</answer>
+        <answer>lists</answer>
+        <answer>pairs</answer>
+        <correct>0</correct>
+        <correct>3</correct>
+    </question>
+    <question type="multi_choice">
+        <text>What is true about maps?</text>
+        <answer>They hold pairs of elements.</answer>
+        <answer>Duplicate keys are allowed.</answer>
+        <answer>Duplicate values are allowed.</answer>
+        <answer>The keys of a map are always integers.</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+    </question>
+    <question type="true_false">
+        <text>Maps can efficiently retrieve a value, given a key.</text>
+        <correct>true</correct>
+    </question>
+
+    <!-- Questions about collection utilities -->
+    <question type="true_false">
+        <text>Immutable collections are readonly.</text>
+        <correct>true</correct>
+    </question>
+    <question type="text">
+        <text>Which class provides utility methods for data structures?</text>
+        <correct>Collections</correct>
+        <correct>java.util.Collections</correct>
+    </question>
+    <question type="text">
+        <text>Which interface can be implemented if we want to define an ordering between objects?</text>
+        <correct>Comparable</correct>
+        <correct>java.lang.Comparable</correct>
+    </question>
+    <question type="true_false">
+        <text>Methods that require an ordering of elements will work for primitives and their wrappers.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>Methods that require an ordering of elements will work for strings.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>Methods that require an ordering of elements will work for any class.</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>We're comparing the current object with another one, and we find they're equal. What should we return?</text>
+        <correct>0</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which interfaces are part of the Java collections framework?</text>
+        <answer>java.util.List</answer>
+        <answer>java.lang.Comparable</answer>
+        <answer>java.util.Map</answer>
+        <answer>java.io.Serializable</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which collections maintain an ordering of their elements?</text>
+        <answer>Lists.</answer>
+        <answer>Sets.</answer>
+        <answer>Maps.</answer>
+        <answer>Stacks.</answer>
+        <correct>0</correct>
+        <correct>3</correct>
     </question>
 
     <!--

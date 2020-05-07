@@ -148,9 +148,9 @@
 <br/><font color="#E65100">import</font> java.util.<font color="#999900">InputMismatchException</font>;
 <br/><font color="#E65100">import</font> java.util.<font color="#999900">Scanner</font>;
 <br/>
-<br/><font color="#E65100">public</font> class <font color="#999900">Main</font> {
+<br/><font color="#E65100">public class</font> <font color="#999900">Main</font> {
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> static <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//check the command line argument
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> save = saveEnabled(args);

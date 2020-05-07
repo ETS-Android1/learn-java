@@ -67,7 +67,7 @@
     </text>
     <code>
         <![CDATA[
-        <font color="#E65100">public</font> static <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {	&nbsp;&nbsp;&nbsp;&nbsp;
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">String</font> argument: args) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(argument);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
@@ -100,7 +100,7 @@
     </text>
     <code>
         <![CDATA[
-        <font color="#E65100">public</font> static <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//do we have 2 arguments?</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(args.length != 2) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Wrong number of arguments!");
@@ -143,9 +143,9 @@
         <![CDATA[
         <font color="#E65100">import</font> java.util.<font color="#999900">Scanner</font>;
 <br/>
-<br/><font color="#E65100">public</font> class <font color="#999900">Main</font> {
+<br/><font color="#E65100">public class</font> <font color="#999900">Main</font> {
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> static <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Enter something:");
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create the scanner from System.in</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Scanner</font> input = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(<font color="#999900">System</font>.in);
@@ -187,9 +187,9 @@
         <![CDATA[
         <font color="#E65100">import</font> java.util.<font color="#999900">Scanner</font>;
 <br/>
-<br/><font color="#E65100">public</font> class <font color="#999900">Main</font> {
+<br/><font color="#E65100">public class</font> <font color="#999900">Main</font> {
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> static <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create the scanner
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Scanner</font> input = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(<font color="#999900">System</font>.in);
@@ -271,15 +271,15 @@
 <br/><font color="#E65100">import</font> java.nio.file.<font color="#999900">Paths</font>;
 <br/><font color="#E65100">import</font> java.util.<font color="#999900">List</font>;
 <br/>
-<br/><font color="#E65100">public</font> class <font color="#999900">Main</font> {
+<br/><font color="#E65100">public class</font> <font color="#999900">Main</font> {
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> static <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args)
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args)
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	<font color="#E65100">throws</font> <font color="#999900">Exception</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create the path object of the file</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Path</font> filePath = <font color="#999900">Paths</font>.get("data.txt");
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//read the lines into a list</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;String> lines = <font color="#999900">Files</font>.readAllLines(filePath);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">String</font>> lines = <font color="#999900">Files</font>.readAllLines(filePath);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//for-each loop on the list</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">String</font> line: lines) {
@@ -348,7 +348,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Path</font> filePath = <font color="#999900">Paths</font>.get("data.txt");
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//read the lines into a list</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;String> lines = <font color="#999900">Files</font>.readAllLines(filePath);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">String</font>> lines = <font color="#999900">Files</font>.readAllLines(filePath);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//the sum is 0 at the start</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> sum = 0;

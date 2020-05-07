@@ -1,7 +1,6 @@
 package com.gaspar.learnjava.asynctask;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.view.View;
 import android.view.animation.Animation;
@@ -14,18 +13,13 @@ import androidx.annotation.Size;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.gaspar.learnjava.CoursesActivity;
-import com.gaspar.learnjava.ExamActivity;
 import com.gaspar.learnjava.LearnJavaActivity;
 import com.gaspar.learnjava.R;
-import com.gaspar.learnjava.UpdatableActivity;
 import com.gaspar.learnjava.curriculum.Chapter;
 import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.database.ExamStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.utils.ThemeUtils;
-
-import java.util.concurrent.Executors;
 
 import cn.iwgang.countdownview.CountdownView;
 
@@ -120,16 +114,12 @@ public class ExamStatusDisplayerTask extends AsyncTask<Object, Void, ExamStatusD
         }
 
         takeExamButton.setOnClickListener(view -> { //button always gets a listener
-            Executors.newSingleThreadExecutor().execute(() -> { //register current epoch in database
-                LearnJavaDatabase.getInstance(result.activity).getExamDao()
-                        .updateExamLastStarted(exam.getId(), System.currentTimeMillis());
-            });
-            Intent intent = new Intent(result.activity, ExamActivity.class);
-            intent.putExtra(Exam.EXAM_PREFERENCE_STRING, exam); //pass exam
-            if(result.activity instanceof UpdatableActivity) {
-                ((UpdatableActivity)result.activity).setUpdateViews(result.examView); //save update view
-            }
-            result.activity.startActivityForResult(intent, CoursesActivity.EXAM_REQUEST_CODE);
+            AlertDialog.Builder builder = new AlertDialog.Builder(ThemeUtils.createDialogWrapper(result.activity));
+            builder.setTitle(R.string.exam);
+            builder.setMessage(R.string.confirm_exam_start);
+            builder.setPositiveButton(R.string.yes, (dialog, which) -> Exam.startExamActivity(result, exam));
+            builder.setNegativeButton(R.string.cancel, (dialog, which) -> dialog.dismiss());
+            builder.create().show();
         });
     }
 
@@ -159,10 +149,10 @@ public class ExamStatusDisplayerTask extends AsyncTask<Object, Void, ExamStatusD
         });
     }
 
-    static class Result {
-        private AppCompatActivity activity;
-        private View examView;
-        private @com.gaspar.learnjava.curriculum.Status int status;
+    public static class Result {
+        public AppCompatActivity activity;
+        public View examView;
+        public @com.gaspar.learnjava.curriculum.Status int status;
         private long secondsRemaining;
         private boolean onCoolDown;
         private int topScore;

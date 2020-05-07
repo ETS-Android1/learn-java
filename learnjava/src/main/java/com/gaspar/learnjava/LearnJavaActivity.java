@@ -33,7 +33,6 @@ import com.gaspar.learnjava.parsers.RawParser;
 import com.gaspar.learnjava.utils.AnimationUtils;
 import com.gaspar.learnjava.utils.OnSwipeTouchListener;
 import com.gaspar.learnjava.utils.ThemeUtils;
-import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
@@ -94,7 +93,7 @@ public class LearnJavaActivity extends ThemedActivity
             LearnJavaDatabase.validateDatabase(this); //check/add all elements
             createNotificationChannel(); //initialize the notification channel
             SettingsActivity.initSettings(this); //initialize settings
-            MobileAds.initialize(this, getString(R.string.admob_app_id)); //initialize admob
+            //MobileAds.initialize(this, getString(R.string.admob_app_id)); //initialize admob
             ThemeUtils.initSelectedTheme(this); //initialize themes
         });
         setContentView(R.layout.learn_java);

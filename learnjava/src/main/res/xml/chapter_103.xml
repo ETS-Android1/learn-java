@@ -256,7 +256,7 @@
     </text>
     <code>
         <![CDATA[
-<font color="#E65100">while </font>(true) {
+<font color="#E65100">while</font>(<font color="#E65100">true</font>) {
 <br/><font color="#E65100"> &nbsp;&nbsp;&nbsp;&nbsp;if</font>(connectionDetected()) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;processConnection();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}

@@ -128,16 +128,16 @@
 <br/><font color="#E65100">import</font> java.util.<font color="#999900">ArrayList</font>;
 <br/><font color="#E65100">import</font> java.util.<font color="#999900">List</font>;
 <br/>
-<br/><font color="#E65100">public</font> class <font color="#999900">Main</font> {
+<br/><font color="#E65100">public class</font> <font color="#999900">Main</font> {
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> static <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//remove all invalid arguments
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;String> validatedArgs = validateArguments(args);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;<font color="#999900">String</font>> validatedArgs = validateArguments(args);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//read the contents of the file into integers
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;Integer> numbers = readNumbers();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;<font color="#999900">Integer</font>> numbers = readNumbers();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//print numbers
 </font>
@@ -168,8 +168,8 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//check the arguments, removing invalid ones.
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font> <font color="#999900">ArrayList</font>&lt;String> validateArguments(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;String> validated = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font> <font color="#999900">ArrayList</font>&lt;<font color="#999900">String</font>> validateArguments(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;<font color="#999900">String</font>> validated = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">String</font> arg: args) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//only keep valid arguments
@@ -201,12 +201,12 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//reads the lines and parses them into integers
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font> <font color="#999900">ArrayList</font>&lt;Integer> readNumbers() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font> <font color="#999900">ArrayList</font>&lt;<font color="#999900">Integer</font>> readNumbers() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Path</font> filePath = <font color="#999900">Paths</font>.get("numbers.txt");
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//we must declare it here, so we can use it below the try block
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;String> lines = null;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">String</font>> lines = null;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> { <font color="gray">//this solution uses exception handling
 </font>
@@ -217,7 +217,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create empty list of numbers
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;Integer> numbers = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;<font color="#999900">Integer</font>> numbers = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//try to parse each line to an integer, and add it to the list
 </font>
@@ -238,7 +238,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> numbers;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font> <font color="#DF7401">double</font> findAverage(<font color="#999900">ArrayList</font>&lt;Integer> numbers) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font> <font color="#DF7401">double</font> findAverage(<font color="#999900">ArrayList</font>&lt;<font color="#999900">Integer</font>> numbers) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> sum = 0; <font color="gray">//calculate the sum of them
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> number: numbers) {
@@ -249,8 +249,8 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> sum / numbers.size();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font> <font color="#DF7401">int</font> findMax(<font color="#999900">ArrayList</font>&lt;Integer> numbers) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> max = <font color="#999900">Integer</font>.<font color="#999900">MIN_VALUE</font>; <font color="gray">//start from the lowest possible
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font> <font color="#DF7401">int</font> findMax(<font color="#999900">ArrayList</font>&lt;<font color="#999900">Integer</font>> numbers) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> max = <font color="#999900">Integer</font>.MIN_VALUE; <font color="gray">//start from the lowest possible
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> number: numbers) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(number > max) { <font color="gray">//we found a larger number
@@ -261,8 +261,8 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> max;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font> <font color="#DF7401">int</font> findMin(<font color="#999900">ArrayList</font>&lt;Integer> numbers) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> min = <font color="#999900">Integer</font>.<font color="#999900">MAX_VALUE</font>; <font color="gray">//start from the highest possible
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font> <font color="#DF7401">int</font> findMin(<font color="#999900">ArrayList</font>&lt;<font color="#999900">Integer</font>> numbers) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> min = <font color="#999900">Integer</font>.MAX_VALUE; <font color="gray">//start from the highest possible
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> number: numbers) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(number &lt; min) { <font color="gray">//we found a smaller number
@@ -273,7 +273,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> min;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font> <font color="#DF7401">int</font> findRange(<font color="#999900">ArrayList</font>&lt;Integer> numbers) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font> <font color="#DF7401">int</font> findRange(<font color="#999900">ArrayList</font>&lt;<font color="#999900">Integer</font>> numbers) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//the range is the difference between the max and the min numbers
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> findMax(numbers) - findMin(numbers);
@@ -289,11 +289,11 @@
         </text>
         <code>
             <![CDATA[
-<font color="#E65100">static</font> <font color="#DF7401">int</font> findMax(<font color="#999900">ArrayList</font>&lt;Integer> numbers) {
+<font color="#E65100">static</font> <font color="#DF7401">int</font> findMax(<font color="#999900">ArrayList</font>&lt;<font color="#999900">Integer</font>> numbers) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#999900">Collections</font>.max(numbers);
 <br/>}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/><font color="#E65100">static</font> <font color="#DF7401">int</font> findMin(<font color="#999900">ArrayList</font>&lt;Integer> numbers) {
+<br/><font color="#E65100">static</font> <font color="#DF7401">int</font> findMin(<font color="#999900">ArrayList</font>&lt;<font color="#999900">Integer</font>> numbers) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#999900">Collections</font>.min(numbers);
 <br/>}
             ]]>

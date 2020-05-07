@@ -78,7 +78,7 @@ In the above example we created a variable to store dates as text. Dates, howeve
         <![CDATA[
 <font color="gray">
 /*<br>
-Numeric input is expected from the user, but it isn't validated here,
+Numeric input is expected from the user, but it isn't validated here,<br>
 so make sure to call validate method before using!<br>
 */</font>
 <br/><font color="#999900">String</font> userInput = getUserInput();

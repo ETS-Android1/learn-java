@@ -144,10 +144,10 @@
     </text>
     <code>
         <![CDATA[
-static<font color="#DF7401"> int </font>method1() {
-<br/>     <font color="#E65100"> static </font>String method2() {
-<br/>          <font color="#999900">System</font>.out.println("I'm an invalid method!");
-<br/>      }
+<font color="#E65100">static</font> <font color="#DF7401">int</font> method1() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;     <font color="#E65100">static</font> <font color="#DF7401">void</font> method2() {
+<br/>   	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;       <font color="#999900">System</font>.out.println("I'm an invalid method!");
+<br/>      	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
         ]]>
     </code>

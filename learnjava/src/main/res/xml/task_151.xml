@@ -123,7 +123,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> <font color="#999900">Address</font> address;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** The orders of the customer. */</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected final</font> <font color="#999900">List&lt;Order></font> orderHistory;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected final</font> <font color="#999900">List</font>&lt;<font color="#999900">Order></font> orderHistory;
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Creates a customer object.
@@ -137,7 +137,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(age &lt;= 0) <font color="#E65100">throw</font> new <font color="#999900">InvalidAgeException</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.age = age;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.address = address;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;orderHistory = <font color="#E65100">new</font> <font color="#999900">ArrayList&lt;></font>(); <font color="gray">//initialize list
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;orderHistory = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>(); <font color="gray">//initialize list
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
@@ -403,7 +403,8 @@
         </code>
         <text>
             <![CDATA[
-            The order class, implemented with a <b>HashMap</b>:
+            The order class, implemented with a <b>HashMap</b>. Don't worry if you don't quite get this. Maps will be
+            covered in the next course.
             ]]>
         </text>
         <code>
@@ -421,14 +422,14 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * A map which contains the products and their amounts.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">HashMap&lt;Product, Integer></font> products;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">HashMap</font>&lt;<font color="#999900">Product</font>, <font color="#999900">Integer</font>> products;
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Creates an order object.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @param products The map of products.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @throws IllegalArgumentException If the product map is empty, or contains invalid product amounts.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Order</font>(<font color="#999900">HashMap&lt;Product, Integer></font> products) <font color="#E65100">throws</font> <font color="#999900">IllegalArgumentException</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Order</font>(<font color="#999900">HashMap</font>&lt;<font color="#999900">Product</font>, <font color="#999900">Integer</font>> products) <font color="#E65100">throws</font> <font color="#999900">IllegalArgumentException</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(products.isEmpty()) <font color="#E65100">throw new</font> <font color="#999900">IllegalArgumentException</font>("No products detected");
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> amount: products.values()) { <font color="gray">//iterate and check product amounts
 </font>
@@ -443,7 +444,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> totalPrice() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> sum = 0;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Entry&lt;Product, Integer></font> pair: products.entrySet()) { <font color="gray">//iterate over the pairs
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Entry</font>&lt;<font color="#999900">Product</font>, <font color="#999900">Integer</font>> pair: products.entrySet()) { <font color="gray">//iterate over the pairs
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum += pair.getKey().getPrice() * pair.getValue(); <font color="gray">//a pair holds price*amount value
 </font>
@@ -474,7 +475,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create an order
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">HashMap&lt;Product, Integer></font> pairs = <font color="#E65100">new</font> <font color="#999900">HashMap&lt;></font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">HashMap</font>&lt;<font color="#999900">Product</font>, <font color="#999900">Integer</font>> pairs = <font color="#E65100">new</font> <font color="#999900">HashMap</font>&lt;>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;pairs.put(tv, 1); <font color="gray">//1 tv
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;pairs.put(tShirt, 3); <font color="gray">//3 shirts

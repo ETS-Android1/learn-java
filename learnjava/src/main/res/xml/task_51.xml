@@ -113,7 +113,7 @@
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">// Subtracts the second parameter from the first one and returns the result.
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font><font color="#DF7401"> int </font>subtract(<font color="#DF7401">int </font>n1,<font color="#DF7401"> int </font>n2) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font> <font color="#DF7401">int</font> subtract(<font color="#DF7401">int </font>n1,<font color="#DF7401"> int </font>n2) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;return </font>n1 - n2;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
@@ -147,7 +147,8 @@
             <code>
                 <![CDATA[
                 <font color="gray">/*
-<br/>Subtracts the second parameter from the first one and returns the result. If the second parameter is 0, it returns 0.
+<br/>Subtracts the second parameter from the first one and returns
+<br/>the result. If the second parameter is 0, it returns 0.
 <br/> */</font>
 <br/><font color="#E65100">static</font><font color="#DF7401"> int </font>subtract(<font color="#DF7401">int </font>n1,<font color="#DF7401"> int </font>n2) {
 <br/><font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>divRes = 0;

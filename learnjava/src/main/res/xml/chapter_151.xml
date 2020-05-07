@@ -47,9 +47,9 @@
         <![CDATA[
 <font color="#E65100">package</font> oop;
 <br/>
-<br/><font color="#E65100">public</font> class <font color="#999900">Main</font> {
+<br/><font color="#E65100">public class</font> <font color="#999900">Main</font> {
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> static <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
@@ -67,7 +67,7 @@
         <![CDATA[
 <font color="#E65100">package</font> oop;
 <br/>
-<br/><font color="#E65100">public</font> class <font color="#999900">Cat</font> {
+<br/><font color="#E65100">public class</font> <font color="#999900">Cat</font> {
 <br/>
 <br/>}
         ]]>
@@ -98,7 +98,7 @@
         <![CDATA[
         <font color="#E65100">package</font> oop;
 <br/>
-<br/><font color="#E65100">public</font> class <font color="#999900">Cat</font> {
+<br/><font color="#E65100">public class</font> <font color="#999900">Cat</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> name;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
@@ -123,7 +123,7 @@
 <br/>
 <br/><font color="#E65100">import</font> java.time.<font color="#999900">Year</font>;
 <br/>
-<br/><font color="#E65100">public</font> class <font color="#999900">Cat</font> {
+<br/><font color="#E65100">public class</font> <font color="#999900">Cat</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> name;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
@@ -168,9 +168,9 @@
         <![CDATA[
         <font color="#E65100">package</font> oop;
 <br/>
-<br/><font color="#E65100">public</font> class <font color="#999900">Main</font> {
+<br/><font color="#E65100">public class</font> <font color="#999900">Main</font> {
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> static <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create a cat and set its members
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Cat</font> cat1 = <font color="#E65100">new</font> <font color="#999900">Cat</font>();

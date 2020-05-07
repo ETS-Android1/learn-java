@@ -177,21 +177,11 @@
     </question>
     <question type="text">
         <text>Enter the AND operator.</text>
-        <correct><![CDATA[
-        &&
-        ]]></correct>
-        <correct><![CDATA[
-        &
-        ]]></correct>
+        <correct>&amp;&amp;</correct>
     </question>
     <question type="text">
         <text>Enter the OR operator.</text>
-        <correct><![CDATA[
-        ||
-        ]]></correct>
-        <correct><![CDATA[
-        |
-        ]]></correct>
+        <correct>||</correct>
     </question>
     <question type="multi_choice">
         <text>We have two booleans, a is true, b is false. Which of these operations will be true?</text>
@@ -535,7 +525,7 @@
         <correct>3</correct>
     </question>
     <question type="single_choice">
-        <text>What happens (be default) when a new PrintWriter starts to print to an existing file?</text>
+        <text>What happens (by default) when a new PrintWriter starts to print to an existing file?</text>
         <answer>The lines are appended to the end of the file.</answer>
         <answer>An exception is thrown.</answer>
         <answer>The content of the file is erased before printing.</answer>

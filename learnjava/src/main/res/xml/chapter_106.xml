@@ -54,7 +54,7 @@
     </text>
     <code>
         <![CDATA[
-        <font color="#E65100">public</font> static <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//usage of the line <font color="#E65100">break</font> character
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Line 1\nLine 2");
@@ -90,8 +90,7 @@
     </text>
     <code>
         <![CDATA[
-<font color="#E65100">public</font> static <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args)
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">throws</font> <font color="#999900">Exception</font> {
+<font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) <font color="#E65100">throws</font> <font color="#999900">Exception</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create the PrintWriter
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">PrintWriter</font> pw = <font color="#E65100">new</font> <font color="#999900">PrintWriter</font>("output.txt", "UTF-8");
@@ -133,11 +132,10 @@
     </text>
     <code>
         <![CDATA[
-        <font color="#E65100">public</font> static <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args)
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">throws</font> <font color="#999900">Exception</font> {
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) <font color="#E65100">throws</font> <font color="#999900">Exception</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">File</font> file = <font color="#E65100">new</font> <font color="#999900">File</font>("output.txt");
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">FileOutputStream</font> fos = <font color="#E65100">new</font> <font color="#999900">FileOutputStream</font>(file, true);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">FileOutputStream</font> fos = <font color="#E65100">new</font> <font color="#999900">FileOutputStream</font>(file, <font color="#E65100">true</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//this PrintWriter will append	&nbsp;&nbsp;&nbsp;&nbsp;
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">PrintWriter</font> pw = <font color="#E65100">new</font> <font color="#999900">PrintWriter</font>(fos);
@@ -167,12 +165,11 @@
     </text>
     <code>
         <![CDATA[
-        <font color="#E65100">public</font> static <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args)
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">throws</font> <font color="#999900">Exception</font> {
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) <font color="#E65100">throws</font> <font color="#999900">Exception</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create the lines
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;String> lines = createLines();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;<font color="#999900">String</font>> lines = createLines();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create path object
 </font>
@@ -188,7 +185,7 @@
 <br/><font color="#E65100">static</font> <font color="#999900">ArrayList</font>&lt;String> createLines() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//construct list
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;String> l = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;<font color="#999900">String</font>> l = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//add some lines
 </font>
@@ -208,12 +205,11 @@
     </text>
     <code>
         <![CDATA[
-        <font color="#E65100">public</font> static <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args)
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">throws</font> <font color="#999900">Exception</font> {
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) <font color="#E65100">throws</font> <font color="#999900">Exception</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create the lines
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;String> lines = createLines();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;<font color="#999900">String</font>> lines = createLines();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create path object
 </font>

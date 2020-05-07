@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Chapter about collection utilities. -->
+
+<resources>
+    <chapterdata>
+        <id>205</id>
+        <name>Collection utilities</name>
+    </chapterdata>
+    <title text="Every collection"/>
+    <text>
+        <![CDATA[
+        Before we proceed, it's important to note that the previous chapters didn't cover all data structures
+        in the <i>JDK</i>, only the most widely used ones. For a complete set, see the <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/collections/overview.html">collection framework documentation</a>.
+        ]]>
+    </text>
+    <title text="The Collections class"/>
+    <text>
+        <![CDATA[
+        When working with collections, it's useful to know about the <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Collections.html">java.util.Collections</a> utility class.
+        Let's take a look at a few methods.
+        ]]>
+    </text>
+    <advanced title="Readonly collections">
+        <![CDATA[
+        Many collections created by the following methods are either <b>immutable</b> or <b>unmodifiable</b>.
+        The two terms are <a href="https://stackoverflow.com/questions/7713274/java-immutable-collections">not exactly the same</a>, but very similar.
+        Such collections disallow you to change their elements. You can think of them as <i>readonly</i> collections.
+        ]]>
+    </advanced>
+    <text>
+        <![CDATA[
+        Multiple methods exists to quickly create lists:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="gray">//create a list using the asList utility method</font>
+<br/><font color="#999900">List</font>&lt;<font color="#999900">Integer</font>> numbers = <font color="#999900">Arrays</font>.asList(0, 1, 2, 3);
+<br/>
+<br/><font color="gray">//create list of 10 character a-s, using nCopies.</font>
+<br/><font color="#999900">List</font>&lt;<font color="#999900">Character</font>> chars = <font color="#999900">Collections</font>.nCopies(10, 'a');
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        The lists created are readonly. Attempting to modify them will result in an <b>UnsupportedOperationException</b>.
+        ]]>
+    </text>
+    <text>
+        <![CDATA[
+        The <i>fill</i> method can save us from writing a for loop.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="gray">//replace all elements with 0-s</font>
+<br/><font color="#999900">Collections</font>.fill(numbers, 0);
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        The <i>frequency</i> utility can count the occurrence of a particular element in the collection.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="gray">//count 0-s in the list</font>
+<br/><font color="#DF7401">int</font> count = <font color="#999900">Collections</font>.frequency(numbers, 0);
+<br/><font color="#999900">System</font>.out.println("0-s in the list: " + count);
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        If you seek to change the order of elements, look no further. These methods only work for lists, as
+        other collections may not have a concept of ordering.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="gray">//revers the order of the elements</font>
+<br/><font color="#999900">Collections</font>.reverse(numbers);
+<br/>
+<br/><font color="gray">//rearrange the elements in a random order</font>
+<br/><font color="#999900">Collections</font>.shuffle(numbers);
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Easily find the minimum or maximum of a collection using these methods.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#DF7401">int</font> max = <font color="#999900">Collections</font>.max(numbers);
+<br/><font color="#DF7401">int</font> min = <font color="#999900">Collections</font>.min(numbers);
+<br/>
+<br/><font color="gray">//sort the elements in ascending order</font>
+<br/><font color="#999900">Collections</font>.sort(numbers);
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        For these to work, there must be a way to compare elements. For primitive wrappers this works as expected, but
+        you must be cautious to use them when the elements are other classes. As an exception, it's also safe for strings,
+        where it orders alphabetically.
+        ]]>
+    </text>
+    <advanced title="Comparable">
+        <![CDATA[
+        If you want to create a class that can be used by methods such as this, you must implement the
+        <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html">Comparable</a> interface.
+        ]]>
+    </advanced>
+    <text>
+        <![CDATA[
+        Let's see an example of the <i>Comparable</i> interface. Here is a <i>Person</i> class that
+        implements it.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#E65100">public class</font> <font color="#999900">Person</font> <font color="#E65100">implements</font> <font color="#999900">Comparable</font>&lt;<font color="#999900">Person</font>> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> name;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">int</font> age; <font color="gray">//this will be used to compare
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Person</font>(<font color="#999900">String</font> name, <font color="#DF7401">int</font> age) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.name = name;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.age = age;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Here is the crucial method. When THIS object is 'bigger', it returns 1. When
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;the OTHER object (the parameter) is bigger, it returns -1. Upon equality, 0 is returned.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Comparing must always work like this in compareTo implementations.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> compareTo(<font color="#999900">Person</font> other) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(<font color="#E65100">this</font>.age > other.age) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> 1;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> if(other.age > <font color="#E65100">this</font>.age) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> -1;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> 0;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Person objects are now ordered by their ages, and using this class in the previously shown methods is safe:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#999900">List</font>&lt;<font color="#999900">Person</font>> people = <font color="#999900">Arrays</font>.asList(
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">new</font> <font color="#999900">Person</font>("Joe", 21),
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">new</font> <font color="#999900">Person</font>("Jane", 33),
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">new</font> <font color="#999900">Person</font>("John", 55)
+<br/>);
+<br/>
+<br/><font color="#999900">Person</font> oldest = <font color="#999900">Collections</font>.max(people);
+<br/><font color="#999900">System</font>.out.println("The oldest person is " + oldest.name);
+        ]]>
+    </code>
+</resources>

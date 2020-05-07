@@ -69,7 +69,7 @@
     <code>
         <![CDATA[
  <font color="gray">//an array of 4 booleans</font>
-<br/><font color="#DF7401">boolean</font>[] logicals = {false, true, false, false};
+<br/><font color="#DF7401">boolean</font>[] logicals = {<font color="#E65100">false</font>, <font color="#E65100">true</font>, <font color="#E65100">false</font>, <font color="#E65100">false</font>};
 <br/><font color="gray">//an array of 3 strings</font>
 <br/><font color="#999900">String</font>[] words = {"Fast", "Array", "Initialization"};
         ]]>

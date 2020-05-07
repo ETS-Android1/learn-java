@@ -13,7 +13,7 @@
     </text>
     <code>
         <![CDATA[
-        <font color="#E65100">public</font> class <font color="#999900">User</font> {
+        <font color="#E65100">public class</font> <font color="#999900">User</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font> email;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
@@ -47,7 +47,7 @@
     </text>
     <code>
         <![CDATA[
-        <font color="#E65100">public</font> class <font color="#999900">User</font> {
+        <font color="#E65100">public class</font> <font color="#999900">User</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//every user objects shares this member ('belongs to the class')
 </font>

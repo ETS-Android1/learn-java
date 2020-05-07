@@ -28,7 +28,7 @@
     </text>
     <code>
         <![CDATA[
-        <font color="#E65100">public</font> class <font color="#999900">Dog</font> {
+        <font color="#E65100">public class</font> <font color="#999900">Dog</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> <font color="#999900">String</font> name;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
@@ -83,7 +83,7 @@
     </text>
     <code>
         <![CDATA[
-        <font color="#E65100">public</font> static <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create a pug object
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Pug</font> p1 = <font color="#E65100">new</font> <font color="#999900">Pug</font>("Edgar", 10, "Black breed");
@@ -200,7 +200,7 @@
     </boxed>
     <code>
         <![CDATA[
-        <font color="#E65100">public</font> static <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create a pug object
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Pug</font> p1 = <font color="#E65100">new</font> <font color="#999900">Pug</font>("Maya", 10, "White breed");
@@ -225,7 +225,7 @@
     </text>
     <code>
         <![CDATA[
-        <font color="#E65100">public</font> static <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create dog objects, some of them are pugs</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Dog</font> d1 = <font color="#E65100">new</font> <font color="#999900">Dog</font>("Bernard", 5);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Pug</font> p1 = <font color="#E65100">new</font> <font color="#999900">Pug</font>("Maya", 10, "White breed");

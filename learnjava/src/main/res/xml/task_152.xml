@@ -278,14 +278,14 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @see Pair
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @see Subject
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">List&lt;Pair></font> subjects;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">List</font>&lt;<font color="#999900">Pair</font>> subjects;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Creates a student object.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @param subjects List of subject and grade pairings.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @throws IllegalArgumentException If the age is not positive, or if the subject list is empty.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Student</font>(<font color="#999900">String</font> name, <font color="#DF7401">int</font> age, <font color="#999900">List&lt;Pair></font> subjects) <font color="#E65100">throws</font> <font color="#999900">IllegalArgumentException</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Student</font>(<font color="#999900">String</font> name, <font color="#DF7401">int</font> age, <font color="#999900">List</font>&lt;<font color="#999900">Pair</font>> subjects) <font color="#E65100">throws</font> <font color="#999900">IllegalArgumentException</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>(name, age);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(subjects.isEmpty()) <font color="#E65100">throw new</font> <font color="#999900">IllegalArgumentException</font>("Must  have some subjects");
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.subjects = subjects;
@@ -403,7 +403,7 @@
 <br/> */</font>
 <br/><font color="#E65100">public class</font> <font color="#999900">SchoolClass</font> {
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">List&lt;Student></font> students;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">List</font>&lt;<font color="#999900">Student</font>> students;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Creates a school class object from a list of students.
@@ -411,7 +411,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @throws IllegalArgumentException If the list is empty, or if not all the students
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; *  in the list have the same age.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">SchoolClass</font>(<font color="#999900">List&lt;Student></font> students) <font color="#E65100">throws</font> <font color="#999900">IllegalArgumentException</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">SchoolClass</font>(<font color="#999900">List</font>&lt;<font color="#999900">Student</font>> students) <font color="#E65100">throws</font> <font color="#999900">IllegalArgumentException</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(students.isEmpty()) <font color="#E65100">throw new</font> <font color="#999900">IllegalArgumentException</font>("No students found");
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> firstAge = students.get(0).getAge();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Student</font> student: students) {
@@ -440,7 +440,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** @return The list of students, for modifications. Used by the methods of {@link Administrator}. */</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> <font color="#999900">List&lt;Student></font> getStudentList() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> <font color="#999900">List</font>&lt;<font color="#999900">Student</font>> getStudentList() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> students;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
