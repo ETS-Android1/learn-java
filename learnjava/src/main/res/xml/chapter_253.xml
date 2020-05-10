@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <chapterdata>
+        <id>253</id>
+        <name>Basic multithreading operations</name>
+    </chapterdata>
+    <text>
+        <![CDATA[
+        In this chapter we'll learn about how a thread can be paused and stopped safely, and how can
+        we detect if a thread has finished working.
+        ]]>
+    </text>
+    <title text="The current thread"/>
+    <text>
+        <![CDATA[
+        It's always possible to get a reference to the currently executing
+        thread object, like this:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#999900">Thread</font> current = <font color="#999900">Thread</font>.currentThread();
+<br/><font color="#999900">System</font>.out.println(current.getName());
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Calling this in the main method will print "<i>main</i>, which is the default name for the main thread.
+        Using this method we can check properties of the executing thread.
+        ]]>
+    </text>
+    <title text="Pausing execution"/>
+    <text>
+        <![CDATA[
+        Usually the currently executing thread is paused, so a static pause method was added which does this. The
+        amount of <b>milliseconds</b> (1/1000 seconds) must be specified, and the thread will wait this much time.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#999900">System</font>.out.println("Starting to wait...");
+<br/><font color="#E65100">try</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=0; i&lt;5; i++) { <font color="gray">//wait 5 times, <font color="#E65100">for</font> 1 second
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Thread</font>.sleep(1000);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Waited 1 second.");
+<br/>}
+<br/>} <font color="#E65100">catch</font>(<font color="#999900">InterruptedException</font> e) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.err.println("Was interrupted.");
+<br/>}
+<br/><font color="#999900">System</font>.out.println("Finished waiting!");
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        When working with threads, we almost always has to watch out for an <b>InterruptedException</b>. This is because
+        of external reasons, sometimes threads can't wait as much as they were told to, and this exception gets thrown.
+        ]]>
+    </text>
+    <title text="Waiting for a result: volatile"/>
+    <boxed title="Volatile variables">
+        <![CDATA[
+        Suppose we have two threads, and one updates a variable. It's possible for the other thread to still
+        see the old value (since it doesn't know about a possible update). To counter this, volatile variables
+        were introduced. Every thread sees the up to date value of a volatile variable.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Let's see a code sample where the main thread will check a volatile variable to detect if another
+        thread has stopped.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#E65100">public class</font> <font color="#999900">Main</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static volatile</font> <font color="#DF7401">boolean</font> finished = <font color="#E65100">false</font>; <font color="gray">//this will be checked
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Thread</font> worker = <font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> <font color="#999900">Runnable</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> run() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> { <font color="gray">//simulate some task...
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Thread</font>.sleep(3000);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">InterruptedException</font> e) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.err.println("Was interrupted.");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">finally</font> { <font color="gray">//will always update value
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;finished = <font color="#E65100">true</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;});
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;worker.start();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">while</font>(!finished) { <font color="gray">//wait until the other thread sets the variable
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Waiting for worker...");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Worker finished!");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        First of all, you can see that it's easy to declare that a variable is volatile. The keyword is <b>volatile</b>. Volatility
+        of the variable <i>finished</i> ensures that the main thread will see it's updated value (which is set in the worker thread).
+        ]]>
+    </text>
+    <boxed title="Deadlock">
+        <![CDATA[
+        Notice that in the code sample the value is updated in the <i>finally</i> block. Even if the thread is interrupted,
+        it'll always be set to true. If this was not the case, we could get a deadlock, which means that threads wait
+        on each other indefinitely.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        To see a deadlock, change this part of the code in the following way:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#E65100">try</font> { <font color="gray">//simulate some task...
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Thread</font>.sleep(3000);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">throw</font> <font color="#E65100">new</font> <font color="#999900">InterruptedException</font>(); <font color="gray">//simulate an interrupt
+</font>
+<br/>} <font color="#E65100">catch</font>(<font color="#999900">InterruptedException</font> e) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.err.println("Was interrupted.");
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        After this change, the code will run until you manually terminate it. Of course we could always put the
+        variable update in the <i>catch</i> block as well, but it's good practice to use <i>finally</i> in cases like this.
+        ]]>
+    </text>
+    <boxed title="Active waiting">
+        <![CDATA[
+        Waiting with a loop is called active waiting. This is because even if the thread waits, the <i>CPU</i>
+        still processes the loop statements.
+        ]]>
+    </boxed>
+    <title text="Waiting for a result: joining"/>
+    <text>
+        <![CDATA[
+        A slightly more elegant way to wait for a thread to finish. The <i>join</i> method causes the current thread to
+        wait until the joined thread finishes.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#999900">Thread</font> worker = <font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> <font color="#999900">Runnable</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> run() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> { <font color="gray">//simulate some task...
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Thread</font>.sleep(3000);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">InterruptedException</font> e) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.err.println("Was interrupted.");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>});
+<br/>worker.start();
+<br/><font color="#E65100">try</font> { <font color="gray">//join can also be interrupted
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;worker.join();
+<br/>} <font color="#E65100">catch</font>(<font color="#999900">InterruptedException</font> e) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.err.println("Was interrupted.");
+<br/>}
+<br/><font color="#999900">System</font>.out.println("Worker finished!");
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Note that the <i>join</i> method is called on a thread object. <b>NEVER</b> call it on the
+        current thread, as that's a guaranteed deadlock.
+        ]]>
+    </text>
+    <boxed title="Passive waiting">
+        <![CDATA[
+        This waiting method is considered passive waiting. It's usually preferred to active waiting,
+        since it's less <i>CPU</i> intensive.
+        ]]>
+    </boxed>
+    <title text="Waiting for a result: wait, notify"/>
+    <text>
+        <![CDATA[
+        Java has been designed with parallelism in mind, as even the <i>Object</i> base class (so every object) has
+        methods for parallelism.
+        ]]>
+    </text>
+    <boxed title="Monitor">
+        <![CDATA[
+        Each object has a waiting queue for threads. To place the <b>current thread</b> into this queue, the objects
+        <i>wait</i> method must be called. To wake up a single thread (or all), use the objects <i>notify</i> and <i>notifyAll</i>
+        methods. Objects used like this are called <b>monitors</b> (every object can be used as a monitor).
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Let's see the previous example with this method. We could even use the thread object as a monitor, but a cleaner
+        solution is to create a separate object for this.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#E65100">final</font> <font color="#999900">Object</font> monitor = <font color="#E65100">new</font> <font color="#999900">Object</font>(); <font color="gray">//this will be the monitor
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/><font color="#999900">Thread</font> worker = <font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> <font color="#999900">Runnable</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> run() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> { <font color="gray">//simulate some task...
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Thread</font>.sleep(3000);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">InterruptedException</font> e) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.err.println("<font color="#999900">Was</font> interrupted.");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">finally</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">synchronized</font> (monitor) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;monitor.notify(); <font color="gray">//notify the waiting main thread
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>});
+<br/>worker.start();
+<br/><font color="#E65100">try</font> { <font color="gray">//wait can also be interrupted
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">synchronized</font> (monitor) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;monitor.wait(); <font color="gray">//notify the waiting main thread
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>} <font color="#E65100">catch</font> (<font color="#999900">InterruptedException</font> e) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.err.println("Was interrupted.");
+<br/>}
+<br/><font color="#999900">System</font>.out.println("Worker finished!");
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        You'll notice that the method calls are in <b>synchronized</b> blocks. Ignore them for now, we'll
+        talk about them in the following chapters. It's required to avoid an <b>IllegalMonitorStateException</b>.
+        ]]>
+    </text>
+
+    <!-- keywords: volatile, Object methods: join, wait, notify, notifyAll  -->
+
+</resources>

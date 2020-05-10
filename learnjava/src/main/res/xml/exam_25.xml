@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Exam of course 'Parallel programming' -->
+
+<resources>
+    <examdata>
+        <id>25</id>
+        <questionAmount>25</questionAmount>
+        <timeLimit>30</timeLimit>
+        <finished>false</finished>
+    </examdata>
+
+    <!-- Questions about basic parallel concepts. -->
+    <question type="multi_choice">
+        <text>What is true about parallel programs?</text>
+        <answer>It's only possible to execute them under Windows OS.</answer>
+        <answer>They are sequential programs.</answer>
+        <answer>The are non-deterministic.</answer>
+        <answer>They can execute multiple processes at the same time.</answer>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which of these is another name for thread?</text>
+        <answer>Runnable.</answer>
+        <answer>Executor.</answer>
+        <answer>Task.</answer>
+        <answer>Non-determinism.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which is the opposite of parallel programming?</text>
+        <answer>Sequential.</answer>
+        <answer>Concurrent.</answer>
+        <answer>Multithreaded.</answer>
+        <answer>Non-deterministic.</answer>
+        <correct>0</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these can influence the effectiveness of parallel applications?</text>
+        <answer>The operating system.</answer>
+        <answer>The hardware.</answer>
+        <correct>0</correct>
+        <correct>1</correct>
+    </question>
+    <question type="true_false">
+        <text>Parallel programs are deterministic.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>Sequential programs are deterministic.</text>
+        <correct>true</correct>
+    </question>
+    <question type="multi_choice">
+        <text>What are some advantages of parallel applications?</text>
+        <answer>Increased efficiency.</answer>
+        <answer>Easy debugging.</answer>
+        <answer>Programs will be deterministic.</answer>
+        <answer>The ability to create efficient GUI applications.</answer>
+        <correct>0</correct>
+        <correct>3</correct>
+    </question>
+    <question type="multi_choice">
+        <text>What are some disadvantages of parallel programming?</text>
+        <answer>Such programs are harder to debug.</answer>
+        <answer>Non-determinism, which is beneficial.</answer>
+        <answer>Increased code complexity.</answer>
+        <answer>Nothing, there is no reason not to use it.</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is non-determinism?</text>
+        <answer>Another word for parallel programming.</answer>
+        <answer>The same program may produce different outputs, even with the same input.</answer>
+        <answer>The ability to create parallel programs in Java.</answer>
+        <answer>The same program will always produce the same output, given identical input.</answer>
+        <correct>1</correct>
+    </question>
+
+    <!-- Questions about basic Java parallel programming -->
+
+
+    <!--
+    <question type="single_choice">
+        <text></text>
+        <answer></answer>
+        <answer></answer>
+        <answer></answer>
+        <answer></answer>
+        <correct></correct>
+    </question>
+
+    <question type="multi_choice">
+        <text></text>
+        <answer></answer>
+        <answer></answer>
+        <answer></answer>
+        <answer></answer>
+        <correct></correct>
+        <correct></correct>
+    </question>
+
+    <question type="true_false">
+        <text></text>
+        <correct></correct>
+    </question>
+
+    <question type="text">
+        <text></text>
+        <correct></correct>
+        <correct></correct>
+    </question>
+    -->
+</resources>

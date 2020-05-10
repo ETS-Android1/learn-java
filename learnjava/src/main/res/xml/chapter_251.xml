@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Chapter about introduction to parallel programming. -->
+
+<resources>
+    <chapterdata>
+        <id>251</id>
+        <name>Introduction to multithreading</name>
+    </chapterdata>
+
+    <!-- In general, not in Java? Possible dangers
+     definitions, basic concept -->
+
+    <text>
+        <![CDATA[
+        Parallel programming is the execution of multiple processes <b>at the same time</b>. Please note that this chapter
+        will not be Java specific, more like a quick overview of the topic.
+        ]]>
+    </text>
+    <boxed title="Other names">
+        <![CDATA[
+        These processes are sometimes called <b>tasks</b>, <b>jobs</b> or in Java, <b>threads</b>, hence the
+        name, multithreading. A program that is not parallel is called <b>sequential</b>.
+        <p>
+        A similar concept to parallelism is <b>concurrency</b>. Check the linked resourced below if you're interested in
+        the differences.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        The amount of processes we can run in parallel depends on multiple factors:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>The <b>operating system</b>. In the end, programs can only 'request' threads to start. The <i>OS</i> will decide
+         how many processes it actually starts, and when.</li>
+        <li>The hardware. To run processes in parallel multiple <i>CPU</i> cores are needed.</li>
+        </ul>
+        ]]>
+    </list>
+    <title text="Advantages"/>
+    <text>
+        <![CDATA[
+        Creating parallel applications can lead to increased performance, since we can run multiple parts
+        of out code simultaneously.
+        ]]>
+    </text>
+    <boxed title="Creating better models">
+        <![CDATA[
+        Java (and any object oriented languages) places importance on modeling the problem as realistically as
+        possible. Classes and interfaces all serve this purpose. Now, with parallel programming we can build
+        even better models.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        For some programs, being parallel is a must. An example is applications with a <b>graphical user interface</b> (<i>GUI</i>).
+        These apps create their own windows instead of using the command line, and thus they're more user friendly.
+        ]]>
+    </text>
+    <boxed title="Multithreading in GUI apps">
+        <![CDATA[
+        A <i>GUI</i> app must perform long operations in parallel, on so called <b>background threads</b>. Otherwise,
+        while the long operation was underway, the user interface couldn't continue to be interactive, and the program
+        would appear to be "<i>frozen</i>".
+        <p>
+        As an example, this android app uses multiple threads to load resources, so that the buttons, swipe components
+        remain reactive while loading is in progress.
+        ]]>
+    </boxed>
+    <title text="Disadvantages"/>
+    <text>
+        <![CDATA[
+        Our programs have so far been <b>deterministic</b>. This means that given the same input, they'll always produce the
+        same output. Now with parallel programming, we bring <b>non-determinism</b> into the system. This is because the <i>OS</i>
+        decides which processes will it start executing, and we have no way of knowing this beforehand.
+        ]]>
+    </text>
+    <advanced title="Debugging problems">
+        <![CDATA[
+        Parallel programs are significantly harder to debug, if we encounter a problem. For this reason, it's
+        important that you really understand the previous courses before you jump into this one.
+        ]]>
+    </advanced>
+    <text>
+        <![CDATA[
+        It's challenging (sometimes outright not possible) to split a sequential program or algorithm into parts that can be executed in parallel. It's
+        up to the programmer to decide if this extra work is worth the speedup.
+        ]]>
+    </text>
+    <title text="Extra material"/>
+    <text>
+        <![CDATA[
+        It's difficult to grasp what parallel programming actually is. I've gathered a few resources here which
+        can help:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>A short video on parallel computing: <a href="https://www.youtube.com/watch?v=q7sgzDH1cR8">Parallel Computing Explained In 3 Minutes</a>.</li>
+        <li>A longer and more detailed video: <a href="https://www.youtube.com/watch?v=RNVIcm8-6RE">Introduction To Parallel Computing</a>.</li>
+        <li>About concurrency and parallelism: <a href="https://youtu.be/RNVIcm8-6RE?t=371">Later in the same video</a>.</li>
+        </ul>
+        ]]>
+    </list>
+    <text>
+        <![CDATA[
+        I did not make these resources. Credits and thanks to the authors.
+        ]]>
+    </text>
+</resources>
