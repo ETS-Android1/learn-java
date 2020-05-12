@@ -78,8 +78,228 @@
         <correct>1</correct>
     </question>
 
-    <!-- Questions about basic Java parallel programming -->
+    <!-- Questions about the Thread class -->
+    <question type="true_false">
+        <text>A Java thread can be started only once.</text>
+        <correct>true</correct>
+    </question>
+    <question type="text">
+        <text>Which is the base class for creating parallel processes?</text>
+        <correct>Thread</correct>
+        <correct>java.lang.Thread</correct>
+    </question>
+    <question type="text">
+        <text>Which class is used to give executable statements to a thread?</text>
+        <correct>Runnable</correct>
+        <correct>java.lang.Runnable</correct>
+        <correct>Callable</correct>
+        <correct>java.util.concurrent.Callable</correct>
+    </question>
+    <question type="true_false">
+        <text>Thread objects start executing as soon as they're instantiated.</text>
+        <correct>false</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is an anonymous class?</text>
+        <answer>A class with no subclasses.</answer>
+        <answer>A class that is declared in a statement, not in a standard class declaration.</answer>
+        <answer>A class which only has static methods.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which interfaces are used to pass executable statement to threads?</text>
+        <answer>java.lang.Runnable</answer>
+        <answer>java.io.Serializable</answer>
+        <answer>java.lang.Comparable</answer>
+        <answer>java.util.concurrent.Callable</answer>
+        <correct>0</correct>
+        <correct>3</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these methods can we use to 'pass' the runnable to a thread?</text>
+        <answer>Using anonymous classes.</answer>
+        <answer>Creating and passing a list of statements.</answer>
+        <answer>Subclassing java.lang.Thread.</answer>
+        <answer>Implementing java.lang.Runnable</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>The Thread class cannot be subclassed.</text>
+        <correct>false</correct>
+    </question>
 
+    <!-- Questions about basic Java parallel programming -->
+    <question type="true_false">
+        <text>Pausing ongoing thread execution is allowed.</text>
+        <correct>true</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which of these exceptions must we handle when working with threads?</text>
+        <answer>ArrayIndexOutOfBoundsException</answer>
+        <answer>InterruptedException</answer>
+        <answer>IOException</answer>
+        <answer>RuntimeException</answer>
+        <correct>1</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to declare a variable which always shows its actual value in all threads?</text>
+        <correct>volatile</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is a deadlock?</text>
+        <answer>When the program terminates due to an error.</answer>
+        <answer>An infinite while loop.</answer>
+        <answer>When threads are waiting on each other an thus the program cannot continue.</answer>
+        <answer>When a thread is interrupted.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these are passive waiting?</text>
+        <answer>Waiting with the join method.</answer>
+        <answer>Waiting with a loop.</answer>
+        <answer>Waiting with the wait method.</answer>
+        <answer>Being stuck in a deadlock.</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which method is used to pause thread execution for a fixed time?</text>
+        <answer>sleep</answer>
+        <answer>pause</answer>
+        <answer>halt</answer>
+        <answer>passiveWait</answer>
+        <correct>0</correct>
+    </question>
+    <question type="true_false">
+        <text>Active waiting is preferred over passive waiting.</text>
+        <correct>false</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which method is used for a thread to wait until another one is finished?</text>
+        <answer>wait</answer>
+        <answer>sleep</answer>
+        <answer>join</answer>
+        <answer>interrupt</answer>
+        <correct>2</correct>
+    </question>
+    <question type="true_false">
+        <text>When we need to stop a thread, we can join it on itself.</text>
+        <correct>false</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is a monitor?</text>
+        <answer>Any object whose waiting queue is used with the wait and notify methods.</answer>
+        <answer>A thread subclass.</answer>
+        <answer>Any object that is used as the lock of a synchronized block.</answer>
+        <answer>An object that is used within a synchronized block.</answer>
+        <correct>0</correct>
+    </question>
+    <question type="single_choice">
+        <text>What does the wait method do?</text>
+        <answer>Pauses the thread for a fixed amount.</answer>
+        <answer>Causes the thread to pause until it is woken u with a notify call.</answer>
+        <answer>Interrupts the thread.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which method is used to 'wake up' a single thread in a monitors waiting queue?</text>
+        <answer>notify</answer>
+        <answer>release</answer>
+        <answer>wait</answer>
+        <answer>notifyAll</answer>
+        <correct>0</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which method is used to 'wake up' all threads in a monitors waiting queue?</text>
+        <answer>notify</answer>
+        <answer>release</answer>
+        <answer>acquire</answer>
+        <answer>notifyAll</answer>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>Wait and notify can only be called inside a synchronized block.</text>
+        <correct>true</correct>
+    </question>
+
+    <!-- Questions about mutual exclusion -->
+    <question type="single_choice">
+        <text>What is mutual exclusion?</text>
+        <answer>When a thread must wait for the result of another thread.</answer>
+        <answer>When only a limited number of threads may execute code sections.</answer>
+        <answer>When multiple threads are paused.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="true_false">
+        <text>Java has built in means for mutual exclusion.</text>
+        <correct>true</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to make a code section mutually exclusive?</text>
+        <correct>synchronized</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these can be synchronized?</text>
+        <answer>A block of code.</answer>
+        <answer>A class.</answer>
+        <answer>A method.</answer>
+        <answer>A member.</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+    </question>
+    <question type="single_choice">
+        <text>what is a critical section?</text>
+        <answer>Code that is executed by a background thread.</answer>
+        <answer>Code that has a chance of throwing InterruptedException.</answer>
+        <answer>Code that must always be accessed by a at most a fixed amount of threads.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="true_false">
+        <text>The lock of the synchronized block 'remembers' of a thread is already executing that block.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>The lock of the synchronized block can be any object or primitive.</text>
+        <correct>false</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is used as a lock when a non-static method is synchronized?</text>
+        <answer>The return value of the method.</answer>
+        <answer>The parameter of the method</answer>
+        <answer>The object to which the method belongs to.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is a semaphore?</text>
+        <answer>An object whose waiting queue is used with the wait and notify methods.</answer>
+        <answer>An object used as the lock the synchronized block.</answer>
+        <answer>An object that can perform mutual exclusion.</answer>
+        <answer>A thread subclass.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which methods are used to start and end the semaphore's critical sections?</text>
+        <answer>acquire</answer>
+        <answer>wait</answer>
+        <answer>execute</answer>
+        <answer>release</answer>
+        <correct>0</correct>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is an atomic operation?</text>
+        <answer>An operation that is safe from any exceptions.</answer>
+        <answer>an operation that is safe to use in multithreaded environments.</answer>
+        <answer>The operation performed by a background thread.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="text">
+        <text>Which class can be used to get a thread safe integer implementation?</text>
+        <correct>AtomicInteger</correct>
+        <correct>java.util.concurrent.atomic.AtomicInteger</correct>
+    </question>
 
     <!--
     <question type="single_choice">

@@ -83,9 +83,9 @@
 <br/><font color="gray">//fill it with key-value pairs</font>
 <br/><font color="#E65100">for</font>(<font color="#999900">Day</font> day: <font color="#999900">Day</font>.values()) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(day == <font color="#999900">Day</font>.SATURDAY || day == <font color="#999900">Day</font>.SUNDAY) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;weekendMap.put(day, true); <font color="gray">//on weekend</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;weekendMap.put(day, <font color="#E65100">true</font>); <font color="gray">//on weekend</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;weekendMap.put(day, false); <font color="gray">//not on weekend</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;weekendMap.put(day, <font color="#E65100">false</font>); <font color="gray">//not on weekend</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
         ]]>

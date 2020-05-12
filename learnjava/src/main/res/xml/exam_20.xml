@@ -173,8 +173,8 @@
         <answer>They are special maps.</answer>
         <answer>They only allow adding and removing elements at the 'top'.</answer>
         <answer>They are first-in-first-out data structures.</answer>
+        <correct>0</correct>
         <correct>2</correct>
-        <correct>3</correct>
     </question>
     <question type="true_false">
         <text>A stack is a FIFO data structure.</text>

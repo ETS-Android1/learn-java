@@ -44,10 +44,10 @@
     <code>
         <![CDATA[
         <font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> reading = true; <font color="gray">//create the variables needed
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> reading =  <font color="#E65100">true</font>; <font color="gray">//create the variables needed
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> counter = 0;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> input = null;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> input =  <font color="#E65100">null</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Scanner</font> scanner = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(<font color="#999900">System</font>.in);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//don't have to worry about how big the internal array is
 </font>
@@ -62,7 +62,7 @@
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">NumberFormatException</font> e) { <font color="gray">//not a number, maybe 'q'?
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>("q".equals(input)) reading = false; <font color="gray">//'q' was entered, stop
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>("q".equals(input)) reading =  <font color="#E65100">false</font>; <font color="gray">//'q' was entered, stop
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
@@ -128,7 +128,7 @@
         <![CDATA[
 <font color="gray">//create an empty list for doubles
 </font>
-<br/><font color="#999900">LinkedList</font>&lt;<font color="#999900">Double</font>> nums = <font color="#E65100">new</font> <font color="#999900">LinkedList</font>$lt;>();
+<br/><font color="#999900">LinkedList</font>&lt;<font color="#999900">Double</font>> nums = <font color="#E65100">new</font> <font color="#999900">LinkedList</font>&lt;>();
 <br/>nums.size(); <font color="gray">//get the amount of element in the list
 </font>
 <br/>

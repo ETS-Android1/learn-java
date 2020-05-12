@@ -3,10 +3,296 @@
 <resources>
     <taskdata>
         <id>251</id>
-        <name>Producer-consumer problem</name>
+        <name>Dining philosophers</name>
     </taskdata>
-
+    <text>
+        <![CDATA[
+        The dining philosophers problem is a famous parallel programming task, used to demonstrate a
+        deadlock, and possible solutions.
+        ]]>
+    </text>
+    <title text="The problem"/>
+    <text>
+        <![CDATA[
+        A table with 5 spots, and 5 forks is given. 5 philosophers then try to sit down and and eat (multiple times)
+        at the table.
+        ]]>
+    </text>
+    <image name="dining_philo"/>
+    <text>
+        <![CDATA[
+        The <i>eating<i> follows these rules:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>The philosopher must sit down at the table first.</li>
+        <li>He must then grab his right fork.</li>
+        <li>Then he must acquire the left fork as well.</li>
+        <li>Now the philosopher can eat.</li>
+        <li>After eating, he must let go of both forks, and stand up from the table.</li>
+        </ul>
+        ]]>
+    </list>
+    <boxed title="What goes wrong?">
+        <![CDATA[
+        The problem boils down to the fact that only 5 forks are on the table, and the philosophers are greedy, they
+        all attempt to eat as soon as possible. Each one of them will sit down, and grab the right fork. Then, no one can
+        take a left fork, since all forks are taken.
+        <p>
+        The philosophers are also stubborn, and they won't let go of the forks before eating. Thus, we arrived at a deadlock.
+        ]]>
+    </boxed>
+    <title text="The task"/>
+    <text>
+        <![CDATA[
+        Your task is to implement this problem. First, implement it in a way that you arrive at the deadlock
+        described above. Then, fix it with any solution.
+        ]]>
+    </text>
+    <boxed title="Possible solutions">
+        <![CDATA[
+        Here are some tips to solve the deadlock. What if one philosopher was left handed? What if we only
+        allowed only 4 of them to sit at the table (semaphore)?
+        ]]>
+    </boxed>
+    <title text="Recommendation"/>
+    <text>
+        <![CDATA[
+        Make a philosopher thread, and start 5 of them. You can implement the forks as semaphores that let only
+        one thread in. Then, you can create 5 forks, and assign a left and right for for all philosopher threads.
+        ]]>
+    </text>
+    <boxed title="Be verbose">
+        <![CDATA[
+        Print everything. Name the 5 philosophers, and print to the console when any one of them sits down, grabs any
+        fork or lets go of any fork, even when they stand up. This will visualize what is going on.
+        ]]>
+    </boxed>
     <solution>
-
+        <title text="Deadlock implementation"/>
+        <text>
+            <![CDATA[
+            First, here is the philosopher class.
+            ]]>
+        </text>
+        <code>
+            <![CDATA[
+<font color="#E65100">class</font> <font color="#999900">Philosopher</font> <font color="#E65100">extends</font> <font color="#999900">Thread</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">Semaphore</font> rightFork; <font color="gray">//2 forks for this philosopher, semaphores with capacity 1
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">Semaphore</font> leftFork;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font> name;
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Philosopher</font>(<font color="#999900">Semaphore</font> rightFork, <font color="#999900">Semaphore</font> leftFork, <font color="#999900">String</font> name) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.rightFork = rightFork;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.leftFork = leftFork;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.name = name;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//a philosopher will eat 3 times
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private static</font> <font color="#E65100">final</font> <font color="#DF7401">int</font> N_EAT = 3;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> run() { <font color="gray">//a philosopher will attempt to eat a number of times
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=0; i&lt;N_EAT; i++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;eat();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">void</font> eat() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;rightFork.acquire(); <font color="gray">//try to grab forks
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(name + " grabbed right fork.");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;leftFork.acquire();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(name + " grabbed left fork.");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Thread</font>.sleep(1000); <font color="gray">//simulating eating
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">InterruptedException</font> e) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;e.printStackTrace();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">finally</font> { <font color="gray">//must always release the semaphores
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;rightFork.release(); <font color="gray">//let go of forks
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(name + " put fown left fork.");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;leftFork.release();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(name + " put down right fork.");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+            ]]>
+        </code>
+        <text>
+            <![CDATA[
+            Then, we call this in the main class:
+            ]]>
+        </text>
+        <code>
+            <![CDATA[
+            <font color="#E65100">public class</font> <font color="#999900">DiningPhilosophersDeadlock</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//constants
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private static final</font> <font color="#DF7401">int</font> N_FILOS = 5, N_FORKS = 5;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//philosopher names
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private static final</font> <font color="#999900">String</font>[] NAMES = {"Aristotle","Plato","Nietzsche","Voltaire","Cicero"};
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create fork semaphores
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Semaphore</font>[] forks = <font color="#E65100">new</font> <font color="#999900">Semaphore</font>[N_FORKS];
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=0; i&lt;N_FORKS; i++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;forks[i] = <font color="#E65100">new</font> <font color="#999900">Semaphore</font>(1); <font color="gray">//each fork can be used by 1 philosopher
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create philosophers and assign the forks
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">Philosopher</font>> philos = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=0; i&lt;N_FILOS; i++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(i == N_FILOS - 1) { <font color="gray">//the last one
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;philos.add(<font color="#E65100">new</font> <font color="#999900">Philosopher</font>(forks[i], forks[0], NAMES[i]));
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;philos.add(<font color="#E65100">new</font> <font color="#999900">Philosopher</font>(forks[i], forks[i+1], NAMES[i]));
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//start the threads
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Philosopher</font> philo: philos) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;philo.start();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+            ]]>
+        </code>
+        <text>
+            <![CDATA[
+            Running this will most likely result in a deadlock. It's possible that the threads are scheduled in a way
+            that the philosophers manage to eat though.
+            ]]>
+        </text>
+        <title text="Solution with semaphores"/>
+        <text>
+            <![CDATA[
+            The updated philosopher class, which now has the table semaphore. This is always acquired
+            before accessing the forks.
+            ]]>
+        </text>
+        <code>
+            <![CDATA[
+<font color="#E65100">class</font> <font color="#999900">Philosopher</font> <font color="#E65100">extends</font> <font color="#999900">Thread</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">Semaphore</font> rightFork; <font color="gray">//2 forks <font color="#E65100">for</font> this filosopher, semaphores with capacity 1
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">Semaphore</font> leftFork;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">Semaphore</font> table; <font color="gray">//table semaphore with capacity 4
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font> name;
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Philosopher</font>(<font color="#999900">Semaphore</font> table, <font color="#999900">Semaphore</font> rightFork, <font color="#999900">Semaphore</font> leftFork, <font color="#999900">String</font> name) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.rightFork = rightFork;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.leftFork = leftFork;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.name = name;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.table = table;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//a philosopher will eat 3 times
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private static final</font> <font color="#DF7401">int</font> N_EAT = 3;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> run() { <font color="gray">//a philosopher will attempt to eat a number of times
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=0; i&lt;N_EAT; i++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;eat();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">void</font> eat() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;table.acquire(); <font color="gray">//try to sit down
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(name + " sat down.");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;rightFork.acquire(); <font color="gray">//try to grab forks
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(name + " grabbed right fork.");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;leftFork.acquire();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(name + " grabbed left fork.");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Thread</font>.sleep(1000); <font color="gray">//simulating eating
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">InterruptedException</font> e) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;e.printStackTrace();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">finally</font> { <font color="gray">//must always release the semaphores
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;rightFork.release(); <font color="gray">//let go of forks
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(name + " put fown left fork.");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;leftFork.release();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(name + " put down right fork.");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;table.release(); <font color="gray">//stand up
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(name + " stood up.");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+            ]]>
+        </code>
+        <text>
+            <![CDATA[
+            I'll not copy the updated main method here, as it's almost the same. The only difference is that now
+            a table semaphore is created with capacity 4, and it's passed to the philosopher threads (with
+            the updated constructor seen above).
+            ]]>
+        </text>
+        <code>
+            <![CDATA[
+<font color="gray">//create table semaphore</font>
+<br/><font color="#999900">Semaphore</font> table = <font color="#E65100">new</font> <font color="#999900">Semaphore</font>(N_FILOS-1);
+            ]]>
+        </code>
+        <title text="Solution with left handed philosopher"/>
+        <text>
+            <![CDATA[
+            Probably the simplest and most surprising solution is to make one of the philosophers "left handed", meaning
+            he'll attempt to grab the left fork first.
+            ]]>
+        </text>
+        <boxed title="Left handed implementation">
+            <![CDATA[
+            In terms of implementing this, only a single line needs to be modified. We must change the order
+            of the two fork semaphores for a single philosopher.
+            ]]>
+        </boxed>
+        <text>
+            <![CDATA[
+            For example, I changed the order for the last philosopher:
+            ]]>
+        </text>
+        <code>
+            <![CDATA[
+<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=0; i&lt;N_FILOS; i++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(i == N_FILOS - 1) { <font color="gray">//the last one
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;philos.add(<font color="#E65100">new</font> <font color="#999900">Philosopher</font>(forks[0], forks[i], NAMES[i]));
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;philos.add(<font color="#E65100">new</font> <font color="#999900">Philosopher</font>(forks[i], forks[i+1], NAMES[i]));
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+            ]]>
+        </code>
+        <text>
+            <![CDATA[
+            Note that the last philosopher now gets <i>forks[0]</i> and <i>forks[i]</i> in this order instead
+            of the original <i>forks[i]</i> and <i>forks[0]</i>.
+            ]]>
+        </text>
     </solution>
 </resources>
