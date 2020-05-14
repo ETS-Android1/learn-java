@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <chapterdata>
+        <id>255</id>
+        <name>Executor services</name>
+    </chapterdata>
+    <text>
+        <![CDATA[
+        Executor services are the modern alternatives for directly using the <i>Thread</i> class. To use, them
+        we'll have to take a look at a new interface.
+        ]]>
+    </text>
+    <advanced title="Replacement?">
+        <![CDATA[
+        The following classes and interfaces were intended to replace the old <i>Runnable</i> and <i>Thread</i> classes. The official
+        "best practice" is that you only use the new ones. However, in practice, the old classes are still often used, because people
+        have gotten used to it, and for many problems, they are still perfect.
+        ]]>
+    </advanced>
+    <title text="Callable"/>
+    <text>
+        <![CDATA[
+        <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Callable.html">java.util.concurrent.Callable</a>
+        is the modern way of passing code to be executed in the background.
+        ]]>
+    </text>
+    <boxed title="Why not Runnable?">
+        <![CDATA[
+        The most important disadvantage of <i>Runnable</i> is the lack of return value. When performing a background operation,
+        the result of that operation is often needed. With <i>Callable</i>, a generic interface, there is a way to easily
+        get the result in the original thread.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Let's see an example <i>Callable</i>, which we'll use later. The important method here is <i>call</i>.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="gray">//Callable, that checks if a number is prime or not.
+</font>
+<br/><font color="#E65100">class</font> <font color="#999900">PrimeTask</font> <font color="#E65100">implements</font> <font color="#999900">Callable</font>&lt;<font color="#999900">Boolean</font>> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> number;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> PrimeTask(<font color="#DF7401">int</font> number) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.number = number;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Note that this is an inefficient primality test!
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Boolean</font> call() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=number-1; i>1; i--) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(divisibleBy(i)) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return false</font>; <font color="gray">//Found divisor, not a prime
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return true</font>; <font color="gray">//No divisor found
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Checks <font color="#E65100">if</font> the number is divisible by given divisor.
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">boolean</font> divisibleBy(<font color="#DF7401">int</font> divisor) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> (number % divisor) == 0;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        You can see that the generic class argument of <i>Callable</i> is going to be the return type of the background
+        operation.
+        ]]>
+    </text>
+    <title text="Future"/>
+    <text>
+        <![CDATA[
+        We'll need another class to retrieve the result of the background operation. This is called
+        <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html">java.util.concurrent.Future</a>.
+        ]]>
+    </text>
+    <boxed title="Why future?">
+        <![CDATA[
+        When you give a task (a <i>Callable</i>) to an executor service, it won't be able to instantly
+        return the result of that task (since that task needs to complete first, in the background).
+        <p>
+        What it can do, is giving you an object, that will, <b>in the future</b> hold the result. In other programming
+        languages, these are often called <b>promises</b>.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        The <i>Future</i> class is also generic. You'll need to specify the type of the result of the background task.
+        Obviously, this must match the return type of the <i>Callable</i>.
+        ]]>
+    </text>
+    <title text="Executor services"/>
+    <text>
+        <![CDATA[
+        An executor service is a class that can take <i>Callable</i> objects, while returning <i>Future</i>
+        objects, and then calculate the results of the callables, in the background. The base class for these
+        is <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ExecutorService.html">java.util.concurrent.ExecutorService</a>
+        ]]>
+    </text>
+    <boxed title="Executors class">
+        <![CDATA[
+        Executor services can be created with the utility class
+        <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Executors.html">Executors</a>. We'll see examples soon.
+        ]]>
+    </boxed>
+    <title text="Single thread executor"/>
+    <text>
+        <![CDATA[
+        This is the simplest possible executor service. It encapsulates a single background thread.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+ <font color="gray">//Create a task that we want to do in parallel
+</font>
+<br/><font color="#999900">PrimeTask</font> task = <font color="#E65100">new</font> <font color="#999900">PrimeTask</font>(78);
+<br/>
+<br/><font color="gray">//Create an executor service
+</font>
+<br/><font color="#999900">ExecutorService</font> service = <font color="#999900">Executors</font>.newSingleThreadExecutor();
+<br/>
+<br/><font color="gray">//Pass the task to the service, get a Future
+</font>
+<br/><font color="#999900">Future</font>&lt;<font color="#999900">Boolean</font>> result = service.submit(task);
+<br/>
+<br/><font color="#E65100">try</font> { <font color="gray">//Wait for result, then print it
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> isPrime = result.get();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("78 is a prime: " + isPrime);
+<br/>} <font color="#E65100">catch</font>(<font color="#999900">Exception</font> e) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.err.println("Failed to execute task!");
+<br/>} <font color="#E65100">finally</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//An executor service must explicitly be shut down
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;service.shutdown();
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        As you can see, the <i>Future.get</i> method will try to return the result of the background task.
+        If the result is not calculated yet, it halts the current thread until the result is ready.
+        ]]>
+    </text>
+    <text>
+        <![CDATA[
+        For this task, a simple <i>Thread</i> class would have been enough. The executor services
+        only start to shine when many tasks must be executed.
+        ]]>
+    </text>
+    <title text="Fixed thread pool"/>
+    <text>
+        <![CDATA[
+        Fixed thread pools are executor services which use a fixed number of threads to perform
+        the received tasks (the thread number is given when the service is created).
+        ]]>
+    </text>
+    <advanced title="Counting processors">
+        <![CDATA[
+        As mentioned in the first chapter, the efficiency of parallel programming depends on the amount of
+        processors available. Interestingly, Java provides a way to get this number programmatically, at runtime:
+        <br><br>
+        <i>Runtime.getRuntime().availableProcessors()</i>
+        ]]>
+    </advanced>
+    <text>
+        <![CDATA[
+        Let's use a thread pool! The only difference is that instead of a single task, a list of tasks can be
+        passed to the pool, and it'll return a list of futures.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#999900">List</font>&lt;<font color="#999900">PrimeTask</font>> tasks = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
+<br/><font color="gray">//Let's check primality between 2 and 20
+</font>
+<br/><font color="#E65100">for</font>(<font color="#DF7401">int</font> i=2; i&lt;=20; i++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;tasks.add(<font color="#E65100">new</font> <font color="#999900">PrimeTask</font>(i));
+<br/>}
+<br/>
+<br/><font color="gray">//Create a thread pool, based on processor count
+</font>
+<br/><font color="#DF7401">int</font> procCount = <font color="#999900">Runtime</font>.getRuntime().availableProcessors();
+<br/><font color="#999900">ExecutorService</font> pool = <font color="#999900">Executors</font>.newFixedThreadPool(procCount);
+<br/>
+<br/><font color="#E65100">try</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Pass all tasks in, get a Future list
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">Future</font>&lt;<font color="#999900">Boolean</font>>> futures = pool.invokeAll(tasks);
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Wait for all tasks to finish
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=0; i&lt;futures.size(); i++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Get task and future
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Future</font>&lt;<font color="#999900">Boolean</font>> result = futures.get(i);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">PrimeTask</font> task = tasks.get(i);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Get the <font color="#DF7401">boolean</font> result of calculation
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> isPrime = result.get();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(task.number + " is a prime: " + isPrime);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>} <font color="#E65100">catch</font> (<font color="#999900">Exception</font> e) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.err.println("Failed to execute!");
+<br/>} <font color="#E65100">finally</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Shut the pool down
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;pool.shutdown();
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Note that the amount of tasks exceeds the number of processors (at least on my computer), but this
+        is not a problem for the executor service.
+        ]]>
+    </text>
+    <title text="Other executors"/>
+    <text>
+        <![CDATA[
+        These were only the most common executor service types, however, more are provided in the <i>Executors</i> class.
+        Some especially interesting ones are:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li><b>Cached thread pool</b>: can automatically determine the amount of threads needed.</li>
+        <li><b>Scheduled thread pool</b>: can execute tasks after a delay, or periodically.</li>
+        </ul>
+        ]]>
+    </list>
+
+    <!-- keywords: callable, executors future  -->
+
+</resources>

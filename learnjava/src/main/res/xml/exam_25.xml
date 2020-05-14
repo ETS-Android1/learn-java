@@ -7,7 +7,7 @@
         <id>25</id>
         <questionAmount>25</questionAmount>
         <timeLimit>30</timeLimit>
-        <finished>false</finished>
+        <finished>true</finished>
     </examdata>
 
     <!-- Questions about basic parallel concepts. -->
@@ -299,6 +299,58 @@
         <text>Which class can be used to get a thread safe integer implementation?</text>
         <correct>AtomicInteger</correct>
         <correct>java.util.concurrent.atomic.AtomicInteger</correct>
+    </question>
+
+    <!-- Questions about executor services -->
+    <question type="single_choice">
+        <text>Why was a new interface introduced instead of Runnable?</text>
+        <answer>Because Runnable has no parameters.</answer>
+        <answer>Because no other methods can be called from Runnable.</answer>
+        <answer>Because runnable has no return value.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="text">
+        <text>What is the modern alternative of the Runnable interface?</text>
+        <correct>Callable</correct>
+        <correct>java.util.concurrent.Callable</correct>
+    </question>
+    <question type="text">
+        <text>Which class provides methods to create executor services?</text>
+        <correct>Executors</correct>
+        <correct>java.util.concurrent.Executors</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which of these is ideal if you have 100 tasks to be performed in the background?</text>
+        <answer>The Thread class.</answer>
+        <answer>A fixed thread pool.</answer>
+        <answer>A scheduled executor service.</answer>
+        <answer>A single thread executor service.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="true_false">
+        <text>Executor services will wait for new tasks until explicitly shut down.</text>
+        <correct>true</correct>
+    </question>
+    <question type="text">
+        <text>Which class is used to hold the not yet calculated value of a background task?</text>
+        <correct>Future</correct>
+        <correct>java.util.concurrent.Future</correct>
+    </question>
+    <question type="true_false">
+        <text>Using the get method of a future object will return null if the calculation is not yet complete.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>Using the get method of a future object will pause the current thread if the calculation is not yet complete.</text>
+        <correct>true</correct>
+    </question>
+    <question type="single_choice">
+        <text>When are executors more efficient then individually creating threads?</text>
+        <answer>When the execution time of the tasks is short.</answer>
+        <answer>When the execution time of the tasks is long.</answer>
+        <answer>When many tasks are to be executed.</answer>
+        <answer>When the tasks will likely throw exceptions.</answer>
+        <correct>2</correct>
     </question>
 
     <!--

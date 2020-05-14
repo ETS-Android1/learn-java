@@ -3,10 +3,275 @@
 <resources>
     <taskdata>
         <id>252</id>
-        <name>Dining philosophers problem</name>
+        <name>Producers and consumers</name>
     </taskdata>
-
+    <text>
+        <![CDATA[
+        This is another typical parallel programming problem. Here are the details:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>An empty collection (<b>buffer</b>) is given, with a maximum capacity.</li>
+        <li><b>Producers</b> are threads who place elements inside the buffer.</li>
+        <li><b>Consumers</b> are threads who remove elements from the buffer.</li>
+        </ul>
+        ]]>
+    </list>
+    <boxed title="Waiting">
+        <![CDATA[
+        If a producer finds the buffer full, it must wait until there is space for it's element.
+        If a consumer finds the buffer empty, it must wait until there is an element for it to take.
+        ]]>
+    </boxed>
+    <title text="Implementation details"/>
+    <text>
+        <![CDATA[
+        This task is independent of the amount of producers, consumers, and the capacity of the buffer.
+        I suggest you define them as constants or ask their value from the user.
+        ]]>
+    </text>
+    <boxed title="Producers">
+        <![CDATA[
+        There are many ways to implement producers. They can, for example place a fixed or random
+        amount of elements in the buffer, then stop. Another option is to have them place elements
+        until explicitly told to stop.
+        ]]>
+    </boxed>
+    <boxed title="Consumers">
+        <![CDATA[
+        The consumer implementation depends on the producers. One thing must be guaranteed: the consumers
+        have to remove all elements from the buffer before stopping (so that no element is wasted).
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        The program must terminate eventually, no consumer or producer can work indefinitely.
+        ]]>
+    </text>
+    <title text="The buffer"/>
+    <text>
+        <![CDATA[
+        The selection of the correct data structure is essential. A nice solution is a <b>queue</b>, as
+        it'll ensure that the elements waiting for the longest time will be consumed first.
+        ]]>
+    </text>
+    <boxed title="Don't reinvent the wheel">
+        <![CDATA[
+        We don't have to write a queue that has a capacity, and can block threads! One perfect choice
+        is already supplied in the <i>JDK</i>: <a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/BlockingQueue.html">BlockingQueue</a>.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        When working with collections and threads it's always worth looking at what options are provided in the
+        <i>JDK</i> before trying to implement our own thread-safe collections.
+        ]]>
+    </text>
+    <advanced title="Implementing your own queue">
+        <![CDATA[
+        It's also not terribly difficult to create your own blocking queue. The usage of synchronized
+        methods and the <i>wait</i> and <i>notifyAll</i> calls are recommended if you decide to go down
+        this way! It definitely adds an extra layer of challenge to this task.
+        ]]>
+    </advanced>
     <solution>
-
+        <text>
+            <![CDATA[
+            Here is the buffer class. It uses a <i>BlockingQueue</i>. I also added some printing when
+            elements are added or removed (doesn't always show the exact updating order).
+            ]]>
+        </text>
+        <code>
+            <![CDATA[
+            <font color="gray">//Manages the data.
+</font>
+<br/><font color="#E65100">public class</font> <font color="#999900">Buffer</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">BlockingQueue</font>&lt;<font color="#999900">Integer</font>> data;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Buffer</font>(<font color="#DF7401">int</font> capacity) { <font color="gray">//create an empty buffer
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;data = <font color="#E65100">new</font> <font color="#999900">LinkedBlockingDeque</font>&lt;>(capacity);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Place an object into the queue.
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> enqueueElement(<font color="#DF7401">int</font> element) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;data.put(element); <font color="gray">//will block until there is space
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Producer added: " + data.toString());
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font> (<font color="#999900">InterruptedException</font> e) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.err.println("Failed to place element: " + element);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Remove an element from the front of the queue.
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> dequeueElement() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//This will block until an element is present.
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> removed = data.take();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Consumer removed: " + data.toString());
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> removed;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font> (<font color="#999900">InterruptedException</font> e) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.err.println("Waiting failed, returning 0.");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> 0; <font color="gray">//Must return something
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">boolean</font> isEmpty() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> data.isEmpty();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+            ]]>
+        </code>
+        <text>
+            <![CDATA[
+            The producer implementation. It will place elements until told to stop, with the <i>stopProducing</i>
+            method.
+            ]]>
+        </text>
+        <code>
+            <![CDATA[
+        <font color="#E65100">public class</font> <font color="#999900">Producer</font> <font color="#E65100">extends</font> <font color="#999900">Thread</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">Buffer</font> buffer; <font color="gray">//Will place elements here
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">AtomicBoolean</font> ongoing;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Producer</font>(<font color="#999900">Buffer</font> buffer) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.buffer = buffer;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;ongoing = <font color="#E65100">new</font> <font color="#999900">AtomicBoolean</font>(<font color="#E65100">true</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;start(); <font color="gray">//start as soon as constructed
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> run() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">while</font>(ongoing.get()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;Normally some long process would create a
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;number here. We just randomize.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> number = <font color="#999900">ThreadLocalRandom</font>.current().nextInt(0,10);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;buffer.enqueueElement(number);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Thread</font>.sleep(1000); <font color="gray">//wait 1 second before placing again
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">InterruptedException</font> e) {}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> stopProducing() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;ongoing.set(<font color="#E65100">false</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+            ]]>
+        </code>
+        <text>
+            <![CDATA[
+            The consumer. Just like a producer, it also works until told to stop, with the <i>stopConsuming</i> method.
+            The only trick is that a consumer will not stop when there are still elements in the buffer, ensuring that
+            no element remains unused.
+            ]]>
+        </text>
+        <code>
+            <![CDATA[
+<font color="#E65100">public class</font> <font color="#999900">Consumer</font> <font color="#E65100">extends</font> <font color="#999900">Thread</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">Buffer</font> buffer; <font color="gray">//Will place elements here
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">AtomicBoolean</font> ongoing;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Consumer</font>(<font color="#999900">Buffer</font> buffer) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.buffer = buffer;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;ongoing = <font color="#E65100">new</font> <font color="#999900">AtomicBoolean</font>(<font color="#E65100">true</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;start(); <font color="gray">//start as soon as constructed
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> run() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Consumers will not stop until all elements are consumed.
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">while</font>(ongoing.get() || !buffer.isEmpty()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;Normally a consumer would do something with
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;this element. We will just ignore it.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> number = buffer.dequeueElement();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Thread</font>.sleep(1000); <font color="gray">//wait 1 second before taking again
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">InterruptedException</font> e) {}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> stopConsuming() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;ongoing.set(<font color="#E65100">false</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+            ]]>
+        </code>
+        <text>
+            <![CDATA[
+            Finally, the main class. Pretty simple, just creating a some producers and consumers, and a buffer, wait
+            a bit to let them work, then shut them all down.
+            ]]>
+        </text>
+        <code>
+            <![CDATA[
+            <font color="#E65100">public class</font> <font color="#999900">ProducerConsumer</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//The amount of producers and consumers.
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private static final</font> <font color="#DF7401">int</font> N_PRODUCERS = 10;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private static final</font> <font color="#DF7401">int</font> N_CONSUMERS = 8;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//The queue capacity
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private static final</font> <font color="#DF7401">int</font> CAPACITY = 5;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Create the buffer
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Buffer</font> buffer = <font color="#E65100">new</font> <font color="#999900">Buffer</font>(CAPACITY);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Create and start consumers and producers
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">Consumer</font>> consumers = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=0; i&lt;N_CONSUMERS; i++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;consumers.add(<font color="#E65100">new</font> <font color="#999900">Consumer</font>(buffer));
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">Producer</font>> producers = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=0; i&lt;N_PRODUCERS; i++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;producers.add(<font color="#E65100">new</font> <font color="#999900">Producer</font>(buffer));
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> { <font color="gray">//Give some time for producers and consumers to work
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Thread</font>.sleep(10000);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">InterruptedException</font> e) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.err.println("Main thread stopping early...");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">finally</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Stop all producers and consumers
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Producer</font> producer: producers) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;producer.stopProducing();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Consumers will not stop until all elements are consumed.
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Consumer</font> consumer: consumers) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;consumer.stopConsuming();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+            ]]>
+        </code>
     </solution>
 </resources>
