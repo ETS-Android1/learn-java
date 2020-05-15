@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <chapterdata>
+        <id>301</id>
+        <name>The need for generics</name>
+    </chapterdata>
+    <text>
+        <![CDATA[
+        If you got this far, you must be at least a bit familiar with generics in Java. If nothing else, you did
+        use multiple generic classes in the course about data structures.
+        ]]>
+    </text>
+    <title text="Definition"/>
+    <text>
+        <![CDATA[
+        A generic class is a template, or a blueprint to create traditional classes. They can take <b>type parameters</b>,
+        and behave accordingly.
+        ]]>
+    </text>
+    <boxed title="Similarity">
+        <![CDATA[
+        Note that this is much like how classes are basically blueprints to create objects. A generic class is
+        a more abstract concept, but it's a blueprint just the same.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        In other languages, this functionality is called templating (<i>C++</i>).
+        ]]>
+    </text>
+    <title text="Why is it needed?"/>
+    <text>
+        <![CDATA[
+        Let's take a simple example, where we need a class to print a string.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+          <font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">Printer</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font> text;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Printer</font>(<font color="#999900">String</font> text) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.text = text;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> print() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(text);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Trivial. But what if we have to extends the functionality of this class, to support not only strings, but
+        let's say integers, doubles, and so on.
+        ]]>
+    </text>
+    <boxed title="More classes">
+        <![CDATA[
+        The simplest, but probably worst idea is to create <i>Printer</i> class for each type we wish to support. The
+        problem with this approach is that it generates a lot of duplicate code. We'll have many classes, that all
+        basically do the same thing.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Generics <b>wasn't always part of Java</b>, only added in version 5. So, how did classes that are now generic
+        (like lists) worked back then? By using the <i>Object</i> base class:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">Printer</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">Object</font> object;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Printer</font>(<font color="#999900">Object</font> object) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.object = object;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> print() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(object.toString());
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Object</font> getPrintObject() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> object;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+<br/>
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Not a bad solution, this <i>Printer</i> will work with any objects. But there are still some undesirable
+        properties. For example, the need for casting:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#999900">Printer</font> p = <font color="#E65100">new</font> <font color="#999900">Printer</font>("text");
+<br/>p.print();
+<br/><font color="gray">//Must cast return value to string</font>
+<br/><font color="#999900">String</font> text = (<font color="#999900">String</font>)p.getPrintObject();
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        This is a downcast and thus a dangerous operation. There is no compile time warning for trying to cast
+        to a different class!
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="gray">/**
+<br/> * Later in the code...
+<br/> * We forgot the original type, and used
+<br/> * integer accidentally.
+<br/> */</font>
+<br/><font color="#DF7401">int</font> number = (<font color="#DF7401">int</font>)p.getPrintObject();
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        This will result in a nasty <i>ClassCastException</i> which is thrown at runtime.
+        ]]>
+    </text>
+    <boxed title="CTE for the win">
+        <![CDATA[
+        A compile time error, or exception is always easier to debug then a runtime exception. Thus, programmers
+        prefer to see such errors as in the above code sample as soon as possible. With generics, this is possible.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        We could of course just secure this code with the usage of the <b>instanceof</b> operator, but
+        the result is so bloated for such a simple operation as getting an object that it's not preferred.
+        ]]>
+    </text>
+</resources>

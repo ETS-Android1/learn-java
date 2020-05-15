@@ -58,7 +58,7 @@ public class LearnJavaActivity extends ThemedActivity
     /**
      * A constant that determines if ads will be loaded or not.
      */
-    public static final boolean LOAD_ADS = true;
+    public static final boolean LOAD_ADS = false;
 
     /**
      * The name of the application's shared preferences.

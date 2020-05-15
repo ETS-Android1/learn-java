@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <chapterdata>
+        <id>302</id>
+        <name>Writing generic code</name>
+    </chapterdata>
+
+    <text>
+        <![CDATA[
+        Now let's see that generic printer, finally. Check this sample for the syntax:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">Printer</font>&lt;<font color="#999900">T</font>> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">T</font> object;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Printer</font>(<font color="#999900">T</font> object) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.object = object;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> print() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(object.toString());
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">T</font> getPrintObject() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> object;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+<br/>
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        The key is that <i>T</i>, between the <i>&lt;></i> symbols. That is going to define a type parameter, and this
+        type can later be used inside the class declaration. For example it's used as
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>a member.</li>
+        <li>a parameter (in the constructor).</li>
+        <li>a return value (in the getter method).</li>
+        </ul>
+        ]]>
+    </list>
+    <boxed title="Naming convention">
+        <![CDATA[
+        Anything that can be used as a normal identifier can also be used a type parameter name. However, convention
+        is that single, capital letters are used! For some reason, <i>T</i> and <i>E</i> is especially popular.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        This class can then be constructed like this:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="gray">//A printer for strings
+</font>
+<br/><font color="#999900">Printer</font>&lt;<font color="#999900">String</font>> p1 = <font color="#E65100">new</font> <font color="#999900">Printer</font>&lt;>("text");
+<br/><font color="gray">//A printer for doubles
+</font>
+<br/><font color="#999900">Printer</font>&lt;<font color="#999900">Double</font>> p2 = <font color="#E65100">new</font> <font color="#999900">Printer</font>&lt;>(3.14);
+<br/><font color="gray">//Printer for objects, will generate warnings
+</font>
+<br/><font color="#999900">Printer</font> p3 = <font color="#E65100">new</font> <font color="#999900">Printer</font>(<font color="#E65100">new</font> <font color="#999900">Object</font>());
+<br/><font color="gray">//Proper way for object printer
+</font>
+<br/><font color="#999900">Printer</font>&lt;<font color="#999900">Object</font>> p4 = <font color="#E65100">new</font> <font color="#999900">Printer</font>&lt;>(<font color="#E65100">new</font> <font color="#999900">Object</font>());
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Not much new here, we've seen how to instantiate generic classes like collections before. Except maybe the 3. statement,
+        which also works, despite the lack of a type argument.
+        ]]>
+    </text>
+    <boxed title="Without type parameter">
+        <![CDATA[
+        The reason why no type parameters are needed is backwards compatibility. Before generics, collections were written for
+        <i>Object</i>, like the <i>Printer</i> class in the previous chapter. When generics were introduced, collections were
+        rewritten.
+        <p>
+        By allowing declarations without type parameters, old code that uses non-generic collections will still compile.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        This code is now <b>type safe</b>, if we try to do some invalid casting, we will get an error at compile
+        time.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="gray">//A printer <font color="#E65100">for</font> strings
+</font>
+<br/><font color="#999900">Printer</font>&lt;<font color="#999900">String</font>> p1 = <font color="#E65100">new</font> <font color="#999900">Printer</font>&lt;>("text");
+<br/><font color="gray">//compile time ERROR!!!
+</font>
+<br/><font color="#DF7401">int</font> number = p1.getPrintObject();
+<br/><font color="gray">//also compile time ERROR!!!
+</font>
+<br/><font color="#DF7401">int</font> number = (<font color="#DF7401">int</font>)p1.getPrintObject();
+        ]]>
+    </code>
+    <title text="Multiple type parameters"/>
+    <text>
+        <![CDATA[
+        Any number of type parameters is allowed. This shouldn't come as a surprise, since we've seen such classes before,
+        like a <i>HashMap</i>. Here is an example, and the syntax to declare them:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">Pair</font>&lt;<font color="#999900">S</font>, <font color="#999900">T</font>> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">S</font> s;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">T</font> t;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Pair</font>(<font color="#999900">S</font> s, <font color="#999900">T</font> t) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.t = t;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.s = s;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//other methods here...
+</font>
+<br/>}
+        ]]>
+    </code>
+    <title text="Generic methods"/>
+    <text>
+        <![CDATA[
+        Declaring generic methods is also allowed. This is because of classes that can't be instantiated, and have
+        static methods don't miss out on the generic fun (typically used for utility classes).
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#E65100">public abstract</font> <font color="#E65100">class</font> <font color="#999900">Utility</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#E65100">static</font> &lt;<font color="#999900">T</font>> <font color="#DF7401">void</font> print(<font color="#999900">T</font> object) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(object.toString());
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Note that the method type parameters must be given between the modifiers and the return value. Then, these types can
+        be used as the return value or parameters of the method (but only for this method).
+        <br><br>
+        You use such a method just like any traditional one:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#999900">String</font> text = "Hello";
+<br/><font color="#999900">Utility</font>.print(text);
+        ]]>
+    </code>
+    <advanced title="No primitives">
+        <![CDATA[
+        Primitives are not allowed as generic arguments (discussed this already in the data structures course). This
+        isn't a problem however, because the wrapper classes and autoboxing, primitives can also be used seamlessly.
+        Just make sure you use the wrapper classes when instantiating generic classes.
+        ]]>
+    </advanced>
+
+</resources>

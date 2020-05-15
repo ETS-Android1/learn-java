@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Course: Generics -->
+
+<resources>
+    <coursedata>
+        <id>30</id>
+        <name>Generics</name>
+        <finished>false</finished>
+    </coursedata>
+    <chapter>301</chapter>
+    <chapter>302</chapter>
+    <chapter>303</chapter>
+    <chapter>304</chapter>
+    <task>301</task>
+    <exam>30</exam>
+</resources>
