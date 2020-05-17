@@ -42,6 +42,8 @@
     <string name="orange_theme">Orange</string>
     <string name="blue_theme">Blue</string>
     <string name="dark_theme">Dark</string>
+    <string name="screen">Screen</string>
+    <string name="keep_awake_description">Prevent screen from turning off</string>
 
     <!-- Notification data -->
     <string name="notification_channel_name" translatable="false">LearnJava notification channel</string>

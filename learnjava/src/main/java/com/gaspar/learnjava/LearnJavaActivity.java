@@ -84,7 +84,7 @@ public class LearnJavaActivity extends ThemedActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Executors.newSingleThreadExecutor().execute(() -> { //initialize the database related variables
+        LearnJavaDatabase.DB_EXECUTOR.execute(() -> { //initialize the database related variables
             try { //parse course objects
                 CoursesActivity.setParsedCourses(CourseParser.getInstance().parseCourses(this));
             } catch (Exception e) {

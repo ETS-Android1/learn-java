@@ -89,7 +89,7 @@ public class ExamNotificationReceiver extends BroadcastReceiver {
     @UiThread
     static void postExamNotification(Exam failedExam, Context context) {
         if(!SettingsActivity.examNotificationsEnabled(context)) return; //do nothing if notifications are disabled
-        Executors.newSingleThreadExecutor().execute(() -> {
+        LearnJavaDatabase.DB_EXECUTOR.execute(() -> {
             if(CoursesActivity.coursesNotParsed()) {
                 try {
                     CoursesActivity.getParsedCourses().addAll(CourseParser.getInstance().parseCourses(context));

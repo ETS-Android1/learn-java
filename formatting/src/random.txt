@@ -1,0 +1,26 @@
+package com.learnjava.MainClass
+
+import java.util.List;
+
+public static void myMethod(MyClass mc) {
+	byte[] whatever = 1;
+	mc.doShit(); //most epic comment
+	
+	//Comment with capital letter.
+	
+	List<String> list = new ArrayList<>();
+	
+	System.out.println("we have ");
+	
+	MyClass other = mc;
+	this.member = member;
+	
+	@Override
+	do {
+	   whatever++;
+	} while (whatever<5);
+	
+    /*
+	* Multilined comment.
+	*/
+}
