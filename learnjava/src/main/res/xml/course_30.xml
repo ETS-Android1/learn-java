@@ -10,8 +10,10 @@
     </coursedata>
     <chapter>301</chapter>
     <chapter>302</chapter>
+    <!--
     <chapter>303</chapter>
     <chapter>304</chapter>
+    -->
     <task>301</task>
     <exam>30</exam>
 </resources>

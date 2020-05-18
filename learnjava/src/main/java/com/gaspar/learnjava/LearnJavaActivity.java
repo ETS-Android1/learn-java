@@ -38,7 +38,6 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.Executors;
 
 public class LearnJavaActivity extends ThemedActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -58,7 +57,7 @@ public class LearnJavaActivity extends ThemedActivity
     /**
      * A constant that determines if ads will be loaded or not.
      */
-    public static final boolean LOAD_ADS = false;
+    public static final boolean LOAD_ADS = true;
 
     /**
      * The name of the application's shared preferences.

@@ -164,6 +164,22 @@
 <br/><font color="#999900">Utility</font>.print(text);
         ]]>
     </code>
+    <title text="Generic interfaces"/>
+    <text>
+        <![CDATA[
+        Interfaces can also be generic. This is not surprising, as interfaces are just fully abstract classes, so it makes
+        sense for interfaces to also support generics. We've seen multiple examples:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li><b>java.lang.Comparable</b>: The type parameter is the object type that will be compared.</li>
+        <li><b>java.util.concurrent.Callable</b>: The type parameter is the return value of the process.</li>
+        <li>All interfaces in the collections framework (List, Map, Set, ...)</li>
+        </ul>
+        ]]>
+    </list>
     <advanced title="No primitives">
         <![CDATA[
         Primitives are not allowed as generic arguments (discussed this already in the data structures course). This
