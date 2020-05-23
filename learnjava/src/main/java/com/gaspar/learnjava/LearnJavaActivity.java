@@ -38,7 +38,6 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.Executors;
 
 public class LearnJavaActivity extends ThemedActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -46,14 +45,18 @@ public class LearnJavaActivity extends ThemedActivity
     /**
      * Debug constant. If this is set to true the application is in debug mode. This makes all courses and tasks openable,
      * all exams can be started at any time.
+     * <p>
+     * DO NOT SET THIS HERE, it's set automatically from the build variant.
      */
-    public static final boolean DEBUG = true;
+    public static boolean DEBUG;
 
     /**
      * Constant that determines if ads will or won't be test(debug) ads. This only has a real effect if {@value LOAD_ADS}
      * is true.
+     * <p>
+     * DO NOT SET THIS HERE, it's set automatically from the build variant.
      */
-    public static final boolean DEBUG_ADS = true;
+    public static boolean DEBUG_ADS;
 
     /**
      * A constant that determines if ads will be loaded or not.
@@ -84,7 +87,15 @@ public class LearnJavaActivity extends ThemedActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Executors.newSingleThreadExecutor().execute(() -> { //initialize the database related variables
+        //check if it's debug or release, and set ads accordingly
+        if(getResources().getBoolean(R.bool.is_debug)) {
+            DEBUG = true;
+            DEBUG_ADS = true;
+        } else { //release
+            DEBUG = false;
+            DEBUG_ADS = false;
+        }
+        LearnJavaDatabase.DB_EXECUTOR.execute(() -> { //initialize the database related variables
             try { //parse course objects
                 CoursesActivity.setParsedCourses(CourseParser.getInstance().parseCourses(this));
             } catch (Exception e) {

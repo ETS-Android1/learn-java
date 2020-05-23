@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.widget.RadioGroup;
 import android.widget.Switch;
@@ -24,17 +25,36 @@ import com.gaspar.learnjava.utils.ThemeUtils;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.concurrent.Executors;
-
 /**
  * Activity to show app settings.
  */
 public class SettingsActivity extends ThemedActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    /**
+     * Preference object that can be used by the methods of this activity.
+     */
+    private SharedPreferences prefs;
+
+    /**
+     * Constant for the 'exam notifications enabled' preference.
+     */
+    private static final String EXAM_NOTIFICATIONS_PREF_NAME = "exam_notification_pref_name";
+
+    /**
+     * Constant for the 'app difficulty' preference.
+     */
+    public static final String DIFFICULTY_PREF_NAME = "difficulty";
+
+    /**
+     * Constant for the 'keep screen on' preference.
+     */
+    private static final String KEEP_AWAKE_PREF_NAME = "keep_awake_pref_name";
+
     @Override
     public void onCreate(Bundle savedState) {
         super.onCreate(savedState);
         setContentView(R.layout.settings);
+        prefs = getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
         setUpUI();
     }
 
@@ -49,19 +69,10 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        initNotificationSettings();
+        initNotificationSettings(); //show up to date values in the settings screen
         initDifficultySettings();
+        initScreenSettings();
     }
-
-    /**
-     * Constant for the 'exam notifications enabled' preference.
-     */
-    private static final String EXAM_NOTIFICATIONS_PREF_NAME = "exam_notification_pref_name";
-
-    /**
-     * Constant for the 'app difficulty' preference.
-     */
-    public static final String DIFFICULTY_PREF_NAME = "difficulty";
 
     /**
      * Called when a style selector button is clicked.
@@ -96,7 +107,6 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
      * Initializes the notification related settings.
      */
     private void initNotificationSettings() {
-        final SharedPreferences prefs = getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
         Switch examNotificationSwitch = findViewById(R.id.examNotificationsSwitch);
         examNotificationSwitch.setChecked(prefs.getBoolean(EXAM_NOTIFICATIONS_PREF_NAME, true)); //set exam notification status
         examNotificationSwitch.setOnCheckedChangeListener((compoundButton, checked) ->
@@ -104,10 +114,26 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
     }
 
     /**
+     * Initializes screen related settings such as "keep screen awake".
+     */
+    private void initScreenSettings() {
+        //keep awake functionality
+        Switch keepAwakeSwitch = findViewById(R.id.keepAwakeSwitch);
+        keepAwakeSwitch.setChecked(prefs.getBoolean(KEEP_AWAKE_PREF_NAME, false)); //false by default
+        keepAwakeSwitch.setOnCheckedChangeListener((compoundButton, checked) -> {
+                prefs.edit().putBoolean(KEEP_AWAKE_PREF_NAME, checked).apply();
+                if(checked) { //update settings activity as well
+                    getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                } else { //turn it off
+                    getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                }
+        });
+    }
+
+    /**
      * Initializes the difficulty related settings.
      */
     private void initDifficultySettings() {
-        final SharedPreferences prefs = getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
         RadioGroup group = findViewById(R.id.difficultyButtons);
         @Difficulties String currentDifficulty = prefs.getString(DIFFICULTY_PREF_NAME, Difficulties.DEFAULT);
         switch (currentDifficulty) { //set status according to preferences
@@ -148,7 +174,7 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
         builder.setPositiveButton(R.string.ok, (dialogInterface, i) -> {
             //deletes the contents of the database, and then re-validates it, filling it with default values.
             dialogInterface.dismiss();
-            Executors.newSingleThreadExecutor().execute(() -> {
+            LearnJavaDatabase.DB_EXECUTOR.execute(() -> {
                 LearnJavaDatabase.resetDatabase(SettingsActivity.this);
                 LearnJavaDatabase.validateDatabase(SettingsActivity.this);
             });
@@ -198,6 +224,14 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
     public static boolean examNotificationsEnabled(Context context) {
         final SharedPreferences prefs = context.getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
         return prefs.getBoolean(EXAM_NOTIFICATIONS_PREF_NAME, true);
+    }
+
+    /**
+     * Checks if the keep screen awake function is enabled.
+     */
+    public static boolean keepAwakeEnabled(Context context) {
+        final SharedPreferences prefs = context.getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
+        return prefs.getBoolean(KEEP_AWAKE_PREF_NAME, false); //false by default
     }
 
     /**

@@ -18,6 +18,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * A singleton class representing the app database.
@@ -28,6 +30,11 @@ import java.util.List;
 public abstract class LearnJavaDatabase extends RoomDatabase {
 
     private static LearnJavaDatabase instance;
+
+    /**
+     * Will be used to execute queries in the background.
+     */
+    public static final ExecutorService DB_EXECUTOR = Executors.newSingleThreadExecutor();
 
     public static LearnJavaDatabase getInstance(@NonNull Context context) {
         if(instance == null) {

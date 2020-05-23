@@ -171,7 +171,7 @@ public class Exam implements Serializable {
      * @param exam The exam that must be started.
      */
     public static void startExamActivity(ExamStatusDisplayerTask.Result result, Exam exam) {
-        Executors.newSingleThreadExecutor().execute(() -> { //register current epoch in database
+        LearnJavaDatabase.DB_EXECUTOR.execute(() -> { //register current epoch in database
             LearnJavaDatabase.getInstance(result.activity).getExamDao()
                     .updateExamLastStarted(exam.getId(), System.currentTimeMillis());
         });

@@ -42,6 +42,8 @@
     <string name="orange_theme">Orange</string>
     <string name="blue_theme">Blue</string>
     <string name="dark_theme">Dark</string>
+    <string name="screen">Screen</string>
+    <string name="keep_awake_description">Prevent screen from turning off</string>
 
     <!-- Notification data -->
     <string name="notification_channel_name" translatable="false">LearnJava notification channel</string>
@@ -123,7 +125,7 @@
     <string name="congratulations_info_1">You\'ve passed all exams! Make sure to also do the tasks of each course.</string>
     <string name="congratulations_info_2">Additional courses will be added in the future. Next planned courses:</string>
     <string name="do_not_show_again">Don\'t show this again.</string>
-    <string name="next_planned_course">Generics and Java 8 courses.</string>
+    <string name="next_planned_course">Java 8 course.</string>
 
     <!-- Contact and rate -->
     <string name="contact_me">Contact me</string>

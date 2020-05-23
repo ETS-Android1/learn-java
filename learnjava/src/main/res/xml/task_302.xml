@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <taskdata>
+        <id>302</id>
+        <name>Improved data structures</name>
+    </taskdata>
+    <boxed title="Dependency">
+        <![CDATA[
+        This task assumes you've completed the previous one, generic data structures.
+        ]]>
+    </boxed>
+    <title text="Refactoring"/>
+    <text>
+        <![CDATA[
+        Refactoring means making significant changes in an already written codebase. Before you begin this
+        task, refactor the improved data structures to have a common base class, <i>MyCollection</i>. This class
+        should be generic.
+        ]]>
+    </text>
+    <boxed title="MyCollection details">
+        <![CDATA[
+        The base class should provide methods to to iterate over the elements of the collections. This can be done
+        by maintaining a reference to the current element, or storing the current index.
+        <br><br>
+        Also make the base class have abstract <i>add</i> and <i>remove</i> methods so every collection has these operations.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        The <i>JDK</i> has interfaces for such behaviour called <b>java.util.Iterator</b> and <b>java.lang.Iterable</b>.
+        They have other, difficult to implement methods. For our purposes, a simple iterator is enough.
+        ]]>
+    </text>
+    <boxed title="Iterator implementation">
+        <![CDATA[
+        When the <i>next</i> method is called but there are no more elements, a <i>NoSuchElementException</i> should be thrown.
+        Also have a <i>hasNext</i> method which can tell if there are more elements or not, and a method which can reset the
+        iterator to the beginning.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        The reason we need this common base class and the iterator functionality is so that a utility
+        class can be created.
+        ]]>
+    </text>
+    <title text="Utility class"/>
+    <text>
+        <![CDATA[
+        Create an abstract class which has generic methods. The following methods are needed:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>Printing a data structure (for any type).</li>
+        <li>Summing a data structure (only for elements that are <i>Number</i> subclasses).</li>
+        <li>Minimum and maximum finder methods (only for <i>Comparable</i> elements).</li>
+        </ul>
+        ]]>
+    </list>
+    <solution>
+        <text>
+            <![CDATA[
+            The abstract base class:
+            ]]>
+        </text>
+        <code>
+            <![CDATA[
+<font color="#E65100">public</font> <font color="#E65100">abstract</font> <font color="#E65100">class</font> <font color="#999900">MyCollection</font>&lt;<font color="#999900">T</font>> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//used by the iteration
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> <font color="#DF7401">int</font> currentIndex;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//the iterator method
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#E65100">abstract</font> <font color="#999900">T</font> next() <font color="#E65100">throws</font> <font color="#999900">NoSuchElementException</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//helper method which can detect <font color="#E65100">if</font> we're at the end
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">boolean</font> hasNext() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(currentIndex == size()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> false;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> true;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> resetIterator() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;currentIndex = 0;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#E65100">abstract</font> <font color="#DF7401">void</font> add(<font color="#999900">T</font> element);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#E65100">abstract</font> <font color="#999900">T</font> remove(<font color="#999900">T</font> element);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#E65100">abstract</font> <font color="#DF7401">int</font> size();
+<br/>}
+            ]]>
+        </code>
+        <text>
+            <![CDATA[
+            Here is the custom array list class, only showing the new method, <i>next</i>. All the other methods were
+            already implemented.
+            ]]>
+        </text>
+        <code>
+            <![CDATA[
+<font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">MyArrayList</font>&lt;<font color="#999900">T</font>> <font color="#E65100">extends</font> <font color="#999900">MyCollection</font>&lt;<font color="#999900">T</font>> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Other methods and members are the same as in the previous task.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;*/</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">T</font> next() <font color="#E65100">throws</font> <font color="#999900">NoSuchElementException</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//check <font color="#E65100">if</font> we can get next
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(!hasNext()) <font color="#E65100">throw</font> <font color="#E65100">new</font> <font color="#999900">NoSuchElementException</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//next element exists
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> get(currentIndex++);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+            ]]>
+        </code>
+        <text>
+            <![CDATA[
+            <i>MyLinkedList</i> gets exactly the same <i>next</i> method. Instead, lets look at the improved stack:
+            ]]>
+        </text>
+        <code>
+            <![CDATA[
+<font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">MyStack</font>&lt;<font color="#999900">T</font>> <font color="#E65100">extends</font> <font color="#999900">MyCollection</font>&lt;<font color="#999900">T</font>> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Other methods and members are unchanged.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;*/</font>
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">T</font> next() <font color="#E65100">throws</font> <font color="#999900">NoSuchElementException</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//check <font color="#E65100">if</font> we can get next
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(!hasNext()) <font color="#E65100">throw</font> <font color="#E65100">new</font> <font color="#999900">NoSuchElementException</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//next element exists
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> list.get(currentIndex++);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> add(<font color="#999900">T</font> element) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;push(element);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">T</font> remove(<font color="#999900">T</font> element) <font color="#E65100">throws</font> <font color="#999900">UnsupportedOperationException</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//we don't allow removing by element with a stack
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">throw</font> <font color="#E65100">new</font> <font color="#999900">UnsupportedOperationException</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+            ]]>
+        </code>
+        <text>
+            <![CDATA[
+            Now that we have the improved data structures, we can write the utility class:
+            ]]>
+        </text>
+        <code>
+            <![CDATA[
+<font color="#E65100">public</font> <font color="#E65100">abstract</font> <font color="#E65100">class</font> <font color="#999900">MyUtils</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//print method, accepts any collection
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">void</font> printCollection(<font color="#999900">MyCollection</font>&lt;?> collection) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;collection.resetIterator(); <font color="gray">//must be done!
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">while</font>(collection.hasNext()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(collection.next().toString());
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Sum method, accepts only numeric collection
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">double</font> sumCollection(<font color="#999900">MyCollection</font>&lt;? <font color="#E65100">extends</font> <font color="#999900">Number</font>> collection) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;collection.resetIterator(); <font color="gray">//must be done!
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> sum = 0;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">while</font>(collection.hasNext()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum += collection.next().doubleValue();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> sum;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Max method, only accepts comparable collections
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#E65100">static</font> &lt;<font color="#999900">T</font> <font color="#E65100">extends</font> <font color="#999900">Comparable</font>&lt;<font color="#999900">T</font>>> <font color="#999900">T</font> maximum(<font color="#999900">MyCollection</font>&lt;<font color="#999900">T</font>> collection) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;collection.resetIterator(); <font color="gray">//must be done!
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">T</font> max = collection.next();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">while</font>(collection.hasNext()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">T</font> element = collection.next();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> compare = element.compareTo(max);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(compare >= 1) { <font color="gray">//we found a <font color="#E65100">new</font> max
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;max = element;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> max;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Min method, only accepts comparable collections
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#E65100">static</font> &lt;<font color="#999900">T</font> <font color="#E65100">extends</font> <font color="#999900">Comparable</font>&lt;<font color="#999900">T</font>>> <font color="#999900">T</font> minimum(<font color="#999900">MyCollection</font>&lt;<font color="#999900">T</font>> collection) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;collection.resetIterator(); <font color="gray">//must be done!
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">T</font> min = collection.next();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">while</font>(collection.hasNext()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">T</font> element = collection.next();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> compare = element.compareTo(min);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(compare &lt;= -1) { <font color="gray">//we found a <font color="#E65100">new</font> min
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;min = element;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> min;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+            ]]>
+        </code>
+        <text>
+            <![CDATA[
+            As you can see, the iterator functionality provided by the base class allowed us to perform
+            these operations.
+            ]]>
+        </text>
+    </solution>
+</resources>

@@ -29,8 +29,6 @@ import com.gaspar.learnjava.curriculum.Status;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.utils.ThemeUtils;
 
-import java.util.concurrent.Executors;
-
 import cn.iwgang.countdownview.CountdownView;
 
 /**
@@ -180,7 +178,7 @@ public class ExamActivity extends ThemedActivity {
      * @param correctQuestions The amount of questions correctly answered (points).
      */
     private void displayAndUpdateExamResult(double correctQuestions) {
-        Executors.newSingleThreadExecutor().execute(() -> { //first launch the top score updating
+        LearnJavaDatabase.DB_EXECUTOR.execute(() -> { //first launch the top score updating
             int prevScore = LearnJavaDatabase.getInstance(this).getExamDao().queryTopScore(exam.getId());
             if(correctQuestions > prevScore) { //this works for NEVER_STARTED as well, as its value is -1
                 LearnJavaDatabase.getInstance(this).getExamDao()
@@ -194,7 +192,7 @@ public class ExamActivity extends ThemedActivity {
         if (percentage >= Exam.getMinimumPassPercentage(this)) { //pass
             resultLayout.setBackgroundResource(R.drawable.correct_answer_background);
             ((TextView)resultLayout.findViewById(R.id.examResultText)).setText(R.string.exam_passed);
-            Executors.newSingleThreadExecutor().execute(() -> {
+            LearnJavaDatabase.DB_EXECUTOR.execute(() -> {
                 LearnJavaDatabase.getInstance(ExamActivity.this) //set this exam completed
                         .getExamDao().updateExamCompletionStatus(exam.getId(), Status.COMPLETED);
                 Course nextCourse = Course.findNextCourse(exam.getId());

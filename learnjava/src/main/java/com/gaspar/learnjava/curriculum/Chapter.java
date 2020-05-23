@@ -135,7 +135,7 @@ public class Chapter implements Serializable {
     @UiThread
     public void markChapterAsCompleted(Context context) {
         chapterStatusUpdatePending = true; //start a chapter status update
-        Executors.newSingleThreadExecutor().execute(() -> {
+        LearnJavaDatabase.DB_EXECUTOR.execute(() -> {
             ChapterStatus newStatus = new ChapterStatus(id,
                     com.gaspar.learnjava.curriculum.Status.COMPLETED);
             LearnJavaDatabase.getInstance(context).getChapterDao().updateChapterStatus(newStatus);

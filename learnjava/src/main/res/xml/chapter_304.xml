@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <chapterdata>
+        <id>304</id>
+        <name>Wildcards</name>
+    </chapterdata>
+    <text>
+        <![CDATA[
+        Wildcard are used to accept generic classes with any (or bounded) type arguments.
+        ]]>
+    </text>
+    <title text="Support any type"/>
+    <text>
+        <![CDATA[
+        Here is a demonstration on why such functionality is necessary. For this, I'll use the <i>Calculator</i>
+        class from the last chapter:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">Calculator</font>&lt;<font color="#999900">T</font> <font color="#E65100">extends</font> <font color="#999900">Number</font>> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">double</font> currentValue;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Calculator</font>(<font color="#999900">T</font> startingValue) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;currentValue = startingValue.doubleValue();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> add(<font color="#999900">T</font> number) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//we have access to Number methods too, not only Object methods!
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;currentValue += number.doubleValue();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> currentValue;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> subtract(<font color="#999900">T</font> number) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//we have access to Number methods too, not only Object methods!
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;currentValue += number.doubleValue();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> currentValue;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> getValue() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> currentValue;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        We can add numbers to the value of the calculator. Another reasonable function would be the ability
+        to add another <i>Calculator</i> object to it as well (the value of the calculator object).
+        <br><br>
+        It's of course possible to do it like this, but this isn't a 'generic' solution and demonstrates nothing
+        about wildcards:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#999900">Calculator</font>&lt;<font color="#999900">Double</font>> calc1 = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(-3.2);
+<br/><font color="#999900">Calculator</font>&lt;<font color="#999900">Double</font>> calc2 = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(1.4);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>calc1.add(calc2.getValue());
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Instead, we create a new method inside the class to handle this:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#E65100">public</font> <font color="#DF7401">double</font> addCalculator(<font color="#999900">Calculator</font>&lt;<font color="#999900">T</font>> other) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;currentValue += other.currentValue;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> currentValue;
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Works, but there is a problem. Since <i>T</i> is the type if the current calculator, this method will
+        only accept calculators with the same type parameter.
+        <p>
+        It's however reasonable to add any type of calculator to the current one!
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#999900">Calculator</font>&lt;<font color="#999900">Double</font>> calc1 = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(-3.2);
+<br/><font color="#999900">Calculator</font>&lt;<font color="#999900">Double</font>> calc2 = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(1.4);
+<br/>
+<br/>calc1.addCalculator(calc2); <font color="gray">//works
+</font>
+<br/>
+<br/><font color="#999900">Calculator</font>&lt;<font color="#999900">Integer</font>> calc3 = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(5);
+<br/>
+<br/><font color="gray">//Does not work, can't add Integer calculator to Double one.
+</font>
+<br/>calc1.addCalculator(calc3);
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        This is where the wildcards come in. Instead of <i>T</i>, you can use a <b>?</b> symbol to indicate that
+        the class should be accepted with any possible type argument.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#E65100">public</font> <font color="#DF7401">double</font> addCalculator(<font color="#999900">Calculator</font>&lt;?> other) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;currentValue += other.currentValue;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> currentValue;
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        The method will now accept any calculator. There is no need to put a bound <i>(Number)</i> on this wildcard,
+        since the type is already checked when creating the calculator object.
+        ]]>
+    </text>
+    <title text="Simulating inheritance"/>
+    <text>
+        <![CDATA[
+        By default, Java generics does not behave the way most programmers would expect, regarding inheritance. Let's
+        first see how things work without generics:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">void</font> print(<font color="#999900">Object</font> o) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(o.toString());
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        This method will take any object, since all of them extend <i>Object</i> and so they <b>are</b> also <i>Object</i>s
+        (remember, polymorphism).
+        ]]>
+    </text>
+    <boxed title="Introduce generics">
+        <![CDATA[
+        Now make a method that does the same, but for a <i>List</i>. <i>List</i> is a generic interface, and this'll
+        introduce an undesired side effect.
+        ]]>
+    </boxed>
+    <code>
+        <![CDATA[
+        <font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">void</font> printList(<font color="#999900">List</font>&lt;<font color="#999900">Object</font>> list) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Object</font> o: list) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(o.toString());
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Naively, one would try to use this method with not only <i>List&lt;Object></i>, but with any lists. This, however
+        will fail:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#999900">List</font>&lt;<font color="#999900">String</font>> strings = <font color="#999900">Arrays</font>.asList("<font color="#999900">Ha</font>","<font color="#999900">Ha</font>","<font color="#999900">Ha</font>");
+<br/><font color="gray">//Compile time error?!
+</font>
+<br/>printList(strings);
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        The problem is that despite <i>String</i> extending <i>Object</i>, <i>List&lt;String></i> <b>DOES NOT</b> extend
+        <i>List&lt;Object></i>.
+        ]]>
+    </text>
+    <boxed title="True in general">
+        <![CDATA[
+        This effect is true for any generic class. There is no inheritance between <i>GenericClass&lt;A></i> and
+        <i>GenericClass&lt;B></i>, not even when there is a connection between <i>A</i> and <i>B</i>.
+        <p>
+        This is because the compiler creates separate classes from the generic class.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        To get around this, and make the method work as expected, we have to use wildcards:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">void</font> printList(<font color="#999900">List</font>&lt;?> list) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Object</font> o: list) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(o.toString());
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        ]]>
+    </code>
+    <title text="Bounded wildcards"/>
+    <text>
+        <![CDATA[
+        Similarly to type parameters, wildcards can also be bounded. Let's say we must sum the elements of
+        a <i>List</i>.
+        <br><br>
+        Here are some ideas. These are just suggestions, they won't compile.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">double</font> sumList(<font color="#999900">List</font>&lt;?> list) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Due to type erasure, we can only use
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Object's methods here.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>}
+<br/>
+<br/><font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">double</font> sumList(<font color="#999900">List</font>&lt;<font color="#999900">Number</font>> list) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Can use Number methods, but this will
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;only accept List&lt;Number>.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        To solve this, let's bound the wildcard:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">double</font> sumList(<font color="#999900">List</font>&lt;? <font color="#E65100">extends</font> <font color="#999900">Number</font>> list) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> sum = 0;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Number</font> number: list) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum += number.doubleValue();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> sum;
+<br/>}
+        ]]>
+    </code>
+</resources>

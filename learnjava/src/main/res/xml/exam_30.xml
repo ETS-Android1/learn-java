@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Exam of course 'Generics' -->
+
+<resources>
+    <examdata>
+        <id>30</id>
+        <questionAmount>20</questionAmount>
+        <timeLimit>25</timeLimit>
+        <finished>true</finished>
+    </examdata>
+
+    <!-- Questions about introduction -->
+    <question type="single_choice">
+        <text>What is a generic class?</text>
+        <answer>A class blueprint for collections.</answer>
+        <answer>A class that is for generic purposes.</answer>
+        <answer>A class that cannot be instantiated.</answer>
+        <answer>A class blueprint that can take type parameters.</answer>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is another name for generic classes?</text>
+        <answer>multipurpose classes</answer>
+        <answer>templates</answer>
+        <answer>interfaces</answer>
+        <answer>abstract classes</answer>
+        <correct>1</correct>
+    </question>
+    <question type="true_false">
+        <text>Java didn't have generics support in the beginning.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>Even the first versions of Java had generics support.</text>
+        <correct>false</correct>
+    </question>
+
+    <!-- Questions about basic Java generics -->
+    <question type="single_choice">
+        <text>Why does the compiler allow creating objects from generic classes without specifying the type parameters?</text>
+        <answer>So that programmers who forget the types don't get exceptions.</answer>
+        <answer>To be backwards compatible with older code.</answer>
+        <answer>To allow primitives as types.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="multi_choice">
+        <text>What are good names for type parameters, by convention?</text>
+        <answer>T</answer>
+        <answer>Type</answer>
+        <answer>Element</answer>
+        <answer>E</answer>
+        <correct>0</correct>
+        <correct>3</correct>
+    </question>
+    <question type="multi_choice">
+        <text>How can a type parameter be used in a generic class?</text>
+        <answer>As a return value.</answer>
+        <answer>As a parameter.</answer>
+        <answer>To create new objects of that type.</answer>
+        <answer>To create arrays of that type.</answer>
+        <correct>0</correct>
+        <correct>1</correct>
+    </question>
+    <question type="true_false">
+        <text>The type parameters must be specified when creating a generic class.</text>
+        <correct>false</correct>
+    </question>
+    <question type="single_choice">
+        <text>What happens on creating an object from a generic class without specifying the type parameters?</text>
+        <answer>All type parameters will be Object-s</answer>
+        <answer>A compile time error happens, as that is not allowed.</answer>
+        <answer>The compiler will try to guess the best type parameters.</answer>
+        <answer>A runtime exception is thrown, as that is not allowed.</answer>
+        <correct>0</correct>
+    </question>
+    <question type="true_false">
+        <text>Primitives are allowed as type arguments.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>Primitive wrappers are allowed as type arguments.</text>
+        <correct>true</correct>
+    </question>
+    <question type="single_choice">
+        <text>How many type parameters can be specified in generic classes.</text>
+        <answer>1.</answer>
+        <answer>A maximum of 2.</answer>
+        <answer>A maximum of 3.</answer>
+        <answer>Any number of parameters.</answer>
+        <correct>3</correct>
+    </question>
+    <!-- lol -->
+    <question type="multi_choice">
+        <text>Which of these can be generic?</text>
+        <answer>Classes.</answer>
+        <answer>Methods.</answer>
+        <answer>Packages.</answer>
+        <answer>Interfaces.</answer>
+        <correct>0</correct>
+        <correct>1</correct>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is a typical use of generic methods?</text>
+        <answer>Constructors.</answer>
+        <answer>Static utility methods.</answer>
+        <answer>Generic methods are not allowed.</answer>
+        <answer>Generic getters and setters.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="true_false">
+        <text>Methods can be generic.</text>
+        <correct>true</correct>
+    </question>
+
+    <!-- Questions about bounding -->
+    <question type="single_choice">
+        <text>What is type erasure?</text>
+        <answer>A generic object is created without specifying the type parameters.</answer>
+        <answer>Generic objects are reduced to their upper bounds inside the generic class.</answer>
+        <answer>An upper bound on type parameters.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="true_false">
+        <text>Type erasure always reduces to Object.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>Upper bounds can influence type erasure.</text>
+        <correct>true</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is true about a bounded type parameter.</text>
+        <answer>The compiler will enforce the correct type.</answer>
+        <answer>It's only checked at runtime whether the bound condition is satisfied.</answer>
+        <answer>Only 2 bounds can be given, a class and an interface.</answer>
+        <answer>Only classes can be upper bounds.</answer>
+        <correct>0</correct>
+    </question>
+    <question type="single_choice">
+        <text>How many upper bounds (or bound) can a type parameter have?</text>
+        <answer>1</answer>
+        <answer>2</answer>
+        <answer>5</answer>
+        <answer>Any number of bounds.</answer>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>Any number of interfaces can be specified as upper bounds.</text>
+        <correct>true</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these are valid orders to specify upper bounds?</text>
+        <answer>A class.</answer>
+        <answer>A class and an interface.</answer>
+        <answer>an interface and a class.</answer>
+        <answer>An interface.</answer>
+        <correct>0</correct>
+        <correct>1</correct>
+        <correct>3</correct>
+    </question>
+    <question type="text">
+        <text>What is the base class for numeric values?</text>
+        <correct>Number</correct>
+        <correct>java.lang.Number</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to declare upper bounds?</text>
+        <correct>extends</correct>
+    </question>
+    <question type="true_false">
+        <text>Interface upper bounds are declared with the 'extends' keyword.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>Interface upper bounds are declared with the 'implements' keyword.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>Interfaces can't be upper bounds.</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>Which symbol is used to separate multiple upper bounds on one parameter?</text>
+        <correct><![CDATA[
+            &
+        ]]></correct>
+    </question>
+
+    <!-- Questions about wildcards -->
+    <question type="text">
+        <text>Which symbol is used to declare a wildcard?</text>
+        <correct>?</correct>
+    </question>
+    <question type="true_false">
+        <text>Wildcards can be bounded.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>Wildcards cannot be upper bounded.</text>
+        <correct>false</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is a wildcard?</text>
+        <answer>A placeholder for a type parameter.</answer>
+        <answer>A bounded type parameter.</answer>
+        <answer>A generic class which can accept any type parameter.</answer>
+        <correct>0</correct>
+    </question>
+
+    <!--
+        <question type="single_choice">
+            <text></text>
+            <answer></answer>
+            <answer></answer>
+            <answer></answer>
+            <answer></answer>
+            <correct></correct>
+        </question>
+
+        <question type="multi_choice">
+            <text></text>
+            <answer></answer>
+            <answer></answer>
+            <answer></answer>
+            <answer></answer>
+            <correct></correct>
+            <correct></correct>
+        </question>
+
+        <question type="true_false">
+            <text></text>
+            <correct></correct>
+        </question>
+
+        <question type="text">
+            <text></text>
+            <correct></correct>
+            <correct></correct>
+        </question>
+        -->
+</resources>

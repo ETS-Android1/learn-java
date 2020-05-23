@@ -196,6 +196,23 @@
                        tools:ignore="ButtonStyle" />
 
                </LinearLayout>
+               <TextView
+                   android:id="@+id/textView8"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="@string/screen"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/themeSelectors" />
+
+               <Switch
+                   android:id="@+id/keepAwakeSwitch"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_margin="@dimen/margin"
+                   android:switchPadding="@dimen/padding"
+                   android:text="@string/keep_awake_description"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
            </androidx.constraintlayout.widget.ConstraintLayout>
 

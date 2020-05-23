@@ -145,7 +145,7 @@ public class TaskActivity extends ThemedActivity implements NavigationView.OnNav
      */
     @UiThread
     public void updateTaskStatus(boolean completed, int taskId) {
-        Executors.newSingleThreadExecutor().execute(() -> {
+        LearnJavaDatabase.DB_EXECUTOR.execute(() -> {
             int status = completed ? com.gaspar.learnjava.curriculum.Status.COMPLETED
                     : com.gaspar.learnjava.curriculum.Status.UNLOCKED;
             TaskStatus newStatus = new TaskStatus(taskId, status);

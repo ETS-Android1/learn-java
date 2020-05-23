@@ -2,6 +2,7 @@ package com.gaspar.learnjava;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 
 import androidx.annotation.Nullable;
@@ -44,6 +45,14 @@ public class ThemedActivity extends AppCompatActivity {
             recreate();
         }
         recolorToolbar();
+
+        //check for "keep awake" status update
+        boolean keepAwake = SettingsActivity.keepAwakeEnabled(this);
+        if(keepAwake) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        } else { //turn it off
+            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        }
     }
 
     /**

@@ -11,6 +11,12 @@
         how the <i>JDK</i> lists work internally.
         ]]>
     </text>
+    <advanced title="Needed later">
+        <![CDATA[
+        The result of this task will be needed in a task of a later course! Be sure to do it, and that it's
+        working correctly.
+        ]]>
+    </advanced>
     <boxed title="Without generics">
         <![CDATA[
         Since we didn't learn how to code generic classes yet, your lists need only to support one type of
