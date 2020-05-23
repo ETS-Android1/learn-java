@@ -7,7 +7,7 @@
         <id>30</id>
         <questionAmount>20</questionAmount>
         <timeLimit>25</timeLimit>
-        <finished>false</finished>
+        <finished>true</finished>
     </examdata>
 
     <!-- Questions about introduction -->
@@ -116,8 +116,99 @@
     </question>
 
     <!-- Questions about bounding -->
+    <question type="single_choice">
+        <text>What is type erasure?</text>
+        <answer>A generic object is created without specifying the type parameters.</answer>
+        <answer>Generic objects are reduced to their upper bounds inside the generic class.</answer>
+        <answer>An upper bound on type parameters.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="true_false">
+        <text>Type erasure always reduces to Object.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>Upper bounds can influence type erasure.</text>
+        <correct>true</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is true about a bounded type parameter.</text>
+        <answer>The compiler will enforce the correct type.</answer>
+        <answer>It's only checked at runtime whether the bound condition is satisfied.</answer>
+        <answer>Only 2 bounds can be given, a class and an interface.</answer>
+        <answer>Only classes can be upper bounds.</answer>
+        <correct>0</correct>
+    </question>
+    <question type="single_choice">
+        <text>How many upper bounds (or bound) can a type parameter have?</text>
+        <answer>1</answer>
+        <answer>2</answer>
+        <answer>5</answer>
+        <answer>Any number of bounds.</answer>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>Any number of interfaces can be specified as upper bounds.</text>
+        <correct>true</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these are valid orders to specify upper bounds?</text>
+        <answer>A class.</answer>
+        <answer>A class and an interface.</answer>
+        <answer>an interface and a class.</answer>
+        <answer>An interface.</answer>
+        <correct>0</correct>
+        <correct>1</correct>
+        <correct>3</correct>
+    </question>
+    <question type="text">
+        <text>What is the base class for numeric values?</text>
+        <correct>Number</correct>
+        <correct>java.lang.Number</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to declare upper bounds?</text>
+        <correct>extends</correct>
+    </question>
+    <question type="true_false">
+        <text>Interface upper bounds are declared with the 'extends' keyword.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>Interface upper bounds are declared with the 'implements' keyword.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>Interfaces can't be upper bounds.</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>Which symbol is used to separate multiple upper bounds on one parameter?</text>
+        <correct><![CDATA[
+            &
+        ]]></correct>
+    </question>
 
     <!-- Questions about wildcards -->
+    <question type="text">
+        <text>Which symbol is used to declare a wildcard?</text>
+        <correct>?</correct>
+    </question>
+    <question type="true_false">
+        <text>Wildcards can be bounded.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>Wildcards cannot be upper bounded.</text>
+        <correct>false</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is a wildcard?</text>
+        <answer>A placeholder for a type parameter.</answer>
+        <answer>A bounded type parameter.</answer>
+        <answer>A generic class which can accept any type parameter.</answer>
+        <correct>0</correct>
+    </question>
 
     <!--
         <question type="single_choice">

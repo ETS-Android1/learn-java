@@ -3,12 +3,17 @@
 <resources>
     <taskdata>
         <id>301</id>
-        <name>Improved data structures</name>
+        <name>Generic data structures</name>
     </taskdata>
+    <boxed title="Dependency">
+        <![CDATA[
+        This task needs the data structure implementations from course 4! If
+        you've not done those yet, I recommend that you complete them first.
+        ]]>
+    </boxed>
     <text>
         <![CDATA[
-        The goal is to improve the collections created in the tasks of the <b>data structures course</b>. If
-        you've not done those yet, I recommend that you complete them first.
+        The goal is to improve the collections created in the tasks of the <b>data structures course</b>.
         ]]>
     </text>
     <title text="Generic list"/>
