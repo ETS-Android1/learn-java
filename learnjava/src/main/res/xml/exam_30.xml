@@ -99,7 +99,6 @@
         <answer>Interfaces.</answer>
         <correct>0</correct>
         <correct>1</correct>
-        <correct>2</correct>
         <correct>3</correct>
     </question>
     <question type="single_choice">
@@ -184,9 +183,7 @@
     </question>
     <question type="text">
         <text>Which symbol is used to separate multiple upper bounds on one parameter?</text>
-        <correct><![CDATA[
-            &
-        ]]></correct>
+        <correct>&amp;</correct>
     </question>
 
     <!-- Questions about wildcards -->

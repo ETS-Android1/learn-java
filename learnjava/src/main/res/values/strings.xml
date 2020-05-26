@@ -119,6 +119,12 @@
     <string name="image_component_desc">Image component</string>
     <string name="zoom_in">Zoom in</string>
     <string name="zoom_out">Zoom out</string>
+    <string name="interactive_code">INTERACTIVE CODE</string>
+    <string name="interactive_check_solution">Check solution</string>
+    <string name="interactive_help">Help</string>
+    <string name="interactive_reset">Reset interactive code</string>
+    <string name="empty_space_marker" translatable="false">___</string>
+    <string name="formatted_line_break" translatable="false"><![CDATA[<br/>]]></string>
 
     <!-- All exams completed -->
     <string name="congratulations">Congratulations!</string>

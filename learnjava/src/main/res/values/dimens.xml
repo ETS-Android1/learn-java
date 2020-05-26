@@ -41,4 +41,7 @@
     <dimen name="elevation">5dp</dimen>
 
     <dimen name="notification_height">64dp</dimen>
+
+    <!-- interactive code -->
+    <dimen name="min_empty_space_width">60dp</dimen>
 </resources>

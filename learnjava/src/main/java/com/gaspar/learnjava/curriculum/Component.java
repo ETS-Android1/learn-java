@@ -1,5 +1,6 @@
 package com.gaspar.learnjava.curriculum;
 
+import android.annotation.SuppressLint;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -61,7 +62,7 @@ public class Component implements Serializable {
     /**
      * Formatted string that the component's {@link android.view.View} will display.
      */
-    private String data;
+    protected String data;
 
     public Component(@ComponentType int type, String data) {
         this.type = type;
@@ -69,12 +70,14 @@ public class Component implements Serializable {
     }
 
     /**
-     * Creates a view that shows the content of this component.
+     * Creates a view that shows the content of this component. This method does not care about interactive_component
+     * components, as those have their separate class, with this method overridden.
      *
      * @param parent The view group this question view will be added. This method DOES NOT add the
      *               inflated view.
      * @return The created view.
      */
+    @SuppressLint("SwitchIntDef")
     @UiThread
     @SuppressWarnings("deprecation") //says it's unused, but it isn't...
     public View createComponentView(final Context context, ViewGroup parent) {
@@ -147,6 +150,7 @@ public class Component implements Serializable {
             case ComponentType.TITLE:
                 componentView = inflater.inflate(R.layout.title_component, parent, false);
                 ((TextView)componentView.findViewById(R.id.title)).setText(title);
+                break;
         }
         return componentView;
     }
@@ -175,15 +179,14 @@ public class Component implements Serializable {
     /**
      * The amount of font size (in pixels) that the zoom buttons increase/decrease.
      */
-    private static final int ZOOM_SIZE_CHANGE = 10;
+    protected static final int ZOOM_SIZE_CHANGE = 10;
 
     /**
-     * Adds listeners to the zoom in and zoom out button of code sample component.
-     *
+     * Adds listeners to the zoom in and zoom out button of code sample component. Also works for interactive component.
      * @param codeSampleView The code sample view.
      */
     @UiThread
-    private static void initZoomButtons(@NonNull View codeSampleView) {
+    protected void initZoomButtons(@NonNull View codeSampleView) {
         ImageButton zoomIn = codeSampleView.findViewById(R.id.zoomInButton);
         ImageButton zoomOut = codeSampleView.findViewById(R.id.zoomOutButton);
         final int minFontSize = (int)codeSampleView.getContext().getResources().getDimension(R.dimen.code_text_size);
@@ -201,7 +204,7 @@ public class Component implements Serializable {
      * Component type constants.
      */
     @IntDef({ComponentType.TEXT, ComponentType.CODE, ComponentType.ADVANCED,
-            ComponentType.BOXED, ComponentType.LIST, ComponentType.IMAGE, ComponentType.TITLE})
+            ComponentType.BOXED, ComponentType.LIST, ComponentType.IMAGE, ComponentType.TITLE, ComponentType.INTERACTIVE})
     public @interface ComponentType {
         int TEXT = 0;
         int CODE = 1;
@@ -210,6 +213,7 @@ public class Component implements Serializable {
         int LIST = 4;
         int IMAGE = 5;
         int TITLE = 6;
+        int INTERACTIVE = 7;
     }
 
     public void setTitle(@Nullable String title) {

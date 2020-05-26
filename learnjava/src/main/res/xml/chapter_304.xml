@@ -79,7 +79,7 @@
     </code>
     <text>
         <![CDATA[
-        Works, but there is a problem. Since <i>T</i> is the type if the current calculator, this method will
+        Works, but there is a problem. Since <i>T</i> is the type of the current calculator, this method will
         only accept calculators with the same type parameter.
         <p>
         It's however reasonable to add any type of calculator to the current one!
@@ -163,7 +163,7 @@
     </text>
     <code>
         <![CDATA[
-        <font color="#999900">List</font>&lt;<font color="#999900">String</font>> strings = <font color="#999900">Arrays</font>.asList("<font color="#999900">Ha</font>","<font color="#999900">Ha</font>","<font color="#999900">Ha</font>");
+        <font color="#999900">List</font>&lt;<font color="#999900">String</font>> strings = <font color="#999900">Arrays</font>.asList("Ha","Ha","Ha");
 <br/><font color="gray">//Compile time error?!
 </font>
 <br/>printList(strings);

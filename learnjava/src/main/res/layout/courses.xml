@@ -76,16 +76,6 @@
                    android:layout_marginEnd="@dimen/margin"
                    android:gravity="center" />
 
-               <Button
-                   android:id="@+id/tapPrompt"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:theme="?android:buttonStyle"
-                   android:layout_marginTop="@dimen/margin"
-                   android:onClick="showTapPrompt"
-                   android:text="@string/tap_to_see_details"
-                   android:textAppearance="@style/subtitle" />
-
                <ListView
                    android:id="@+id/courseSelectors"
                    android:layout_width="match_parent"

@@ -107,7 +107,7 @@
     </text>
     <code>
         <![CDATA[
-        public static<font color="#DF7401"> void </font>main(<font color="#999900">String</font>[] args) {
+         <font color="#E65100">public static</font> <font color="#DF7401">void </font>main(<font color="#999900">String</font>[] args) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(Hello, world!);
 <br/>}
         ]]>
@@ -132,7 +132,7 @@
     </text>
     <code>
         <![CDATA[
-public static<font color="#DF7401"> void </font>main(<font color="#999900">String</font>[] args) {
+<font color="#E65100">public static</font> <font color="#DF7401">void </font>main(<font color="#999900">String</font>[] args) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Hello, world!");
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Have a nice day!");
 <br/>}
@@ -146,4 +146,15 @@ public static<font color="#DF7401"> void </font>main(<font color="#999900">Strin
         In general, statements inside a method are executed <b>from top to bottom</b>.
         ]]>
     </text>
+    <interactive instruction="Complete the main method so that it prints the text!">
+        <data>
+            <![CDATA[
+<font color="#E65100">public</font> ___ <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.___("Hello, world!");
+<br/>}
+        ]]>
+        </data>
+        <answer place="0">static</answer>
+        <answer place="1">println</answer>
+    </interactive>
 </resources>
