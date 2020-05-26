@@ -9,10 +9,17 @@
     <text>
         <![CDATA[
         The purpose of this application is to help you learn the basics of the
-        <font color="#DF7401">Java programming language</font>. This app, however, cannot do that alone.
-        You will need to install <font color="#DF7401">Java</font> on computer and practice actively
-        while using this app.
-        <br><br>
+        <b>Java programming language</b>.
+        ]]>
+    </text>
+    <boxed title="Practice">
+        <![CDATA[
+        You should install Java on computer and practice actively
+        while using this app. Keep reading the guide to learn how to set up a development environment!
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
         This app is aimed towards those who never coded in their life. However, you're familiar with other
         languages, you'll also find it useful. If you already have experience with <b>C++ or C#</b> you'll learn
         fast and easily, as these languages are quite similar to Java.
@@ -21,43 +28,43 @@
     <title text="Installing an IDE"/>
     <text>
         <![CDATA[
-        To make development easier, using an <font color="#DF7401">Integrated Development Environment
-        (IDE)</font> is recommended. These software provide code editors, build tools and various other
+        To make development easier, using an Integrated Development Environment
+        (<i>IDE</i>) is recommended. These software provide code editors, build tools and various other
         tools.
         ]]>
     </text>
     <boxed title="Why should I use an IDE?">
         <![CDATA[
-        Without an IDE, you must manually install the Java Development Kit (JDK) and use the command
-        line to compile and run your code. The IDEs come with a built in JDK and running your entire
-        project is as simple as pressing a button. The IDE also provides code completion and highlights
+        Without an <i>IDE</i>, you must manually install the Java Development Kit (<i>JDK</i>) and use the command
+        line to compile and run your code. The IDEs come with a built in <i>JDK</i> and running your entire
+        project is as simple as pressing a button. The <i>IDE</i> also provides code completion and highlights
         errors in your code, making them easy to spot.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        Here are a few recommended IDEs for PCs and laptops:
+        Here are a few recommended <i>IDE</i>s for <i>PC</i>s and laptops:
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li> <a href="https://www.eclipse.org/">Eclipse</a>: The most widely used <font color="#DF7401">Java</font> IDE.</li>
-        <li> <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a>: A great IDE developed by JetBrains.</li>
-        <li> <a href="https://netbeans.org/">NetBeans</a>: Another amazing IDE for <font color="#DF7401">Java</font> development.</li>
+        <li> <a href="https://www.eclipse.org/">Eclipse</a>: The most widely used Java IDE.</li>
+        <li> <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a>: A great <i>IDE</i> developed by JetBrains.</li>
+        <li> <a href="https://netbeans.org/">NetBeans</a>: Another amazing <i>IDE</i> for Java development.</li>
         </ul>
         ]]>
     </list>
     <text>
         <![CDATA[
-        While coding on your phone is much less convenient, there also exist Java IDEs for android. My recommendation is
+        While coding on your phone is much less convenient, there also exist Java <i>IDE</i>s for android. My recommendation is
         Java N-IDE, you can find it in the Google Play store <a href="https://play.google.com/store/apps/details?id=com.duy.compiler.javanide&hl=en_US">here</a>.
         ]]>
     </text>
     <advanced title="Without an IDE">
         <![CDATA[
-        If you for any reason can't or don't want to install any IDE, you can read about installing
-        the JDK <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html">
+        If you for any reason can't or don't want to install any <i>IDE</i>, you can read about installing
+        the <i>JDK</i> <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html">
         here</a>, and about compiling and running your programs from the command line
         <a href="https://www.wikihow.com/Compile-%26-Run-Java-Program-Using-Command-Prompt">here</a>.
         ]]>
@@ -74,16 +81,32 @@
         chapter. Press this to confirm that you understand its content and ready to move on the the next one.
         ]]>
     </text>
-    <boxed title="Code samples">
+    <title text="Code samples"/>
+    <text>
+    <![CDATA[
+     The chapters contain <b>code samples</b>. If the displayed code is wide enough, these are horizontally
+     scrollable! You can also increase the code size, or copy their contents.
+     <br><br>
+     Some of the samples are interactive. This means that they have missing parts, which you can complete. Here is an example:
+    ]]>
+    </text>
+    <interactive instruction="Write '=' to complete the declaration!">
+        <data>
+            <![CDATA[
+            <font color="#E65100">private</font> <font color="#999900">String</font> ___ "Some text";
+            ]]>
+        </data>
+        <answer place="0">=</answer>
+    </interactive>
+    <text>
         <![CDATA[
-        The chapters contain <b>code samples</b>. If the displayed code is wide enough, these are horizontally
-        scrollable! You can also increase the code size, or copy their contents.
+        You can use the buttons on the right to check if your answer is correct!
         ]]>
-    </boxed>
+    </text>
     <advanced title="Share your clipboard">
         <![CDATA[
-        A great way to use this app is to share your clipboard with your PC! This way the code samples you copy on your
-        phone can be easily pasted into the code on PC!
+        A great way to use this app is to share your clipboard with your <i>PC</i>! This way the code samples you copy on your
+        phone can be easily pasted into the code on <i>PC</i>!
         <p>
         Many apps can do this, you can select from <a href="https://www.guidingtech.com/apps-sync-clipboard-between-pc-android/">this
         </a> list or search in the Play Store.
@@ -108,12 +131,18 @@
     <text>
         <![CDATA[
         You will also find <b>tasks</b> within each course. Tasks are projects that allow
-        you to test your knowledge of the course by creating a full program.
-        <br><br>
-        As tasks are complex exercises with an almost infinite amount of possible solutions,
+        you to test your knowledge of a course by creating a full program.
+        ]]>
+    </text>
+    <boxed title="Task details">
+        <![CDATA[
+         As tasks are complex exercises with an almost infinite amount of possible solutions,
         your solution won't be checked by the app, and you may mark a task as completed at any time. One correct solution is however
-        provided for each task, which you can use if you are stuck.
-        <br><br>
+        provided for each task, which you can use if you are stuck or want confirmation.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
         Tasks are optional (but recommended), the exam for a course will unlock even if you never opened any of its tasks.
         Unlike exams, you are free to check any chapters, or use other guides online for help when completing the task.
         ]]>

@@ -60,7 +60,7 @@
                android:layout_height="0dp"
                android:layout_marginBottom="8dp"
                android:layout_weight="10"
-               app:layout_constraintBottom_toTopOf="@id/closeGuideButton"
+               app:layout_constraintBottom_toBottomOf="parent"
                app:layout_constraintEnd_toEndOf="parent"
                app:layout_constraintStart_toStartOf="parent"
                app:layout_constraintTop_toTopOf="parent">
@@ -72,22 +72,6 @@
                    android:gravity="start"
                    android:orientation="vertical" />
            </ScrollView>
-
-           <Button
-               android:id="@+id/closeGuideButton"
-               android:layout_width="wrap_content"
-               android:layout_height="0dp"
-               android:layout_gravity="center"
-               android:layout_margin="@dimen/margin"
-               android:layout_weight="1"
-               android:foregroundGravity="center"
-               android:minWidth="100dp"
-               app:layout_constraintBottom_toBottomOf="parent"
-               app:layout_constraintEnd_toEndOf="parent"
-               app:layout_constraintStart_toStartOf="parent"
-               android:onClick="closeButtonOnClick"
-               android:text="@string/ok"
-               android:textAlignment="center" />
        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

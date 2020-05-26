@@ -31,7 +31,7 @@
     </text>
     <code>
         <![CDATA[
-<font color="#DF7401">int </font>myVariable;
+<font color="#DF7401">int</font> myVariable;
 <br/>myVariable = 5;
         ]]>
     </code>
