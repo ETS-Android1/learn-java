@@ -75,7 +75,15 @@
         This app splits the curriculum into <b>courses</b>, and within courses into <b>chapters</b>.
         Initially, only the first course is unlocked. You can unlock additional courses by reading
         through all the chapters and completing the related <b>exam</b>.
-        <br><br>
+        ]]>
+    </text>
+    <boxed title="Courses menu">
+        <![CDATA[
+        You can find all courses and chapters if you open the menu on the top left, and select <b>courses</b>!
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
         You may read through the chapters of a course in any order, but it's recommended that you follow the
         given order, as the chapters are built on each other. You will find a button at the bottom of every
         chapter. Press this to confirm that you understand its content and ready to move on the the next one.

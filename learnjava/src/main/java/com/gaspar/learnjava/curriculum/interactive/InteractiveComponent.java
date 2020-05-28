@@ -1,8 +1,9 @@
-package com.gaspar.learnjava.curriculum;
+package com.gaspar.learnjava.curriculum.interactive;
 
 import android.content.Context;
 import android.os.Build;
 import android.text.Html;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,8 +17,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.gaspar.learnjava.R;
+import com.gaspar.learnjava.curriculum.Component;
+import com.google.android.material.snackbar.Snackbar;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,6 +40,27 @@ import java.util.List;
  *         <answer place="1">;</answer>
  *     </interactive>
  * </code>
+ * It's also possible to have empty spaces require other answers to be present to be acceptable:
+ * <code>
+ *      <interactive instruction="Complete the sample so that the variables final value is 8!">
+ *         <data>
+ *         <![CDATA[
+ *              <font color="#DF7401">int</font> num = ___;
+ *              <br/>num = num ___ 5;
+ *         ]]>
+ *         </data>
+ *         <answer place="0" group="add" required_places="1">3</answer>
+ *         <answer place="0" group="subtract" required_places="1">13</answer>
+ *         <answer place="0" group="div" required_places="1">40</answer>
+ *         <answer place="1" group="add" required_places="0">+</answer>
+ *         <answer place="1" group="subtract" required_places="0">-</answer>
+ *         <answer place="1" group="div" required_places="0">/</answer>
+ *     </interactive>
+ * </code>
+ * Multiple required places are to be separated with a comma.
+ * <p>
+ * Each empty space can have a default answer as well. This must be placed into the DEFAULT
+ * tag after the answer tags.
  */
 public final class InteractiveComponent extends Component {
 
@@ -80,31 +103,25 @@ public final class InteractiveComponent extends Component {
         int emptySpaceCounter = 0;
         EditText lastEditText = null; //last edit text will get special ime action (done)
         for(String dataLine: dataLines) { //split each line to constant texts (and implicitly, empty spaces)
+            dataLine = dataLine.replace("\n", ""); //remove line break from the end...
             String[] separatedData = dataLine.split(EMPTY_SPACE_MARKER);
-            boolean beginsWithEmptySpace = dataLine.startsWith(EMPTY_SPACE_MARKER);
-            boolean endsWithEmptySpace = dataLine.endsWith(EMPTY_SPACE_MARKER);
             //create layout for this line
             LinearLayout lineLayout = (LinearLayout)inflater.inflate(R.layout.interactive_line, codeArea, false);
-            if(beginsWithEmptySpace) lastEditText = addEmptySpaceView(emptySpaceCounter++, lineLayout, inflater, context);
             for(int i=0; i<separatedData.length; i++) {
-                if("".equals(separatedData[i])) { //"fake" code at start or at end, skip
-                    continue;
+                if(!"".equals(separatedData[i])) { //only if there is actual text
+                    TextView codeView = new TextView(context);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                        codeView.setText(Html.fromHtml(separatedData[i], Html.FROM_HTML_MODE_COMPACT));
+                    } else {
+                        codeView.setText(Html.fromHtml(separatedData[i])); //deprecated but new android wont use this anyways
+                    }
+                    codeView.setTextColor(context.getResources().getColor(R.color.code_text_color));
+                    lineLayout.addView(codeView);
                 }
-                //real code, insert a text view
-                separatedData[i] = separatedData[i].replace("\n", ""); //remove line break from the end...
-                TextView codeView = new TextView(context);
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    codeView.setText(Html.fromHtml(separatedData[i], Html.FROM_HTML_MODE_COMPACT));
-                } else {
-                    codeView.setText(Html.fromHtml(separatedData[i])); //deprecated but new android wont use this anyways
-                }
-                codeView.setTextColor(context.getResources().getColor(R.color.code_text_color));
-                lineLayout.addView(codeView);
                 if(i < separatedData.length - 1) { //between every constant code part, add the empty space
-                   lastEditText = addEmptySpaceView(emptySpaceCounter++, lineLayout, inflater, context);
+                    lastEditText = addEmptySpaceView(emptySpaceCounter++, lineLayout, inflater, context);
                 }
             }
-            if(endsWithEmptySpace) lastEditText = addEmptySpaceView(emptySpaceCounter++, lineLayout, inflater, context);
             codeArea.addView(lineLayout);
         }
         if(lastEditText!=null) lastEditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
@@ -112,7 +129,7 @@ public final class InteractiveComponent extends Component {
         //set button listeners
         initZoomButtons(interactiveView);
         interactiveView.findViewById(R.id.resetButton).setOnClickListener(v -> reset(context));
-        interactiveView.findViewById(R.id.checkButton).setOnClickListener(v -> checkSolution(context));
+        interactiveView.findViewById(R.id.checkButton).setOnClickListener(v -> checkSolution(context, interactiveView));
         return interactiveView;
     }
 
@@ -125,6 +142,9 @@ public final class InteractiveComponent extends Component {
         EditText input = emptySpaceView.findViewById(R.id.inputField); //there is a new last edit text
         input.setImeOptions(EditorInfo.IME_ACTION_NEXT);
         emptySpaceView.findViewById(R.id.showSolutionButton).setOnClickListener(v -> emptySpace.showSolution(context));
+
+        //show default text if there is one
+        emptySpace.getDefaultText().ifPresent(input::setText);
         return input; //is "last edit text"
     }
 
@@ -173,10 +193,13 @@ public final class InteractiveComponent extends Component {
      * Iterates all empty spaces and decides if the answer there is correct or not. If yes, recolors
      * it to green. If not, colors it red. Locks the edit texts.
      */
-    private void checkSolution(@NonNull final Context context) {
+    private void checkSolution(@NonNull final Context context, @NonNull final View view) {
+        boolean allCorrect = true;
         for(EmptySpace emptySpace: emptySpaces) {
-            emptySpace.checkSolution(context);
+            allCorrect = emptySpace.checkSolution(context, emptySpaces);
         }
+        Snackbar.make(view, allCorrect ? R.string.interactive_correct : R.string.interactive_incorrect, Snackbar.LENGTH_SHORT)
+            .show();
     }
     /**
      * Empties all edit texts and removes coloring.
@@ -184,104 +207,6 @@ public final class InteractiveComponent extends Component {
     private void reset(@NonNull final Context context) {
         for(EmptySpace emptySpace: emptySpaces) {
             emptySpace.resetEmptySpace(context);
-        }
-    }
-    /**
-     * This class stores represents a spot where the user can enter input inside an interactive code sample.
-     */
-    public static class EmptySpace {
-
-        private final int place; //the "index" of this empty space
-        private final List<String> answers; //the answers accepted by this empty space
-        private View emptySpaceView; //this is bound later, is created from "empty_space_view.xml"
-
-        EmptySpace(int place, String answer) {
-            this.place = place;
-            this.answers = new ArrayList<>();
-            answers.add(answer);
-        }
-
-        int getPlace() {
-            return place;
-        }
-
-        public List<String> getAnswers() {
-            return answers;
-        }
-        //called when the view for this empty space is being created.
-        void bindView(final View view) {
-            this.emptySpaceView = view;
-        }
-
-        //checks if the edit text has an acceptable answer
-        private boolean isCorrect() {
-            EditText input = emptySpaceView.findViewById(R.id.inputField);
-            return answers.contains(input.getText().toString().trim());
-        }
-        //checks if the entered answer is correct (also disables input)
-        void checkSolution(@NonNull final Context context) {
-            if(emptySpaceView == null) throw new RuntimeException("View not bound!");
-            final EditText inputField = emptySpaceView.findViewById(R.id.inputField);
-            inputField.setEnabled(false);
-            if(isCorrect()) {
-                inputField.setTextColor(context.getResources().getColor(android.R.color.black));
-                inputField.setBackgroundResource(R.drawable.correct_answer_background);
-            } else { //incorrect, show red background and help icon
-                inputField.setTextColor(context.getResources().getColor(android.R.color.black));
-                inputField.setBackgroundResource(R.drawable.incorrect_background);
-                emptySpaceView.findViewById(R.id.showSolutionButton).setVisibility(View.VISIBLE);
-            }
-        }
-        //clears text and colored background (also enables it)
-        void resetEmptySpace(@NonNull final Context context) {
-            if(emptySpaceView == null) throw new RuntimeException("View not bound!");
-            final EditText inputField = emptySpaceView.findViewById(R.id.inputField);
-            inputField.setText("");
-            //reset to original style
-            inputField.setBackgroundResource(R.drawable.edit_text_line_background);
-            inputField.setTextColor(context.getResources().getColor(R.color.code_text_color));
-            inputField.setEnabled(true);
-            emptySpaceView.findViewById(R.id.showSolutionButton).setVisibility(View.GONE);
-        }
-        //shows correct solution (the first one)
-        void showSolution(@NonNull final Context context) {
-            resetEmptySpace(context);
-            final EditText inputField = emptySpaceView.findViewById(R.id.inputField);
-            inputField.setText(answers.get(0));
-        }
-        //appends a correct answer to this empty space's answer list
-        void addAnswer(String answer) {
-            answers.add(answer);
-        }
-    }
-
-    /**
-     * Can build a list of EmptySpace objects from XML answer tags.
-     */
-    public static class EmptySpaceListBuilder {
-
-        private List<EmptySpace> emptySpaces;
-
-        public EmptySpaceListBuilder() {
-            emptySpaces = new ArrayList<>();
-        }
-
-        public void addEmptySpaceAnswer(int place, @NonNull String answer) {
-            boolean wasPresent = false;
-            for(EmptySpace emptySpace: emptySpaces) {
-                if(emptySpace.getPlace() == place) { //there is an empty space with this place already
-                    emptySpace.addAnswer(answer);
-                    wasPresent = true;
-                    break;
-                }
-            }
-            if(!wasPresent) { //did not see this place before
-                emptySpaces.add(new EmptySpace(place, answer));
-            }
-        }
-
-        public List<EmptySpace> finishBuilding() {
-            return emptySpaces;
         }
     }
 }
