@@ -59,6 +59,15 @@
         course of classes, for now it's enough to know that the programmer must initialize the elements of such arrays.
         ]]>
     </boxed>
+    <interactive instruction="Declare an array for doubles with size 20!">
+        <data>
+<![CDATA[
+<font color="#DF7401">double</font>___ reals = <font color="#E65100">new</font> <font color="#DF7401">double</font>[___];
+]]>
+        </data>
+        <answer place="0">[]</answer>
+        <answer place="1">20</answer>
+    </interactive>
     <title text="Array initializer"/>
     <text>
         <![CDATA[
@@ -88,6 +97,16 @@
 <br/><font color="#DF7401">int</font>[] integers = {1,2,3,"four"};
         ]]>
     </code>
+    <interactive instruction="Declare an array which has the first 3 letters of the ABC!">
+        <data>
+<![CDATA[
+___[] letters = { 'a', ___, 'c' };
+]]>
+        </data>
+        <answer place="0">char</answer>
+        <answer place="0">Character</answer>
+        <answer place="1">'b'</answer>
+    </interactive>
     <title text="Reference the elements"/>
     <text>
         <![CDATA[
@@ -206,6 +225,23 @@
         error! These exceptions are thrown when we run the code.
         ]]>
     </text>
+    <interactive instruction="Correct the indices so that they are within bounds!">
+        <data>
+<![CDATA[
+<font color="#DF7401">double</font>[] reals = <font color="#E65100">new</font> <font color="#DF7401">double</font>[20];
+<br/><font color="#999900">System</font>.out.println("<font color="#999900">First</font>: " + reals[___]);
+<br/><font color="#999900">System</font>.out.println("<font color="#999900">Last</font>: " + reals[___]);
+]]>
+        </data>
+        <answer place="0">0</answer>
+        <answer place="1">19</answer>
+        <answer place="1">reals.length-1</answer>
+        <answer place="1">reals.length - 1</answer>
+        <answer place="1">reals.length- 1</answer>
+        <answer place="1">reals.length -1</answer>
+        <default place="0">1</default>
+        <default place="1">20</default>
+    </interactive>
     <title text="Iterate arrays"/>
     <text>
         <![CDATA[

@@ -125,7 +125,7 @@
         it the second time.
         ]]>
     </text>
-    <!-- ??? for some reason this only parses 1 empty space!?
+    <!-- For some reason this crashes
     <interactive instruction="Complete the declaration and the print statement!">
         <data>
         <![CDATA[

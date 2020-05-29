@@ -156,6 +156,26 @@
         after every run!
         ]]>
     </text>
+    <interactive instruction="Complete the program so that it writes the array to a file called 'results.txt'">
+        <data>
+            <![CDATA[
+<font color="#999900">String</font>[] lines = calculate(); <font color="gray">//suppose <font color="#E65100">this</font> works
+</font>
+<br/><font color="#999900">File</font> file = <font color="#E65100">new</font> <font color="#999900">File</font>(___);
+<br/><font color="#999900">FileOutputStream</font> stream = <font color="#E65100">new</font> <font color="#999900">FileOutputStream</font>(file);
+<br/>___ writer = <font color="#E65100">new</font> ___(stream);
+<br/>___(<font color="#999900">String</font> line: lines) { <font color="gray">//iterate lines
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;writer.println(line);
+<br/>}
+<br/>writer.close();
+            ]]>
+        </data>
+        <answer place="0">"results.txt"</answer>
+        <answer place="1">PrintWriter</answer>
+        <answer place="2">PrintWriter</answer>
+        <answer place="3">for</answer>
+    </interactive>
     <title text="Another way to write to file"/>
     <text>
         <![CDATA[

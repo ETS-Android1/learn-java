@@ -69,6 +69,21 @@
         It is also essential for constructors.
         ]]>
     </text>
+    <interactive instruction="Complete the method declaration so that it overloads the other method!">
+        <data>
+<![CDATA[
+<font color="#DF7401">void</font> setProperties(<font color="#DF7401">int</font> id) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.id = id;
+<br/>}
+<br/>
+<br/><font color="#DF7401">void</font> ___(<font color="#DF7401">int</font> id, <font color="#999900">String</font> activityName) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.id = id;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.activityName = activityName;
+<br/>}
+]]>
+        </data>
+        <answer place="0">setProperties</answer>
+    </interactive>
     <title text="Constructors"/>
     <text>
         <![CDATA[
@@ -153,6 +168,21 @@
         ourselves.
         ]]>
     </text>
+    <interactive instruction="Complete the constructor declaration!">
+        <data>
+<![CDATA[
+<font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">Activity</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> id = 0;
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> ___(<font color="#DF7401">int</font> id) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;___.id = id;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+]]>
+        </data>
+        <answer place="0">Activity</answer>
+        <answer place="1">this</answer>
+    </interactive>
     <title text="Encapsulation and visibility"/>
     <text>
         <![CDATA[
@@ -413,6 +443,16 @@
         </ul>
         ]]>
     </list>
+    <interactive instruction="Make it so that the first variable is only visible inside the class, but the second one is visible everywhere! ">
+        <data>
+<![CDATA[
+___ <font color="#999900">String</font> sensitiveData;
+<br/>___ <font color="#999900">Date</font> timeOfCreation;
+]]>
+        </data>
+        <answer place="0">private</answer>
+        <answer place="1">public</answer>
+    </interactive>
 
     <!-- visibility (why?), class visibility
     overloading (why, how, examples)

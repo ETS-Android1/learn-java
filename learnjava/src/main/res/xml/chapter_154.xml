@@ -37,7 +37,7 @@
     <boxed title="How many users do we have?">
         <![CDATA[
         It's important to know how many users are created! We can use an integer to count this, but it's redundant to
-        store this information in every object we create, and it's also difficult to implement.
+        store this information in every object we create, and it's also difficult to implement it that way.
         ]]>
     </boxed>
     <text>
@@ -109,7 +109,7 @@
         Java is able to deduce which variable we mean by <b>userCounter</b>, even without putting the class name there (because
         we are inside the class).
         <p>
-        The <b>User.</b> can of course also be written explicitly there.
+        The <b>User.</b> can of course also be written explicitly there, but that is not necessary.
         ]]>
     </text>
     <title text="Constants"/>
@@ -121,6 +121,17 @@
         For this, the <b>final</b> keyword can be used. By convention, names of constants are fully capitalized.
         ]]>
     </text>
+    <interactive instruction="Declare this variable so that it's constant and belongs to the class!">
+        <data>
+<![CDATA[
+<font color="#E65100">public</font> ___ ___ <font color="#DF7401">int</font> RESULT_OK = 1;
+]]>
+        </data>
+        <answer place="0" group="final_first" required_places="1">final</answer>
+        <answer place="1" group="final_first" required_places="0">static</answer>
+        <answer place="0" group="static_first" required_places="1">static</answer>
+        <answer place="1" group="static_first" required_places="0">final</answer>
+    </interactive>
     <boxed title="Reminder: final">
         <![CDATA[
         We learned about the <b>final</b> keyword already. Classes and method can be marked final, this has to do with
@@ -238,6 +249,16 @@
         to assign properties to each enum constant, see <a href="https://www.java67.com/2018/07/java-enum-with-constructor-example.html">this</a> tutorial.
         ]]>
     </advanced>
+    <interactive instruction="Complete the enum declaration!">
+        <data>
+<![CDATA[
+___ <font color="#999900">ThreeWayLogic</font> {
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;TRUE, FALSE, UNDETERMINED;
+<br/>}
+]]>
+        </data>
+        <answer place="0">enum</answer>
+    </interactive>
 
     <!-- static variables, methods
     enumerations: basic, more advanced -->

@@ -14,7 +14,7 @@
     </text>
     <code>
         <![CDATA[
-        <font color="#E65100">public abstract class</font> Computer {
+        <font color="#E65100">public abstract class</font> <font color="#999900">Computer</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//...</font>
 <br/>}
 <br/>
@@ -29,10 +29,10 @@
     <title text="What is the point?"/>
     <text>
         <![CDATA[
-        So what is the point of this? Creating objects is the most fundamental principle of OOP. Why disable this
+        So what is the point of this? Creating objects is a fundamental part of <i>OOP</i>. Why disable this
         for some classes?
         <p>
-        <u>Firstly</u>, for <b>utility classes</b>.
+        Firstly, for <b>utility classes</b>.
         ]]>
     </text>
     <boxed title="Utility class">
@@ -87,20 +87,19 @@
     </text>
     <code>
         <![CDATA[
-        <font color="#E65100">public abstract class</font> Computer {
+        <font color="#E65100">public abstract class</font> <font color="#999900">Computer</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> String processor;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> <font color="#999900">String</font> processor;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> <font color="#DF7401">int</font> ram; <font color="gray">//in gigabytes
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> Computer(String processor, <font color="#DF7401">int</font> ram) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> <font color="#999900">Computer</font>(<font color="#999900">String</font> processor, <font color="#DF7401">int</font> ram) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.processor = processor;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.ram = ram;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public abstract</font> <font color="#DF7401">void</font> printProperties();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>}
         ]]>
     </code>
@@ -159,8 +158,8 @@
     </code>
     <text>
         <![CDATA[
-        You may have noticed that this is similar to method overriding. Note that, however, in this case the subclass is <b>forced</b>
-        to implement the method (and also override, hence the annotation there).
+        You may have noticed that this is similar to method overriding. Note that, however, in this case the subclass <b>has to implement</b>
+        the method (unless the subclass is abstract as well).
         ]]>
     </text>
     <title text="Interfaces"/>
@@ -174,7 +173,7 @@
     </text>
     <code>
         <![CDATA[
-        <font color="gray">//an <font color="#E65100">interface</font> for classes that can be printed
+        <font color="gray">//an interface for classes that can be printed
 </font>
 <br/><font color="#E65100">public interface</font> <font color="#999900">Printable</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
@@ -191,6 +190,18 @@
         a property, their name is by convention an adjective (like <i>Printable</i> in this case).
         ]]>
     </text>
+    <interactive instruction="This interface has 2 methods: read and readAll. Complete the declaration!">
+        <data>
+<![CDATA[
+<font color="#E65100">public</font> ___ <font color="#999900">Readable</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> read(<font color="#999900">String</font> data);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> ___(<font color="#999900">String</font>[] data);
+<br/>}
+]]>
+        </data>
+        <answer place="0">interface</answer>
+        <answer place="1">readAll</answer>
+    </interactive>
     <boxed title="Reasons for interfaces">
         <![CDATA[
         Interfaces are a good way to force a class to have a set of methods. They're also used to simulate inheritance from
@@ -240,6 +251,28 @@
         It isn't necessary true anymore that an interface is fully abstract, yet this definition is still often used (even in this chapter).
         ]]>
     </advanced>
+    <interactive instruction="Use the previous interactive sample to fill the gaps!">
+        <data>
+            <![CDATA[
+<font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">TextFile</font> ___ <font color="#999900">File</font> ___ <font color="#999900">Readable</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> ___(<font color="#999900">String</font> data) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//implementation
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> readAll(<font color="#999900">String</font>[] data) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//implementation
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+    ]]>
+        </data>
+        <answer place="0">extends</answer>
+        <answer place="1">implements</answer>
+        <answer place="2">read</answer>
+    </interactive>
     <!-- abstract class meaning, the abstract keyword: for class and for method
     special class: interface (static and default methods) and the implements keyword -->
 </resources>

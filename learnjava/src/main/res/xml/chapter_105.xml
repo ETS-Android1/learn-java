@@ -34,8 +34,8 @@
     </advanced>
     <text>
         <![CDATA[
-        When using an IDE, we don't have access to the console, however, we can give the arguments to the IDE and
-        it will pass them to the JVM instead.
+        When using an <i>IDE</i>, we don't have access to the console, however, we can give the arguments to the <i>IDE</i> and
+        it will pass them to the <i>JVM</i> instead.
         <p>
         In Eclipse, follow these steps to set the arguments:
         ]]>
@@ -59,7 +59,7 @@
     </boxed>
     <text>
         <![CDATA[
-        Now that we know how to set the arguments, let's look at how we can access them at runtime. The JVM will place them
+        Now that we know how to set the arguments, let's look at how we can access them at runtime. The <i>JVM</i> will place them
         in the <b>String array parameter</b> of the main method (called <i>args</i> by default).
         <p>
         For example, let's print all the command line arguments to the console:
@@ -116,6 +116,18 @@
 <br/>}
         ]]>
     </code>
+    <interactive instruction="Complete the program so that it returns instantly when there ARE arguments!">
+        <data>
+<![CDATA[
+<font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(___ > 0) <font color="#E65100">return</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Code here...
+</font>
+<br/>}
+]]>
+        </data>
+        <answer place="0">args.length</answer>
+    </interactive>
     <title text="Using System.in and a Scanner"/>
     <text>
         <![CDATA[
@@ -127,8 +139,8 @@
     </text>
     <boxed title="Command line interface in the IDE">
         <![CDATA[
-        Our program gets what the user types through the command line interface (CLI). When necessary, our IDE will
-        "simulate" the CLI, so we can easily test the program while developing.
+        Our program gets what the user types through the command line interface (<i>CLI</i>). When necessary, the <i>IDE</i> will
+        "simulate" the <i>CLI</i>, so we can easily test the program while developing.
         <p>
         In Eclipse, the "console" will appear near the bottom of the screen, like this:
         ]]>
@@ -214,6 +226,23 @@
         an integer it will throw an <b>InputMismatchException</b>. Since we didn't implement exception handling, this will crash our program.
         ]]>
     </text>
+    <interactive instruction="Complete the sample in a way that it keeps going until -1 was entered on the keyboard!">
+        <data>
+<![CDATA[
+<font color="#999900">Scanner</font> scanner = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(___);
+<br/><font color="#DF7401">int</font> number = 0;
+<br/><font color="#E65100">while</font>(number ___ -1) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;number = scanner.___();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(number + " was entered...");
+<br/>}
+<br/><font color="#999900">System</font>.out.println("<font color="#999900">Stopping</font>.");
+<br/>scanner.close();
+]]>
+        </data>
+        <answer place="0">System.in</answer>
+        <answer place="1">!=</answer>
+        <answer place="2">nextInt</answer>
+    </interactive>
     <title text="Reading from files"/>
     <text>
         <![CDATA[
@@ -273,8 +302,7 @@
 <br/>
 <br/><font color="#E65100">public class</font> <font color="#999900">Main</font> {
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args)
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	<font color="#E65100">throws</font> <font color="#999900">Exception</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) <font color="#E65100">throws</font> <font color="#999900">Exception</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create the path object of the file</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Path</font> filePath = <font color="#999900">Paths</font>.get("data.txt");
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;

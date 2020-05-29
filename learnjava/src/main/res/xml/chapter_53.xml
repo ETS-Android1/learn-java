@@ -156,5 +156,6 @@
         </data>
         <answer place="0">static</answer>
         <answer place="1">println</answer>
+        <answer place="1">print</answer>
     </interactive>
 </resources>

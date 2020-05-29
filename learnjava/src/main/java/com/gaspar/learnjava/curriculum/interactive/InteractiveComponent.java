@@ -3,7 +3,6 @@ package com.gaspar.learnjava.curriculum.interactive;
 import android.content.Context;
 import android.os.Build;
 import android.text.Html;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -196,7 +195,8 @@ public final class InteractiveComponent extends Component {
     private void checkSolution(@NonNull final Context context, @NonNull final View view) {
         boolean allCorrect = true;
         for(EmptySpace emptySpace: emptySpaces) {
-            allCorrect = emptySpace.checkSolution(context, emptySpaces);
+            boolean correctAnswer = emptySpace.checkSolution(context, emptySpaces);
+            if(!correctAnswer) allCorrect = false;
         }
         Snackbar.make(view, allCorrect ? R.string.interactive_correct : R.string.interactive_incorrect, Snackbar.LENGTH_SHORT)
             .show();

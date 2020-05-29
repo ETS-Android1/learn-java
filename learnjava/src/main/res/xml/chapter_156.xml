@@ -96,7 +96,7 @@
     </code>
     <text>
         <![CDATA[
-        The finally block must be at the end, and is guaranteed to be executed after either the try, or the catch-block.
+        The finally block must be at the end, and is guaranteed to be executed after either the try, or the catch block.
         ]]>
     </text>
     <advanced title="Errors">
@@ -106,6 +106,23 @@
         </i>java.lang.OutOfMemoryError</i>.
         ]]>
     </advanced>
+    <interactive instruction="Write the exception handling! Check the samples above for the exception name, or use the base class!">
+        <data>
+<![CDATA[
+___ {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Path</font> path = <font color="#999900">Paths</font>.get("input.txt");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">String</font>> lines = <font color="#999900">Files</font>.readAllLines(path);
+<br/>} ___ (___ e) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.err.println("Could not find file!");
+<br/>}
+]]>
+        </data>
+        <answer place="0">try</answer>
+        <answer place="1">catch</answer>
+        <answer place="2">IOException</answer>
+        <answer place="2">Exception</answer>
+        <answer place="2">Throwable</answer>
+    </interactive>
     <title text="Throw an exception manually"/>
     <text>
         <![CDATA[
@@ -185,8 +202,6 @@
         even if they are unchecked exceptions. This way the caller will always know what kind of exceptions can he expect.
         ]]>
     </boxed>
-
     <!-- try-catch-finally, Throwable, Exception, Error, RuntimeException
      throw and throws keywords -->
-
 </resources>
