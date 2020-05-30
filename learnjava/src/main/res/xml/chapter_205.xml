@@ -166,4 +166,16 @@
 <br/><font color="#999900">System</font>.out.println("The oldest person is " + oldest.name);
         ]]>
     </code>
+    <interactive instruction="Complete the method so that it removes the minimum and maximum of the double list!">
+        <data>
+<![CDATA[
+<font color="#E65100">public</font> <font color="#DF7401">void</font> removeMinMax(<font color="#999900">List</font>&lt;<font color="#999900">Double</font>> numbers) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;numbers.remove(___.max(numbers));
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;numbers.remove(<font color="#999900">Collections</font>.___(numbers));
+<br/>}
+]]>
+        </data>
+        <answer place="0">Collections</answer>
+        <answer place="1">min</answer>
+    </interactive>
 </resources>

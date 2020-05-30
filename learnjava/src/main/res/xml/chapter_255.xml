@@ -99,6 +99,29 @@
         Obviously, this must match the return type of the <i>Callable</i>.
         ]]>
     </text>
+    <interactive instruction="This callable task must count the occurrence of a letter in a string!">
+        <data>
+<![CDATA[
+   <font color="#E65100">class</font> <font color="#999900">LetterCounter</font> ___ <font color="#999900">Callable</font>&lt;<font color="#999900">Integer</font>> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font> text;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">char</font> letter;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> ___(<font color="#999900">String</font> text, <font color="#DF7401">char</font> letter) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.text = text;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.letter = letter;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> ___ call() <font color="#E65100">throws</font> <font color="#999900">Exception</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Cool one liner solution
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#999900">Collections</font>.frequency(<font color="#999900">Arrays</font>.asList(text.toCharArray()), letter);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+]]>
+        </data>
+        <answer place="0">implements</answer>
+        <answer place="1">LetterCounter</answer>
+        <answer place="2">Integer</answer>
+    </interactive>
     <title text="Executor services"/>
     <text>
         <![CDATA[
@@ -241,7 +264,26 @@
         </ul>
         ]]>
     </list>
-
+    <interactive instruction="Suppose we have random strings in a list. Use the LetterCounter task defined above to count the occurrence of 'a' in them using an executor service!">
+        <data>
+<![CDATA[
+<font color="#999900">List</font>&lt;<font color="#999900">String</font>> strings = generateStrings(); <font color="gray">//suppose <font color="#E65100">this</font> creates the list of strings
+</font>
+<br/><font color="#999900">List</font>&lt;___> tasks = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
+<br/><font color="#E65100">for</font>(<font color="#999900">String</font> text: strings) { <font color="gray">//create tasks
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;tasks.add(<font color="#E65100">new</font> <font color="#999900">LetterCounter</font>(text, ___));
+<br/>}
+<br/><font color="#999900">ExecutorService</font> pool = ___.newFixedThreadPool(5);
+<br/><font color="#999900">List</font>&lt;<font color="#999900">Future</font>&lt;<font color="#999900">Integer</font>>> futures = pool.invokeAll(tasks);
+<br/><font color="gray">//Do something with the results here...
+</font>
+<br/>pool.shutdown();
+]]>
+        </data>
+        <answer place="0">LetterCounter</answer>
+        <answer place="1">'a'</answer>
+        <answer place="2">Executors</answer>
+    </interactive>
     <!-- keywords: callable, executors future  -->
-
 </resources>

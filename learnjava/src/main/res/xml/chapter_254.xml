@@ -64,7 +64,7 @@
     </list>
     <text>
         <![CDATA[
-        As you can see from the code, volatility is not enough to stop this from happening.
+        As you can see from the code, volatility of the counter is not enough to stop this from happening.
         ]]>
     </text>
     <boxed title="When to exclude mutually">
@@ -228,6 +228,17 @@
         Yes, there is class called <i>Class</i> and also a class called <i>Object</i>...
         ]]>
     </text>
+    <interactive instruction="The method that was used in the last course is now going to be used by multiple threads. Make the necessary correction so that the list remains consistent!">
+        <data>
+<![CDATA[
+<font color="#E65100">public</font> ___ <font color="#DF7401">void</font> removeFirstLast(<font color="#999900">List</font>&lt;?> list) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;list.remove(0);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;list.remove(list.size()-1);
+<br/>}
+]]>
+        </data>
+        <answer place="0">synchronized</answer>
+    </interactive>
     <title text="Semaphores"/>
     <text>
         <![CDATA[
@@ -361,6 +372,24 @@
         class. That was basically a simple atomic integer class with only the increment method.
         ]]>
     </text>
+    <interactive instruction="Create a boolean variable with atomic operations, then, in the thread, set its value to false!">
+        <data>
+<![CDATA[
+___ condition = <font color="#E65100">new</font> ___(true);
+<br/><font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> <font color="#999900">Runnable</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> run() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Some long operation here...
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;condition.set(___);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}).start();
+]]>
+        </data>
+        <answer place="0">AtomicBoolean</answer>
+        <answer place="1">AtomicBoolean</answer>
+        <answer place="2">false</answer>
+    </interactive>
 
     <!-- keywords: synchronized, semaphores, atomic  -->
 

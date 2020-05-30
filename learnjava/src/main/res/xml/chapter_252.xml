@@ -51,7 +51,7 @@
     <title text="Passing the runnable to the thread"/>
     <text>
         <![CDATA[
-        There are multiple ways to pass the runnable the the thread object. The simplest is probably implementing the runnable
+        There are multiple ways to pass the runnable the the thread object. The simplest (but not the shortest) is probably implementing the runnable
         interface in a separate class:
         ]]>
     </text>
@@ -166,6 +166,21 @@
 <br/>t1.start();
         ]]>
     </code>
+    <interactive instruction="Create the thread using an anonymous runnable!">
+        <data>
+<![CDATA[
+<font color="#999900">Thread</font> thread = <font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> ___() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> ___() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//<font color="#E65100">do</font> some <font color="#DF7401">long</font> calculation here...
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>});
+]]>
+        </data>
+        <answer place="0">Runnable</answer>
+        <answer place="1">run</answer>
+    </interactive>
     <title text="Demonstration"/>
     <text>
         <![CDATA[

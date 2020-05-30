@@ -152,4 +152,21 @@ Instead, let's take a look at how we can <b>iterate the pairs</b> themselves:
         the descriptions of <i>HashMap</i> and <i>TreeMap</i> are good starting points (linked above).
         ]]>
     </advanced>
+    <interactive instruction="This program should ask for 5 names and ages, and place these in a name -> age map.">
+        <data>
+<![CDATA[
+<font color="#999900">Map</font>&lt;___,___> userData = <font color="#E65100">new</font> <font color="#999900">HashMap</font>&lt;>();
+<br/><font color="#999900">Scanner</font> scanner = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(<font color="#999900">System</font>.in);
+<br/><font color="#E65100">for</font>(<font color="#DF7401">int</font> i=0; i&lt;5; i++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("<font color="#999900">Enter</font> " + (i+1) + ". user name and age:");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> name = scanner.nextLine();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> age = scanner.nextInt();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;userData.___(name, age);
+<br/>}
+]]>
+        </data>
+        <answer place="0">String</answer>
+        <answer place="1">Integer</answer>
+        <answer place="2">put</answer>
+    </interactive>
 </resources>

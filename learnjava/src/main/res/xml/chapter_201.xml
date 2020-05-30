@@ -77,7 +77,7 @@
     </list>
     <boxed title="Inefficient memory usage">
         <![CDATA[
-        What does the first point mean? If we allocate an array for 1000 integers, and the user only enters
+        If we allocate an array for 1000 integers, and the user only enters
         3 for example, we are wasting the amount of memory needed to store 997 integers. Not too terrible, considering the
         amount of <i>RAM</i> there is in computers nowadays, but still.
         ]]>
@@ -99,7 +99,7 @@
     <title text="What is a data structure?"/>
     <text>
         <![CDATA[
-        A data structure can be anything that stores data in an organized way. Each data structure has it's
+        A data structure can be anything that stores data in an organized way (even an array). Each data structure has it's
         own advantages and disadvantages, so we must take care to choose the appropriate structure for the problems.
         ]]>
     </text>
@@ -146,4 +146,16 @@
         Use these wrappers as element types instead (<i>List&lt;Integer></i>)!
         ]]>
     </text>
+    <interactive instruction="Complete the generic list declaration for float types!">
+        <data>
+            <![CDATA[
+___&lt;<font color="#999900">Float</font>> numbers = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>___();
+]]>
+        </data>
+        <answer place="0">ArrayList</answer>
+        <answer place="0">List</answer>
+        <answer place="0">Collection</answer>
+        <answer place="1"><![CDATA[<>]]></answer>
+        <answer place="1"><![CDATA[<Float>]]></answer>
+    </interactive>
 </resources>

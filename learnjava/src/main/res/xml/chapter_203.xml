@@ -75,6 +75,28 @@
         waiting for the longest will get into the system first (<i>FIFO</i>).
         ]]>
     </text>
+    <interactive instruction="This program should asks for user input, enqueue it, then dequeue and print input lines.">
+        <data>
+<![CDATA[
+<font color="#999900">Queue</font>&lt;___> inputQueue = <font color="#E65100">new</font> <font color="#999900">ArrayDeque</font>&lt;>();
+<br/><font color="#999900">Scanner</font> scanner = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(<font color="#999900">System</font>.in);
+<br/><font color="#999900">String</font> input = scanner.nextLine();
+<br/><font color="#E65100">while</font>(!input.equals("stop")) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;inputQueue.___(input); <font color="gray">//enqueue input
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;input = scanner.nextLine();
+<br/>}
+<br/>scanner.close();
+<br/><font color="#E65100">while</font>(!___.isEmpty()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(inputQueue.remove()); <font color="gray">//dequeue an print
+</font>
+<br/>}
+]]>
+        </data>
+        <answer place="0">String</answer>
+        <answer place="1">add</answer>
+        <answer place="2">inputQueue</answer>
+    </interactive>
     <title text="Double ended queues"/>
     <text>
         <![CDATA[
@@ -180,4 +202,29 @@
         efficient solution, more like a demonstration of stacks.
         ]]>
     </text>
+    <interactive instruction="Update the previous interactive component so that it prints the input in reverse order. Use a stack to achieve this!">
+        <data>
+<![CDATA[
+___&lt;<font color="#999900">String</font>> inputStack = <font color="#E65100">new</font> ___&lt;>();
+<br/><font color="#999900">Scanner</font> scanner = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(<font color="#999900">System</font>.in);
+<br/><font color="#999900">String</font> input = scanner.nextLine();
+<br/><font color="#E65100">while</font>(!input.equals("stop")) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;inputStack.___(input);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;input = scanner.nextLine();
+<br/>}
+<br/>scanner.close();
+<br/><font color="#E65100">while</font>(!inputQueue.isEmpty()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(inputStack.___());
+<br/>}
+]]>
+        </data>
+        <answer place="0">Stack</answer>
+        <answer place="1">Stack</answer>
+        <answer place="2">push</answer>
+        <answer place="3">pop</answer>
+        <default place="0">Queue</default>
+        <default place="1">ArrayDeque</default>
+        <default place="2">add</default>
+        <default place="3">remove</default>
+    </interactive>
 </resources>
