@@ -182,6 +182,30 @@
 <br/><font color="#999900">Calculator</font>&lt;<font color="#999900">Boolean</font>> boolCalc = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(<font color="#E65100">false</font>);
         ]]>
     </code>
+    <interactive instruction="Update the vector class from the previous chapter to use an upper bounded type parameter!">
+        <data>
+<![CDATA[
+<font color="#E65100">class</font> <font color="#999900">Vector</font>&lt;<font color="#999900">T</font> ___ <font color="#999900">Number</font>> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">T</font>[] elements;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Vector</font>(<font color="#999900">T</font>[] elements) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.elements = elements;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> dotProduct(<font color="#999900">Vector</font>&lt;___> other) <font color="#E65100">throws</font> <font color="#999900">IllegalArgumentException</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(elements.length != other.elements.length) <font color="#E65100">throw</font> <font color="#E65100">new</font> <font color="#999900">IllegalArgumentException</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> product = 0;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=0; i&lt;elements.length; i++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;product += elements[i].doubleValue() * other.elements[i].doubleValue();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> product;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+]]>
+        </data>
+        <answer place="0">extends</answer>
+        <answer place="1">T</answer>
+        <answer place="1">?</answer>
+        <answer place="1">? extends Number</answer>
+    </interactive>
     <title text="Interface bounds"/>
     <text>
         <![CDATA[

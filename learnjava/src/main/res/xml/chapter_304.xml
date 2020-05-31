@@ -120,6 +120,19 @@
         since the type is already checked when creating the calculator object.
         ]]>
     </text>
+    <interactive instruction="Update the dotProduct method from the previous chapter to use a wildcarded vector as parameter!">
+        <data>
+<![CDATA[
+<font color="#E65100">public</font> <font color="#DF7401">double</font> dotProduct(<font color="#999900">Vector</font>&lt;___> other) <font color="#E65100">throws</font> <font color="#999900">IllegalArgumentException</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//The body is the same.
+</font>
+<br/>}
+]]>
+        </data>
+        <answer place="0">?</answer>
+        <answer place="0">? extends Number</answer>
+        <default place="0">T</default>
+    </interactive>
     <title text="Simulating inheritance"/>
     <text>
         <![CDATA[
@@ -239,4 +252,16 @@
 <br/>}
         ]]>
     </code>
+    <interactive instruction="Complete this method to return the largest key of the map!">
+        <data>
+<![CDATA[
+<font color="#E65100">public</font> &lt;<font color="#999900">K</font> ___ <font color="#999900">Comparable</font>&lt;<font color="#999900">K</font>>, <font color="#999900">V</font>> ___ keyMaximum(<font color="#999900">Map</font>&lt;<font color="#999900">K</font>, <font color="#999900">V</font>> map) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#999900">Collections</font>.max(___.keySet());
+<br/>}
+]]>
+        </data>
+        <answer place="0">extends</answer>
+        <answer place="1">K</answer>
+        <answer place="2">map</answer>
+    </interactive>
 </resources>

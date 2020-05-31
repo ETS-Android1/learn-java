@@ -132,6 +132,24 @@
 <br/>}
         ]]>
     </code>
+    <interactive instruction="Complete the declaration of this generic class!">
+        <data>
+<![CDATA[
+<font color="#E65100">class</font> <font color="#999900">Vector</font>___ {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">T</font>[] elements;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Vector</font>(___ elements) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.elements = elements;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> ___ getElement(<font color="#DF7401">int</font> index) <font color="#E65100">throws</font> <font color="#999900">ArrayIndexOutOfBoundsException</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> elements[index];
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+]]>
+        </data>
+        <answer place="0"><![CDATA[<T>]]></answer>
+        <answer place="1">T[]</answer>
+        <answer place="2">T</answer>
+    </interactive>
     <title text="Generic methods"/>
     <text>
         <![CDATA[
@@ -187,5 +205,22 @@
         Just make sure you use the wrapper classes when instantiating generic classes.
         ]]>
     </advanced>
-
+    <interactive instruction="This method is designed for Objects. Update it to use generics with type parameter E!">
+        <data>
+<![CDATA[
+<font color="#E65100">public</font> ___ ___ hashCodeComparison(___ o1, ___ o2) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(o1.hashCode() > o2.hashCode()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> o1;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> <font color="#E65100">return</font> o2;
+<br/>}
+]]>
+        </data>
+        <answer place="0"><![CDATA[<E>]]></answer>
+        <answer place="1">E</answer>
+        <answer place="2">E</answer>
+        <answer place="3">E</answer>
+        <default place="1">Object</default>
+        <default place="2">Object</default>
+        <default place="3">Object</default>
+    </interactive>
 </resources>
