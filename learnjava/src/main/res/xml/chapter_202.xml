@@ -8,7 +8,8 @@
     <text>
         <![CDATA[
         The list is one of the simplest data structures. They're similar to arrays, but unlike arrays,
-        they can change their capacity of elements automatically, when needed.
+        they can change their capacity of elements automatically, when needed (this means that a list can take
+        any number of elements).
         ]]>
     </text>
     <boxed title="Lists in Java">
@@ -89,6 +90,18 @@
         must be shifted right in the array, and this is expansive).
         ]]>
     </boxed>
+    <interactive instruction="Complete this program which adds the first 100 integers to an array list!">
+        <data>
+<![CDATA[
+<font color="#999900">List</font>&lt;___> numbers = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
+<br/><font color="#E65100">for</font>(<font color="#DF7401">int</font> i=0; i&lt;100; i++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;numbers.___(i+1);
+<br/>}
+]]>
+        </data>
+        <answer place="0">Integer</answer>
+        <answer place="1">add</answer>
+    </interactive>
     <title text="LinkedList"/>
     <text>
         <![CDATA[
@@ -174,4 +187,19 @@
         For a full list of methods, check the official documentation, linked above.
         ]]>
     </text>
+    <interactive instruction="Make this method remove the first and last elements of a list! Don't worry about the '?', it's a generics trick.">
+        <data>
+<![CDATA[
+<font color="#E65100">public</font> <font color="#DF7401">void</font> removeFirstLast(<font color="#999900">List</font>&lt;?> list) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;list.___(0);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;list.remove(___);
+<br/>}
+]]>
+        </data>
+        <answer place="0">remove</answer>
+        <answer place="1">list.size()-1</answer>
+        <answer place="1">list.size() - 1</answer>
+        <answer place="1">list.size()- 1</answer>
+        <answer place="1">list.size() -1</answer>
+    </interactive>
 </resources>

@@ -24,6 +24,13 @@ import androidx.annotation.StringDef;
     String IMAGE = "image";
     String LIST = "list";
     String SOLUTION = "solution";
+    String INTERACTIVE = "interactive";
+    String PLACE = "place";
+    String INSTRUCTION = "instruction";
+    String DATA = "data";
+    String REQUIRED_PLACES = "required_places";
+    String GROUP = "group";
+    String DEFAULT = "default";
 
     String QUESTION = "question";
     String QUESTION_AMOUNT = "questionAmount";

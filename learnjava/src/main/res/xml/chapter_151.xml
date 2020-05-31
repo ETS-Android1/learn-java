@@ -5,7 +5,6 @@
         <id>151</id>
         <name>Creating classes</name>
     </chapterdata>
-
     <text>
         <![CDATA[
         Classes have been mentioned many times in the previous courses. It's time to explain what they are,
@@ -201,6 +200,18 @@
         Notice that the objects are created using the <b>new</b> keyword.
         ]]>
     </text>
+    <interactive instruction="Complete the class declaration!">
+        <data>
+<![CDATA[
+<font color="#E65100">public</font> ___ <font color="#999900">Activity</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> id = 0;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;___ activityName = "default_name";
+<br/>}
+]]>
+        </data>
+        <answer place="0">class</answer>
+        <answer place="1">String</answer>
+    </interactive>
     <boxed title="Referencing members and methods">
         <![CDATA[
         As you can see in this example, to reference the member variables and methods of an object, the

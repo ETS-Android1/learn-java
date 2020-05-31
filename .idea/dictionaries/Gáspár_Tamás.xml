@@ -3,6 +3,8 @@
     <words>
       <w>addelement</w>
       <w>callables</w>
+      <w>deques</w>
+      <w>dequeues</w>
       <w>downcasting</w>
       <w>downcasts</w>
       <w>filos</w>
@@ -14,6 +16,7 @@
       <w>philo</w>
       <w>philos</w>
       <w>primality</w>
+      <w>reals</w>
       <w>reusability</w>
       <w>sema</w>
       <w>sisi</w>
@@ -22,6 +25,7 @@
       <w>taskshop</w>
       <w>upcast</w>
       <w>upcasting</w>
+      <w>wildcarded</w>
     </words>
   </dictionary>
 </component>

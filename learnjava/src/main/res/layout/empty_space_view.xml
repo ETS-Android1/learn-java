@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="0dp"
+    tools:background="@android:color/black"
+    android:gravity="center_vertical">
+
+    <EditText
+        android:id="@+id/inputField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edit_text_line_background"
+        android:minWidth="@dimen/min_empty_space_width"
+        android:textAlignment="center"
+        tools:text="code"
+        android:textColor="@color/code_text_color"
+        android:importantForAutofill="no"
+        android:inputType="textNoSuggestions|textShortMessage"
+        tools:ignore="LabelFor"
+        android:maxLines="1" /> <!-- Ime options are set programmatically -->
+
+    <ImageButton
+        android:id="@+id/showSolutionButton"
+        android:layout_width="@dimen/icon_size"
+        android:contentDescription="@string/interactive_help"
+        android:layout_height="@dimen/icon_size"
+        android:visibility="gone"
+        android:src="@drawable/interactive_help"
+        tools:visibility="visible"
+        android:layout_marginStart="5dp"/>
+
+</LinearLayout>

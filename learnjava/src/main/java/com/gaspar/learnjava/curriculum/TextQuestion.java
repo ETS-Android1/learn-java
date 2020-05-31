@@ -97,12 +97,6 @@ public class TextQuestion extends Question implements Serializable {
 
     @Override
     public boolean isCorrect() {
-        /*
-        for(String correctAnswer: correctAnswers) { //don't care about lower or upper case
-            if(correctAnswer.equalsIgnoreCase(enteredAnswer)) return true;
-        }
-        return false;
-        */
         return correctAnswers.contains(enteredAnswer);
     }
 

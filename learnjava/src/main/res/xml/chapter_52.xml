@@ -2,6 +2,15 @@
 
 <!-- 'File extensions and project structure', belongs to course 'The basics' -->
 
+<!--
+<interactive instruction="">
+    <data>
+
+    </data>
+    <answer place="0"></answer>
+</interactive>
+-->
+
 <resources>
     <chapterdata>
         <id>52</id>
@@ -129,9 +138,9 @@
     <title text="Packages in the code, import"/>
     <text>
         <![CDATA[
-        At the first line of a source file, the containing packages <i>should</i> be declared, with the <b>package</b>
-        keyword. For example, if our source file (<i>Main.java</b>) is inside package <i>learnjava</i>, and this package is inside
-        <i>com</i>, the the first line must be:
+        The first statement of every <i>.java</i> file must be the <b>package declaration</b>.
+        For example, if our source file (<i>Main.java</i>) is inside package <i>learnjava</i>, and this package is inside
+        package <i>com</i>, then the the first statement must be:
         ]]>
     </text>
     <code>
@@ -142,9 +151,20 @@
     <text>
         <![CDATA[
         As we can see, the package hierarchy can be resolved with dot characters. The package declaration
-        must <b>always be in the first line</b> of the source code!
+        must <b>always be the first statement</b> of the source code!
         ]]>
     </text>
+    <boxed title="The default package">
+        <![CDATA[
+        We don't necessarily need to declare a package. If we don't, the <b>default package</b> will be used,
+        however, this is discouraged.
+        <p>
+        Most importantly because the default package can't be referenced, and so we won't be able to import classes
+        from it!
+        <p>
+        For very simple applications with only one package, it's <i>OK</i> to use the default package.
+        ]]>
+    </boxed>
     <text>
         <![CDATA[
         If we wish to use code (a class) from another package, we must <b>import</b> it, without this
@@ -159,24 +179,43 @@
         <br/>
         <br/><font color="#E65100">import </font>java.util.<font color="#999900">Date</font>;
         <br/>
-        <br/>...
+        <br/><font color="gray">//Rest of the code...</font>
         ]]>
     </code>
     <text>
         <![CDATA[
-        We already know that the <i>package</i> line must be the first line. By convention, the <i>import</i>
-        lines follow after that line, at the beginning of the file.
+        By convention, the <i>import</i> statements follow after the package declaration, at the beginning of the file.
         ]]>
     </text>
-    <boxed title="The default package">
+    <boxed title="java.lang">
         <![CDATA[
-        We don't necessarily need to declare a package. If we don't, the <b>default package</b> will be used,
-        however, this is discouraged, for multiple reasons.
-        <br><br>
-        Most importantly, the default package can't be referenced, and so we won't be able to import classes
-        from it!
-        <br><br>
-        For very simple applications with only one package, it's OK to use the default package.
+        There is a special package in the <i>JDK</i>, <b>java.lang</b>. This contains the core classes of Java development
+        (such as <i>String</i>).
+        <p>
+        Since these classes are so commonly used, this package is <b>auto imported</b>, we don't have to explicitly import it.
         ]]>
     </boxed>
+    <text>
+        <![CDATA[
+        It's also possible to import all classes from a package by using the <b>*</b> symbol instead of the classname.
+        For example, this imports all classes from the <i>java.nio</i> package:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#E65100">import</font> java.nio.*;
+        ]]>
+    </code>
+    <interactive instruction="Complete the package declaration and the import statements!">
+        <data>
+<![CDATA[
+___ com.learnjava;
+<br/>
+<br/><font color="#E65100">import</font> java.util.<font color="#999900">Collections</font>;
+<br/>___ java.util.<font color="#999900">Map</font>;
+]]>
+        </data>
+        <answer place="0">package</answer>
+        <answer place="1">import</answer>
+    </interactive>
 </resources>

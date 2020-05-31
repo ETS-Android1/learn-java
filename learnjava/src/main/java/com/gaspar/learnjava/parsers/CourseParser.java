@@ -14,6 +14,9 @@ import com.gaspar.learnjava.curriculum.Component;
 import com.gaspar.learnjava.curriculum.Course;
 import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.curriculum.Task;
+import com.gaspar.learnjava.curriculum.interactive.EmptySpace;
+import com.gaspar.learnjava.curriculum.interactive.EmptySpaceAnswer;
+import com.gaspar.learnjava.curriculum.interactive.InteractiveComponent;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -192,6 +195,8 @@ public class CourseParser {
                     Component component = new Component(Component.ComponentType.TITLE, "");  //data not important
                     component.setTitle(title);
                     components.add(component);
+                } else if(tagName.equalsIgnoreCase(TagName.INTERACTIVE) && parseComponents) {
+                    components.add(parseInteractiveComponent(parser));
                 }
             }
             eventType = parser.next();
@@ -203,6 +208,42 @@ public class CourseParser {
         } else {
             return new Chapter(chapterId, chapterName);
         }
+    }
+
+    /**
+     * Parses an interactive_component code component. This means the parsing of the "data" (code +
+     * empty spaces), and the possible answers for each empty space. These are within ANSWER tags.
+     * @return The parsed component.
+     */
+    private InteractiveComponent parseInteractiveComponent(@NonNull final XmlResourceParser parser)
+            throws XmlPullParserException, IOException {
+        int eventType = parser.getEventType();
+        String tagName = parser.getName();
+        String instruction = parser.getAttributeValue(null, TagName.INSTRUCTION);
+        String data = null;
+        EmptySpace.EmptySpaceListBuilder builder = new EmptySpace.EmptySpaceListBuilder();
+        while(eventType != XmlResourceParser.END_TAG || !tagName.equalsIgnoreCase(TagName.INTERACTIVE)) {
+            //found an answer
+            if(eventType == XmlResourceParser.START_TAG && tagName.equalsIgnoreCase(TagName.ANSWER)) {
+                //read place and answer text
+                int place = Integer.parseInt(parser.getAttributeValue(null, TagName.PLACE));
+                EmptySpaceAnswer.AnswerBuilder answerBuilder = new EmptySpaceAnswer.AnswerBuilder();
+                answerBuilder.withGroup(parser.getAttributeValue(null, TagName.GROUP)); //may be null!
+                answerBuilder.withRequiredPlaces(parser.getAttributeValue(null, TagName.REQUIRED_PLACES));
+                answerBuilder.withAnswer(parser.nextText());
+                builder.addEmptySpaceAnswer(place, answerBuilder.build());
+            } else if(eventType == XmlResourceParser.START_TAG && tagName.equalsIgnoreCase(TagName.DATA)) {
+                data = parser.nextText();
+            } else if(eventType == XmlResourceParser.START_TAG && tagName.equalsIgnoreCase(TagName.DEFAULT)) {
+                int place = Integer.parseInt(parser.getAttributeValue(null, TagName.PLACE));
+                builder.addDefaultText(place, parser.nextText());
+            }
+            eventType = parser.next(); //advance parser
+            tagName = parser.getName();
+        }
+        //validate
+        if(data == null || instruction == null) throw new RuntimeException("Invalid interactive_component component!");
+        return new InteractiveComponent(instruction, data, builder.finishBuilding());
     }
 
     /**

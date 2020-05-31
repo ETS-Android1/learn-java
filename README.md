@@ -7,6 +7,7 @@ About the curriculum:
 - Tasks: example projects that you can solve (with solutions).
 
 Features:
-- Multiple application themes (dark included).
+- Multiple application themes (dark and orange).
 - Formatted code samples that are copiable and zoomable.
+- Interactive code samples with missing parts (mini-tasks).
 - Notifications: get alerted when you can take a failed exam again.

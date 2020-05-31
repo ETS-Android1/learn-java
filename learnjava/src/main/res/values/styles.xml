@@ -97,8 +97,8 @@
 
     <!-- custom components styles for dark mode -->
     <style name="edit_text_dark" parent="Widget.AppCompat.EditText">
-        <item name="android:backgroundTint">@color/colorAccent_Dark</item>
-        <item name="android:textColor">@color/colorAccent_Dark</item>
+        <item name="android:background">@drawable/edit_text_line_background</item>
+        <item name="android:textColor">@color/darkThemeTextColor</item>
         <item name="android:textColorHint">@color/darkThemeTextColor</item>
     </style>
     <style name="radio_button_dark" parent="Widget.AppCompat.CompoundButton.RadioButton">

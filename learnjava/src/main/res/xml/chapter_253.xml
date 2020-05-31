@@ -58,6 +58,22 @@
         of external reasons, sometimes threads can't wait as much as they were told to, and this exception gets thrown.
         ]]>
     </text>
+    <interactive instruction="Make the current thread wait one and a half seconds!">
+        <data>
+<![CDATA[
+<font color="#E65100">try</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;___.sleep(___);
+<br/>} <font color="#E65100">catch</font>(___ e) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;e.printStackTrace();
+<br/>}
+]]>
+        </data>
+        <answer place="0">Thread</answer>
+        <answer place="1">1500</answer>
+        <answer place="2">InterruptedException</answer>
+        <answer place="2">Exception</answer>
+        <answer place="2">Throwable</answer>
+    </interactive>
     <title text="Waiting for a result: volatile"/>
     <boxed title="Volatile variables">
         <![CDATA[
@@ -145,8 +161,8 @@
     </text>
     <boxed title="Active waiting">
         <![CDATA[
-        Waiting with a loop is called active waiting. This is because even if the thread waits, the <i>CPU</i>
-        still processes the loop statements.
+        Waiting with a loop is called active waiting. This is because it may seem like the thread is not doing anything, but the <i>CPU</i>
+        still repeatedly executes the loop statements.
         ]]>
     </boxed>
     <title text="Waiting for a result: joining"/>
@@ -251,7 +267,27 @@
         talk about them in the following chapters. It's required to avoid an <b>IllegalMonitorStateException</b>.
         ]]>
     </text>
-
+    <interactive instruction="This methods halts the current thread until each of the given threads finished.">
+        <data>
+<![CDATA[
+<font color="#E65100">public</font> <font color="#DF7401">boolean</font> joinOnAll(<font color="#999900">Collection</font>&lt;<font color="#999900">Thread</font>> threads) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Thread</font> thread: ___) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;thread.___();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> true; <font color="gray">//indicate with true that the wait succeeded
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font> (<font color="#999900">InterruptedException</font> e) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;e.printStackTrace();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> false; <font color="gray">//indicate with false that the wait failed
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+]]>
+        </data>
+        <answer place="0">threads</answer>
+        <answer place="1">join</answer>
+    </interactive>
     <!-- keywords: volatile, Object methods: join, wait, notify, notifyAll  -->
 
 </resources>

@@ -31,7 +31,7 @@
     </text>
     <code>
         <![CDATA[
-<font color="#DF7401">int </font>myVariable;
+<font color="#DF7401">int</font> myVariable;
 <br/>myVariable = 5;
         ]]>
     </code>
@@ -86,6 +86,15 @@
         and separated by commas.
         ]]>
     </text>
+    <interactive instruction="Declare an integer variable called 'counter', with initial value 0!">
+        <data>
+<![CDATA[
+ <font color="#DF7401">int</font> ___ = ___;
+]]>
+        </data>
+        <answer place="0">counter</answer>
+        <answer place="1">0</answer>
+    </interactive>
     <title text="Referencing and assigning"/>
     <text>
         <![CDATA[
@@ -93,13 +102,13 @@
         like initializing, we can assign a new value to our variable with the '<b>=</b>' operator. For the next example, let's
         take a look at a variable which stores text. The type of such a variable in Java is <b>String</b> (mind the capital S).
         <br><br>
-        Use the project from the previous chapter, of create a new one. Modify the content of our main method to
+        Use the project from the previous chapter, or create a new one. Modify the content of our main method to
         look like this:
         ]]>
     </text>
     <code>
         <![CDATA[
-<font color="#E65100">public </font>static<font color="#DF7401"> void </font>main(<font color="#999900">String</font>[] args) {
+<font color="#E65100">public static</font> <font color="#DF7401"> void </font>main(<font color="#999900">String</font>[] args) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> text = "This is my initial value";
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(text);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text = "This is my updated value";
@@ -116,6 +125,18 @@
         it the second time.
         ]]>
     </text>
+    <!-- For some reason this crashes
+    <interactive instruction="Complete the declaration and the print statement!">
+        <data>
+        <![CDATA[
+            ___ data = "1a3gjg18b42";
+            <br/><font color="#999900">System</font>.out.println(___);
+        ]]>
+        </data>
+        <answer place="0">String</answer>
+        <asnwer place="1">data</asnwer>
+    </interactive>
+    -->
     <boxed title="Be careful when assigning">
         <![CDATA[
         Some of you may have already experimented with trying to assign a value to a variable, which it clearly
@@ -172,4 +193,18 @@
         careful not to divide by 0, as this will result in an error when running our application!
        ]]>
    </advanced>
+    <interactive instruction="Complete the sample so that the variables final value is 8!">
+        <data>
+                 <![CDATA[
+               <font color="#DF7401">int</font> num = ___;
+               <br/>num = num ___ 5;
+          ]]>
+        </data>
+        <answer place="0" group="add" required_places="1">3</answer>
+        <answer place="0" group="subtract" required_places="1">13</answer>
+        <answer place="0" group="div" required_places="1">40</answer>
+        <answer place="1" group="add" required_places="0">+</answer>
+        <answer place="1" group="subtract" required_places="0">-</answer>
+        <answer place="1" group="div" required_places="0">/</answer>
+    </interactive>
 </resources>

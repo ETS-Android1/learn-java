@@ -46,12 +46,23 @@
     <text>
         <![CDATA[
         The first <i>int</i> in the first line is the <b>return type</b> of the method. It will return an <i>int</i> to the caller
-        after finishing. Then we write the name of the method, now <i>add<i>.
+        after finishing. Then we write the name of the method, now <i>add</i>.
         <br><br>
         Behind the name, comes the <b>parameters</b>, between parentheses. This method has two of them, both <i>int</i>'s, called
         <i>n1</i> and <i>n2</i>. As you can see, the parameters are separated by commas.
         ]]>
     </text>
+    <interactive instruction="Correct the method declaration so that its return type matches the returned value!">
+        <data>
+<![CDATA[
+<font color="#E65100">static</font> ___ getZero() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> 0;
+<br/>}
+]]>
+        </data>
+        <answer place="0">int</answer>
+        <default place="0">String</default>
+    </interactive>
     <advanced title="The static keyword">
         <![CDATA[
         In our method declaration there is also a <i>static</i> keyword. The importance of this will be explained
@@ -60,7 +71,7 @@
     </advanced>
     <text>
         <![CDATA[
-        <u>What the method does:</u> The name gives it away, doesn't it. Out method will take two <i>int</i>'s as parameters,
+        <u>What the method does:</u> The name gives it away. The method will take two <i>int</i>'s as parameters,
         add them together, and return the result (which is also an <i>int</i> of course).
         ]]>
     </text>
@@ -92,6 +103,18 @@
         indicate that the method does not return anything.
         ]]>
     </text>
+    <interactive instruction="Declare a method with no return type and a String parameter!">
+        <data>
+            <![CDATA[
+<font color="#E65100">static</font> ___ stringConsumer(___ text) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//<font color="#E65100">do</font> something with string here...
+</font>
+<br/>}
+]]>
+        </data>
+        <answer place="0">void</answer>
+        <answer place="1">String</answer>
+    </interactive>
     <boxed title="Returning in void methods">
         <![CDATA[
         The <i>return</i> keyword works a bit differently in void methods. It isn't necessary
@@ -159,13 +182,13 @@
     </text>
     <code>
         <![CDATA[
-           <font color="#E65100">public </font>class <font color="#999900">Main</font> {
+           <font color="#E65100">public class</font> <font color="#999900">Main</font> {
 <br/>
-<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;public </font>static<font color="#DF7401"> void </font>main(<font color="#999900">String</font>[] args) {
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static </font><font color="#DF7401">int </font>add<font color="#DF7401">(int </font>n1,<font color="#DF7401"> int </font>n2) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static </font><font color="#DF7401">int </font>add(<font color="#DF7401">int </font>n1,<font color="#DF7401"> int </font>n2) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>additionResult = n1 + n2;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return </font>additionResult;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
@@ -213,6 +236,17 @@
         <i>result</i>. This value is then printed.
         ]]>
     </text>
+    <interactive instruction="Call the greetMe method with parameter 'John'">
+        <data>
+            <![CDATA[
+<font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;___ (___);
+<br/>}
+            ]]>
+        </data>
+        <answer place="0">greetMe</answer>
+        <answer place="1">"John"</answer>
+    </interactive>
     <boxed title="Assigning methods?">
         <![CDATA[
         In the previous example we can see a line that may look confusing to you:

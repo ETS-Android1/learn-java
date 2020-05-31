@@ -49,6 +49,17 @@ In the above example we created a variable to store dates as text. Dates, howeve
         some time later, you might not remember, and use invalid input, which can cause errors!
         ]]>
     </text>
+    <interactive instruction="Complete these single-lined comments!">
+        <data>
+<![CDATA[
+<font color="#DF7401">int</font> num = 0;
+<br/>num = num + 1; ___ <font color="gray">increase by one</font>
+<br/><font color="#999900">System</font>.out.println(num); ___ <font color="gray">print value</font>
+]]>
+        </data>
+        <answer place="0">//</answer>
+        <answer place="1">//</answer>
+    </interactive>
     <title text="Multi-line comments"/>
     <text>
         <![CDATA[
@@ -84,6 +95,16 @@ so make sure to call validate method before using!<br>
 <br/><font color="#999900">String</font> userInput = getUserInput();
         ]]>
     </code>
+    <interactive instruction="Complete this multi-lined comment!">
+        <data>
+            <![CDATA[
+___ <font color="gray">The first line of this long, multi-lined comment.
+<br/><font color="gray">The second line of this long, multi-lined comment.</font> ___
+            ]]>
+        </data>
+        <answer place="0">/*</answer>
+        <answer place="1">*/</answer>
+    </interactive>
     <title text="TODO"/>
     <text>
         <![CDATA[
@@ -95,7 +116,7 @@ so make sure to call validate method before using!<br>
     <code>
         <![CDATA[
         <font color="gray">//TODO: finish writing this method!</font>
-<br/>public<font color="#DF7401"> void </font>validate(<font color="#999900">String</font> userInput) {
+<br/><font color="#E65100">public</font> <font color="#DF7401">void</font> validate(<font color="#999900">String</font> userInput) {
 <br/>
 <br/>}
         ]]>

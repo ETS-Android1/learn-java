@@ -2,6 +2,8 @@ package com.gaspar.learnjava.asynctask;
 
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
@@ -42,6 +44,10 @@ public class FillGuideActivityTask extends AsyncTask<GuideActivity, Void, FillGu
             for(Component component: result.components) { //add component views
                 componentsLayout.addView(component.createComponentView(result.activity, componentsLayout));
             }
+            final LayoutInflater inflater = LayoutInflater.from(result.activity);
+            View closeButton = inflater.inflate(R.layout.close_buide_button, componentsLayout, false);
+            closeButton.setOnClickListener(v -> result.activity.closeButtonOnClick(v));
+            componentsLayout.addView(closeButton);
         } else {
             FillCourseActivityTask.showFailDialog(result.activity, result.activity.getString(R.string.guide));
         }

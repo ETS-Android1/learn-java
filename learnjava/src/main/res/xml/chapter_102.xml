@@ -70,6 +70,18 @@
 <br/>}
         ]]>
     </code>
+    <interactive instruction="Complete the program so that it only prints when the number is 10!">
+        <data>
+<![CDATA[
+<font color="#DF7401">int</font> number = getNumber(); <font color="gray">//suppose <font color="#E65100">this</font> returns an integer</font>
+<br/>___ (number ___ 10) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("<font color="#999900">Number</font> was 10!");
+<br/>}
+]]>
+        </data>
+        <answer place="0">if</answer>
+        <answer place="1">==</answer>
+    </interactive>
     <advanced title="One statement">
         <![CDATA[
         It is not required to write the curly braces of the <i>if</i> block. In this case, <b>only one
@@ -150,6 +162,24 @@
         allows us to write complex code, that takes many factors into account.
         ]]>
     </boxed>
+    <interactive instruction="Complete and correct this program in a way that 'Middle' is only printed when the number is between 0.25 and 0.75!">
+        <data>
+<![CDATA[
+<font color="gray">//this double can have a value between 0 and 1
+</font>
+<br/><font color="#DF7401">double</font> real = <font color="#E65100">new</font> <font color="#999900">Random</font>().nextDouble();
+<br/><font color="#E65100">if</font>(real ___ 0.25 && real &lt;= ___) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("<font color="#999900">Near</font> the middle of the interval!");
+<br/>} ___ {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("<font color="#999900">Near</font> the edges of the interval!");
+<br/>}
+]]>
+        </data>
+        <answer place="0">>=</answer>
+        <answer place="1">0.75</answer>
+        <answer place="2">else</answer>
+        <default place="2">if</default>
+    </interactive>
     <title text="The switch block"/>
     <text>
         <![CDATA[

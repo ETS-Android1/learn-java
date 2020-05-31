@@ -2,6 +2,15 @@
 
 <!--Belongs to course 'Primitives, control flow and I/O' -->
 
+<!--
+<interactive instruction="">
+    <data>
+
+    </data>
+    <answer place="0"></answer>
+</interactive>
+-->
+
 <resources>
     <chapterdata>
         <id>101</id>
@@ -209,10 +218,20 @@
 <br/>c = a ^ b; <font color="gray">//true</font>
         ]]>
     </code>
+    <interactive instruction="Enter a boolean operator which makes the value of 'c' true!">
+        <data>
+            <![CDATA[
+<font color="#DF7401">boolean</font> a = false, b = true;
+<br/><font color="#DF7401">boolean</font> c = a ___ b;
+            ]]>
+        </data>
+        <answer place="0">&amp;&amp;</answer>
+        <answer place="0">^</answer>
+    </interactive>
     <title text="char"/>
     <text>
         <![CDATA[
-        The last primitive, it's used to represent unicode characters. They use 16 bits to store the integer
+        The last primitive, it's used to represent unicode characters. It's got 16 bits to store the integer
         representation of the unicode characters.
         <br><br>
         <u>Wrapper:</u> The wrapper class is <b>Character</b>.
@@ -258,6 +277,49 @@
         <![CDATA[
         Notice that the + operator that is used to "join" two strings together is now used on a String
         and a <i>char</i>.
+        ]]>
+    </text>
+    <interactive instruction="Declare a character variable with value 'C'!">
+        <data>
+<![CDATA[
+___ letter = ___;
+]]>
+        </data>
+        <answer place="0">char</answer>
+        <answer place="0">Character</answer>
+        <answer place="1">'C'</answer>
+    </interactive>
+    <title text="Autoboxing"/>
+    <text>
+        <![CDATA[
+        A primitive type is <b>not the same</b> as its wrapper class, however, they can be interchanged
+        in the code. The compiler will do the necessary conversions. This is called <b>autoboxing</b>.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#E65100">static</font> <font color="#DF7401">void</font> printChar(<font color="#DF7401">char</font> c) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(c);
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        This method takes a <i>char</i> primitive, but passing a <i>Character</i> (wrapper) variable is also fine:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        printChar('a'); <font color="gray">//with primitive
+</font>
+<br/>printChar(<font color="#E65100">new</font> <font color="#999900">Character</font>('b')); <font color="gray">//with wrapper
+</font>
+<br/>printChar(<font color="#999900">Character</font>.valueOf('c')); <font color="gray">//with wrapper</font>
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        This is going to be especially useful when using <b>generics</b> (covered in a later course).
         ]]>
     </text>
 </resources>

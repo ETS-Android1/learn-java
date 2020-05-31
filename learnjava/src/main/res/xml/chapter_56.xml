@@ -99,13 +99,12 @@
         <![CDATA[
         There is one more rule, and it's pretty obvious. We aren't allowed to use <b>Java keywords and literals</b>
         as identifiers. They are reserved. This is no big restriction for us, as most keywords would be horrible
-        identifiers anyways. <i>int</i> is a keyword, for example, but we won't cry ourself to sleep just because
-        we can't create a variable like this:
+        identifiers anyways. <i>int</i> is a keyword, for example, and so something like this is not allowed:
         ]]>
     </text>
     <code>
         <![CDATA[
-<font color="#DF7401">int </font>int;
+<font color="#DF7401">int</font> int = 1;
         ]]>
     </code>
     <advanced title="List of keywords">
@@ -152,11 +151,20 @@
  <font color="#999900">String</font> reverseText(<font color="#999900">String</font> text) { ... }
         ]]>
     </code>
+    <interactive instruction="Correct the naming of this variable so that it uses the camel case convention!">
+        <data>
+<![CDATA[
+<font color="#DF7401">int</font> ___ = 0;
+]]>
+        </data>
+        <answer place="0">matchCounter</answer>
+        <default place="0">match_counter</default>
+    </interactive>
     <text>
         <![CDATA[
         We haven't seen a real example for this, but we will also have to <b>name classes</b>. For these,
         something very similar to the camel-case style should be used. The only difference is that class
-        names should begin with a capital letter!
+        names should begin with a capital letter (this is called <b>PascalCase</b>)!
         ]]>
     </text>
     <code>
@@ -164,6 +172,17 @@
 <font color="#E65100">public </font>class <font color="#999900">TextFormatter</font> { ... }
         ]]>
     </code>
+    <interactive instruction="Name the class 'string builder' with the appropriate naming convention!">
+        <data>
+            <![CDATA[
+<font color="#E65100">public</font> <font color="#E65100">class</font> ___ {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Class contents...	&nbsp;&nbsp;&nbsp;&nbsp;
+</font>
+<br/>}
+            ]]>
+        </data>
+        <answer place="0">StringBuilder</answer>
+    </interactive>
     <text>
         <![CDATA[
         Despite not being as important as others, package identifiers also have their own

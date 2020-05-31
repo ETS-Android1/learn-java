@@ -5,7 +5,6 @@
         <id>153</id>
         <name>Inheritance</name>
     </chapterdata>
-
     <text>
         <![CDATA[
         When creating classes, we often want to be able to define 'relations' between our classes. Let's look at a
@@ -185,6 +184,19 @@
         for more details.
         ]]>
     </text>
+    <interactive instruction="Make this class extends the other one, and also call its constructor!">
+        <data>
+<![CDATA[
+<font color="#E65100">class</font> <font color="#999900">FragmentActivity</font> ___ <font color="#999900">Activity</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">FragmentActivity</font>(<font color="#DF7401">int</font> id, <font color="#DF7401">int</font> fragmentCount) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;___(id);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+]]>
+        </data>
+        <answer place="0">extends</answer>
+        <answer place="1">super</answer>
+    </interactive>
     <title text="Use child as parent"/>
     <text>
         <![CDATA[
