@@ -10,4 +10,7 @@ Features:
 - Multiple application themes (dark and orange).
 - Formatted code samples that are copiable and zoomable.
 - Interactive code samples with missing parts (mini-tasks).
+- Clip sync with your computer.
 - Notifications: get alerted when you can take a failed exam again.
+
+Clip syncing uses my small app that can be downloaded from [here](https://gtomika.github.io/learn-java-clipsync/).

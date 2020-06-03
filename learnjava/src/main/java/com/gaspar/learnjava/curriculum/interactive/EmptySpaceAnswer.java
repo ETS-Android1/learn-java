@@ -90,6 +90,10 @@ public class EmptySpaceAnswer {
             instance.answer = answer;
         }
 
+        /**
+         * Adds some required places to the answer.
+         * @param csvRequiredPlaces String of required places, as parsed from XML.
+         */
         public void withRequiredPlaces(String csvRequiredPlaces) { //the parameter is what's parsed
             List<Integer> places = null;
             if(csvRequiredPlaces != null) { //make int list from strings separated by commas
@@ -99,10 +103,18 @@ public class EmptySpaceAnswer {
             instance.requiredPlaces = places==null ? Optional.empty() : Optional.of(places);
         }
 
+        /**
+         * Adds a group for the answer.
+         * @param group The group.
+         */
         public void withGroup(String group) {
             instance.group = group==null ? Optional.empty() : Optional.of(group);
         }
 
+        /**
+         * Builds the answer objects with the given properties.
+         * @return The answer object.
+         */
         public EmptySpaceAnswer build() {
             if(instance.requiredPlaces.isPresent() && !instance.group.isPresent() ||
                     !instance.requiredPlaces.isPresent() && instance.group.isPresent()) {

@@ -45,6 +45,47 @@
     <string name="screen">Screen</string>
     <string name="keep_awake_description">Prevent screen from turning off</string>
 
+    <!-- ClipSync -->
+    <string name="clip_sync">ClipSync</string>
+    <string name="clip_sync_intro">Share your phone\'s clipboard with your computer\'s to easily transfer code samples between the two!</string>
+    <string name="get_started">Get started</string>
+    <string name="get_started_info_1">The app has built in support for ClipSync! Download the pairing app for your computer from my GitHub:</string>
+    <string name="download_link" translatable="false">https://gtomika.github.io/learn-java-clipsync</string>
+    <string name="get_started_info_2">Start the downloaded app where you\'ll see a mode selection screen.</string>
+    <string name="clip_sync_modes">ClipSync modes</string>
+    <string name="bluetooth" translatable="false">Bluetooth</string>
+    <string name="network">Network</string>
+    <string name="clip_sync_modes_info_1">You can use Bluetooth. Use this method if both your phone and computer has Bluetooth.</string>
+    <string name="clip_sync_modes_info_2">Alternatively, the app can sync through the local network. Use this is your devices are on the same network (for example on the same WiFi).</string>
+    <string name="clip_sync_remember_description">The app will remember your decision! You only need to select a mode again if you want to change it.</string>
+    <string name="clip_sync_mode_not_selected">Tap on one of the icons to select a mode!</string>
+    <string name="clip_sync_bluetooth_selected">BLUETOOTH selected! Make sure the desktop app is also on and you selected bluetooth there too.</string>
+    <string name="clip_sync_network_selected">NETWORK selected! Make sure the desktop app is also on and you selected network there too.</string>
+    <string name="bluetooth_not_supported">This device does not support Bluetooth! You can try to use the other ClipSync method.</string>
+    <string name="using_bluetooth_clip_sync">Using Bluetooth ClipSync!</string>
+    <string name="using_network_clip_sync">Using network ClipSync!</string>
+    <string name="clip_sync_disable">Disable</string>
+    <string name="clip_sync_disabled">ClipSync disabled!</string>
+    <string name="clip_sync_test">Test syncing</string>
+    <string name="clip_sync_test_description">You can test if the syncing works using this dummy code sample:</string>
+    <string name="dummy_code_sample" translatable="false"><![CDATA[
+     <font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(\"ClipSync!\");
+<br/>}
+    ]]></string>
+    <string name="clip_sync_success">Synced with other device!</string>
+    <string name="clip_sync_fail">ClipSync failed: time out.</string>
+    <string name="clip_sync_bluetooth_cancelled">You can\'t use Bluetooth ClipSync without Bluetooth…</string>
+    <string name="clip_sync_pairing">Pairing</string>
+    <string name="clip_sync_pairing_info">Searching for nearby devices…</string>
+    <string name="clip_sync_pairing_description">Bluetooth must find the ClipSync desktop app, which may take some time. This only needs to be performed once.</string>
+    <string name="clip_sync_pairing_handshake">Desktop app found! Pairing…</string>
+    <string name="clip_sync_not_paired">No paired app found. Please pair in the ClipSync menu!</string>
+    <string name="clip_sync_misc_error">Could not locate desktop app! Make sure it\'s on, you selected Bluetooth mode, and that it\'s showing a green tick!</string>
+    <string name="clip_sync_location">Bluetooth usage requires location permission. Please allow it!</string>
+    <string name="clip_sync_location_denied">Can\'t use bluetooth without permission!</string>
+    <string name="scanning_device">Scanning device </string>
+
     <!-- Notification data -->
     <string name="notification_channel_name" translatable="false">LearnJava notification channel</string>
     <string name="notification_channel_description" translatable="false">…</string>

@@ -31,6 +31,7 @@ import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.parsers.CourseParser;
 import com.gaspar.learnjava.parsers.RawParser;
 import com.gaspar.learnjava.utils.AnimationUtils;
+import com.gaspar.learnjava.utils.DrawerUtils;
 import com.gaspar.learnjava.utils.OnSwipeTouchListener;
 import com.gaspar.learnjava.utils.ThemeUtils;
 import com.google.android.gms.ads.MobileAds;
@@ -95,6 +96,7 @@ public class LearnJavaActivity extends ThemedActivity
             DEBUG = false;
             DEBUG_ADS = false;
         }
+        setContentView(R.layout.learn_java);
         LearnJavaDatabase.DB_EXECUTOR.execute(() -> { //initialize the database related variables
             try { //parse course objects
                 CoursesActivity.setParsedCourses(CourseParser.getInstance().parseCourses(this));
@@ -107,8 +109,8 @@ public class LearnJavaActivity extends ThemedActivity
             SettingsActivity.initSettings(this); //initialize settings
             MobileAds.initialize(this, result -> {}); //initialize admob
             ThemeUtils.initSelectedTheme(this); //initialize themes
+            ClipSyncActivity.initClipSync(this, findViewById(R.id.learnJavaMainView)); //initialize clip sync
         });
-        setContentView(R.layout.learn_java);
         setUpUI(); //init toolbar and drawer here
     }
 
@@ -283,23 +285,7 @@ public class LearnJavaActivity extends ThemedActivity
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId(); // Handle navigation view item clicks here.
-        Intent intent = null;
-        if(id == R.id.nav_courses) {
-            intent = new Intent(this, CoursesActivity.class);
-        } else if(id == R.id.nav_tasks) {
-            intent = new Intent(this, TasksActivity.class);
-        } else if(id == R.id.nav_exams) {
-            intent = new Intent(this, ExamsActivity.class);
-        } else if(id == R.id.nav_guide) {
-            intent = new Intent(this, GuideActivity.class);
-        } else if(id == R.id.nav_contact) {
-            intent = new Intent(this, ContactActivity.class);
-        }
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        if(intent == null) return true;
-        startActivity(intent); //start selected activity
+        DrawerUtils.handleDrawerOnClick(this, item);
         return true;
     }
 

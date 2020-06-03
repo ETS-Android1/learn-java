@@ -17,8 +17,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.gaspar.learnjava.asynctask.FillChapterActivityTask;
 import com.gaspar.learnjava.curriculum.Chapter;
 import com.gaspar.learnjava.curriculum.Exam;
+import com.gaspar.learnjava.utils.LearnJavaBluetooth;
+import com.gaspar.learnjava.utils.DrawerUtils;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 public class ChapterActivity extends ThemedActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -113,23 +116,20 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId(); // Handle navigation view item clicks here.
-        Intent intent = null;
-        if(id == R.id.nav_tasks) {
-            intent = new Intent(this, TasksActivity.class);
-        } else if(id == R.id.nav_exams) {
-            intent = new Intent(this, ExamsActivity.class);
-        } else if(id == R.id.nav_guide) {
-            intent = new Intent(this, GuideActivity.class);
-        } else if(id == R.id.nav_starter_screen) {
-            intent = new Intent(this, LearnJavaActivity.class);
-        } else if(id == R.id.nav_contact) {
-            intent = new Intent(this, ContactActivity.class);
-        }
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        if(intent == null) return true;
-        startActivity(intent); //start selected activity
+        DrawerUtils.handleDrawerOnClick(this, item);
         return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == ClipSyncActivity.REQUEST_ENABLE_BT) { //the user has decided about bluetooth
+            if(resultCode == RESULT_OK) { //the user chose to turn on bluetooth
+                LearnJavaBluetooth.getInstance().turnOnBluetooth();
+            } else { //complain
+                Snackbar.make(findViewById(R.id.testCodeSample), getString(R.string.clip_sync_bluetooth_cancelled),
+                        Snackbar.LENGTH_SHORT).show();
+            }
+        }
     }
 }

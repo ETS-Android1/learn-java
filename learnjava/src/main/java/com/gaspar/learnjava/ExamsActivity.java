@@ -15,6 +15,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.gaspar.learnjava.asynctask.FillExamsActivityTask;
 import com.gaspar.learnjava.curriculum.Exam;
+import com.gaspar.learnjava.utils.DrawerUtils;
 import com.google.android.gms.ads.AdView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -110,23 +111,7 @@ public class ExamsActivity extends ThemedActivity implements NavigationView.OnNa
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId(); // Handle navigation view item clicks here.
-        Intent intent = null;
-        if(id == R.id.nav_tasks) {
-            intent = new Intent(this, TasksActivity.class);
-        } else if(id == R.id.nav_guide) {
-            intent = new Intent(this, GuideActivity.class);
-        } else if(id == R.id.nav_courses) {
-            intent = new Intent(this, CoursesActivity.class);
-        } else if(id == R.id.nav_starter_screen) {
-            intent = new Intent(this, LearnJavaActivity.class);
-        } else if(id == R.id.nav_contact) {
-            intent = new Intent(this, ContactActivity.class);
-        }
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        if(intent == null) return true;
-        startActivity(intent); //start selected activity
+        DrawerUtils.handleDrawerOnClick(this, item);
         return true;
     }
 
