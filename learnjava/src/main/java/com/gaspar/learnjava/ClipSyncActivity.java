@@ -43,6 +43,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Activity that allows the user to set up and test clip sync. There are two ways for this, bluetooth and
+ * local network, but most of the activity's code is about bluetooth as that is much harder to initialize.
+ */
 public class ClipSyncActivity extends ThemedActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -92,7 +96,7 @@ public class ClipSyncActivity extends ThemedActivity
                             Optional<BluetoothSocket> connResult = LearnJavaBluetooth.getInstance().getServerSocket(deviceExtra);
                             if (connResult.isPresent()) {
                                 LearnJavaBluetooth.getInstance().sendData(
-                                        LearnJavaBluetooth.HANDSHAKE_MESSAGE, connResult.get(), ClipSyncActivity.this.findViewById(R.id.testCodeSample));
+                                        LearnJavaBluetooth.HANDSHAKE_MESSAGE, connResult.get(), ClipSyncActivity.this);
                             } else {
                                 Snackbar.make(ClipSyncActivity.this.findViewById(R.id.testCodeSample), ClipSyncActivity.this.getString(R.string.clip_sync_misc_error), Snackbar.LENGTH_LONG).show();
                             }
@@ -235,7 +239,18 @@ public class ClipSyncActivity extends ThemedActivity
      * Called when the user selects network sync mode.
      */
     public void networkSelectOnClick(@NonNull View view) {
-
+        AlertDialog.Builder builder = new AlertDialog.Builder(ThemeUtils.createDialogWrapper(ClipSyncActivity.this));
+        builder.setMessage(R.string.clip_sync_remember_description);
+        builder.setIcon(R.drawable.local_network_icon);
+        builder.setPositiveButton(R.string.ok, ((dialogInterface, i) -> {
+            dialogInterface.dismiss();
+            Snackbar.make(findViewById(R.id.testCodeSample), getString(R.string.using_network_clip_sync), Snackbar.LENGTH_SHORT).show();
+        }));
+        builder.create().show();
+        prefs.edit().putInt(CLIP_SYNC_PREF_NAME, ClipSyncMode.NETWORK).apply();
+        final TextView statusDisplayer = findViewById(R.id.clipSyncStatusDisplayer);
+        statusDisplayer.setText(getString(R.string.clip_sync_network_selected));
+        findViewById(R.id.deselectButton).setVisibility(View.VISIBLE);
     }
 
     /**

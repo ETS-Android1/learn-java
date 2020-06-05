@@ -11,7 +11,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +29,7 @@ import androidx.core.content.ContextCompat;
 import com.gaspar.learnjava.ClipSyncActivity;
 import com.gaspar.learnjava.LearnJavaActivity;
 import com.gaspar.learnjava.R;
+import com.gaspar.learnjava.asynctask.NetworkExchangeTask;
 import com.gaspar.learnjava.parsers.RawParser;
 import com.gaspar.learnjava.utils.LearnJavaBluetooth;
 import com.gaspar.learnjava.utils.ListTagHandler;
@@ -165,7 +165,6 @@ public class Component implements Serializable {
         }
         final SharedPreferences prefs = activity.getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
         final int mode = prefs.getInt(ClipSyncActivity.CLIP_SYNC_PREF_NAME, ClipSyncActivity.ClipSyncMode.NOT_SELECTED);
-        Log.d("LearnJava", "Sync mode: " + mode);
         switch(mode) {
             case ClipSyncActivity.ClipSyncMode.BLUETOOTH: //using bluetooth clip sync
                 if(LearnJavaBluetooth.getInstance().bluetoothOn()) {
@@ -174,7 +173,7 @@ public class Component implements Serializable {
                     if(serverOpt.isPresent()) {
                         Optional<BluetoothSocket> serverSocketOpt = LearnJavaBluetooth.getInstance().getServerSocket(serverOpt.get());
                         if(serverSocketOpt.isPresent()) {
-                            LearnJavaBluetooth.getInstance().sendData(copyFromThis.getText().toString(), serverSocketOpt.get(), copyFromThis);
+                            LearnJavaBluetooth.getInstance().sendData(copyFromThis.getText().toString(), serverSocketOpt.get(), activity);
                         } else { //could not obtain socket for some reason
                             Snackbar.make(copyFromThis, activity.getString(R.string.clip_sync_misc_error), Snackbar.LENGTH_LONG).show();
                         }
@@ -187,7 +186,7 @@ public class Component implements Serializable {
                 }
                 break;
             case ClipSyncActivity.ClipSyncMode.NETWORK:
-                //TODO
+                new NetworkExchangeTask(copyFromThis.getText().toString(), activity).execute();
                 break;
             default: //no clip sync, just a general confirmation
                 Snackbar.make(copyFromThis, R.string.copy_successful, Snackbar.LENGTH_SHORT).show();

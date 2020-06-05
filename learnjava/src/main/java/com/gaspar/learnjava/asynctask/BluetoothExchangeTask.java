@@ -9,6 +9,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Size;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.gaspar.learnjava.R;
 import com.google.android.material.snackbar.Snackbar;
@@ -19,9 +20,8 @@ import java.io.UncheckedIOException;
 import java.nio.charset.StandardCharsets;
 
 /**
- * This background task sends text data to the desktop app, and waits for a confirmation response.
- * If the response does not arrive within a time limit, the exchange is considered failed, otherwise
- * it's a success.
+ * This background task sends text data to the desktop app through bluetooth.
+ * If a connection can be made and the data is sent the exchange is considered a success.
  * <p>
  * When the exchange stops, the user is notified according to the result.
  * <p>
@@ -33,11 +33,11 @@ public class BluetoothExchangeTask extends AsyncTask<Void, Void, Boolean> {
      * Determines how long the async task will attempt to exchange data. After this the task
      * is cancelled and the result is handled in the onCancel callback.
      */
-    private static final int TIMEOUT_MILLIS = 5000;
+    static final int TIMEOUT_MILLIS = 10000;
     /**
      * This marks the end of the data exchanged. Should not be used in code samples.
      */
-    private static final String DATA_DELIMITER = "DATA_DELIMITER";
+    static final String DATA_DELIMITER = "DATA_DELIMITER";
     /**
      * The text that will be sent to the desktop app.
      */
@@ -51,22 +51,22 @@ public class BluetoothExchangeTask extends AsyncTask<Void, Void, Boolean> {
      */
     private boolean result;
     /**
-     * The view which is used to make Snackbar confirmations to the user. Context leak but could not do it in any other way.
+     * The activity which is used to make Snackbar confirmations to the user. Context leak but could not do it in any other way.
      */
     @SuppressLint("StaticFieldLeak")
-    private final View view;
+    private final AppCompatActivity activity;
 
-    public BluetoothExchangeTask(@NonNull String data, @NonNull final BluetoothSocket socket, @NonNull View view) {
+    public BluetoothExchangeTask(@NonNull String data, @NonNull final BluetoothSocket socket, @NonNull AppCompatActivity activity) {
         this.data = data;
         this.socket = socket;
-        this.view = view;
+        this.activity = activity;
     }
 
     @Override
     protected void onPreExecute() {
-        //start a countdown for timeout
-        //not important
-        // stop async task if not in progress
+        final View loadingIndicator = activity.findViewById(R.id.loadingIndicator); //show loading icon
+        if(loadingIndicator != null) loadingIndicator.setVisibility(View.VISIBLE);
+        //start timeout countdown
         CountDownTimer timer = new CountDownTimer(TIMEOUT_MILLIS, TIMEOUT_MILLIS) {
             public void onTick(long millisUntilFinished) {
             } //not important
@@ -112,10 +112,14 @@ public class BluetoothExchangeTask extends AsyncTask<Void, Void, Boolean> {
     protected void onPostExecute(Boolean result) {
         String message;
         if(result) {
-            message = view.getContext().getString(R.string.clip_sync_success);
+            message = activity.getString(R.string.clip_sync_success);
         } else { //fail
-            message = view.getContext().getString(R.string.clip_sync_fail);
+            message = activity.getString(R.string.clip_sync_fail);
         }
-        Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show();
+        final View loadingIndicator = activity.findViewById(R.id.loadingIndicator); //hide loading icon
+        if(loadingIndicator != null) {
+            loadingIndicator.setVisibility(View.GONE);
+            Snackbar.make(loadingIndicator, message, Snackbar.LENGTH_SHORT).show();
+        }
     }
 }

@@ -4,10 +4,12 @@
     package="com.gaspar.learnjava">
 
     <uses-permission android:name="android.permission.VIBRATE" /> <!-- For notification -->
-    <uses-permission android:name="android.permission.BLUETOOTH"/> <!-- For ClipSync -->
+    <uses-permission android:name="android.permission.BLUETOOTH"/> <!-- For bluetooth ClipSync -->
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- Bluetooth requires this... -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- Bluetooth requires this... -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- for network clip sync -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"

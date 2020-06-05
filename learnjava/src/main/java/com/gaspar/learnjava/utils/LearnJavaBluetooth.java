@@ -5,11 +5,11 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.os.ParcelUuid;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresPermission;
 import androidx.annotation.UiThread;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.gaspar.learnjava.asynctask.BluetoothExchangeTask;
 
@@ -119,8 +119,8 @@ public class LearnJavaBluetooth {
      * @param data The string.
      */
     @UiThread
-    public void sendData(@NonNull String data, @NonNull BluetoothSocket socket, @NonNull final View view) {
+    public void sendData(@NonNull String data, @NonNull BluetoothSocket socket, @NonNull final AppCompatActivity activity) {
         turnOnBluetooth(); //maybe it's turned off
-        new BluetoothExchangeTask(data, socket, view).execute();
+        new BluetoothExchangeTask(data, socket, activity).execute();
     }
 }

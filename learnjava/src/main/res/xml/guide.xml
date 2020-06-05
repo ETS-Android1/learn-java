@@ -111,15 +111,14 @@
         You can use the buttons on the right to check if your answer is correct!
         ]]>
     </text>
-    <advanced title="Share your clipboard">
+    <boxed title="Share code with your computer">
         <![CDATA[
-        A great way to use this app is to share your clipboard with your <i>PC</i>! This way the code samples you copy on your
+        A great way to use this app is to sync and send the code samples to your computer! This way the code samples you copy on your
         phone can be easily pasted into the code on <i>PC</i>!
         <p>
-        Many apps can do this, you can select from <a href="https://www.guidingtech.com/apps-sync-clipboard-between-pc-android/">this
-        </a> list or search in the Play Store.
+        This app has <b>built-in</b> syncing! Head over to the <b>ClipSync menu</b> to get started!
         ]]>
-    </advanced>
+    </boxed>
     <title text="Exams"/>
     <text>
         <![CDATA[

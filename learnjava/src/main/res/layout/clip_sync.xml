@@ -28,196 +28,215 @@ android:fitsSystemWindows="true">
     </com.google.android.material.appbar.AppBarLayout>
 
     <!-- Actual content of the activity -->
-    <ScrollView
+    <!-- Actual content of the activity -->
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="visible"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
-            android:orientation="vertical"
+        <!-- When the background task finished this is showing -->
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:textSize="@dimen/medium_text_size"
-                android:text="@string/clip_sync_intro"/>
-
-            <View
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/separator_height"
-                android:layout_marginTop="@dimen/margin"
-                android:background="@color/separator_color" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:textSize="@dimen/big_text_size"
-                android:text="@string/get_started"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:textSize="@dimen/medium_text_size"
-                android:text="@string/get_started_info_1"/>
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/download_link"
-                android:onClick="downloadButtonOnClick"
-                android:textAllCaps="false"
-                android:textSize="@dimen/medium_text_size"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:textSize="@dimen/medium_text_size"
-                android:text="@string/get_started_info_2"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/separator_height"
-                android:layout_marginTop="@dimen/margin"
-                android:background="@color/separator_color" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:textSize="@dimen/big_text_size"
-                android:text="@string/clip_sync_modes"/>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center">
+                android:layout_height="wrap_content">
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/bluetoothIcon"
-                    android:textSize="@dimen/medium_text_size"
-                    android:text="@string/clip_sync_modes_info_1"/>
-
-                <ImageView
-                    android:id="@+id/bluetoothIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_margin="@dimen/margin"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:src="@drawable/bluetooth_icon"
-                    android:background="@drawable/clip_sync_background"
-                    android:onClick="bluetoothSelectOnClick"
-                    android:contentDescription="@string/bluetooth"/>
+                    android:layout_gravity="start"
+                    android:textSize="@dimen/medium_text_size"
+                    android:text="@string/clip_sync_intro"/>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/separator_height"
+                    android:layout_marginTop="@dimen/margin"
+                    android:background="@color/separator_color" />
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/networkIcon"
-                    android:textSize="@dimen/medium_text_size"
-                    android:text="@string/clip_sync_modes_info_2"/>
-
-                <ImageView
-                    android:id="@+id/networkIcon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_margin="@dimen/margin"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:onClick="networkSelectOnClick"
-                    android:src="@drawable/local_network_icon"
-                    android:background="@drawable/clip_sync_background"
-                    android:contentDescription="@string/network"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/separator_height"
-                android:layout_marginTop="@dimen/margin"
-                android:background="@color/separator_color" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center">
+                    android:layout_gravity="start"
+                    android:textSize="@dimen/big_text_size"
+                    android:text="@string/get_started"/>
 
                 <TextView
-                    android:id="@+id/clipSyncStatusDisplayer"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/deselectButton"
+                    android:layout_gravity="start"
                     android:textSize="@dimen/medium_text_size"
-                    tools:text="Status display here..."/>
+                    android:text="@string/get_started_info_1"/>
 
                 <Button
-                    android:id="@+id/deselectButton"
-                    tools:visibility="visible"
-                    android:visibility="gone"
-                    android:text="@string/clip_sync_disable"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_margin="@dimen/margin"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:onClick="clipSyncDisabledOnClick"/>
+                    android:layout_gravity="center"
+                    android:text="@string/download_link"
+                    android:onClick="downloadButtonOnClick"
+                    android:textAllCaps="false"
+                    android:textSize="@dimen/medium_text_size"/>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:textSize="@dimen/medium_text_size"
+                    android:text="@string/get_started_info_2"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/separator_height"
-                android:layout_marginTop="@dimen/margin"
-                android:background="@color/separator_color" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/separator_height"
+                    android:layout_marginTop="@dimen/margin"
+                    android:background="@color/separator_color" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:textSize="@dimen/big_text_size"
-                android:text="@string/clip_sync_test"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:textSize="@dimen/big_text_size"
+                    android:text="@string/clip_sync_modes"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:textSize="@dimen/medium_text_size"
-                android:text="@string/clip_sync_test_description"/>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
 
-            <include
-                android:id="@+id/testCodeSample"
-                layout="@layout/code_component"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/bluetoothIcon"
+                        android:textSize="@dimen/medium_text_size"
+                        android:text="@string/clip_sync_modes_info_1"/>
 
-        </LinearLayout>
+                    <ImageView
+                        android:id="@+id/bluetoothIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_margin="@dimen/margin"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:src="@drawable/bluetooth_icon"
+                        android:background="@drawable/clip_sync_background"
+                        android:onClick="bluetoothSelectOnClick"
+                        android:contentDescription="@string/bluetooth"/>
 
-    </ScrollView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/networkIcon"
+                        android:textSize="@dimen/medium_text_size"
+                        android:text="@string/clip_sync_modes_info_2"/>
+
+                    <ImageView
+                        android:id="@+id/networkIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_margin="@dimen/margin"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:onClick="networkSelectOnClick"
+                        android:src="@drawable/local_network_icon"
+                        android:background="@drawable/clip_sync_background"
+                        android:contentDescription="@string/network"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/separator_height"
+                    android:layout_marginTop="@dimen/margin"
+                    android:background="@color/separator_color" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/clipSyncStatusDisplayer"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/deselectButton"
+                        android:textSize="@dimen/medium_text_size"
+                        tools:text="Status display here..."/>
+
+                    <Button
+                        android:id="@+id/deselectButton"
+                        tools:visibility="visible"
+                        android:visibility="gone"
+                        android:text="@string/clip_sync_disable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_margin="@dimen/margin"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:onClick="clipSyncDisabledOnClick"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/separator_height"
+                    android:layout_marginTop="@dimen/margin"
+                    android:background="@color/separator_color" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:textSize="@dimen/big_text_size"
+                    android:text="@string/clip_sync_test"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:textSize="@dimen/medium_text_size"
+                    android:text="@string/clip_sync_test_description"/>
+
+                <include
+                    android:id="@+id/testCodeSample"
+                    layout="@layout/code_component"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <!-- Loading indicator -->
+        <ProgressBar
+            android:id="@+id/loadingIndicator"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:indeterminate="true"
+            android:visibility="gone" />
+    </RelativeLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
