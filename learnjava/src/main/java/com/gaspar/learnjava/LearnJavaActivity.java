@@ -1,5 +1,10 @@
 package com.gaspar.learnjava;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -213,6 +218,40 @@ public class LearnJavaActivity extends ThemedActivity
             public void onAnimationRepeat(Animation animation) { }
         });
         touchIcon.startAnimation(right);
+    }
+
+    /**
+     * Shows the prompt which points to the drawer, after the user has completed
+     * all chapters of a course and he cant progress anymore from the starter screen.
+     */
+    public void showAndAnimateOpenDrawerPrompt() {
+        final View prompt = findViewById(R.id.showMenuView);
+        final ObjectAnimator pulsator = ObjectAnimator.ofPropertyValuesHolder(
+                prompt,
+                PropertyValuesHolder.ofFloat("scaleX", 1.2f),
+                PropertyValuesHolder.ofFloat("scaleY", 1.2f)).
+                setDuration(500);
+        pulsator.setRepeatCount(ValueAnimator.INFINITE);
+        pulsator.setRepeatMode(ObjectAnimator.REVERSE);
+        pulsator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                prompt.setVisibility(View.VISIBLE);
+                prompt.bringToFront();
+            }
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                prompt.setVisibility(View.GONE);
+            }
+        });
+        pulsator.start();
+    }
+
+    @Override //cancel ongoing animation here
+    protected void onPause() {
+        super.onPause();
+        final View prompt = findViewById(R.id.showMenuView);
+        prompt.clearAnimation();
     }
 
     private void showStartContinueComponent() {

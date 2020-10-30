@@ -31,6 +31,8 @@ public class InitStarterViewTask extends AsyncTask<Object, Void, LearnJavaActivi
 
     private boolean started;
 
+    private boolean showOpenDrawerForExamPrompt;
+
     public InitStarterViewTask(int chapterId, boolean started) {
         this.started = started;
         if(started) {
@@ -86,6 +88,11 @@ public class InitStarterViewTask extends AsyncTask<Object, Void, LearnJavaActivi
             startedView.setVisibility(View.GONE);
             notStartedView.setVisibility(View.VISIBLE);
         }
+        //the user completed all chapters, but the next course it locked: he needs to take an exam
+        //this prompt shows where he can open the drawer to start an exam.
+        if(showOpenDrawerForExamPrompt) {
+            activity.showAndAnimateOpenDrawerPrompt();
+        }
     }
 
     @WorkerThread
@@ -107,6 +114,7 @@ public class InitStarterViewTask extends AsyncTask<Object, Void, LearnJavaActivi
                             if(cStatus == null) throw new RuntimeException("Database error!");
                             if(cStatus.getStatus() == com.gaspar.learnjava.curriculum.Status.LOCKED) {
                                 //next course is not yet unlocked
+                                showOpenDrawerForExamPrompt = true; //show the user a prompt where he can progress
                                 return currentChapterId;
                             } else { //next course is unlocked
                                 return CoursesActivity.getParsedCourses().get(i+1).getChapters().get(0).getId();

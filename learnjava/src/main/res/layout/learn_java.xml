@@ -58,13 +58,46 @@
             tools:showIn="@layout/learn_java">
 
             <!-- The main view -->
+
+            <LinearLayout
+                android:id="@+id/showMenuView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="@dimen/side_margin"
+                android:layout_marginTop="@dimen/margin"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:contentDescription="@string/courses"
+                    app:srcCompat="@drawable/pointer_arrow_up" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="9"
+                    android:text="@string/open_drawer_for_exam_prompt"
+                    android:textColor="@color/colorAccentOrange"
+                    android:textSize="@dimen/small_text_size" />
+            </LinearLayout>
+
             <RelativeLayout
                 android:id="@+id/learnJavaMainView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/starter_view_margin"
                 android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true">
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/starter_view_margin"
+                android:visibility="visible">
 
                 <LinearLayout
                     android:id="@+id/startedView"

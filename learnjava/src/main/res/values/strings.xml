@@ -98,6 +98,7 @@
     <string name="exams">Exams</string>
     <string name="guide">Guide</string>
     <string name="starter_screen">Starter screen</string>
+    <string name="open_drawer_for_exam_prompt">Unlock the next course by passing an exam!</string>
 
     <!-- When the user has not started a course yet -->
     <string name="before_you_start">Read the guide before you start:</string>
