@@ -18,10 +18,21 @@ import java.util.Optional;
  */
 public class EmptySpace {
 
-    private final int place; //the "index" of this empty space
-    private final List<EmptySpaceAnswer> answers; //the answers accepted by this empty space
-    private View emptySpaceView; //this is bound later, is created from "empty_space_view.xml"
-
+    /**
+     * The "index" of this empty space, starts from 0. It's use to later bind the EmptySpace objects and their views.
+     */
+    private final int place;
+    /**
+     * Contains the answers accepted by this empty space.
+     */
+    private final List<EmptySpaceAnswer> answers;
+    /**
+     * The view of this empty space. This is bound later, is created from "empty_space_view.xml".
+     */
+    private View emptySpaceView;
+    /**
+     * The optional default text. If it's present than this will be shown by default, not an empty EditText.
+     */
     @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
     private Optional<String> defaultText;
 
@@ -154,6 +165,10 @@ public class EmptySpace {
             }
         }
 
+        /**
+         * Stops the parsing of an interactive components.
+         * @return The empty spaces found while parsing.
+         */
         public List<EmptySpace> finishBuilding() {
             return emptySpaces;
         }

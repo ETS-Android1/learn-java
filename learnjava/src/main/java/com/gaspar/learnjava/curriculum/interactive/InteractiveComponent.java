@@ -1,7 +1,6 @@
 package com.gaspar.learnjava.curriculum.interactive;
 
 import android.content.Context;
-import android.os.Build;
 import android.text.Html;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -14,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.curriculum.Component;
@@ -81,15 +81,13 @@ public final class InteractiveComponent extends Component {
     /**
      * Creates the interactive_component view, using the formatted data, and the empty spaces. Binds an
      * EditText to each empty space.
-     *
      * @param context Context.
      * @param parent The view group this question view will be added. This method DOES NOT add the
      *               inflated view.
      * @return The created view ready to be added.
      */
     @Override
-    @SuppressWarnings("deprecation") //says it's unused, but it isn't...
-    public View createComponentView(Context context, ViewGroup parent) {
+    public View createComponentView(@NonNull final AppCompatActivity context, ViewGroup parent) {
         final LayoutInflater inflater = LayoutInflater.from(context);
         final String EMPTY_SPACE_MARKER = context.getString(R.string.empty_space_marker);
         final String FORMATTED_LINE_BREAK = context.getString(R.string.formatted_line_break);
@@ -109,12 +107,8 @@ public final class InteractiveComponent extends Component {
             for(int i=0; i<separatedData.length; i++) {
                 if(!"".equals(separatedData[i])) { //only if there is actual text
                     TextView codeView = new TextView(context);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        codeView.setText(Html.fromHtml(separatedData[i], Html.FROM_HTML_MODE_COMPACT));
-                    } else {
-                        codeView.setText(Html.fromHtml(separatedData[i])); //deprecated but new android wont use this anyways
-                    }
-                    codeView.setTextColor(context.getResources().getColor(R.color.code_text_color));
+                    codeView.setText(Html.fromHtml(separatedData[i], Html.FROM_HTML_MODE_COMPACT));
+                    codeView.setTextColor(context.getColor(R.color.code_text_color));
                     lineLayout.addView(codeView);
                 }
                 if(i < separatedData.length - 1) { //between every constant code part, add the empty space
@@ -132,6 +126,15 @@ public final class InteractiveComponent extends Component {
         return interactiveView;
     }
 
+    /**
+     * Inserts a view where the user can enter input. This view also contains a help icon where
+     * the user can ask for the correct solution.
+     * @param place Used to get the matching {@link EmptySpace} object.
+     * @param parent The layout where the view will be inserted.
+     * @param inflater A layout inflater.
+     * @param context Context.
+     * @return The {@link EditText} of the view. This is used to set IME actions later.
+     */
     private EditText addEmptySpaceView(int place, LinearLayout parent, final LayoutInflater inflater, @NonNull final Context context) {
         View emptySpaceView = inflater.inflate(R.layout.empty_space_view, parent, false);
         //bind to EmptySpace object, and add to line
@@ -147,8 +150,13 @@ public final class InteractiveComponent extends Component {
         return input; //is "last edit text"
     }
 
+    /**
+     * Sets the zoom button listeners. This is more complex then the superclass method, as
+     * there is more then just a text view now.
+     * @param codeSampleView The code sample view.
+     */
     @Override
-    protected void initZoomButtons(@NonNull View codeSampleView) {
+    public void initZoomButtons(@NonNull View codeSampleView) {
         ImageButton zoomIn = codeSampleView.findViewById(R.id.zoomInButton);
         ImageButton zoomOut = codeSampleView.findViewById(R.id.zoomOutButton);
         final int minFontSize = (int)codeSampleView.getContext().getResources().getDimension(R.dimen.code_text_size);

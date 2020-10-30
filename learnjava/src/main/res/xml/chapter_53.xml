@@ -78,7 +78,6 @@
         <![CDATA[
         <font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Hello, world!");
-<br/>
 <br/>}
         ]]>
     </code>

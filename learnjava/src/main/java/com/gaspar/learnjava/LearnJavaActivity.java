@@ -1,5 +1,10 @@
 package com.gaspar.learnjava;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -31,6 +36,7 @@ import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.parsers.CourseParser;
 import com.gaspar.learnjava.parsers.RawParser;
 import com.gaspar.learnjava.utils.AnimationUtils;
+import com.gaspar.learnjava.utils.DrawerUtils;
 import com.gaspar.learnjava.utils.OnSwipeTouchListener;
 import com.gaspar.learnjava.utils.ThemeUtils;
 import com.google.android.gms.ads.MobileAds;
@@ -95,6 +101,7 @@ public class LearnJavaActivity extends ThemedActivity
             DEBUG = false;
             DEBUG_ADS = false;
         }
+        setContentView(R.layout.learn_java);
         LearnJavaDatabase.DB_EXECUTOR.execute(() -> { //initialize the database related variables
             try { //parse course objects
                 CoursesActivity.setParsedCourses(CourseParser.getInstance().parseCourses(this));
@@ -107,8 +114,8 @@ public class LearnJavaActivity extends ThemedActivity
             SettingsActivity.initSettings(this); //initialize settings
             MobileAds.initialize(this, result -> {}); //initialize admob
             ThemeUtils.initSelectedTheme(this); //initialize themes
+            ClipSyncActivity.initClipSync(this, findViewById(R.id.learnJavaMainView)); //initialize clip sync
         });
-        setContentView(R.layout.learn_java);
         setUpUI(); //init toolbar and drawer here
     }
 
@@ -213,6 +220,40 @@ public class LearnJavaActivity extends ThemedActivity
         touchIcon.startAnimation(right);
     }
 
+    /**
+     * Shows the prompt which points to the drawer, after the user has completed
+     * all chapters of a course and he cant progress anymore from the starter screen.
+     */
+    public void showAndAnimateOpenDrawerPrompt() {
+        final View prompt = findViewById(R.id.showMenuView);
+        final ObjectAnimator pulsator = ObjectAnimator.ofPropertyValuesHolder(
+                prompt,
+                PropertyValuesHolder.ofFloat("scaleX", 1.2f),
+                PropertyValuesHolder.ofFloat("scaleY", 1.2f)).
+                setDuration(500);
+        pulsator.setRepeatCount(ValueAnimator.INFINITE);
+        pulsator.setRepeatMode(ObjectAnimator.REVERSE);
+        pulsator.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                prompt.setVisibility(View.VISIBLE);
+                prompt.bringToFront();
+            }
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                prompt.setVisibility(View.GONE);
+            }
+        });
+        pulsator.start();
+    }
+
+    @Override //cancel ongoing animation here
+    protected void onPause() {
+        super.onPause();
+        final View prompt = findViewById(R.id.showMenuView);
+        prompt.clearAnimation();
+    }
+
     private void showStartContinueComponent() {
         SharedPreferences preferences = getSharedPreferences(APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
         boolean started = preferences.contains(ACTIVE_CHAPTER_ID_PREFERENCE);
@@ -283,23 +324,7 @@ public class LearnJavaActivity extends ThemedActivity
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId(); // Handle navigation view item clicks here.
-        Intent intent = null;
-        if(id == R.id.nav_courses) {
-            intent = new Intent(this, CoursesActivity.class);
-        } else if(id == R.id.nav_tasks) {
-            intent = new Intent(this, TasksActivity.class);
-        } else if(id == R.id.nav_exams) {
-            intent = new Intent(this, ExamsActivity.class);
-        } else if(id == R.id.nav_guide) {
-            intent = new Intent(this, GuideActivity.class);
-        } else if(id == R.id.nav_contact) {
-            intent = new Intent(this, ContactActivity.class);
-        }
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        if(intent == null) return true;
-        startActivity(intent); //start selected activity
+        DrawerUtils.handleDrawerOnClick(this, item);
         return true;
     }
 
