@@ -18,6 +18,7 @@
     <string name="swipe_horizontally">Swipe horizontally</string>
 
     <!-- Ads -->
+    <string name="loading_ad">Loading ad…</string>
     <string name="admob_app_id" translatable="false">ca-app-pub-7754228088611040~7265518837</string>
     <string name="ad_unit_id_banner_test" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
     <string name="ad_unit_id_banner_courses" translatable="false">ca-app-pub-7754228088611040/2723638595</string>

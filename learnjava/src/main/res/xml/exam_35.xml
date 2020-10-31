@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Exam of course 'Java 8' -->
+
+<resources>
+    <examdata>
+        <id>35</id>
+        <questionAmount>20</questionAmount>
+        <timeLimit>25</timeLimit>
+        <finished>false</finished> <!-- TODO set this to true when done -->
+    </examdata>
+
+    <!--
+        <question type="single_choice">
+            <text></text>
+            <answer></answer>
+            <answer></answer>
+            <answer></answer>
+            <answer></answer>
+            <correct></correct>
+        </question>
+
+        <question type="multi_choice">
+            <text></text>
+            <answer></answer>
+            <answer></answer>
+            <answer></answer>
+            <answer></answer>
+            <correct></correct>
+            <correct></correct>
+        </question>
+
+        <question type="true_false">
+            <text></text>
+            <correct></correct>
+        </question>
+
+        <question type="text">
+            <text></text>
+            <correct></correct>
+            <correct></correct>
+        </question>
+        -->
+</resources>

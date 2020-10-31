@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 import androidx.annotation.UiThread;
 
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
@@ -33,11 +34,12 @@ abstract class LearnJavaAds {
     private static final Random random = new Random();
 
     /**
-     * Loads a banner ad, then adds it to the given parent view, according to debug preferences: {@value LearnJavaActivity#DEBUG_ADS}
+     * Loads a banner ad, then adds it to the given parent view, according to debug preferences: {@link LearnJavaActivity#DEBUG_ADS}
      * and {@value LearnJavaActivity#LOAD_ADS}.
      *
      * @param realId The non-test id of the ad unit. Only used in non debug mode.
-     * @param parent The parent view to which the ad view will be added.
+     * @param parent The parent view to which the ad view will be added. It is displaying some text
+     *               that indicates the ad is loading.
      * @return The loaded ad view.
      */
     static AdView loadBannerAd(@StringRes int realId, ViewGroup parent) {
@@ -49,18 +51,25 @@ abstract class LearnJavaAds {
             if(LearnJavaActivity.LOAD_ADS) adView.loadAd(new AdRequest.Builder().build());
         } else { //load test ad in debug, but only when ad loading is enabled
             adView.setAdUnitId(context.getString(R.string.ad_unit_id_banner_test));
-            if(LearnJavaActivity.LOAD_ADS) {
+            if (LearnJavaActivity.LOAD_ADS) {
                 adView.loadAd(new AdRequest.Builder().build());
+                adView.setAdListener(new AdListener() { //changes will happen when it's loaded
+                    @Override
+                    public void onAdLoaded() {
+                        super.onAdLoaded();
+                        parent.removeAllViews(); //clear the loading indicator text
+                        parent.addView(adView); //add to parent
+                    }
+                });
             } else {
                 parent.getLayoutParams().height = 0;
             }
         }
-        parent.addView(adView); //add to parent
         return adView;
     }
 
     /**
-     * Starts the loading of an interstitial ad, according to debug preferences: {@value LearnJavaActivity#DEBUG_ADS}
+     * Starts the loading of an interstitial ad, according to debug preferences: {@link LearnJavaActivity#DEBUG_ADS}
      * and {@value LearnJavaActivity#LOAD_ADS}.
      *
      * @param realId The non-test id of the ad unit. Only used in non debug mode.
