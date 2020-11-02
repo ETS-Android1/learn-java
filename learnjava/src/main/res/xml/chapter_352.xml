@@ -5,5 +5,212 @@
         <id>352</id>
         <name>Advanced interface techniques</name>
     </chapterdata>
-    
+    <text>
+        <![CDATA[
+        Java 8 extended the <i>interfaces</i> with several new functions.
+        ]]>
+    </text>
+    <title text="Throwback: interfaces before Java 8"/>
+    <text>
+        <![CDATA[
+        If you're not quite sure about your knowledge of interfaces, I suggest you refresh it from the
+        chapter '<b>Abstract classes and interfaces</b>', which is in course '<b>Classes and objects</b>'
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="gray">//an interface for classes that can be printed
+</font>
+<br/><font color="#E65100">public interface</font> <font color="#999900">Printable</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> print(); <font color="gray">//prints the object to the console</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> printedLines(); <font color="gray">//returns how many lines the printed object uses</font>
+<br/>
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Prior to Java 8, an interface was a class with only <b>public, abstract methods</b> (no implementation, only
+        declaration).
+        ]]>
+    </text>
+    <title text="Default methods"/>
+    <text>
+        <![CDATA[
+        Java 8 introduced <b>default methods</b> for interfaces. These methods <b>have implementations</b>, despite
+        being in an interface. They must be marked with the <i>default</i> keyword.
+        ]]>
+    </text>
+    <boxed title="Why introduce this change?">
+        <![CDATA[
+        An interface forces the implementing class to implement its abstract methods. But with <i>default</i> methods,
+        that is no longer true, an implementing class does not have to do anything with a <i>default</i> method. So, what
+        is the point of allowing such methods?
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        The answer is related to adding new methods to existing interfaces! Imagine that the <i>Printable</i>
+        interface is used in a popular Java library, developed by you. You'd like to add a new method to this interface:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#E65100">public</font> <font color="#E65100">interface</font> <font color="#999900">Printable</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//prints the object to the console
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> print();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//returns the number of lines used <font color="#E65100">for</font> printing
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> printedLines();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//<font color="#E65100">new</font> method: print to any PrintStream
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> print(java.io.<font color="#999900">PrintStream</font> stream);
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        This is a great addition to your interface. <i>Printable</i> objects can now be printed to any <i>PrintStream</i>, not
+        only <i>System.out</i>. However, there is a big problem! Everyone who is using your library will now get a <b>compile
+        time error</b>, because their classes <b>do not implement this new method</b>!
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#E65100">public</font> <font color="#E65100">interface</font> <font color="#999900">Printable</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//prints the object
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> print();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//returns the number of lines used <font color="#E65100">for</font> printing
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> printedLines();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//<font color="#E65100">new</font> method: print to any PrintStream
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">default</font> <font color="#DF7401">void</font> print(java.io.<font color="#999900">PrintStream</font> stream) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp; * Without a better alternative, we will use
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp; * toString to print the object to the stream.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;stream.print(<font color="#E65100">this</font>.toString());
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        By making the method default, we won't break any code currently using the interface. If the default implementation
+        is not enough for someone, they are free to override this method!
+        ]]>
+    </text>
+    <text>
+        <![CDATA[
+        Other times, we don't need to bother the implementors of the interface with certain methods. Take this
+        interface for instance:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#E65100">interface</font> <font color="#999900">Comparable</font>&lt;<font color="#999900">T</font>> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Returns 0 if they're equal, 1 if this object
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * is bigger, -1 if the other is bigger.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> compare(<font color="#999900">T</font> other);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//checks if this is greater
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> greaterThen(<font color="#999900">T</font> other);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//checks if this is smaller
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> smallerThen(<font color="#999900">T</font> other);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//checks if they are equal
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> equalsTo(<font color="#999900">T</font> other);
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Notice that we can give implementations for the last 3 methods only using the first method, <i>compare</i>.
+        Let's do that with default methods:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#E65100">interface</font> <font color="#999900">Comparable</font>&lt;<font color="#999900">T</font>> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Returns 0 if they're equal, 1 if this object
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * is bigger, -1 if the other is bigger.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> compare(<font color="#999900">T</font> other);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//checks if this is greater
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">default</font> <font color="#DF7401">boolean</font> greaterThen(<font color="#999900">T</font> other) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#E65100">this</font>.compare(other) > 0;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//checks if this is smaller
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">default</font> <font color="#DF7401">boolean</font> smallerThen(<font color="#999900">T</font> other) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#E65100">this</font>.compare(other) &lt; 0;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//checks if they are equal
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">default</font> <font color="#DF7401">boolean</font> equalsTo(<font color="#999900">T</font> other) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#E65100">this</font>.compare(other) == 0;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        ]]>
+    </code>
+    <title text="Static methods"/>
+    <text>
+        <![CDATA[
+        This is a very straightforward change, Java 8 allows static methods in interfaces. They behave the same as if it
+        was a static method for a class. They are great for utility methods related to the interface.
+        ]]>
+    </text>
+    <title text="Functional interfaces"/>
+    <text>
+        <![CDATA[
+        Java 8 introduced the concept of a <b>functional interfaces</b>. A functional interface is an interface with
+        <b>exactly one abstract method</b> (it may have other static or default methods).
+        ]]>
+    </text>
+    <boxed title="Annotation">
+        <![CDATA[
+        The <b>@FunctionalInterface</b> annotation was added. Programmers can place this on the functional interface
+        they are writing (it is not mandatory).
+        <br>
+        Even though not necessary, it is recommended you use this annotation. If you accidentally add more then one
+        abstract methods to an interface with this annotation, the compiler will generate an error!
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        For instance, here is an important functional interface from the standard library (this is a simplified version).
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="red">@FunctionalInterface</font>
+<br/><font color="#E65100">interface</font> <font color="#999900">Predicate</font>&lt;<font color="#999900">T</font>> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//tests the predicate on the given object
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> test(<font color="#999900">T</font> t);
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        The standard library contains many functional interfaces. See them in the package
+        <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html">java.util.function</a>.
+        ]]>
+    </text>
+    <boxed title="Why include so many functional interfaces?">
+        <![CDATA[
+        Functional interfaces are not so useful by themselves. However, in the next chapter we'll learn about a concept
+        that relies heavily on functional interfaces, and is very powerful.
+        ]]>
+    </boxed>
 </resources>

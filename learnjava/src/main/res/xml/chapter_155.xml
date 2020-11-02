@@ -249,6 +249,8 @@
         article, for more information.
         <p>
         It isn't necessary true anymore that an interface is fully abstract, yet this definition is still often used (even in this chapter).
+        <p>
+        More on this in the course '<b>Java 8</b>'.
         ]]>
     </advanced>
     <interactive instruction="Use the previous interactive sample to fill the gaps!">

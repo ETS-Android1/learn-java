@@ -9,13 +9,15 @@
         <finished>false</finished> <!-- TODO set this to true when done -->
     </coursedata>
     <chapter>351</chapter>
-    <!--
     <chapter>352</chapter>
     <chapter>353</chapter>
+    <!--
     <chapter>354</chapter>
     <chapter>355</chapter>
     -->
     <task>351</task>
+    <!--
     <task>352</task>
+    -->
     <exam>35</exam>
 </resources>

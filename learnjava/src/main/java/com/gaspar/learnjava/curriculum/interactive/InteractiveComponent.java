@@ -26,7 +26,7 @@ import java.util.List;
  * The interactive_component components consist of constant code and "empty spaces", where the user can enter
  * short code samples. Each space can have multiple correct answers.
  * <p>
- * An interface for checking if the answers are correct is provided. The user can also request for
+ * A UI for checking if the answers are correct is provided. The user can also request for
  * the correct answers to be filled.
  * <p>
  * An example of the XML syntax of this component (in real examples, the text will be formatted):

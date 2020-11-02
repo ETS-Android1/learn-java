@@ -3,6 +3,7 @@ package com.gaspar.learnjava;
 import android.content.Context;
 import android.util.Log;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
@@ -13,6 +14,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.LoadAdError;
 
 import java.util.Random;
 
@@ -60,6 +62,12 @@ abstract class LearnJavaAds {
                         parent.removeAllViews(); //clear the loading indicator text
                         parent.addView(adView); //add to parent
                     }
+                    @Override
+                    public void onAdFailedToLoad(LoadAdError e) {
+                        super.onAdFailedToLoad(e);
+                        final TextView statusView = parent.findViewById(R.id.adStatusLabel);
+                        statusView.setText(R.string.ad_load_fail);
+                    }
                 });
             } else {
                 parent.getLayoutParams().height = 0;
@@ -83,6 +91,7 @@ abstract class LearnJavaAds {
             interstitialAd.setAdUnitId(context.getString(R.string.ad_unit_id_interstitial_test));
         }
         if(LearnJavaActivity.LOAD_ADS) { //only initiate loading if its enabled
+            interstitialAd.setImmersiveMode(true);
             interstitialAd.loadAd(new AdRequest.Builder().build());
         }
         return interstitialAd;

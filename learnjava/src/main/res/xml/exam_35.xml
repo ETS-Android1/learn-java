@@ -9,6 +9,143 @@
         <timeLimit>25</timeLimit>
         <finished>false</finished> <!-- TODO set this to true when done -->
     </examdata>
+    <!-- Questions about Java versions -->
+    <question type="text">
+        <text>Which annotation marks a piece of code for removal in the future?</text>
+        <correct>@Deprecated</correct>
+    </question>
+    <question type="single_choice">
+        <text>In which version of Java were generics added?</text>
+        <answer>Java 5</answer>
+        <answer>Java 8</answer>
+        <answer>Java 7</answer>
+        <answer>Java 11</answer>
+        <correct>0</correct>
+    </question>
+    <question type="single_choice">
+        <text>In which version of Java was the java.nio package added?</text>
+        <answer>Java 5</answer>
+        <answer>Java 7</answer>
+        <answer>Java 11</answer>
+        <answer>Java 8</answer>
+        <correct>1</correct>
+    </question>
+    <question type="single_choice">
+        <text>In which version of Java were lambda expressions added?</text>
+        <answer>Java has no lambda expressions.</answer>
+        <answer>Java 11</answer>
+        <answer>Java 8</answer>
+        <answer>Java 7</answer>
+        <correct>2</correct>
+    </question>
+    <question type="true_false">
+        <text>It's good practice to use deprecated classes.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>The compiler will give an error if you use deprecated methods.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>Deprecation is indicated in the source code with an annotation.</text>
+        <correct>true</correct>
+    </question>
+    <question type="multi_choice">
+        <text>What can change in a new Java version?</text>
+        <answer>New classes can be added to the standard library.</answer>
+        <answer>Code from the standard library may be deprecated.</answer>
+        <answer>Code that previously compiled can throw errors in the new version.</answer>
+        <answer>New keywords can be introduced.</answer>
+        <correct>0</correct>
+        <correct>1</correct>
+        <correct>3</correct>
+    </question>
+
+    <!-- Questions about advanced interface techniques -->
+    <question type="true_false">
+        <text>Prior to Java 8, an interface was fully abstract.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>Java 8 interfaces must be fully abstract.</text>
+        <correct>false</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these can a Java 8 interface contain?</text>
+        <answer>Members.</answer>
+        <answer>Abstract methods.</answer>
+        <answer>Methods with implementation.</answer>
+        <answer>Static methods.</answer>
+        <correct>1</correct>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which of these can you have in Java 8 interfaces, but not in interfaces before that?</text>
+        <answer>Inner classes.</answer>
+        <answer>Abstract methods.</answer>
+        <answer>Members.</answer>
+        <answer>Static methods.</answer>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is a default method?</text>
+        <answer>It's another name for static methods.</answer>
+        <answer>An interface method with implementation.</answer>
+        <answer>It's another name for abstract methods.</answer>
+        <answer>An interface method without implementation.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="text">
+        <text>What keyword is used to declare that an interface method has implementation?</text>
+        <correct>default</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword must be used to declare a method that belongs to the interface, not the object?</text>
+        <correct>static</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is a functional interface?</text>
+        <answer>An interface with no abstract methods.</answer>
+        <answer>An interface with one default method.</answer>
+        <answer>An interface with one abstract method.</answer>
+        <answer>An interface whose methods call other functions.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="text">
+        <text>Which annotation is used to mark functional interfaces?</text>
+        <correct>@FunctionalInterface</correct>
+    </question>
+    <question type="single_choice">
+        <text>Where are standard functional interfaces located?</text>
+        <answer>java.nio</answer>
+        <answer>java.util</answer>
+        <answer>java.util.function</answer>
+        <answer>java.lang</answer>
+        <correct>2</correct>
+    </question>
+    <question type="true_false">
+        <text>The functional interface annotation must be placed above functional interfaces.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>The compiler will generate a warning if an interfaces is marked as functional, but it isn't.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>The compiler will stop with an error if an interfaces is marked as functional, but it isn't.</text>
+        <correct>true</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which of these can a normal interface have, but a functional one cannot?</text>
+        <answer>Static methods.</answer>
+        <answer>Members.</answer>
+        <answer>Default methods.</answer>
+        <answer>Multiple abstract methods.</answer>
+        <correct>3</correct>
+    </question>
+
+    <!-- Questions about lambda expressions -->
 
     <!--
         <question type="single_choice">
