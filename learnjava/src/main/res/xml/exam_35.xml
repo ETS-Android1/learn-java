@@ -146,6 +146,136 @@
     </question>
 
     <!-- Questions about lambda expressions -->
+    <question type="single_choice">
+        <text>What is a lambda expression?</text>
+        <answer>The abstract method of a functional interface.</answer>
+        <answer>It is an anonymous, inline declared function.</answer>
+        <answer>A functional interface.</answer>
+        <answer>It is a function which has 1 parameter.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is the correct syntax for a (general) lambda expression?</text>
+        <answer>( statements ) -> parameters</answer>
+        <answer>{ parameters } -> ( statements )</answer>
+        <answer>{ parameters } -> { statements }</answer>
+        <answer>( parameters ) -> { statements }</answer>
+        <correct>3</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these are correct syntax for a lambda with ONE parameter?</text>
+        <answer>( parameter ) -> { statements }</answer>
+        <answer>( statements ) -> parameter</answer>
+        <answer>( statements ) -> { parameter }</answer>
+        <answer>parameter -> { statements }</answer>
+        <correct>0</correct>
+        <correct>3</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these are correct syntax for a lambda with ONE parameter and ONE statement?</text>
+        <answer>( parameter ) -> { statement }</answer>
+        <answer>parameter -> ( statements )</answer>
+        <answer>parameter -> statement</answer>
+        <answer>parameter -> { statement }</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="text">
+        <text>Write a lambda expression which has no parameters, and uses println to print "Lambda" to the console.</text>
+        <correct>( ) -> System.out.println( "Lambda" )</correct>
+        <correct>( ) -> { System.out.println("Lambda"); }</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="text">
+        <text>Write a lambda expression which has one int parameter called 'n' and returns 2 times 'n'. </text>
+        <correct>n -> n * 2</correct>
+        <correct>( n ) -> n * 2</correct>
+        <correct>( n ) -> { return[s]n * 2; }</correct>
+        <correct>( int[s]n ) -> n * 2</correct>
+        <correct>( int[s]n ) -> { return[s]n * 2; }</correct>
+        <correct>( Integer[s]n ) -> n * 2</correct>
+        <correct>( Integer[s]n ) -> { return[s]n * 2; }</correct>
+        <correct>n -> { return[s]n * 2; }</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="text">
+        <text>Write a lambda expression which has one string parameter ('s'), and returns this with an 'x' character at the end.</text>
+        <correct>s -> s + 'x'</correct>
+        <correct>( s ) -> s + 'x'</correct>
+        <correct>( String[s]s ) -> s + 'x'</correct>
+        <correct>s -> { return[s]s + 'x'; }</correct>
+        <correct>( s ) -> { return[s]s + 'x'; }</correct>
+        <correct>( String[s]s ) -> { return s + 'x'; }</correct>
+        <correct>s -> s.append( 'x' )</correct>
+        <correct>( s ) -> s.append( 'x' )</correct>
+        <correct>( String[s]s ) -> s.append( 'x' )</correct>
+        <correct>s -> { return[s]s.append( 'x' ); }</correct>
+        <correct>( s ) -> { return[s]s.append( 'x' ); }</correct>
+        <correct>( String[s]s ) -> { return[s]s.append( 'x' ); }</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="text">
+        <text>Write a lambda which has 2 int parameters ('a' and 'b'), and returns their sum.</text>
+        <correct>( a , b ) -> a + b</correct>
+        <correct>( a , b ) -> { return[s]a + b; }</correct>
+        <correct>( int[s]a , int[s]b ) -> a + b</correct>
+        <correct>( int[s]a , int[s]b ) -> { return[s]a + b; }</correct>
+        <correct>( Integer[s]a , Integer[s]b ) -> a + b</correct>
+        <correct>( Integer[s]a , Integer[s]b ) -> { return[s]a + b; }</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="text">
+        <text>Write a lambda that has a string parameter ('s'), and returns if that string is longer then 4 characters.</text>
+        <correct>s -> s.length() > 4</correct>
+        <correct>( s ) -> s.length() > 4</correct>
+        <correct>( String[s]s ) -> s.length() > 4</correct>
+        <correct>s -> { return[s]s.length() > 4; }</correct>
+        <correct>( s ) -> { return[s]s.length() > 4; }</correct>
+        <correct>( String[s]s ) -> { return[s]s.length() > 4; }</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="true_false">
+        <text>You can assign the '() -> System.out.println("k")' lambda to a Runnable.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>You can assign the '(n) -> System.out.println(n)' lambda to a Runnable.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>You can assign the '(n) -> System.out.println(n)' lambda to a Consumer.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>The Supplier functional interface takes no parameters and returns a result. You can assign the '() -> 3' lambda to it.</text>
+        <correct>true</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Select the lambdas with parameters.</text>
+        <answer>() -> 3.14</answer>
+        <answer>(n) -> Math.pow(n,2)</answer>
+        <answer>() -> System.out.print("Java")</answer>
+        <answer>text -> text.replace('a','b')</answer>
+        <correct>1</correct>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>The 'i -> i+2' lambda is valid.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>The 'var => var.toString()' lambda is valid.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>The 'v1,v2 -> v1 + v2' lambda is valid.</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>Which symbols are used to connect  the parameters and statements of a lambda?</text>
+        <correct>-></correct>
+    </question>
 
     <!--
         <question type="single_choice">

@@ -49,25 +49,15 @@
     </question>
     <question type="text">
         <text>Declare and initialize an empty array list of strings called 'lines'. Use the diamond operator!</text>
-        <correct>ArrayList&lt;String> lines = new ArrayList&lt;>();</correct>
-        <correct>ArrayList&lt;String> lines= new ArrayList&lt;>();</correct>
-        <correct>ArrayList&lt;String> lines =new ArrayList&lt;>();</correct>
-        <correct>ArrayList&lt;String> lines=new ArrayList&lt;>();</correct>
-        <correct>List&lt;String> lines = new ArrayList&lt;>();</correct>
-        <correct>List&lt;String> lines= new ArrayList&lt;>();</correct>
-        <correct>List&lt;String> lines =new ArrayList&lt;>();</correct>
-        <correct>List&lt;String> lines=new ArrayList&lt;>();</correct>
+        <correct>ArrayList&lt;String>[s]lines = new[s]ArrayList&lt;>();</correct>
+        <correct>List&lt;String>[s]lines = new[s]ArrayList&lt;>();</correct>
+        <ignoreSpace/>
     </question>
     <question type="text">
         <text>Declare and initialize an empty linked list of integers called 'nums'. Use the diamond operator!</text>
-        <correct>LinkedList&lt;Integer> nums = new LinkedList&lt;>();</correct>
-        <correct>LinkedList&lt;Integer> nums= new LinkedList&lt;>();</correct>
-        <correct>LinkedList&lt;Integer> nums =new LinkedList&lt;>();</correct>
-        <correct>LinkedList&lt;Integer> nums=new LinkedList&lt;>();</correct>
-        <correct>List&lt;Integer> nums = new LinkedList&lt;>();</correct>
-        <correct>List&lt;Integer> nums= new LinkedList&lt;>();</correct>
-        <correct>List&lt;Integer> nums =new LinkedList&lt;>();</correct>
-        <correct>List&lt;Integer> nums=new LinkedList&lt;>();</correct>
+        <correct>LinkedList&lt;Integer>[s]nums = new[s]LinkedList&lt;>();</correct>
+        <correct>List&lt;Integer>[s]nums = new[s]LinkedList&lt;>();</correct>
+        <ignoreSpace/>
     </question>
     <question type="text">
         <text>Enter the 'diamond operator'.</text>
@@ -151,12 +141,12 @@
     <question type="text">
         <text>Which acronym is used to describe queues?</text>
         <correct>FIFO</correct>
-        <correct>fifo</correct>
+        <ignoreCase/>
     </question>
     <question type="text">
         <text>Which acronym is used to describe stacks?</text>
         <correct>LIFO</correct>
-        <correct>lifo</correct>
+        <ignoreCase/>
     </question>
     <question type="multi_choice">
         <text>What is true about queues?</text>

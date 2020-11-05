@@ -14,10 +14,7 @@
     <question type="text">
         <text>What does OOP stand for?</text>
         <correct>Object oriented programming</correct>
-        <correct>object oriented programming</correct>
-        <correct>Object Oriented Programming</correct>
-        <correct>Object Oriented programming</correct>
-        <correct>Object oriented Programming</correct>
+        <ignoreCase/>
     </question>
     <question type="single_choice">
         <text>What is a class?</text>

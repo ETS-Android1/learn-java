@@ -38,4 +38,6 @@ import androidx.annotation.StringDef;
     String TYPE = "type";
     String ANSWER = "answer";
     String CORRECT = "correct";
+    String IGNORE_SPACE = "ignoreSpace";
+    String IGNORE_CASE = "ignoreCase";
 }

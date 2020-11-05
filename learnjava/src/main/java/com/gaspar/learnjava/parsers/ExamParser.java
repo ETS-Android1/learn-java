@@ -218,16 +218,21 @@ public class ExamParser {
         String tagName = parser.getName();
         String questionText = null;
         List<String> acceptedAnswers = new ArrayList<>();
+        boolean ignoreSpace = false, ignoreCase = false;
         while(eventType != XmlResourceParser.END_TAG || !tagName.equalsIgnoreCase(TagName.QUESTION)) { //end of question tag
             if(eventType == XmlResourceParser.START_TAG && tagName.equalsIgnoreCase(TagName.TEXT)) {
                 questionText = parser.nextText();
             } else if(eventType == XmlResourceParser.START_TAG && tagName.equalsIgnoreCase(TagName.CORRECT)) {
                 acceptedAnswers.add(parser.nextText());
+            } else if(eventType == XmlResourceParser.START_TAG && tagName.equalsIgnoreCase(TagName.IGNORE_SPACE)) {
+                ignoreSpace = true; //found ignore space tag
+            } else if(eventType == XmlResourceParser.START_TAG && tagName.equalsIgnoreCase(TagName.IGNORE_CASE)) {
+                ignoreCase = true; //found ignore case tag
             }
             eventType = parser.next(); //advance parser
             tagName = parser.getName();
         }
         if(questionText == null || acceptedAnswers.isEmpty()) throw new RuntimeException("Invalid text question!");
-        return new TextQuestion(questionText, acceptedAnswers);
+        return new TextQuestion(questionText, acceptedAnswers, ignoreSpace, ignoreCase);
     }
 }
