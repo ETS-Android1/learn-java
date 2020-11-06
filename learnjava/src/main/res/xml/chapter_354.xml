@@ -3,7 +3,229 @@
 <resources>
     <chapterdata>
         <id>354</id>
-        <name>Stream API</name>
+        <name>Stream operations</name>
     </chapterdata>
-    
+    <text>
+        <![CDATA[
+        The <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html">java.util.stream.Stream</a> class
+        introduced in Java 8 provides new ways to work with collections and other data sources.
+        ]]>
+    </text>
+    <boxed title="Lambdas">
+        <![CDATA[
+        The stream operations rely on lambda expressions (and thus, on functional interfaces) to be compact. Make sure
+        you understand these concepts before you jump into this chapter.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        The general process will be the following:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+            <li>Convert the collection into a stream.</li>
+            <li>Perform operations on the stream.</li>
+            <li>Get the result of the operations, or convert the stream back to a collection.</li>
+        </ul>
+        ]]>
+    </list>
+    <title text="Convert collections to streams"/>
+    <text>
+        <![CDATA[
+        We can get a stream of any collection by calling the <i>stream</i> method of the <i>Collection</i> interface. Take a
+        look at this example, where I use a list (which implements <i>Collection</i>):
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="gray">//create list
+</font>
+<br/><font color="#999900">List</font>&lt;<font color="#999900">Integer</font>> numbers = <font color="#999900">Arrays</font>.asList(1,-1,3,2,4);
+<br/><font color="gray">//get a stream of this list
+</font>
+<br/><font color="#999900">Stream</font>&lt;<font color="#999900">Integer</font>> numStream = numbers.stream();
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Note that the <i>Stream</i> class is also generic, its type parameter must be the same as the type of the elements
+        in the source.
+        ]]>
+    </text>
+    <boxed title="Stream from arrays">
+        <![CDATA[
+        Arrays themselves can't be converted into streams directly, but you can use the <i>Arrays</i> utility class
+        to first convert them into collections (like in the example above).
+        ]]>
+    </boxed>
+    <title text="Convert streams to collections"/>
+    <text>
+        <![CDATA[
+        To turn a stream into a collection, use the <i>collect</i> method. The parameter of this method will decide which
+        type of collection the stream will be converted into.
+        ]]>
+    </text>
+    <boxed title="Collectors class">
+        <![CDATA[
+        Luckily for us, many predefined collectors are available in the <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collectors.html">java.util.stream.Collectors</a> utility
+        class. During this course, I'll only use simple collectors like <i>toList</i>, but there are more advanced ways to
+        collect a stream as well (grouping by, counting, etc...).
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Let's extend the previous example by converting the stream back to a list, and a set.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="gray">//create list
+</font>
+<br/><font color="#999900">List</font>&lt;<font color="#999900">Integer</font>> numbers = <font color="#999900">Arrays</font>.asList(1,-1,3,2,4);
+<br/><font color="gray">//get a stream of this list
+</font>
+<br/><font color="#999900">Stream</font>&lt;<font color="#999900">Integer</font>> numStream = numbers.stream();
+<br/><font color="gray">//convert it back to a list (this is a new list!)
+</font>
+<br/><font color="#999900">List</font>&lt;<font color="#999900">Integer</font>> numbers2 = numStream.collect(<font color="#999900">Collectors</font>.toList());
+<br/><font color="gray">//convert it to a new set
+</font>
+<br/><font color="#999900">Set</font>&lt;<font color="#999900">Integer</font>> numSet = numStream.collect(<font color="#999900">Collectors</font>.toSet());
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        The resulting list and set will have the same elements as the original list, since we've performed no operations on the
+        stream so far.
+        ]]>
+    </text>
+    <title text="Stream operations"/>
+    <text>
+        <![CDATA[
+        With operations, we can modify the content of a stream, or get some property of it.
+        ]]>
+    </text>
+    <boxed title="One statement">
+        <![CDATA[
+        In the following examples, I'll do the conversions and the operations in one statement,
+        as that is how streams are most commonly used. I'll also don't convert the streams back to
+        collections, as it won't be necessary.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        I'll be using this <i>Set</i> in each sample:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#999900">Set</font>&lt;<font color="#999900">String</font>> languages = <font color="#E65100">new</font> <font color="#999900">HashSet</font>&lt;>();
+<br/>languages.add("Java");
+<br/>languages.add("C++");
+<br/>languages.add("C");
+<br/>languages.add("C#");
+<br/>languages.add("JavaScript");
+<br/>languages.add("Python");
+<br/>languages.add("PHP");
+<br/>languages.add("Kotlin");
+<br/><font color="gray">//print all</font>
+<br/><font color="#999900">System</font>.out.println("Languages in the set: ");
+<br/>languages.forEach(lang -> <font color="#999900">System</font>.out.print(lang + ", "));
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        The first operation is <b>filtering</b>. It allows us to select elements based on a condition. The condition is
+        given by a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html">Predicate</a> functional
+        interface, which I'll specify with a lambda.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#999900">System</font>.out.println("Languages which begin with 'C':");
+<br/>languages.stream().filter(lang -> lang.startsWith("C"))
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.forEach(lang -> <font color="#999900">System</font>.out.printf(lang+", "));
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        This time I only wanted to print the filtered elements, and for that it wasn't even needed to convert the stream
+        back to a collection.
+        <br><br>
+        We can also <b>count</b> the elements. This time I'm interested in how many language names start with 'Java'. This means
+        filtering first, then counting:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#DF7401">long</font> res = languages.stream()
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.filter(lang -> lang.startsWith("Java"))
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.count();
+<br/><font color="#999900">System</font>.out.println("Starts with Java: " + res);
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        There was again no need for converting back, we just needed the <i>long</i> return value of <i>count</i>.
+        <br><br>
+        Next up is <b>mapping</b>. This allows change the data of the stream using a <i>Function</i> functional interface and the
+        <i>map</i> method:
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+              <font color="gray">//Print how long each name is: map from String to int
+</font>
+<br/>languages.stream()
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;.map(lang -> lang.length()) <font color="gray">//or mapToInt
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;.forEach(length -> <font color="#999900">System</font>.out.print(length+", "));
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        It's also worth looking at the <i>anyMatch</i> function, which will check if there exists at least
+        one element in the stream fulfilling a condition (<i>Predicate</i>).
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="gray">//Let's see if Python is included or not
+</font>
+<br/><font color="#DF7401">boolean</font> includes = languages.stream()
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.anyMatch(lang -> lang.equals("Python"));
+<br/><font color="#999900">System</font>.out.println("Python is in the set: " + includes);
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        This function also has a pair, <i>allMatch</i>, which will only return true if all elements fulfill the condition.
+        ]]>
+    </text>
+    <title text="Combining the operation"/>
+    <text>
+        <![CDATA[
+        The real power of stream operations becomes clear when you 'chain' them together For instance,
+        we'd like to see <b>collect the length of names that begin with 'P' into a new list<b>.
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+<font color="#999900">List</font>&lt;<font color="#999900">Integer</font>> lengths = languages.stream()
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.filter(lang -> lang.startsWith("P")) <font color="gray">//filter to 'P' start
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.map(lang -> lang.length()) <font color="gray">//map to the length
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.collect(<font color="#999900">Collectors</font>.toList()); <font color="gray">//collect to list</font>
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        There are of course many other stream operations which I did not illustrate here, please
+        refer to the <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html">Stream's documentation</a>
+        to see all.
+        ]]>
+    </text>
 </resources>
