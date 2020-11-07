@@ -101,6 +101,17 @@
         stream so far.
         ]]>
     </text>
+    <interactive instruction="Convert the list into a stream, and then back to a list!">
+        <data>
+           <![CDATA[
+        <font color="#999900">List</font>&lt;<font color="#999900">Character</font>> letters = ___.asList('c','a','b','d');
+<br/>letters = letters.___().collect(___.toList());
+        ]]>
+        </data>
+        <answer place="0">Arrays</answer>
+        <answer place="1">stream</answer>
+        <answer place="2">Collectors</answer>
+    </interactive>
     <title text="Stream operations"/>
     <text>
         <![CDATA[
@@ -153,8 +164,23 @@
         <![CDATA[
         This time I only wanted to print the filtered elements, and for that it wasn't even needed to convert the stream
         back to a collection.
-        <br><br>
-        We can also <b>count</b> the elements. This time I'm interested in how many language names start with 'Java'. This means
+        ]]>
+    </text>
+    <interactive instruction="Remove letters from the list that are not 'a' or 'c'!">
+        <data>
+            <![CDATA[
+            <font color="#999900">List</font>&lt;<font color="#999900">Character</font>> letters = <font color="#999900">Arrays</font>.asList('c','a','b','d','a');
+<br/>letters = letters.stream()
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.___(letter -> letter == 'a' || letter == 'c')
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.collect(<font color="#999900">Collectors</font>.___());
+            ]]>
+        </data>
+        <answer place="0">filter</answer>
+        <answer place="1">toList</answer>
+    </interactive>
+    <text>
+        <![CDATA[
+  We can also <b>count</b> the elements. This time I'm interested in how many language names start with 'Java'. This means
         filtering first, then counting:
         ]]>
     </text>
@@ -184,6 +210,20 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;.forEach(length -> <font color="#999900">System</font>.out.print(length+", "));
         ]]>
     </code>
+    <interactive instruction="Map each letter in the list to a string!">
+        <data>
+            <![CDATA[
+            <font color="#999900">List</font>&lt;<font color="#999900">Character</font>> letters = <font color="#999900">Arrays</font>.asList('c','a','b','d','a');
+<br/><font color="#999900">List</font>&lt;<font color="#999900">String</font>> stringLetters = letters.___()
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.___(letter -> <font color="#999900">String</font>.valueOf(___))
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.collect(<font color="#999900">Collectors</font>.toList());
+            ]]>
+        </data>
+        <answer place="0">stream</answer>
+        <answer place="1">map</answer>
+        <answer place="2">letter</answer>
+        <default place="1">filter</default>
+    </interactive>
     <text>
         <![CDATA[
         It's also worth looking at the <i>anyMatch</i> function, which will check if there exists at least

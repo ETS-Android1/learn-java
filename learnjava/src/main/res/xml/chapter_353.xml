@@ -94,7 +94,7 @@
     </code>
     <text>
         <![CDATA[
-        This previously unimaginable compactness is the beauty and power of lambda expressions.
+        This previously unimaginable compactness is why lambdas should be used.
         ]]>
     </text>
     <title text="Lambdas with parameters"/>
@@ -122,6 +122,16 @@
 <br/>printer.accept("Java 8");
         ]]>
     </code>
+    <interactive instruction="Correct the lambda expression which prints the sum of two numbers!">
+        <data>
+            <![CDATA[
+(n1, n2___ -> <font color="#999900">System</font>.out.println(n1 ___ n2)
+            ]]>
+        </data>
+        <answer place="0">)</answer>
+        <answer place="1">+</answer>
+        <default place="1">-</default>
+    </interactive>
     <text>
         <![CDATA[
 Notice something interesting here. It's enough to only put an identifier into the parameter list (<i>s</i>). For normal functions,
@@ -205,4 +215,14 @@ make lambdas as compact as possible.
         will be returned by the lambda as well!
         ]]>
     </text>
+    <interactive instruction="Correct this declaration of a Predicate!">
+        <data>
+            <![CDATA[
+            <font color="#999900">Predicate</font>&lt;<font color="#999900">Double</font>> isNegative = d -> ___ &lt; ___;
+            ]]>
+        </data>
+        <answer place="0">d</answer>
+        <answer place="1">0</answer>
+        <answer place="1">0.0</answer>
+    </interactive>
 </resources>

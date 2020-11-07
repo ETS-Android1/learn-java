@@ -105,6 +105,20 @@
         is not enough for someone, they are free to override this method!
         ]]>
     </text>
+    <interactive instruction="Complete the interface!">
+        <data>
+            <![CDATA[
+        <font color="#E65100">public</font> ___ <font color="#999900">MyInterface</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> abstractMethod();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;___ <font color="#DF7401">void</font> methodWithImplementation() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("<font color="#999900">Implementation</font>");
+}
+<br/>}
+            ]]>
+        </data>
+        <answer place="0">interface</answer>
+        <answer place="1">default</answer>
+    </interactive>
     <text>
         <![CDATA[
         Other times, we don't need to bother the implementors of the interface with certain methods. Take this
@@ -163,6 +177,28 @@
 <br/>}
         ]]>
     </code>
+    <interactive instruction="Complete the interface!">
+        <data>
+            <![CDATA[
+<font color="#E65100">public</font> <font color="#E65100">interface</font> <font color="#999900">Summable</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//performs the summing
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;___ sum();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//gets the size
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> size();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//calculates average
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;___ <font color="#DF7401">double</font> average() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> ___() / size();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+            ]]>
+        </data>
+        <answer place="0">double</answer>
+        <answer place="1">default</answer>
+        <answer place="2">sum</answer>
+    </interactive>
     <title text="Static methods"/>
     <text>
         <![CDATA[
@@ -207,10 +243,21 @@
         <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html">java.util.function</a>.
         ]]>
     </text>
-    <boxed title="Why include so many functional interfaces?">
+    <interactive instruction="Complete the functional interface! Let T be the type of function parameters, and S the return value.">
+        <data>
+            <![CDATA[
+<font color="#E65100">public interface</font> <font color="#999900">BinaryFunction</font>&lt;<font color="#999900">T</font>, ___> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">S</font> callFunction(___ t1, <font color="#999900">T</font> t2);
+<br/>}
+            ]]>
+        </data>
+        <answer place="0">S</answer>
+        <answer place="1">T</answer>
+    </interactive>
+    <text>
         <![CDATA[
-        Functional interfaces are not so useful by themselves. However, in the next chapter we'll learn about a concept
+ Functional interfaces are not so useful by themselves. However, in the next chapter we'll learn about a concept
         that relies heavily on functional interfaces, and is very powerful.
         ]]>
-    </boxed>
+    </text>
 </resources>
