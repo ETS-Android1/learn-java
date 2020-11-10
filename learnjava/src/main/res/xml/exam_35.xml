@@ -277,6 +277,10 @@
         <correct>-></correct>
     </question>
 
+    <!-- Questions about streams -->
+
+    <!-- Questions about additional Java 8 features -->
+
     <!--
         <question type="single_choice">
             <text></text>
