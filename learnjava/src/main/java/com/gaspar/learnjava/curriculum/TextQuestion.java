@@ -21,12 +21,10 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
- * Represents a question with text answers. if the ignoreSpace tag is present, then the answers of the
- * user will be stripped of spaces before checking if they are correct (except {@link #DO_NOT_IGNORE_SPACE}, which matters).
+ * Represents a question with text answers.
  * If the ignoreCase tag is present, then the question is not case sensitive.
- *
  <p>
- *  Example for text question XML structure:
+ *  Text question XML structure:
  *   {@code
  *   <resources>
  *           <question type="text">
@@ -34,11 +32,22 @@ import java.util.regex.Pattern;
  *           <correct>*An accepted answer*</correct>
  *           ...
  *           <correct>*Another accepted answer*</correct>
- *           <ignoreSpace/>
- *           <ignoreCase/>
+ *           <ignoreSpace/> (optional)
+ *           <ignoreCase/> (optional)
  *    </question>
  *  </resources>
  *  }
+ *  </p>
+ *  <p>
+ *      <h2>ignoreSpace tag</h2>
+ *      If this tag is present, then spaces at certain positions are ignored. The positions where the user
+ *      is allowed to place any number of spaces are marked with a space in the correct answer. For example:
+ *      <br><br>
+ *      {@code <correct>int[s]x = 5;</correct>}
+ *      <br><br>
+ *      In this case the user can place as many spaces between x, =, and 5 as they want. Some spaces in the answer
+ *      can be made mandatory using {@link #DO_NOT_IGNORE_SPACE} ([s]). In the example above, the user must write
+ *      a space between int and x.
  *  </p>
  */
 public class TextQuestion extends Question implements Serializable {

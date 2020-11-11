@@ -37,6 +37,7 @@ import java.util.List;
  *         </data>
  *         <answer place="0">=</answer>
  *         <answer place="1">;</answer>
+ *         <default place="0">*first edit text will be filled with this*</default> (optional)
  *     </interactive>
  * </code>
  * It's also possible to have empty spaces require other answers to be present to be acceptable:

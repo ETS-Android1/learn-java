@@ -3,7 +3,7 @@
 <resources>
     <taskdata>
         <id>352</id>
-        <name>Java 8 task 2</name> <!-- TODO rename -->
+        <name>Custom stream operations</name>
     </taskdata>
 
     <solution>

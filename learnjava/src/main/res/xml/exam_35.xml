@@ -7,7 +7,7 @@
         <id>35</id>
         <questionAmount>20</questionAmount>
         <timeLimit>25</timeLimit>
-        <finished>false</finished> <!-- TODO set this to true when done -->
+        <finished>true</finished>
     </examdata>
     <!-- Questions about Java versions -->
     <question type="text">
@@ -278,8 +278,148 @@
     </question>
 
     <!-- Questions about streams -->
+    <question type="single_choice">
+        <text>How do you create a stream from a collection?</text>
+        <answer>With the static method 'stream' from the Collections class.</answer>
+        <answer>With the 'stream' method of the Collection interface.</answer>
+        <answer>With the static method 'createFrom' from the Stream class.</answer>
+        <answer>By passing a collection into Stream's constructor.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="single_choice">
+        <text>How do you create collection from a stream?</text>
+        <answer>With the static 'fromStream' method of the Collection interface.</answer>
+        <answer>Streams can't be turned into collections.</answer>
+        <answer>With the 'collect' method of the stream.</answer>
+        <answer>With the 'map' method of the stream.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="true_false">
+        <text>There is no way to create a stream from an array, as it isn't a collection.</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>Which method of a stream is used to select certain elements based on a condition?</text>
+        <correct>filter</correct>
+    </question>
+    <question type="text">
+        <text>Which method of a stream is used to apply a function to all elements of the stream, and create a new stream?</text>
+        <correct>map</correct>
+    </question>
+    <question type="text">
+        <text>Which method is used to apply a Consumer to each element of a stream?</text>
+        <correct>forEach</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Select the stream methods resulting another stream.</text>
+        <answer>filter</answer>
+        <answer>collect</answer>
+        <answer>anyMatch</answer>
+        <answer>sorted</answer>
+        <correct>0</correct>
+        <correct>3</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Select the stream methods that result in Optional objects.</text>
+        <answer>allMatch</answer>
+        <answer>findFirst</answer>
+        <answer>count</answer>
+        <answer>collect</answer>
+        <correct>1</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Select the stream methods that take a Predicate as a parameter.</text>
+        <answer>anyMatch</answer>
+        <answer>map</answer>
+        <answer>allMatch</answer>
+        <answer>filter</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>Stream operations can be specified with lambda expressions.</text>
+        <correct>true</correct>
+    </question>
+    <question type="single_choice">
+        <text>Why can you use lambda expressions as stream operation parameters?</text>
+        <answer>Because the parameters are functional interfaces.</answer>
+        <answer>Because Stream is an immutable class.</answer>
+        <answer>Because the parameters are interfaces.</answer>
+        <answer>Because streams were added in Java 8.</answer>
+        <correct>0</correct>
+    </question>
+    <question type="true_false">
+        <text>Predefined collectors are found inside the Collectors class.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>Predefined collectors are found in the Collection class.</text>
+        <correct>false</correct>
+    </question>
 
     <!-- Questions about additional Java 8 features -->
+    <question type="text">
+        <text>Which class added in Java 8 can, but not necessarily hold a value?</text>
+        <correct>Optional</correct>
+        <correct>java.util.Optional</correct>
+    </question>
+    <question type="true_false">
+        <text>An Optional can hold any object.</text>
+        <correct>true</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these if true about an Optional?</text>
+        <answer>Can hold a value.</answer>
+        <answer>Can hold multiple values.</answer>
+        <answer>Can be empty.</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+    </question>
+    <question type="single_choice">
+        <text>When should an Optional be used?</text>
+        <answer>As a member of a class.</answer>
+        <answer>As a return value of methods that may not return a "value".</answer>
+        <answer>It's deprecated and should not be used.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="text">
+        <text>Which static method can be used to create a Optional holding a value?</text>
+        <correct>of</correct>
+        <correct>Optional.of</correct>
+    </question>
+    <question type="text">
+        <text>Which static method can be used to create a Optional without a value?</text>
+        <correct>empty</correct>
+        <correct>Optional.empty</correct>
+    </question>
+    <question type="single_choice">
+        <text>What happens when extract a value from an empty Optional?</text>
+        <answer>An empty Optional is returned.</answer>
+        <answer>Null is returned.</answer>
+        <answer>An exception is thrown.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="text">
+        <text>Which symbol is used to make a method reference?</text>
+        <correct>::</correct>
+    </question>
+    <question type="true_false">
+        <text>You can't create a method reference to a static method.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>You can't create a method reference to a method without parameters.</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>Make a method reference to the 'parseInt' method of the Integer class.</text>
+        <correct>Integer::parseInt</correct>
+    </question>
+    <question type="text">
+        <text>You have an object called 'obj'. Make a method reference to the 'toString' method of this object.</text>
+        <correct>obj::toString</correct>
+    </question>
 
     <!--
         <question type="single_choice">
