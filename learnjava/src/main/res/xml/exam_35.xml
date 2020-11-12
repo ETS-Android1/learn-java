@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Exam of course 'Java 8' -->
+
+<resources>
+    <examdata>
+        <id>35</id>
+        <questionAmount>20</questionAmount>
+        <timeLimit>25</timeLimit>
+        <finished>true</finished>
+    </examdata>
+    <!-- Questions about Java versions -->
+    <question type="text">
+        <text>Which annotation marks a piece of code for removal in the future?</text>
+        <correct>@Deprecated</correct>
+    </question>
+    <question type="single_choice">
+        <text>In which version of Java were generics added?</text>
+        <answer>Java 5</answer>
+        <answer>Java 8</answer>
+        <answer>Java 7</answer>
+        <answer>Java 11</answer>
+        <correct>0</correct>
+    </question>
+    <question type="single_choice">
+        <text>In which version of Java was the java.nio package added?</text>
+        <answer>Java 5</answer>
+        <answer>Java 7</answer>
+        <answer>Java 11</answer>
+        <answer>Java 8</answer>
+        <correct>1</correct>
+    </question>
+    <question type="single_choice">
+        <text>In which version of Java were lambda expressions added?</text>
+        <answer>Java has no lambda expressions.</answer>
+        <answer>Java 11</answer>
+        <answer>Java 8</answer>
+        <answer>Java 7</answer>
+        <correct>2</correct>
+    </question>
+    <question type="true_false">
+        <text>It's good practice to use deprecated classes.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>The compiler will give an error if you use deprecated methods.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>Deprecation is indicated in the source code with an annotation.</text>
+        <correct>true</correct>
+    </question>
+    <question type="multi_choice">
+        <text>What can change in a new Java version?</text>
+        <answer>New classes can be added to the standard library.</answer>
+        <answer>Code from the standard library may be deprecated.</answer>
+        <answer>Code that previously compiled can throw errors in the new version.</answer>
+        <answer>New keywords can be introduced.</answer>
+        <correct>0</correct>
+        <correct>1</correct>
+        <correct>3</correct>
+    </question>
+
+    <!-- Questions about advanced interface techniques -->
+    <question type="true_false">
+        <text>Prior to Java 8, an interface was fully abstract.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>Java 8 interfaces must be fully abstract.</text>
+        <correct>false</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these can a Java 8 interface contain?</text>
+        <answer>Members.</answer>
+        <answer>Abstract methods.</answer>
+        <answer>Methods with implementation.</answer>
+        <answer>Static methods.</answer>
+        <correct>1</correct>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which of these can you have in Java 8 interfaces, but not in interfaces before that?</text>
+        <answer>Inner classes.</answer>
+        <answer>Abstract methods.</answer>
+        <answer>Members.</answer>
+        <answer>Static methods.</answer>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is a default method?</text>
+        <answer>It's another name for static methods.</answer>
+        <answer>An interface method with implementation.</answer>
+        <answer>It's another name for abstract methods.</answer>
+        <answer>An interface method without implementation.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="text">
+        <text>What keyword is used to declare that an interface method has implementation?</text>
+        <correct>default</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword must be used to declare a method that belongs to the interface, not the object?</text>
+        <correct>static</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is a functional interface?</text>
+        <answer>An interface with no abstract methods.</answer>
+        <answer>An interface with one default method.</answer>
+        <answer>An interface with one abstract method.</answer>
+        <answer>An interface whose methods call other functions.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="text">
+        <text>Which annotation is used to mark functional interfaces?</text>
+        <correct>@FunctionalInterface</correct>
+    </question>
+    <question type="single_choice">
+        <text>Where are standard functional interfaces located?</text>
+        <answer>java.nio</answer>
+        <answer>java.util</answer>
+        <answer>java.util.function</answer>
+        <answer>java.lang</answer>
+        <correct>2</correct>
+    </question>
+    <question type="true_false">
+        <text>The functional interface annotation must be placed above functional interfaces.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>The compiler will generate a warning if an interfaces is marked as functional, but it isn't.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>The compiler will stop with an error if an interfaces is marked as functional, but it isn't.</text>
+        <correct>true</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which of these can a normal interface have, but a functional one cannot?</text>
+        <answer>Static methods.</answer>
+        <answer>Members.</answer>
+        <answer>Default methods.</answer>
+        <answer>Multiple abstract methods.</answer>
+        <correct>3</correct>
+    </question>
+
+    <!-- Questions about lambda expressions -->
+    <question type="single_choice">
+        <text>What is a lambda expression?</text>
+        <answer>The abstract method of a functional interface.</answer>
+        <answer>It is an anonymous, inline declared function.</answer>
+        <answer>A functional interface.</answer>
+        <answer>It is a function which has 1 parameter.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is the correct syntax for a (general) lambda expression?</text>
+        <answer>( statements ) -> parameters</answer>
+        <answer>{ parameters } -> ( statements )</answer>
+        <answer>{ parameters } -> { statements }</answer>
+        <answer>( parameters ) -> { statements }</answer>
+        <correct>3</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these are correct syntax for a lambda with ONE parameter?</text>
+        <answer>( parameter ) -> { statements }</answer>
+        <answer>( statements ) -> parameter</answer>
+        <answer>( statements ) -> { parameter }</answer>
+        <answer>parameter -> { statements }</answer>
+        <correct>0</correct>
+        <correct>3</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these are correct syntax for a lambda with ONE parameter and ONE statement?</text>
+        <answer>( parameter ) -> { statement }</answer>
+        <answer>parameter -> ( statements )</answer>
+        <answer>parameter -> statement</answer>
+        <answer>parameter -> { statement }</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="text">
+        <text>Write a lambda expression which has no parameters, and uses println to print "Lambda" to the console.</text>
+        <correct>( ) -> System.out.println( "Lambda" )</correct>
+        <correct>( ) -> { System.out.println("Lambda"); }</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="text">
+        <text>Write a lambda expression which has one int parameter called 'n' and returns 2 times 'n'. </text>
+        <correct>n -> n * 2</correct>
+        <correct>( n ) -> n * 2</correct>
+        <correct>( n ) -> { return[s]n * 2; }</correct>
+        <correct>( int[s]n ) -> n * 2</correct>
+        <correct>( int[s]n ) -> { return[s]n * 2; }</correct>
+        <correct>( Integer[s]n ) -> n * 2</correct>
+        <correct>( Integer[s]n ) -> { return[s]n * 2; }</correct>
+        <correct>n -> { return[s]n * 2; }</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="text">
+        <text>Write a lambda expression which has one string parameter ('s'), and returns this with an 'x' character at the end.</text>
+        <correct>s -> s + 'x'</correct>
+        <correct>( s ) -> s + 'x'</correct>
+        <correct>( String[s]s ) -> s + 'x'</correct>
+        <correct>s -> { return[s]s + 'x'; }</correct>
+        <correct>( s ) -> { return[s]s + 'x'; }</correct>
+        <correct>( String[s]s ) -> { return s + 'x'; }</correct>
+        <correct>s -> s.append( 'x' )</correct>
+        <correct>( s ) -> s.append( 'x' )</correct>
+        <correct>( String[s]s ) -> s.append( 'x' )</correct>
+        <correct>s -> { return[s]s.append( 'x' ); }</correct>
+        <correct>( s ) -> { return[s]s.append( 'x' ); }</correct>
+        <correct>( String[s]s ) -> { return[s]s.append( 'x' ); }</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="text">
+        <text>Write a lambda which has 2 int parameters ('a' and 'b'), and returns their sum.</text>
+        <correct>( a , b ) -> a + b</correct>
+        <correct>( a , b ) -> { return[s]a + b; }</correct>
+        <correct>( int[s]a , int[s]b ) -> a + b</correct>
+        <correct>( int[s]a , int[s]b ) -> { return[s]a + b; }</correct>
+        <correct>( Integer[s]a , Integer[s]b ) -> a + b</correct>
+        <correct>( Integer[s]a , Integer[s]b ) -> { return[s]a + b; }</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="text">
+        <text>Write a lambda that has a string parameter ('s'), and returns if that string is longer then 4 characters.</text>
+        <correct>s -> s.length() > 4</correct>
+        <correct>( s ) -> s.length() > 4</correct>
+        <correct>( String[s]s ) -> s.length() > 4</correct>
+        <correct>s -> { return[s]s.length() > 4; }</correct>
+        <correct>( s ) -> { return[s]s.length() > 4; }</correct>
+        <correct>( String[s]s ) -> { return[s]s.length() > 4; }</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="true_false">
+        <text>You can assign the '() -> System.out.println("k")' lambda to a Runnable.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>You can assign the '(n) -> System.out.println(n)' lambda to a Runnable.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>You can assign the '(n) -> System.out.println(n)' lambda to a Consumer.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>The Supplier functional interface takes no parameters and returns a result. You can assign the '() -> 3' lambda to it.</text>
+        <correct>true</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Select the lambdas with parameters.</text>
+        <answer>() -> 3.14</answer>
+        <answer>(n) -> Math.pow(n,2)</answer>
+        <answer>() -> System.out.print("Java")</answer>
+        <answer>text -> text.replace('a','b')</answer>
+        <correct>1</correct>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>The 'i -> i+2' lambda is valid.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>The 'var => var.toString()' lambda is valid.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>The 'v1,v2 -> v1 + v2' lambda is valid.</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>Which symbols are used to connect  the parameters and statements of a lambda?</text>
+        <correct>-></correct>
+    </question>
+
+    <!-- Questions about streams -->
+    <question type="single_choice">
+        <text>How do you create a stream from a collection?</text>
+        <answer>With the static method 'stream' from the Collections class.</answer>
+        <answer>With the 'stream' method of the Collection interface.</answer>
+        <answer>With the static method 'createFrom' from the Stream class.</answer>
+        <answer>By passing a collection into Stream's constructor.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="single_choice">
+        <text>How do you create collection from a stream?</text>
+        <answer>With the static 'fromStream' method of the Collection interface.</answer>
+        <answer>Streams can't be turned into collections.</answer>
+        <answer>With the 'collect' method of the stream.</answer>
+        <answer>With the 'map' method of the stream.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="true_false">
+        <text>There is no way to create a stream from an array, as it isn't a collection.</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>Which method of a stream is used to select certain elements based on a condition?</text>
+        <correct>filter</correct>
+    </question>
+    <question type="text">
+        <text>Which method of a stream is used to apply a function to all elements of the stream, and create a new stream?</text>
+        <correct>map</correct>
+    </question>
+    <question type="text">
+        <text>Which method is used to apply a Consumer to each element of a stream?</text>
+        <correct>forEach</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Select the stream methods resulting another stream.</text>
+        <answer>filter</answer>
+        <answer>collect</answer>
+        <answer>anyMatch</answer>
+        <answer>sorted</answer>
+        <correct>0</correct>
+        <correct>3</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Select the stream methods that result in Optional objects.</text>
+        <answer>allMatch</answer>
+        <answer>findFirst</answer>
+        <answer>count</answer>
+        <answer>collect</answer>
+        <correct>1</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Select the stream methods that take a Predicate as a parameter.</text>
+        <answer>anyMatch</answer>
+        <answer>map</answer>
+        <answer>allMatch</answer>
+        <answer>filter</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>Stream operations can be specified with lambda expressions.</text>
+        <correct>true</correct>
+    </question>
+    <question type="single_choice">
+        <text>Why can you use lambda expressions as stream operation parameters?</text>
+        <answer>Because the parameters are functional interfaces.</answer>
+        <answer>Because Stream is an immutable class.</answer>
+        <answer>Because the parameters are interfaces.</answer>
+        <answer>Because streams were added in Java 8.</answer>
+        <correct>0</correct>
+    </question>
+    <question type="true_false">
+        <text>Predefined collectors are found inside the Collectors class.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>Predefined collectors are found in the Collection class.</text>
+        <correct>false</correct>
+    </question>
+
+    <!-- Questions about additional Java 8 features -->
+    <question type="text">
+        <text>Which class added in Java 8 can, but not necessarily hold a value?</text>
+        <correct>Optional</correct>
+        <correct>java.util.Optional</correct>
+    </question>
+    <question type="true_false">
+        <text>An Optional can hold any object.</text>
+        <correct>true</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these if true about an Optional?</text>
+        <answer>Can hold a value.</answer>
+        <answer>Can hold multiple values.</answer>
+        <answer>Can be empty.</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+    </question>
+    <question type="single_choice">
+        <text>When should an Optional be used?</text>
+        <answer>As a member of a class.</answer>
+        <answer>As a return value of methods that may not return a "value".</answer>
+        <answer>It's deprecated and should not be used.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="text">
+        <text>Which static method can be used to create a Optional holding a value?</text>
+        <correct>of</correct>
+        <correct>Optional.of</correct>
+    </question>
+    <question type="text">
+        <text>Which static method can be used to create a Optional without a value?</text>
+        <correct>empty</correct>
+        <correct>Optional.empty</correct>
+    </question>
+    <question type="single_choice">
+        <text>What happens when extract a value from an empty Optional?</text>
+        <answer>An empty Optional is returned.</answer>
+        <answer>Null is returned.</answer>
+        <answer>An exception is thrown.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="text">
+        <text>Which symbol is used to make a method reference?</text>
+        <correct>::</correct>
+    </question>
+    <question type="true_false">
+        <text>You can't create a method reference to a static method.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>You can't create a method reference to a method without parameters.</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>Make a method reference to the 'parseInt' method of the Integer class.</text>
+        <correct>Integer::parseInt</correct>
+    </question>
+    <question type="text">
+        <text>You have an object called 'obj'. Make a method reference to the 'toString' method of this object.</text>
+        <correct>obj::toString</correct>
+    </question>
+
+    <!--
+        <question type="single_choice">
+            <text></text>
+            <answer></answer>
+            <answer></answer>
+            <answer></answer>
+            <answer></answer>
+            <correct></correct>
+        </question>
+
+        <question type="multi_choice">
+            <text></text>
+            <answer></answer>
+            <answer></answer>
+            <answer></answer>
+            <answer></answer>
+            <correct></correct>
+            <correct></correct>
+        </question>
+
+        <question type="true_false">
+            <text></text>
+            <correct></correct>
+        </question>
+
+        <question type="text">
+            <text></text>
+            <correct></correct>
+            <correct></correct>
+        </question>
+        -->
+</resources>

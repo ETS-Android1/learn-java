@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Course: Java 8 -->
+
+<resources>
+    <coursedata>
+        <id>35</id>
+        <name>Java 8</name>
+        <finished>true</finished>
+    </coursedata>
+    <chapter>351</chapter>
+    <chapter>352</chapter>
+    <chapter>353</chapter>
+    <chapter>354</chapter>
+    <chapter>355</chapter>
+    <task>351</task>
+    <task>352</task>
+    <exam>35</exam>
+</resources>

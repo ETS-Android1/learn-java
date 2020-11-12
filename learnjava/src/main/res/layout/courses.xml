@@ -74,7 +74,15 @@
                    android:layout_height="wrap_content"
                    android:layout_marginStart="@dimen/margin"
                    android:layout_marginEnd="@dimen/margin"
-                   android:gravity="center" />
+                   android:gravity="center">
+
+                   <TextView
+                       android:id="@+id/adStatusLabel"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_centerInParent="true"
+                       android:text="@string/loading_ad"/>
+               </RelativeLayout>
 
                <ListView
                    android:id="@+id/courseSelectors"

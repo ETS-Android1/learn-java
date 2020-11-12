@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <chapterdata>
+        <id>351</id>
+        <name>Java versions and Java 8</name>
+    </chapterdata>
+    <text>
+        <![CDATA[
+        Java has undergone many changes since its release. Take a look at this version table from
+        <i>Wikipedia</i>:
+        ]]>
+    </text>
+    <image name="java_versions"/>
+    <text>
+        <![CDATA[
+        Here is what may change in a new release:
+        ]]>
+    </text>
+    <title text="Deprecate obsolete classes"/>
+    <text>
+        <![CDATA[
+        Deprecating a method or a class means marking it for removal in a future version. In most cases,
+        a suitable replacement is given. Deprecated code can still be used, however, it's recommended to
+        use the replacement instead.
+        ]]>
+    </text>
+    <boxed title="Annotation">
+        <![CDATA[
+        Deprecated code is marked with the <b>@Deprecated</b> annotation. Your compiler will raise a
+        warning if you use such a method or class.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        For example much of the class <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Date.html">java.util.Date</a> has been deprecated, because a better alternative
+        has been added in Java 7, called the <a href="https://docs.oracle.com/javase/8/docs/api/java/time/package-summary.html">java.time</a> package.
+        ]]>
+    </text>
+    <title text="Extend the standard library"/>
+    <text>
+        <![CDATA[
+        In each version, new classes, methods and sometimes even entire packages are added to the standard
+        library. These could be:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>Better implementations of previously present code (in this case, the previous code is ofter deprecated).</li>
+        <li>Code that brings some entirely new functionality.
+        </ul>
+        ]]>
+    </list>
+    <text>
+        <![CDATA[
+        For example, in Java 7, the package <a href="https://docs.oracle.com/javase/7/docs/api/java/nio/package-summary.html">java.nio</a>
+        package was added (the name stands for New IO).
+        ]]>
+    </text>
+    <code>
+        <![CDATA[
+        <font color="#E65100">try</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">String</font>> lines = <font color="#999900">Files</font>.readAllLines(<font color="#999900">Paths</font>.get("myfile.txt"));
+<br/>} <font color="#E65100">catch</font>(<font color="#999900">IOException</font> e) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.err.println("<font color="#999900">Failed</font> to read from file!");
+<br/>}
+        ]]>
+    </code>
+    <text>
+        <![CDATA[
+        Before the <i>NIO</i> package, programmers had to use readers and loops to achieve this.
+        ]]>
+    </text>
+    <title text="Extend the language itself"/>
+    <text>
+        <![CDATA[
+        These are the most significant changes. New keywords and structures may be introduced, and the syntax
+        of Java can change, allowing the programmer to be more productive.
+        ]]>
+    </text>
+    <boxed title="Java 5: Generics">
+        <![CDATA[
+        For instance, Java 5 introduced generics, which was a significant extension to Java.
+        ]]>
+    </boxed>
+    <title text="Why Java 8?"/>
+    <text>
+        <![CDATA[
+        This course is about Java 8. However, if you take a look at the version table again, you'll notice that
+        it is not at all the latest release. So, what makes it so significant that it deserves its own course?
+        ]]>
+    </text>
+    <boxed title="The most widely used">
+        <![CDATA[
+        Java 8 became the most widely used version, despite the newer releases. This is partly because it offered
+        so many new things, and partly because the newer version did not, so many programmers and companies simply did not consider
+        worth their time to upgrade.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        In the following chapters, we'll take a look at the most important changes of Java 8, with detailed explanations
+        and examples!
+        ]]>
+    </text>
+</resources>

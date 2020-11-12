@@ -10,6 +10,22 @@
         <finished>true</finished>
     </examdata>
     <!-- Questions about 'What is Java?' -->
+    <question type="text">
+        <text>Something is missing from the variable declaration 'int x = 5' Write the corrected statement.</text>
+        <correct>int[s]x = 5;</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="text">
+        <text>Something is wrong with the 'String data = 32;' statement. Write the corrected statement, without changing the
+            variables name, or value.</text>
+        <correct>int[s]data = 32;</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="text">
+        <text>What does JDK stand for?</text>
+        <correct>Java Development Kit</correct>
+        <ignoreCase/>
+    </question>
     <question type="multi_choice">
         <text>When we say 'Java', what can we mean by it?</text>
         <answer>A platform for software development</answer>
@@ -77,25 +93,14 @@
         <correct>0</correct>
     </question>
     <question type="text">
-        <text>What does JDK stand for?</text>
-        <correct>Java Development Kit</correct>
-        <correct>Java Development kit</correct>
-        <correct>Java development Kit</correct>
-        <correct>java Development Kit</correct>
-        <correct>java development Kit</correct>
-        <correct>java development kit</correct>
-    </question>
-    <question type="text">
         <text>What does JVM stand for?</text>
         <correct>Java Virtual Machine</correct>
+        <ignoreCase/>
     </question>
     <question type="text">
         <text>What does IDE stand for?</text>
         <correct>Integrated Development Environment</correct>
-        <correct>Integrated Development environment</correct>
-        <correct>Integrated development Environment</correct>
-        <correct>Integrated development environment</correct>
-        <correct>integrated development environment</correct>
+        <ignoreCase/>
     </question>
     <question type="single_choice">
         <text>What is the purpose of the JVM?</text>
@@ -211,12 +216,12 @@
     </question>
     <question type="text">
         <text>We would like to import a class named 'Utils' from package 'calculator', which is inside package 'com'.
-        What is the import line we must write?</text>
+            What is the import line we must write?</text>
         <correct>import com.calculator.Utils;</correct>
     </question>
     <question type="text">
         <text>We are creating a class into package 'utils', which is inside package 'org'. What is the package declaration statement
-        we must write?</text>
+            we must write?</text>
         <correct>package org.utils;</correct>
     </question>
     <question type="true_false">
@@ -236,13 +241,13 @@
         <correct>3</correct>
     </question>
     <question type="single_choice">
-            <text>What does application entry point mean?</text>
-            <answer>It's where the compiler starts compiling your source files.</answer>
-            <answer>The first line of the source file.</answer>
-            <answer>It's where the JVM will start to execute your program.</answer>
-            <answer>It's the only method with no return type.</answer>
-            <correct>2</correct>
-        </question>
+        <text>What does application entry point mean?</text>
+        <answer>It's where the compiler starts compiling your source files.</answer>
+        <answer>The first line of the source file.</answer>
+        <answer>It's where the JVM will start to execute your program.</answer>
+        <answer>It's the only method with no return type.</answer>
+        <correct>2</correct>
+    </question>
     <question type="text">
         <text>Write the statement that will print 'Good morning' to the console.</text>
         <correct>System.out.println("Good morning");</correct>
@@ -285,27 +290,10 @@
         <correct>false</correct>
     </question>
     <question type="text">
-        <text>Something is missing from the variable declaration 'int x = 5' Write the corrected statement.</text>
-        <correct>int x = 5;</correct>
-        <correct>int x=5;</correct>
-        <correct>int x= 5;</correct>
-        <correct>int x =5;</correct>
-    </question>
-    <question type="text">
-        <text>Something is wrong with the 'String data = 32;' statement. Write the corrected statement, without changing the
-        variables name, or value.</text>
-        <correct>int data = 32;</correct>
-        <correct>int data= 32;</correct>
-        <correct>int data =32;</correct>
-        <correct>int data=32;</correct>
-    </question>
-    <question type="text">
         <text>Something is wrong with the 'String text "my message";' statement. Write the corrected statement, without changing the
             variables name, or value.</text>
-        <correct>String text = "my message";</correct>
-        <correct>String text= "my message";</correct>
-        <correct>String text ="my message";</correct>
-        <correct>String text="my message";</correct>
+        <correct>String[s]text = "my[s]message";</correct>
+        <ignoreSpace/>
     </question>
     <question type="single_choice">
         <text>Which operator is used to check equality?</text>
@@ -419,23 +407,16 @@
     </question>
     <question type="text">
         <text>What would you write between the parentheses if you declare a method with two parameters.
-        The first one is an integer with the name 'amount', the second is a string with the name 'name'. Don't write the parentheses.</text>
-        <correct>int amount, String name</correct>
-        <correct>int amount , String name</correct>
-        <correct>int amount,String name</correct>
-        <correct>int amount ,String name</correct>
+            The first one is an integer with the name 'amount', the second is a string with the name 'name'. Don't write the parentheses.</text>
+        <correct>int[s]amount , String[s]name</correct>
+        <ignoreSpace/>
     </question>
     <question type="text">
         <text>What would you write between the parentheses if you declare a method with two parameters.
             They are both integers with the names 'num1' and 'num2'. Don't write the parentheses.</text>
-        <correct>int num1, int num2</correct>
-        <correct>int num1,int num2</correct>
-        <correct>int num1 ,int num2</correct>
-        <correct>int num1 , int num2</correct>
-        <correct>int num2, int num1</correct>
-        <correct>int num2 , int num1</correct>
-        <correct>int num2 ,int num1</correct>
-        <correct>int num2,int num1</correct>
+        <correct>int[s]num1 , int[s]num2</correct>
+        <correct>int[s]num2 , int[s]num1</correct>
+        <ignoreSpace/>
     </question>
     <question type="text">
         <text>Which keyword is used to return value to the caller in methods?</text>
@@ -515,9 +496,9 @@
         <text>'_myVar' is a valid identifier.</text>
         <correct>false</correct>
     </question>  <question type="true_false">
-        <text>'9lives' is an invalid identifier.</text>
-        <correct>true</correct>
-    </question>
+    <text>'9lives' is an invalid identifier.</text>
+    <correct>true</correct>
+</question>
     <question type="true_false">
         <text>'my_(well_named)_variable' is a valid identifier</text>
         <correct>false</correct>
@@ -583,18 +564,18 @@
     <!-- Questions about 'Comments in the code' -->
     <question type="text">
         <text>Write a single line comment which says 'this is a comment'.</text>
-        <correct>//this is a comment</correct>
-        <correct>// this is a comment</correct>
+        <correct>// this[s]is[s]a[s]comment</correct>
+        <ignoreSpace/>
     </question>
     <question type="text">
         <text>Write a single line comment which says 'remember to comment your code!'.</text>
-        <correct>//remember to comment your code!</correct>
-        <correct>// remember to comment your code!</correct>
+        <correct>// remember[s]to[s]comment[s]your[s]code!</correct>
+        <ignoreSpace/>
     </question>
     <question type="text">
         <text>Write a multi line comment (in one line) which says 'important information'.</text>
-        <correct>/* important information */</correct>
-        <correct>/*important information*/</correct>
+        <correct>/* important[s]information */</correct>
+        <ignoreSpace/>
     </question>
     <question type="single_choice">
         <text>Which symbols are used to create multi-lined comments?</text>

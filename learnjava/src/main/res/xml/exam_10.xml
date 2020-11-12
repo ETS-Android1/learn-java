@@ -41,9 +41,7 @@
         <text>What is the name the of the classes used to provide additional functionality for primitives?</text>
         <correct>wrapper</correct>
         <correct>wrapper class</correct>
-        <correct>Wrapper</correct>
-        <correct>Wrapper class</correct>
-        <correct>Wrapper Class</correct>
+        <ignoreCase/>
     </question>
     <question type="text">
         <text>What is the wrapper class for the 'float' primitive type?</text>
@@ -75,7 +73,6 @@
     </question>
     <question type="text">
         <text>What is the default value of a double?</text>
-        <correct>0</correct>
         <correct>0.0</correct>
     </question>
     <question type="true_false">
@@ -84,47 +81,27 @@
     </question>
     <question type="text">
         <text>Declare a short with name 's' and value -124.</text>
-        <correct>short s = -124;</correct>
-        <correct>short s= -124;</correct>
-        <correct>short s =-124;</correct>
-        <correct>short s=-124;</correct>
-        <correct>Short s = -124;</correct>
-        <correct>Short s= -124;</correct>
-        <correct>Short s =-124;</correct>
-        <correct>Short s=-124;</correct>
+        <correct>short[s]s = -124;</correct>
+        <correct>Short[s]s = -124;</correct>
+        <ignoreSpace/>
     </question>
     <question type="text">
         <text>Declare a double with name 'div' and value 22.435</text>
-        <correct>double div = 22.435;</correct>
-        <correct>double div= 22.435;</correct>
-        <correct>double div =22.435;</correct>
-        <correct>double div=22.435;</correct>
-        <correct>Double div = 22.435;</correct>
-        <correct>Double div= 22.435;</correct>
-        <correct>Double div =22.435;</correct>
-        <correct>Double div=22.435;</correct>
+        <correct>double[s]div = 22.435;</correct>
+        <correct>Double[s]div = 22.435;</correct>
+        <ignoreSpace/>
     </question>
     <question type="text">
         <text>Declare a float with name 'conv' and a value of half.</text>
-        <correct>float conv = 0.5f;</correct>
-        <correct>float conv= 0.5f;</correct>
-        <correct>float conv =0.5f;</correct>
-        <correct>float conv=0.5f;</correct>
-        <correct>Float conv = 0.5f;</correct>
-        <correct>Float conv= 0.5f;</correct>
-        <correct>Float conv =0.5f;</correct>
-        <correct>Float conv=0.5f;</correct>
+        <correct>float[s]conv = 0.5f;</correct>
+        <correct>Float[s]conv = 0.5f;</correct>
+        <ignoreSpace/>
     </question>
     <question type="text">
         <text>Declare a char with with name 'firstLetter' and a value of c.</text>
-        <correct>char firstLetter = 'c';</correct>
-        <correct>char firstLetter= 'c';</correct>
-        <correct>char firstLetter ='c';</correct>
-        <correct>char firstLetter='c';</correct>
-        <correct>Character firstLetter = 'c';</correct>
-        <correct>Character firstLetter= 'c';</correct>
-        <correct>Character firstLetter ='c';</correct>
-        <correct>Character firstLetter='c';</correct>
+        <correct>char[s]firstLetter = 'c';</correct>
+        <correct>Character[s]firstLetter = 'c';</correct>
+        <ignoreSpace/>
     </question>
     <question type="text">
         <text>Enter the not-equal operator.</text>
@@ -386,34 +363,18 @@
         <correct>0</correct>
     </question>
     <question type="text">
-        <text>Declare an array of characters (using primitive or wrapper), with name 'letters' and length 25.</text>
-        <correct>char[] letters = new char[25];</correct>
-        <correct>char[] letters=new char[25];</correct>
-        <correct>char[] letters =new char[25];</correct>
-        <correct>char[] letters= new char[25];</correct>
-        <correct>char letters[] = new char[25];</correct>
-        <correct>char letters[]=new char[25];</correct>
-        <correct>char letters[] =new char[25];</correct>
-        <correct>char letters[]= new char[25];</correct>
-        <correct>Character[] letters = new Character[25];</correct>
-        <correct>Character[] letters=new Character[25];</correct>
-        <correct>Character[] letters= new Character[25];</correct>
-        <correct>Character[] letters =new Character[25];</correct>
-        <correct>Character letters[] = new Character[25];</correct>
-        <correct>Character letters[]=new Character[25];</correct>
-        <correct>Character letters[] =new Character[25];</correct>
-        <correct>Character letters[]= new Character[25];</correct>
+        <text>Declare an array of characters with name 'letters' and length 25.</text>
+        <correct>char[][s]letters = new[s]char[ 25 ];</correct>
+        <correct>char[s]letters[] = new[s]char[ 25 ];</correct>
+        <correct>Character[][s]letters = new[s]Character[ 25 ];</correct>
+        <correct>Character[s]letters[] = new[s]Character[ 25 ];</correct>
+        <ignoreSpace/>
     </question>
     <question type="text">
         <text>Declare an array of strings called 'sentences' with length 100.</text>
-        <correct>String[] sentences = new String[100];</correct>
-        <correct>String[] sentences=new String[100];</correct>
-        <correct>String[] sentences= new String[100];</correct>
-        <correct>String[] sentences =new String[100];</correct>
-        <correct>String sentences[] = new String[100];</correct>
-        <correct>String sentences[]=new String[100];</correct>
-        <correct>String sentences[]= new String[100];</correct>
-        <correct>String sentences[] =new String[100];</correct>
+        <correct>String[][s]sentences = new[s]String[ 100 ];</correct>
+        <correct>String[s]sentences[] = new[s]String[ 100 ];</correct>
+        <ignoreSpace/>
     </question>
 
     <!-- Questions for getting input -->
@@ -427,10 +388,9 @@
     </question>
     <question type="text">
         <text>We have a string named 'textData'. Write a statement that parses it into an newly created integer called 'data'!</text>
-        <correct>int data = Integer.parseInt("textData");</correct>
-        <correct>int data= Integer.parseInt("textData");</correct>
-        <correct>int data =Integer.parseInt("textData");</correct>
-        <correct>int data=Integer.parseInt("textData");</correct>
+        <correct>int[s]data = Integer.parseInt( "textData" );</correct>
+        <correct>Integer[s]data = Integer.parseInt( "textData" );</correct>
+        <ignoreSpace/>
     </question>
     <question type="single_choice">
         <text>What happens when the parameter of Integer.parseInt is not a string format of an integer?</text>
@@ -462,34 +422,26 @@
     </question>
     <question type="text">
         <text>Write a statement that creates a Scanner called 's' set to the standard input!</text>
-        <correct>Scanner s = new Scanner(System.in);</correct>
-        <correct>Scanner s= new Scanner(System.in);</correct>
-        <correct>Scanner s =new Scanner(System.in);</correct>
-        <correct>Scanner s=new Scanner(System.in);</correct>
+        <correct>Scanner[s]s = new[s]Scanner( System.in );</correct>
+        <ignoreSpace/>
     </question>
     <question type="text">
         <text>We have a scanner called 's', tuned to the standard input. Write a statement that captures a line of text
         from the user, and saves it in a string called 'userInput'!</text>
-        <correct>String userInput = s.nextLine();</correct>
-        <correct>String userInput =s.nextLine();</correct>
-        <correct>String userInput= s.nextLine();</correct>
-        <correct>String userInput=s.nextLine();</correct>
+        <correct>String[s]userInput = s.nextLine();</correct>
+        <ignoreSpace/>
     </question>
     <question type="text">
         <text>We have a scanner called 's', tuned to the standard input. Write a statement that captures a line of text
             from the user, and saves it in an integer called 'userInput'!</text>
-        <correct>int userInput = s.nextInt();</correct>
-        <correct>int userInput =s.nextInt();</correct>
-        <correct>int userInput= s.nextInt();</correct>
-        <correct>int userInput=s.nextInt();</correct>
-        <correct>Integer userInput = s.nextInt();</correct>
-        <correct>Integer userInput =s.nextInt();</correct>
-        <correct>Integer userInput= s.nextInt();</correct>
-        <correct>Integer userInput=s.nextInt();</correct>
+        <correct>int[s]userInput = s.nextInt();</correct>
+        <correct>Integer[s]userInput = s.nextInt();</correct>
+        <ignoreSpace/>
     </question>
     <question type="text">
-        <text>Which utility class did we use to read the contents of a file?</text>
+        <text>Which utility class is used to read the contents of a file?</text>
         <correct>Files</correct>
+        <correct>java.nio.file.Files</correct>
     </question>
     <question type="single_choice">
         <text>What happens when we try to read a file that does not exists?</text>
@@ -508,7 +460,7 @@
         ]]></correct>
     </question>
     <question type="true_false">
-        <text>Println is short for printline.</text>
+        <text>Println is short for print line.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
