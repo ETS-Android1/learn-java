@@ -7,7 +7,7 @@
     </chapterdata>
     <text>
         <![CDATA[
-        The <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html">java.util.stream.Stream</a> class
+        The <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html">java.util.stream.Stream</a> interface
         introduced in Java 8 provides new ways to work with collections and other data sources.
         ]]>
     </text>
@@ -50,7 +50,7 @@
     </code>
     <text>
         <![CDATA[
-        Note that the <i>Stream</i> class is also generic, its type parameter must be the same as the type of the elements
+        Note that the <i>Stream</i> interface is also generic, its type parameter must be the same as the type of the elements
         in the source.
         ]]>
     </text>
