@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <chapterdata>
         <id>252</id>
@@ -21,14 +20,14 @@
         is <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Thread.html">java.lang.Thread</a>.
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="gray">//create a thread</font>
 <br/><font color="#999900">Thread</font> t1 = <font color="#E65100">new</font> <font color="#999900">Thread</font>();	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/><font color="gray">//start this thread</font>
-<br/>t1.start();
-        ]]>
-    </code>
+<br/>t1.<font color="#ADD8E6">start</font>();
+        
+    ]]></code>
     <text>
         <![CDATA[
         So what will this thread do? Well, nothing. This is obvious, since we didn't specify anything that it
@@ -55,30 +54,30 @@
         interface in a separate class:
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
 <font color="#E65100">class</font> <font color="#999900">GreetRunnable</font> <font color="#E65100">implements</font> <font color="#999900">Runnable</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//override the run method to do something</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> run() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Hello from a thread!");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello from a thread!"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Then, we can instantiate this class, and pass it to a thread, since it's a runnable.
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
 <font color="gray">//create a thread using the runnable</font>
 <br/><font color="#999900">Thread</font> t1 = <font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> <font color="#999900">GreetRunnable</font>());	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/><font color="gray">//start the thread</font>
-<br/>t1.start();
-        ]]>
-    </code>
+<br/>t1.<font color="#ADD8E6">start</font>();
+        
+    ]]></code>
     <text>
         <![CDATA[
         As expected, this thread will print the greeting to the console.
@@ -96,20 +95,20 @@
         examples below, but if you need more explanation, plenty is provided <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/anonymousclasses.html">here</a>.
         ]]>
     </boxed>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
 <font color="gray">//create a thread using an anonymous runnable</font>
 <br/><font color="#999900">Thread</font> t1 = <font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> <font color="#999900">Runnable</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font> <font color="gray">//override the run method here</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> run() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Hello from an anonymous runnable!");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello from an anonymous runnable!"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>});	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/><font color="gray">//start the thread
 </font>
-<br/>t1.start();
-        ]]>
-    </code>
+<br/>t1.<font color="#ADD8E6">start</font>();
+        
+    ]]></code>
     <text>
         <![CDATA[
         This does the same thing, but we did not need to declare a full-fledged custom class. If you'll only use
@@ -123,14 +122,14 @@
         will be covered in a later course, but you can take a look at the code sample to get a quick peek.
         ]]>
     </advanced>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="gray">//create a thread using a lambda expression</font>
-<br/><font color="#999900">Thread</font> t1 = <font color="#E65100">new</font> <font color="#999900">Thread</font>(() -> <font color="#999900">System</font>.out.println("Hello from a lambda!"));
+<br/><font color="#999900">Thread</font> t1 = <font color="#E65100">new</font> <font color="#999900">Thread</font>(() -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello from a lambda!"</font>));
 <br/><font color="gray">//start the thread</font>
-<br/>t1.start();
-        ]]>
-    </code>
+<br/>t1.<font color="#ADD8E6">start</font>();
+        
+    ]]></code>
     <text>
         <![CDATA[
         No, it's still not over. Interestingly, the <i>Thread</i> class also implements <i>Runnable</i>, but it's <i>run</i> method
@@ -138,46 +137,46 @@
         there:
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
 <font color="#E65100">class</font> <font color="#999900">GreetThread</font> <font color="#E65100">extends</font> <font color="#999900">Thread</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> run() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> name = getName(); <font color="gray">//get the thread's name
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> name = <font color="#ADD8E6">getName</font>(); <font color="gray">//get the thread's name
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=0; i&lt;50; i++) { <font color="gray">//greet us 50 times
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;<font color="#F0E130">50</font>; i++) { <font color="gray">//greet us 50 times
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Hello, I'm " + name);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello, I'm "</font> + name);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         As you can see, thread objects have names, which you can get and set with the appropriate getters and setters.
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
  <font color="#999900">GreetThread</font> t1 = <font color="#E65100">new</font>  <font color="#999900">GreetThread</font>();
-<br/>t1.setName("Thread 1"); <font color="gray">//set the thread's name
+<br/>t1.<font color="#ADD8E6">setName</font>(<font color="#2E8B57">"Thread 1"</font>); <font color="gray">//set the thread's name
 </font>
-<br/>t1.start();
-        ]]>
-    </code>
+<br/>t1.<font color="#ADD8E6">start</font>();
+        
+    ]]></code>
     <interactive instruction="Create the thread using an anonymous runnable!">
-        <data>
-<![CDATA[
-<font color="#999900">Thread</font> thread = <font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> ___() {
+        <data><![CDATA[
+
+<font color="#999900">Thread</font> thread = <font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> <font color="#ADD8E6">___</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> ___() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//<font color="#E65100">do</font> some <font color="#DF7401">long</font> calculation here...
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">___</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//do some long calculation here...
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>});
-]]>
-        </data>
+
+        ]]></data>
         <answer place="0">Runnable</answer>
         <answer place="1">run</answer>
     </interactive>
@@ -188,19 +187,19 @@
         the previously created <i>GreetThread</i> class.
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
 <font color="gray">//create 2 threads, with different names</font>
 <br/><font color="#999900">GreetThread</font> t1 = <font color="#E65100">new</font> <font color="#999900">GreetThread</font>();
-<br/>t1.setName("Thread 1");
+<br/>t1.<font color="#ADD8E6">setName</font>(<font color="#2E8B57">"Thread 1"</font>);
 <br/><font color="#999900">GreetThread</font> t2 = <font color="#E65100">new</font> <font color="#999900">GreetThread</font>();
-<br/>t2.setName("Thread 2");
+<br/>t2.<font color="#ADD8E6">setName</font>(<font color="#2E8B57">"Thread 2"</font>);
 <br/>
 <br/><font color="gray">//start both</font>
-<br/>t1.start();
-<br/>t2.start();
-        ]]>
-    </code>
+<br/>t1.<font color="#ADD8E6">start</font>();
+<br/>t2.<font color="#ADD8E6">start</font>();
+        
+    ]]></code>
     <text>
         <![CDATA[
         In a sequential program, you'd see thread 1 greeting us 50 times, then thread 2 doing the same. But if you run

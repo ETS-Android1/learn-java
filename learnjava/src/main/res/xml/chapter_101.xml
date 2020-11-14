@@ -1,17 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<!--Belongs to course 'Primitives, control flow and I/O' -->
-
-<!--
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--Belongs to course 'Primitives, control flow and I/O' --><!--
 <interactive instruction="">
     <data>
 
     </data>
     <answer place="0"></answer>
 </interactive>
--->
-
-<resources>
+--><resources>
     <chapterdata>
         <id>101</id>
         <name>Primitives types</name>
@@ -40,12 +35,12 @@
         These values are stored as constants of the wrapper class:
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="#DF7401">int</font> min = <font color="#999900">Integer</font>.MIN_VALUE;
         <br/><font color="#DF7401">int</font> max = <font color="#999900">Integer</font>.MAX_VALUE;
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         <u>Default value:</u> The default value of an <i>int</i> is 0.
@@ -75,12 +70,12 @@
         <u>Default value:</u> The default value of a <i>long</i> is 0.
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#DF7401">long </font>big = <font color="#999900">Integer</font>.<font color="#999900">MAX_VALUE</font> * 2;
-        <br/><font color="#DF7401">long</font> l1 = 1418284149L;
-        ]]>
-    </code>
+    <code><![CDATA[
+        
+        <font color="#DF7401">long </font>big = <font color="#999900">Integer</font>.<font color="#999900">MAX_VALUE</font> * <font color="#F0E130">2</font>;
+        <br/><font color="#DF7401">long</font> l1 = <font color="#F0E130">141828414</font>9L;
+        
+    ]]></code>
     <text>
         <![CDATA[
         As an example, and a demonstration that the <i>long</i> type has a wider range, we can see that this variable has the
@@ -117,17 +112,17 @@
         <u>Default value:</u> 0.0
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#DF7401">double </font>d1 = 3.65;
+    <code><![CDATA[
+        
+        <font color="#DF7401">double </font>d1 = <font color="#F0E130">3.65</font>;
 <font color="#DF7401">
-<br/>double </font>d2 = -21.941743242;
-<br/><font color="gray">//Don't need to write 423.0, but we can</font>
-<br/><font color="#DF7401">double</font> d3 = 423;
+<br/>double </font>d2 = <font color="#F0E130">-21.941743242</font>;
+<br/><font color="gray<font color="#2E8B57">">//Don'</font>t need to write 423.0, but we can</font>
+<br/><font color="#DF7401">double</font> d3 = <font color="#F0E130">423</font>;
 <br/>
 <br/><font color="#DF7401">double</font> res = d1 + d2;
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Observe the above examples to see that a <b>dot</b> is used to declare <i>double</i>s. Arithmetic can
@@ -145,11 +140,11 @@
         <u>Default value:</u> 0f
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#DF7401">float</font> f1 = 0.424242f;
-        ]]>
-    </code>
+    <code><![CDATA[
+        
+        <font color="#DF7401">float</font> f1 = <font color="#F0E130">0.424242f</font>;
+        
+    ]]></code>
     <text>
         <![CDATA[
         It's declared similarly as a <i>double</i>, but notice the <b>f</b> at the end. It <b>must</b> be used to
@@ -166,15 +161,15 @@
         <u>Default value:</u> false
         ]]>
     </text>
-    <code>
-        <![CDATA[
-<font color="#DF7401">int </font>i1 = 1, i2 = 2;
-<br/><font color="#DF7401">boolean</font> b1 = i1 &gt; 7; <font color="gray">//false</font>
-<br/><font color="#DF7401">boolean</font> b2 = i2 &lt;= 1; <font color="gray">//true</font>
-<br/><font color="#DF7401">boolean</font> b3 = i2 == 3; <font color="gray">//false</font>
+    <code><![CDATA[
+        
+<font color="#DF7401">int </font>i1 = <font color="#F0E130">1</font>, i2 = <font color="#F0E130">2</font>;
+<br/><font color="#DF7401">boolean</font> b1 = i1 &gt; <font color="#F0E130">7</font>; <font color="gray">//false</font>
+<br/><font color="#DF7401">boolean</font> b2 = i2 &lt;= <font color="#F0E130">1</font>; <font color="gray">//true</font>
+<br/><font color="#DF7401">boolean</font> b3 = i2 == <font color="#F0E130">3</font>; <font color="gray">//false</font>
 <br/><font color="#DF7401">boolean</font> b4 = i1 != i2; <font color="gray">//true</font>
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         As you can see, additional <b>comparison operators</b> are at our disposal when using <i>boolean</i>s. They can <b>compare</b>
@@ -184,12 +179,12 @@
         and <b>!=</b> (not equal).
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="#DF7401">boolean </font>b = <font color="#E65100">true</font>;
 <br/>b = !b; <font color="gray">//b will be false</font>
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         This example illustrates the <b>negate operator</b>. You can use it on a boolean to quickly "swap"
@@ -207,8 +202,8 @@
         </ul>
         ]]>
     </list>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="#DF7401">boolean </font>a = true, b = false;
 <font color="#DF7401">
 <br/>boolean </font>c = a && b; <font color="gray">//false
@@ -216,15 +211,15 @@
 <br/>c = a || b; <font color="gray">//true
 </font>
 <br/>c = a ^ b; <font color="gray">//true</font>
-        ]]>
-    </code>
+        
+    ]]></code>
     <interactive instruction="Enter a boolean operator which makes the value of 'c' true!">
-        <data>
-            <![CDATA[
+        <data><![CDATA[
+            
 <font color="#DF7401">boolean</font> a = false, b = true;
 <br/><font color="#DF7401">boolean</font> c = a ___ b;
-            ]]>
-        </data>
+            
+        ]]></data>
         <answer place="0">&amp;&amp;</answer>
         <answer place="0">^</answer>
     </interactive>
@@ -239,15 +234,15 @@
         <u>Default value:</u> '\u0000'
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="#DF7401">char </font>c1 = '\u0011';
 <font color="#DF7401">
-<br/>char </font>c2 = 'A';
+<br/>char </font>c2 = <font color="#2E8B57">'A'</font>;
 <font color="#DF7401">
-<br/>char </font>c3 = 'ä';
-        ]]>
-    </code>
+<br/>char </font>c3 = <font color="#2E8B57">'ä'</font>;
+        
+    ]]></code>
     <text>
         <![CDATA[
         As you can see, we must always put the declared character between apostrophes, but we aren't required
@@ -262,17 +257,17 @@
         Despite this, Java allows us to use them together in certain situations.
         ]]>
     </boxed>
-    <code>
-        <![CDATA[
- <font color="#999900">String</font> s = "mam";
+    <code><![CDATA[
+        
+ <font color="#999900">String</font> s = <font color="#2E8B57">"mam"</font>;
 <font color="#DF7401">
-<br/>char </font>aChar = 'a';
+<br/>char </font>aChar = <font color="#2E8B57">'a'</font>;
 <br/>s = s + aChar;
 <br/><font color="gray">//will print mama
 </font>
-<br/><font color="#999900">System</font>.out.println(s);
-        ]]>
-    </code>
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(s);
+        
+    ]]></code>
     <text>
         <![CDATA[
         Notice that the + operator that is used to "join" two strings together is now used on a String
@@ -280,11 +275,11 @@
         ]]>
     </text>
     <interactive instruction="Declare a character variable with value 'C'!">
-        <data>
-<![CDATA[
+        <data><![CDATA[
+
 ___ letter = ___;
-]]>
-        </data>
+
+        ]]></data>
         <answer place="0">char</answer>
         <answer place="0">Character</answer>
         <answer place="1">'C'</answer>
@@ -296,27 +291,27 @@ ___ letter = ___;
         in the code. The compiler will do the necessary conversions. This is called <b>autoboxing</b>.
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#E65100">static</font> <font color="#DF7401">void</font> printChar(<font color="#DF7401">char</font> c) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(c);
+    <code><![CDATA[
+        
+        <font color="#E65100">static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printChar</font>(<font color="#DF7401">char</font> c) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(c);
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         This method takes a <i>char</i> primitive, but passing a <i>Character</i> (wrapper) variable is also fine:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        printChar('a'); <font color="gray">//with primitive
+    <code><![CDATA[
+        
+        <font color="#ADD8E6">printChar</font>(<font color="#2E8B57">'a'</font>); <font color="gray">//with primitive
 </font>
-<br/>printChar(<font color="#E65100">new</font> <font color="#999900">Character</font>('b')); <font color="gray">//with wrapper
+<br/><font color="#ADD8E6">printChar</font>(<font color="#E65100">new</font> <font color="#999900">Character</font>(<font color="#2E8B57">'b'</font>)); <font color="gray">//with wrapper
 </font>
-<br/>printChar(<font color="#999900">Character</font>.valueOf('c')); <font color="gray">//with wrapper</font>
-        ]]>
-    </code>
+<br/><font color="#ADD8E6">printChar</font>(<font color="#999900">Character</font>.<font color="#ADD8E6">valueOf</font>(<font color="#2E8B57">'c'</font>)); <font color="gray">//with wrapper</font>
+        
+    ]]></code>
     <text>
         <![CDATA[
         This is going to be especially useful when using <b>generics</b> (covered in a later course).

@@ -1,8 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<!-- Chapter about stacks and double sided queues -->
-
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- Chapter about stacks and double sided queues --><resources>
     <chapterdata>
         <id>203</id>
         <name>Queues and stacks</name>
@@ -42,32 +39,32 @@
         that <b>CAN</b> be used as queues. Here is an example:
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
 <font color="gray">//Wow, LinkedList implements Queue</font>
 <br/><font color="#999900">Queue</font>&lt;<font color="#999900">Integer</font>> queue = <font color="#E65100">new</font> <font color="#999900">LinkedList</font>&lt;>();
 <br/>
 <br/><font color="gray">//Typical queue method: add element to the back.</font>
-<br/>queue.add(1);
-<br/>queue.add(2);
-<br/>queue.add(3);
+<br/>queue.<font color="#ADD8E6">add</font>(<font color="#F0E130">1</font>);
+<br/>queue.<font color="#ADD8E6">add</font>(<font color="#F0E130">2</font>);
+<br/>queue.<font color="#ADD8E6">add</font>(<font color="#F0E130">3</font>);
 <br/>
 <br/><font color="gray">//Returns the element at the front, but DOES NOT remove it.
 </font>
-<br/>queue.element();
+<br/>queue.<font color="#ADD8E6">element</font>();
 <br/><font color="gray">//Same as queue.element().
 </font>
-<br/>queue.peek();
+<br/>queue.<font color="#ADD8E6">peek</font>();
 <br/>
 <br/><font color="gray">/*
 <br/> * Typical queue method: remove elements from the front
 <br/> * (also returns it).
 <br/> */</font>
-<br/>queue.remove();
-<br/>queue.remove();
-<br/>queue.remove();
-        ]]>
-    </code>
+<br/>queue.<font color="#ADD8E6">remove</font>();
+<br/>queue.<font color="#ADD8E6">remove</font>();
+<br/>queue.<font color="#ADD8E6">remove</font>();
+        
+    ]]></code>
     <text>
         <![CDATA[
         Queues can be useful when some system that takes elements has limited capacity, and you need to
@@ -76,23 +73,23 @@
         ]]>
     </text>
     <interactive instruction="This program should asks for user input, enqueue it, then dequeue and print input lines.">
-        <data>
-<![CDATA[
+        <data><![CDATA[
+
 <font color="#999900">Queue</font>&lt;___> inputQueue = <font color="#E65100">new</font> <font color="#999900">ArrayDeque</font>&lt;>();
-<br/><font color="#999900">Scanner</font> scanner = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(<font color="#999900">System</font>.in);
-<br/><font color="#999900">String</font> input = scanner.nextLine();
-<br/><font color="#E65100">while</font>(!input.equals("stop")) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;inputQueue.___(input); <font color="gray">//enqueue input
+<br/><font color="#999900">Scanner</font> scanner = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(<font color="#999900">System</font>.<font color="#ADD8E6">in</font>);
+<br/><font color="#999900">String</font> input = scanner.<font color="#ADD8E6">nextLine</font>();
+<br/><font color="#E65100">while</font>(!input.<font color="#ADD8E6">equals</font>(<font color="#2E8B57">"stop"</font>)) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;inputQueue.<font color="#ADD8E6">___</font>(input); <font color="gray">//enqueue input
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;input = scanner.nextLine();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;input = scanner.<font color="#ADD8E6">nextLine</font>();
 <br/>}
-<br/>scanner.close();
-<br/><font color="#E65100">while</font>(!___.isEmpty()) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(inputQueue.remove()); <font color="gray">//dequeue an print
+<br/>scanner.<font color="#ADD8E6">close</font>();
+<br/><font color="#E65100">while</font>(!___.<font color="#ADD8E6">isEmpty</font>()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(inputQueue.<font color="#ADD8E6">remove</font>()); <font color="gray">//dequeue an print
 </font>
 <br/>}
-]]>
-        </data>
+
+        ]]></data>
         <answer place="0">String</answer>
         <answer place="1">add</answer>
         <answer place="2">inputQueue</answer>
@@ -115,31 +112,31 @@
         Let's see some code samples with <i>ArrayDeque</i>:
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
 <font color="#999900">Deque</font>&lt;<font color="#999900">Integer</font>> queue = <font color="#E65100">new</font> <font color="#999900">ArrayDeque</font>&lt;>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/><font color="gray">//Elements can be added at both ends.
 </font>
-<br/>queue.addFirst(1);
-<br/>queue.addLast(2);
-<br/>queue.addFirst(4);
-<br/>queue.add(3); <font color="gray">//same as addFirst
+<br/>queue.<font color="#ADD8E6">addFirst</font>(<font color="#F0E130">1</font>);
+<br/>queue.<font color="#ADD8E6">addLast</font>(<font color="#F0E130">2</font>);
+<br/>queue.<font color="#ADD8E6">addFirst</font>(<font color="#F0E130">4</font>);
+<br/>queue.<font color="#ADD8E6">add</font>(<font color="#F0E130">3</font>); <font color="gray">//same as addFirst
 </font>
-<br/>queue.addLast(-5);
+<br/>queue.<font color="#ADD8E6">addLast</font>(<font color="#F0E130">-5</font>);
 <br/>
 <br/><font color="gray">//We can check the last and first elements without removing them.
 </font>
-<br/>queue.peekFirst();
-<br/>queue.peekLast();
+<br/>queue.<font color="#ADD8E6">peekFirst</font>();
+<br/>queue.<font color="#ADD8E6">peekLast</font>();
 <br/>
 <br/><font color="gray">//Elements can be removed from both sides.
 </font>
-<br/>queue.removeFirst();
-<br/>queue.removeLast();
-<br/>queue.remove(); <font color="gray">//same as removeLast</font>
-        ]]>
-    </code>
+<br/>queue.<font color="#ADD8E6">removeFirst</font>();
+<br/>queue.<font color="#ADD8E6">removeLast</font>();
+<br/>queue.<font color="#ADD8E6">remove</font>(); <font color="gray">//same as removeLast</font>
+        
+    ]]></code>
     <title text="Stacks"/>
     <text>
         <![CDATA[
@@ -172,30 +169,30 @@
         Instead of just listing the methods, let's see a proper application for stacks, string reversing.
         ]]>
     </text>
-    <code>
-        <![CDATA[
-<font color="#E65100">public static</font> <font color="#999900">String</font> reverseString(<font color="#999900">String</font> text) {
+    <code><![CDATA[
+        
+<font color="#E65100">public static</font> <font color="#999900">String</font> <font color="#ADD8E6">reverseString</font>(<font color="#999900">String</font> text) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Any Deque implementation can also be used
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Stack</font>&lt;<font color="#999900">Character</font>> stack = <font color="#E65100">new</font> <font color="#999900">Stack</font>&lt;>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">char</font> c: text.toCharArray()) { <font color="gray">//push in every character
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">char</font> c: text.<font color="#ADD8E6">toCharArray</font>()) { <font color="gray">//push in every character
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;stack.push(c);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;stack.<font color="#ADD8E6">push</font>(c);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">char</font>[] reversedArray = <font color="#E65100">new</font> <font color="#DF7401">char</font>[text.length()];
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=0; i&lt;text.length(); i++) { <font color="gray">//lets pop out every character
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">char</font>[] reversedArray = <font color="#E65100">new</font> <font color="#DF7401">char</font>[text.<font color="#ADD8E6">length</font>()];
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;text.<font color="#ADD8E6">length</font>(); i++) { <font color="gray">//lets pop out every character
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;reversedArray[i] = stack.pop();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;reversedArray[i] = stack.<font color="#ADD8E6">pop</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//String has a char array constructor
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return new</font> <font color="#999900">String</font>(reversedArray);
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Before you move on, think about why the stack makes this solution work. Obviously this is by no way the most
@@ -203,21 +200,21 @@
         ]]>
     </text>
     <interactive instruction="Update the previous interactive component so that it prints the input in reverse order. Use a stack to achieve this!">
-        <data>
-<![CDATA[
+        <data><![CDATA[
+
 ___&lt;<font color="#999900">String</font>> inputStack = <font color="#E65100">new</font> ___&lt;>();
-<br/><font color="#999900">Scanner</font> scanner = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(<font color="#999900">System</font>.in);
-<br/><font color="#999900">String</font> input = scanner.nextLine();
-<br/><font color="#E65100">while</font>(!input.equals("stop")) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;inputStack.___(input);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;input = scanner.nextLine();
+<br/><font color="#999900">Scanner</font> scanner = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(<font color="#999900">System</font>.<font color="#ADD8E6">in</font>);
+<br/><font color="#999900">String</font> input = scanner.<font color="#ADD8E6">nextLine</font>();
+<br/><font color="#E65100">while</font>(!input.<font color="#ADD8E6">equals</font>(<font color="#2E8B57">"stop"</font>)) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;inputStack.<font color="#ADD8E6">___</font>(input);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;input = scanner.<font color="#ADD8E6">nextLine</font>();
 <br/>}
-<br/>scanner.close();
-<br/><font color="#E65100">while</font>(!inputQueue.isEmpty()) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(inputStack.___());
+<br/>scanner.<font color="#ADD8E6">close</font>();
+<br/><font color="#E65100">while</font>(!inputQueue.<font color="#ADD8E6">isEmpty</font>()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(inputStack.<font color="#ADD8E6">___</font>());
 <br/>}
-]]>
-        </data>
+
+        ]]></data>
         <answer place="0">Stack</answer>
         <answer place="1">Stack</answer>
         <answer place="2">push</answer>

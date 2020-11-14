@@ -1,8 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<!--Belongs to course 'Primitives, control flow and I/O' -->
-
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--Belongs to course 'Primitives, control flow and I/O' --><resources>
     <chapterdata>
         <id>104</id>
         <name>Arrays</name>
@@ -22,34 +19,34 @@
         the <b>length</b> of the array (number of variables it contains).
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="#DF7401">int</font>[] numbers; <font color="gray">//declaration</font>
-<br/>numbers = <font color="#E65100">new</font> <font color="#DF7401">int</font>[100]; <font color="gray">//initialization</font>
-        ]]>
-    </code>
+<br/>numbers = <font color="#E65100">new</font> <font color="#DF7401">int</font>[<font color="#F0E130">100</font>]; <font color="gray">//initialization</font>
+        
+    ]]></code>
     <text>
         <![CDATA[
         The above code creates an array of integers. The array will hold 100 integer variables. Just like with
         variables, the declaration and initialization can be written in one statement:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#DF7401">int</font>[] numbers = <font color="#E65100">new</font> <font color="#DF7401">int</font>[100];
-        ]]>
-    </code>
+    <code><![CDATA[
+        
+        <font color="#DF7401">int</font>[] numbers = <font color="#E65100">new</font> <font color="#DF7401">int</font>[<font color="#F0E130">100</font>];
+        
+    ]]></code>
     <text>
         <![CDATA[
         It is of course possible to create an array not only from primitive types, but from classes as well. For example,
         the following code creates an array of <i>String</i>s, which will contain 25 string objects:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#999900">String</font>[] strings = <font color="#E65100">new</font> <font color="#999900">String</font>[25];
-        ]]>
-    </code>
+    <code><![CDATA[
+        
+        <font color="#999900">String</font>[] strings = <font color="#E65100">new</font> <font color="#999900">String</font>[<font color="#F0E130">25</font>];
+        
+    ]]></code>
     <boxed title="Default value of the elements">
         <![CDATA[
         When creating an <b>array of primitives</b> (int, double, char, ...), Java will automatically initialize
@@ -60,11 +57,11 @@
         ]]>
     </boxed>
     <interactive instruction="Declare an array for doubles with size 20!">
-        <data>
-<![CDATA[
+        <data><![CDATA[
+
 <font color="#DF7401">double</font>___ reals = <font color="#E65100">new</font> <font color="#DF7401">double</font>[___];
-]]>
-        </data>
+
+        ]]></data>
         <answer place="0">[]</answer>
         <answer place="1">20</answer>
     </interactive>
@@ -75,14 +72,14 @@
         of our array between curly braces! Here are a few examples:
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
  <font color="gray">//an array of 4 booleans</font>
 <br/><font color="#DF7401">boolean</font>[] logicals = {<font color="#E65100">false</font>, <font color="#E65100">true</font>, <font color="#E65100">false</font>, <font color="#E65100">false</font>};
 <br/><font color="gray">//an array of 3 strings</font>
-<br/><font color="#999900">String</font>[] words = {"Fast", "Array", "Initialization"};
-        ]]>
-    </code>
+<br/><font color="#999900">String</font>[] words = {<font color="#2E8B57">"Fast"</font>, "Array", <font color="#2E8B57">"Initialization"</font>};
+        
+    ]]></code>
     <text>
         <![CDATA[
         Using this technique initializes not only the array itself, but each element individually. We also don't
@@ -91,18 +88,18 @@
         We must, however, be careful not to put elements of different types between the curly braces!
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="gray">//INVALID CODE!	&nbsp;&nbsp;&nbsp;&nbsp;</font>
-<br/><font color="#DF7401">int</font>[] integers = {1,2,3,"four"};
-        ]]>
-    </code>
+<br/><font color="#DF7401">int</font>[] integers = {<font color="#F0E130">1,2</font>,<font color="#F0E130">3</font>,<font color="#2E8B57">"four"</font>};
+        
+    ]]></code>
     <interactive instruction="Declare an array which has the first 3 letters of the ABC!">
-        <data>
-<![CDATA[
-___[] letters = { 'a', ___, 'c' };
-]]>
-        </data>
+        <data><![CDATA[
+
+___[] letters = { <font color="#2E8B57">'a'</font>, ___, <font color="#2E8B57">'c'</font> };
+
+        ]]></data>
         <answer place="0">char</answer>
         <answer place="0">Character</answer>
         <answer place="1">'b'</answer>
@@ -120,68 +117,68 @@ ___[] letters = { 'a', ___, 'c' };
         will have index 1, and so on.
         ]]>
     </boxed>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="gray">//array of 3 doubles</font>
-<br/><font color="#DF7401">double</font>[] reals = <font color="#E65100">new</font> <font color="#DF7401">double</font>[3];
+<br/><font color="#DF7401">double</font>[] reals = <font color="#E65100">new</font> <font color="#DF7401">double</font>[<font color="#F0E130">3</font>];
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/><font color="gray">/**
 <br/> * Values are now 0 for all 3
 <br/> * doubles in the array.
 <br/> */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>reals[0] = 3.14;
-<br/>reals[1] = -22.43;
-<br/>reals[2] = 5.5;
+<br/>reals[<font color="#F0E130">0</font>] = <font color="#F0E130">3.14</font>;
+<br/>reals[<font color="#F0E130">1</font>] = <font color="#F0E130">-22.43</font>;
+<br/>reals[<font color="#F0E130">2</font>] = <font color="#F0E130">5.5</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/><font color="gray">/**
 <br/> * We assigned our own values
 <br/> * for the elements.
 <br/>*/</font>
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Notice how that we used indices <i>0,1,2</i> to reference the elements, and not indices <i>1,2,3</i>!
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="gray">//array of 4 strings
 </font>
-<br/><font color="#999900">String</font>[] words = <font color="#E65100">new</font> <font color="#999900">String</font>[4];
+<br/><font color="#999900">String</font>[] words = <font color="#E65100">new</font> <font color="#999900">String</font>[<font color="#F0E130">4</font>];
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/><font color="gray">/**
 <br/> * Values are now null for all
 <br/> * elements. We should initialize:
 <br/>*/</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>words[0] = "Cat";
-<br/>words[1] = "Car";
-<br/>words[2] = "Java";
-<br/>words[3] = "Programming";
+<br/>words[<font color="#F0E130">0</font>] = <font color="#2E8B57">"Cat"</font>;
+<br/>words[<font color="#F0E130">1</font>] = <font color="#2E8B57">"Car"</font>;
+<br/>words[<font color="#F0E130">2</font>] = <font color="#2E8B57">"Java"</font>;
+<br/>words[<font color="#F0E130">3</font>] = <font color="#2E8B57">"Programming"</font>;
 <br/>
 <br/><font color="gray">/**
 <br/> * Now we can safely do something
 <br/> * with the words!
 <br/> */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/><font color="#999900">System</font>.out.print(words[2] + " " + words[3]);
-        ]]>
-    </code>
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">print</font>(words[<font color="#F0E130">2</font>] + <font color="#2E8B57">" "</font> + words[<font color="#F0E130">3</font>]);
+        
+    ]]></code>
     <text>
         <![CDATA[
         In java, we can always get the length (number of elements) of an array this way:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#DF7401">char</font>[] chars = <font color="#E65100">new</font> <font color="#DF7401">char</font>[50];
+    <code><![CDATA[
+        
+        <font color="#DF7401">char</font>[] chars = <font color="#E65100">new</font> <font color="#DF7401">char</font>[<font color="#F0E130">50</font>];
 <br/><font color="gray">//charAmount will be 50	&nbsp;&nbsp;&nbsp;&nbsp;
 </font>
-<br/><font color="#DF7401">int</font> charAmount = chars.length;
-        ]]>
-    </code>
+<br/><font color="#DF7401">int</font> charAmount = chars.<font color="#ADD8E6">length</font>;
+        
+    ]]></code>
     <title text="Dangers of arrays"/>
     <text>
         <![CDATA[
@@ -191,15 +188,15 @@ ___[] letters = { 'a', ___, 'c' };
         The following code sample is faulty, and the image shows what happens if we run it:
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="gray">//indices are from 0 to 9!</font>
-<br/><font color="#DF7401">int</font>[] nums = <font color="#E65100">new</font> <font color="#DF7401">int</font>[10];
+<br/><font color="#DF7401">int</font>[] nums = <font color="#E65100">new</font> <font color="#DF7401">int</font>[<font color="#F0E130">10</font>];
 <br/>
 <br/><font color="gray">//there is no element with index 10!</font>
-<br/><font color="#999900">System</font>.out.println(nums[10]);
-        ]]>
-    </code>
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(nums[<font color="#F0E130">10</font>]);
+        
+    ]]></code>
     <image name="array_index_exception"/>
     <text>
         <![CDATA[
@@ -210,14 +207,14 @@ ___[] letters = { 'a', ___, 'c' };
         See this code and the exception it throws:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-<font color="#999900">String</font>[] words = <font color="#E65100">new</font> <font color="#999900">String</font>[6];
+    <code><![CDATA[
+        
+<font color="#999900">String</font>[] words = <font color="#E65100">new</font> <font color="#999900">String</font>[<font color="#F0E130">6</font>];
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/><font color="gray">//words[0] is null here!</font>
-<br/><font color="#DF7401">int</font> charNum = words[0].length();
-        ]]>
-    </code>
+<br/><font color="#DF7401">int</font> charNum = words[<font color="#F0E130">0</font>].<font color="#ADD8E6">length</font>();
+        
+    ]]></code>
     <image name="null_pointer_exception"/>
     <text>
         <![CDATA[
@@ -226,13 +223,13 @@ ___[] letters = { 'a', ___, 'c' };
         ]]>
     </text>
     <interactive instruction="Correct the indices so that they are within bounds!">
-        <data>
-<![CDATA[
-<font color="#DF7401">double</font>[] reals = <font color="#E65100">new</font> <font color="#DF7401">double</font>[20];
-<br/><font color="#999900">System</font>.out.println("<font color="#999900">First</font>: " + reals[___]);
-<br/><font color="#999900">System</font>.out.println("<font color="#999900">Last</font>: " + reals[___]);
-]]>
-        </data>
+        <data><![CDATA[
+
+<font color="#DF7401">double</font>[] reals = <font color="#E65100">new</font> <font color="#DF7401">double</font>[<font color="#F0E130">20</font>];
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"<font color="</font></font>#999900">First</font>: " + reals[___]);
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"<font color="</font></font>#999900">Last</font>: " + reals[___]);
+
+        ]]></data>
         <answer place="0">0</answer>
         <answer place="1">19</answer>
         <answer place="1">reals.length-1</answer>
@@ -251,25 +248,25 @@ ___[] letters = { 'a', ___, 'c' };
         In this example, an array of 100 integers is created. In it, we would like to store first 100 positive numbers:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-<font color="#DF7401">int</font>[] posNums = <font color="#E65100">new</font> <font color="#DF7401">int</font>[100];
+    <code><![CDATA[
+        
+<font color="#DF7401">int</font>[] posNums = <font color="#E65100">new</font> <font color="#DF7401">int</font>[<font color="#F0E130">100</font>];
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/><font color="gray">/**
 <br/> * There are only 0-s in the
 <br/> * array here.
 <br/> */</font>
 <br/>
-<br/><font color="#E65100">for</font>(<font color="#DF7401">int</font> i=0; i&lt;posNums.length; i++) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;posNums[i] = i + 1;
+<br/><font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;posNums.<font color="#ADD8E6">length</font>; i++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;posNums[i] = i + <font color="#F0E130">1</font>;
 <br/>}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/><font color="gray">/**
 <br/> * Now the array stores the
 <br/> * numbers from 1 to 100.
 <br/>*/</font>
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         As you can see, the iterator variable <i>i</i> is used to initialize all elements in our array.
@@ -288,21 +285,21 @@ ___[] letters = { 'a', ___, 'c' };
         It can, for example, be used when we would like to print all elements of an array:
         ]]>
     </advanced>
-    <code>
-        <![CDATA[
-        <font color="#999900">String</font>[] textData = <font color="#E65100">new</font> <font color="#999900">String</font>[50];
+    <code><![CDATA[
+        
+        <font color="#999900">String</font>[] textData = <font color="#E65100">new</font> <font color="#999900">String</font>[<font color="#F0E130">50</font>];
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/><font color="gray">/**
 <br/> * Suppose that we initialize the
 <br/> * values here!
 <br/> */</font>
-<br/>initValues(textData);
+<br/><font color="#ADD8E6">initValues</font>(textData);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/><font color="#E65100">for</font>(<font color="#999900">String</font> text: textData) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(text);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(text);
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Note that the iterator variable here isn't a number! Instead, it's a <b>String</b> called <i>text</i>.
@@ -324,39 +321,39 @@ ___[] letters = { 'a', ___, 'c' };
         Note that we can use the array initializer for multi-dimensional arrays too:
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="#DF7401">int</font>[][] matrix = {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;{1, 5, -2},
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;{3, 7, 2},
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;{2, -1, 1}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;{<font color="#F0E130">1</font>, <font color="#F0E130">5</font>, <font color="#F0E130">-2</font>},
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;{<font color="#F0E130">3</font>, <font color="#F0E130">7</font>, <font color="#F0E130">2</font>},
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;{<font color="#F0E130">2</font>, <font color="#F0E130">-1</font>, <font color="#F0E130">1</font>}
 <br/>};
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         To traverse these arrays, we can use <b>nested loops</b> (loop inside loop). This example prints
         the elements of our multi dimensional array, formatted as a matrix:
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="#DF7401">int</font>[][] matrix = {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;{1, 5, -2},
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;{3, 7, 2},
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;{2, -1, 1}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;{<font color="#F0E130">1</font>, <font color="#F0E130">5</font>, <font color="#F0E130">-2</font>},
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;{<font color="#F0E130">3</font>, <font color="#F0E130">7</font>, <font color="#F0E130">2</font>},
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;{<font color="#F0E130">2</font>, <font color="#F0E130">-1</font>, <font color="#F0E130">1</font>}
 <br/>};
 <br/><font color="gray">//this outer loop iterates all rows</font>
-<br/><font color="#E65100">for</font>(<font color="#DF7401">int</font> i=0; i&lt;matrix.length; i++) {
+<br/><font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;matrix.<font color="#ADD8E6">length</font>; i++) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//this inner loop iterates inside a row	&nbsp;&nbsp;&nbsp;&nbsp;</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> j=0; j&lt;matrix[i].length; j++) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.print(matrix[i][j] + " ");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> j=<font color="#F0E130">0</font>; j&lt;matrix[i].<font color="#ADD8E6">length</font>; j++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">print</font>(matrix[i][j] + <font color="#2E8B57">" "</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(); <font color="gray">//line <font color="#E65100">break</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(); <font color="gray">//line break
 </font>
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Though harder to visualize, you can create more then just 2 dimensional arrays as well.
@@ -368,13 +365,13 @@ ___[] letters = { 'a', ___, 'c' };
         Now that we know about arrays, we'll understand a part of the <b>main method</b>, which we previously didn't.
         ]]>
     </text>
-    <code>
-        <![CDATA[
-    <font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;public static</font><font color="#DF7401"> void </font>main(<font color="#999900">String</font>[] args) {
+    <code><![CDATA[
+        
+    <font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;public static</font><font color="#DF7401"> void </font><font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">// TODO: Auto-generated method stub</font>
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         The parameter called <b>args</b> is actually an array of strings! This special array is loaded by the JVM, and will

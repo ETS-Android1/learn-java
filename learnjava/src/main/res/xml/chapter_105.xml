@@ -1,8 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<!--Belongs to course 'Primitives, control flow and I/O' -->
-
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--Belongs to course 'Primitives, control flow and I/O' --><resources>
     <chapterdata>
         <id>105</id>
         <name>Getting input</name>
@@ -65,15 +62,15 @@
         For example, let's print all the command line arguments to the console:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {	&nbsp;&nbsp;&nbsp;&nbsp;
+    <code><![CDATA[
+        
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">String</font> argument: args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(argument);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(argument);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         The <b>for-each</b> loop is used due to it's simple syntax.
@@ -98,34 +95,34 @@
         command line arguments. If this isn't the case, the program will crash.
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+    <code><![CDATA[
+        
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//do we have 2 arguments?</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(args.length != 2) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Wrong number of arguments!");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(args.<font color="#ADD8E6">length</font> != <font color="#F0E130">2</font>) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Wrong number of arguments!"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp; <font color="#E65100">return</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//convert the strings using parseInt</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> num1 = <font color="#999900">Integer</font>.parseInt(args[0]);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> num2 = <font color="#999900">Integer</font>.parseInt(args[1]);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> num1 = <font color="#999900">Integer</font>.<font color="#ADD8E6">parseInt</font>(args[<font color="#F0E130">0</font>]);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> num2 = <font color="#999900">Integer</font>.<font color="#ADD8E6">parseInt</font>(args[<font color="#F0E130">1</font>]);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//print the result</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> res = num1 + num2;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("The result is " + res);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"The result is "</font> + res);
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <interactive instruction="Complete the program so that it returns instantly when there ARE arguments!">
-        <data>
-<![CDATA[
-<font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(___ > 0) <font color="#E65100">return</font>;
+        <data><![CDATA[
+
+<font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(___ > <font color="#F0E130">0</font>) <font color="#E65100">return</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Code here...
 </font>
 <br/>}
-]]>
-        </data>
+
+        ]]></data>
         <answer place="0">args.length</answer>
     </interactive>
     <title text="Using System.in and a Scanner"/>
@@ -151,30 +148,30 @@
         Let's create a program that asks for a line of text from the user, and then prints that out:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#E65100">import</font> java.util.<font color="#999900">Scanner</font>;
+    <code><![CDATA[
+        
+        <font color="#E65100">import</font> java.<font color="#ADD8E6">util</font>.<font color="#999900">Scanner</font>;
 <br/>
 <br/><font color="#E65100">public class</font> <font color="#999900">Main</font> {
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Enter something:");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Enter something:"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create the scanner from System.in</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Scanner</font> input = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(<font color="#999900">System</font>.in);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Scanner</font> input = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(<font color="#999900">System</font>.<font color="#ADD8E6">in</font>);
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> line = input.nextLine();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> line = input.<font color="#ADD8E6">nextLine</font>();
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//echo what the user entered</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("You entered: " + line);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"You entered: "</font> + line);
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//close the scanner
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;input.close();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;input.<font color="#ADD8E6">close</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Closing the scanner is not necessary, but recommended. Only close the scanner after you are sure that you
@@ -195,31 +192,31 @@
         Now let's solve the number addition problem using <i>System.in and Scanner</i>:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#E65100">import</font> java.util.<font color="#999900">Scanner</font>;
+    <code><![CDATA[
+        
+        <font color="#E65100">import</font> java.<font color="#ADD8E6">util</font>.<font color="#999900">Scanner</font>;
 <br/>
 <br/><font color="#E65100">public class</font> <font color="#999900">Main</font> {
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create the scanner
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Scanner</font> input = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(<font color="#999900">System</font>.in);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Scanner</font> input = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(<font color="#999900">System</font>.<font color="#ADD8E6">in</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//ask <font color="#E65100">for</font> and read the numbers
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//ask for and read the numbers
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("First number:");
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> num1 = input.nextInt();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Second number:");
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> num2 = input.nextInt();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"First number:"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> num1 = input.<font color="#ADD8E6">nextInt</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Second number:"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> num2 = input.<font color="#ADD8E6">nextInt</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> sum = num1 + num2;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.print("Their sum: " + sum);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;input.close();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">print</font>(<font color="#2E8B57">"Their sum: "</font> + sum);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;input.<font color="#ADD8E6">close</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Note that the <b>nextInt</b> method expects an integer! If it receives a line that cannot be converted to
@@ -227,18 +224,18 @@
         ]]>
     </text>
     <interactive instruction="Complete the sample in a way that it keeps going until -1 was entered on the keyboard!">
-        <data>
-<![CDATA[
+        <data><![CDATA[
+
 <font color="#999900">Scanner</font> scanner = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(___);
-<br/><font color="#DF7401">int</font> number = 0;
-<br/><font color="#E65100">while</font>(number ___ -1) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;number = scanner.___();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(number + " was entered...");
+<br/><font color="#DF7401">int</font> number = <font color="#F0E130">0</font>;
+<br/><font color="#E65100">while</font>(number ___ <font color="#F0E130">-1</font>) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;number = scanner.<font color="#ADD8E6">___</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(number + <font color="#2E8B57">" was entered..."</font>);
 <br/>}
-<br/><font color="#999900">System</font>.out.println("<font color="#999900">Stopping</font>.");
-<br/>scanner.close();
-]]>
-        </data>
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"<font color="</font>#999900">Stopping</font>.");
+<br/>scanner.<font color="#ADD8E6">close</font>();
+
+        ]]></data>
         <answer place="0">System.in</answer>
         <answer place="1">!=</answer>
         <answer place="2">nextInt</answer>
@@ -291,33 +288,33 @@
        to the console. Don't forget to <b>type some lines to the file</b> and save it before running this!
        ]]>
    </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
 <font color="#E65100">package</font> input;
 <br/>
-<br/><font color="#E65100">import</font> java.nio.file.<font color="#999900">Files</font>;
-<br/><font color="#E65100">import</font> java.nio.file.<font color="#999900">Path</font>;
-<br/><font color="#E65100">import</font> java.nio.file.<font color="#999900">Paths</font>;
-<br/><font color="#E65100">import</font> java.util.<font color="#999900">List</font>;
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">nio</font>.<font color="#ADD8E6">file</font>.<font color="#999900">Files</font>;
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">nio</font>.<font color="#ADD8E6">file</font>.<font color="#999900">Path</font>;
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">nio</font>.<font color="#ADD8E6">file</font>.<font color="#999900">Paths</font>;
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">util</font>.<font color="#999900">List</font>;
 <br/>
 <br/><font color="#E65100">public class</font> <font color="#999900">Main</font> {
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) <font color="#E65100">throws</font> <font color="#999900">Exception</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) <font color="#E65100">throws</font> <font color="#999900">Exception</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create the path object of the file</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Path</font> filePath = <font color="#999900">Paths</font>.get("data.txt");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Path</font> filePath = <font color="#999900">Paths</font>.<font color="#ADD8E6">get</font>(<font color="#2E8B57">"data.txt"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//read the lines into a list</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">String</font>> lines = <font color="#999900">Files</font>.readAllLines(filePath);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">String</font>> lines = <font color="#999900">Files</font>.<font color="#ADD8E6">readAllLines</font>(filePath);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//for-each loop on the list</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">String</font> line: lines) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(line);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(line);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <advanced title="throws Exception">
         <![CDATA[
         You might be wondering what the <b>throws Exception</b> means at the end of the main method declaration. In
@@ -359,40 +356,40 @@
         Before running, fill the file with integers, only place one number in one line!
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
 <font color="#E65100">package</font> input;
 <br/>
-<br/><font color="#E65100">import</font> java.nio.file.<font color="#999900">Files</font>;
-<br/><font color="#E65100">import</font> java.nio.file.<font color="#999900">Path</font>;
-<br/><font color="#E65100">import</font> java.nio.file.<font color="#999900">Paths</font>;
-<br/><font color="#E65100">import</font> java.util.<font color="#999900">List</font>;
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">nio</font>.<font color="#ADD8E6">file</font>.<font color="#999900">Files</font>;
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">nio</font>.<font color="#ADD8E6">file</font>.<font color="#999900">Path</font>;
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">nio</font>.<font color="#ADD8E6">file</font>.<font color="#999900">Paths</font>;
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">util</font>.<font color="#999900">List</font>;
 <br/>
 <br/><font color="#E65100">public</font> class <font color="#999900">Main</font> {
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> static <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args)
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> static <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args)
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	<font color="#E65100">throws</font> <font color="#999900">Exception</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create the path object of the file</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Path</font> filePath = <font color="#999900">Paths</font>.get("data.txt");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Path</font> filePath = <font color="#999900">Paths</font>.<font color="#ADD8E6">get</font>(<font color="#2E8B57">"data.txt"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//read the lines into a list</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">String</font>> lines = <font color="#999900">Files</font>.readAllLines(filePath);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">String</font>> lines = <font color="#999900">Files</font>.<font color="#ADD8E6">readAllLines</font>(filePath);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//the sum is 0 at the start</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> sum = 0;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> sum = <font color="#F0E130">0</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//iterate the lines</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">String</font> line: lines) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//convert the line (string) to int</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> lineAsInt = <font color="#999900">Integer</font>.parseInt(line);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//increase the sum with it's value</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> lineAsInt = <font color="#999900">Integer</font>.<font color="#ADD8E6">parseInt</font>(line);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray<font color="#2E8B57">">//increase the sum with it'</font>s value</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum = sum + lineAsInt;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("The sum is " + sum);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"The sum is "</font> + sum);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
 </resources>

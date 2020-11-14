@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <chapterdata>
         <id>155</id>
@@ -12,14 +11,14 @@
         We can use the <b>abstract</b> keyword to mark a class as abstract:
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="#E65100">public abstract class</font> <font color="#999900">Computer</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//...</font>
 <br/>}
 <br/>
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Trying to instantiate such a class will result in a compile time error:
@@ -85,8 +84,8 @@
         which is <b>declared, but not implemented</b>:
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="#E65100">public abstract class</font> <font color="#999900">Computer</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> <font color="#999900">String</font> processor;
@@ -95,14 +94,14 @@
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> <font color="#999900">Computer</font>(<font color="#999900">String</font> processor, <font color="#DF7401">int</font> ram) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.processor = processor;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.ram = ram;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">processor</font> = processor;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">ram</font> = ram;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public abstract</font> <font color="#DF7401">void</font> printProperties();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public abstract</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printProperties</font>();
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         This class not only has an abstract method, but also has a constructor! Where will this constructor be used, if the class
@@ -111,8 +110,8 @@
         The answer is the subclass. It's constructor will call this class' constructor, and it'll implement the abstract method!
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
 <font color="#E65100">public class</font> <font color="#999900">PC</font> <font color="#E65100">extends</font> <font color="#999900">Computer</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">PC</font>(<font color="#999900">String</font> processor, <font color="#DF7401">int</font> ram) {
@@ -123,16 +122,16 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//implement the abstract method of the superclass
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> printProperties() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("This is a PC.\n" +
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;"Processor: " + processor + "\n" +
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;"RAM amount: " + ram + " GB");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printProperties</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>("This is a PC.\n" +
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2E8B57">"Processor: "</font> + processor + "\n" +
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2E8B57">"RAM amount: "</font> + ram + <font color="#2E8B57">" GB"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-        ]]>
-    </code>
-    <code>
-        <![CDATA[
+        
+    ]]></code>
+    <code><![CDATA[
+        
         <font color="#E65100">public class</font> <font color="#999900">Laptop</font> <font color="#E65100">extends</font> <font color="#999900">Computer</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">int</font> accumulatorTime; <font color="gray">//in minutes
@@ -141,21 +140,21 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Laptop</font>(<font color="#999900">String</font> processor, <font color="#DF7401">int</font> ram, <font color="#DF7401">int</font> accumulatorTime) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>(processor, ram); <font color="gray">//call superclass constructor
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.accumulatorTime = accumulatorTime;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">accumulatorTime</font> = accumulatorTime;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//implement the abstract method of the superclass
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> printProperties() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("This is a laptop.\n" +
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;"Processor: " + processor + "\n" +
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;"RAM amount: " + ram + " GB\n" +
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;"It can operate for " + accumulatorTime + " minutes if fully charged.");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printProperties</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>("This is a laptop.\n" +
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2E8B57">"Processor: "</font> + processor + "\n" +
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2E8B57">"RAM amount: "</font> + ram + " GB\n" +
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2E8B57">"It can operate for "</font> + accumulatorTime + <font color="#2E8B57">" minutes if fully charged."</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         You may have noticed that this is similar to method overriding. Note that, however, in this case the subclass <b>has to implement</b>
@@ -171,19 +170,19 @@
         They are declared similarly to classes, but with the keyword <b>interface</b> instead:
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="gray">//an interface for classes that can be printed
 </font>
 <br/><font color="#E65100">public interface</font> <font color="#999900">Printable</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> print(); <font color="gray">//prints the object</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> <font color="#ADD8E6">print</font>(); <font color="gray">//prints the object</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> printedLines(); <font color="gray">//returns how many lines the printed object uses</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> <font color="#ADD8E6">printedLines</font>(); <font color="gray">//returns how many lines the printed object uses</font>
 <br/>
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         By default all methods are <b>abstract, and public</b>. It's redundant to write the modifiers there. Since interfaces represent
@@ -191,14 +190,14 @@
         ]]>
     </text>
     <interactive instruction="This interface has 2 methods: read and readAll. Complete the declaration!">
-        <data>
-<![CDATA[
+        <data><![CDATA[
+
 <font color="#E65100">public</font> ___ <font color="#999900">Readable</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> read(<font color="#999900">String</font> data);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> ___(<font color="#999900">String</font>[] data);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> <font color="#ADD8E6">read</font>(<font color="#999900">String</font> data);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> <font color="#ADD8E6">___</font>(<font color="#999900">String</font>[] data);
 <br/>}
-]]>
-        </data>
+
+        ]]></data>
         <answer place="0">interface</answer>
         <answer place="1">readAll</answer>
     </interactive>
@@ -214,27 +213,27 @@
         Now, let's create a simple class that implements the <i>Printable</i> interface (the <b>implements</b> keyword is used):
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="gray">//a <font color="#E65100">class</font> that stores an array of strings</font>
+    <code><![CDATA[
+        
+        <font color="gray">//a class that stores an array of strings</font>
 <br/><font color="#E65100">class</font> <font color="#999900">Data</font> <font color="#E65100">implements</font> <font color="#999900">Printable</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font>[] strings;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> print() { <font color="gray">//prints all strings, each to 1 line</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">print</font>() { <font color="gray">//prints all strings, each to 1 line</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">String</font> s: strings) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(s);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(s);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> printedLines() { <font color="gray">//returns the number of strings</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> strings.length;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">printedLines</font>() { <font color="gray">//returns the number of strings</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> strings.<font color="#ADD8E6">length</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         When implementing multiple interfaces, their names must be separated by commas, after the <i>implements</i> keyword.
@@ -254,23 +253,23 @@
         ]]>
     </advanced>
     <interactive instruction="Use the previous interactive sample to fill the gaps!">
-        <data>
-            <![CDATA[
+        <data><![CDATA[
+            
 <font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">TextFile</font> ___ <font color="#999900">File</font> ___ <font color="#999900">Readable</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> ___(<font color="#999900">String</font> data) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">___</font>(<font color="#999900">String</font> data) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//implementation
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> readAll(<font color="#999900">String</font>[] data) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">readAll</font>(<font color="#999900">String</font>[] data) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//implementation
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-    ]]>
-        </data>
+    
+        ]]></data>
         <answer place="0">extends</answer>
         <answer place="1">implements</answer>
         <answer place="2">read</answer>

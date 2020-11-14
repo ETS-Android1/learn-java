@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <chapterdata>
         <id>352</id>
@@ -17,19 +16,19 @@
         chapter '<b>Abstract classes and interfaces</b>', which is in course '<b>Classes and objects</b>'
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="gray">//an interface for classes that can be printed
 </font>
 <br/><font color="#E65100">public interface</font> <font color="#999900">Printable</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> print(); <font color="gray">//prints the object to the console</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> <font color="#ADD8E6">print</font>(); <font color="gray">//prints the object to the console</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> printedLines(); <font color="gray">//returns how many lines the printed object uses</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> <font color="#ADD8E6">printedLines</font>(); <font color="gray">//returns how many lines the printed object uses</font>
 <br/>
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Prior to Java 8, an interface was a class with only <b>public, abstract methods</b> (no implementation, only
@@ -56,21 +55,21 @@
         interface is used in a popular Java library, developed by you. You'd like to add a new method to this interface:
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
 <font color="#E65100">public</font> <font color="#E65100">interface</font> <font color="#999900">Printable</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//prints the object to the console
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> print();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//returns the number of lines used <font color="#E65100">for</font> printing
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> <font color="#ADD8E6">print</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//returns the number of lines used for printing
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> printedLines();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//<font color="#E65100">new</font> method: print to any PrintStream
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> <font color="#ADD8E6">printedLines</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//new method: print to any PrintStream
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> print(java.io.<font color="#999900">PrintStream</font> stream);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> <font color="#ADD8E6">print</font>(java.<font color="#ADD8E6">io</font>.<font color="#999900">PrintStream</font> stream);
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         This is a great addition to your interface. <i>Printable</i> objects can now be printed to any <i>PrintStream</i>, not
@@ -78,27 +77,27 @@
         time error</b>, because their classes <b>do not implement this new method</b>!
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="#E65100">public</font> <font color="#E65100">interface</font> <font color="#999900">Printable</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//prints the object
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> print();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//returns the number of lines used <font color="#E65100">for</font> printing
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> <font color="#ADD8E6">print</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//returns the number of lines used for printing
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> printedLines();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//<font color="#E65100">new</font> method: print to any PrintStream
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> <font color="#ADD8E6">printedLines</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//new method: print to any PrintStream
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">default</font> <font color="#DF7401">void</font> print(java.io.<font color="#999900">PrintStream</font> stream) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">default</font> <font color="#DF7401">void</font> <font color="#ADD8E6">print</font>(java.<font color="#ADD8E6">io</font>.<font color="#999900">PrintStream</font> stream) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp; * Without a better alternative, we will use
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp; * toString to print the object to the stream.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;stream.print(<font color="#E65100">this</font>.toString());
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;stream.<font color="#ADD8E6">print</font>(<font color="#E65100">this</font>.<font color="#ADD8E6">toString</font>());
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         By making the method default, we won't break any code currently using the interface. If the default implementation
@@ -106,16 +105,16 @@
         ]]>
     </text>
     <interactive instruction="Complete the interface!">
-        <data>
-            <![CDATA[
+        <data><![CDATA[
+            
         <font color="#E65100">public</font> ___ <font color="#999900">MyInterface</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> abstractMethod();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;___ <font color="#DF7401">void</font> methodWithImplementation() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("<font color="#999900">Implementation</font>");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> <font color="#ADD8E6">abstractMethod</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;___ <font color="#DF7401">void</font> <font color="#ADD8E6">methodWithImplementation</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"<font color="</font>#999900">Implementation</font>");
 }
 <br/>}
-            ]]>
-        </data>
+            
+        ]]></data>
         <answer place="0">interface</answer>
         <answer place="1">default</answer>
     </interactive>
@@ -125,76 +124,76 @@
         interface for instance:
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="#E65100">interface</font> <font color="#999900">Comparable</font>&lt;<font color="#999900">T</font>> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Returns 0 if they're equal, 1 if this object
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * is bigger, -1 if the other is bigger.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> compare(<font color="#999900">T</font> other);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> <font color="#ADD8E6">compare</font>(<font color="#999900">T</font> other);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//checks if this is greater
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> greaterThen(<font color="#999900">T</font> other);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> <font color="#ADD8E6">greaterThen</font>(<font color="#999900">T</font> other);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//checks if this is smaller
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> smallerThen(<font color="#999900">T</font> other);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> <font color="#ADD8E6">smallerThen</font>(<font color="#999900">T</font> other);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//checks if they are equal
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> equalsTo(<font color="#999900">T</font> other);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> <font color="#ADD8E6">equalsTo</font>(<font color="#999900">T</font> other);
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Notice that we can give implementations for the last 3 methods only using the first method, <i>compare</i>.
         Let's do that with default methods:
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="#E65100">interface</font> <font color="#999900">Comparable</font>&lt;<font color="#999900">T</font>> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Returns 0 if they're equal, 1 if this object
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * is bigger, -1 if the other is bigger.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> compare(<font color="#999900">T</font> other);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> <font color="#ADD8E6">compare</font>(<font color="#999900">T</font> other);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//checks if this is greater
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">default</font> <font color="#DF7401">boolean</font> greaterThen(<font color="#999900">T</font> other) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#E65100">this</font>.compare(other) > 0;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">default</font> <font color="#DF7401">boolean</font> <font color="#ADD8E6">greaterThen</font>(<font color="#999900">T</font> other) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#E65100">this</font>.<font color="#ADD8E6">compare</font>(other) > <font color="#F0E130">0</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//checks if this is smaller
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">default</font> <font color="#DF7401">boolean</font> smallerThen(<font color="#999900">T</font> other) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#E65100">this</font>.compare(other) &lt; 0;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">default</font> <font color="#DF7401">boolean</font> <font color="#ADD8E6">smallerThen</font>(<font color="#999900">T</font> other) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#E65100">this</font>.<font color="#ADD8E6">compare</font>(other) &lt; <font color="#F0E130">0</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//checks if they are equal
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">default</font> <font color="#DF7401">boolean</font> equalsTo(<font color="#999900">T</font> other) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#E65100">this</font>.compare(other) == 0;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">default</font> <font color="#DF7401">boolean</font> <font color="#ADD8E6">equalsTo</font>(<font color="#999900">T</font> other) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#E65100">this</font>.<font color="#ADD8E6">compare</font>(other) == <font color="#F0E130">0</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <interactive instruction="Complete the interface!">
-        <data>
-            <![CDATA[
+        <data><![CDATA[
+            
 <font color="#E65100">public</font> <font color="#E65100">interface</font> <font color="#999900">Summable</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//performs the summing
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;___ sum();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;___ <font color="#ADD8E6">sum</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//gets the size
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> size();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> <font color="#ADD8E6">size</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//calculates average
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;___ <font color="#DF7401">double</font> average() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> ___() / size();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;___ <font color="#DF7401">double</font> <font color="#ADD8E6">average</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#ADD8E6">___</font>() / <font color="#ADD8E6">size</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-            ]]>
-        </data>
+            
+        ]]></data>
         <answer place="0">double</answer>
         <answer place="1">default</answer>
         <answer place="2">sum</answer>
@@ -227,16 +226,16 @@
         For instance, here is an important functional interface from the standard library (this is a simplified version).
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
 <font color="red">@FunctionalInterface</font>
 <br/><font color="#E65100">interface</font> <font color="#999900">Predicate</font>&lt;<font color="#999900">T</font>> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//tests the predicate on the given object
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> test(<font color="#999900">T</font> t);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> <font color="#ADD8E6">test</font>(<font color="#999900">T</font> t);
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         The standard library contains many functional interfaces. See them in the package
@@ -244,13 +243,13 @@
         ]]>
     </text>
     <interactive instruction="Complete the functional interface! Let T be the type of function parameters, and S the return value.">
-        <data>
-            <![CDATA[
+        <data><![CDATA[
+            
 <font color="#E65100">public interface</font> <font color="#999900">BinaryFunction</font>&lt;<font color="#999900">T</font>, ___> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">S</font> callFunction(___ t1, <font color="#999900">T</font> t2);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">S</font> <font color="#ADD8E6">callFunction</font>(___ t1, <font color="#999900">T</font> t2);
 <br/>}
-            ]]>
-        </data>
+            
+        ]]></data>
         <answer place="0">S</answer>
         <answer place="1">T</answer>
     </interactive>

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <chapterdata>
         <id>201</id>
@@ -18,40 +17,40 @@
         Let's create a solution using an array!
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {	&nbsp;&nbsp;&nbsp;&nbsp;
+    <code><![CDATA[
+        
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> reading = <font color="#E65100">true</font>; <font color="gray">//create the variables needed
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> counter = 0;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> counter = <font color="#F0E130">0</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> input = <font color="#E65100">null</font>;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Scanner</font> scanner = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(System.in);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Scanner</font> scanner = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(System.<font color="#ADD8E6">in</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font>[] numbers = <font color="#E65100">new</font> <font color="#DF7401">int</font>[5]; <font color="gray">//how big should the array be?!
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font>[] numbers = <font color="#E65100">new</font> <font color="#DF7401">int</font>[<font color="#F0E130">5</font>]; <font color="gray">//how big should the array be?!
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">while</font>(reading) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.print("Enter the " + counter + ". number or 'q' to stop: ");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">print</font>(<font color="#2E8B57">"Enter the "</font> + counter + ". number or 'q<font color="#2E8B57">' to stop: "</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;input = scanner.next(); <font color="gray">//save number
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;input = scanner.<font color="#ADD8E6">next</font>(); <font color="gray">//save number
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;numbers[counter++] = <font color="#999900">Integer</font>.parseInt(input);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">NumberFormatException</font> e) { <font color="gray">//not a number, maybe 'q'?
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;numbers[counter++] = <font color="#999900">Integer</font>.<font color="#ADD8E6">parseInt</font>(input);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">NumberFormatException</font> e) { <font color="gray<font color="#2E8B57">">//not a number, maybe '</font>q'?
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>("q".equals(input)) reading = false; <font color="gray">//'q' was entered, stop
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(<font color="#2E8B57">"q"</font>.<font color="#ADD8E6">equals</font>(input)) reading = false; <font color="gray<font color="#2E8B57">">//'</font>q' was entered, stop
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> sum = 0; <font color="gray">//sum the numbers
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> sum = <font color="#F0E130">0</font>; <font color="gray">//sum the numbers
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i: numbers) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum += i;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Sum is " + sum);	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;scanner.close();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Sum is "</font> + sum);	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;scanner.<font color="#ADD8E6">close</font>();
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         The code works, but only if we are careful. It's easy to see that we run out of array indices, if we try to enter
@@ -117,12 +116,12 @@
         elements must be declared together with the object:
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="gray">//A list of strings, empty for now</font>
 <br/><font color="#999900">ArrayList</font>&lt;<font color="#999900">String</font>> strings = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Note that writing the type of elements for the second time (after the <i>new</i> keyword) is not necessary after
@@ -147,11 +146,11 @@
         ]]>
     </text>
     <interactive instruction="Complete the generic list declaration for float types!">
-        <data>
-            <![CDATA[
-___&lt;<font color="#999900">Float</font>> numbers = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>___();
-]]>
-        </data>
+        <data><![CDATA[
+            
+___&lt;<font color="#999900">Float</font>> numbers = <font color="#E65100">new</font> <font color="#999900">ArrayList</font><font color="#ADD8E6">___</font>();
+
+        ]]></data>
         <answer place="0">ArrayList</answer>
         <answer place="0">List</answer>
         <answer place="0">Collection</answer>

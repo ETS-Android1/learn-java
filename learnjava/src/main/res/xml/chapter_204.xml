@@ -1,8 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<!-- Chapter about maps. -->
-
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- Chapter about maps. --><resources>
     <chapterdata>
         <id>204</id>
         <name>Maps</name>
@@ -57,8 +54,8 @@
         in the previous course if you can't quite remember how to make them.
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="#E65100">enum</font> <font color="#999900">Day</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;MONDAY,
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;TUESDAY,
@@ -68,40 +65,40 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;SATURDAY,
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;SUNDAY
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Now let's create a mapping between enum values and booleans, and fill it with pairs.
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="gray">//create map</font>
 <br/><font color="#999900">Map</font>&lt;<font color="#999900">Day</font>,<font color="#999900">Boolean</font>> weekendMap = <font color="#E65100">new</font> <font color="#999900">HashMap</font>&lt;>();
 <br/>
 <br/><font color="gray">//fill it with key-value pairs</font>
-<br/><font color="#E65100">for</font>(<font color="#999900">Day</font> day: <font color="#999900">Day</font>.values()) {
+<br/><font color="#E65100">for</font>(<font color="#999900">Day</font> day: <font color="#999900">Day</font>.<font color="#ADD8E6">values</font>()) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(day == <font color="#999900">Day</font>.SATURDAY || day == <font color="#999900">Day</font>.SUNDAY) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;weekendMap.put(day, <font color="#E65100">true</font>); <font color="gray">//on weekend</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;weekendMap.<font color="#ADD8E6">put</font>(day, <font color="#E65100">true</font>); <font color="gray">//on weekend</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;weekendMap.put(day, <font color="#E65100">false</font>); <font color="gray">//not on weekend</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;weekendMap.<font color="#ADD8E6">put</font>(day, <font color="#E65100">false</font>); <font color="gray">//not on weekend</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         As you can see, the <i>put</i> method can be used to place key-value pairs into the map. Let's retrieve
         some values using our days as keys:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-           <font color="#999900">System</font>.out.println("Monday is on weekend: " + weekendMap.get(<font color="#999900">Day</font>.MONDAY));
-<br/><font color="#999900">System</font>.out.println("Saturday is on weekend: " + weekendMap.get(<font color="#999900">Day</font>.SATURDAY));
-        ]]>
-    </code>
+    <code><![CDATA[
+        
+           <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Monday is on weekend: "</font> + weekendMap.<font color="#ADD8E6">get</font>(<font color="#999900">Day</font>.MONDAY));
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Saturday is on weekend: "</font> + weekendMap.<font color="#ADD8E6">get</font>(<font color="#999900">Day</font>.SATURDAY));
+        
+    ]]></code>
     <title text="Iterating the map"/>
     <text>
         <![CDATA[
@@ -111,14 +108,14 @@
         If we need to <b>iterate all key</b>, we can do it this way:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#999900">System</font>.out.println("The map has the following days as keys:");
-<br/><font color="#E65100">for</font>(<font color="#999900">Day</font> key: weekendMap.keySet()) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(key.toString());
+    <code><![CDATA[
+        
+        <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"The map has the following days as keys:"</font>);
+<br/><font color="#E65100">for</font>(<font color="#999900">Day</font> key: weekendMap.<font color="#ADD8E6">keySet</font>()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(key.<font color="#ADD8E6">toString</font>());
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
 We can <b>iterate all values</b> in the map, the only difference is that instead of the <i>keySet</i> method, the
@@ -127,14 +124,14 @@ We can <b>iterate all values</b> in the map, the only difference is that instead
 Instead, let's take a look at how we can <b>iterate the pairs</b> themselves:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-<font color="#999900">System</font>.out.println("The map has the following key-value pairs:");
-<br/><font color="#E65100">for</font>(<font color="#999900">Map</font>.<font color="#999900">Entry</font>&lt;<font color="#999900">Day</font>, <font color="#999900">Boolean</font>> pair: weekendMap.entrySet()) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(pair.getKey() + " -> " + pair.getValue());
+    <code><![CDATA[
+        
+<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"The map has the following key-value pairs:"</font>);
+<br/><font color="#E65100">for</font>(<font color="#999900">Map</font>.<font color="#999900">Entry</font>&lt;<font color="#999900">Day</font>, <font color="#999900">Boolean</font>> pair: weekendMap.<font color="#ADD8E6">entrySet</font>()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(pair.<font color="#ADD8E6">getKey</font>() + " -> " + pair.<font color="#ADD8E6">getValue</font>());
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         The trick is to realize that there is already an <i>Entry</i> class provided for us, which can hold pairs.
@@ -152,19 +149,19 @@ Instead, let's take a look at how we can <b>iterate the pairs</b> themselves:
         the descriptions of <i>HashMap</i> and <i>TreeMap</i> are good starting points (linked above).
         ]]>
     </advanced>
-    <interactive instruction="This program should ask for 5 names and ages, and place these in a name -> age map.">
-        <data>
-<![CDATA[
+    <interactive instruction="This program should ask for 5 names and ages, and place these in a name -&gt; age map.">
+        <data><![CDATA[
+
 <font color="#999900">Map</font>&lt;___,___> userData = <font color="#E65100">new</font> <font color="#999900">HashMap</font>&lt;>();
-<br/><font color="#999900">Scanner</font> scanner = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(<font color="#999900">System</font>.in);
-<br/><font color="#E65100">for</font>(<font color="#DF7401">int</font> i=0; i&lt;5; i++) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("<font color="#999900">Enter</font> " + (i+1) + ". user name and age:");
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> name = scanner.nextLine();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> age = scanner.nextInt();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;userData.___(name, age);
+<br/><font color="#999900">Scanner</font> scanner = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(<font color="#999900">System</font>.<font color="#ADD8E6">in</font>);
+<br/><font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;<font color="#F0E130">5</font>; i++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"<font color="</font>#999900">Enter</font> " + (i+<font color="#F0E130">1</font>) + ". user name and age:");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> name = scanner.<font color="#ADD8E6">nextLine</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> age = scanner.<font color="#ADD8E6">nextInt</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;userData.<font color="#ADD8E6">___</font>(name, age);
 <br/>}
-]]>
-        </data>
+
+        ]]></data>
         <answer place="0">String</answer>
         <answer place="1">Integer</answer>
         <answer place="2">put</answer>

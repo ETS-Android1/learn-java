@@ -1,8 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<!-- 'Naming rules and conventions', belongs to course 'The basics' -->
-
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- 'Naming rules and conventions', belongs to course 'The basics' --><resources>
     <chapterdata>
         <id>56</id>
         <name>Naming rules and conventions</name>
@@ -59,8 +56,8 @@
         mean all of them should actually be used!
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
 <font color="#DF7401">int </font>counter;
 <font color="#DF7401">
 <br/>int </font>input_counter;
@@ -71,8 +68,8 @@
 <br/><font color="#999900">String</font> __Xx_SoMe_TeXt_Xx__;
 <br/><font color="#999900">String</font> A124512999113;
 <br/><font color="#999900">String</font> _________;
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         The first four are not so bad, but the last 3, though perfectly valid, should be considered
@@ -81,14 +78,14 @@
         Not, let's see some <b>invalid</b> identifiers:
         ]]>
     </text>
-    <code>
-<![CDATA[
+    <code><![CDATA[
+
 <font color="#DF7401"> int </font>0counter;
 <font color="#DF7401">
-<br/>int </font>variable_(important);
-<br/><font color="#999900">String</font> 1.text;
-]]>
-    </code>
+<br/>int </font><font color="#ADD8E6">variable_</font>(important);
+<br/><font color="#999900">String</font> <font color="#F0E130">1</font>.<font color="#ADD8E6">text</font>;
+
+    ]]></code>
     <text>
         <![CDATA[
         The first one begins with a number, which is not allowed. The second contains special characters,
@@ -102,11 +99,11 @@
         identifiers anyways. <i>int</i> is a keyword, for example, and so something like this is not allowed:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-<font color="#DF7401">int</font> int = 1;
-        ]]>
-    </code>
+    <code><![CDATA[
+        
+<font color="#DF7401">int</font> int = <font color="#F0E130">1</font>;
+        
+    ]]></code>
     <advanced title="List of keywords">
         <![CDATA[
         All keywords and literals are not listed here, as there is a lot of them, but you can find the
@@ -146,17 +143,17 @@
         If we, for example, need a method that reverses some text, the following is a nice, camel-case name:
         ]]>
     </text>
-    <code>
-        <![CDATA[
- <font color="#999900">String</font> reverseText(<font color="#999900">String</font> text) { ... }
-        ]]>
-    </code>
+    <code><![CDATA[
+        
+ <font color="#999900">String</font> <font color="#ADD8E6">reverseText</font>(<font color="#999900">String</font> text) { ... }
+        
+    ]]></code>
     <interactive instruction="Correct the naming of this variable so that it uses the camel case convention!">
-        <data>
-<![CDATA[
-<font color="#DF7401">int</font> ___ = 0;
-]]>
-        </data>
+        <data><![CDATA[
+
+<font color="#DF7401">int</font> ___ = <font color="#F0E130">0</font>;
+
+        ]]></data>
         <answer place="0">matchCounter</answer>
         <default place="0">match_counter</default>
     </interactive>
@@ -167,20 +164,20 @@
         names should begin with a capital letter (this is called <b>PascalCase</b>)!
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
 <font color="#E65100">public </font>class <font color="#999900">TextFormatter</font> { ... }
-        ]]>
-    </code>
+        
+    ]]></code>
     <interactive instruction="Name the class 'string builder' with the appropriate naming convention!">
-        <data>
-            <![CDATA[
+        <data><![CDATA[
+            
 <font color="#E65100">public</font> <font color="#E65100">class</font> ___ {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Class contents...	&nbsp;&nbsp;&nbsp;&nbsp;
 </font>
 <br/>}
-            ]]>
-        </data>
+            
+        ]]></data>
         <answer place="0">StringBuilder</answer>
     </interactive>
     <text>
@@ -189,11 +186,11 @@
         naming conventions. Package names should only contain one word, fully lower case.
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="#E65100">package</font> utils;
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Note that seeing a line like <br><br>

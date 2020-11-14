@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Contains the guide components -->
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- Contains the guide components --><resources>
     <chapterdata> <!-- These are unused, just here so parser doesn't throw exception -->
         <id>-1</id>
         <name>guide</name>
@@ -99,11 +98,11 @@
     ]]>
     </text>
     <interactive instruction="Write '=' to complete the declaration!">
-        <data>
-            <![CDATA[
-            <font color="#E65100">private</font> <font color="#999900">String</font> ___ "Some text";
-            ]]>
-        </data>
+        <data><![CDATA[
+            
+            <font color="#E65100">private</font> <font color="#999900">String</font> ___ <font color="#2E8B57">"Some text"</font>;
+            
+        ]]></data>
         <answer place="0">=</answer>
     </interactive>
     <text>

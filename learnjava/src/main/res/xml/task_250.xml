@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <taskdata>
         <id>250</id>
@@ -29,11 +28,11 @@
         A possible way to get random integers in a range between 0 and 10:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-<font color="#DF7401">int</font> randomNum = <font color="#999900">ThreadLocalRandom</font>.current().nextInt(0, 10);
-        ]]>
-    </code>
+    <code><![CDATA[
+        
+<font color="#DF7401">int</font> randomNum = <font color="#999900">ThreadLocalRandom</font>.<font color="#ADD8E6">current</font>().<font color="#ADD8E6">nextInt</font>(<font color="#F0E130">0</font>, <font color="#F0E130">10</font>);
+        
+    ]]></code>
     <text>
         <![CDATA[
         Any solution can be used to create the threads, but remember, it'll be reused 10 times, so a solid choice
@@ -56,18 +55,18 @@
         Here is a simple way to measure execution time:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-<font color="#DF7401">long</font> start = <font color="#999900">System</font>.currentTimeMillis();
+    <code><![CDATA[
+        
+<font color="#DF7401">long</font> start = <font color="#999900">System</font>.<font color="#ADD8E6">currentTimeMillis</font>();
 <br/>
 <br/><font color="gray">//write code here that needs to be measured</font>
 <br/>
-<br/><font color="#DF7401">long</font> end = <font color="#999900">System</font>.currentTimeMillis();
+<br/><font color="#DF7401">long</font> end = <font color="#999900">System</font>.<font color="#ADD8E6">currentTimeMillis</font>();
 <br/>
 <br/><font color="gray">//this will be in milliseconds</font>
 <br/><font color="#DF7401">long</font> executionTime = end - start;
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Also compare the sums calculated, and make sure they're equal.
@@ -79,8 +78,8 @@
             Here is the custom thread class. It gets the original array, and the beginning and end indices.
             ]]>
         </text>
-        <code>
-            <![CDATA[
+        <code><![CDATA[
+            
 <font color="#E65100">public class</font> <font color="#999900">SumThread</font> <font color="#E65100">extends</font> <font color="#999900">Thread</font> {
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Storing the sum here, only set after execution.</font>
@@ -94,13 +93,13 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private final</font> <font color="#DF7401">int</font> endIndex;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">SumThread</font>(<font color="#DF7401">int</font>[] numbers, <font color="#DF7401">int</font> beginIndex, <font color="#DF7401">int</font> endIndex) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.numbers = numbers;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.beginIndex = beginIndex;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.endIndex = endIndex;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">numbers</font> = numbers;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">beginIndex</font> = beginIndex;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">endIndex</font> = endIndex;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> run() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=beginIndex; i&lt;endIndex; i++) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum += numbers[i];
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
@@ -108,55 +107,55 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//this must be called AFTER execution is done
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">long</font> getSum() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">long</font> <font color="#ADD8E6">getSum</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> sum;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-            ]]>
-        </code>
+            
+        ]]></code>
         <text>
             <![CDATA[
             Here are some of the boring methods that we need:
             ]]>
         </text>
-        <code>
-            <![CDATA[
+        <code><![CDATA[
+            
 <font color="gray">//constants</font>
-<br/><font color="#E65100">private static</font> <font color="#E65100">final</font> <font color="#DF7401">int</font> ARRAY_SIZE = 1000000;
-<br/><font color="#E65100">private static</font> <font color="#E65100">final</font> <font color="#DF7401">int</font> THREAD_AMOUNT = 10;
+<br/><font color="#E65100">private static</font> <font color="#E65100">final</font> <font color="#DF7401">int</font> ARRAY_SIZE = <font color="#F0E130">1000000</font>;
+<br/><font color="#E65100">private static</font> <font color="#E65100">final</font> <font color="#DF7401">int</font> THREAD_AMOUNT = <font color="#F0E130">10</font>;
 <br/>
 <br/><font color="gray">//method that creates an array of the given size
 </font>
-<br/><font color="#E65100">private static</font> <font color="#DF7401">int</font>[] createArray() {
+<br/><font color="#E65100">private static</font> <font color="#DF7401">int</font>[] <font color="#ADD8E6">createArray</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font>[] numbers = <font color="#E65100">new</font> <font color="#DF7401">int</font>[ARRAY_SIZE];
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=0; i&lt;ARRAY_SIZE; i++) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;numbers[i] = <font color="#999900">ThreadLocalRandom</font>.current().nextInt(0,10);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;ARRAY_SIZE; i++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;numbers[i] = <font color="#999900">ThreadLocalRandom</font>.<font color="#ADD8E6">current</font>().<font color="#ADD8E6">nextInt</font>(<font color="#F0E130">0,10</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> numbers;
 <br/>}
 <br/>
 <br/><font color="gray">//the method that does the summing sequentially
 </font>
-<br/><font color="#E65100">private static</font> <font color="#DF7401">long</font> sumSequential(<font color="#DF7401">int</font>[] numbers) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> sum = 0;
+<br/><font color="#E65100">private static</font> <font color="#DF7401">long</font> <font color="#ADD8E6">sumSequential</font>(<font color="#DF7401">int</font>[] numbers) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> sum = <font color="#F0E130">0</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> number: numbers) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum += number;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> sum;
 <br/>}
-            ]]>
-        </code>
+            
+        ]]></code>
         <text>
             <![CDATA[
             Now to the important part: the parallel summing methods. Here is one that uses the custom thread
             defined above:
             ]]>
         </text>
-        <code>
-            <![CDATA[
+        <code><![CDATA[
+            
         <font color="gray">//the method that does the summing in parallel.
 </font>
-<br/><font color="#E65100">private static</font> <font color="#DF7401">long</font> sumParallel(<font color="#DF7401">int</font>[] numbers) <font color="#E65100">throws</font> <font color="#999900">InterruptedException</font> {
+<br/><font color="#E65100">private static</font> <font color="#DF7401">long</font> <font color="#ADD8E6">sumParallel</font>(<font color="#DF7401">int</font>[] numbers) <font color="#E65100">throws</font> <font color="#999900">InterruptedException</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//storing threads here to join on them later
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">SumThread</font>[] threads = <font color="#E65100">new</font> <font color="#999900">SumThread</font>[THREAD_AMOUNT];
@@ -164,52 +163,52 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">final</font> <font color="#DF7401">int</font> THREAD_LOAD = ARRAY_SIZE / THREAD_AMOUNT;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//note that we increase iterator by 1000
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=0; i&lt;ARRAY_SIZE; i+=THREAD_LOAD) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;ARRAY_SIZE; i+=THREAD_LOAD) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create a new thread and give it the indices
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">SumThread</font> thread = <font color="#E65100">new</font> <font color="#999900">SumThread</font>(numbers, i, i+T<font color="#999900">HREAD_LOAD</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;threads[i/THREAD_LOAD] = thread;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;thread.start(); <font color="gray">//start it
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;thread.<font color="#ADD8E6">start</font>(); <font color="gray">//start it
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//now we must wait for all threads to finish
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">SumThread</font> thread: threads) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;thread.join();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;thread.<font color="#ADD8E6">join</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//every thread finished, let's <font color="#E65100">do</font> the <font color="#E65100">final</font> summing
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//every thread finished, let's do the final summing
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> sum = 0;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> sum = <font color="#F0E130">0</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">SumThread</font> thread: threads) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum += thread.getSum();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum += thread.<font color="#ADD8E6">getSum</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> sum;
 <br/>}
-            ]]>
-        </code>
+            
+        ]]></code>
         <text>
             <![CDATA[
             Using the executors is another option:
             ]]>
         </text>
-        <code>
-            <![CDATA[
-<font color="gray">//custom callable, very similar to the SumThread <font color="#E65100">class</font></font>
+        <code><![CDATA[
+            
+<font color="gray">//custom callable, very similar to the SumThread class</font>
 <br/><font color="#E65100">static class</font> <font color="#999900">SumCallable</font> <font color="#E65100">implements</font> <font color="#999900">Callable</font>&lt;<font color="#999900">Long</font>> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private final</font> <font color="#DF7401">int</font>[] numbers;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private final</font> <font color="#DF7401">int</font> beginIndex;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private final</font> <font color="#DF7401">int</font> endIndex;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">SumCallable</font>(<font color="#DF7401">int</font>[] numbers, <font color="#DF7401">int</font> beginIndex, <font color="#DF7401">int</font> endIndex) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.numbers = numbers;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.beginIndex = beginIndex;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.endIndex = endIndex;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">numbers</font> = numbers;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">beginIndex</font> = beginIndex;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">endIndex</font> = endIndex;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Long</font> call() <font color="#E65100">throws</font> <font color="#999900">Exception</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> sum = 0;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Long</font> <font color="#ADD8E6">call</font>() <font color="#E65100">throws</font> <font color="#999900">Exception</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> sum = <font color="#F0E130">0</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=beginIndex; i&lt;endIndex; i++) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum += numbers[i];
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
@@ -219,7 +218,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/><font color="gray">//the method that does the summing in parallel.
 </font>
-<br/><font color="#E65100">private static</font> <font color="#DF7401">long</font> sumParallel(<font color="#DF7401">int</font>[] numbers) <font color="#E65100">throws</font> ExecutionException, InterruptedException {
+<br/><font color="#E65100">private static</font> <font color="#DF7401">long</font> <font color="#ADD8E6">sumParallel</font>(<font color="#DF7401">int</font>[] numbers) <font color="#E65100">throws</font> ExecutionException, InterruptedException {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create the tasks
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">SumCallable</font>> tasks = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
@@ -227,31 +226,31 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">final</font> <font color="#DF7401">int</font> THREAD_LOAD = ARRAY_SIZE / THREAD_AMOUNT;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//note that we increase iterator by 1000
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=0; i&lt;ARRAY_SIZE; i+=THREAD_LOAD) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;ARRAY_SIZE; i+=THREAD_LOAD) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create a new callable and give it the indices
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">SumCallable</font> task = <font color="#E65100">new</font> <font color="#999900">SumCallable</font>(numbers, i, i+T<font color="#999900">HREAD_LOAD</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;tasks.add(task);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;tasks.<font color="#ADD8E6">add</font>(task);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create the thread pool
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ExecutorService</font> pool = <font color="#999900">Executors</font>.newFixedThreadPool(THREAD_AMOUNT);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ExecutorService</font> pool = <font color="#999900">Executors</font>.<font color="#ADD8E6">newFixedThreadPool</font>(THREAD_AMOUNT);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//give all tasks to the pool, and get futures back
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">Future</font>&lt;<font color="#999900">Long</font>>> futures = pool.invokeAll(tasks);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">Future</font>&lt;<font color="#999900">Long</font>>> futures = pool.<font color="#ADD8E6">invokeAll</font>(tasks);
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> sum = 0; <font color="gray">//wait for tasks to finish, and do the summing
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> sum = <font color="#F0E130">0</font>; <font color="gray">//wait for tasks to finish, and do the summing
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Future</font>&lt;<font color="#999900">Long</font>> future: futures) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum += future.get();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum += future.<font color="#ADD8E6">get</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;pool.shutdown();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;pool.<font color="#ADD8E6">shutdown</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> sum;
 <br/>}
-            ]]>
-        </code>
+            
+        ]]></code>
         <text>
             <![CDATA[
             In the main method we create the array and do the summing twice, while measuring the time. Finally,
@@ -261,40 +260,40 @@
             method.
             ]]>
         </text>
-        <code>
-            <![CDATA[
-<font color="#E65100">public</font> static <font color="#DF7401">void</font> main(String[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font>[] numbers = createArray();
+        <code><![CDATA[
+            
+<font color="#E65100">public</font> static <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(String[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font>[] numbers = <font color="#ADD8E6">createArray</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//calculate and measure sequential method
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> start = <font color="#999900">System</font>.currentTimeMillis();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> seqSum = sumSequential(numbers);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> end = <font color="#999900">System</font>.currentTimeMillis();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> start = <font color="#999900">System</font>.<font color="#ADD8E6">currentTimeMillis</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> seqSum = <font color="#ADD8E6">sumSequential</font>(numbers);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> end = <font color="#999900">System</font>.<font color="#ADD8E6">currentTimeMillis</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> seqTime = end - start;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//calculate and measure the parallel method
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;start = <font color="#999900">System</font>.currentTimeMillis();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> parSum = 0;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;start = <font color="#999900">System</font>.<font color="#ADD8E6">currentTimeMillis</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> parSum = <font color="#F0E130">0</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;parSum = sumParallel(numbers);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;parSum = <font color="#ADD8E6">sumParallel</font>(numbers);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">InterruptedException</font> e) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.err.println("Interrupted, calculation invalid!");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">err</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Interrupted, calculation invalid!"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;end = <font color="#999900">System</font>.currentTimeMillis();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;end = <font color="#999900">System</font>.<font color="#ADD8E6">currentTimeMillis</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> parTime = end - start;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//compare the results:
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Sequential result: " + seqSum);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Parallel result: " + parSum);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Sequential result: "</font> + seqSum);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"Parallel result: "</font></font> + parSum);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Sequential time: " + seqTime + " milliseconds");
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Parallel result: " + parTime + " milliseconds");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Sequential time: "</font> + seqTime + <font color="#2E8B57"><font color="#2E8B57">" milliseconds"</font></font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"Parallel result: "</font></font> + parTime + <font color="#2E8B57"><font color="#2E8B57">" milliseconds"</font></font>);
 <br/>}
-            ]]>
-        </code>
+            
+        ]]></code>
         <text>
             <![CDATA[
             Interestingly, sequential summing is faster, at least on my computer. This may be because

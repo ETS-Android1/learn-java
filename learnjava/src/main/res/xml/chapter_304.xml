@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <chapterdata>
         <id>304</id>
@@ -17,36 +16,36 @@
         class from the last chapter:
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
 <font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">Calculator</font>&lt;<font color="#999900">T</font> <font color="#E65100">extends</font> <font color="#999900">Number</font>> {
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">double</font> currentValue;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Calculator</font>(<font color="#999900">T</font> startingValue) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;currentValue = startingValue.doubleValue();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;currentValue = startingValue.<font color="#ADD8E6">doubleValue</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> add(<font color="#999900">T</font> number) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">add</font>(<font color="#999900">T</font> number) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//we have access to Number methods too, not only Object methods!
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;currentValue += number.doubleValue();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;currentValue += number.<font color="#ADD8E6">doubleValue</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> currentValue;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> subtract(<font color="#999900">T</font> number) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">subtract</font>(<font color="#999900">T</font> number) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//we have access to Number methods too, not only Object methods!
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;currentValue += number.doubleValue();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;currentValue += number.<font color="#ADD8E6">doubleValue</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> currentValue;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> getValue() {
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">getValue</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> currentValue;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         We can add numbers to the value of the calculator. Another reasonable function would be the ability
@@ -56,27 +55,27 @@
         about wildcards:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-<font color="#999900">Calculator</font>&lt;<font color="#999900">Double</font>> calc1 = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(-3.2);
-<br/><font color="#999900">Calculator</font>&lt;<font color="#999900">Double</font>> calc2 = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(1.4);
+    <code><![CDATA[
+        
+<font color="#999900">Calculator</font>&lt;<font color="#999900">Double</font>> calc1 = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(<font color="#F0E130">-3.2</font>);
+<br/><font color="#999900">Calculator</font>&lt;<font color="#999900">Double</font>> calc2 = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(<font color="#F0E130">1.4</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>calc1.add(calc2.getValue());
-        ]]>
-    </code>
+<br/>calc1.<font color="#ADD8E6">add</font>(calc2.<font color="#ADD8E6">getValue</font>());
+        
+    ]]></code>
     <text>
         <![CDATA[
         Instead, we create a new method inside the class to handle this:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#E65100">public</font> <font color="#DF7401">double</font> addCalculator(<font color="#999900">Calculator</font>&lt;<font color="#999900">T</font>> other) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;currentValue += other.currentValue;
+    <code><![CDATA[
+        
+        <font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">addCalculator</font>(<font color="#999900">Calculator</font>&lt;<font color="#999900">T</font>> other) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;currentValue += other.<font color="#ADD8E6">currentValue</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> currentValue;
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Works, but there is a problem. Since <i>T</i> is the type of the current calculator, this method will
@@ -85,35 +84,35 @@
         It's however reasonable to add any type of calculator to the current one!
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#999900">Calculator</font>&lt;<font color="#999900">Double</font>> calc1 = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(-3.2);
-<br/><font color="#999900">Calculator</font>&lt;<font color="#999900">Double</font>> calc2 = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(1.4);
+    <code><![CDATA[
+        
+        <font color="#999900">Calculator</font>&lt;<font color="#999900">Double</font>> calc1 = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(<font color="#F0E130">-3.2</font>);
+<br/><font color="#999900">Calculator</font>&lt;<font color="#999900">Double</font>> calc2 = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(<font color="#F0E130">1.4</font>);
 <br/>
-<br/>calc1.addCalculator(calc2); <font color="gray">//works
+<br/>calc1.<font color="#ADD8E6">addCalculator</font>(calc2); <font color="gray">//works
 </font>
 <br/>
-<br/><font color="#999900">Calculator</font>&lt;<font color="#999900">Integer</font>> calc3 = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(5);
+<br/><font color="#999900">Calculator</font>&lt;<font color="#999900">Integer</font>> calc3 = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(<font color="#F0E130">5</font>);
 <br/>
 <br/><font color="gray">//Does not work, can't add Integer calculator to Double one.
 </font>
-<br/>calc1.addCalculator(calc3);
-        ]]>
-    </code>
+<br/>calc1.<font color="#ADD8E6">addCalculator</font>(calc3);
+        
+    ]]></code>
     <text>
         <![CDATA[
         This is where the wildcards come in. Instead of <i>T</i>, you can use a <b>?</b> symbol to indicate that
         the class should be accepted with any possible type argument.
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#E65100">public</font> <font color="#DF7401">double</font> addCalculator(<font color="#999900">Calculator</font>&lt;?> other) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;currentValue += other.currentValue;
+    <code><![CDATA[
+        
+        <font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">addCalculator</font>(<font color="#999900">Calculator</font>&lt;?> other) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;currentValue += other.<font color="#ADD8E6">currentValue</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> currentValue;
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         The method will now accept any calculator. There is no need to put a bound <i>(Number)</i> on this wildcard,
@@ -121,14 +120,14 @@
         ]]>
     </text>
     <interactive instruction="Update the dotProduct method from the previous chapter to use a wildcarded vector as parameter!">
-        <data>
-<![CDATA[
-<font color="#E65100">public</font> <font color="#DF7401">double</font> dotProduct(<font color="#999900">Vector</font>&lt;___> other) <font color="#E65100">throws</font> <font color="#999900">IllegalArgumentException</font> {
+        <data><![CDATA[
+
+<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">dotProduct</font>(<font color="#999900">Vector</font>&lt;___> other) <font color="#E65100">throws</font> <font color="#999900">IllegalArgumentException</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//The body is the same.
 </font>
 <br/>}
-]]>
-        </data>
+
+        ]]></data>
         <answer place="0">?</answer>
         <answer place="0">? extends Number</answer>
         <default place="0">T</default>
@@ -140,13 +139,13 @@
         first see how things work without generics:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-<font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">void</font> print(<font color="#999900">Object</font> o) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(o.toString());
+    <code><![CDATA[
+        
+<font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">print</font>(<font color="#999900">Object</font> o) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(o.<font color="#ADD8E6">toString</font>());
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         This method will take any object, since all of them extend <i>Object</i> and so they <b>are</b> also <i>Object</i>s
@@ -159,29 +158,29 @@
         introduce an undesired side effect.
         ]]>
     </boxed>
-    <code>
-        <![CDATA[
-        <font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">void</font> printList(<font color="#999900">List</font>&lt;<font color="#999900">Object</font>> list) {
+    <code><![CDATA[
+        
+        <font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printList</font>(<font color="#999900">List</font>&lt;<font color="#999900">Object</font>> list) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Object</font> o: list) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(o.toString());
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(o.<font color="#ADD8E6">toString</font>());
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Naively, one would try to use this method with not only <i>List&lt;Object></i>, but with any lists. This, however
         will fail:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#999900">List</font>&lt;<font color="#999900">String</font>> strings = <font color="#999900">Arrays</font>.asList("Ha","Ha","Ha");
+    <code><![CDATA[
+        
+        <font color="#999900">List</font>&lt;<font color="#999900">String</font>> strings = <font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(<font color="#2E8B57"><font color="#2E8B57"><font color="#2E8B57">"Ha"</font></font></font>,<font color="#2E8B57"><font color="#2E8B57">"Ha"</font></font>,<font color="#2E8B57"><font color="#2E8B57"><font color="#2E8B57">"Ha"</font></font></font>);
 <br/><font color="gray">//Compile time error?!
 </font>
-<br/>printList(strings);
-        ]]>
-    </code>
+<br/><font color="#ADD8E6">printList</font>(strings);
+        
+    ]]></code>
     <text>
         <![CDATA[
         The problem is that despite <i>String</i> extending <i>Object</i>, <i>List&lt;String></i> <b>DOES NOT</b> extend
@@ -201,15 +200,15 @@
         To get around this, and make the method work as expected, we have to use wildcards:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-<font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">void</font> printList(<font color="#999900">List</font>&lt;?> list) {
+    <code><![CDATA[
+        
+<font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printList</font>(<font color="#999900">List</font>&lt;?> list) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Object</font> o: list) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(o.toString());
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(o.<font color="#ADD8E6">toString</font>());
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <title text="Bounded wildcards"/>
     <text>
         <![CDATA[
@@ -219,47 +218,47 @@
         Here are some ideas. These are just suggestions, they won't compile.
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">double</font> sumList(<font color="#999900">List</font>&lt;?> list) {
+    <code><![CDATA[
+        
+        <font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">double</font> <font color="#ADD8E6">sumList</font>(<font color="#999900">List</font>&lt;?> list) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;Due to type erasure, we can only use
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;Object's methods here.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>}
 <br/>
-<br/><font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">double</font> sumList(<font color="#999900">List</font>&lt;<font color="#999900">Number</font>> list) {
+<br/><font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">double</font> <font color="#ADD8E6">sumList</font>(<font color="#999900">List</font>&lt;<font color="#999900">Number</font>> list) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;Can use Number methods, but this will
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;only accept List&lt;Number>.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         To solve this, let's bound the wildcard:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-<font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">double</font> sumList(<font color="#999900">List</font>&lt;? <font color="#E65100">extends</font> <font color="#999900">Number</font>> list) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> sum = 0;
+    <code><![CDATA[
+        
+<font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">double</font> <font color="#ADD8E6">sumList</font>(<font color="#999900">List</font>&lt;? <font color="#E65100">extends</font> <font color="#999900">Number</font>> list) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> sum = <font color="#F0E130">0</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Number</font> number: list) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum += number.doubleValue();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum += number.<font color="#ADD8E6">doubleValue</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> sum;
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <interactive instruction="Complete this method to return the largest key of the map!">
-        <data>
-<![CDATA[
-<font color="#E65100">public</font> &lt;<font color="#999900">K</font> ___ <font color="#999900">Comparable</font>&lt;<font color="#999900">K</font>>, <font color="#999900">V</font>> ___ keyMaximum(<font color="#999900">Map</font>&lt;<font color="#999900">K</font>, <font color="#999900">V</font>> map) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#999900">Collections</font>.max(___.keySet());
+        <data><![CDATA[
+
+<font color="#E65100">public</font> &lt;<font color="#999900">K</font> ___ <font color="#999900">Comparable</font>&lt;<font color="#999900">K</font>>, <font color="#999900">V</font>> ___ <font color="#ADD8E6">keyMaximum</font>(<font color="#999900">Map</font>&lt;<font color="#999900">K</font>, <font color="#999900">V</font>> map) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#999900">Collections</font>.<font color="#ADD8E6">max</font>(___.<font color="#ADD8E6">keySet</font>());
 <br/>}
-]]>
-        </data>
+
+        ]]></data>
         <answer place="0">extends</answer>
         <answer place="1">K</answer>
         <answer place="2">map</answer>

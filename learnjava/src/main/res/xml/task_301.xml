@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <taskdata>
         <id>301</id>
@@ -42,8 +41,8 @@
             The (linked) list implementation. I added only a few methods here, the rest is modified in the same manner.
             ]]>
         </text>
-        <code>
-            <![CDATA[
+        <code><![CDATA[
+            
 <font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">MyLinkedList</font>&lt;<font color="#999900">T</font>> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">Node</font>&lt;<font color="#999900">T</font>> head; <font color="gray">//The first node. Null if the list is empty.
@@ -51,18 +50,18 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">int</font> size; <font color="gray">//It's not needed to store this, but it's faster then always counting.
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> size() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">size</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> size;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Useful helper method that can find us a node based on it's index.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Useful helper method that can find us a node based on its index.
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">Node</font>&lt;<font color="#999900">T</font>> findNodeAt(<font color="#DF7401">int</font> index) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">Node</font>&lt;<font color="#999900">T</font>> <font color="#ADD8E6">findNodeAt</font>(<font color="#DF7401">int</font> index) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(head == null) <font color="#E65100">return</font> null;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> counter = 0;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> counter = <font color="#F0E130">0</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Node</font>&lt;<font color="#999900">T</font>> node = head;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">while</font>(counter &lt; index) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;node = node.next; <font color="gray">//advance
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;node = node.<font color="#ADD8E6">next</font>; <font color="gray">//advance
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;counter++;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
@@ -71,17 +70,17 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Add an element to the end of the list. Null is not allowed
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> add(<font color="#999900">T</font> element) <font color="#E65100">throws</font> <font color="#999900">NullPointerException</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">add</font>(<font color="#999900">T</font> element) <font color="#E65100">throws</font> <font color="#999900">NullPointerException</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(element == null) <font color="#E65100">throw</font> <font color="#E65100">new</font> <font color="#999900">NullPointerException</font>();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(head == null) { <font color="gray">//<font color="#E65100">this</font> is the first element
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(head == null) { <font color="gray">//this is the first element
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;head = <font color="#E65100">new</font> <font color="#999900">Node</font>&lt;<font color="#999900">T</font>>(element, null);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> { <font color="gray">//there are elements in the list
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Node</font>&lt;<font color="#999900">T</font>> last = findNodeAt(size-1);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//let's set a <font color="#E65100">new</font> node to the end
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Node</font>&lt;<font color="#999900">T</font>> last = <font color="#ADD8E6">findNodeAt</font>(size-<font color="#F0E130">1</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray<font color="#2E8B57">">//let'</font>s set a new node to the end
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;last.next = <font color="#E65100">new</font> <font color="#999900">Node</font>&lt;<font color="#999900">T</font>>(element, null);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;last.<font color="#ADD8E6">next</font> = <font color="#E65100">new</font> <font color="#999900">Node</font>&lt;<font color="#999900">T</font>>(element, null);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;size++;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
@@ -89,36 +88,36 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Rest of the methods similarly...
 </font>
 <br/>}
-            ]]>
-        </code>
+            
+        ]]></code>
         <text>
             <![CDATA[
             For this to work, the inner class <i>Node</i> also needs to be a generic class:
             ]]>
         </text>
-        <code>
-            <![CDATA[
+        <code><![CDATA[
+            
 <font color="#E65100">class</font> <font color="#999900">Node</font>&lt;<font color="#999900">T</font>> {
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">T</font> data;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Node</font>&lt;<font color="#999900">T</font>> next; <font color="gray">//<font color="#E65100">this</font> is null at the last node
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Node</font>&lt;<font color="#999900">T</font>> next; <font color="gray">//this is null at the last node
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Node</font>(<font color="#999900">T</font> data, <font color="#999900">Node</font>&lt;<font color="#999900">T</font>> next) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.data = data;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.next = next;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">data</font> = data;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">next</font> = next;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-            ]]>
-        </code>
+            
+        ]]></code>
         <advanced title="Generic array list">
             <![CDATA[
             If you've decided to go for the array list, here is a possible method to circumvent the restrictions
             of generic arrays.
             ]]>
         </advanced>
-        <code>
-            <![CDATA[
+        <code><![CDATA[
+            
             <font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">MyArrayList</font>&lt;<font color="#999900">T</font>> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">Object</font>[] array; <font color="gray">//the internal array
@@ -129,31 +128,31 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//constructor which sets an initial array capacity of 15
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">MyArrayList</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;array = <font color="#E65100">new</font> <font color="#999900">Object</font>[15];
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;array = <font color="#E65100">new</font> <font color="#999900">Object</font>[<font color="#F0E130">15</font>];
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Increases the array capacity. This method is only used internally.
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">void</font> increaseCapacity() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Object</font>[] increasedArray = <font color="#E65100">new</font> <font color="#999900">Object</font>[2 * array.length + 1]; <font color="gray">//<font color="#DF7401">double</font> capacity
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">void</font> <font color="#ADD8E6">increaseCapacity</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Object</font>[] increasedArray = <font color="#E65100">new</font> <font color="#999900">Object</font>[<font color="#F0E130">2</font> * array.<font color="#ADD8E6">length</font> + <font color="#F0E130">1</font>]; <font color="gray">//double capacity
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=0; i&lt;array.length; i++) { <font color="gray">//copy elements
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;array.<font color="#ADD8E6">length</font>; i++) { <font color="gray">//copy elements
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;increasedArray[i] = array[i];
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;array = increasedArray; <font color="gray">//assign <font color="#E65100">new</font> array
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;array = increasedArray; <font color="gray">//assign new array
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Gets an element by index.
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@SuppressWarnings</font>("unchecked")
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">T</font> get(<font color="#DF7401">int</font> index) <font color="#E65100">throws</font> <font color="#999900">IndexOutOfBoundsException</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(index &lt; 0 || index > size-1) { <font color="gray">//check <font color="#E65100">if</font> index is invalid
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@SuppressWarnings</font>(<font color="#2E8B57">"unchecked"</font>)
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">T</font> <font color="#ADD8E6">get</font>(<font color="#DF7401">int</font> index) <font color="#E65100">throws</font> <font color="#999900">IndexOutOfBoundsException</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(index &lt; <font color="#F0E130">0</font> || index > size-<font color="#F0E130">1</font>) { <font color="gray">//check if index is invalid
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">throw</font> <font color="#E65100">new</font> <font color="#999900">IndexOutOfBoundsException</font>(<font color="#999900">String</font>.valueOf(index));
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">throw</font> <font color="#E65100">new</font> <font color="#999900">IndexOutOfBoundsException</font>(<font color="#999900">String</font>.<font color="#ADD8E6">valueOf</font>(index));
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//index is valid, we can <font color="#E65100">return</font> it
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//index is valid, we can return it
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> (<font color="#999900">T</font>)array[index]; <font color="gray">//Notice the cast
 </font>
@@ -162,8 +161,8 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Rest of the methods...
 </font>
 <br/>}
-            ]]>
-        </code>
+            
+        ]]></code>
         <text>
             <![CDATA[
             The <i>SuppressWarning</i> annotation tells the IDE and the compiler not to worry about the potentially
@@ -177,8 +176,8 @@
             The entire generic stack class (using the linked list):
             ]]>
         </text>
-        <code>
-            <![CDATA[
+        <code><![CDATA[
+            
 <font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">MyStack</font>&lt;<font color="#999900">T</font>> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">MyLinkedList</font>&lt;<font color="#999900">T</font>> list;
@@ -189,36 +188,36 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//add the element to the back of the list.
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> push(<font color="#999900">T</font> element) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;list.add(element);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">push</font>(<font color="#999900">T</font> element) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;list.<font color="#ADD8E6">add</font>(element);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//remove the element at the back of the list.
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">T</font> pop() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> list.remove(list.size()-1);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">T</font> <font color="#ADD8E6">pop</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> list.<font color="#ADD8E6">remove</font>(list.<font color="#ADD8E6">size</font>()<font color="#F0E130">-1</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//peek the element at the back of the list.
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">T</font> peek() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> list.get(list.size()-1);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">T</font> <font color="#ADD8E6">peek</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> list.<font color="#ADD8E6">get</font>(list.<font color="#ADD8E6">size</font>()<font color="#F0E130">-1</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//clear the stack
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> clear() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;list.clear();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">clear</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;list.<font color="#ADD8E6">clear</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//size of the stack
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> size() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> list.size();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">size</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> list.<font color="#ADD8E6">size</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-            ]]>
-        </code>
+            
+        ]]></code>
         <text>
             <![CDATA[
             This task shows it well that once you have a non-generic class, it's usually simple to convert it

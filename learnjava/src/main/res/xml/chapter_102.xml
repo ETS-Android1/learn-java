@@ -1,8 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<!--Belongs to course 'Primitives, control flow and I/O' -->
-
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--Belongs to course 'Primitives, control flow and I/O' --><resources>
     <chapterdata>
         <id>102</id>
         <name>Controlling the flow: if-else</name>
@@ -21,14 +18,14 @@
         it's condition is true! Observe the example for the correct syntax:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-<font color="#DF7401">char </font>testChar = 'a';
-<br/><font color="#E65100">if</font>(testChar == 'a') {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("The test char is a!");
+    <code><![CDATA[
+        
+<font color="#DF7401">char </font>testChar = <font color="#2E8B57"><font color="#2E8B57">'a'</font></font>;
+<br/><font color="#E65100">if</font>(testChar == <font color="#2E8B57"><font color="#2E8B57">'a'</font></font>) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"The test char is a!"</font>);
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         <p>
@@ -47,38 +44,38 @@
         Well, one not-so-elegant way would be to use another if block inside the the first one:
         ]]>
     </boxed>
-    <code>
-        <![CDATA[
-        <font color="#DF7401">int </font>n1 = 2, n2 = 3;
-<br/><font color="#E65100">if</font>(n1 == 2) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(n2 == 3) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("n1=2,n2=3");
+    <code><![CDATA[
+        
+        <font color="#DF7401">int </font>n1 = <font color="#F0E130">2</font>, n2 = <font color="#F0E130">3</font>;
+<br/><font color="#E65100">if</font>(n1 == <font color="#F0E130">2</font>) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(n2 == <font color="#F0E130">3</font>) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"n1=2,n2=3"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         This is where the <b>logical operators</b> come in to the rescue. The AND operator is perfect for this example:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#DF7401">int </font>n1 = 2, n2 = 3;
-<br/><font color="#E65100">if</font>(n1 == 2 && n2 == 3) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("n1=2,n2=3");
+    <code><![CDATA[
+        
+        <font color="#DF7401">int </font>n1 = <font color="#F0E130">2</font>, n2 = <font color="#F0E130">3</font>;
+<br/><font color="#E65100">if</font>(n1 == <font color="#F0E130">2</font> && n2 == <font color="#F0E130">3</font>) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"n1=2,n2=3"</font>);
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <interactive instruction="Complete the program so that it only prints when the number is 10!">
-        <data>
-<![CDATA[
-<font color="#DF7401">int</font> number = getNumber(); <font color="gray">//suppose <font color="#E65100">this</font> returns an integer</font>
-<br/>___ (number ___ 10) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("<font color="#999900">Number</font> was 10!");
+        <data><![CDATA[
+
+<font color="#DF7401">int</font> number = <font color="#ADD8E6">getNumber</font>(); <font color="gray">//suppose this returns an integer</font>
+<br/>___ (number ___ <font color="#F0E130">10</font>) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"<font color="</font>#999900">Number</font> was <font color="#F0E130">10</font>!");
 <br/>}
-]]>
-        </data>
+
+        ]]></data>
         <answer place="0">if</answer>
         <answer place="1">==</answer>
     </interactive>
@@ -100,16 +97,16 @@
         should be used instead:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#DF7401">char </font>testChar = 'b';
-<br/><font color="#E65100">if</font>(testChar == 'a') {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("The char is a!");	&nbsp;&nbsp;&nbsp;&nbsp;
+    <code><![CDATA[
+        
+        <font color="#DF7401">char </font>testChar = <font color="#2E8B57">'b'</font>;
+<br/><font color="#E65100">if</font>(testChar == <font color="#2E8B57">'a'</font>) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"The char is a!"</font>);	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>}<font color="#E65100"> else </font>{
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("The char is NOT a!");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"The char is NOT a!"</font>);
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         We extended our <i>testChar</i> example with an <b>else block</b>. Notice that the condition is now false, so the
@@ -130,21 +127,21 @@
         quite intuitive, see the example:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#DF7401">double </font>d = 3.14;
-<br/><font color="#E65100">if</font>(d > 5) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Bigger then 5");
-<br/>}<font color="#E65100"> else if</font>(d > 3) {
+    <code><![CDATA[
+        
+        <font color="#DF7401">double </font>d = <font color="#F0E130">3.14</font>;
+<br/><font color="#E65100">if</font>(d > <font color="#F0E130">5</font>) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Bigger then 5"</font>);
+<br/>}<font color="#E65100"> else if</font>(d > <font color="#F0E130">3</font>) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//this block is run</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Bigger then 3");
-<br/>}<font color="#E65100"> else if</font>(d > 1) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Bigger then 1");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Bigger then 3"</font>);
+<br/>}<font color="#E65100"> else if</font>(d > <font color="#F0E130">1</font>) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Bigger then 1"</font>);
 <br/>}<font color="#E65100"> else </font>{
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Smaller then 1");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Smaller then 1"</font>);
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         A very important detail to know about these else-if blocks, is the conditions are evaluated from top
@@ -163,19 +160,19 @@
         ]]>
     </boxed>
     <interactive instruction="Complete and correct this program in a way that 'Middle' is only printed when the number is between 0.25 and 0.75!">
-        <data>
-<![CDATA[
+        <data><![CDATA[
+
 <font color="gray">//this double can have a value between 0 and 1
 </font>
-<br/><font color="#DF7401">double</font> real = <font color="#E65100">new</font> <font color="#999900">Random</font>().nextDouble();
-<br/><font color="#E65100">if</font>(real ___ 0.25 && real &lt;= ___) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("<font color="#999900">Near</font> the middle of the interval!");
+<br/><font color="#DF7401">double</font> real = <font color="#E65100">new</font> <font color="#999900">Random</font>().<font color="#ADD8E6">nextDouble</font>();
+<br/><font color="#E65100">if</font>(real ___ <font color="#F0E130">0.25</font> && real &lt;= ___) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"<font color="</font></font>#999900">Near</font> the middle of the interval!");
 <br/>} ___ {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("<font color="#999900">Near</font> the edges of the interval!");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"<font color="</font></font>#999900">Near</font> the edges of the interval!");
 <br/>}
-]]>
-        </data>
-        <answer place="0">>=</answer>
+
+        ]]></data>
+        <answer place="0">&gt;=</answer>
         <answer place="1">0.75</answer>
         <answer place="2">else</answer>
         <default place="2">if</default>
@@ -187,27 +184,27 @@
         the syntax. Assume that the <i>assignGrade</i> method returns an integer between 1 and 5.
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#DF7401">int </font>grade = assignGrade();
+    <code><![CDATA[
+        
+        <font color="#DF7401">int </font>grade = <font color="#ADD8E6">assignGrade</font>();
 <br/><font color="#999900">String</font> output;
 <br/><font color="#E65100">switch</font>(grade) {
-<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;case </font>1: output = "You failed!";
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;case </font><font color="#F0E130">1</font>: output = <font color="#2E8B57">"You failed!"</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">break</font>;
-<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;case </font>2: output = "You almost failed...";
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;case </font><font color="#F0E130">2</font>: output = <font color="#2E8B57">"You almost failed..."</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">break</font>;
-<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;case </font>3: output = "Not bad, not good.";
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;case </font><font color="#F0E130">3</font>: output = <font color="#2E8B57">"Not bad, not good."</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">break</font>;
-<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;case </font>4: output = "Very good!";
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;case </font><font color="#F0E130">4</font>: output = <font color="#2E8B57">"Very good!"</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">break</font>;
-<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;case </font>5: output = "Perfect!";
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;case </font><font color="#F0E130">5</font>: output = <font color="#2E8B57">"Perfect!"</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; 	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">break</font>;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">default</font>: output = "Invalid grade!";
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">default</font>: output = <font color="#2E8B57">"Invalid grade!"</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;        <font color="#E65100">break</font>;
 <br/>}
-<br/><font color="#999900">System</font>.out.println(output);
-        ]]>
-    </code>
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(output);
+        
+    ]]></code>
     <text>
         <![CDATA[
         <p>

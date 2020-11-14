@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <chapterdata>
         <id>154</id>
@@ -11,23 +10,23 @@
         Previously, our members and methods belonged to objects. Consider this example:
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="#E65100">public class</font> <font color="#999900">User</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font> email;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">User</font>(<font color="#999900">String</font> email) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.email = email;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">email</font> = email;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> getEmail() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">getEmail</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> email;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
 <br/>
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Each user object will have its separate email variable (so this member belongs to the object). This is fine, but
@@ -45,20 +44,20 @@
         The <b>static</b> keyword can be used to mark that a variable or a method should belong to the class:
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="#E65100">public class</font> <font color="#999900">User</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//every user objects shares this member ('belongs to the class')
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//every user objects shares this member so it 'belongs to the class'.
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private static</font> <font color="#DF7401">int</font> userCounter = 0;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private static</font> <font color="#DF7401">int</font> userCounter = <font color="#F0E130">0</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//belongs to the object
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font> email;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">User</font>(<font color="#999900">String</font> email) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.email = email;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">email</font> = email;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//new user created, increase counter
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;userCounter++;
@@ -66,18 +65,18 @@
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//belongs to the class
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> makeReport() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("We have " + userCounter + " users.");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">makeReport</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"We have "</font> + userCounter + <font color="#2E8B57">" users."</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//belongs to the object
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> getEmail() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">getEmail</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> email;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Each time a new user is created the counter is increased (in the constructor).
@@ -93,16 +92,16 @@
         belong to any object! The solution is intuitive, since it belongs to the class, we'll use that.
         ]]>
     </boxed>
-    <code>
-        <![CDATA[
-        <font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">User</font> u1 = <font color="#E65100">new</font> User("email@email.com");
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">User</font> u2 = <font color="#E65100">new</font> User("email2@email.com");
+    <code><![CDATA[
+        
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">User</font> u1 = <font color="#E65100">new</font> U<font color="#ADD8E6">ser</font>(<font color="#2E8B57">"email@email.com"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">User</font> u2 = <font color="#E65100">new</font> U<font color="#ADD8E6">ser</font>(<font color="#2E8B57">"email2@email.com"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">User</font>.makeReport();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">User</font>.<font color="#ADD8E6">makeReport</font>();
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Observe that when we referenced the static member in the constructor, there is no <b>User.</b> part. In that context,
@@ -122,15 +121,15 @@
         ]]>
     </text>
     <interactive instruction="Declare this variable so that it's constant and belongs to the class!">
-        <data>
-<![CDATA[
-<font color="#E65100">public</font> ___ ___ <font color="#DF7401">int</font> RESULT_OK = 1;
-]]>
-        </data>
-        <answer place="0" group="final_first" required_places="1">final</answer>
-        <answer place="1" group="final_first" required_places="0">static</answer>
-        <answer place="0" group="static_first" required_places="1">static</answer>
-        <answer place="1" group="static_first" required_places="0">final</answer>
+        <data><![CDATA[
+
+<font color="#E65100">public</font> ___ ___ <font color="#DF7401">int</font> RESULT_OK = <font color="#F0E130">1</font>;
+
+        ]]></data>
+        <answer group="final_first" place="0" required_places="1">final</answer>
+        <answer group="final_first" place="1" required_places="0">static</answer>
+        <answer group="static_first" place="0" required_places="1">static</answer>
+        <answer group="static_first" place="1" required_places="0">final</answer>
     </interactive>
     <boxed title="Reminder: final">
         <![CDATA[
@@ -138,12 +137,12 @@
         inheritance. Well, variables can also be final, but this is related to constant values, not inheritance!
         ]]>
     </boxed>
-    <code>
-        <![CDATA[
-<font color="#E65100">final</font> <font color="#DF7401">int</font> ONE = 1;
+    <code><![CDATA[
+        
+<font color="#E65100">final</font> <font color="#DF7401">int</font> ONE = <font color="#F0E130">1</font>;
 <br/><font color="gray">//ONE = 2;</font>
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         What's going to stop us to reassign this variable? If you uncomment the second line and run the code,
@@ -157,34 +156,34 @@
         instead of at declaration:
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="#E65100">public class</font> <font color="#999900">User</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//final, but isn't assigned here</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private final</font> <font color="#999900">String</font> email;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">User</font>(<font color="#999900">String</font> email) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.email = email; <font color="gray">//gets its final value here</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">email</font> = email; <font color="gray">//gets its final value here</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> getEmail() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">getEmail</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> email;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Final is often combined with static to create global (accessible everywhere) constants. For example, the JDK
         has the value of the famous constant pi stored in such a variable:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-<font color="#999900">System</font>.out.println("Pi is " + <font color="#999900">Math</font>.PI);
-        ]]>
-    </code>
+    <code><![CDATA[
+        
+<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Pi is "</font> + <font color="#999900">Math</font>.PI);
+        
+    ]]></code>
     <title text="Enums"/>
     <text>
         <![CDATA[
@@ -192,8 +191,8 @@
         be used to declare constants, that are somehow related to each other.
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="#E65100">public enum</font> <font color="#999900">Day</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;MONDAY,
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;TUESDAY,
@@ -203,8 +202,8 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;SATURDAY,
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;SUNDAY
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         As you can see, the <b>enum</b> keyword is used. Now we have a constant for each day of the week (and they are
@@ -214,28 +213,28 @@
         day:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-<font color="#E65100">public static</font> <font color="#999900">Day</font> nextDay(<font color="#999900">Day</font> today) {
+    <code><![CDATA[
+        
+<font color="#E65100">public static</font> <font color="#999900">Day</font> <font color="#ADD8E6">nextDay</font>(<font color="#999900">Day</font> today) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//built-in enum method, returns them in order of declaration!</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Day</font>[] allDays = Day.values();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Day</font>[] allDays = Day.<font color="#ADD8E6">values</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Day</font> tomorrow = null;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(today == <font color="#999900">Day</font>.SUNDAY) { <font color="gray">//handle special <font color="#E65100">case</font> sunday
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(today == <font color="#999900">Day</font>.SUNDAY) { <font color="gray">//handle special case sunday
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#999900">Day</font>.MONDAY;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=0; i &lt; allDays.length; i++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i &lt; allDays.<font color="#ADD8E6">length</font>; i++) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(today == allDays[i]) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;tomorrow = allDays[i+1]; <font color="gray">//this would go out of bounds <font color="#E65100">for</font> sunday
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;tomorrow = allDays[i+<font color="#F0E130">1</font>]; <font color="gray">//this would go out of bounds for sunday
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> tomorrow;
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Note that similarly to primitive types, the <b>==</b> operator can safely be used on enums (although the <i>
@@ -250,13 +249,13 @@
         ]]>
     </advanced>
     <interactive instruction="Complete the enum declaration!">
-        <data>
-<![CDATA[
+        <data><![CDATA[
+
 ___ <font color="#999900">ThreeWayLogic</font> {
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;TRUE, FALSE, UNDETERMINED;
 <br/>}
-]]>
-        </data>
+
+        ]]></data>
         <answer place="0">enum</answer>
     </interactive>
 

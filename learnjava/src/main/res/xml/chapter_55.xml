@@ -1,8 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<!-- 'Methods', belongs to the course 'The basics' -->
-
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- 'Methods', belongs to the course 'The basics' --><resources>
     <chapterdata>
         <id>55</id>
         <name>Methods: return types and parameters</name>
@@ -35,14 +32,14 @@
         The first method we declare is a very simple one. Can you guess what it does?
         ]]>
     </text>
-    <code>
-        <![CDATA[
-<font color="#E65100">static</font> <font color="#DF7401">int</font> add(<font color="#DF7401">int </font>n1,<font color="#DF7401"> int </font>n2) {
+    <code><![CDATA[
+        
+<font color="#E65100">static</font> <font color="#DF7401">int</font> <font color="#ADD8E6">add</font>(<font color="#DF7401">int </font>n1,<font color="#DF7401"> int </font>n2) {
 <br/><font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>additionResult = n1 + n2;
 <br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;return </font>additionResult;
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         The first <i>int</i> in the first line is the <b>return type</b> of the method. It will return an <i>int</i> to the caller
@@ -53,13 +50,13 @@
         ]]>
     </text>
     <interactive instruction="Correct the method declaration so that its return type matches the returned value!">
-        <data>
-<![CDATA[
-<font color="#E65100">static</font> ___ getZero() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> 0;
+        <data><![CDATA[
+
+<font color="#E65100">static</font> ___ <font color="#ADD8E6">getZero</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#F0E130">0</font>;
 <br/>}
-]]>
-        </data>
+
+        ]]></data>
         <answer place="0">int</answer>
         <default place="0">String</default>
     </interactive>
@@ -86,13 +83,13 @@
         is also an integer variable, and the types match.
         ]]>
     </boxed>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="#E65100">static</font> <font color="#DF7401">void </font>greetMe (<font color="#999900">String</font> myName) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Hello, " + myName);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello, "</font> + myName);
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         This method operates on text rather then integers. It takes a <i>String</i> parameter,
@@ -104,14 +101,14 @@
         ]]>
     </text>
     <interactive instruction="Declare a method with no return type and a String parameter!">
-        <data>
-            <![CDATA[
-<font color="#E65100">static</font> ___ stringConsumer(___ text) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//<font color="#E65100">do</font> something with string here...
+        <data><![CDATA[
+            
+<font color="#E65100">static</font> ___ <font color="#ADD8E6">stringConsumer</font>(___ text) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//do something with string here...
 </font>
 <br/>}
-]]>
-        </data>
+
+        ]]></data>
         <answer place="0">void</answer>
         <answer place="1">String</answer>
     </interactive>
@@ -130,13 +127,13 @@
         Lastly, let's see an example for a method with no parameters.
         ]]>
     </text>
-    <code>
-        <![CDATA[
-<font color="#E65100">static </font><font color="#DF7401">int </font>twoPlusTwo() {
-<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;return </font>2 + 2;
+    <code><![CDATA[
+        
+<font color="#E65100">static </font><font color="#DF7401">int </font><font color="#ADD8E6">twoPlusTwo</font>() {
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;return </font><font color="#F0E130">2</font> + <font color="#F0E130">2</font>;
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Very simple, right? This method just returns the result of 2+2. No need for any parameters
@@ -165,44 +162,44 @@
         <b>within the class</b> but <b>outside other methods</b>. For example, the following code is invalid:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-<font color="#E65100">static</font> <font color="#DF7401">int</font> method1() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;     <font color="#E65100">static</font> <font color="#DF7401">void</font> method2() {
-<br/>   	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;       <font color="#999900">System</font>.out.println("I'm an invalid method!");
+    <code><![CDATA[
+        
+<font color="#E65100">static</font> <font color="#DF7401">int</font> <font color="#ADD8E6">method1</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;     <font color="#E65100">static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">method2</font>() {
+<br/>   	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;       <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"I'</font>m an invalid method!");
 <br/>      	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Make sure all the methods are in your project. Your class will have to look something like this
         (the order of the methods doesn't matter):
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
            <font color="#E65100">public class</font> <font color="#999900">Main</font> {
 <br/>
-<br/>&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static </font><font color="#DF7401">int </font>add(<font color="#DF7401">int </font>n1,<font color="#DF7401"> int </font>n2) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static </font><font color="#DF7401">int </font><font color="#ADD8E6">add</font>(<font color="#DF7401">int </font>n1,<font color="#DF7401"> int </font>n2) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>additionResult = n1 + n2;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return </font>additionResult;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static </font><font color="#DF7401">void </font>greetMe(<font color="#999900">String</font> myName) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Hello, " + myName);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static </font><font color="#DF7401">void </font><font color="#ADD8E6">greetMe</font>(<font color="#999900">String</font> myName) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello, "</font> + myName);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static </font><font color="#DF7401">int </font>twoPlusTwo() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;return </font>2 + 2;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static </font><font color="#DF7401">int </font><font color="#ADD8E6">twoPlusTwo</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;return </font><font color="#F0E130">2</font> + <font color="#F0E130">2</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <title text="Calling methods"/>
     <text>
         <![CDATA[
@@ -213,15 +210,15 @@
         between the parentheses:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#E65100">public static</font><font color="#DF7401"> void </font>main(<font color="#999900">String</font>[] args) {
-<br/><font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>result = add(7,8);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("7+8 is " + result);
+    <code><![CDATA[
+        
+        <font color="#E65100">public static</font><font color="#DF7401"> void </font><font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/><font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>result = <font color="#ADD8E6">add</font>(<font color="#F0E130">7,8</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>("7+<font color="#F0E130">8</font> is " + result);
 <br/>}
 <br/>
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Write this on your main method as well, and run the project!
@@ -237,13 +234,13 @@
         ]]>
     </text>
     <interactive instruction="Call the greetMe method with parameter 'John'">
-        <data>
-            <![CDATA[
-<font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+        <data><![CDATA[
+            
+<font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;___ (___);
 <br/>}
-            ]]>
-        </data>
+            
+        ]]></data>
         <answer place="0">greetMe</answer>
         <answer place="1">"John"</answer>
     </interactive>
@@ -269,16 +266,16 @@
         and observe the output!
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#E65100">public static</font><font color="#DF7401"> void </font>main(<font color="#999900">String</font>[] args) {
-<br/><font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>result = add(7,8);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("7+8 is " + result);
+    <code><![CDATA[
+        
+        <font color="#E65100">public static</font><font color="#DF7401"> void </font><font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/><font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>result = <font color="#ADD8E6">add</font>(<font color="#F0E130">7,8</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>("7+<font color="#F0E130">8</font> is " + result);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;greetMe("Tom");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ADD8E6">greetMe</font>(<font color="#2E8B57">"Tom"</font>);
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         I used <i>"Tom"</i> as the name parameter, but any name of you choosing (any text, in fact) can be used.
@@ -299,13 +296,13 @@
         In fact, we can change out <i>twoPlusTwo</i> method, and make it call the <i>add</i> method!
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#E65100">static </font><font color="#DF7401">int </font>twoPlusTwo() {
-<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;return </font>add(2,2);
+    <code><![CDATA[
+        
+        <font color="#E65100">static </font><font color="#DF7401">int </font><font color="#ADD8E6">twoPlusTwo</font>() {
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;return </font><font color="#ADD8E6">add</font>(<font color="#F0E130">2,2</font>);
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <advanced title="Keep it short">
         <![CDATA[
         Generally, writing very long methods is bad practice, which makes out code harder to understand. Our example

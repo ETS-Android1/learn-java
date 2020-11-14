@@ -1,8 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<!-- 'The first program', belongs to course 'The basics' -->
-
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- 'The first program', belongs to course 'The basics' --><resources>
     <chapterdata>
         <id>53</id>
         <name>The first program</name>
@@ -34,18 +31,18 @@
          your own class name, of course):
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="#E65100">public class </font>Main {
 <br/>
-<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;public static</font><font color="#DF7401"> void </font>main(<font color="#999900">String</font>[] args) {
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;public static</font><font color="#DF7401"> void </font><font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">// TODO: Auto-generated method stub</font>
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         The part that begins with <i>public static void main</i> is called the <b>main method</b>. Java apps can have many
@@ -74,13 +71,13 @@
         must end with a ';'.
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Hello, world!");
+    <code><![CDATA[
+        
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello, world!"</font>);
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         As you can see, we can print text to the console with the <b>System.out.println()</b> method.
@@ -104,13 +101,13 @@
         For example, let's suppose we forgot our " " symbols, and our main method looks like this:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-         <font color="#E65100">public static</font> <font color="#DF7401">void </font>main(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(Hello, world!);
+    <code><![CDATA[
+        
+         <font color="#E65100">public static</font> <font color="#DF7401">void </font><font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(Hello, world!);
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Even before trying to compile and run, our IDE will notice that something is not right, and will
@@ -129,14 +126,14 @@
         Let us add another print statement for our code, after the previous one:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-<font color="#E65100">public static</font> <font color="#DF7401">void </font>main(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Hello, world!");
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Have a nice day!");
+    <code><![CDATA[
+        
+<font color="#E65100">public static</font> <font color="#DF7401">void </font><font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello, world!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Have a nice day!"</font>);
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         We expect that the messages will appear in the console in the same order as they are in the code.
@@ -146,13 +143,13 @@
         ]]>
     </text>
     <interactive instruction="Complete the main method so that it prints the text!">
-        <data>
-            <![CDATA[
-<font color="#E65100">public</font> ___ <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.___("Hello, world!");
+        <data><![CDATA[
+            
+<font color="#E65100">public</font> ___ <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">___</font>(<font color="#2E8B57">"Hello, world!"</font>);
 <br/>}
-        ]]>
-        </data>
+        
+        ]]></data>
         <answer place="0">static</answer>
         <answer place="1">println</answer>
         <answer place="1">print</answer>

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <chapterdata>
         <id>351</id>
@@ -58,15 +57,15 @@
         package was added (the name stands for New IO).
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="#E65100">try</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">String</font>> lines = <font color="#999900">Files</font>.readAllLines(<font color="#999900">Paths</font>.get("myfile.txt"));
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">String</font>> lines = <font color="#999900">Files</font>.<font color="#ADD8E6">readAllLines</font>(<font color="#999900">Paths</font>.<font color="#ADD8E6">get</font>(<font color="#2E8B57">"myfile.txt"</font>));
 <br/>} <font color="#E65100">catch</font>(<font color="#999900">IOException</font> e) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.err.println("<font color="#999900">Failed</font> to read from file!");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">err</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"<font color="</font>#999900">Failed to read from file!"</font>);
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Before the <i>NIO</i> package, programmers had to use readers and loops to achieve this.

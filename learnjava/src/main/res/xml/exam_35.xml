@@ -1,8 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<!-- Exam of course 'Java 8' -->
-
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- Exam of course 'Java 8' --><resources>
     <examdata>
         <id>35</id>
         <questionAmount>20</questionAmount>
@@ -156,125 +153,125 @@
     </question>
     <question type="single_choice">
         <text>What is the correct syntax for a (general) lambda expression?</text>
-        <answer>( statements ) -> parameters</answer>
-        <answer>{ parameters } -> ( statements )</answer>
-        <answer>{ parameters } -> { statements }</answer>
-        <answer>( parameters ) -> { statements }</answer>
+        <answer>( statements ) -&gt; parameters</answer>
+        <answer>{ parameters } -&gt; ( statements )</answer>
+        <answer>{ parameters } -&gt; { statements }</answer>
+        <answer>( parameters ) -&gt; { statements }</answer>
         <correct>3</correct>
     </question>
     <question type="multi_choice">
         <text>Which of these are correct syntax for a lambda with ONE parameter?</text>
-        <answer>( parameter ) -> { statements }</answer>
-        <answer>( statements ) -> parameter</answer>
-        <answer>( statements ) -> { parameter }</answer>
-        <answer>parameter -> { statements }</answer>
+        <answer>( parameter ) -&gt; { statements }</answer>
+        <answer>( statements ) -&gt; parameter</answer>
+        <answer>( statements ) -&gt; { parameter }</answer>
+        <answer>parameter -&gt; { statements }</answer>
         <correct>0</correct>
         <correct>3</correct>
     </question>
     <question type="multi_choice">
         <text>Which of these are correct syntax for a lambda with ONE parameter and ONE statement?</text>
-        <answer>( parameter ) -> { statement }</answer>
-        <answer>parameter -> ( statements )</answer>
-        <answer>parameter -> statement</answer>
-        <answer>parameter -> { statement }</answer>
+        <answer>( parameter ) -&gt; { statement }</answer>
+        <answer>parameter -&gt; ( statements )</answer>
+        <answer>parameter -&gt; statement</answer>
+        <answer>parameter -&gt; { statement }</answer>
         <correct>0</correct>
         <correct>2</correct>
         <correct>3</correct>
     </question>
     <question type="text">
         <text>Write a lambda expression which has no parameters, and uses println to print "Lambda" to the console.</text>
-        <correct>( ) -> System.out.println( "Lambda" )</correct>
-        <correct>( ) -> { System.out.println("Lambda"); }</correct>
+        <correct>( ) -&gt; System.out.println( "Lambda" )</correct>
+        <correct>( ) -&gt; { System.out.println("Lambda"); }</correct>
         <ignoreSpace/>
     </question>
     <question type="text">
         <text>Write a lambda expression which has one int parameter called 'n' and returns 2 times 'n'. </text>
-        <correct>n -> n * 2</correct>
-        <correct>( n ) -> n * 2</correct>
-        <correct>( n ) -> { return[s]n * 2; }</correct>
-        <correct>( int[s]n ) -> n * 2</correct>
-        <correct>( int[s]n ) -> { return[s]n * 2; }</correct>
-        <correct>( Integer[s]n ) -> n * 2</correct>
-        <correct>( Integer[s]n ) -> { return[s]n * 2; }</correct>
-        <correct>n -> { return[s]n * 2; }</correct>
+        <correct>n -&gt; n * 2</correct>
+        <correct>( n ) -&gt; n * 2</correct>
+        <correct>( n ) -&gt; { return[s]n * 2; }</correct>
+        <correct>( int[s]n ) -&gt; n * 2</correct>
+        <correct>( int[s]n ) -&gt; { return[s]n * 2; }</correct>
+        <correct>( Integer[s]n ) -&gt; n * 2</correct>
+        <correct>( Integer[s]n ) -&gt; { return[s]n * 2; }</correct>
+        <correct>n -&gt; { return[s]n * 2; }</correct>
         <ignoreSpace/>
     </question>
     <question type="text">
         <text>Write a lambda expression which has one string parameter ('s'), and returns this with an 'x' character at the end.</text>
-        <correct>s -> s + 'x'</correct>
-        <correct>( s ) -> s + 'x'</correct>
-        <correct>( String[s]s ) -> s + 'x'</correct>
-        <correct>s -> { return[s]s + 'x'; }</correct>
-        <correct>( s ) -> { return[s]s + 'x'; }</correct>
-        <correct>( String[s]s ) -> { return s + 'x'; }</correct>
-        <correct>s -> s.append( 'x' )</correct>
-        <correct>( s ) -> s.append( 'x' )</correct>
-        <correct>( String[s]s ) -> s.append( 'x' )</correct>
-        <correct>s -> { return[s]s.append( 'x' ); }</correct>
-        <correct>( s ) -> { return[s]s.append( 'x' ); }</correct>
-        <correct>( String[s]s ) -> { return[s]s.append( 'x' ); }</correct>
+        <correct>s -&gt; s + 'x'</correct>
+        <correct>( s ) -&gt; s + 'x'</correct>
+        <correct>( String[s]s ) -&gt; s + 'x'</correct>
+        <correct>s -&gt; { return[s]s + 'x'; }</correct>
+        <correct>( s ) -&gt; { return[s]s + 'x'; }</correct>
+        <correct>( String[s]s ) -&gt; { return s + 'x'; }</correct>
+        <correct>s -&gt; s.append( 'x' )</correct>
+        <correct>( s ) -&gt; s.append( 'x' )</correct>
+        <correct>( String[s]s ) -&gt; s.append( 'x' )</correct>
+        <correct>s -&gt; { return[s]s.append( 'x' ); }</correct>
+        <correct>( s ) -&gt; { return[s]s.append( 'x' ); }</correct>
+        <correct>( String[s]s ) -&gt; { return[s]s.append( 'x' ); }</correct>
         <ignoreSpace/>
     </question>
     <question type="text">
         <text>Write a lambda which has 2 int parameters ('a' and 'b'), and returns their sum.</text>
-        <correct>( a , b ) -> a + b</correct>
-        <correct>( a , b ) -> { return[s]a + b; }</correct>
-        <correct>( int[s]a , int[s]b ) -> a + b</correct>
-        <correct>( int[s]a , int[s]b ) -> { return[s]a + b; }</correct>
-        <correct>( Integer[s]a , Integer[s]b ) -> a + b</correct>
-        <correct>( Integer[s]a , Integer[s]b ) -> { return[s]a + b; }</correct>
+        <correct>( a , b ) -&gt; a + b</correct>
+        <correct>( a , b ) -&gt; { return[s]a + b; }</correct>
+        <correct>( int[s]a , int[s]b ) -&gt; a + b</correct>
+        <correct>( int[s]a , int[s]b ) -&gt; { return[s]a + b; }</correct>
+        <correct>( Integer[s]a , Integer[s]b ) -&gt; a + b</correct>
+        <correct>( Integer[s]a , Integer[s]b ) -&gt; { return[s]a + b; }</correct>
         <ignoreSpace/>
     </question>
     <question type="text">
         <text>Write a lambda that has a string parameter ('s'), and returns if that string is longer then 4 characters.</text>
-        <correct>s -> s.length() > 4</correct>
-        <correct>( s ) -> s.length() > 4</correct>
-        <correct>( String[s]s ) -> s.length() > 4</correct>
-        <correct>s -> { return[s]s.length() > 4; }</correct>
-        <correct>( s ) -> { return[s]s.length() > 4; }</correct>
-        <correct>( String[s]s ) -> { return[s]s.length() > 4; }</correct>
+        <correct>s -&gt; s.length() &gt; 4</correct>
+        <correct>( s ) -&gt; s.length() &gt; 4</correct>
+        <correct>( String[s]s ) -&gt; s.length() &gt; 4</correct>
+        <correct>s -&gt; { return[s]s.length() &gt; 4; }</correct>
+        <correct>( s ) -&gt; { return[s]s.length() &gt; 4; }</correct>
+        <correct>( String[s]s ) -&gt; { return[s]s.length() &gt; 4; }</correct>
         <ignoreSpace/>
     </question>
     <question type="true_false">
-        <text>You can assign the '() -> System.out.println("k")' lambda to a Runnable.</text>
+        <text>You can assign the '() -&gt; System.out.println("k")' lambda to a Runnable.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>You can assign the '(n) -> System.out.println(n)' lambda to a Runnable.</text>
+        <text>You can assign the '(n) -&gt; System.out.println(n)' lambda to a Runnable.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>You can assign the '(n) -> System.out.println(n)' lambda to a Consumer.</text>
+        <text>You can assign the '(n) -&gt; System.out.println(n)' lambda to a Consumer.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>The Supplier functional interface takes no parameters and returns a result. You can assign the '() -> 3' lambda to it.</text>
+        <text>The Supplier functional interface takes no parameters and returns a result. You can assign the '() -&gt; 3' lambda to it.</text>
         <correct>true</correct>
     </question>
     <question type="multi_choice">
         <text>Select the lambdas with parameters.</text>
-        <answer>() -> 3.14</answer>
-        <answer>(n) -> Math.pow(n,2)</answer>
-        <answer>() -> System.out.print("Java")</answer>
-        <answer>text -> text.replace('a','b')</answer>
+        <answer>() -&gt; 3.14</answer>
+        <answer>(n) -&gt; Math.pow(n,2)</answer>
+        <answer>() -&gt; System.out.print("Java")</answer>
+        <answer>text -&gt; text.replace('a','b')</answer>
         <correct>1</correct>
         <correct>3</correct>
     </question>
     <question type="true_false">
-        <text>The 'i -> i+2' lambda is valid.</text>
+        <text>The 'i -&gt; i+2' lambda is valid.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>The 'var => var.toString()' lambda is valid.</text>
+        <text>The 'var =&gt; var.toString()' lambda is valid.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>The 'v1,v2 -> v1 + v2' lambda is valid.</text>
+        <text>The 'v1,v2 -&gt; v1 + v2' lambda is valid.</text>
         <correct>false</correct>
     </question>
     <question type="text">
         <text>Which symbols are used to connect  the parameters and statements of a lambda?</text>
-        <correct>-></correct>
+        <correct>-&gt;</correct>
     </question>
 
     <!-- Questions about streams -->

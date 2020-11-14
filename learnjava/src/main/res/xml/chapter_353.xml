@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <chapterdata>
         <id>353</id>
@@ -24,19 +23,19 @@
         First things first, is it even a functional interface? Yes it is, it's only (abstract) method is <i>run</i>.
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="#E65100">final</font> <font color="#999900">Runnable</font> myFunction = <font color="#E65100">new</font> <font color="#999900">Runnable</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> run() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Java 8");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Java 8"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>};
 <br/><font color="gray">//we pass a 'function' in as parameter
 </font>
-<br/><font color="#E65100">new</font> <font color="#999900">Thread</font>(myFunction).start();
-        ]]>
-    </code>
+<br/><font color="#E65100">new</font> <font color="#999900">Thread</font>(myFunction).<font color="#ADD8E6">start</font>();
+        
+    ]]></code>
     <text>
         <![CDATA[
         Well, there is nothing new in this code, we could do this prior to Java 8 as well. But this is where lambda
@@ -62,12 +61,12 @@
         Let's rewrite the example above using a lambda:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#999900">Runnable</font> myFunction = () -> { <font color="#999900">System</font>.out.println("Java 8"); };
-<br/><font color="#E65100">new</font> <font color="#999900">Thread</font>(myFunction).start();
-        ]]>
-    </code>
+    <code><![CDATA[
+        
+        <font color="#999900">Runnable</font> myFunction = () -> { <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Java 8"</font>); };
+<br/><font color="#E65100">new</font> <font color="#999900">Thread</font>(myFunction).<font color="#ADD8E6">start</font>();
+        
+    ]]></code>
     <text>
         <![CDATA[
         The brackets are empty, as the <i>Runnable</i>'s method, <i>run</i> has no parameters. Similarly to <i>if</i>
@@ -75,23 +74,23 @@
         even more compact:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-<font color="#999900">Runnable</font> myFunction = () -> <font color="#999900">System</font>.out.println("Java 8");
-<br/><font color="#E65100">new</font> <font color="#999900">Thread</font>(myFunction).start();
-        ]]>
-    </code>
+    <code><![CDATA[
+        
+<font color="#999900">Runnable</font> myFunction = () -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Java 8"</font>);
+<br/><font color="#E65100">new</font> <font color="#999900">Thread</font>(myFunction).<font color="#ADD8E6">start</font>();
+        
+    ]]></code>
     <text>
         <![CDATA[
         And from here, it's only one more step to create a <i>Runnable</i>, pass it to a thread, and start that thread
         using a very compact one-liner statement:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#E65100">new</font> <font color="#999900">Thread</font>(() -> <font color="#999900">System</font>.out.println("Java 8")).start();
-        ]]>
-    </code>
+    <code><![CDATA[
+        
+        <font color="#E65100">new</font> <font color="#999900">Thread</font>(() -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Java 8"</font>)).<font color="#ADD8E6">start</font>();
+        
+    ]]></code>
     <text>
         <![CDATA[
         This previously unimaginable compactness is why lambdas should be used.
@@ -114,20 +113,20 @@
         However, if there are no parameters, you <b>must</b> write the empty brackets!
         ]]>
     </boxed>
-    <code>
-        <![CDATA[
-        <font color="#999900">Consumer</font>&lt;<font color="#999900">String</font>> printer = s -> <font color="#999900">System</font>.out.println(s);
+    <code><![CDATA[
+        
+        <font color="#999900">Consumer</font>&lt;<font color="#999900">String</font>> printer = s -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(s);
 <br/><font color="gray">//we can call it this way
 </font>
-<br/>printer.accept("Java 8");
-        ]]>
-    </code>
+<br/>printer.<font color="#ADD8E6">accept</font>(<font color="#2E8B57">"Java 8"</font>);
+        
+    ]]></code>
     <interactive instruction="Correct the lambda expression which prints the sum of two numbers!">
-        <data>
-            <![CDATA[
-(n1, n2___ -> <font color="#999900">System</font>.out.println(n1 ___ n2)
-            ]]>
-        </data>
+        <data><![CDATA[
+            
+(n1, n2___ -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(n1 ___ n2)
+            
+        ]]></data>
         <answer place="0">)</answer>
         <answer place="1">+</answer>
         <default place="1">-</default>
@@ -150,13 +149,13 @@ make lambdas as compact as possible.
         For instance, this is <b>invalid code</b>, as <i>Runnable</i>'s run cannot accept parameters:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-<font color="gray">//the compiler won't be able to make sense of 'param'
+    <code><![CDATA[
+        
+<font color="gray<font color="#2E8B57">">//the compiler won'</font>t be able to make sense of 'param'
 </font>
-<br/><font color="#E65100">new</font> <font color="#999900">Thread</font>(param -> <font color="#999900">System</font>.out.println("Hello")).start();
-        ]]>
-    </code>
+<br/><font color="#E65100">new</font> <font color="#999900">Thread</font>(param -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello"</font>)).<font color="#ADD8E6">start</font>();
+        
+    ]]></code>
     <text>
         <![CDATA[
         Let's test the previous consumer. In Java 8, most <i>collections</i> (list, map, set, etc...) got a new method: <i>forEach</i>.
@@ -164,12 +163,12 @@ make lambdas as compact as possible.
         collection.
         ]]>
     </text>
-    <code>
-        <![CDATA[
-<font color="#999900">List</font>&lt;<font color="#999900">String</font>> myList = <font color="#999900">Arrays</font>.asList("s1","s2","s3");
-<br/>myList.forEach(s -> <font color="#999900">System</font>.out.println(s));
-        ]]>
-    </code>
+    <code><![CDATA[
+        
+<font color="#999900">List</font>&lt;<font color="#999900">String</font>> myList = <font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(<font color="#2E8B57">"s1"</font>, <font color="#2E8B57">"s2"</font>, <font color="#2E8B57">"s3"</font>);
+<br/>myList.<font color="#ADD8E6">forEach</font>(s -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(s));
+        
+    ]]></code>
     <text>
         <![CDATA[
         This is again a demonstration of the power of lambdas, we were able to print all elements in a list
@@ -186,17 +185,17 @@ make lambdas as compact as possible.
         and it's method takes a parameter of the first type, and "converts" it into the second type somehow.
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="#999900">Function</font>&lt;<font color="#999900">String</font>, <font color="#999900">Integer</font>> converter = s -> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#999900">Integer</font>.parseInt(s);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#999900">Integer</font>.<font color="#ADD8E6">parseInt</font>(s);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">NumberFormatException</font> e) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> null;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>};
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Here we had to write the curly braces as there are multiple statements inside the body of the lambda. However, if
@@ -204,11 +203,11 @@ make lambdas as compact as possible.
         shortly as this:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#999900">Function</font>&lt;<font color="#999900">String</font>, <font color="#999900">Integer</font>> converter = s -> <font color="#999900">Integer</font>.parseInt(s);
-        ]]>
-    </code>
+    <code><![CDATA[
+        
+        <font color="#999900">Function</font>&lt;<font color="#999900">String</font>, <font color="#999900">Integer</font>> converter = s -> <font color="#999900">Integer</font>.<font color="#ADD8E6">parseInt</font>(s);
+        
+    ]]></code>
     <text>
         <![CDATA[
         Note that in this case, we don't even have to write the <i>return</i> keyword. Whatever that single statement returns
@@ -216,11 +215,11 @@ make lambdas as compact as possible.
         ]]>
     </text>
     <interactive instruction="Correct this declaration of a Predicate!">
-        <data>
-            <![CDATA[
+        <data><![CDATA[
+            
             <font color="#999900">Predicate</font>&lt;<font color="#999900">Double</font>> isNegative = d -> ___ &lt; ___;
-            ]]>
-        </data>
+            
+        ]]></data>
         <answer place="0">d</answer>
         <answer place="1">0</answer>
         <answer place="1">0.0</answer>

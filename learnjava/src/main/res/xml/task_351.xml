@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <taskdata>
         <id>351</id>
@@ -22,11 +21,11 @@
         First, the <i>Employee</i> class:
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
 <font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">Employee</font> {
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//<font color="#E65100">enum</font> <font color="#E65100">for</font> possible genders
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//enum for possible genders
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font> <font color="#E65100">enum</font> <font color="#999900">Gender</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;MALE, FEMALE;
@@ -41,52 +40,52 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//constructor
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Employee</font>(<font color="#999900">String</font> name, <font color="#999900">Gender</font> gender, <font color="#999900">Date</font> birthday) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.name = name;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.gender = gender;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.birthday = birthday;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">name</font> = name;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">gender</font> = gender;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">birthday</font> = birthday;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//toString override
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> toString() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">StringBuilder</font> sb = <font color="#E65100">new</font> <font color="#999900">StringBuilder</font>("<font color="#999900">Employee</font> data:\n");
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sb.append("Name: " + name + "\n");
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sb.append("Gender: " + gender.toString() + "\n");
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sb.append("Birthday: " + birthday.toLocaleString() + "\n"); <font color="gray">//deprecated!
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">toString</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">StringBuilder</font> sb = <font color="#E65100">new</font> <font color="#999900">StringBuilder</font>(<font color="#2E8B57">"Employee data:\n"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sb.<font color="#ADD8E6">append</font>(<font color="#2E8B57">"Name: "</font> + name + <font color="#2E8B57">"\n"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sb.<font color="#ADD8E6">append</font>(<font color="#2E8B57">"Gender: "</font> + gender.<font color="#ADD8E6">toString</font>() + <font color="#2E8B57">"\n"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sb.<font color="#ADD8E6">append</font>(<font color="#2E8B57">"Birthday: "</font> + birthday.<font color="#ADD8E6">toLocaleString</font>() + <font color="#2E8B57">"\n"</font>); <font color="gray">//deprecated!
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> sb.toString();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> sb.<font color="#ADD8E6">toString</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//getters
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> getName() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">getName</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> name;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Gender</font> getGender() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Gender</font> <font color="#ADD8E6">getGender</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> gender;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Date</font> getBirthday() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Date</font> <font color="#ADD8E6">getBirthday</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> birthday;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         You should upgrade this class to use the <b>java.time</b> package instead of the old <i>java.util.Date</i>.
         Now for the <i>Company</i> class:
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
 <font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">Company</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//current year, deprecated
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#E65100">static</font> <font color="#E65100">final</font> <font color="#DF7401">int</font> CURRENT_YEAR = <font color="#E65100">new</font> <font color="#999900">Date</font>().getYear();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#E65100">static</font> <font color="#E65100">final</font> <font color="#DF7401">int</font> CURRENT_YEAR = <font color="#E65100">new</font> <font color="#999900">Date</font>().<font color="#ADD8E6">getYear</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//list of employees
 </font>
@@ -95,27 +94,27 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//constructor from a list of employees
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Company</font>(<font color="#999900">List</font>&lt;<font color="#999900">Employee</font>> employees) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.employees.addAll(employees);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">employees</font>.<font color="#ADD8E6">addAll</font>(employees);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//print employees
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> printEmployees() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printEmployees</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Employee</font> e: employees) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(e.toString());
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(e.<font color="#ADD8E6">toString</font>());
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//get employees over 50 years old
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">List</font>&lt;<font color="#999900">Employee</font>> getSeniorEmployees() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">List</font>&lt;<font color="#999900">Employee</font>> <font color="#ADD8E6">getSeniorEmployees</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">Employee</font>> seniors = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Employee</font> e: employees) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//deprecated
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> age = CURRENT_YEAR - e.getBirthday().getYear();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(age > 50) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;seniors.add(e);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> age = CURRENT_YEAR - e.<font color="#ADD8E6">getBirthday</font>().<font color="#ADD8E6">getYear</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(age > <font color="#F0E130">50</font>) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;seniors.<font color="#ADD8E6">add</font>(e);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> seniors;
@@ -123,13 +122,13 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//finds the oldest employee, returns null if there are no employees
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Employee</font> findOldestEmployee() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> maxAge = -1;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Employee</font> <font color="#ADD8E6">findOldestEmployee</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> maxAge = <font color="#F0E130">-1</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Employee</font> oldest = <font color="#E65100">null</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Employee</font> e: employees) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//deprecated
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> age = CURRENT_YEAR - e.getBirthday().getYear();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> age = CURRENT_YEAR - e.<font color="#ADD8E6">getBirthday</font>().<font color="#ADD8E6">getYear</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(age > maxAge) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;oldest = e;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;maxAge = age;
@@ -140,18 +139,18 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//gets employee names, but without duplicates
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Set</font>&lt;<font color="#999900">String</font>> getUniqueNames() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Set</font>&lt;<font color="#999900">String</font>> <font color="#ADD8E6">getUniqueNames</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Set</font>&lt;<font color="#999900">String</font>> uniqueNames = <font color="#E65100">new</font> <font color="#999900">HashSet</font>&lt;>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Employee</font> e: employees) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//the set will not allow duplicates
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;uniqueNames.add(e.getName());
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;uniqueNames.<font color="#ADD8E6">add</font>(e.<font color="#ADD8E6">getName</font>());
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> uniqueNames;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         You should modernize the following in this class:
@@ -178,38 +177,38 @@
         updated version.
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
 <font color="gray">//make employees, warning: date constructor is deprecated
 </font>
-<br/><font color="#999900">Employee</font> john = <font color="#E65100">new</font> <font color="#999900">Employee</font>("John", <font color="#999900">Gender</font>.MALE, <font color="#E65100">new</font> <font color="#999900">Date</font>(1973 - 1900,7,13));
-<br/><font color="#999900">Employee</font> jane = <font color="#E65100">new</font> <font color="#999900">Employee</font>("Jane", <font color="#999900">Gender</font>.FEMALE, <font color="#E65100">new</font> <font color="#999900">Date</font>(1961 - 1900,2,21));
-<br/><font color="#999900">Employee</font> john2 = <font color="#E65100">new</font> <font color="#999900">Employee</font>("John", <font color="#999900">Gender</font>.MALE, <font color="#E65100">new</font> <font color="#999900">Date</font>(1959 - 1900,3,1));
-<br/><font color="#999900">Employee</font> donald = <font color="#E65100">new</font> <font color="#999900">Employee</font>("Donald", <font color="#999900">Gender</font>.MALE, <font color="#E65100">new</font> <font color="#999900">Date</font>(1992 - 1900,11,12));
+<br/><font color="#999900">Employee</font> john = <font color="#E65100">new</font> <font color="#999900">Employee</font>(<font color="#2E8B57"><font color="#2E8B57">"John"</font></font>, <font color="#999900">Gender</font>.MALE, <font color="#E65100">new</font> <font color="#999900">Date</font>(<font color="#F0E130">1973</font> - <font color="#F0E130">1900,7</font>,<font color="#F0E130">13</font>));
+<br/><font color="#999900">Employee</font> jane = <font color="#E65100">new</font> <font color="#999900">Employee</font>(<font color="#2E8B57">"Jane"</font>, <font color="#999900">Gender</font>.FEMALE, <font color="#E65100">new</font> <font color="#999900">Date</font>(<font color="#F0E130">1961</font> - <font color="#F0E130">1900,2</font>,<font color="#F0E130">21</font>));
+<br/><font color="#999900">Employee</font> john2 = <font color="#E65100">new</font> <font color="#999900">Employee</font>(<font color="#2E8B57"><font color="#2E8B57">"John"</font></font>, <font color="#999900">Gender</font>.MALE, <font color="#E65100">new</font> <font color="#999900">Date</font>(<font color="#F0E130">1959</font> - <font color="#F0E130">1900,3</font>,<font color="#F0E130">1</font>));
+<br/><font color="#999900">Employee</font> donald = <font color="#E65100">new</font> <font color="#999900">Employee</font>(<font color="#2E8B57">"Donald"</font>, <font color="#999900">Gender</font>.MALE, <font color="#E65100">new</font> <font color="#999900">Date</font>(<font color="#F0E130">1992</font> - <font color="#F0E130">1900,11</font>,<font color="#F0E130">12</font>));
 <br/>
 <br/><font color="gray">//make a company
 </font>
-<br/><font color="#999900">Company</font> itSolutions = <font color="#E65100">new</font> <font color="#999900">Company</font>(<font color="#999900">Arrays</font>.asList(john, jane, john2, donald));
+<br/><font color="#999900">Company</font> itSolutions = <font color="#E65100">new</font> <font color="#999900">Company</font>(<font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(john, jane, john2, donald));
 <br/>
-<br/>itSolutions.printEmployees();
+<br/>itSolutions.<font color="#ADD8E6">printEmployees</font>();
 <br/>
-<br/><font color="#999900">System</font>.out.println("Senior employees:");
-<br/>itSolutions.getSeniorEmployees()
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.forEach(e -> <font color="#999900">System</font>.out.println(e.getName()));
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Senior employees:"</font>);
+<br/>itSolutions.<font color="#ADD8E6">getSeniorEmployees</font>()
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">forEach</font>(e -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(e.<font color="#ADD8E6">getName</font>()));
 <br/>
-<br/><font color="#999900">System</font>.out.println("Oldest employee:");
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Oldest employee:"</font>);
 <br/><font color="gray">//rewrite this is you are using Optional
 </font>
-<br/><font color="#999900">Employee</font> oldest = itSolutions.findOldestEmployee();
+<br/><font color="#999900">Employee</font> oldest = itSolutions.<font color="#ADD8E6">findOldestEmployee</font>();
 <br/><font color="#E65100">if</font>(oldest != null) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(oldest.toString());
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(oldest.<font color="#ADD8E6">toString</font>());
 <br/>}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/><font color="#999900">System</font>.out.println("Unique names:");
-<br/>itSolutions.getUniqueNames()
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.forEach(<font color="#999900">System</font>.out::println);
-        ]]>
-    </code>
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Unique names:"</font>);
+<br/>itSolutions.<font color="#ADD8E6">getUniqueNames</font>()
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">forEach</font>(<font color="#999900">System</font>.<font color="#ADD8E6">out</font>::println);
+        
+    ]]></code>
     <text>
         <![CDATA[
         You may name the 2 new classes anything you like, in my solution I'll use <i>Employee8</i> and <i>Company8</i>.
@@ -221,11 +220,11 @@
             In the <i>Employee8</i> class, I replace the old <i>java.util.Date</i> class with its Java 8 equivalent, <i>java.time.LocalDate</i>.
             ]]>
         </text>
-        <code>
-            <![CDATA[
+        <code><![CDATA[
+            
 <font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">Employee8</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//<font color="#E65100">enum</font> <font color="#E65100">for</font> possible genders
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//enum for possible genders
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font> <font color="#E65100">enum</font> <font color="#999900">Gender</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;MALE, FEMALE;
@@ -240,50 +239,50 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//constructor
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Employee8</font>(<font color="#999900">String</font> name, <font color="#999900">Gender</font> gender, <font color="#999900">LocalDate</font> birthday) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.name = name;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.gender = gender;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.birthday = birthday;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">name</font> = name;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">gender</font> = gender;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">birthday</font> = birthday;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//toString override
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> toString() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">StringBuilder</font> sb = <font color="#E65100">new</font> <font color="#999900">StringBuilder</font>("Employee data:\n");
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sb.append("Name: " + name + "\n");
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sb.append("Gender: " + gender.toString() + "\n");
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sb.append("Birthday: " + birthday.toString() + "\n");
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> sb.toString();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">toString</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">StringBuilder</font> sb = <font color="#E65100">new</font> <font color="#999900">StringBuilder</font>(<font color="#2E8B57">"Employee data:\n"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sb.<font color="#ADD8E6">append</font>(<font color="#2E8B57">"Name: "</font> + name + <font color="#2E8B57">"\n"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sb.<font color="#ADD8E6">append</font>(<font color="#2E8B57">"Gender: "</font> + gender.<font color="#ADD8E6">toString</font>() + <font color="#2E8B57">"\n"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sb.<font color="#ADD8E6">append</font>(<font color="#2E8B57">"Birthday: "</font> + birthday.<font color="#ADD8E6">toString</font>() + <font color="#2E8B57">"\n"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> sb.<font color="#ADD8E6">toString</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//getters
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> getName() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">getName</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> name;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Gender</font> getGender() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Gender</font> <font color="#ADD8E6">getGender</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> gender;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">LocalDate</font> getBirthday() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">LocalDate</font> <font color="#ADD8E6">getBirthday</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> birthday;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-            ]]>
-        </code>
+            
+        ]]></code>
         <text>
             <![CDATA[
             In the <i>Company8</i> class, I update all 4 methods to use streams, lambdas, and <i>Optional</i>:
             ]]>
         </text>
-        <code>
-            <![CDATA[
+        <code><![CDATA[
+            
 <font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">Company8</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//current year
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#E65100">static</font> <font color="#E65100">final</font> <font color="#DF7401">int</font> <font color="#999900">CURRENT_YEAR</font> = <font color="#999900">Year</font>.now().getValue();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#E65100">static</font> <font color="#E65100">final</font> <font color="#DF7401">int</font> <font color="#999900">CURRENT_YEAR</font> = <font color="#999900">Year</font>.<font color="#ADD8E6">now</font>().<font color="#ADD8E6">getValue</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//list of employees
 </font>
@@ -292,89 +291,89 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//constructor from a list of employees
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Company8</font>(<font color="#999900">List</font>&lt;<font color="#999900">Employee8</font>> employees) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.employees.addAll(employees);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">employees</font>.<font color="#ADD8E6">addAll</font>(employees);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//print employees
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> printEmployees() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;employees.forEach(<font color="#999900">System</font>.out::println);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printEmployees</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;employees.<font color="#ADD8E6">forEach</font>(<font color="#999900">System</font>.<font color="#ADD8E6">out</font>::println);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//get employees over 50 years old
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">List</font>&lt;<font color="#999900">Employee8</font>> getSeniorEmployees() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> employees.stream()
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.filter(e -> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> age = <font color="#999900">CURRENT_YEAR</font> - e.getBirthday().getYear();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> age > 50;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">List</font>&lt;<font color="#999900">Employee8</font>> <font color="#ADD8E6">getSeniorEmployees</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> employees.<font color="#ADD8E6">stream</font>()
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">filter</font>(e -> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> age = <font color="#999900">CURRENT_YEAR</font> - e.<font color="#ADD8E6">getBirthday</font>().<font color="#ADD8E6">getYear</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> age > <font color="#F0E130">50</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;})
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.collect(<font color="#999900">Collectors</font>.toList());
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">collect</font>(<font color="#999900">Collectors</font>.<font color="#ADD8E6">toList</font>());
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//finds the oldest employee
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Optional</font>&lt;<font color="#999900">Employee8</font>> findOldestEmployee() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">OptionalInt</font> maxAge = employees.stream()
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.mapToInt(e -> CURRENT_YEAR - e.getBirthday().getYear()) <font color="gray">//map to age
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Optional</font>&lt;<font color="#999900">Employee8</font>> <font color="#ADD8E6">findOldestEmployee</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">OptionalInt</font> maxAge = employees.<font color="#ADD8E6">stream</font>()
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">mapToInt</font>(e -> CURRENT_YEAR - e.<font color="#ADD8E6">getBirthday</font>().<font color="#ADD8E6">getYear</font>()) <font color="gray">//map to age
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.max();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(maxAge.isPresent()) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> employees.stream()
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.filter(e -> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> age = CURRENT_YEAR - e.getBirthday().getYear();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> age == maxAge.getAsInt();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">max</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(maxAge.<font color="#ADD8E6">isPresent</font>()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> employees.<font color="#ADD8E6">stream</font>()
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">filter</font>(e -> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> age = CURRENT_YEAR - e.<font color="#ADD8E6">getBirthday</font>().<font color="#ADD8E6">getYear</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> age == maxAge.<font color="#ADD8E6">getAsInt</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;})
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.findFirst();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">findFirst</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#999900">Optional</font>.empty();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#999900">Optional</font>.<font color="#ADD8E6">empty</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//gets employee names, but without duplicates
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Set</font>&lt;<font color="#999900">String</font>> getUniqueNames() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> employees.stream()
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.map(e -> e.getName())
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.collect(<font color="#999900">Collectors</font>.toSet());
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Set</font>&lt;<font color="#999900">String</font>> <font color="#ADD8E6">getUniqueNames</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> employees.<font color="#ADD8E6">stream</font>()
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">map</font>(e -> e.<font color="#ADD8E6">getName</font>())
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">collect</font>(<font color="#999900">Collectors</font>.<font color="#ADD8E6">toSet</font>());
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-            ]]>
-        </code>
+            
+        ]]></code>
         <text>
             <![CDATA[
             And the updated test code can look something like this:
             ]]>
         </text>
-        <code>
-            <![CDATA[
+        <code><![CDATA[
+            
 <font color="gray">//make employees
 </font>
-<br/><font color="#999900">Employee8</font> john = <font color="#E65100">new</font> <font color="#999900">Employee8</font>("John", <font color="#999900">Employee8</font>.<font color="#999900">Gender</font>.MALE, <font color="#999900">LocalDate</font>.of(1973, 7, 13));
-<br/><font color="#999900">Employee8</font> jane = <font color="#E65100">new</font> <font color="#999900">Employee8</font>("Jane", <font color="#999900">Employee8</font>.<font color="#999900">Gender</font>.FEMALE, <font color="#999900">LocalDate</font>.of(1961, 2, 21));
-<br/><font color="#999900">Employee8</font> john2 = <font color="#E65100">new</font> <font color="#999900">Employee8</font>("John", <font color="#999900">Employee8</font>.<font color="#999900">Gender</font>.MALE, <font color="#999900">LocalDate</font>.of(1959, 3, 1));
-<br/><font color="#999900">Employee8</font> donald = <font color="#E65100">new</font> <font color="#999900">Employee8</font>("Donald", <font color="#999900">Employee8</font>.<font color="#999900">Gender</font>.MALE, <font color="#999900">LocalDate</font>.of(1992, 11, 12));
+<br/><font color="#999900">Employee8</font> john = <font color="#E65100">new</font> <font color="#999900">Employee8</font>(<font color="#2E8B57"><font color="#2E8B57">"John"</font></font>, <font color="#999900">Employee8</font>.<font color="#999900">Gender</font>.MALE, <font color="#999900">LocalDate</font>.<font color="#ADD8E6">of</font>(<font color="#F0E130">1973</font>, <font color="#F0E130">7</font>, <font color="#F0E130">13</font>));
+<br/><font color="#999900">Employee8</font> jane = <font color="#E65100">new</font> <font color="#999900">Employee8</font>(<font color="#2E8B57">"Jane"</font>, <font color="#999900">Employee8</font>.<font color="#999900">Gender</font>.FEMALE, <font color="#999900">LocalDate</font>.<font color="#ADD8E6">of</font>(<font color="#F0E130">1961</font>, <font color="#F0E130">2</font>, <font color="#F0E130">21</font>));
+<br/><font color="#999900">Employee8</font> john2 = <font color="#E65100">new</font> <font color="#999900">Employee8</font>(<font color="#2E8B57"><font color="#2E8B57">"John"</font></font>, <font color="#999900">Employee8</font>.<font color="#999900">Gender</font>.MALE, <font color="#999900">LocalDate</font>.<font color="#ADD8E6">of</font>(<font color="#F0E130">1959</font>, <font color="#F0E130">3</font>, <font color="#F0E130">1</font>));
+<br/><font color="#999900">Employee8</font> donald = <font color="#E65100">new</font> <font color="#999900">Employee8</font>(<font color="#2E8B57">"Donald"</font>, <font color="#999900">Employee8</font>.<font color="#999900">Gender</font>.MALE, <font color="#999900">LocalDate</font>.<font color="#ADD8E6">of</font>(<font color="#F0E130">1992</font>, <font color="#F0E130">11</font>, <font color="#F0E130">12</font>));
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/><font color="gray">//make a company
 </font>
-<br/><font color="#999900">Company8</font> itSolutions = <font color="#E65100">new</font> <font color="#999900">Company8</font>(<font color="#999900">Arrays</font>.asList(john, jane, john2, donald));
+<br/><font color="#999900">Company8</font> itSolutions = <font color="#E65100">new</font> <font color="#999900">Company8</font>(<font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(john, jane, john2, donald));
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>itSolutions.printEmployees();
+<br/>itSolutions.<font color="#ADD8E6">printEmployees</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/><font color="#999900">System</font>.out.println("Senior employees:");
-<br/>itSolutions.getSeniorEmployees()
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;   .forEach(e -> <font color="#999900">System</font>.out.println(e.getName()));
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Senior employees:"</font>);
+<br/>itSolutions.<font color="#ADD8E6">getSeniorEmployees</font>()
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;   .<font color="#ADD8E6">forEach</font>(e -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(e.<font color="#ADD8E6">getName</font>()));
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/><font color="#999900">System</font>.out.println("Oldest employee:");
-<br/><font color="#999900">Optional</font>&lt;<font color="#999900">Employee8</font>> oldest = itSolutions.findOldestEmployee();
-<br/><font color="#E65100">if</font>(oldest.isPresent()) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(oldest.get().toString());
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Oldest employee:"</font>);
+<br/><font color="#999900">Optional</font>&lt;<font color="#999900">Employee8</font>> oldest = itSolutions.<font color="#ADD8E6">findOldestEmployee</font>();
+<br/><font color="#E65100">if</font>(oldest.<font color="#ADD8E6">isPresent</font>()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(oldest.<font color="#ADD8E6">get</font>().<font color="#ADD8E6">toString</font>());
 <br/>}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/><font color="#999900">System</font>.out.println("Unique names:");
-<br/>itSolutions.getUniqueNames()
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.forEach(<font color="#999900">System</font>.out::println);
-            ]]>
-        </code>
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Unique names:"</font>);
+<br/>itSolutions.<font color="#ADD8E6">getUniqueNames</font>()
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">forEach</font>(<font color="#999900">System</font>.<font color="#ADD8E6">out</font>::println);
+            
+        ]]></code>
     </solution>
 </resources>

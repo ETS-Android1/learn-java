@@ -1,8 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<!-- Exam of course 'The basics -->
-
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- Exam of course 'The basics --><resources>
     <examdata>
         <id>5</id>
         <questionAmount>25</questionAmount>
@@ -298,7 +295,7 @@
     <question type="single_choice">
         <text>Which operator is used to check equality?</text>
         <answer>==</answer>
-        <answer>-></answer>
+        <answer>-&gt;</answer>
         <answer>=</answer>
         <answer>+</answer>
         <correct>0</correct>

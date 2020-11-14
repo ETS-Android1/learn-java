@@ -1,17 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<!-- 'File extensions and project structure', belongs to course 'The basics' -->
-
-<!--
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- 'File extensions and project structure', belongs to course 'The basics' --><!--
 <interactive instruction="">
     <data>
 
     </data>
     <answer place="0"></answer>
 </interactive>
--->
-
-<resources>
+--><resources>
     <chapterdata>
         <id>52</id>
         <name>File extensions and project structure</name>
@@ -143,11 +138,11 @@
         package <i>com</i>, then the the first statement must be:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#E65100">package</font> com.learnjava;
-        ]]>
-    </code>
+    <code><![CDATA[
+        
+        <font color="#E65100">package</font> com.<font color="#ADD8E6">learnjava</font>;
+        
+    ]]></code>
     <text>
         <![CDATA[
         As we can see, the package hierarchy can be resolved with dot characters. The package declaration
@@ -173,15 +168,15 @@
         what we must write:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#E65100">package </font>com.learnjava;
+    <code><![CDATA[
+        
+        <font color="#E65100">package </font>com.<font color="#ADD8E6">learnjava</font>;
         <br/>
-        <br/><font color="#E65100">import </font>java.util.<font color="#999900">Date</font>;
+        <br/><font color="#E65100">import </font>java.<font color="#ADD8E6">util</font>.<font color="#999900">Date</font>;
         <br/>
         <br/><font color="gray">//Rest of the code...</font>
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         By convention, the <i>import</i> statements follow after the package declaration, at the beginning of the file.
@@ -201,20 +196,20 @@
         For example, this imports all classes from the <i>java.nio</i> package:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-<font color="#E65100">import</font> java.nio.*;
-        ]]>
-    </code>
+    <code><![CDATA[
+        
+<font color="#E65100">import</font> java.<font color="#ADD8E6">nio</font>.*;
+        
+    ]]></code>
     <interactive instruction="Complete the package declaration and the import statements!">
-        <data>
-<![CDATA[
-___ com.learnjava;
+        <data><![CDATA[
+
+___ com.<font color="#ADD8E6">learnjava</font>;
 <br/>
-<br/><font color="#E65100">import</font> java.util.<font color="#999900">Collections</font>;
-<br/>___ java.util.<font color="#999900">Map</font>;
-]]>
-        </data>
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">util</font>.<font color="#999900">Collections</font>;
+<br/>___ java.<font color="#ADD8E6">util</font>.<font color="#999900">Map</font>;
+
+        ]]></data>
         <answer place="0">package</answer>
         <answer place="1">import</answer>
     </interactive>

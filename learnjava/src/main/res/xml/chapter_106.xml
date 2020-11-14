@@ -1,8 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<!--Belongs to course 'Primitives, control flow and I/O' -->
-
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--Belongs to course 'Primitives, control flow and I/O' --><resources>
     <chapterdata>
         <id>106</id>
         <name>Providing output</name>
@@ -52,23 +49,23 @@
         See this code sample and image for some examples:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//usage of the line <font color="#E65100">break</font> character
+    <code><![CDATA[
+        
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//usage of the line break character
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Line 1\nLine 2");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Line 1\nLine 2"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//this just prints a line <font color="#E65100">break</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//this just prints a line break
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//usage of the tab character
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Tab1\tTab2");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Tab1\tTab2"</font>);
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         When running this code, the text will indeed appear formatted in the console:
@@ -88,22 +85,22 @@
         can use it not only to print to the console, but also to a file!
         ]]>
     </text>
-    <code>
-        <![CDATA[
-<font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) <font color="#E65100">throws</font> <font color="#999900">Exception</font> {
+    <code><![CDATA[
+        
+<font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) <font color="#E65100">throws</font> <font color="#999900">Exception</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create the PrintWriter
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">PrintWriter</font> pw = <font color="#E65100">new</font> <font color="#999900">PrintWriter</font>("output.txt", "UTF-8");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">PrintWriter</font> pw = <font color="#E65100">new</font> <font color="#999900">PrintWriter</font>(<font color="#2E8B57">"output.txt"</font>, <font color="#2E8B57">"UTF-8"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//print something to file
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;pw.println("This is a line");
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;pw.print("Here is another line");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;pw.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"This is a line"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;pw.<font color="#ADD8E6">print</font>(<font color="#2E8B57">"Here is another line"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;pw.close();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;pw.<font color="#ADD8E6">close</font>();
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Just as with reading from files, Java requires us to implement some exception handling, but we don't
@@ -130,11 +127,11 @@
         We must construct our <i>PrintWriter</i> a bit differently to achieve this behaviour:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) <font color="#E65100">throws</font> <font color="#999900">Exception</font> {
+    <code><![CDATA[
+        
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) <font color="#E65100">throws</font> <font color="#999900">Exception</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">File</font> file = <font color="#E65100">new</font> <font color="#999900">File</font>("output.txt");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">File</font> file = <font color="#E65100">new</font> <font color="#999900">File</font>(<font color="#2E8B57">"output.txt"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">FileOutputStream</font> fos = <font color="#E65100">new</font> <font color="#999900">FileOutputStream</font>(file, <font color="#E65100">true</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//this PrintWriter will append	&nbsp;&nbsp;&nbsp;&nbsp;
 </font>
@@ -142,12 +139,12 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//print something to file
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;pw.println("Line printed!");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;pw.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Line printed!"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;pw.close();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;pw.<font color="#ADD8E6">close</font>();
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         The key is the second parameter of the <b>FileOutputSteam</b>. By setting it to true we enable the append mode.
@@ -157,20 +154,20 @@
         ]]>
     </text>
     <interactive instruction="Complete the program so that it writes the array to a file called 'results.txt'">
-        <data>
-            <![CDATA[
-<font color="#999900">String</font>[] lines = calculate(); <font color="gray">//suppose <font color="#E65100">this</font> works
+        <data><![CDATA[
+            
+<font color="#999900">String</font>[] lines = <font color="#ADD8E6">calculate</font>(); <font color="gray">//suppose this works
 </font>
 <br/><font color="#999900">File</font> file = <font color="#E65100">new</font> <font color="#999900">File</font>(___);
 <br/><font color="#999900">FileOutputStream</font> stream = <font color="#E65100">new</font> <font color="#999900">FileOutputStream</font>(file);
-<br/>___ writer = <font color="#E65100">new</font> ___(stream);
-<br/>___(<font color="#999900">String</font> line: lines) { <font color="gray">//iterate lines
+<br/>___ writer = <font color="#E65100">new</font> <font color="#ADD8E6">___</font>(stream);
+<br/><font color="#ADD8E6">___</font>(<font color="#999900">String</font> line: lines) { <font color="gray">//iterate lines
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;writer.println(line);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;writer.<font color="#ADD8E6">println</font>(line);
 <br/>}
-<br/>writer.close();
-            ]]>
-        </data>
+<br/>writer.<font color="#ADD8E6">close</font>();
+            
+        ]]></data>
         <answer place="0">"results.txt"</answer>
         <answer place="1">PrintWriter</answer>
         <answer place="2">PrintWriter</answer>
@@ -183,61 +180,61 @@
         we already have out lines placed in a list or an array:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) <font color="#E65100">throws</font> <font color="#999900">Exception</font> {
+    <code><![CDATA[
+        
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) <font color="#E65100">throws</font> <font color="#999900">Exception</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create the lines
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;<font color="#999900">String</font>> lines = createLines();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;<font color="#999900">String</font>> lines = <font color="#ADD8E6">createLines</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create path object
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Path</font> filePath = <font color="#999900">Paths</font>.get("output.txt");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Path</font> filePath = <font color="#999900">Paths</font>.<font color="#ADD8E6">get</font>(<font color="#2E8B57">"output.txt"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Files</font>.write(filePath, lines, <font color="#999900">StandardCharsets</font>.<font color="#999900">UTF_8</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Files</font>.<font color="#ADD8E6">write</font>(filePath, lines, <font color="#999900">StandardCharsets</font>.<font color="#999900">UTF_<font color="#F0E130">8</font></font>);
 <br/>}
 <br/>
 <br/><font color="gray">/*
 <br/>This method creates our lines,
 <br/>placed in a list.
 <br/>*/</font>
-<br/><font color="#E65100">static</font> <font color="#999900">ArrayList</font>&lt;String> createLines() {
+<br/><font color="#E65100">static</font> <font color="#999900">ArrayList</font>&lt;String> <font color="#ADD8E6">createLines</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//construct list
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;<font color="#999900">String</font>> l = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//add some lines
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;l.add("line 1");
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;l.add("line 2");
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;l.add("line 3");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;l.<font color="#ADD8E6">add</font>(<font color="#2E8B57">"line 1"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;l.<font color="#ADD8E6">add</font>(<font color="#2E8B57">"line 2"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;l.<font color="#ADD8E6">add</font>(<font color="#2E8B57">"line 3"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> l;
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Note that this method does not append by default! To make is append lines to existing files we
         must add an additional parameter to the write method, like so:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) <font color="#E65100">throws</font> <font color="#999900">Exception</font> {
+    <code><![CDATA[
+        
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) <font color="#E65100">throws</font> <font color="#999900">Exception</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create the lines
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;<font color="#999900">String</font>> lines = createLines();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;<font color="#999900">String</font>> lines = <font color="#ADD8E6">createLines</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create path object
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Path</font> filePath = <font color="#999900">Paths</font>.get("output.txt");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Path</font> filePath = <font color="#999900">Paths</font>.<font color="#ADD8E6">get</font>(<font color="#2E8B57">"output.txt"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//this will now append
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Files</font>.write(filePath, lines, <font color="#999900">StandardCharsets</font>.<font color="#999900">UTF_8</font>,
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Files</font>.<font color="#ADD8E6">write</font>(filePath, lines, <font color="#999900">StandardCharsets</font>.<font color="#999900">UTF_<font color="#F0E130">8</font></font>,
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">StandardOpenOption</font>.<font color="#999900">APPEND</font>);
 <br/>}
 <br/>
@@ -245,19 +242,19 @@
 <br/>This method creates our lines,
 <br/>placed in a list.
 <br/>*/</font>
-<br/><font color="#E65100">static</font> <font color="#999900">ArrayList</font>&lt;String> createLines() {
+<br/><font color="#E65100">static</font> <font color="#999900">ArrayList</font>&lt;String> <font color="#ADD8E6">createLines</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//construct list
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;String> l = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//add some lines
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;l.add("line 1");
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;l.add("line 2");
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;l.add("line 3");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;l.<font color="#ADD8E6">add</font>(<font color="#2E8B57">"line 1"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;l.<font color="#ADD8E6">add</font>(<font color="#2E8B57">"line 2"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;l.<font color="#ADD8E6">add</font>(<font color="#2E8B57">"line 3"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> l;
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
 </resources>

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <taskdata>
         <id>151</id>
@@ -97,12 +96,12 @@
             The customer, returning customer classes:
             ]]>
         </text>
-        <code>
-            <![CDATA[
+        <code><![CDATA[
+            
 <font color="#E65100">package</font> taskshop;
 <br/>
-<br/><font color="#E65100">import</font> java.util.<font color="#999900">ArrayList</font>;
-<br/><font color="#E65100">import</font> java.util.<font color="#999900">List</font>;
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">util</font>.<font color="#999900">ArrayList</font>;
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">util</font>.<font color="#999900">List</font>;
 <br/>
 <br/><font color="gray">/**
 <br/> * Represents a customer of the online shop.
@@ -133,10 +132,10 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @throws InvalidAgeException When the age is not positive.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Customer</font>(<font color="#999900">String</font> name, <font color="#DF7401">int</font> age, <font color="#999900">Address</font> address) <font color="#E65100">throws</font> <font color="#999900">InvalidAgeException</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.name = name;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(age &lt;= 0) <font color="#E65100">throw</font> new <font color="#999900">InvalidAgeException</font>();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.age = age;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.address = address;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">name</font> = name;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(age &lt;= <font color="#F0E130">0</font>) <font color="#E65100">throw</font> new <font color="#999900">InvalidAgeException</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">age</font> = age;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">address</font> = address;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;orderHistory = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>(); <font color="gray">//initialize list
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
@@ -145,18 +144,18 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Register a new order in the customers history.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @param order The order to be registered.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> addOrder(<font color="#999900">Order</font> order) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;orderHistory.add(order);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">addOrder</font>(<font color="#999900">Order</font> order) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;orderHistory.<font color="#ADD8E6">add</font>(order);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Calculates the total spending of the customer, using {@link #orderHistory}.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @return The total spending.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> totalSpending() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> sum = 0;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">totalSpending</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> sum = <font color="#F0E130">0</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Order</font> order: orderHistory) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum += order.totalPrice(); <font color="gray">//use the total price method of order.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum += order.<font color="#ADD8E6">totalPrice</font>(); <font color="gray">//use the total price method of order.
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> sum;
@@ -164,31 +163,31 @@
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">// -------------------- Getters and setters -----------------------
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> getAge() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">getAge</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> age;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> setAge(<font color="#DF7401">int</font> age) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.age = age;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">setAge</font>(<font color="#DF7401">int</font> age) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">age</font> = age;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Address</font> getAddress() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Address</font> <font color="#ADD8E6">getAddress</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> address;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> setAddress(<font color="#999900">Address</font> address) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.address = address;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">setAddress</font>(<font color="#999900">Address</font> address) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">address</font> = address;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> getName() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">getName</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> name;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
 <br/>
-            ]]>
-        </code>
-        <code>
-            <![CDATA[
+            
+        ]]></code>
+        <code><![CDATA[
+            
 <font color="#E65100">package</font> taskshop;
 <br/>
 <br/><font color="gray">/**
@@ -212,10 +211,10 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">ReturningCustomer</font>(<font color="#999900">String</font> name, <font color="#DF7401">int</font> age, <font color="#999900">Address</font> address,
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> discount) <font color="#E65100">throws</font> <font color="#999900">InvalidAgeException</font>, <font color="#999900">IllegalArgumentException</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>(name, age, address);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(discount &lt; 0 || discount > 1) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">throw new</font> <font color="#999900">IllegalArgumentException</font>(discount + " is not a valid multiplier");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(discount &lt; <font color="#F0E130">0</font> || discount > <font color="#F0E130">1</font>) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">throw new</font> <font color="#999900">IllegalArgumentException</font>(discount + <font color="#2E8B57">" is not a valid multiplier"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.discount = discount;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">discount</font> = discount;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
@@ -224,24 +223,24 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @return The total spending.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> totalSpending() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return super</font>.totalSpending() * discount;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">totalSpending</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return super</font>.<font color="#ADD8E6">totalSpending</font>() * discount;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> getDiscount() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">getDiscount</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> discount;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
 <br/>
-            ]]>
-        </code>
+            
+        ]]></code>
         <text>
             <![CDATA[
             The custom exception used:
             ]]>
         </text>
-        <code>
-            <![CDATA[
+        <code><![CDATA[
+            
             <font color="#E65100">package</font> taskshop;
 <br/>
 <br/><font color="gray">/**
@@ -252,19 +251,19 @@
 <br/><font color="#E65100">public class</font> <font color="#999900">InvalidAgeException</font> <font color="#E65100">extends</font> <font color="#999900">RuntimeException</font> {
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">InvalidAgeException</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>("Age must be a positive number!");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>(<font color="#2E8B57">"Age must be a positive number!"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>}
-            ]]>
-        </code>
+            
+        ]]></code>
         <text>
             <![CDATA[
             The address class, very simple:
             ]]>
         </text>
-        <code>
-            <![CDATA[
+        <code><![CDATA[
+            
             <font color="#E65100">package</font> taskshop;
 <br/>
 <br/><font color="gray">/**
@@ -281,30 +280,30 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">int</font> houseNumber;
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> Address(<font color="#DF7401">int</font> postalCode, <font color="#999900">String</font> city, <font color="#999900">String</font> street, <font color="#DF7401">int</font> houseNumber) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.postalCode = postalCode;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.city = city;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.street = street;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.houseNumber = houseNumber;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#ADD8E6">Address</font>(<font color="#DF7401">int</font> postalCode, <font color="#999900">String</font> city, <font color="#999900">String</font> street, <font color="#DF7401">int</font> houseNumber) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">postalCode</font> = postalCode;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">city</font> = city;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">street</font> = street;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">houseNumber</font> = houseNumber;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//override toString for nice string representation of address
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> toString() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> postalCode + ", " + city + "; " + street + " " + houseNumber + ".";
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">toString</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> postalCode + <font color="#2E8B57">", "</font> + city + <font color="#2E8B57">"; "</font> + street + <font color="#2E8B57">" "</font> + houseNumber + <font color="#2E8B57">"."</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
 <br/>
-            ]]>
-        </code>
+            
+        ]]></code>
         <text>
             <![CDATA[
             The product class and the <i>ProductType</i> enum:
             ]]>
         </text>
-        <code>
-            <![CDATA[
+        <code><![CDATA[
+            
             <font color="#E65100">package</font> taskshop;
 <br/>
 <br/><font color="gray">/**
@@ -333,56 +332,56 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @throws IllegalArgumentException When the price is not positive.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Product</font>(<font color="#999900">String</font> name, <font color="#999900">ProductType</font> type, <font color="#DF7401">int</font> price) <font color="#E65100">throws</font> <font color="#999900">IllegalArgumentException</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.name = name;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.type = type;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(price &lt;= 0) <font color="#E65100">throw new</font> <font color="#999900">IllegalArgumentException</font>("Price must be positive");
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.price = price;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.id = generateUniqueId();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">name</font> = name;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">type</font> = type;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(price &lt;= <font color="#F0E130">0</font>) <font color="#E65100">throw new</font> <font color="#999900">IllegalArgumentException</font>(<font color="#2E8B57"><font color="#2E8B57">"Price must be positive"</font></font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">price</font> = price;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">id</font> = <font color="#ADD8E6">generateUniqueId</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//a helper variable for id generation.</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private static</font> <font color="#DF7401">int</font> currentProductId = 1;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private static</font> <font color="#DF7401">int</font> currentProductId = <font color="#F0E130">1</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Creates an id for a newly created product object. Uses {@link #currentProductId}.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @return The created id.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private static</font> <font color="#DF7401">int</font> generateUniqueId() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private static</font> <font color="#DF7401">int</font> <font color="#ADD8E6">generateUniqueId</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> currentProductId++; <font color="gray">//return, then increment
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">// ------------------ Getters and setters. ----------------------------------
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> getName() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">getName</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> name;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> setName(<font color="#999900">String</font> name) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.name = name;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">setName</font>(<font color="#999900">String</font> name) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">name</font> = name;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> getPrice() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">getPrice</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> price;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> setPrice(<font color="#DF7401">int</font> price) <font color="#E65100">throws</font> <font color="#999900">IllegalArgumentException</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(price &lt;= 0) <font color="#E65100">throw new</font> <font color="#999900">IllegalArgumentException</font>("Price must be positive");
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.price = price;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">setPrice</font>(<font color="#DF7401">int</font> price) <font color="#E65100">throws</font> <font color="#999900">IllegalArgumentException</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(price &lt;= <font color="#F0E130">0</font>) <font color="#E65100">throw new</font> <font color="#999900">IllegalArgumentException</font>(<font color="#2E8B57"><font color="#2E8B57">"Price must be positive"</font></font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">price</font> = price;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> getId() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">getId</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> id;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">ProductType</font> getType() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">ProductType</font> <font color="#ADD8E6">getType</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> type;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-            ]]>
-        </code>
-        <code>
-            <![CDATA[
+            
+        ]]></code>
+        <code><![CDATA[
+            
 <font color="#E65100">package</font> taskshop;
 <br/>
 <br/><font color="gray">/**
@@ -399,20 +398,20 @@
 <br/>
 <br/>}
 <br/>
-            ]]>
-        </code>
+            
+        ]]></code>
         <text>
             <![CDATA[
             The order class, implemented with a <b>HashMap</b>. Don't worry if you don't quite get this. Maps will be
             covered in the next course.
             ]]>
         </text>
-        <code>
-            <![CDATA[
+        <code><![CDATA[
+            
             <font color="#E65100">package</font> taskshop;
 <br/>
-<br/><font color="#E65100">import</font> java.util.<font color="#999900">HashMap</font>;
-<br/><font color="#E65100">import</font> java.util.<font color="#999900">Map</font>.<font color="#999900">Entry</font>;
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">util</font>.<font color="#999900">HashMap</font>;
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">util</font>.<font color="#999900">Map</font>.<font color="#999900">Entry</font>;
 <br/>
 <br/><font color="gray">/**
 <br/> * Represents a purchase in the online shop.
@@ -430,72 +429,72 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @throws IllegalArgumentException If the product map is empty, or contains invalid product amounts.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Order</font>(<font color="#999900">HashMap</font>&lt;<font color="#999900">Product</font>, <font color="#999900">Integer</font>> products) <font color="#E65100">throws</font> <font color="#999900">IllegalArgumentException</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(products.isEmpty()) <font color="#E65100">throw new</font> <font color="#999900">IllegalArgumentException</font>("No products detected");
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> amount: products.values()) { <font color="gray">//iterate and check product amounts
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(products.<font color="#ADD8E6">isEmpty</font>()) <font color="#E65100">throw new</font> <font color="#999900">IllegalArgumentException</font>(<font color="#2E8B57">"No products detected"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> amount: products.<font color="#ADD8E6">values</font>()) { <font color="gray">//iterate and check product amounts
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(amount &lt;= 0) <font color="#E65100">throw new</font> <font color="#999900">IllegalArgumentException</font>("Amount of product must be positive");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(amount &lt;= <font color="#F0E130">0</font>) <font color="#E65100">throw new</font> <font color="#999900">IllegalArgumentException</font>(<font color="#2E8B57">"Amount of product must be positive"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.products = products;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">products</font> = products;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Calculates the total price of products in this order.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * <font color="red">@return</font> The calculated sum.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> totalPrice() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> sum = 0;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Entry</font>&lt;<font color="#999900">Product</font>, <font color="#999900">Integer</font>> pair: products.entrySet()) { <font color="gray">//iterate over the pairs
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">totalPrice</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> sum = <font color="#F0E130">0</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Entry</font>&lt;<font color="#999900">Product</font>, <font color="#999900">Integer</font>> pair: products.<font color="#ADD8E6">entrySet</font>()) { <font color="gray">//iterate over the pairs
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum += pair.getKey().getPrice() * pair.getValue(); <font color="gray">//a pair holds price*amount value
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum += pair.<font color="#ADD8E6">getKey</font>().<font color="#ADD8E6">getPrice</font>() * pair.<font color="#ADD8E6">getValue</font>(); <font color="gray">//a pair holds price*amount value
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> sum;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
 <br/>
-            ]]>
-        </code>
+            
+        ]]></code>
         <text>
             <![CDATA[
             The only thing left is to run some tests in the main method:
             ]]>
         </text>
-        <code>
-            <![CDATA[
-            <font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
+        <code><![CDATA[
+            
+            <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create some products</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Product</font> tv = <font color="#E65100">new</font> <font color="#999900">Product</font>("Television", <font color="#999900">ProductType</font>.TECH, 300);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Product</font> tShirt = <font color="#E65100">new</font> <font color="#999900">Product</font>("T-shirt", <font color="#999900">ProductType</font>.CLOTHES, 10);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Product</font> tv = <font color="#E65100">new</font> <font color="#999900">Product</font>(<font color="#2E8B57">"Television"</font>, <font color="#999900">ProductType</font>.TECH, <font color="#F0E130">300</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Product</font> tShirt = <font color="#E65100">new</font> <font color="#999900">Product</font>(<font color="#2E8B57">"T-shirt"</font>, <font color="#999900">ProductType</font>.CLOTHES, <font color="#F0E130">10</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create a customer (the address is random)
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Address</font> addressOfJani = <font color="#E65100">new</font> <font color="#999900">Address</font>(1133, "Budapest", "Kossuth", 23);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Customer</font> jani = <font color="#E65100">new</font> <font color="#999900">Customer</font>("Joe", 30, addressOfJani);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Jani lives at " + jani.getAddress());
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Address</font> addressOfJani = <font color="#E65100">new</font> <font color="#999900">Address</font>(<font color="#F0E130">1133</font>, <font color="#2E8B57">"Budapest"</font>, <font color="#2E8B57">"Kossuth"</font>, <font color="#F0E130">23</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Customer</font> jani = <font color="#E65100">new</font> <font color="#999900">Customer</font>(<font color="#2E8B57">"Joe"</font>, <font color="#F0E130">30</font>, addressOfJani);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Jani lives at "</font> + jani.<font color="#ADD8E6">getAddress</font>());
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create an order
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">HashMap</font>&lt;<font color="#999900">Product</font>, <font color="#999900">Integer</font>> pairs = <font color="#E65100">new</font> <font color="#999900">HashMap</font>&lt;>();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;pairs.put(tv, 1); <font color="gray">//1 tv
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;pairs.<font color="#ADD8E6">put</font>(tv, <font color="#F0E130">1</font>); <font color="gray">//1 tv
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;pairs.put(tShirt, 3); <font color="gray">//3 shirts
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;pairs.<font color="#ADD8E6">put</font>(tShirt, <font color="#F0E130">3</font>); <font color="gray">//3 shirts
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Order</font> orderOfJani = <font color="#E65100">new</font> <font color="#999900">Order</font>(pairs);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//add to history
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;jani.addOrder(orderOfJani);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Jani spent " + jani.totalSpending() + " (normal customer)");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;jani.<font color="#ADD8E6">addOrder</font>(orderOfJani);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"Jani spent "</font></font> + jani.<font color="#ADD8E6">totalSpending</font>() + " (normal customer)");
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create jani as returning customer, 20% discount
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ReturningCustomer</font> janiReturning = <font color="#E65100">new</font> <font color="#999900">ReturningCustomer</font>("Jani", 30, addressOfJani, 0.8);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;janiReturning.addOrder(orderOfJani); <font color="gray">//same order
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ReturningCustomer</font> janiReturning = <font color="#E65100">new</font> <font color="#999900">ReturningCustomer</font>(<font color="#2E8B57">"Jani"</font>, <font color="#F0E130">30</font>, addressOfJani, <font color="#F0E130">0.8</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;janiReturning.<font color="#ADD8E6">addOrder</font>(orderOfJani); <font color="gray">//same order
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Jani spent " + janiReturning.totalSpending() + " (returning customer)");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"Jani spent "</font></font> + janiReturning.<font color="#ADD8E6">totalSpending</font>() + " (returning customer)");
 <br/>}
-            ]]>
-        </code>
+            
+        ]]></code>
         <text>
             <![CDATA[
             When running it, we can see that the total spending will be indeed less when he is a returning customer.

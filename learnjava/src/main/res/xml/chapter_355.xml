@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <chapterdata>
         <id>355</id>
@@ -23,51 +22,51 @@
         indicate that no object can be returned, a common practice was to return null.
         ]]>
     </boxed>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">School</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//contains student id and name pairs
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">Map</font>&lt;<font color="#999900">Integer</font>, <font color="#999900">String</font>> students = <font color="#E65100">new</font> <font color="#999900">HashMap</font>&lt;>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">School</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;students.put(21, "John");
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;students.put(17, "Jane");
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;students.put(63, "Tom");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;students.<font color="#ADD8E6">put</font>(<font color="#F0E130">21</font>, <font color="#2E8B57">"John"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;students.<font color="#ADD8E6">put</font>(<font color="#F0E130">17</font>, <font color="#2E8B57">"Jane"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;students.<font color="#ADD8E6">put</font>(<font color="#F0E130">63</font>, <font color="#2E8B57">"Tom"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//gets a student name by id
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> getStudentById(<font color="#DF7401">int</font> id) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(students.containsKey(id)) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> students.get(id);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">getStudentById</font>(<font color="#DF7401">int</font> id) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(students.<font color="#ADD8E6">containsKey</font>(id)) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> students.<font color="#ADD8E6">get</font>(id);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> { <font color="gray">//return null if not found
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return null</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         The idea of <i>Optional</i> is to make it very clear that this method may not find a student name! Instead of
         returning null, we'll clarify this by returning an <i>Optional<String></i>.
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="gray">//gets a student name by id
 </font>
-<br/><font color="#E65100">public</font> <font color="#999900">Optional</font>&lt;<font color="#999900">String</font>> getStudentById(<font color="#DF7401">int</font> id) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(students.containsKey(id)) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#999900">Optional</font>.of(students.get(id));
+<br/><font color="#E65100">public</font> <font color="#999900">Optional</font>&lt;<font color="#999900">String</font>> <font color="#ADD8E6">getStudentById</font>(<font color="#DF7401">int</font> id) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(students.<font color="#ADD8E6">containsKey</font>(id)) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#999900">Optional</font>.<font color="#ADD8E6">of</font>(students.<font color="#ADD8E6">get</font>(id));
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> { <font color="gray">//return empty optional if not found
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#999900">Optional</font>.empty();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#999900">Optional</font>.<font color="#ADD8E6">empty</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         Note that we create <i>Optional</i> objects with the <i>of</i> and <i>empty</i> static methods. The first one is used to
@@ -75,29 +74,29 @@
         result of the method:
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="#999900">School</font> school = <font color="#E65100">new</font> <font color="#999900">School</font>();
-<br/><font color="#999900">Optional</font>&lt;<font color="#999900">String</font>> id21Opt = school.getStudentById(21);
+<br/><font color="#999900">Optional</font>&lt;<font color="#999900">String</font>> id21Opt = school.<font color="#ADD8E6">getStudentById</font>(<font color="#F0E130">21</font>);
 <br/><font color="gray">//check if this contains a string
 </font>
-<br/><font color="#E65100">if</font>(id21Opt.isPresent()) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> name = id21Opt.get();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Student with id 21: " + name);
+<br/><font color="#E65100">if</font>(id21Opt.<font color="#ADD8E6">isPresent</font>()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> name = id21Opt.<font color="#ADD8E6">get</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Student with id 21: "</font> + name);
 <br/>} <font color="#E65100">else</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("No student found with id 21");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"No student found with id 21"</font>);
 <br/>}
-<br/><font color="#999900">Optional</font>&lt;<font color="#999900">String</font>> id43Opt = school.getStudentById(43);
+<br/><font color="#999900">Optional</font>&lt;<font color="#999900">String</font>> id43Opt = school.<font color="#ADD8E6">getStudentById</font>(<font color="#F0E130">43</font>);
 <br/><font color="gray">//check if this contains a string
 </font>
-<br/><font color="#E65100">if</font>(id43Opt.isPresent()) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> name = id43Opt.get();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Student with id 43: " + name);
+<br/><font color="#E65100">if</font>(id43Opt.<font color="#ADD8E6">isPresent</font>()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> name = id43Opt.<font color="#ADD8E6">get</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Student with id 43: "</font> + name);
 <br/>} <font color="#E65100">else</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("No student found with id 43");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"No student found with id 43"</font>);
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         The key method here is <i>isPresent</i> which will determine if the <i>Optional</i> holds a value. If this returns
@@ -112,19 +111,19 @@
         don't always return a value use <i>Optional</i>.
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#999900">List</font>&lt;<font color="#999900">String</font>> names = <font color="#999900">Arrays</font>.asList("John", "Jane", "Tom");
+    <code><![CDATA[
+        
+        <font color="#999900">List</font>&lt;<font color="#999900">String</font>> names = <font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(<font color="#2E8B57">"John"</font>, "Jane", <font color="#2E8B57">"Tom"</font>);
 <br/><font color="gray">//get the first element of the stream
 </font>
-<br/><font color="#999900">Optional</font>&lt;<font color="#999900">String</font>> nameOpt = names.stream().findFirst();
+<br/><font color="#999900">Optional</font>&lt;<font color="#999900">String</font>> nameOpt = names.<font color="#ADD8E6">stream</font>().<font color="#ADD8E6">findFirst</font>();
 <br/><font color="gray">//if the steam is empty, this optional is empty too
 </font>
-<br/><font color="#E65100">if</font>(nameOpt.isPresent()) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println("Stream is not empty, first: " + nameOpt.get());
+<br/><font color="#E65100">if</font>(nameOpt.<font color="#ADD8E6">isPresent</font>()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Stream is not empty, first: "</font> + nameOpt.<font color="#ADD8E6">get</font>());
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
         If we do not wan't to bother with the <i>Optional</i>, and get a string even if the stream is empty, we can use
@@ -132,15 +131,15 @@
         get a "default" value (the parameter).
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#999900">List</font>&lt;<font color="#999900">String</font>> names = <font color="#999900">Arrays</font>.asList("John", "Jane", "Tom");
-<br/><font color="#999900">String</font> firstName = names.stream()
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.findFirst()
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.orElse("Empty stream");
-<br/><font color="#999900">System</font>.out.println(firstName);
-        ]]>
-    </code>
+    <code><![CDATA[
+        
+        <font color="#999900">List</font>&lt;<font color="#999900">String</font>> names = <font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(<font color="#2E8B57">"John"</font>, "Jane", <font color="#2E8B57">"Tom"</font>);
+<br/><font color="#999900">String</font> firstName = names.<font color="#ADD8E6">stream</font>()
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">findFirst</font>()
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">orElse</font>(<font color="#2E8B57">"Empty stream"</font>);
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(firstName);
+        
+    ]]></code>
     <text>
         <![CDATA[
         In these examples, <i>Optional</i> was always used as a return value, however, it's also possible
@@ -160,28 +159,28 @@
         Method references are used to make lambda expressions even shorter. Consider this example:
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="gray">//the same name list again
 </font>
-<br/><font color="#999900">List</font>&lt;<font color="#999900">String</font>> names = <font color="#999900">Arrays</font>.asList("John", "Jane", "Tom");
+<br/><font color="#999900">List</font>&lt;<font color="#999900">String</font>> names = <font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(<font color="#2E8B57">"John"</font>, "Jane", <font color="#2E8B57">"Tom"</font>);
 <br/><font color="gray">//print all elements
 </font>
-<br/>names.forEach(name -> <font color="#999900">System</font>.out.println(name));
-        ]]>
-    </code>
+<br/>names.<font color="#ADD8E6">forEach</font>(name -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(name));
+        
+    ]]></code>
     <text>
         <![CDATA[
         Instead of this, we can reference the <i>println</i> method of the object <i>System.out</i>. To do this,
         new syntax is added, <b>::</b>
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="gray">//print all elements</font>
-<br/>names.forEach(<font color="#999900">System</font>.out::println);
-        ]]>
-    </code>
+<br/>names.<font color="#ADD8E6">forEach</font>(<font color="#999900">System</font>.<font color="#ADD8E6">out</font>::println);
+        
+    ]]></code>
     <text>
         <![CDATA[
         Note that for this to work, the referenced method must have the correct signature! In this case it works, since the
@@ -204,16 +203,16 @@
         Let's see an other example, this time for a static method reference:
         ]]>
     </text>
-    <code>
-        <![CDATA[
-<font color="#999900">List</font>&lt;<font color="#999900">Integer</font>> numbers = <font color="#999900">Arrays</font>.asList(1,3,-2,2);
+    <code><![CDATA[
+        
+<font color="#999900">List</font>&lt;<font color="#999900">Integer</font>> numbers = <font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(<font color="#F0E130">1,3</font>,<font color="#F0E130">-2,2</font>);
 <br/><font color="gray">//convert them to a list of string
 </font>
-<br/><font color="#999900">List</font>&lt;<font color="#999900">String</font>> numStrings = numbers.stream()
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.map(<font color="#999900">String</font>::valueOf)
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.collect(<font color="#999900">Collectors</font>.toList());
-        ]]>
-    </code>
+<br/><font color="#999900">List</font>&lt;<font color="#999900">String</font>> numStrings = numbers.<font color="#ADD8E6">stream</font>()
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">map</font>(<font color="#999900">String</font>::valueOf)
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">collect</font>(<font color="#999900">Collectors</font>.<font color="#ADD8E6">toList</font>());
+        
+    ]]></code>
     <text>
         <![CDATA[
         In this case, the <i>map</i> method expected something that can convert an <i>int</i> to <i>String</i>. We

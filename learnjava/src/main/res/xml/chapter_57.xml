@@ -1,8 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<!-- 'Comments in the code', belongs to course 'The basics' -->
-
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- 'Comments in the code', belongs to course 'The basics' --><resources>
     <chapterdata>
         <id>57</id>
         <name>Comments in the code</name>
@@ -20,11 +17,11 @@ to understand and document the code we write.
         right of the slashes into a comment.
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
 <font color="#999900">String</font> date; <font color="gray">//the date is in YYYY:MM:DD format</font>
-        ]]>
-    </code>
+        
+    ]]></code>
     <text>
         <![CDATA[
 In the above example we created a variable to store dates as text. Dates, however, can be in many formats.
@@ -32,16 +29,16 @@ In the above example we created a variable to store dates as text. Dates, howeve
     we later open our code we don't have to waste time figuring out what format we used.
         ]]>
     </text>
-    <code>
-        <![CDATA[
-<font color="gray">//The input isn't validated here!</font>
-<br/><font color="#999900">String</font> userInput = getUserInput();
+    <code><![CDATA[
+        
+<font color="gray<font color="#2E8B57">">//The input isn'</font>t validated here!</font>
+<br/><font color="#999900">String</font> userInput = <font color="#ADD8E6">getUserInput</font>();
 <br><br>
 ...
 <br><br>
-<font color="#999900">String</font> validInput = validate(userInput);
-        ]]>
-    </code>
+<font color="#999900">String</font> validInput = <font color="#ADD8E6">validate</font>(userInput);
+        
+    ]]></code>
     <text>
         <![CDATA[
         In this example, we warn ourselves that the <i>userInput</i> variable must be checked before we use
@@ -50,13 +47,13 @@ In the above example we created a variable to store dates as text. Dates, howeve
         ]]>
     </text>
     <interactive instruction="Complete these single-lined comments!">
-        <data>
-<![CDATA[
-<font color="#DF7401">int</font> num = 0;
-<br/>num = num + 1; ___ <font color="gray">increase by one</font>
-<br/><font color="#999900">System</font>.out.println(num); ___ <font color="gray">print value</font>
-]]>
-        </data>
+        <data><![CDATA[
+
+<font color="#DF7401">int</font> num = <font color="#F0E130">0</font>;
+<br/>num = num + <font color="#F0E130">1</font>; ___ <font color="gray">increase by one</font>
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(num); ___ <font color="gray">print value</font>
+
+        ]]></data>
         <answer place="0">//</answer>
         <answer place="1">//</answer>
     </interactive>
@@ -67,15 +64,15 @@ In the above example we created a variable to store dates as text. Dates, howeve
         is using multiple single line comments, like this:
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
 <font color="gray">//Numeric input is expected. Not validated here,
 </font>
 <br/><font color="gray">// call validate method before using!
 </font>
-<br/><font color="#999900">String</font> userInput = getUserInput();
-        ]]>
-    </code>
+<br/><font color="#999900">String</font> userInput = <font color="#ADD8E6">getUserInput</font>();
+        
+    ]]></code>
     <text>
         <![CDATA[
         The problem with this approach is that we must write the slashes in the beginning of every line.
@@ -85,23 +82,23 @@ In the above example we created a variable to store dates as text. Dates, howeve
         multi-line comment:
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
 <font color="gray">
 /*<br>
 Numeric input is expected from the user, but it isn't validated here,<br>
 so make sure to call validate method before using!<br>
 */</font>
-<br/><font color="#999900">String</font> userInput = getUserInput();
-        ]]>
-    </code>
+<br/><font color="#999900">String</font> userInput = <font color="#ADD8E6">getUserInput</font>();
+        
+    ]]></code>
     <interactive instruction="Complete this multi-lined comment!">
-        <data>
-            <![CDATA[
+        <data><![CDATA[
+            
 ___ <font color="gray">The first line of this long, multi-lined comment.
 <br/><font color="gray">The second line of this long, multi-lined comment.</font> ___
-            ]]>
-        </data>
+            
+        ]]></data>
         <answer place="0">/*</answer>
         <answer place="1">*/</answer>
     </interactive>
@@ -113,14 +110,14 @@ ___ <font color="gray">The first line of this long, multi-lined comment.
         word, and highlight it for us, so we can easily find the unfinished part of out code.
         ]]>
     </text>
-    <code>
-        <![CDATA[
+    <code><![CDATA[
+        
         <font color="gray">//TODO: finish writing this method!</font>
-<br/><font color="#E65100">public</font> <font color="#DF7401">void</font> validate(<font color="#999900">String</font> userInput) {
+<br/><font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">validate</font>(<font color="#999900">String</font> userInput) {
 <br/>
 <br/>}
-        ]]>
-    </code>
+        
+    ]]></code>
     <title text="Commenting conventions"/>
     <text>
         <![CDATA[
@@ -132,11 +129,11 @@ ___ <font color="gray">The first line of this long, multi-lined comment.
         example below for a completely unnecessary comment.
         ]]>
     </text>
-    <code>
-        <![CDATA[
-        <font color="#DF7401">int </font>x = 5; <font color="gray">//An integer variable named x, with value 5.</font>
-        ]]>
-    </code>
+    <code><![CDATA[
+        
+        <font color="#DF7401">int </font>x = <font color="#F0E130">5</font>; <font color="gray">//An integer variable named x, with value 5.</font>
+        
+    ]]></code>
     <text>
         <![CDATA[
         This comment adds no additional information. The variable type, name and the initial value can easily

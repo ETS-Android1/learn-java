@@ -1,8 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<!-- Course: Parallel programming -->
-
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- Course: Parallel programming --><resources>
     <coursedata>
         <id>25</id>
         <name>Parallel programming</name>

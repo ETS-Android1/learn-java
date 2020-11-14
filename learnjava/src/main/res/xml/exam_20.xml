@@ -1,8 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-
-<!-- Exam of course 'Data structures' -->
-
-<resources>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- Exam of course 'Data structures' --><resources>
     <examdata>
         <id>20</id>
         <questionAmount>25</questionAmount>
@@ -49,19 +46,19 @@
     </question>
     <question type="text">
         <text>Declare and initialize an empty array list of strings called 'lines'. Use the diamond operator!</text>
-        <correct>ArrayList&lt;String>[s]lines = new[s]ArrayList&lt;>();</correct>
-        <correct>List&lt;String>[s]lines = new[s]ArrayList&lt;>();</correct>
+        <correct>ArrayList&lt;String&gt;[s]lines = new[s]ArrayList&lt;&gt;();</correct>
+        <correct>List&lt;String&gt;[s]lines = new[s]ArrayList&lt;&gt;();</correct>
         <ignoreSpace/>
     </question>
     <question type="text">
         <text>Declare and initialize an empty linked list of integers called 'nums'. Use the diamond operator!</text>
-        <correct>LinkedList&lt;Integer>[s]nums = new[s]LinkedList&lt;>();</correct>
-        <correct>List&lt;Integer>[s]nums = new[s]LinkedList&lt;>();</correct>
+        <correct>LinkedList&lt;Integer&gt;[s]nums = new[s]LinkedList&lt;&gt;();</correct>
+        <correct>List&lt;Integer&gt;[s]nums = new[s]LinkedList&lt;&gt;();</correct>
         <ignoreSpace/>
     </question>
     <question type="text">
         <text>Enter the 'diamond operator'.</text>
-        <correct>&lt;></correct>
+        <correct>&lt;&gt;</correct>
     </question>
     <question type="true_false">
         <text>Generic collections directly support primitive types.</text>
