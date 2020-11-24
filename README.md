@@ -4,6 +4,12 @@ An android application that teaches Java programming.
 It is already published in the playstore, see it [here](https://play.google.com/store/apps/details?id=com.gaspar.learnjava) 
 for screenshots and download.
 
+## Build process
+
+You can import this project to Android Studio, but note that you'll only be able to build the **noads** 
+build variant. The other two variants (**release**, **debug**) require files/sensitive information that 
+are only present on my computer.
+
 ## Java teaching materials
 
 About the curriculum:
