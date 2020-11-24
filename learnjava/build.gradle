@@ -1,8 +1,13 @@
 apply plugin: 'com.android.application'
 
-if(project.hasProperty("AndroidSigning.signing")
-    && new File(project.property("AndroidSigning.signing") + "androidsigning.gradle").exists()) {
-  apply from: project.property("AndroidSigning.signing") + "androidsigning.gradle"
+if(project.hasProperty("AndroidProjects.signing")
+    && new File(project.property("AndroidProjects.signing") + "androidsigning.gradle").exists()) {
+  apply from: project.property("AndroidProjects.signing") + "androidsigning.gradle"
+}
+
+if(project.hasProperty("AndroidProjects.ads")
+        && new File(project.property("AndroidProjects.ads") + "learnjava_ads.gradle").exists()) {
+    apply from: project.property("AndroidProjects.ads") + "learnjava_ads.gradle"
 }
 
 android {
@@ -12,18 +17,38 @@ android {
         applicationId "com.gaspar.learnjava"
         minSdkVersion 24
         targetSdkVersion 29
-        versionCode 12
-        versionName "1.5.0"
+        versionCode 13
+        versionName "1.6.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        release {
+        release { //ONLY I CAN BUILD this variant: actual release build
             minifyEnabled false
             resValue "bool", "is_debug", "false"
+            resValue "bool", "load_ads", "true"
+			//real signing configs and app IDs are only present on my computer
         }
-        debug {
+        debug { //ONLY I CAN BUILD this variant: debug mode which loads debug ads.
             debuggable true
             resValue "bool", "is_debug", "true"
+            resValue "bool", "load_ads", "true"
+            signingConfig signingConfigs.debug
+			//real signing configs and app IDs are only present on my computer
+        }
+        noads { //EVERYBODY can build this variant. Same as debug, but with no ads at all.
+            debuggable true
+            resValue "bool", "is_debug", "true"
+            resValue "bool", "load_ads", "false"
+            signingConfig signingConfigs.debug
+            //fake IDs so the compilation does not fail. otherwise unused
+            resValue "string", "ad_mob_app_id", "ca-app-pub-3940256099942544~3347511713" //sample app ID from ad mob website
+            resValue "string", "ad_unit_id_banner_test", "fake_id"
+            resValue "string", "ad_unit_id_banner_courses", "fake_id"
+            resValue "string", "ad_unit_id_banner_exams", "fake_id"
+            resValue "string", "ad_unit_id_banner_tasks", "fake_id"
+            resValue "string", "ad_unit_id_interstitial_test", "fake_id"
+            resValue "string", "ad_unit_id_interstitial_chapter", "fake_id"
+            resValue "string", "ad_unit_id_interstitial_task", "fake_id"
         }
     }
     compileOptions {
@@ -37,7 +62,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.android.material:material:1.2.1'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.3'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation "androidx.preference:preference:1.1.1"
     implementation "android.arch.persistence.room:runtime:1.1.1"
     implementation 'com.github.iwgang:countdownview:2.1.6'

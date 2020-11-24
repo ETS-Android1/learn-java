@@ -26,6 +26,29 @@ import java.util.Random;
 abstract class LearnJavaAds {
 
     /**
+     * Constant that determines if ads will or won't be test(debug) ads. This only has a real effect if {@link #LOAD_ADS}
+     * is true.
+     * <p>
+     * DO NOT SET THIS HERE, it's set automatically from the build variant.
+     */
+    public static boolean DEBUG_ADS;
+
+    /**
+     * A constant that determines if ads will be loaded or not.
+     * <p>
+     * DO NOT SET THIS HERE, it's set automatically from the build variant.
+     */
+    public static boolean LOAD_ADS;
+
+    /**
+     * Sets the {@link #DEBUG_ADS} and {@link #LOAD_ADS} booleans from the build variant.
+     */
+    static void initAdConstants(@NonNull final Context context) {
+        DEBUG_ADS = context.getResources().getBoolean(R.bool.is_debug);
+        LOAD_ADS = context.getResources().getBoolean(R.bool.load_ads);
+    }
+
+    /**
      * The possibility of an ad appearing.
      */
     private static final float AD_POSSIBILITY = 0.5f;
@@ -36,61 +59,52 @@ abstract class LearnJavaAds {
     private static final Random random = new Random();
 
     /**
-     * Loads a banner ad, then adds it to the given parent view, according to debug preferences: {@link LearnJavaActivity#DEBUG_ADS}
-     * and {@value LearnJavaActivity#LOAD_ADS}.
+     * Loads a banner ad, then adds it to the given parent view, according to debug preferences: {@link #DEBUG_ADS}
+     * and {@link #LOAD_ADS}.
      *
-     * @param realId The non-test id of the ad unit. Only used in non debug mode.
+     * @param id The id of the ad unit.
      * @param parent The parent view to which the ad view will be added. It is displaying some text
      *               that indicates the ad is loading.
      * @return The loaded ad view.
      */
-    static AdView loadBannerAd(@StringRes int realId, ViewGroup parent) {
+    static AdView loadBannerAd(@StringRes int id, ViewGroup parent) {
         Context context = parent.getContext();
         AdView adView = new AdView(context);
         adView.setAdSize(AdSize.BANNER);
-        if(!LearnJavaActivity.DEBUG_ADS) { //load real ad only when not in debug
-            adView.setAdUnitId(context.getString(realId));
-            if(LearnJavaActivity.LOAD_ADS) adView.loadAd(new AdRequest.Builder().build());
-        } else { //load test ad in debug, but only when ad loading is enabled
-            adView.setAdUnitId(context.getString(R.string.ad_unit_id_banner_test));
-            if (LearnJavaActivity.LOAD_ADS) {
-                adView.loadAd(new AdRequest.Builder().build());
-                adView.setAdListener(new AdListener() { //changes will happen when it's loaded
-                    @Override
-                    public void onAdLoaded() {
-                        super.onAdLoaded();
-                        parent.removeAllViews(); //clear the loading indicator text
-                        parent.addView(adView); //add to parent
-                    }
-                    @Override
-                    public void onAdFailedToLoad(LoadAdError e) {
-                        super.onAdFailedToLoad(e);
-                        final TextView statusView = parent.findViewById(R.id.adStatusLabel);
-                        statusView.setText(R.string.ad_load_fail);
-                    }
-                });
-            } else {
-                parent.getLayoutParams().height = 0;
-            }
+        adView.setAdUnitId(context.getString(id));
+        if (LOAD_ADS) {
+            adView.loadAd(new AdRequest.Builder().build());
+            adView.setAdListener(new AdListener() { //changes will happen when it's loaded
+                @Override
+                public void onAdLoaded() {
+                    super.onAdLoaded();
+                    parent.removeAllViews(); //clear the loading indicator text
+                    parent.addView(adView); //add to parent
+                }
+                @Override
+                public void onAdFailedToLoad(LoadAdError e) {
+                    super.onAdFailedToLoad(e);
+                    final TextView statusView = parent.findViewById(R.id.adStatusLabel);
+                    statusView.setText(R.string.ad_load_fail);
+                }
+            });
+        } else {
+            parent.getLayoutParams().height = 0;
         }
         return adView;
     }
 
     /**
-     * Starts the loading of an interstitial ad, according to debug preferences: {@link LearnJavaActivity#DEBUG_ADS}
-     * and {@value LearnJavaActivity#LOAD_ADS}.
+     * Starts the loading of an interstitial ad, according to debug preferences: {@link #DEBUG_ADS}
+     * and {@link #LOAD_ADS}.
      *
-     * @param realId The non-test id of the ad unit. Only used in non debug mode.
+     * @param id The id of the ad unit.
      * @return The interstitial ad that may or may not have started loading.
      */
-    static InterstitialAd loadInterstitialAd(Context context, @StringRes int realId) {
+    static InterstitialAd loadInterstitialAd(Context context, @StringRes int id) {
         InterstitialAd interstitialAd = new InterstitialAd(context);
-        if(!LearnJavaActivity.DEBUG_ADS) { //only show real ad if non debug mode is enabled for ads
-            interstitialAd.setAdUnitId(context.getString(realId));
-        } else { //only load test ad in debug ad mode
-            interstitialAd.setAdUnitId(context.getString(R.string.ad_unit_id_interstitial_test));
-        }
-        if(LearnJavaActivity.LOAD_ADS) { //only initiate loading if its enabled
+        interstitialAd.setAdUnitId(context.getString(id));
+        if(LOAD_ADS) { //only initiate loading if its enabled
             interstitialAd.setImmersiveMode(true);
             interstitialAd.loadAd(new AdRequest.Builder().build());
         }

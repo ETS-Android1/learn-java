@@ -20,14 +20,7 @@
     <!-- Ads -->
     <string name="loading_ad">Loading ad…</string>
     <string name="ad_load_fail">Ad failed to load!</string>
-    <string name="admob_app_id" translatable="false">ca-app-pub-7754228088611040~7265518837</string>
-    <string name="ad_unit_id_banner_test" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="ad_unit_id_banner_courses" translatable="false">ca-app-pub-7754228088611040/2723638595</string>
-    <string name="ad_unit_id_banner_exams" translatable="false">ca-app-pub-7754228088611040/6293000907</string>
-    <string name="ad_unit_id_banner_tasks" translatable="false">ca-app-pub-7754228088611040/4979919236</string>
-    <string name="ad_unit_id_interstitial_test" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="ad_unit_id_interstitial_chapter" translatable="false">ca-app-pub-7754228088611040/4461539327</string>
-    <string name="ad_unit_id_interstitial_task" translatable="false">ca-app-pub-7754228088611040/2206911076</string>
+    <!-- Individual ad IDs are extracted, and only present on my machine. No ads build type works without them. -->
 
     <!-- Settings -->
     <string name="notifications">Notifications</string>
@@ -177,7 +170,7 @@
     <string name="congratulations_info_1">You\'ve passed all exams! Make sure to also do the tasks of each course.</string>
     <string name="congratulations_info_2">Additional courses will be added in the future. Next planned courses:</string>
     <string name="do_not_show_again">Don\'t show this again.</string>
-    <string name="next_planned_course">Java 8 course.</string>
+    <string name="next_planned_course">Swing GUI course.</string>
 
     <!-- Contact and rate -->
     <string name="contact_me">Contact me</string>

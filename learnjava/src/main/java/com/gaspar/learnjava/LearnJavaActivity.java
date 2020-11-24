@@ -57,19 +57,6 @@ public class LearnJavaActivity extends ThemedActivity
     public static boolean DEBUG;
 
     /**
-     * Constant that determines if ads will or won't be test(debug) ads. This only has a real effect if {@value LOAD_ADS}
-     * is true.
-     * <p>
-     * DO NOT SET THIS HERE, it's set automatically from the build variant.
-     */
-    public static boolean DEBUG_ADS;
-
-    /**
-     * A constant that determines if ads will be loaded or not.
-     */
-    public static final boolean LOAD_ADS = true;
-
-    /**
      * The name of the application's shared preferences.
      */
     public static final String APP_PREFERENCES_NAME = "learn_java_prefs";
@@ -93,16 +80,10 @@ public class LearnJavaActivity extends ThemedActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //check if it's debug or release, and set ads accordingly
-        if(getResources().getBoolean(R.bool.is_debug)) {
-            DEBUG = true;
-            DEBUG_ADS = true;
-        } else { //release
-            DEBUG = false;
-            DEBUG_ADS = false;
-        }
+        //check if it's debug or release, and set flag accordingly
+        DEBUG = getResources().getBoolean(R.bool.is_debug);
         setContentView(R.layout.learn_java);
-        LearnJavaDatabase.DB_EXECUTOR.execute(() -> { //initialize the database related variables
+        LearnJavaDatabase.DB_EXECUTOR.execute(() -> { //initialize necessary variables, database
             try { //parse course objects
                 CoursesActivity.setParsedCourses(CourseParser.getInstance().parseCourses(this));
             } catch (Exception e) {
@@ -112,7 +93,10 @@ public class LearnJavaActivity extends ThemedActivity
             LearnJavaDatabase.validateDatabase(this); //check/add all elements
             createNotificationChannel(); //initialize the notification channel
             SettingsActivity.initSettings(this); //initialize settings
-            MobileAds.initialize(this, result -> {}); //initialize admob
+            LearnJavaAds.initAdConstants(this); //initialize ad variables
+            if(LearnJavaAds.LOAD_ADS) {
+                MobileAds.initialize(this, result -> {}); //initialize admob
+            }
             ThemeUtils.initSelectedTheme(this); //initialize themes
             ClipSyncActivity.initClipSync(this, findViewById(R.id.learnJavaMainView)); //initialize clip sync
         });

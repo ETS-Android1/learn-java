@@ -67,19 +67,19 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        adView.destroy();
+        if(adView != null) adView.destroy();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        adView.pause();
+        if(adView != null) adView.pause();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        adView.resume();
+        if(adView != null) adView.resume();
         showCongratulationPrompt();
     }
 
@@ -97,7 +97,12 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-       adView = LearnJavaAds.loadBannerAd(R.string.ad_unit_id_banner_courses, findViewById(R.id.adContainer));
+        if(LearnJavaAds.LOAD_ADS) {
+            int adId = LearnJavaAds.DEBUG_ADS ? R.string.ad_unit_id_banner_test : R.string.ad_unit_id_banner_courses;
+            adView = LearnJavaAds.loadBannerAd(adId, findViewById(R.id.adContainer));
+        } else {
+            findViewById(R.id.adContainer).setVisibility(View.GONE);
+        }
     }
 
     /**

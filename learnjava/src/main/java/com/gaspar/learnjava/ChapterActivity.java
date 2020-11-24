@@ -60,7 +60,11 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
             passedExam = (Exam) getIntent().getExtras().getSerializable(Exam.EXAM_PREFERENCE_STRING);
         }
         setUpUI(passedChapter);
-        interstitialAd = LearnJavaAds.loadInterstitialAd(this, R.string.ad_unit_id_interstitial_chapter);
+
+        if(LearnJavaAds.LOAD_ADS) {
+            int adId = LearnJavaAds.DEBUG_ADS ? R.string.ad_unit_id_interstitial_test : R.string.ad_unit_id_interstitial_chapter;
+            interstitialAd = LearnJavaAds.loadInterstitialAd(this, adId);
+        }
     }
 
     private void setUpUI(Chapter receivedChapter) {
@@ -98,7 +102,7 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
         }
         setResult(Activity.RESULT_OK, result);
         //show ad with some possibility
-        if(LearnJavaAds.rollForAd()) LearnJavaAds.showInterstitialAd(interstitialAd);
+        if(LearnJavaAds.LOAD_ADS && LearnJavaAds.rollForAd()) LearnJavaAds.showInterstitialAd(interstitialAd);
         ChapterActivity.this.finish(); //close itself
     }
 
@@ -109,7 +113,7 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
         } else {
             //show ad with some possibility
-            if(LearnJavaAds.rollForAd()) LearnJavaAds.showInterstitialAd(interstitialAd);
+            if(LearnJavaAds.LOAD_ADS && LearnJavaAds.rollForAd()) LearnJavaAds.showInterstitialAd(interstitialAd);
             super.onBackPressed();
         }
     }

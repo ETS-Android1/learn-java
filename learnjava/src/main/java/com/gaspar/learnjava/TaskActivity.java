@@ -60,7 +60,11 @@ public class TaskActivity extends ThemedActivity implements NavigationView.OnNav
         } else {
             setTitle(passedTask.getName());
             setUpUI(passedTask);
-            interstitialAd = LearnJavaAds.loadInterstitialAd(this, R.string.ad_unit_id_interstitial_task);
+
+            if(LearnJavaAds.LOAD_ADS) {
+                int adId = LearnJavaAds.DEBUG_ADS ? R.string.ad_unit_id_interstitial_test : R.string.ad_unit_id_interstitial_task;
+                interstitialAd = LearnJavaAds.loadInterstitialAd(this, adId);
+            }
         }
     }
 
@@ -83,7 +87,7 @@ public class TaskActivity extends ThemedActivity implements NavigationView.OnNav
         result.putExtra(Task.TASK_PREFERENCE_STRING, displayedTask);
         setResult(Activity.RESULT_OK, result); //return result
         //show ad with some possibility
-        if(LearnJavaAds.rollForAd()) LearnJavaAds.showInterstitialAd(interstitialAd);
+        if(LearnJavaAds.LOAD_ADS && LearnJavaAds.rollForAd()) LearnJavaAds.showInterstitialAd(interstitialAd);
         finish();
     }
 
@@ -161,7 +165,7 @@ public class TaskActivity extends ThemedActivity implements NavigationView.OnNav
             Intent result = new Intent();
             result.putExtra(Task.TASK_PREFERENCE_STRING, displayedTask);
             setResult(Activity.RESULT_OK, result); //return result
-            if(LearnJavaAds.rollForAd()) LearnJavaAds.showInterstitialAd(interstitialAd); //show ad with some possibility
+            if(LearnJavaAds.LOAD_ADS && LearnJavaAds.rollForAd()) LearnJavaAds.showInterstitialAd(interstitialAd); //show ad with some possibility
             super.onBackPressed();
         }
     }
