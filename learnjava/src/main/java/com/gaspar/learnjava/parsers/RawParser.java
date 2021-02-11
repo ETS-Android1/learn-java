@@ -1,6 +1,7 @@
 package com.gaspar.learnjava.parsers;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -8,10 +9,8 @@ import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
 
-import com.gaspar.learnjava.R;
-
+import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,20 +27,24 @@ public abstract class RawParser {
      */
     public static Drawable parseImage(String imageName, @NonNull final Context context) {
         Drawable imageDrawable = null;
-        final Field[] fields = R.raw.class.getDeclaredFields();
-        for (Field field : fields) {
-            final int rawResourceID;
-            try {
-                rawResourceID = field.getInt(R.xml.class);
-            } catch (Exception e) {
-                throw new RuntimeException();
+        final AssetManager manager = context.getAssets();
+        String imagesFolder = "images";
+        try {
+            final String[] imagePaths = manager.list(imagesFolder); //list images in the asset folder
+            if(imagePaths == null) throw new IOException();
+            for(String imagePath: imagePaths) { //find image with name
+                String foundImageName = imagePath.substring(0, imagePath.lastIndexOf('.'));
+                if(foundImageName.equals(imageName)) {
+                    //image found
+                    try(InputStream is = manager.open(imagesFolder + "/" + imagePath)) {
+                        Bitmap bitmap = BitmapFactory.decodeStream(is);
+                        imageDrawable = new BitmapDrawable(context.getResources(), bitmap);
+                    }
+                    break;
+                }
             }
-            String resourceName = context.getResources().getResourceEntryName(rawResourceID);
-            if(resourceName.equals(imageName)) { //found the image
-                InputStream is = context.getResources().openRawResource(rawResourceID);
-                Bitmap bitmap = BitmapFactory.decodeStream(is);
-                imageDrawable = new BitmapDrawable(context.getResources(), bitmap);
-            }
+        } catch(IOException e) {
+            throw new RuntimeException("Failed to load image!");
         }
         if(imageDrawable == null) throw new RuntimeException("Image not found!");
         return imageDrawable;
@@ -54,22 +57,25 @@ public abstract class RawParser {
      * @return The code images as a list of {@link Drawable}.
      */
     public static List<Drawable> parseCodeImages(@NonNull final Context context) {
-        final Field[] fields = R.raw.class.getDeclaredFields();
         List<Drawable> drawables = new ArrayList<>();
-        for (Field field : fields) {
-            final int rawResourceID;
-            try {
-                rawResourceID = field.getInt(R.xml.class);
-            } catch (Exception e) {
-                throw new RuntimeException();
+        final AssetManager manager = context.getAssets();
+        String imagesFolder = "images";
+        try {
+            final String[] imagePaths = manager.list(imagesFolder); //list images in the asset folder
+            if(imagePaths == null) throw new IOException();
+            for(String imagePath: imagePaths) { //find code background images
+                if(imagePath.startsWith(CODE_IMAGE_NAME)) {
+                    //found a background image
+                    try(InputStream is = manager.open(imagesFolder + "/" + imagePath)) {
+                        Bitmap bitmap = BitmapFactory.decodeStream(is);
+                        Drawable imageDrawable = new BitmapDrawable(context.getResources(), bitmap);
+                        drawables.add(imageDrawable);
+                    }
+                }
             }
-            String resourceName = context.getResources().getResourceEntryName(rawResourceID);
-            if(resourceName.startsWith(CODE_IMAGE_NAME)) { //found a code image id
-                InputStream is = context.getResources().openRawResource(rawResourceID);
-                Bitmap bitmap = BitmapFactory.decodeStream(is);
-                drawables.add(new BitmapDrawable(context.getResources(), bitmap));
-            }
+        } catch(IOException e) {
+            throw new RuntimeException("Failed to load background image!");
         }
-       return drawables;
+        return drawables;
     }
 }

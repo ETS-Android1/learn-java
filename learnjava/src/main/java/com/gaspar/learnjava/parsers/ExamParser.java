@@ -1,14 +1,13 @@
 package com.gaspar.learnjava.parsers;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.content.res.XmlResourceParser;
 
 import androidx.annotation.CheckResult;
 import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
-import androidx.annotation.XmlRes;
 
-import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.curriculum.MultiChoiceQuestion;
 import com.gaspar.learnjava.curriculum.Question;
@@ -18,9 +17,10 @@ import com.gaspar.learnjava.curriculum.TrueOrFalseQuestion;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -47,43 +47,61 @@ public class ExamParser {
     private ExamParser() {}
 
     /**
-     * Parses an exam object from XML.
+     * Parses an exam object from XML. The exam is identified by the exam id.
      *
      * @param examId The id of the exam that will be parsed.
-     * @param parseQuestions If the question objects should be parsed.
+     * @param parseQuestions If the question objects should be parsed, or only basic information.
+     * @param context Context.
      * @return The parsed exam object.
+     * @throws XmlPullParserException When the XML could not be parsed.
+     * @throws IOException When the XML could not be parsed.
+     * @throws RuntimeException When there is no exam with the specified id.
      */
     public Exam parseExam(int examId, boolean parseQuestions, @NonNull Context context)
         throws IOException, XmlPullParserException, RuntimeException {
         Exam parsedExam = null;
-        final Field[] fields = R.xml.class.getDeclaredFields();
-        for (Field field : fields) {
-            final int xmlResourceID;
-            try {
-                xmlResourceID = field.getInt(R.xml.class);
-            } catch (Exception e) {
-                throw new RuntimeException();
+        final AssetManager manager = context.getAssets();
+        String examFolder = "exams";
+        final String[] examPaths = manager.list(examFolder); //list exam XML-s in the asset folder
+        final XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+        factory.setNamespaceAware(true);
+        if(examPaths != null) {
+            for(String relExamPath: examPaths) { //check exam XMLs for the correct id
+                String examPath = examFolder + "/" + relExamPath;
+                if(CourseParser.getInstance().matchingId(examPath, examId, manager, factory)) {
+                    //found the exam with the selected id
+                    try(final InputStream is = manager.open(examPath)) { //open exam XML as input stream
+                        final XmlPullParser parser = factory.newPullParser();
+                        parser.setInput(is, "UTF-8");
+                        parsedExam = parseExamData(parser, parseQuestions);
+                    }
+                    break;
+                }
             }
-            String resourceName = context.getResources().getResourceEntryName(xmlResourceID);
-            if(resourceName.startsWith(TagName.EXAM + "_") && resourceName.endsWith(String.valueOf(examId))) {
-                parsedExam = parseExamData(xmlResourceID, parseQuestions, context);
-            }
+        } else {
+            throw new IOException("Failed to open exam assets!");
         }
-        if(parsedExam == null) throw new RuntimeException();
+        if(parsedExam == null) throw new RuntimeException("No exam with id " + examId);
         return parsedExam;
     }
 
     /**
-     * Helper method.
+     * Parses exam data into an {@link Exam} object, optionally with questions.
+     *
+     * @param parser An XML parser that points to the beginning of the exam XML.
+     * @param parseQuestions If questions should be parsed, or only basic information.
+     * @return The parsed {@link Exam} object.
+     * @throws XmlPullParserException When the XML could not be parsed.
+     * @throws IOException When the XML could not be parsed.
+     * @throws RuntimeException If the exam object is incomplete, for example no name or id.
      */
-    private Exam parseExamData(@XmlRes int xmlResourceId, boolean parseQuestions, @NonNull Context context)
+    private Exam parseExamData(@NonNull XmlPullParser parser, boolean parseQuestions)
         throws XmlPullParserException, IOException, RuntimeException {
         int examId = CourseParser.NO_ID_FOUND;
         int questionAmount = CourseParser.NO_ID_FOUND;
         int timeLimit = CourseParser.NO_ID_FOUND;
         boolean finished = false;
         List<Question> questions = new ArrayList<>();
-        XmlResourceParser parser = context.getResources().getXml(xmlResourceId);
 
         int eventType = parser.getEventType();
         while (eventType != XmlResourceParser.END_DOCUMENT) {
@@ -116,12 +134,14 @@ public class ExamParser {
     }
 
     /**
-     * Parses question objects using an XML parser set to an exam XML file.
-     *
-     * @param parser The xml parser.
-     * @return The parsed question object.
+     * Parses {@link Question} objects using an XML parser.
+     * @param parser An XML parser pointing to the beginning of the question in the XML file.
+     * @return The parsed {@link Question} object.
+     * @throws XmlPullParserException When the XML could not be parsed.
+     * @throws IOException When the XML could not be parsed.
+     * @throws RuntimeException When the question is incomplete.
      */
-    private Question parseQuestion(XmlResourceParser parser) throws XmlPullParserException, IOException {
+    private Question parseQuestion(@NonNull final XmlPullParser parser) throws XmlPullParserException, IOException {
         Question question = null;
         @Question.QuestionType
         int type = Question.findTypeFromString(parser.getAttributeValue(null, TagName.TYPE));
@@ -143,7 +163,15 @@ public class ExamParser {
         return question;
     }
 
-    private SingleChoiceQuestion parseSingleChoiceQuestion(XmlResourceParser parser)
+    /**
+     * Parses {@link SingleChoiceQuestion} objects using an XML parser.
+     * @param parser An XML parser pointing to the beginning of the question in the XML file.
+     * @return The parsed {@link SingleChoiceQuestion} object.
+     * @throws XmlPullParserException When the XML could not be parsed.
+     * @throws IOException When the XML could not be parsed.
+     * @throws RuntimeException When the question is incomplete.
+     */
+    private SingleChoiceQuestion parseSingleChoiceQuestion(@NonNull final XmlPullParser parser)
             throws XmlPullParserException, IOException {
         int eventType = parser.getEventType();
         String tagName = parser.getName();
@@ -167,7 +195,15 @@ public class ExamParser {
         return new SingleChoiceQuestion(questionText, answers, correctAnswerIndex);
     }
 
-    private MultiChoiceQuestion parseMultiChoiceQuestion(XmlResourceParser parser)
+    /**
+     * Parses {@link MultiChoiceQuestion} objects using an XML parser.
+     * @param parser An XML parser pointing to the beginning of the question in the XML file.
+     * @return The parsed {@link MultiChoiceQuestion} object.
+     * @throws XmlPullParserException When the XML could not be parsed.
+     * @throws IOException When the XML could not be parsed.
+     * @throws RuntimeException When the question is incomplete.
+     */
+    private MultiChoiceQuestion parseMultiChoiceQuestion(@NonNull final XmlPullParser parser)
             throws XmlPullParserException, IOException {
         int eventType = parser.getEventType();
         String tagName = parser.getName();
@@ -191,7 +227,15 @@ public class ExamParser {
         return new MultiChoiceQuestion(questionText, answers, correctIndexes);
     }
 
-    private TrueOrFalseQuestion parseTrueOrFalseQuestion(XmlResourceParser parser)
+    /**
+     * Parses {@link TrueOrFalseQuestion} objects using an XML parser.
+     * @param parser An XML parser pointing to the beginning of the question in the XML file.
+     * @return The parsed {@link TrueOrFalseQuestion} object.
+     * @throws XmlPullParserException When the XML could not be parsed.
+     * @throws IOException When the XML could not be parsed.
+     * @throws RuntimeException When the question is incomplete.
+     */
+    private TrueOrFalseQuestion parseTrueOrFalseQuestion(@NonNull final XmlPullParser parser)
             throws XmlPullParserException, IOException {
         int eventType = parser.getEventType();
         String tagName = parser.getName();
@@ -212,7 +256,15 @@ public class ExamParser {
         return new TrueOrFalseQuestion(questionText, isTrue);
     }
 
-    private TextQuestion parseTextQuestion(XmlResourceParser parser)
+    /**
+     * Parses {@link TextQuestion} objects using an XML parser.
+     * @param parser An XML parser pointing to the beginning of the question in the XML file.
+     * @return The parsed {@link TextQuestion} object.
+     * @throws XmlPullParserException When the XML could not be parsed.
+     * @throws IOException When the XML could not be parsed.
+     * @throws RuntimeException When the question is incomplete.
+     */
+    private TextQuestion parseTextQuestion(@NonNull final XmlPullParser parser)
             throws XmlPullParserException, IOException {
         int eventType = parser.getEventType();
         String tagName = parser.getName();

@@ -84,14 +84,14 @@ public class CourseStatus {
     @WorkerThread
     public static void initCourseCount(int xmlCourseCount, Context context) {
         SharedPreferences prefs = context.getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
-        if(!prefs.contains(COURSE_COUNT)) { //first time, create preference
+        if(!prefs.contains(COURSE_COUNT) || prefs.getInt(COURSE_COUNT,0) == 0) { //create preference
             prefs.edit().putInt(COURSE_COUNT, xmlCourseCount).apply();
         }
         if(!prefs.contains(CoursesActivity.CONGRATULATION_PROMPT)) { //this is handled here, since if course count changes then this must be reactivated
             prefs.edit().putBoolean(CoursesActivity.CONGRATULATION_PROMPT, true).apply();
         }
         //Log.d("LearnJava", "pref: " + prefs.getInt(COURSE_COUNT,0) + " xml: " + xmlCourseCount);
-        if(prefs.getInt(COURSE_COUNT, 0) != xmlCourseCount) { //new course detected
+        if(prefs.getInt(COURSE_COUNT, 0) < xmlCourseCount) { //new course detected
             newCourseDetected(prefs, context);
         }
         CourseStatus.courseCount = new AtomicInteger(0); //initiate course counter variable
@@ -100,7 +100,7 @@ public class CourseStatus {
 
     /**
      * Called when the application detects a course that was previously not included (after an update).
-     * It may needs to be already unlocked.
+     * It may need to be already unlocked.
      */
     @WorkerThread
     private static void newCourseDetected(final SharedPreferences prefs, @NonNull final Context context) {
