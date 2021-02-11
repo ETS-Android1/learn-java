@@ -17,9 +17,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.gaspar.learnjava.asynctask.FillChapterActivityTask;
 import com.gaspar.learnjava.curriculum.Chapter;
 import com.gaspar.learnjava.curriculum.Exam;
-import com.gaspar.learnjava.utils.LearnJavaBluetooth;
 import com.gaspar.learnjava.utils.DrawerUtils;
-import com.google.android.gms.ads.InterstitialAd;
+import com.gaspar.learnjava.utils.LearnJavaBluetooth;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -31,7 +33,7 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
     private Chapter passedChapter;
 
     /**
-     * The exam of the course of this chapter. This may be needed, if the completion of this chapter unlocks the exam.
+     * The exam of this chapter. This may be needed, if the completion of this chapter unlocks the exam.
      */
     private Exam passedExam;
 
@@ -60,10 +62,16 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
             passedExam = (Exam) getIntent().getExtras().getSerializable(Exam.EXAM_PREFERENCE_STRING);
         }
         setUpUI(passedChapter);
-
+        //load interstitial ad
         if(LearnJavaAds.LOAD_ADS) {
             int adId = LearnJavaAds.DEBUG_ADS ? R.string.ad_unit_id_interstitial_test : R.string.ad_unit_id_interstitial_chapter;
-            interstitialAd = LearnJavaAds.loadInterstitialAd(this, adId);
+            InterstitialAd.load(this, getString(adId), new AdRequest.Builder().build(), new InterstitialAdLoadCallback() {
+                @Override
+                public void onAdLoaded(@NonNull InterstitialAd iad) {
+                    interstitialAd = iad;
+                    Log.d("LearnJava", "Interstitial Ad loaded!");
+                }
+            });
         }
     }
 
@@ -102,7 +110,7 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
         }
         setResult(Activity.RESULT_OK, result);
         //show ad with some possibility
-        if(LearnJavaAds.LOAD_ADS && LearnJavaAds.rollForAd()) LearnJavaAds.showInterstitialAd(interstitialAd);
+        if(interstitialAd != null && LearnJavaAds.rollForAd()) interstitialAd.show(this);
         ChapterActivity.this.finish(); //close itself
     }
 
@@ -113,7 +121,7 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
             drawer.closeDrawer(GravityCompat.START);
         } else {
             //show ad with some possibility
-            if(LearnJavaAds.LOAD_ADS && LearnJavaAds.rollForAd()) LearnJavaAds.showInterstitialAd(interstitialAd);
+            if(interstitialAd != null && LearnJavaAds.rollForAd()) interstitialAd.show(this);
             super.onBackPressed();
         }
     }

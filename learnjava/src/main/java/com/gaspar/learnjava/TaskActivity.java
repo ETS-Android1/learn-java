@@ -23,7 +23,9 @@ import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.database.TaskStatus;
 import com.gaspar.learnjava.utils.AnimationUtils;
 import com.gaspar.learnjava.utils.DrawerUtils;
-import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.material.navigation.NavigationView;
 
 /**
@@ -63,7 +65,12 @@ public class TaskActivity extends ThemedActivity implements NavigationView.OnNav
 
             if(LearnJavaAds.LOAD_ADS) {
                 int adId = LearnJavaAds.DEBUG_ADS ? R.string.ad_unit_id_interstitial_test : R.string.ad_unit_id_interstitial_task;
-                interstitialAd = LearnJavaAds.loadInterstitialAd(this, adId);
+                InterstitialAd.load(this, getString(adId), new AdRequest.Builder().build(), new InterstitialAdLoadCallback() {
+                    @Override
+                    public void onAdLoaded(@NonNull InterstitialAd iad) {
+                        interstitialAd = iad;
+                    }
+                });
             }
         }
     }
@@ -87,7 +94,7 @@ public class TaskActivity extends ThemedActivity implements NavigationView.OnNav
         result.putExtra(Task.TASK_PREFERENCE_STRING, displayedTask);
         setResult(Activity.RESULT_OK, result); //return result
         //show ad with some possibility
-        if(LearnJavaAds.LOAD_ADS && LearnJavaAds.rollForAd()) LearnJavaAds.showInterstitialAd(interstitialAd);
+        if(interstitialAd != null && LearnJavaAds.rollForAd()) interstitialAd.show(this);
         finish();
     }
 
@@ -165,7 +172,7 @@ public class TaskActivity extends ThemedActivity implements NavigationView.OnNav
             Intent result = new Intent();
             result.putExtra(Task.TASK_PREFERENCE_STRING, displayedTask);
             setResult(Activity.RESULT_OK, result); //return result
-            if(LearnJavaAds.LOAD_ADS && LearnJavaAds.rollForAd()) LearnJavaAds.showInterstitialAd(interstitialAd); //show ad with some possibility
+            if(interstitialAd != null && LearnJavaAds.rollForAd()) interstitialAd.show(this); //show ad with some possibility
             super.onBackPressed();
         }
     }

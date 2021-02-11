@@ -1,7 +1,6 @@
 package com.gaspar.learnjava;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -13,7 +12,6 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.LoadAdError;
 
 import java.util.Random;
@@ -31,14 +29,14 @@ abstract class LearnJavaAds {
      * <p>
      * DO NOT SET THIS HERE, it's set automatically from the build variant.
      */
-    public static boolean DEBUG_ADS;
+    static boolean DEBUG_ADS;
 
     /**
      * A constant that determines if ads will be loaded or not.
      * <p>
      * DO NOT SET THIS HERE, it's set automatically from the build variant.
      */
-    public static boolean LOAD_ADS;
+    static boolean LOAD_ADS;
 
     /**
      * Sets the {@link #DEBUG_ADS} and {@link #LOAD_ADS} booleans from the build variant.
@@ -81,6 +79,7 @@ abstract class LearnJavaAds {
                     parent.removeAllViews(); //clear the loading indicator text
                     parent.addView(adView); //add to parent
                 }
+
                 @Override
                 public void onAdFailedToLoad(LoadAdError e) {
                     super.onAdFailedToLoad(e);
@@ -92,34 +91,6 @@ abstract class LearnJavaAds {
             parent.getLayoutParams().height = 0;
         }
         return adView;
-    }
-
-    /**
-     * Starts the loading of an interstitial ad, according to debug preferences: {@link #DEBUG_ADS}
-     * and {@link #LOAD_ADS}.
-     *
-     * @param id The id of the ad unit.
-     * @return The interstitial ad that may or may not have started loading.
-     */
-    static InterstitialAd loadInterstitialAd(Context context, @StringRes int id) {
-        InterstitialAd interstitialAd = new InterstitialAd(context);
-        interstitialAd.setAdUnitId(context.getString(id));
-        if(LOAD_ADS) { //only initiate loading if its enabled
-            interstitialAd.setImmersiveMode(true);
-            interstitialAd.loadAd(new AdRequest.Builder().build());
-        }
-        return interstitialAd;
-    }
-
-    /**
-     * Shows an ad using this (already initialized and loaded) interstitial ad object.
-     */
-    static void showInterstitialAd(@NonNull final InterstitialAd interstitialAd) {
-        if(interstitialAd.isLoaded()) {
-            interstitialAd.show();
-        } else {
-            Log.d("LearnJava", "Attempted to show unloaded ad...");
-        }
     }
 
     /**

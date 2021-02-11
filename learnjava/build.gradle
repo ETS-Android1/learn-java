@@ -17,8 +17,8 @@ android {
         applicationId "com.gaspar.learnjava"
         minSdkVersion 24
         targetSdkVersion 29
-        versionCode 13
-        versionName "1.6.0"
+        versionCode 14
+        versionName "1.6.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -26,14 +26,14 @@ android {
             minifyEnabled false
             resValue "bool", "is_debug", "false"
             resValue "bool", "load_ads", "true"
-			//real signing configs and app IDs are only present on my computer
+			//real signing configs and ad IDs are only present on my computer
         }
         debug { //ONLY I CAN BUILD this variant: debug mode which loads debug ads.
             debuggable true
             resValue "bool", "is_debug", "true"
             resValue "bool", "load_ads", "true"
             signingConfig signingConfigs.debug
-			//real signing configs and app IDs are only present on my computer
+			//real signing configs and ad IDs are only present on my computer
         }
         noads { //EVERYBODY can build this variant. Same as debug, but with no ads at all.
             debuggable true
@@ -61,7 +61,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation "androidx.preference:preference:1.1.1"
     implementation "android.arch.persistence.room:runtime:1.1.1"
@@ -70,6 +70,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.3.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    implementation 'com.google.android.gms:play-services-ads:19.5.0'
+    implementation 'com.google.android.gms:play-services-ads:19.7.0'
     implementation 'com.kaopiz:kprogresshud:1.0.2'
 }
