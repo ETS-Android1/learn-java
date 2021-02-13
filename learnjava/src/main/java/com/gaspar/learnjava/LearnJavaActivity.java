@@ -236,8 +236,19 @@ public class LearnJavaActivity extends ThemedActivity
         super.onPause();
         final View prompt = findViewById(R.id.showMenuView);
         prompt.clearAnimation();
+        //show loading indicator again, in case the last opened chapter changes.
+        View startedView = findViewById(R.id.startedView);
+        View notStartedView =  findViewById(R.id.notStartedView);
+        View loadingView = findViewById(R.id.loadingView);
+        startedView.setVisibility(View.GONE);
+        notStartedView.setVisibility(View.GONE);
+        loadingView.setVisibility(View.VISIBLE);
     }
 
+    /**
+     * Finds which chapter was last opened from the app preferences. If no chapter was found
+     * than the "get started" screen is shown.
+     */
     private void showStartContinueComponent() {
         SharedPreferences preferences = getSharedPreferences(APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
         boolean started = preferences.contains(ACTIVE_CHAPTER_ID_PREFERENCE);

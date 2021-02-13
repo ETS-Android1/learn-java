@@ -57,8 +57,6 @@
             tools:activity=".LearnJavaActivity"
             tools:showIn="@layout/learn_java">
 
-            <!-- The main view -->
-
             <LinearLayout
                 android:id="@+id/showMenuView"
                 android:layout_width="wrap_content"
@@ -90,6 +88,7 @@
                     android:textSize="@dimen/small_text_size" />
             </LinearLayout>
 
+            <!-- The main view -->
             <RelativeLayout
                 android:id="@+id/learnJavaMainView"
                 android:layout_width="wrap_content"
@@ -166,8 +165,18 @@
                         android:layout_marginTop="@dimen/margin"
                         android:layout_weight="1"
                         android:onClick="continueLearningOnClick"
+                        android:visibility="visible"
+                        tools:visibility="gone"
                         android:text="@string/start_learning" />
                 </LinearLayout>
+
+                <!-- Shown until the last chapter is loaded. -->
+                <ProgressBar
+                    android:id="@+id/loadingView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:layout_centerInParent="true"/>
             </RelativeLayout>
 
             <!-- The layout for background images -->

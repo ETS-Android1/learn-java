@@ -21,7 +21,7 @@ import com.gaspar.learnjava.parsers.CourseParser;
 import com.google.android.material.snackbar.Snackbar;
 
 /**
- * Finds the name of a single chapter from it's id. Sets the text on completion.
+ * Finds the name of a single chapter from it's id. Sets the view in the main menu on completion.
  */
 public class InitStarterViewTask extends AsyncTask<Object, Void, LearnJavaActivity> {
 
@@ -77,9 +77,12 @@ public class InitStarterViewTask extends AsyncTask<Object, Void, LearnJavaActivi
         if(!activity.successfulLoad) { //loading has failed
             String message = activity.getString(R.string.loading_error, activity.getString(R.string.courses));
             Snackbar.make(button, message, Snackbar.LENGTH_LONG).show();
+            return;
         }
         View startedView = activity.findViewById(R.id.startedView);
         View notStartedView =  activity.findViewById(R.id.notStartedView);
+        View loadingView = activity.findViewById(R.id.loadingView);
+        loadingView.setVisibility(View.GONE); //don't show loading anymore
         if(started) {
             notStartedView.setVisibility(View.GONE);
             startedView.setVisibility(View.VISIBLE);
