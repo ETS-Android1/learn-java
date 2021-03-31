@@ -61,7 +61,7 @@ public class Component implements Serializable {
      * Type of the component.
      */
     @ComponentType
-    private int type;
+    private final int type;
 
     /**
      * The optional component title. Not all kinds of components can have titles.

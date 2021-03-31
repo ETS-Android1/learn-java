@@ -27,9 +27,9 @@ public class InitStarterViewTask extends AsyncTask<Object, Void, LearnJavaActivi
 
     private static final int NO_STARTED_CHAPTER = Integer.MIN_VALUE;
 
-    private int chapterId;
+    private final int chapterId;
 
-    private boolean started;
+    private final boolean started;
 
     private boolean showOpenDrawerForExamPrompt;
 

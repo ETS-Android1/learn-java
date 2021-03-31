@@ -95,7 +95,7 @@ public class ExamParser {
      * @throws IOException When the XML could not be parsed.
      * @throws RuntimeException If the exam object is incomplete, for example no name or id.
      */
-    private Exam parseExamData(@NonNull XmlPullParser parser, boolean parseQuestions)
+    public Exam parseExamData(@NonNull XmlPullParser parser, boolean parseQuestions)
         throws XmlPullParserException, IOException, RuntimeException {
         int examId = CourseParser.NO_ID_FOUND;
         int questionAmount = CourseParser.NO_ID_FOUND;

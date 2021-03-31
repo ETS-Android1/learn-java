@@ -45,6 +45,9 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Starting activity of the app. Prompts the user to start or continue the curriculum.
+ */
 public class LearnJavaActivity extends ThemedActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -99,14 +102,23 @@ public class LearnJavaActivity extends ThemedActivity
             }
             ThemeUtils.initSelectedTheme(this); //initialize themes
             ClipSyncActivity.initClipSync(this, findViewById(R.id.learnJavaMainView)); //initialize clip sync
+            showStartContinueComponent();
         });
         setUpUI(); //init toolbar and drawer here
+        onCreate = true;
     }
+
+    private boolean onCreate;
 
     @Override
     protected void onResume() {
         super.onResume();
-        showStartContinueComponent();
+        if(!onCreate) { //if we are returning to this activity, update the component
+            showStartContinueComponent();
+        } else {
+            //we are launching this activity. component will be updated when all initialization completed
+            onCreate = false;
+        }
         RelativeLayout backgroundLayout = findViewById(R.id.backgroundImagesLayout); //show another background image
         backgroundLayout.getChildAt(visibleCodeIndex).setVisibility(View.GONE);
         visibleCodeIndex = new Random().nextInt(backgroundLayout.getChildCount()); //start with random image

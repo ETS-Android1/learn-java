@@ -75,6 +75,7 @@ public class CourseParser {
             throw new IOException("Failed to open course assets!");
         }
         Collections.sort(parsedCourses, courseComparator); //sort by id
+        if(parsedCourses.size() == 0) throw new RuntimeException("No courses found!");
         return parsedCourses;
     }
 
@@ -91,7 +92,7 @@ public class CourseParser {
      * @param context App context.
      * @return The parsed course object.
      */
-    private Course parseCourse(@NonNull final XmlPullParser parser, @NonNull Context context)
+    public Course parseCourse(@NonNull final XmlPullParser parser, @NonNull Context context)
             throws XmlPullParserException, IOException, NumberFormatException {
         List<Chapter> chapters = new ArrayList<>(); //these will be filled during XML parsing
         List<Task> tasks = new ArrayList<>();
@@ -172,7 +173,7 @@ public class CourseParser {
      * @return True only if the id inside matches.
      * @throws IOException If the file could not be opened.
      */
-    boolean matchingId(@NonNull String path, int id, final AssetManager manager, final XmlPullParserFactory factory)
+    public boolean matchingId(@NonNull String path, int id, final AssetManager manager, final XmlPullParserFactory factory)
             throws IOException, XmlPullParserException {
         XmlPullParser parser = factory.newPullParser();
         try(final InputStream is = manager.open(path)) { //open file
@@ -201,7 +202,7 @@ public class CourseParser {
      * @throws IOException If problem arises during XML parsing.
      * @throws RuntimeException If the chapter file is incorrect, such as no id or name.
      */
-    private Chapter parseChapterData(@NonNull XmlPullParser parser, boolean parseComponents)
+    public Chapter parseChapterData(@NonNull XmlPullParser parser, boolean parseComponents)
         throws RuntimeException, XmlPullParserException, IOException {
         int chapterId = NO_ID_FOUND;
         String chapterName = null;

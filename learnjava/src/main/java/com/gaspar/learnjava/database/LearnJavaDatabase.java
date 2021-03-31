@@ -1,6 +1,7 @@
 package com.gaspar.learnjava.database;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
@@ -8,13 +9,20 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
-import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.curriculum.Chapter;
 import com.gaspar.learnjava.curriculum.Course;
 import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.curriculum.Task;
+import com.gaspar.learnjava.parsers.CourseParser;
+import com.gaspar.learnjava.parsers.ExamParser;
+import com.gaspar.learnjava.parsers.TaskParser;
 
-import java.lang.reflect.Field;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -53,34 +61,66 @@ public abstract class LearnJavaDatabase extends RoomDatabase {
     public abstract ExamDao getExamDao();
 
     /**
-     * Goes through all XML resource files and checks if the curriculum elements (course, task, ...)
+     * Goes through all asset files and checks if the curriculum elements (course, task, ...)
      * are added to the database or not. If not it adds them.
      */
     public static void validateDatabase(@NonNull Context context) {
-        final Field[] fields = R.xml.class.getDeclaredFields();
-        List<Integer> courseIdList = new ArrayList<>();
-        for (Field field : fields) {
-            final int xmlResourceID;
-            try {
-                xmlResourceID = field.getInt(R.xml.class);
-            } catch (Exception e) {
-                throw new RuntimeException();
+        List<Integer> idList = new ArrayList<>();
+        final AssetManager manager = context.getAssets(); //get access to assets
+        try {
+            final XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
+            factory.setNamespaceAware(true);
+            //list all courses
+            final String[] coursePaths = manager.list("courses"); //list course XML-s in the courses asset folder
+            for(String relCoursePath: coursePaths) { //check every course XML for the correct id
+                String coursePath = "courses/" + relCoursePath;
+                try(final InputStream is = manager.open(coursePath)) { //open course XML as input stream
+                    final XmlPullParser parser = factory.newPullParser();
+                    parser.setInput(is, "UTF-8");
+                    final Course course = CourseParser.getInstance().parseCourse(parser, context); //parse this course
+                    idList.add(course.getId());
+                }
             }
-            String resourceName = context.getResources().getResourceEntryName(xmlResourceID);
-            if(resourceName.startsWith("course_")) {
-                courseIdList.add(parseId(resourceName)); //courses must be sorted by id before validating, see below
-            } else if(resourceName.startsWith("chapter_")) {
-                Chapter.validateChapterStatus(parseId(resourceName), context);
-            } else if(resourceName.startsWith("task_")) {
-                Task.validateTaskStatus(parseId(resourceName), context);
-            } else if(resourceName.startsWith("exam_")) {
-                Exam.validateExamStatus(parseId(resourceName), context);
-            } //other resource like guide is not tracked in the database
-        }
-        /* important, as the one with the smallest id is the first course, and that must get unlocked by default. */
-        Collections.sort(courseIdList);
-        for(int courseId: courseIdList) {
-            Course.validateCourseStatus(courseId, context);
+            /* important, as the one with the smallest id is the first course, and that must get unlocked by default. */
+            Collections.sort(idList);
+            for(int courseId: idList) {
+                Course.validateCourseStatus(courseId, context);
+            }
+            //list and validate all chapters
+            final String[] chapterPaths = manager.list("chapters");
+            for(String relChapterPath: chapterPaths) { //check every chapter XML for the correct id
+                String chapterPath = "chapters/" + relChapterPath;
+                try(final InputStream is = manager.open(chapterPath)) { //open chapter XML as input stream
+                    final XmlPullParser parser = factory.newPullParser();
+                    parser.setInput(is, "UTF-8");
+                    final Chapter chapter = CourseParser.getInstance().parseChapterData(parser, false); //parse this chapter
+                    Chapter.validateChapterStatus(chapter.getId(), context); //validate
+                }
+            }
+            //list and validate tasks
+            final String[] taskPaths = manager.list("tasks");
+            for(String relTaskPath: taskPaths) { //check every task XML for the correct id
+                String taskPath = "tasks/" + relTaskPath;
+                try(final InputStream is = manager.open(taskPath)) { //open task XML as input stream
+                    final XmlPullParser parser = factory.newPullParser();
+                    parser.setInput(is, "UTF-8");
+                    final Task task = TaskParser.getInstance().parseTaskData(parser, false); //parse this chapter
+                    Task.validateTaskStatus(task.getId(), context); //validate
+                }
+            }
+            //list and validate exams
+            final String[] examPaths = manager.list("exams");
+            for(String relExamPath: examPaths) { //check every exam XML for the correct id
+                String examPath = "exams/" + relExamPath;
+                try(final InputStream is = manager.open(examPath)) { //open exam XML as input stream
+                    final XmlPullParser parser = factory.newPullParser();
+                    parser.setInput(is, "UTF-8");
+                    final Exam exam = ExamParser.getInstance().parseExamData(parser, false); //parse this exam
+                    Exam.validateExamStatus(exam.getId(), context); //validate
+                }
+            }
+        } catch (XmlPullParserException | IOException e) {
+            throw new RuntimeException("Failed to validate database: " + e.getClass().getSimpleName() + " - " + e.getMessage());
         }
     }
 
@@ -94,12 +134,6 @@ public abstract class LearnJavaDatabase extends RoomDatabase {
         database.getExamDao().deleteRecords();
         database.getTaskDao().deleteRecords();
         CourseStatus.initCourseCount(0, context); //also reset course counter variable
-    }
-
-    private static int parseId(String resourceName) throws IllegalArgumentException {
-        String[] parts = resourceName.split("_");
-        if(parts.length != 2) throw new IllegalArgumentException();
-        return Integer.parseInt(parts[1]);
     }
 
     /*

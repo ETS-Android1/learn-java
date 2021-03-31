@@ -238,11 +238,11 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
         new ShowCongratulationTask().execute(this);
     }
 
-    public static List<Course> getParsedCourses() {
+    public static synchronized List<Course> getParsedCourses() {
         return PARSED_COURSES;
     }
 
-    public static void setParsedCourses(List<Course> parsedCourses) {
+    public static synchronized void setParsedCourses(List<Course> parsedCourses) {
         PARSED_COURSES = parsedCourses;
     }
 

@@ -82,7 +82,7 @@ public class TaskParser {
      * @throws XmlPullParserException When the XML could not be parsed.
      * @throws IOException When the XML could not be parsed.
      */
-    private Task parseTaskData(@NonNull final XmlPullParser parser, boolean parseComponents)
+    public Task parseTaskData(@NonNull final XmlPullParser parser, boolean parseComponents)
         throws RuntimeException, XmlPullParserException, IOException {
         int taskId = CourseParser.NO_ID_FOUND;
         String taskName = null;
