@@ -121,6 +121,6 @@ public class LearnJavaBluetooth {
     @UiThread
     public void sendData(@NonNull String data, @NonNull BluetoothSocket socket, @NonNull final AppCompatActivity activity) {
         turnOnBluetooth(); //maybe it's turned off
-        new BluetoothExchangeTask(data, socket, activity).execute();
+        new BluetoothExchangeTask(data, socket).execute(activity);
     }
 }

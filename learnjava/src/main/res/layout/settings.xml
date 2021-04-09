@@ -44,7 +44,7 @@
                    app:layout_constraintStart_toStartOf="parent"
                    app:layout_constraintTop_toTopOf="parent" />
 
-               <Switch
+               <com.google.android.material.switchmaterial.SwitchMaterial
                    android:id="@+id/examNotificationsSwitch"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
@@ -177,20 +177,16 @@
                        android:layout_height="wrap_content"
                        android:layout_weight="1"
                        android:text="@string/orange_theme"
-                       android:background="@drawable/button_background_orange"
                        tools:ignore="ButtonStyle"
                        android:onClick="styleSelected"
-                       android:layout_marginEnd="@dimen/margin"
-                       android:textColor="@android:color/black"/>
+                       android:layout_marginEnd="@dimen/margin" />
 
                    <Button
                        android:id="@+id/darkThemeButton"
                        android:layout_width="0dp"
                        android:layout_height="wrap_content"
                        android:layout_weight="1"
-                       android:textColor="@color/darkThemeTextColor"
                        android:text="@string/dark_theme"
-                       android:background="@drawable/button_background_dark"
                        android:onClick="styleSelected"
                        android:layout_marginStart="@dimen/margin"
                        tools:ignore="ButtonStyle" />
@@ -204,7 +200,7 @@
                    app:layout_constraintStart_toStartOf="parent"
                    app:layout_constraintTop_toBottomOf="@+id/themeSelectors" />
 
-               <Switch
+               <com.google.android.material.switchmaterial.SwitchMaterial
                    android:id="@+id/keepAwakeSwitch"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"

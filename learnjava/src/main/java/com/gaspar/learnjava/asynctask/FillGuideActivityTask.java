@@ -46,16 +46,16 @@ public class FillGuideActivityTask extends AsyncTask<GuideActivity, Void, FillGu
             }
             final LayoutInflater inflater = LayoutInflater.from(result.activity);
             View closeButton = inflater.inflate(R.layout.close_buide_button, componentsLayout, false);
-            closeButton.setOnClickListener(v -> result.activity.closeButtonOnClick(v));
+            closeButton.setOnClickListener(result.activity::closeButtonOnClick);
             componentsLayout.addView(closeButton);
         } else {
             FillCourseActivityTask.showFailDialog(result.activity, result.activity.getString(R.string.guide));
         }
     }
 
-    class Result {
-        private GuideActivity activity;
-        private List<Component> components;
+    static class Result {
+        private final GuideActivity activity;
+        private final List<Component> components;
 
         private Result(@NonNull GuideActivity activity, @Nullable List<Component> components) {
             this.activity = activity;

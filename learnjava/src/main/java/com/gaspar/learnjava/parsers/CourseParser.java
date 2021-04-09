@@ -24,7 +24,6 @@ import org.xmlpull.v1.XmlPullParserFactory;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -74,7 +73,7 @@ public class CourseParser {
         } else {
             throw new IOException("Failed to open course assets!");
         }
-        Collections.sort(parsedCourses, courseComparator); //sort by id
+        parsedCourses.sort(courseComparator); //sort by id
         if(parsedCourses.size() == 0) throw new RuntimeException("No courses found!");
         return parsedCourses;
     }

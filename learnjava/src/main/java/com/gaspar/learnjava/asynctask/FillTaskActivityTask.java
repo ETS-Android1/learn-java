@@ -15,6 +15,7 @@ import com.gaspar.learnjava.curriculum.Task;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.database.TaskStatus;
 import com.gaspar.learnjava.parsers.TaskParser;
+import com.gaspar.learnjava.utils.ThemeUtils;
 
 /**
  * Loads the task components into a task activity.
@@ -24,7 +25,7 @@ public class FillTaskActivityTask extends AsyncTask<TaskActivity, Void, TaskActi
     /**
      * This task was passed to the activity. It has no components.
      */
-    private Task passedTask;
+    private final Task passedTask;
 
     public FillTaskActivityTask(Task passedTask) {
         this.passedTask = passedTask;
@@ -70,6 +71,9 @@ public class FillTaskActivityTask extends AsyncTask<TaskActivity, Void, TaskActi
             completedCheckBox.setChecked(taskCompleted); //show checked if task is completed
             completedCheckBox.setOnCheckedChangeListener((compoundButton, isChecked) ->
                     activity.updateTaskStatus(isChecked, activity.getDisplayedTask().getId()));
+
+            //ask about dark theme
+            ThemeUtils.showDarkThemePromptIfNeeded(activity);
         } else {
             FillCourseActivityTask.showFailDialog(activity, activity.getString(R.string.tasks));
         }

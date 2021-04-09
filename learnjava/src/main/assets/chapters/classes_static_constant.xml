@@ -251,7 +251,7 @@
     <interactive instruction="Complete the enum declaration!">
         <data><![CDATA[
 
-___ <font color="#999900">ThreeWayLogic</font> {
+___ <font color="#999900">TernaryLogic</font> {
 <br/>&nbsp;&nbsp;&nbsp;&nbsp;TRUE, FALSE, UNDETERMINED;
 <br/>}
 

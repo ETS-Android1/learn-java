@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -20,10 +19,8 @@ import com.gaspar.learnjava.asynctask.ShowCongratulationTask;
 import com.gaspar.learnjava.curriculum.Chapter;
 import com.gaspar.learnjava.curriculum.Course;
 import com.gaspar.learnjava.curriculum.Exam;
-import com.gaspar.learnjava.curriculum.Status;
 import com.gaspar.learnjava.curriculum.Task;
 import com.gaspar.learnjava.database.CourseStatus;
-import com.gaspar.learnjava.utils.AnimationUtils;
 import com.gaspar.learnjava.utils.DrawerUtils;
 import com.google.android.gms.ads.AdView;
 import com.google.android.material.navigation.NavigationView;
@@ -85,7 +82,6 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
 
     private void setUpUI() {
         new FillCourseActivityTask().execute(this); //fill list view.
-        addCourseOnClickListeners();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -158,43 +154,6 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
                 nextCourse.queryAndDisplayStatus(nextCourseView.findViewById(R.id.statusIconView), this);
             }
         }
-    }
-
-    /**
-     * Adds a listener to each list view element. The listener hides or shows the chapter/task/exam
-     * views on click, if the course is unlocked or completed.
-     */
-    private void addCourseOnClickListeners() {
-        ListView courseViews = findViewById(R.id.courseSelectors);
-        courseViews.setOnItemClickListener((adapterView, view, position, l) -> {
-            Course c = PARSED_COURSES.get(position);
-            if(!LearnJavaActivity.DEBUG) { //only some shaking happens on locked, except in debug
-                if(c.getStatus() == Status.LOCKED || c.getStatus()==Status.NOT_QUERIED) {
-                    view.findViewById(R.id.statusIconView).
-                            startAnimation(android.view.animation.AnimationUtils.loadAnimation(this, R.anim.shake));
-                    return;
-                }
-            }
-            LinearLayout slideInView = view.findViewById(R.id.slideInView);
-            if(slideInView.getVisibility() == View.GONE) {
-                AnimationUtils.slideIn(slideInView);
-            } else { //visible
-                AnimationUtils.slideOut(slideInView);
-            }
-        });
-    }
-
-    /**
-     * Shows the user which component to tap for details by shaking it a bit. This is always
-     * the first course displayer in the list view
-     */
-    public void showTapPrompt(View tapView) {
-        ListView courseSelectors = findViewById(R.id.courseSelectors);
-        if(courseSelectors.getChildCount() == 0) return;
-        View shakeThis = courseSelectors.getChildAt(0).findViewById(R.id.courseNameBar);
-
-        shakeThis.startAnimation(android.view.animation.AnimationUtils.loadAnimation(
-                CoursesActivity.this, R.anim.shake));
     }
 
     /**

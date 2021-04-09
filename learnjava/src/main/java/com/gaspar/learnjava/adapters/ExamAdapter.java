@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class ExamAdapter extends ArrayAdapter<Course> {
 
-    private AppCompatActivity activity;
+    private final AppCompatActivity activity;
 
     public ExamAdapter(AppCompatActivity activity, @Size(min=1) List<Course> courses) {
         super(activity, R.layout.named_exam_selector_view, courses);

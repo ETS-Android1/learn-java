@@ -31,25 +31,18 @@ public abstract class DrawerUtils {
     public static void handleDrawerOnClick(@NonNull final AppCompatActivity activity, @NonNull final MenuItem item) {
         int id = item.getItemId(); // Handle navigation view item clicks here.
         Intent intent = null;
-        switch(id) {
-            case R.id.nav_courses:
-                intent = new Intent(activity, CoursesActivity.class);
-                break;
-            case R.id.nav_tasks:
-                intent = new Intent(activity, TasksActivity.class);
-                break;
-            case R.id.nav_exams:
-                intent = new Intent(activity, ExamsActivity.class);
-                break;
-            case R.id.nav_guide:
-                intent = new Intent(activity, GuideActivity.class);
-                break;
-            case R.id.nav_contact:
-                intent = new Intent(activity, ContactActivity.class);
-                break;
-            case R.id.nav_clipsync:
-                intent = new Intent(activity, ClipSyncActivity.class);
-                break;
+        if (id == R.id.nav_courses) {
+            intent = new Intent(activity, CoursesActivity.class);
+        } else if (id == R.id.nav_tasks) {
+            intent = new Intent(activity, TasksActivity.class);
+        } else if (id == R.id.nav_exams) {
+            intent = new Intent(activity, ExamsActivity.class);
+        } else if (id == R.id.nav_guide) {
+            intent = new Intent(activity, GuideActivity.class);
+        } else if (id == R.id.nav_contact) {
+            intent = new Intent(activity, ContactActivity.class);
+        } else if (id == R.id.nav_clipsync) {
+            intent = new Intent(activity, ClipSyncActivity.class);
         }
         DrawerLayout drawer = activity.findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

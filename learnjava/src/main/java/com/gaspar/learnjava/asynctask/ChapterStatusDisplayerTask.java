@@ -16,7 +16,7 @@ import com.gaspar.learnjava.database.LearnJavaDatabase;
  */
 public class ChapterStatusDisplayerTask extends AsyncTask<Object, Void, CourseStatusDisplayerTask.Result> {
 
-    private Chapter chapter;
+    private final Chapter chapter;
 
     public ChapterStatusDisplayerTask(Chapter chapter) {
         this.chapter = chapter;

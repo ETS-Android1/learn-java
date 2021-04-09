@@ -53,12 +53,13 @@ public class ShowCongratulationTask extends AsyncTask<CoursesActivity, Void, Sho
         }
     }
 
-    class Result {
+    static class Result {
+        private final List<Integer> examStatuses;
+        private final CoursesActivity activity;
+
         Result(List<Integer> examStatuses, CoursesActivity activity) {
             this.examStatuses = examStatuses;
             this.activity = activity;
         }
-        private List<Integer> examStatuses;
-        private CoursesActivity activity;
     }
 }

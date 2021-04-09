@@ -21,8 +21,6 @@ import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.parsers.CourseParser;
 import com.gaspar.learnjava.utils.ThemeUtils;
 
-import java.util.concurrent.Executors;
-
 /**
  * A background service that shows a notification when it is created.
  */

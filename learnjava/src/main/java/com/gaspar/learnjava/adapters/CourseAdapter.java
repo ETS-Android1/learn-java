@@ -1,5 +1,6 @@
 package com.gaspar.learnjava.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +17,12 @@ import androidx.annotation.Size;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gaspar.learnjava.CoursesActivity;
+import com.gaspar.learnjava.LearnJavaActivity;
 import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.curriculum.Chapter;
 import com.gaspar.learnjava.curriculum.Course;
 import com.gaspar.learnjava.curriculum.Exam;
+import com.gaspar.learnjava.curriculum.Status;
 import com.gaspar.learnjava.curriculum.Task;
 
 import java.util.List;
@@ -30,7 +33,10 @@ import java.util.List;
  */
 public class CourseAdapter extends ArrayAdapter<Course> {
 
-    private CoursesActivity activity;
+    /**
+     * The activity, in which the list view is shown.
+     */
+    private final CoursesActivity activity;
 
     /**
      * Alpha animation applied to selectors on click.
@@ -57,16 +63,44 @@ public class CourseAdapter extends ArrayAdapter<Course> {
             viewHolder.chaptersView = convertView.findViewById(R.id.chaptersView);
             viewHolder.tasksView = convertView.findViewById(R.id.tasksView);
             viewHolder.examView = convertView.findViewById(R.id.examSelector);
+            viewHolder.showHideView = convertView.findViewById(R.id.slideInView);
+            viewHolder.courseNameBar = convertView.findViewById(R.id.courseNameBar);
             convertView.setTag(viewHolder);
         } else { //recycling
             viewHolder = (CourseViewHolder)convertView.getTag();
         }
         if(course != null) { //fill data here using view holder
             viewHolder.courseNameView.setText(course.getCourseName());
+            //register listener that shows or hides contents
+            viewHolder.courseNameBar.setOnClickListener(v -> onCourseNameClick(position, viewHolder.statusIcon, viewHolder.showHideView));
             course.queryAndDisplayStatus(viewHolder.statusIcon, activity);
             addHiddenViews(viewHolder, course); //add chapter, task exam selectors
         }
         return convertView;
+    }
+
+    /**
+     * Called when the user taps the name of one of the courses. Will show the contents if the course is unlocked.
+     * In debug mode, it will always show the contents.
+     * @param position Position of the item that was clicked. Used to find which course this view belongs to.
+     * @param iconView Status icon of the course. Animated when a locked course is tapped.
+     * @param showHideView This is the part of the course item view that is shown/hidden on click.
+     */
+    private void onCourseNameClick(int position, @NonNull final View iconView, @NonNull final View showHideView) {
+        Log.e("LearnJava","Clicked on course name! " + LearnJavaActivity.DEBUG);
+        Course c = CoursesActivity.getParsedCourses().get(position);
+        if(!LearnJavaActivity.DEBUG) { //only some shaking happens on locked, except in debug
+            if(c.getStatus() == Status.LOCKED || c.getStatus()==Status.NOT_QUERIED) {
+                iconView.findViewById(R.id.statusIconView).
+                        startAnimation(android.view.animation.AnimationUtils.loadAnimation(iconView.getContext(), R.anim.shake));
+                return;
+            }
+        }
+        if(showHideView.getVisibility() == View.GONE) {
+            com.gaspar.learnjava.utils.AnimationUtils.slideIn(showHideView);
+        } else { //visible
+            com.gaspar.learnjava.utils.AnimationUtils.slideOut(showHideView);
+        }
     }
 
     /**
@@ -113,7 +147,7 @@ public class CourseAdapter extends ArrayAdapter<Course> {
     private void setUpTaskView(final View taskView, @NonNull Task task) {
         TextView taskNameView = taskView.findViewById(R.id.taskNameView);
         taskNameView.setText(task.getName());
-        taskView.setOnClickListener(view -> { //redirect to task activity of not locked.
+        taskView.setOnClickListener(view -> { //redirect to task activity if not locked.
             Task.startTaskActivity(activity, task, taskView);
             view.startAnimation(clickAnimation);
         });
@@ -128,6 +162,8 @@ public class CourseAdapter extends ArrayAdapter<Course> {
         LinearLayout chaptersView;
         LinearLayout tasksView;
         View examView;
+        View showHideView;
+        View courseNameBar;
     }
 
 }

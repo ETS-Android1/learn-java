@@ -186,7 +186,7 @@ public class Component implements Serializable {
                 }
                 break;
             case ClipSyncActivity.ClipSyncMode.NETWORK:
-                new NetworkExchangeTask(copyFromThis.getText().toString(), activity).execute();
+                new NetworkExchangeTask(copyFromThis.getText().toString()).execute(activity);
                 break;
             default: //no clip sync, just a general confirmation
                 Snackbar.make(copyFromThis, R.string.copy_successful, Snackbar.LENGTH_SHORT).show();

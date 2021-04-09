@@ -29,7 +29,7 @@ import java.util.List;
  */
 public class TaskAdapter extends ArrayAdapter<Course> {
 
-    private AppCompatActivity activity;
+    private final AppCompatActivity activity;
 
     /**
      * Alpha animation applied to task selectors on click.

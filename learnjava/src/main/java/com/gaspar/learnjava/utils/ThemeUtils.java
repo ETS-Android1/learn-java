@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat;
 
 import com.gaspar.learnjava.LearnJavaActivity;
 import com.gaspar.learnjava.R;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /**
  * Gets runtime color values.
@@ -149,5 +150,38 @@ public abstract class ThemeUtils {
             return new ContextThemeWrapper(activity, R.style.dialog_dark);
         }
         throw new RuntimeException("Theme error!");
+    }
+
+    private static final String SHOW_DARK_THEME_PROMPT = "show_dark_theme_prompt";
+
+    /**
+     * Shows a dialog to the user which informs them that a dark mode is available.
+     */
+    public static void showDarkThemePromptIfNeeded(@NonNull final AppCompatActivity activity) {
+        final SharedPreferences preferences = activity.getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
+        if(isDarkTheme()) {
+            //the user already switched to dark theme!
+            preferences.edit().putBoolean(SHOW_DARK_THEME_PROMPT, true).apply();
+            return;
+        }
+
+        if(!preferences.contains(SHOW_DARK_THEME_PROMPT)) {
+            //never been shown before, show it now
+            new MaterialAlertDialogBuilder(ThemeUtils.createDialogWrapper(activity))
+                    .setTitle(R.string.dark_theme_title)
+                    .setMessage(R.string.dark_theme_info)
+                    .setPositiveButton(R.string.dark_theme_accepted, (dialog, which) -> {
+                        dialog.dismiss();
+                        ThemeUtils.updateSelectedTheme(activity, Themes.DARK); //update
+                        activity.setTheme(ThemeUtils.getTheme());
+                        activity.recreate();
+                    })
+                    .setNegativeButton(R.string.dark_theme_denied, (dialog, which) -> dialog.dismiss())
+                    .create()
+                    .show();
+            //save that it was shown
+            preferences.edit().putBoolean(SHOW_DARK_THEME_PROMPT, true).apply();
+        }
+        //otherwise the prompt was already shown
     }
 }

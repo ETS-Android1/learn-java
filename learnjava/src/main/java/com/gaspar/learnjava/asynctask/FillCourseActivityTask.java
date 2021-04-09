@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.ListView;
 
 import androidx.annotation.Size;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gaspar.learnjava.CoursesActivity;
@@ -14,6 +13,7 @@ import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.adapters.CourseAdapter;
 import com.gaspar.learnjava.parsers.CourseParser;
 import com.gaspar.learnjava.utils.ThemeUtils;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /**
  * Parses the courses from XML and fill the list view in the {@link com.gaspar.learnjava.CoursesActivity}
@@ -55,7 +55,7 @@ public class FillCourseActivityTask extends AsyncTask<CoursesActivity, Void, Cou
     }
 
     static void showFailDialog(AppCompatActivity activity, String errorLocation) {
-        androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(ThemeUtils.createDialogWrapper(activity));
+        androidx.appcompat.app.AlertDialog.Builder builder = new MaterialAlertDialogBuilder(ThemeUtils.createDialogWrapper(activity));
         String message = activity.getString(R.string.loading_error, errorLocation);
         builder.setMessage(message);
         builder.setOnCancelListener(dialogInterface -> {

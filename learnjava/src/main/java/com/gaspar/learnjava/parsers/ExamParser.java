@@ -246,7 +246,7 @@ public class ExamParser {
             if(eventType == XmlResourceParser.START_TAG && tagName.equalsIgnoreCase(TagName.TEXT)) {
                 questionText = parser.nextText();
             } else if(eventType == XmlResourceParser.START_TAG && tagName.equalsIgnoreCase(TagName.CORRECT)) {
-                isTrue = Boolean.valueOf(parser.nextText()); //will return false for anything not "true"
+                isTrue = Boolean.parseBoolean(parser.nextText()); //will return false for anything not "true"
                 correctInit = true;
             }
             eventType = parser.next(); //advance parser

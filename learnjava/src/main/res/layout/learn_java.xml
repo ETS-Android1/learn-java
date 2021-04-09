@@ -95,6 +95,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginEnd="@dimen/margin"
                 android:layout_marginTop="@dimen/starter_view_margin"
                 android:visibility="visible">
 

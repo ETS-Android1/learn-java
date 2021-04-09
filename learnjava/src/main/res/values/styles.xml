@@ -1,12 +1,12 @@
 <resources>
-    <style name="AppTheme" parent="Theme.AppCompat.Light"> <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light"> <!-- Base application theme. -->
         <!-- Colors -->
         <item name="colorPrimary">@color/colorPrimaryOrange</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkOrange</item>
         <item name="colorAccent">@color/colorAccentOrange</item>
         <item name="android:windowBackground">@color/windowBackgroundOrange</item>
         <!-- Button styling -->
-        <item name="buttonStyle">@style/button_style_orange</item>
+        <item name="materialButtonStyle">@style/button_style_orange</item>
         <item name="imageButtonStyle">@style/image_button_style_orange</item>
         <!-- Text view style -->
         <item name="android:textViewStyle">@style/text_view_style</item>
@@ -15,14 +15,14 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="DarkTheme" parent="AppTheme"> <!-- Dark application theme. -->
+    <style name="DarkTheme" parent="Theme.MaterialComponents"> <!-- Dark application theme. -->
         <!-- Colors -->
         <item name="colorPrimary">@color/colorPrimary_Dark</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark_Dark</item>
         <item name="colorAccent">@color/colorAccent_Dark</item>
         <item name="android:windowBackground">@color/windowBackground_Dark</item>
         <!-- Button styling -->
-        <item name="buttonStyle">@style/button_style_dark</item>
+        <item name="materialButtonStyle">@style/button_style_dark</item>
         <item name="imageButtonStyle">@style/image_button_style_dark</item>
         <!-- Text view style -->
         <item name="android:textViewStyle">@style/text_view_style</item>
@@ -35,6 +35,9 @@
         <item name="editTextStyle">@style/edit_text_dark</item>
         <item name="radioButtonStyle">@style/radio_button_dark</item>
         <item name="checkboxStyle">@style/checkbox_dark</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="AppTheme">
@@ -56,36 +59,51 @@
     </style>
 
     <!-- Custom button appearance -->
-    <style name="button_style_orange" parent="TextAppearance.AppCompat.Button">
+    <style name="button_style_orange" parent="Widget.MaterialComponents.Button">
         <item name="android:background">@drawable/button_background_selector_orange</item>
         <item name="android:textSize">@dimen/medium_text_size</item>
         <item name="android:elevation">@dimen/elevation</item>
+        <item name="materialThemeOverlay">@style/button_style_text_color</item>
+        <item name="android:textColor">@android:color/black</item>
         <item name="android:animateOnClick">true</item>
         <item name="android:textAlignment">center</item>
     </style>
-    <style name="image_button_style_orange" parent="TextAppearance.AppCompat.Button">
+    <style name="button_style_text_color">
+        <item name="colorOnPrimary">@android:color/black</item>
+    </style>
+
+    <style name="image_button_style_orange" parent="TextAppearance.MaterialComponents.Button">
         <item name="android:background">@drawable/image_button_background_orange</item>
         <item name="android:backgroundTint">@color/colorPrimaryOrange</item>
         <item name="android:elevation">0dp</item>
         <item name="android:animateOnClick">true</item>
+        <item name="android:textColor">@color/darkThemeTextColor</item>
+        <item name="android:foreground">?selectableItemBackground</item>
     </style>
-    <style name="button_style_dark" parent="TextAppearance.AppCompat.Button">
+
+    <style name="button_style_dark" parent="Widget.MaterialComponents.Button">
         <item name="android:background">@drawable/button_background_dark</item>
         <item name="android:textSize">@dimen/medium_text_size</item>
         <item name="android:elevation">@dimen/elevation</item>
+        <item name="materialThemeOverlay">@style/button_style_text_color_dark</item>
         <item name="android:animateOnClick">true</item>
         <item name="android:textAlignment">center</item>
     </style>
-    <style name="image_button_style_dark" parent="TextAppearance.AppCompat.Button">
+    <style name="button_style_text_color_dark">
+        <item name="colorOnPrimary">@color/darkThemeTextColor</item>
+    </style>
+
+    <style name="image_button_style_dark" parent="TextAppearance.MaterialComponents.Button">
         <item name="android:background">@drawable/image_button_background_dark</item>
         <item name="android:backgroundTint">@color/colorPrimary_Dark</item>
         <item name="android:tint">@color/darkThemeTextColor</item>
         <item name="android:elevation">0dp</item>
         <item name="android:animateOnClick">true</item>
+        <item name="android:foreground">?selectableItemBackground</item>
     </style>
 
     <!-- special style for toolbar for dark mode -->
-    <style name="DarkToolbarStyle" parent="Widget.AppCompat.Toolbar">
+    <style name="DarkToolbarStyle" parent="Widget.MaterialComponents.Toolbar">
         <item name="android:textColor">@color/darkThemeTextColor</item>
         <item name="android:background">@color/colorPrimary_Dark</item>
     </style>
@@ -111,12 +129,12 @@
     </style>
 
     <!-- For some reason this needs to be set programmatically for all dialogs -->
-    <style name="dialog_dark" parent="Theme.AppCompat.Dialog.Alert">
+    <style name="dialog_dark" parent="Theme.MaterialComponents.Dialog.Alert">
         <item name="android:windowBackground">@color/windowBackground_Dark</item>
         <item name="android:textColor">@color/darkThemeTextColor</item>
         <item name="buttonStyle">@style/button_style_dark</item>
     </style>
-    <style name="dialog_orange" parent="Theme.AppCompat.Dialog.Alert">
+    <style name="dialog_orange" parent="Theme.MaterialComponents.Dialog.Alert">
         <item name="android:windowBackground">@color/windowBackgroundOrange</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="buttonStyle">@style/button_style_orange</item>

@@ -24,7 +24,6 @@ import com.gaspar.learnjava.parsers.CourseParser;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.concurrent.Executors;
 
 /**
  * <p>
@@ -62,12 +61,12 @@ public class Chapter implements Serializable {
     /**
      * The id of the chapter.
      */
-    private int id;
+    private final int id;
 
     /**
      * The name if the chapter.
      */
-    private String name;
+    private final String name;
 
     /**
      * Displayable components of the chapter.

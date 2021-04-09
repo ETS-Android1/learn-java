@@ -24,7 +24,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -35,6 +34,7 @@ import com.gaspar.learnjava.curriculum.Component;
 import com.gaspar.learnjava.utils.DrawerUtils;
 import com.gaspar.learnjava.utils.LearnJavaBluetooth;
 import com.gaspar.learnjava.utils.ThemeUtils;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.kaopiz.kprogresshud.KProgressHUD;
@@ -54,22 +54,27 @@ public class ClipSyncActivity extends ThemedActivity
      * This constant is used to ask the user to turn on bluetooth.
      */
     public static final int REQUEST_ENABLE_BT = 11;
+
     /**
      * The constant is used to ask the user to allow the app to access location. Needed for bluetooth.
      */
     public static final int REQUEST_ALLOW_LOCATION = 12;
+
     /**
      * Name of the clip sync status preference.
      */
     public static final String CLIP_SYNC_PREF_NAME = "clip_sync_pref";
+
     /**
      * Preference object that this activity can use.
      */
     private SharedPreferences prefs;
+
     /**
      * Discovered devices are stores here to later query them for UUID-s.
      */
     private List<BluetoothDevice> deviceList;
+
     /**
      * This object listens to the discovered devices, from the pairing process. Also listens
      * to found UUID-s. IF it finds the server then a handshake connection is initiated.
@@ -192,7 +197,7 @@ public class ClipSyncActivity extends ThemedActivity
      * If all permissions are granted, looks for the desktop app.
      */
     public void bluetoothSelectOnClick(@NonNull View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(ThemeUtils.createDialogWrapper(ClipSyncActivity.this));
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(ThemeUtils.createDialogWrapper(ClipSyncActivity.this));
         if (!LearnJavaBluetooth.getInstance().bluetoothSupported()) { //no bluetooth support :(
             builder.setMessage(R.string.bluetooth_not_supported);
             builder.setIcon(R.drawable.problem_icon);
@@ -203,7 +208,7 @@ public class ClipSyncActivity extends ThemedActivity
         //Ask about location permission
         int result = ContextCompat.checkSelfPermission(ClipSyncActivity.this, Manifest.permission.ACCESS_FINE_LOCATION);
         if (result != PackageManager.PERMISSION_GRANTED) { //permission is not given
-            AlertDialog.Builder builder1 = new AlertDialog.Builder(ThemeUtils.createDialogWrapper(ClipSyncActivity.this));
+            MaterialAlertDialogBuilder builder1 = new MaterialAlertDialogBuilder(ThemeUtils.createDialogWrapper(ClipSyncActivity.this));
             builder1.setMessage(R.string.clip_sync_location);
             builder1.setIcon(R.drawable.bluetooth_icon);
             builder1.setPositiveButton(R.string.ok, (dialog, i) -> {
@@ -239,7 +244,7 @@ public class ClipSyncActivity extends ThemedActivity
      * Called when the user selects network sync mode.
      */
     public void networkSelectOnClick(@NonNull View view) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(ThemeUtils.createDialogWrapper(ClipSyncActivity.this));
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(ThemeUtils.createDialogWrapper(ClipSyncActivity.this));
         builder.setMessage(R.string.clip_sync_remember_description);
         builder.setIcon(R.drawable.local_network_icon);
         builder.setPositiveButton(R.string.ok, ((dialogInterface, i) -> {
@@ -294,7 +299,7 @@ public class ClipSyncActivity extends ThemedActivity
      * Shows notification to user about the need for pairing. If the user accepts, the pairing will begin.
      */
     private void handleDevicePairing() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(ThemeUtils.createDialogWrapper(ClipSyncActivity.this));
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(ThemeUtils.createDialogWrapper(ClipSyncActivity.this));
         builder.setMessage(R.string.clip_sync_pairing_description);
         builder.setIcon(R.drawable.bluetooth_icon);
         builder.setPositiveButton(R.string.ok, ((dialogInterface, i) -> {
@@ -318,7 +323,7 @@ public class ClipSyncActivity extends ThemedActivity
             pairingDialog.setDetailsLabel(getString(R.string.scanning_device) + device.getName());
             device.fetchUuidsWithSdp();
         } else { //no success in finding the server
-            AlertDialog.Builder builder = new AlertDialog.Builder(ThemeUtils.createDialogWrapper(ClipSyncActivity.this));
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(ThemeUtils.createDialogWrapper(ClipSyncActivity.this));
             builder.setMessage(R.string.clip_sync_misc_error);
             builder.setIcon(R.drawable.problem_icon);
             builder.setPositiveButton(R.string.ok, (dialog, i) -> dialog.dismiss());
@@ -375,7 +380,7 @@ public class ClipSyncActivity extends ThemedActivity
      * when the user selectes bluetooth clip sync (and every permission is granted).
      */
     public void saveBluetoothClipSync() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(ThemeUtils.createDialogWrapper(ClipSyncActivity.this));
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(ThemeUtils.createDialogWrapper(ClipSyncActivity.this));
         builder.setMessage(R.string.clip_sync_remember_description);
         builder.setIcon(R.drawable.bluetooth_icon);
         builder.setPositiveButton(R.string.ok, ((dialogInterface, i) -> {

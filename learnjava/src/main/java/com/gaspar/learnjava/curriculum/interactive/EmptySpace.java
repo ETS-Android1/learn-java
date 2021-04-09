@@ -121,7 +121,7 @@ public class EmptySpace {
      */
     public static class EmptySpaceListBuilder {
 
-        private List<EmptySpace> emptySpaces;
+        private final List<EmptySpace> emptySpaces;
 
         public EmptySpaceListBuilder() {
             emptySpaces = new ArrayList<>();

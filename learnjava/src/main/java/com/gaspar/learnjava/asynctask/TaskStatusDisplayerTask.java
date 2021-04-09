@@ -17,7 +17,7 @@ import com.gaspar.learnjava.database.TaskStatus;
  */
 public class TaskStatusDisplayerTask extends AsyncTask<Object, Void, CourseStatusDisplayerTask.Result> {
 
-    private Task task;
+    private final Task task;
 
     public TaskStatusDisplayerTask(Task task) {
         this.task = task;

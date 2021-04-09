@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.Size;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gaspar.learnjava.R;
@@ -14,18 +13,19 @@ import com.gaspar.learnjava.curriculum.Course;
 import com.gaspar.learnjava.database.CourseStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.utils.ThemeUtils;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /**
  * Queries and displays the status of a course. This depends on if it's unlocked or not, and if it's finished or not.
  */
 public class CourseStatusDisplayerTask extends AsyncTask<Object, Void, CourseStatusDisplayerTask.Result> {
 
-    private Course course;
+    private final Course course;
 
     /**
      * Optional, this will be called when the task end, IN ADDITION TO displaying course status.
      */
-    private Runnable callAtEnd;
+    private final Runnable callAtEnd;
 
     public CourseStatusDisplayerTask(Course course) {
         this.course = course;
@@ -82,7 +82,7 @@ public class CourseStatusDisplayerTask extends AsyncTask<Object, Void, CourseSta
     //adds a dialog that notifies about unfinished courses on click
     private void addDialogOnClick(AppCompatActivity activity, View imageView) {
         imageView.setOnClickListener(v -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(ThemeUtils.createDialogWrapper(activity));
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(ThemeUtils.createDialogWrapper(activity));
             builder.setTitle(R.string.in_development);
             builder.setMessage(R.string.course_development_info);
             builder.setPositiveButton(R.string.ok, (dialog, which) -> dialog.dismiss());
@@ -91,7 +91,7 @@ public class CourseStatusDisplayerTask extends AsyncTask<Object, Void, CourseSta
     }
 
     public static class Result {
-        private AppCompatActivity activity;
+        private final AppCompatActivity activity;
         ImageView imageView;
         public @com.gaspar.learnjava.curriculum.Status int status;
 

@@ -185,4 +185,10 @@
     <string name="my_email">gaspar.tamas97@protonmail.com</string>
     <string name="default_email_subject">About the LearnJava app</string>
     <string name="email_chooser">Select an e-mail app</string>
+
+    <!-- Dark theme prompt. -->
+    <string name="dark_theme_title">Dark theme</string>
+    <string name="dark_theme_info">There is a dark theme! You can try it out now, or change it in the settings.</string>
+    <string name="dark_theme_denied">No thanks</string>
+    <string name="dark_theme_accepted">Show me</string>
 </resources>

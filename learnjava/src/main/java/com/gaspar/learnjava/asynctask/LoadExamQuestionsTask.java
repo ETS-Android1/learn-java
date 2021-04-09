@@ -28,7 +28,7 @@ public class LoadExamQuestionsTask extends AsyncTask<ExamActivity, Void, ExamAct
     /**
      * Id of the exam that must be parsed.
      */
-    private int examId;
+    private final int examId;
 
     public LoadExamQuestionsTask(int examId) {
         this.examId = examId;

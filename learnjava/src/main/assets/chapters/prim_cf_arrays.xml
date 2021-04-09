@@ -77,7 +77,7 @@
  <font color="gray">//an array of 4 booleans</font>
 <br/><font color="#DF7401">boolean</font>[] logicals = {<font color="#E65100">false</font>, <font color="#E65100">true</font>, <font color="#E65100">false</font>, <font color="#E65100">false</font>};
 <br/><font color="gray">//an array of 3 strings</font>
-<br/><font color="#999900">String</font>[] words = {<font color="#2E8B57">"Fast"</font>, "Array", <font color="#2E8B57">"Initialization"</font>};
+<br/><font color="#999900">String</font>[] words = {<font color="#2E8B57">"Fast"</font>, <font color="#2E8B57">"Array"</font>, <font color="#2E8B57">"Initialization"</font>};
         
     ]]></code>
     <text>

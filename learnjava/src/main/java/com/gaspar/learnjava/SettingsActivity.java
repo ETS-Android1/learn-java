@@ -8,12 +8,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.AnimationUtils;
 import android.widget.RadioGroup;
-import android.widget.Switch;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringDef;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -22,8 +20,10 @@ import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.utils.DrawerUtils;
 import com.gaspar.learnjava.utils.ThemeUtils;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 
 /**
  * Activity to show app settings.
@@ -107,7 +107,7 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
      * Initializes the notification related settings.
      */
     private void initNotificationSettings() {
-        Switch examNotificationSwitch = findViewById(R.id.examNotificationsSwitch);
+        SwitchMaterial examNotificationSwitch = findViewById(R.id.examNotificationsSwitch);
         examNotificationSwitch.setChecked(prefs.getBoolean(EXAM_NOTIFICATIONS_PREF_NAME, true)); //set exam notification status
         examNotificationSwitch.setOnCheckedChangeListener((compoundButton, checked) ->
                 prefs.edit().putBoolean(EXAM_NOTIFICATIONS_PREF_NAME, checked).apply());
@@ -118,7 +118,7 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
      */
     private void initScreenSettings() {
         //keep awake functionality
-        Switch keepAwakeSwitch = findViewById(R.id.keepAwakeSwitch);
+        SwitchMaterial keepAwakeSwitch = findViewById(R.id.keepAwakeSwitch);
         keepAwakeSwitch.setChecked(prefs.getBoolean(KEEP_AWAKE_PREF_NAME, false)); //false by default
         keepAwakeSwitch.setOnCheckedChangeListener((compoundButton, checked) -> {
                 prefs.edit().putBoolean(KEEP_AWAKE_PREF_NAME, checked).apply();
@@ -148,19 +148,15 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
                 break;
         }
         group.setOnCheckedChangeListener((radioGroup, id) -> {
-            switch (id) {
-                case R.id.challengingButton:
-                    prefs.edit().putString(DIFFICULTY_PREF_NAME, Difficulties.CHALLENGING).apply();
-                    Exam.setMinimumPassPercentage(80);
-                    break;
-                case R.id.defaultButton:
-                    prefs.edit().putString(DIFFICULTY_PREF_NAME, Difficulties.DEFAULT).apply();
-                    Exam.setMinimumPassPercentage(60);
-                    break;
-                case R.id.easyButton:
-                    prefs.edit().putString(DIFFICULTY_PREF_NAME, Difficulties.EASY).apply();
-                    Exam.setMinimumPassPercentage(50);
-                    break;
+            if (id == R.id.challengingButton) {
+                prefs.edit().putString(DIFFICULTY_PREF_NAME, Difficulties.CHALLENGING).apply();
+                Exam.setMinimumPassPercentage(80);
+            } else if (id == R.id.defaultButton) {
+                prefs.edit().putString(DIFFICULTY_PREF_NAME, Difficulties.DEFAULT).apply();
+                Exam.setMinimumPassPercentage(60);
+            } else if (id == R.id.easyButton) {
+                prefs.edit().putString(DIFFICULTY_PREF_NAME, Difficulties.EASY).apply();
+                Exam.setMinimumPassPercentage(50);
             }
         });
     }
@@ -169,7 +165,7 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
      * Called when the reset button is clicked. Asks for confirmation before resetting.
      */
     public void resetButtonOnClick(View resetButton) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(ThemeUtils.createDialogWrapper(SettingsActivity.this));
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(ThemeUtils.createDialogWrapper(SettingsActivity.this));
         builder.setMessage(R.string.reset_warning);
         builder.setPositiveButton(R.string.ok, (dialogInterface, i) -> {
             //deletes the contents of the database, and then re-validates it, filling it with default values.

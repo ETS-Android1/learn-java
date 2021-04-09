@@ -13,6 +13,7 @@ import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.curriculum.Chapter;
 import com.gaspar.learnjava.curriculum.Component;
 import com.gaspar.learnjava.parsers.CourseParser;
+import com.gaspar.learnjava.utils.ThemeUtils;
 
 /**
  * Parses the chapter components from XML, then shows them in the list view of the activity.
@@ -20,7 +21,7 @@ import com.gaspar.learnjava.parsers.CourseParser;
 public class FillChapterActivityTask extends AsyncTask<ChapterActivity, Void, FillChapterActivityTask.Result> {
 
     //this chapter chapter has not parsed components!
-    private Chapter receivedChapter;
+    private final Chapter receivedChapter;
 
     public FillChapterActivityTask(Chapter chapter) {
         this.receivedChapter = chapter;
@@ -53,6 +54,8 @@ public class FillChapterActivityTask extends AsyncTask<ChapterActivity, Void, Fi
             confirmButton.setOnClickListener(result.activity::chapterConfirmedOnClick);
             result.activity.findViewById(R.id.loadingIndicator).setVisibility(View.GONE);
             result.activity.findViewById(R.id.chapterComponentsLayout).setVisibility(View.VISIBLE);
+            //ask about dark theme
+            ThemeUtils.showDarkThemePromptIfNeeded(result.activity);
         } else {
             FillCourseActivityTask.showFailDialog(result.activity, result.activity.getString(R.string.courses));
         }

@@ -24,11 +24,10 @@ public interface CourseDao {
     @Query("SELECT * FROM course_status WHERE course_id == :courseId")
     CourseStatus queryCourseStatus(int courseId);
 
-    /**
-     * Counts the amount of courses in the database.
-     */
+    /*
     @Query("SELECT COUNT(*) FROM course_status")
     int countCourses();
+    */
 
     @Query("DELETE FROM course_status")
     void deleteRecords();

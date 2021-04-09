@@ -80,7 +80,7 @@ public class EmptySpaceAnswer {
      */
     public static class AnswerBuilder {
 
-        private EmptySpaceAnswer instance;
+        private final EmptySpaceAnswer instance;
 
         public AnswerBuilder() {
             instance = new EmptySpaceAnswer();

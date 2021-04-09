@@ -16,7 +16,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
@@ -28,6 +27,7 @@ import com.gaspar.learnjava.curriculum.Question;
 import com.gaspar.learnjava.curriculum.Status;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.utils.ThemeUtils;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import cn.iwgang.countdownview.CountdownView;
 
@@ -97,7 +97,7 @@ public class ExamActivity extends ThemedActivity {
             stopService(new Intent(this, ExamSwipeClosedService.class)); //stop dismiss listening service
             super.onBackPressed();
         } else {
-            AlertDialog.Builder builder = new AlertDialog.Builder(ThemeUtils.createDialogWrapper(ExamActivity.this));
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(ThemeUtils.createDialogWrapper(ExamActivity.this));
             builder.setMessage(R.string.confirm_abandon_exam);
             builder.setIcon(R.drawable.warning_icon);
             builder.setPositiveButton(R.string.ok, ((dialogInterface, i) -> {
@@ -119,7 +119,7 @@ public class ExamActivity extends ThemedActivity {
            for(Question question: exam.getQuestions()) { //count unanswered questions
                if(!question.isAnswered()) unansweredQuestions++;
            }
-           AlertDialog.Builder builder = new AlertDialog.Builder(ThemeUtils.createDialogWrapper(ExamActivity.this));
+           MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(ThemeUtils.createDialogWrapper(ExamActivity.this));
            builder.setTitle(R.string.confirm_finish_exam);
            builder.setIcon(R.drawable.warning_icon);
            builder.setView(inflateUnansweredWarningView(unansweredQuestions)); //warn about unanswered
@@ -220,7 +220,7 @@ public class ExamActivity extends ThemedActivity {
         countdownView.pause();
         if(notificationVisible) showExamNotification(false); //update notification if it's active
         finishExam(findViewById(R.id.finishExamButton)); //exam will be locked and corrected
-        AlertDialog.Builder builder = new AlertDialog.Builder(ThemeUtils.createDialogWrapper(ExamActivity.this));
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(ThemeUtils.createDialogWrapper(ExamActivity.this));
         builder.setMessage(R.string.exam_time_expired);
         builder.setIcon(R.drawable.problem_icon);
         builder.setPositiveButton(R.string.unfortunate, (dialogIF, i) -> dialogIF.dismiss());

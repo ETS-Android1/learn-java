@@ -71,7 +71,7 @@ public final class InteractiveComponent extends Component {
     /**
      * The list of spaces where the user can enter code.
      */
-    private List<EmptySpace> emptySpaces;
+    private final List<EmptySpace> emptySpaces;
 
     public InteractiveComponent(String instruction, String data, List<EmptySpace> emptySpaces) {
         super(ComponentType.INTERACTIVE, data);

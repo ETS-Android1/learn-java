@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Size;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gaspar.learnjava.LearnJavaActivity;
@@ -20,12 +19,13 @@ import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.database.ExamStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.utils.ThemeUtils;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import cn.iwgang.countdownview.CountdownView;
 
 public class ExamStatusDisplayerTask extends AsyncTask<Object, Void, ExamStatusDisplayerTask.Result> {
 
-    private Exam exam;
+    private final Exam exam;
 
     public ExamStatusDisplayerTask(Exam exam) {
         this.exam = exam;
@@ -114,7 +114,7 @@ public class ExamStatusDisplayerTask extends AsyncTask<Object, Void, ExamStatusD
         }
 
         takeExamButton.setOnClickListener(view -> { //button always gets a listener
-            AlertDialog.Builder builder = new AlertDialog.Builder(ThemeUtils.createDialogWrapper(result.activity));
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(ThemeUtils.createDialogWrapper(result.activity));
             builder.setTitle(R.string.exam);
             builder.setMessage(R.string.confirm_exam_start);
             builder.setPositiveButton(R.string.yes, (dialog, which) -> Exam.startExamActivity(result, exam));
@@ -141,7 +141,7 @@ public class ExamStatusDisplayerTask extends AsyncTask<Object, Void, ExamStatusD
     //adds a dialog that notifies about unfinished exams on click
     private void addDialogOnClick(AppCompatActivity activity, View examView) {
         examView.setOnClickListener(v -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(ThemeUtils.createDialogWrapper(activity));
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(ThemeUtils.createDialogWrapper(activity));
             builder.setTitle(R.string.in_development);
             builder.setMessage(R.string.exam_development_info);
             builder.setPositiveButton(R.string.ok, (dialog, which) -> dialog.dismiss());
@@ -153,9 +153,9 @@ public class ExamStatusDisplayerTask extends AsyncTask<Object, Void, ExamStatusD
         public AppCompatActivity activity;
         public View examView;
         public @com.gaspar.learnjava.curriculum.Status int status;
-        private long secondsRemaining;
-        private boolean onCoolDown;
-        private int topScore;
+        private final long secondsRemaining;
+        private final boolean onCoolDown;
+        private final int topScore;
 
         Result(AppCompatActivity activity ,View examView, @com.gaspar.learnjava.curriculum.Status int status,
                long secondsRemaining, boolean onCoolDown, int topScore) {
