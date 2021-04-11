@@ -100,8 +100,12 @@ public class ClipSyncActivity extends ThemedActivity
                             //initiate a "handshake" connection, this will do pairing
                             Optional<BluetoothSocket> connResult = LearnJavaBluetooth.getInstance().getServerSocket(deviceExtra);
                             if (connResult.isPresent()) {
-                                LearnJavaBluetooth.getInstance().sendData(
-                                        LearnJavaBluetooth.HANDSHAKE_MESSAGE, connResult.get(), ClipSyncActivity.this);
+                                int result = ContextCompat.checkSelfPermission(ClipSyncActivity.this, Manifest.permission.ACCESS_FINE_LOCATION);
+                                if(result == PackageManager.PERMISSION_GRANTED) {
+                                    //it should be granted here, because the pairing is already underway
+                                    LearnJavaBluetooth.getInstance().sendData(
+                                            LearnJavaBluetooth.HANDSHAKE_MESSAGE, connResult.get(), ClipSyncActivity.this);
+                                }
                             } else {
                                 Snackbar.make(ClipSyncActivity.this.findViewById(R.id.testCodeSample), ClipSyncActivity.this.getString(R.string.clip_sync_misc_error), Snackbar.LENGTH_LONG).show();
                             }

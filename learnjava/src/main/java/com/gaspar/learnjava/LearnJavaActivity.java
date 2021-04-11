@@ -103,6 +103,10 @@ public class LearnJavaActivity extends ThemedActivity
             ThemeUtils.initSelectedTheme(this); //initialize themes
             ClipSyncActivity.initClipSync(this, findViewById(R.id.learnJavaMainView)); //initialize clip sync
             showStartContinueComponent();
+            runOnUiThread(() -> {
+                //once everything is loaded, check for system dark theme
+                ThemeUtils.showSystemDarkModeDialogIfNeeded(LearnJavaActivity.this);
+            });
         });
         setUpUI(); //init toolbar and drawer here
         onCreate = true;

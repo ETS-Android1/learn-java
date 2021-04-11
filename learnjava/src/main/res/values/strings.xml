@@ -68,6 +68,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(\"ClipSync!\");
 <br/>}
     ]]></string>
+    <string name="clip_sync_bluetooth_try_again">Bluetooth is on! Please try again now.</string>
     <string name="clip_sync_success">Synced with other device!</string>
     <string name="clip_sync_fail">ClipSync failed: time out.</string>
     <string name="clip_sync_bluetooth_cancelled">You can\'t use Bluetooth ClipSync without Bluetooth…</string>
@@ -190,5 +191,8 @@
     <string name="dark_theme_title">Dark theme</string>
     <string name="dark_theme_info">There is a dark theme! You can try it out now, or change it in the settings.</string>
     <string name="dark_theme_denied">No thanks</string>
-    <string name="dark_theme_accepted">Show me</string>
+    <string name="dark_theme_accepted">Use dark theme</string>
+    <string name="dark_theme_system">
+        The system dark mode seems to be on. Do you want to turn on the application\'s dark mode as well?
+    </string>
 </resources>

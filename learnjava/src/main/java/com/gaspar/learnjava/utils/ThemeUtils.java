@@ -3,6 +3,7 @@ package com.gaspar.learnjava.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
+import android.content.res.Configuration;
 import android.view.ContextThemeWrapper;
 
 import androidx.annotation.ColorRes;
@@ -183,5 +184,44 @@ public abstract class ThemeUtils {
             preferences.edit().putBoolean(SHOW_DARK_THEME_PROMPT, true).apply();
         }
         //otherwise the prompt was already shown
+    }
+
+    private static final String SYSTEM_DARK_THEME_NOTICED = "system_dark_theme_noticed";
+
+    /**
+     * If the system dark theme is on, it will inform the user that the application has a dark theme as well,
+     * and offer to switch to dark theme. Will not show if it was already shown, or if the system is not in
+     * dark mode, or if the user already changed the app to dark mode.
+     * @param activity Activity.
+     */
+    public static void showSystemDarkModeDialogIfNeeded(@NonNull final AppCompatActivity activity) {
+        final SharedPreferences preferences = activity.getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
+        int systemNightMode = activity.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        if(systemNightMode == Configuration.UI_MODE_NIGHT_YES) {
+            //the system is in dark mode
+            if(!preferences.contains(SYSTEM_DARK_THEME_NOTICED)) {
+                //the app has not asked about this before
+                if(!isDarkTheme()) {
+                    //the app is not in dark theme already
+                    new MaterialAlertDialogBuilder(createDialogWrapper(activity))
+                            .setTitle(R.string.dark_theme_title)
+                            .setMessage(R.string.dark_theme_system)
+                            .setPositiveButton(R.string.dark_theme_accepted, (dialog, which) -> {
+                                //the user wants to turn on application dark mode
+                                dialog.dismiss();
+                                ThemeUtils.updateSelectedTheme(activity, Themes.DARK); //update
+                                activity.setTheme(ThemeUtils.getTheme());
+                                activity.recreate();
+                            })
+                            .setNegativeButton(R.string.dark_theme_denied, (dialog, which) -> {
+                                //the user does not want the application dark mode
+                                dialog.dismiss();
+                            })
+                            .show();
+                }
+                //save that we asked about this, so it won't happen again
+                preferences.edit().putBoolean(SYSTEM_DARK_THEME_NOTICED, true).apply();
+            }
+        }
     }
 }

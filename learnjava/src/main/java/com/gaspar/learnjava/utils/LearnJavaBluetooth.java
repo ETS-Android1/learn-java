@@ -119,6 +119,7 @@ public class LearnJavaBluetooth {
      * @param data The string.
      */
     @UiThread
+    @RequiresPermission(Manifest.permission.ACCESS_FINE_LOCATION)
     public void sendData(@NonNull String data, @NonNull BluetoothSocket socket, @NonNull final AppCompatActivity activity) {
         turnOnBluetooth(); //maybe it's turned off
         new BluetoothExchangeTask(data, socket).execute(activity);

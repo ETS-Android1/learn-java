@@ -4,6 +4,7 @@
         <item name="colorPrimary">@color/colorPrimaryOrange</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDarkOrange</item>
         <item name="colorAccent">@color/colorAccentOrange</item>
+        <item name="colorSurface">@color/windowBackgroundOrange</item>
         <item name="android:windowBackground">@color/windowBackgroundOrange</item>
         <!-- Button styling -->
         <item name="materialButtonStyle">@style/button_style_orange</item>
@@ -20,6 +21,7 @@
         <item name="colorPrimary">@color/colorPrimary_Dark</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark_Dark</item>
         <item name="colorAccent">@color/colorAccent_Dark</item>
+        <item name="colorSurface">@color/windowBackground_Dark</item>
         <item name="android:windowBackground">@color/windowBackground_Dark</item>
         <!-- Button styling -->
         <item name="materialButtonStyle">@style/button_style_dark</item>

@@ -1,5 +1,6 @@
 package com.gaspar.learnjava.curriculum;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -9,6 +10,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.util.TypedValue;
@@ -24,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.gaspar.learnjava.ClipSyncActivity;
@@ -34,6 +37,7 @@ import com.gaspar.learnjava.parsers.RawParser;
 import com.gaspar.learnjava.utils.LearnJavaBluetooth;
 import com.gaspar.learnjava.utils.ListTagHandler;
 import com.gaspar.learnjava.utils.ThemeUtils;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.Serializable;
@@ -173,7 +177,29 @@ public class Component implements Serializable {
                     if(serverOpt.isPresent()) {
                         Optional<BluetoothSocket> serverSocketOpt = LearnJavaBluetooth.getInstance().getServerSocket(serverOpt.get());
                         if(serverSocketOpt.isPresent()) {
-                            LearnJavaBluetooth.getInstance().sendData(copyFromThis.getText().toString(), serverSocketOpt.get(), activity);
+                            //check if we have location permission for bluetooth
+                            int result = ContextCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION);
+                            if(result == PackageManager.PERMISSION_GRANTED) {
+                                //all good, bluetooth on, permission granted, we can send
+                                LearnJavaBluetooth.getInstance().sendData(copyFromThis.getText().toString(), serverSocketOpt.get(), activity);
+                            } else {
+                                //no permission yet, ask for it
+                                MaterialAlertDialogBuilder builder1 = new MaterialAlertDialogBuilder(ThemeUtils.createDialogWrapper(activity));
+                                builder1.setMessage(R.string.clip_sync_location);
+                                builder1.setIcon(R.drawable.bluetooth_icon);
+                                builder1.setPositiveButton(R.string.ok, (dialog, i) -> {
+                                    dialog.dismiss();
+                                    //ask for permission, result is handled in the activity's onRequestPermissionResult
+                                    ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                            ClipSyncActivity.REQUEST_ALLOW_LOCATION);
+                                });
+                                builder1.setNegativeButton(R.string.cancel, (dialog, i) -> {
+                                    dialog.dismiss();
+                                    Snackbar.make(activity.findViewById(android.R.id.content), activity.getString(R.string.clip_sync_location_denied),
+                                            Snackbar.LENGTH_SHORT).show();
+                                });
+                                builder1.create().show();
+                            }
                         } else { //could not obtain socket for some reason
                             Snackbar.make(copyFromThis, activity.getString(R.string.clip_sync_misc_error), Snackbar.LENGTH_LONG).show();
                         }

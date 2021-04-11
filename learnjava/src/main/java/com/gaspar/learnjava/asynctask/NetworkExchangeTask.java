@@ -1,5 +1,8 @@
 package com.gaspar.learnjava.asynctask;
 
+import android.content.Context;
+import android.net.DhcpInfo;
+import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.util.Log;
@@ -23,6 +26,8 @@ import java.nio.charset.StandardCharsets;
  * If broadcasting can be made and the data is sent, and a response is received, the exchange is considered a success.
  * <p>
  * When the exchange stops, the user is notified according to the result.
+ * <p>
+ * KNOWN PROBLEMS: This does not work for some reason if the device running the app is also the mobile hotspot.
  */
 public class NetworkExchangeTask extends AsyncTask<AppCompatActivity, Void, BluetoothExchangeTask.Result> {
 
@@ -34,7 +39,12 @@ public class NetworkExchangeTask extends AsyncTask<AppCompatActivity, Void, Blue
     /**
      * The port that the server is using.
      */
-    private static final int PORT_NUMBER = 24480;
+    private static final int APP_PORT_NUMBER = 24480;
+
+    /**
+     * The port that the server will attempt to use.
+     */
+    public static final int SERVER_PORT_NUMBER = 24481;
 
     /**
      * The text that will be sent to the desktop app.
@@ -73,6 +83,24 @@ public class NetworkExchangeTask extends AsyncTask<AppCompatActivity, Void, Blue
         timer.start();
     }
 
+    InetAddress getBroadcastAddress(@NonNull final Context context) throws IOException {
+        WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+        if(wifi == null) {
+            Log.e("LearnJava", "Wifi manager is null!");
+            return InetAddress.getByName("255.255.255.255");
+        }
+        DhcpInfo dhcpInfo = wifi.getDhcpInfo();
+        if(dhcpInfo == null) {
+            Log.e("LearnJava", "D H C P info is null!");
+            return InetAddress.getByName("255.255.255.255");
+        }
+        int broadcast = (dhcpInfo.ipAddress & dhcpInfo.netmask) | ~dhcpInfo.netmask;
+        byte[] quads = new byte[4];
+        for (int k = 0; k < 4; k++)
+            quads[k] = (byte) ((broadcast >> k * 8) & 0xFF);
+        return InetAddress.getByAddress(quads);
+    }
+
     @Override
     protected BluetoothExchangeTask.Result doInBackground(@Size(1) AppCompatActivity... activities) {
         final AppCompatActivity activity = activities[0];
@@ -81,17 +109,30 @@ public class NetworkExchangeTask extends AsyncTask<AppCompatActivity, Void, Blue
             if(loadingIndicator != null) loadingIndicator.setVisibility(View.VISIBLE);
         });
         try {
-            socket = new DatagramSocket(PORT_NUMBER);
+            socket = new DatagramSocket(APP_PORT_NUMBER);
             socket.setBroadcast(true);
             byte[] buffer = (data+BluetoothExchangeTask.DATA_DELIMITER).getBytes(StandardCharsets.UTF_8);
-            InetAddress broadcastAddress = InetAddress.getByName("255.255.255.255");
-            socket.send(new DatagramPacket(buffer, buffer.length, broadcastAddress, PORT_NUMBER));
+            InetAddress broadcastAddress = getBroadcastAddress(activity);
+            Log.d("LearnJava", "Broadcasting on " + broadcastAddress.toString());
+            DatagramPacket messageToServer = new DatagramPacket(buffer, buffer.length, broadcastAddress, SERVER_PORT_NUMBER);
+            socket.send(messageToServer);
+
+            socket.setBroadcast(false);
             //wait for the servers confirmation message
-            byte[] responseBuffer = new byte[CONFIRMATION_MESSAGE.length()];
-            DatagramPacket response = new DatagramPacket(responseBuffer, responseBuffer.length);
-            socket.receive(response); //blocks until response
-            String responseString = new String(response.getData(), 0, response.getLength(), StandardCharsets.UTF_8);
-            Log.d("LearnJava", "Received response: " + responseString);
+            Log.d("LearnJava", "Waiting for responses...");
+            boolean receivedResponse = false;
+            while(!receivedResponse) {
+                byte[] responseBuffer = new byte[CONFIRMATION_MESSAGE.length()];
+                DatagramPacket response = new DatagramPacket(responseBuffer, responseBuffer.length);
+                socket.receive(response); //blocks until any response arrives
+                if(response.getPort() != SERVER_PORT_NUMBER) {
+                    continue; //this message is not from the server
+                }
+                String responseString = new String(response.getData(), 0, response.getLength(), StandardCharsets.UTF_8);
+                Log.d("LearnJava", "Received response: " + responseString);
+                receivedResponse = true;
+            }
+
             socket.close();
             //return success
             return new BluetoothExchangeTask.Result(activity, true);
