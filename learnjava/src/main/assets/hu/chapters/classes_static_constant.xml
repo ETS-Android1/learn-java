@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <chapterdata>
+        <id>154</id>
+        <name>Static, constants and enums</name>
+    </chapterdata>
+    <title text="Static members and methods"/>
+    <text>
+        <![CDATA[
+        Previously, our members and methods belonged to objects. Consider this example:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">public class</font> <font color="#999900">User</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font> email;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">User</font>(<font color="#999900">String</font> email) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">email</font> = email;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">getEmail</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> email;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+<br/>
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Each user object will have its separate email variable (so this member belongs to the object). This is fine, but
+        there are cases then we want a member (or a method) to be the same for all objects (to <i>'belong to the class'</i>).
+        ]]>
+    </text>
+    <boxed title="How many users do we have?">
+        <![CDATA[
+        It's important to know how many users are created! We can use an integer to count this, but it's redundant to
+        store this information in every object we create, and it's also difficult to implement it that way.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        The <b>static</b> keyword can be used to mark that a variable or a method should belong to the class:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">public class</font> <font color="#999900">User</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//every user objects shares this member so it 'belongs to the class'.
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private static</font> <font color="#DF7401">int</font> userCounter = <font color="#F0E130">0</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//belongs to the object
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font> email;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">User</font>(<font color="#999900">String</font> email) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">email</font> = email;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//new user created, increase counter
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;userCounter++;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//belongs to the class
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">makeReport</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"We have "</font> + userCounter + <font color="#2E8B57">" users."</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//belongs to the object
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">getEmail</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> email;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Each time a new user is created the counter is increased (in the constructor).
+        <p>
+        Note that non-static members and methods can't be referenced from a static context! We can't use the <i>email
+        </i> member in the <i>makeReport</i> method (emails belong to users, and we have no individual user in that static method). <i>Static members and methods,
+        on the other hand, can be referenced or called from every method of the class.
+        ]]>
+    </text>
+    <boxed title="Referencing and calling static">
+        <![CDATA[
+        Previously we called a method using the object and the point operator, but the newly added static method does not
+        belong to any object! The solution is intuitive, since it belongs to the class, we'll use that.
+        ]]>
+    </boxed>
+    <code><![CDATA[
+        
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">User</font> u1 = <font color="#E65100">new</font> U<font color="#ADD8E6">ser</font>(<font color="#2E8B57">"email@email.com"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">User</font> u2 = <font color="#E65100">new</font> U<font color="#ADD8E6">ser</font>(<font color="#2E8B57">"email2@email.com"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">User</font>.<font color="#ADD8E6">makeReport</font>();
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Observe that when we referenced the static member in the constructor, there is no <b>User.</b> part. In that context,
+        Java is able to deduce which variable we mean by <b>userCounter</b>, even without putting the class name there (because
+        we are inside the class).
+        <p>
+        The <b>User.</b> can of course also be written explicitly there, but that is not necessary.
+        ]]>
+    </text>
+    <title text="Constants"/>
+    <text>
+        <![CDATA[
+        Java offers a way to declare constants. These are variables that can only be assigned once, on declaration,
+        and then never again.
+        <p>
+        For this, the <b>final</b> keyword can be used. By convention, names of constants are fully capitalized.
+        ]]>
+    </text>
+    <interactive instruction="Declare this variable so that it's constant and belongs to the class!">
+        <data><![CDATA[
+
+<font color="#E65100">public</font> ___ ___ <font color="#DF7401">int</font> RESULT_OK = <font color="#F0E130">1</font>;
+
+        ]]></data>
+        <answer group="final_first" place="0" required_places="1">final</answer>
+        <answer group="final_first" place="1" required_places="0">static</answer>
+        <answer group="static_first" place="0" required_places="1">static</answer>
+        <answer group="static_first" place="1" required_places="0">final</answer>
+    </interactive>
+    <boxed title="Reminder: final">
+        <![CDATA[
+        We learned about the <b>final</b> keyword already. Classes and method can be marked final, this has to do with
+        inheritance. Well, variables can also be final, but this is related to constant values, not inheritance!
+        ]]>
+    </boxed>
+    <code><![CDATA[
+        
+<font color="#E65100">final</font> <font color="#DF7401">int</font> ONE = <font color="#F0E130">1</font>;
+<br/><font color="gray">//ONE = 2;</font>
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        What's going to stop us to reassign this variable? If you uncomment the second line and run the code,
+        you'll see that it's the compiler:
+        ]]>
+    </text>
+    <image name="final_error"/>
+    <text>
+        <![CDATA[
+        There is one exception to final variable assignment. A final member can also be assigned in the constructor,
+        instead of at declaration:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">public class</font> <font color="#999900">User</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//final, but isn't assigned here</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private final</font> <font color="#999900">String</font> email;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">User</font>(<font color="#999900">String</font> email) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">email</font> = email; <font color="gray">//gets its final value here</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">getEmail</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> email;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Final is often combined with static to create global (accessible everywhere) constants. For example, the JDK
+        has the value of the famous constant pi stored in such a variable:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Pi is "</font> + <font color="#999900">Math</font>.PI);
+        
+    ]]></code>
+    <title text="Enums"/>
+    <text>
+        <![CDATA[
+        There is another, more advanced way to declare constants. <b>Enum</b>, a special type of class can
+        be used to declare constants, that are somehow related to each other.
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">public enum</font> <font color="#999900">Day</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;MONDAY,
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;TUESDAY,
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;WEDNESDAY,
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;THURSDAY,
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;FRIDAY,
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;SATURDAY,
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;SUNDAY
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        As you can see, the <b>enum</b> keyword is used. Now we have a constant for each day of the week (and they are
+        ordered correctly, this will matter for us)!
+        <p>
+        The enums come with useful built-in methods. Let's create a method that tells which day is tomorrow, from the current
+        day:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="#E65100">public static</font> <font color="#999900">Day</font> <font color="#ADD8E6">nextDay</font>(<font color="#999900">Day</font> today) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//built-in enum method, returns them in order of declaration!</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Day</font>[] allDays = Day.<font color="#ADD8E6">values</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Day</font> tomorrow = null;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(today == <font color="#999900">Day</font>.SUNDAY) { <font color="gray">//handle special case sunday
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#999900">Day</font>.MONDAY;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i &lt; allDays.<font color="#ADD8E6">length</font>; i++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(today == allDays[i]) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;tomorrow = allDays[i+<font color="#F0E130">1</font>]; <font color="gray">//this would go out of bounds for sunday
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> tomorrow;
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Note that similarly to primitive types, the <b>==</b> operator can safely be used on enums (although the <i>
+        equals</i> method also works). You can find a great discussion about the topic
+        <a href="https://stackoverflow.com/questions/1750435/comparing-java-enum-members-or-equals">here</a>.
+        ]]>
+    </text>
+    <advanced title="Additional enum functions">
+        <![CDATA[
+        Enums support methods too. The previous method could, for example, be added to the <b>Day</b> enum. It's also possible
+        to assign properties to each enum constant, see <a href="https://www.java67.com/2018/07/java-enum-with-constructor-example.html">this</a> tutorial.
+        ]]>
+    </advanced>
+    <interactive instruction="Complete the enum declaration!">
+        <data><![CDATA[
+
+___ <font color="#999900">TernaryLogic</font> {
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;TRUE, FALSE, UNDETERMINED;
+<br/>}
+
+        ]]></data>
+        <answer place="0">enum</answer>
+    </interactive>
+
+    <!-- static variables, methods
+    enumerations: basic, more advanced -->
+
+</resources>

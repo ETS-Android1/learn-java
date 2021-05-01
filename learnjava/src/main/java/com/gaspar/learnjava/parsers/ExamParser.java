@@ -14,6 +14,7 @@ import com.gaspar.learnjava.curriculum.Question;
 import com.gaspar.learnjava.curriculum.SingleChoiceQuestion;
 import com.gaspar.learnjava.curriculum.TextQuestion;
 import com.gaspar.learnjava.curriculum.TrueOrFalseQuestion;
+import com.gaspar.learnjava.utils.LocalizationUtils;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -61,7 +62,8 @@ public class ExamParser {
         throws IOException, XmlPullParserException, RuntimeException {
         Exam parsedExam = null;
         final AssetManager manager = context.getAssets();
-        String examFolder = "exams";
+        String localizedAssets = LocalizationUtils.getLocalizedAssetPath();
+        String examFolder = localizedAssets + "/exams";
         final String[] examPaths = manager.list(examFolder); //list exam XML-s in the asset folder
         final XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
         factory.setNamespaceAware(true);

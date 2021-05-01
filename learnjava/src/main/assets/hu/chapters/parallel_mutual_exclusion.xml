@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <chapterdata>
+        <id>254</id>
+        <name>Mutual exclusion</name>
+    </chapterdata>
+    <text>
+        <![CDATA[
+        Mutual exclusion is a core concept of parallel programming. It means that certain parts of the code (called
+        <b>critical sections</b>) must always be accessed by only a fixed number of threads (usually one) at the same time.
+        ]]>
+    </text>
+    <text>
+        <![CDATA[
+        I'll first show it why do we need mutual exclusion. Suppose we need to increase the value of a variable
+        from 0 to 10000, using two threads. Very simple, no?
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="#E65100">static volatile</font> <font color="#DF7401">int</font> counter = <font color="#F0E130">0</font>; <font color="gray">//start at 0</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/><font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Thread</font> t1 = <font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> R<font color="#ADD8E6">unnable</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;<font color="#F0E130">5000</font>; i++) counter++;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;});
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Thread</font> t2 = <font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> R<font color="#ADD8E6">unnable</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;<font color="#F0E130">5000</font>; i++) counter++;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;});
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;t1.<font color="#ADD8E6">start</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;t2.<font color="#ADD8E6">start</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> { <font color="gray">//wait
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;t1.<font color="#ADD8E6">join</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;t2.<font color="#ADD8E6">join</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font> (<font color="#999900">InterruptedException</font> e) {}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//both threads increased it by 5000, so it should be 10000...
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Counter is "</font> + counter);
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Running this code, you'll see different results, but most likely not 10000. How can this be? There was a total
+        of 10000 increments, but that is not the final value. Here is a brief explanation (let's call the two threads <i>t1</i> and <i>t2</i>):
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li><i>t1</i> and <i>t2</i> arrive at the increment at roughly the same time. Suppose that the value is currently <i>N</i>.</li>
+        <li>Both threads think 'hey, the value is <i>N</i>, so I'll increment it to <i>N+1</i>'.</li>
+        <li>As a result, we effectively 'lost' and increment. This happens multiple times.</li>
+        </ul>
+        ]]>
+    </list>
+    <text>
+        <![CDATA[
+        As you can see from the code, volatility of the counter is not enough to stop this from happening.
+        ]]>
+    </text>
+    <boxed title="When to exclude mutually">
+        <![CDATA[
+        The previous example makes it clear that when we write a variable with multiple threads, we <b>must</b> use mutual exclusion.
+        It's also essential when collections are being modified by multiple processes.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Java comes with built in mutual exclusion. You can create so called <b>synchronized block</b>. It is
+        then guaranteed that only one thread can execute the statements in this block at any given time.
+        ]]>
+    </text>
+    <boxed title="Lock">
+        <![CDATA[
+        Synchronized blocks need a lock (sometimes called a <b>mutex</b>). This can be any object. To put it simply, this object is going to
+        keep count of how many threads are executing that block.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        It's important to use the same lock to get the synchronized block to work like expected. Let's fix the previous example
+        with a common lock that both threads will use. Replace the previous threads with these:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="#999900">Object</font> lock = <font color="#E65100">new</font> <font color="#999900">Object</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/><font color="#999900">Thread</font> t1 = <font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> <font color="#999900">Runnable</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;<font color="#F0E130">5000</font>; i++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">synchronized</font> (lock) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;counter++;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>});
+<br/><font color="#999900">Thread</font> t2 = <font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> <font color="#999900">Runnable</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;<font color="#F0E130">5000</font>; i++)  {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">synchronized</font> (lock) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;counter++;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>});
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        The increment statement is now a <b>critical section</b>. It's important that we do not make the whole for
+        loop a critical section, as that would make the threads to essentially behave like a sequential program.
+        <p>
+        The fact that a common lock was used is essential. If, for example we'd do something like this, the result
+        would be just as incorrect as without synchronized blocks:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="#999900">Thread</font> t1 = <font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> <font color="#999900">Runnable</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;<font color="#F0E130">5000</font>; i++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">synchronized</font> (<font color="#E65100">new</font> <font color="#999900">Object</font>()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;counter++;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>});
+<br/><font color="#999900">Thread</font> t2 = <font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> <font color="#999900">Runnable</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;<font color="#F0E130">5000</font>; i++)  {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">synchronized</font> (<font color="#E65100">new</font> <font color="#999900">Object</font>()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;counter++;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>});
+        
+    ]]></code>
+    <title text="Synchronized methods"/>
+    <text>
+        <![CDATA[
+        Methods can also be marked as synchronized. This is equivalent to putting the entire body of the method
+        into a synchronized block. The only question is, what will be used as a lock in such cases?
+        <p>
+        Let's refactor the previous code. Now the counter is encapsulated in this class:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">public class</font> <font color="#999900">Counter</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">int</font> counter = <font color="#F0E130">0</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public synchronized</font> <font color="#DF7401">void</font> <font color="#ADD8E6">increment</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;counter++;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">getValue</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> counter;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Now we create an object of this class, and have the threads call the <i>increment</i> method:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="#999900">Counter</font> counter = <font color="#E65100">new</font> <font color="#999900">Counter</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/><font color="#999900">Thread</font> t1 = <font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> <font color="#999900">Runnable</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;<font color="#F0E130">5000</font>; i++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;counter.<font color="#ADD8E6">increment</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>});
+<br/><font color="#999900">Thread</font> t2 = <font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> <font color="#999900">Runnable</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;<font color="#F0E130">5000</font>; i++)  {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;counter.<font color="#ADD8E6">increment</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>});
+<br/>t1.<font color="#ADD8E6">start</font>();
+<br/>t2.<font color="#ADD8E6">start</font>();
+<br/><font color="#E65100">try</font> { <font color="gray">//wait
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;t1.<font color="#ADD8E6">join</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;t2.<font color="#ADD8E6">join</font>();
+<br/>} <font color="#E65100">catch</font> (<font color="#999900">InterruptedException</font> e) {}
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Counter is "</font> + counter.<font color="#ADD8E6">getValue</font>());
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        It works correctly. The lock that was used, was the <b>counter object</b>. In general, it works like this:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>For a non-static synchronized method, the object it belongs to will be used as a lock.</li>
+        <li>For a static synchronized method, the <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Class.html">class object</a> of the class will be used as a lock.</li>
+        </ul>
+        ]]>
+    </list>
+    <text>
+        <![CDATA[
+        Yes, there is class called <i>Class</i> and also a class called <i>Object</i>...
+        ]]>
+    </text>
+    <interactive instruction="The method that was used in the last course is now going to be used by multiple threads. Make the necessary correction so that the list remains consistent!">
+        <data><![CDATA[
+
+<font color="#E65100">public</font> ___ <font color="#DF7401">void</font> <font color="#ADD8E6">removeFirstLast</font>(<font color="#999900">List</font>&lt;?> list) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;list.<font color="#ADD8E6">remove</font>(<font color="#F0E130">0</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;list.<font color="#ADD8E6">remove</font>(list.<font color="#ADD8E6">size</font>()<font color="#F0E130">-1</font>);
+<br/>}
+
+        ]]></data>
+        <answer place="0">synchronized</answer>
+    </interactive>
+    <title text="Semaphores"/>
+    <text>
+        <![CDATA[
+        Semaphores are special objects, you can think of them as generalized synchronized blocks.
+        ]]>
+    </text>
+    <boxed title="Let more threads in">
+        <![CDATA[
+        While synchronized blocks can only let one thread in, a semaphore takes an integer at construction,
+        and it's going to let at most that much threads into its critical sections.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Java comes with a semaphore implementation, <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Semaphore.html">java.util.concurrent.Semaphore</a>.
+        To start a critical section, use the <i>acquire</i> method, to end it, use <i>release</i>.
+        <p>
+        Since I really like incrementing, let's solve the previous problem, with a semaphore this time, just as an
+        example of the mentioned methods (the counter integer is used, not the <i>Counter</i> class).
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="gray">/*
+<br/>This semaphore only lets one thread in,
+<br/>works much like a synchronized block.
+<br/> */</font>
+<br/><font color="#999900">Semaphore</font> sema = <font color="#E65100">new</font> <font color="#999900">Semaphore</font>(<font color="#F0E130">1</font>);
+<br/>
+<br/><font color="#999900">Thread</font> t1 = <font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> <font color="#999900">Runnable</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;<font color="#F0E130">5000</font>; i++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sema.<font color="#ADD8E6">acquire</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;counter++;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font> (<font color="#999900">InterruptedException</font> e) {}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">finally</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sema.<font color="#ADD8E6">release</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>});
+<br/><font color="#999900">Thread</font> t2 = <font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> <font color="#999900">Runnable</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;<font color="#F0E130">5000</font>; i++)  {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sema.<font color="#ADD8E6">acquire</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;counter++;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font> (<font color="#999900">InterruptedException</font> e) {}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">finally</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sema.<font color="#ADD8E6">release</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>});
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        When acquiring, we need to watch out for an <i>InterruptedException</i>. To make sure the semaphore always releases,
+        put the <i>release</i> call in the finally block!
+        <p>
+        Though not often, but semaphores that let more threads in are sometimes needed as well. To see an example, head over
+        to the <b>dining philosophers</b> task of this course.
+        ]]>
+    </text>
+    <title text="Atomic operations"/>
+    <text>
+        <![CDATA[
+        An operation is atomic, if it completed without any chance of anything happening when the operation is running,
+        that could invalidate the operation. These operations are preferred when multithreading, since there is no chance
+        of another thread doing anything that could ruin the result until the operation completes.
+        ]]>
+    </text>
+    <boxed title="Increment">
+        <![CDATA[
+        As we saw in the previous examples, incrementing an integer is NOT atomic, since the two threads interfered with
+        each others increment operations.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Atomic operations on primitives are often needed, so the <i>JDK</i> provides classes that perform these, such as
+        <a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/atomic/AtomicInteger.html">java.util.concurrent.atomic.AtomicInteger</a> and
+        <a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/atomic/AtomicBoolean.html">java.util.concurrent.atomic.AtomicBoolean</a> For these classes, each method is atomic, and thus safe for
+        a multithreading environment (not every primitive has a matching "<i>atomic</i>" class.).
+        ]]>
+    </text>
+    <boxed title="Make something atomic">
+        <![CDATA[
+        We already have the tools to make operations atomic. the synchronized keyword can be used. This guarantees that
+        only one thread can perform the operation at one time, and that there won't be interference.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Let's solve the increment problem with the <i>AtomicInteger</i> class, just to see something like this as well.
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">final</font> <font color="#999900">AtomicInteger</font> counter = <font color="#E65100">new</font> <font color="#999900">AtomicInteger</font>(<font color="#F0E130">0</font>);
+<br/><font color="#999900">Thread</font> t1 = <font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> <font color="#999900">Runnable</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;<font color="#F0E130">5000</font>; i++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//getAndIncrement is equivalent to the ++ operation
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;counter.<font color="#ADD8E6">getAndIncrement</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>});
+<br/><font color="#999900">Thread</font> t2 = <font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> <font color="#999900">Runnable</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;<font color="#F0E130">5000</font>; i++)  {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//getAndIncrement is equivalent to the ++ operation
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;counter.<font color="#ADD8E6">getAndIncrement</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>});
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Very similar to the solution to the one with synchronized blocks, ony time the <i>AtomicInteger</i> class takes care of that,
+        and we can call the synchronized method <i>getAndIncrement</i>. It's also like the solution with our custom <i>Counter</i>
+        class. That was basically a simple atomic integer class with only the increment method.
+        ]]>
+    </text>
+    <interactive instruction="Create a boolean variable with atomic operations, then, in the thread, set its value to false!">
+        <data><![CDATA[
+
+___ condition = <font color="#E65100">new</font> <font color="#ADD8E6">___</font>(true);
+<br/><font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> <font color="#999900">Runnable</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Some long operation here...
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;condition.<font color="#ADD8E6">set</font>(___);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}).<font color="#ADD8E6">start</font>();
+
+        ]]></data>
+        <answer place="0">AtomicBoolean</answer>
+        <answer place="1">AtomicBoolean</answer>
+        <answer place="2">false</answer>
+    </interactive>
+
+    <!-- keywords: synchronized, semaphores, atomic  -->
+
+</resources>

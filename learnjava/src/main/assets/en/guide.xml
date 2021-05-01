@@ -14,7 +14,7 @@
     <boxed title="Practice">
         <![CDATA[
         You should install Java on computer and practice actively
-        while using this app. Keep reading the guide to learn how to set up a development environment!
+        while using this app. In the first chapter you'll learn how to set up a development environment!
         ]]>
     </boxed>
     <text>
@@ -65,7 +65,7 @@
         If you for any reason can't or don't want to install any <i>IDE</i>, you can read about installing
         the <i>JDK</i> <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html">
         here</a>, and about compiling and running your programs from the command line
-        <a href="https://www.wikihow.com/Compile-%26-Run-Java-Program-Using-Command-Prompt">here</a>.
+
         ]]>
     </advanced>
     <title text="How the app works"/>
@@ -115,7 +115,8 @@
         A great way to use this app is to sync and send the code samples to your computer! This way the code samples you copy on your
         phone can be easily pasted into the code on <i>PC</i>!
         <p>
-        This app has <b>built-in</b> syncing! Head over to the <b>ClipSync menu</b> to get started!
+        This app has <b>built-in</b> syncing! I suggest you read the first chapter to learn how to install Java,
+        then head over to the <b>ClipSync menu</b> to get started!
         ]]>
     </boxed>
     <title text="Exams"/>

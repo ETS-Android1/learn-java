@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <chapterdata>
+        <id>155</id>
+        <name>Abstract classes and interfaces</name>
+    </chapterdata>
+    <text>
+        <![CDATA[
+        An abstract class is a class which can't be instantiated (can't explicitly create objects of this class).
+        <p>
+        We can use the <b>abstract</b> keyword to mark a class as abstract:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">public abstract class</font> <font color="#999900">Computer</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//...</font>
+<br/>}
+<br/>
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Trying to instantiate such a class will result in a compile time error:
+        ]]>
+    </text>
+    <image name="abstract_class_error"/>
+    <title text="What is the point?"/>
+    <text>
+        <![CDATA[
+        So what is the point of this? Creating objects is a fundamental part of <i>OOP</i>. Why disable this
+        for some classes?
+        <p>
+        Firstly, for <b>utility classes</b>.
+        ]]>
+    </text>
+    <boxed title="Utility class">
+        <![CDATA[
+        A utility class is a class which contains only static, helper methods. The JDK contains such classes, for example
+        <b>Arrays</b> (helper methods for arrays, like sorting), and <b>Collections</b> (similar methods as in <i>Arrays</i>
+        but for data structure implementations).
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        As the utility class only has static methods, there is not reason to create objects from it. As such, the programmers can
+        disable instantiation altogether by making it abstract.
+        ]]>
+    </text>
+    <advanced title="Bad practice?">
+        <![CDATA[
+        Some programmers believe that the <i>abstract</i> keyword should not be used for utility classes, and they suggest a
+        private constructor instead. You can find a discussion about this topic <a href="https://stackoverflow.com/questions/25223553/how-can-i-create-an-utility-class">here</a>.
+        ]]>
+    </advanced>
+    <text>
+        <![CDATA[
+        <u>Secondly</u>, to allow us to better map our models into Java code. Let's understand this through an example:
+        <br><br>
+        We are operating a computer service. The clients bring computers, each of them is either a <b>PC</b> or a <b>Laptop</b>. So,
+        which classes will we need?
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>PC and Laptop classes, of course.</li>
+        <li>A Computer superclass, since PCs and laptops share lots of things, and we can model this using a common superclass.</li>
+        </ul>
+        ]]>
+    </list>
+    <image name="abstract_hierarchy"/>
+    <text>
+        <![CDATA[
+        Since each computer brought to us is either a PC or a laptop, we never need to instantiate the <i>Computer</i> class. To emphasise
+        this, we can mark it as abstract. It's only used as a common superclass. We'll continue with this example later in this
+        chapter.
+        ]]>
+    </text>
+    <title text="Abstract methods"/>
+    <text>
+        <![CDATA[
+        Methods can also be marked as abstract (in this case, the class has to be abstract as well). An abstract methods is a method
+        which is <b>declared, but not implemented</b>:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">public abstract class</font> <font color="#999900">Computer</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> <font color="#999900">String</font> processor;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> <font color="#DF7401">int</font> ram; <font color="gray">//in gigabytes
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> <font color="#999900">Computer</font>(<font color="#999900">String</font> processor, <font color="#DF7401">int</font> ram) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">processor</font> = processor;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">ram</font> = ram;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public abstract</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printProperties</font>();
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        This class not only has an abstract method, but also has a constructor! Where will this constructor be used, if the class
+        can't be instantiated anyways? How can the abstract method be called, if it's not even implemented?
+        <p>
+        The answer is the subclass. It's constructor will call this class' constructor, and it'll implement the abstract method!
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="#E65100">public class</font> <font color="#999900">PC</font> <font color="#E65100">extends</font> <font color="#999900">Computer</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">PC</font>(<font color="#999900">String</font> processor, <font color="#DF7401">int</font> ram) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>(processor, ram); <font color="gray">//call superclass constructor
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//implement the abstract method of the superclass
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printProperties</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>("This is a PC.\n" +
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2E8B57">"Processor: "</font> + processor + "\n" +
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2E8B57">"RAM amount: "</font> + ram + <font color="#2E8B57">" GB"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+    <code><![CDATA[
+        
+        <font color="#E65100">public class</font> <font color="#999900">Laptop</font> <font color="#E65100">extends</font> <font color="#999900">Computer</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">int</font> accumulatorTime; <font color="gray">//in minutes
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Laptop</font>(<font color="#999900">String</font> processor, <font color="#DF7401">int</font> ram, <font color="#DF7401">int</font> accumulatorTime) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>(processor, ram); <font color="gray">//call superclass constructor
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">accumulatorTime</font> = accumulatorTime;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//implement the abstract method of the superclass
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printProperties</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>("This is a laptop.\n" +
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2E8B57">"Processor: "</font> + processor + "\n" +
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2E8B57">"RAM amount: "</font> + ram + " GB\n" +
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2E8B57">"It can operate for "</font> + accumulatorTime + <font color="#2E8B57">" minutes if fully charged."</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        You may have noticed that this is similar to method overriding. Note that, however, in this case the subclass <b>has to implement</b>
+        the method (unless the subclass is abstract as well).
+        ]]>
+    </text>
+    <title text="Interfaces"/>
+    <text>
+        <![CDATA[
+        Interfaces are fully abstract classes. They can be <b>implemented</b> by other classes (which means that the implementing
+        class will have to give implementations for all abstract methods in the interface).
+        <p>
+        They are declared similarly to classes, but with the keyword <b>interface</b> instead:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="gray">//an interface for classes that can be printed
+</font>
+<br/><font color="#E65100">public interface</font> <font color="#999900">Printable</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> <font color="#ADD8E6">print</font>(); <font color="gray">//prints the object</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> <font color="#ADD8E6">printedLines</font>(); <font color="gray">//returns how many lines the printed object uses</font>
+<br/>
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        By default all methods are <b>abstract, and public</b>. It's redundant to write the modifiers there. Since interfaces represent
+        a property, their name is by convention an adjective (like <i>Printable</i> in this case).
+        ]]>
+    </text>
+    <interactive instruction="This interface has 2 methods: read and readAll. Complete the declaration!">
+        <data><![CDATA[
+
+<font color="#E65100">public</font> ___ <font color="#999900">Readable</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> <font color="#ADD8E6">read</font>(<font color="#999900">String</font> data);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> <font color="#ADD8E6">___</font>(<font color="#999900">String</font>[] data);
+<br/>}
+
+        ]]></data>
+        <answer place="0">interface</answer>
+        <answer place="1">readAll</answer>
+    </interactive>
+    <boxed title="Reasons for interfaces">
+        <![CDATA[
+        Interfaces are a good way to force a class to have a set of methods. They're also used to simulate inheritance from
+        multiple classes. A class can only inherit from one superclass, it can however implement any number of interfaces (while also
+        having a superclass).
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Now, let's create a simple class that implements the <i>Printable</i> interface (the <b>implements</b> keyword is used):
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="gray">//a class that stores an array of strings</font>
+<br/><font color="#E65100">class</font> <font color="#999900">Data</font> <font color="#E65100">implements</font> <font color="#999900">Printable</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font>[] strings;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">print</font>() { <font color="gray">//prints all strings, each to 1 line</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">String</font> s: strings) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(s);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">printedLines</font>() { <font color="gray">//returns the number of strings</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> strings.<font color="#ADD8E6">length</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        When implementing multiple interfaces, their names must be separated by commas, after the <i>implements</i> keyword.
+        <br><br>
+        Do not try to create objects from interfaces, as that isn't allowed (they are abstract classes after all).
+        ]]>
+    </text>
+    <advanced title="Additional interface functions">
+        <![CDATA[
+        Interfaces overgone multiple changes when Java 8 was introduced. You can now add static methods, and members, and even
+        give implementations for methods, using the <b>default</b> keyword. Read <a href="https://www.journaldev.com/2752/java-8-interface-changes-static-method-default-method">this</a>
+        article, for more information.
+        <p>
+        It isn't necessary true anymore that an interface is fully abstract, yet this definition is still often used (even in this chapter).
+        <p>
+        More on this in the course '<b>Java 8</b>'.
+        ]]>
+    </advanced>
+    <interactive instruction="Use the previous interactive sample to fill the gaps!">
+        <data><![CDATA[
+            
+<font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">TextFile</font> ___ <font color="#999900">File</font> ___ <font color="#999900">Readable</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">___</font>(<font color="#999900">String</font> data) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//implementation
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">readAll</font>(<font color="#999900">String</font>[] data) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//implementation
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+    
+        ]]></data>
+        <answer place="0">extends</answer>
+        <answer place="1">implements</answer>
+        <answer place="2">read</answer>
+    </interactive>
+    <!-- abstract class meaning, the abstract keyword: for class and for method
+    special class: interface (static and default methods) and the implements keyword -->
+</resources>

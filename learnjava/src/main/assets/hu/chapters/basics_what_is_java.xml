@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- 'What is Java?', belongs to course 'The basics' -->
+<resources>
+    <chapterdata>
+        <id>51</id>
+        <name>Java alapok</name>
+    </chapterdata>
+    <title text="A Java telepítése"/>
+    <text>
+        <![CDATA[
+        Mielőtt programozni kezdhetnél, fel kell telepítened a Java-t fejlesztői verzióját.
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>A számítógépeden menj a <a href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html">hivatalos letöltési oldalra</a>.</li>
+        <li>Válaszd ki az operációs rendszerednek megfelelő verziót.</li>
+        <li>Csomagold ki és futtasd a letöltött telepítőt.</li>
+        <ul>
+        ]]>
+    </list>
+    <boxed title="JAVA_HOME környezeti változó">
+        <![CDATA[
+        Az <i>IDE</i> programodnak szüksége lesz a <i>JAVA_HOME</i> környezeti változóra. Ha nem idegen számodra
+        egy környezeti változó beállítása, akkor állítsd be ezt a <i>Java</i> telepítési könyvtár <i>bin</i> mappájára.
+        Egyébként <a href="https://www.wikihow.com/Set-Java-Home">itt</a> találsz egy teljes útmutatót (angol
+        szöveggel, de a képeken minden látszik).
+        ]]>
+    </boxed>
+    <text>
+       <![CDATA[
+        Most már minden készen áll arra, hogy telepíts egy integrált fejlesztőkörnyezetet (<i>IDE</i>-t). Én itt
+        az <i>Eclipse</i> telepítését fogom bemutatni, de más <i>IDE</i>-t is használhatsz.
+       ]]>
+    </text>
+    <title text="Az Eclipse telepítése"/>
+    <text>
+        <![CDATA[
+        Menj a <a href="https://www.eclipse.org/downloads/">hivatalos Eclipse letöltő oldalra</a> a számítógépeden, majd
+        válasz ki az operációs rendszerednek megfelelő verziót. Ezután futtasd kapott telepítőt.
+        ]]>
+    </text>
+    <title text="Mi is az a Java?"/>
+    <text>
+        <![CDATA[
+        A Java egy specifikáció, ami leír egy <b>szoftverfejlesztő platformot</b>. Célja, hogy a programozóknak
+        olyan környezetet biztosítson, ahol bármilyen alkalmazást fejleszthetnek, több operációs rendszerre (<b>cross-platform</b>).
+        ]]>
+    </text>
+    <boxed title="Nem csak egy programozási nyelv">
+        Figyeld meg, hogy a Java több mint egy programozási nyelv. Egy egész szoftverfejlesztési platformról
+        van szó. Ez olyannyira igaz, hogy több másik programozási nyelv létezik, amik erre a platformra
+        épülnek (pl: Kotlin, Groovy).
+    </boxed>
+    <text>
+        <![CDATA[
+        A Java létrehozója <a href="https://en.wikipedia.org/wiki/James_Gosling">James Gosling</a>, a
+        Sun Microsystems programozója, de jelenleg az
+        <a href="https://en.wikipedia.org/wiki/Oracle_Corporation">Oracle</a> vállalat tulajdonában van.
+        ]]>
+    </text>
+    <text>
+        <![CDATA[
+        <u>A platform legfontosabb elemei a következők:</u>
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>A Java programozási nyelv.</li>
+        <li>A Java fordítóprogram (javac - Java compiler): lefordítja a Java kódot <b>bájtkóddá</b>.</li>
+        <li>A Java virtuális gép (JVM - Java virtual machine): futtatja a lefordított bájtkódot.</li>
+        <li>Osztálykönyvtárak: Rengeteg előre megírt kód, amit felhasználhatunk a saját programjaink írásakor.</li>
+        </ul>
+        ]]>
+    </list>
+    <title text="Java Development Kit - JDK"/>
+    <text>
+        <![CDATA[
+        Egészen eddig csak egy specifikációról beszéltünk. Ez megmondja, hogy pontosan hogyan is kell kinéznie ennek a
+        platformnak, de nem tartalmaz valódi programokat.
+        ]]>
+    </text>
+    <text>
+        <![CDATA[
+        Mivel a elkészíteni a szükséges programokat a specifikáció alapján hatalmas munka, ezért az Oracle
+        biztosít egy teljes értékű implementációt. Ezt <b>Java Development Kit-nek (JDK-nak)</b> nevezik.
+        Mások is elkészítették a saját implementációjukat, ilyen például az <a href="https://en.wikipedia.org/wiki/OpenJDK">OpenJDK</a>.
+        Amit nemrég letöltöttél és telepítettél "Java" névvel, az valójában a JDK volt.
+        ]]>
+    </text>
+    <title text="Cross platform"/>
+    <text>
+        <![CDATA[
+        A Java alapvető tulajdonsága a <b>Write once, Run anywhere (WORA)</b> elv. Ez azt jelenti, hogy a
+        programozónak elég egyszer megírni és lefordítani a kódot, ez pedig majd le fog futni minden támogatott
+        operációs rendszeren (pl: Windows, Linux, ...)
+        ]]>
+    </text>
+    <image name="java_platform_structure"/>
+    <text>Ezen a képen a WORA elv működése látható.</text>
+    <title text="From source code to execution"/>
+    <text>
+        <![CDATA[
+        Nézzük meg mi történik, ha befejeztük a programozást, és szeretnénk futtatni a kódunkat:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ol>
+        <li>1. - A forráskódot megkapja a fordítóprogram.</li>
+        <li>2. - A fordítóprogram ellenőrzi a kódot, ha helyes, akkor átfordítja <b>bájtkóddá</b>.</li>
+        <li>3. - A <b>bájtkód</b> eljut a Java virtuális géphez, ami lefuttatja azt.</li>
+        </ol>
+        ]]>
+    </list>
+    <text>
+        <![CDATA[
+        Az integrált fejlesztőkörnyezet előnye, hogy mindezt egy gomb megnyomásával el tudjuk végezni. Enélkül
+        több parancssori utasítás kiadására lenne szükség.
+        ]]>
+    </text>
+    <title text="A Java programnyelv"/>
+    <text>
+        <![CDATA[
+        Végül lássuk magát a Java programozási nyelvet, ami napjaink egyik legelterjettebb nyelve.
+        ]]>
+    </text>
+    <text>
+        <![CDATA[
+        Két legfontosabb tulajdonsága, hogy <b>általános célú</b> és <b>objektum orientált</b>. Könnyű
+        kitalálni, hogy mit takar az általános célúság. Azt, hogy a Java nyelvet bármilyen típusú alkalmazás
+        elkészítésére használhatjuk. Például:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>Webalkalmazások</li>
+        <li>Android alkalmazások (ez az alkalmazás is Java-ban készült!)</li>
+        <li>Asztali alkalmazások</li>
+        <li>És még sok más...</li>
+        </ul>
+        ]]>
+    </list>
+    <advanced title="Objektum orientált">
+        <![CDATA[
+        Az objektum orientáltság egy bonyolultabb koncepció, amivel majd a későbbi kurzusok során foglalkozunk.
+        ]]>
+    </advanced>
+</resources>

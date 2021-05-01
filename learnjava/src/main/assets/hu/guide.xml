@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- Contains the guide components --><resources>
+    <chapterdata> <!-- These are unused, just here so parser doesn't throw exception -->
+        <id>-1</id>
+        <name>guide</name>
+    </chapterdata>
+    <title text="Bevezetés"/>
+    <text>
+        <![CDATA[
+        Ennek az alkalmazásnak a célja, hogy megtanítsa a <b>Java programnyelv</b>
+        alapjait.
+        ]]>
+    </text>
+    <boxed title="Gyakorlás">
+        <![CDATA[
+        Érdemes telepítened a Java-t a számítógépedre, és aktívan gyakorolni miközben használod
+        az alkalmazást. Így sokkal jobban el tudod majd sajátítani az ismereteket. Az első fejezetben meg
+        fogod tanulni, hogy hogyan kell előkészíteni egy fejlesztőkörnyezetet.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Ez az alkalmazás azoknak készült, akik még nem programoztak, ha azonban már ismersz más
+        programnyelveket, akkor is hasznosnak fogod találni. Főleg a <b>C++ vagy C#</b> nyelveken
+        szerzett tapasztalatok lesznek segítségedre, mivel ezek nagyon hasonlóak a Java-hoz.
+        ]]>
+    </text>
+    <title text="IDE telepítése"/>
+    <text>
+        <![CDATA[
+        A programozás megkönnyítéséhez érdemes használni egy <b>integrált fejlesztőkörnyezetet (IDE)</b>.
+        Ezek a szoftverek kódszerkesztőket és egyéb hasznos eszközöket tartalmaznak.
+        ]]>
+    </text>
+    <boxed title="Miért használjak IDE-t?">
+        <![CDATA[
+        A fejlesztőkörnyezetek képesek egy gomb lenyomásával lefordítani és futtatni a programjaidat.
+        Ezt egyébként csak parancssori utasítások begépelésével tudnád megtenni. Az <i>IDE</i>-k ezen kívül
+        figyelik az általad írt kódot, és kijelölik benne a potenciálisan hibás részeket.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Java programozáshoz én a következő <i>IDE</i>-k egyikét ajánlom:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li> <a href="https://www.eclipse.org/">Eclipse</a>: A legnépszerűbb <i>IDE</i> Java-hoz.</li>
+        <li> <a href="https://www.jetbrains.com/idea/">IntelliJ IDEA</a>: Egy, a JetBrains által fejlesztett modern fejlesztőkörnyezet.</li>
+        <li> <a href="https://netbeans.org/">NetBeans</a>: Egy újabb kitűnő Java fejlesztőkörnyezet.</li>
+        </ul>
+        ]]>
+    </list>
+    <text>
+        <![CDATA[
+        A telefonon történő programozás jóval kényelmetlenebb, azonban erre is van lehetőség. Egy Android-ra készült
+        fejlesztőkörnyezetet letölthetsz <a href="https://play.google.com/store/apps/details?id=com.duy.compiler.javanide&hl=en_US">innen</a>.
+        ]]>
+    </text>
+    <advanced title="IDE nélkül">
+        <![CDATA[
+        Ha valamilyen oknál fogva mégsem akarnál fejlesztőkörnyezetet használni, akkor manuálisan is, a
+        parancssor segítségével is elkészítheted a programjaidat. Erről <a href="https://www.wikihow.com/Compile-%26-Run-Java-Program-Using-Command-Prompt">itt</a> olvashatsz
+        bővebben (angolul).
+        ]]>
+    </advanced>
+    <title text="Az alkalmazás működése"/>
+    <text>
+        <![CDATA[
+        Ebben az alkalmazásban a tananyag fel van osztva <b>kurzusokra</b>, ezeken belül pedig <b>fejezetekre</b>.
+        Jelenleg csak az első kurzust tudod megnyitni. A következőt mindig úgy érheted el, hogy elolvasod az összes fejezetet
+        és sikeresen teljesíted a kurzushoz tartozó <b>vizsgát</b>.
+        ]]>
+    </text>
+    <boxed title="Kurzusok menü">
+        <![CDATA[
+        Minden kurzust megnézhetsz, ha kinyitod a bal felső sarokban lévő menüt, és kiválasztod a kurzusok menüpontot.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Egy kurzus fejezeteit bármilyen sorrendben elolvashatod, de ajánlott az eredeti sorrend tartása, mivel egymásra épülnek.
+        Minden fejezet végén egy gomb megnyomásával jelezheted, ha végeztél. Bármikor újra megnyithatod a fejezeteket.
+        ]]>
+    </text>
+    <title text="Kódminták"/>
+    <text>
+    <![CDATA[
+     A fejezetek <b>kódmintákat</b> is tartalmaznak, amelyek segítik a megértést. Ezek között interaktívak is
+     akadnak, ahol a kódot neked kell kiegészíteni!
+    ]]>
+    </text>
+    <interactive instruction="Írj '='-t a kódminta helyes kitöltéséhez!">
+        <data><![CDATA[
+            
+            <font color="#E65100">private</font> <font color="#999900">String</font> ___ <font color="#2E8B57">"Some text"</font>;
+            
+        ]]></data>
+        <answer place="0">=</answer>
+    </interactive>
+    <text>
+        <![CDATA[
+        A jobboldali gombokkal ellenőrizheted, hogy helyes választ adtál-e meg!
+        ]]>
+    </text>
+    <boxed title="Kód megosztása a számítógépeddel">
+        <![CDATA[
+        Miközben az alkalmazást használod, egyből átmásolhatod az itt látható kódmintákat a számítógépedre!
+        Javaslom, hogy először olvasd el az első fejezetet a Java telepítéséről, ezután pedig nézz be <b>ClipSync
+        menüpontba</b> további információkért.
+        ]]>
+    </boxed>
+    <title text="Vizsgák"/>
+    <text>
+        <![CDATA[
+        Minden kurzushoz tartozik egy vizsga, ami megpróbálja ellenőrizni, hogy mennyit sajátítottál el az adott
+        kurzusból. Ajánlott ezeket segítség nélkül megoldani.
+        ]]>
+    </text>
+    <boxed title="Vizsga nehezítések">
+       <![CDATA[
+       A vizsgák teljesítésére limitált idő áll rendelkezésedre. Ha nem sikerülne, akkor egy kicsit várnod kell, mielőtt
+       újra nekikezdhetnél. A beállítások menüben háromféle nehézségi fokozat közül választhatsz.
+       ]]>
+    </boxed>
+    <title text="Feladatok"/>
+    <text>
+        <![CDATA[
+        Minden kurzusban fogsz találni <b>feladatokat</b> is. Ezek kis projektek, amikkel a gyakorlati
+        programozási képességeidet tesztelheted.
+        ]]>
+    </text>
+    <boxed title="Részletek">
+        <![CDATA[
+        A feladatoknak rengeteg jó megoldásuk létezik. Egy helyes megoldást azonban mindig megnézhetsz, ha esetleg
+        elakadnál, vagy szeretnéd összehasonlítani a megoldásodat valamivel.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        A feladatok megoldása opcionális (de ajánlott), ezek nélkül is továbbléphetsz a következő kurzusra. Nyugodtan használd a korábbi
+        fejezeteket és az internetet miközben megoldod őket.
+        ]]>
+    </text>
+</resources>

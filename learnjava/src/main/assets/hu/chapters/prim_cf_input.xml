@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!--Belongs to course 'Primitives, control flow and I/O' --><resources>
+    <chapterdata>
+        <id>105</id>
+        <name>Getting input</name>
+    </chapterdata>
+    <text>
+        <![CDATA[
+        Knowing how to get input from the user, and how to read files is essential. This will allow us
+        to perform some tasks according to the given input!
+        <p>
+        Consider this example: our application must be able to add 2 given numbers together. The user selects
+        the numbers when (or before) starting the app.
+        ]]>
+    </text>
+    <title text="Command line arguments"/>
+    <text>
+        <![CDATA[
+        This is a straightforward way provided by Java to get some input. We have already seen parts of it at the
+        end of the previous chapter.
+        ]]>
+    </text>
+    <advanced title="Set arguments without an IDE">
+        <![CDATA[
+        If you are using the command line, providing arguments is actually simpler. You must simply enter the arguments
+        (separated by whitespaces) at the end of the <b>java</b> command.
+        <p>
+        For an example, you can check the <a href="https://docs.oracle.com/javase/tutorial/essential/environment/cmdLineArgs.html">
+        official oracle tutorial</a> of command line arguments.
+        ]]>
+    </advanced>
+    <text>
+        <![CDATA[
+        When using an <i>IDE</i>, we don't have access to the console, however, we can give the arguments to the <i>IDE</i> and
+        it will pass them to the <i>JVM</i> instead.
+        <p>
+        In Eclipse, follow these steps to set the arguments:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>1. Click on <b>Run</b> -> <b>Run Configurations</b>.</li>
+        <li>2. Click on the <b>Arguments</b> tab.</li>
+        <li>3. In <b>Program Arguments section</b> enter your arguments.</li>
+        <li>4. Click <b>Apply</b>.</li>
+        </ul>
+        ]]>
+    </list>
+    <image name="eclipse_arguments"/>
+    <boxed title="For other IDEs">
+        <![CDATA[
+        If you are using one of the other recommended environments, see <a href="https://stackoverflow.com/questions/2066307/how-do-you-input-commandline-argument-in-intellij-idea">this</a>
+        StackOverflow question for Intellij Idea, and <a href="https://stackoverflow.com/questions/9168759/netbeans-how-to-set-command-line-arguments-in-java">this one</a> for Netbeans.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Now that we know how to set the arguments, let's look at how we can access them at runtime. The <i>JVM</i> will place them
+        in the <b>String array parameter</b> of the main method (called <i>args</i> by default).
+        <p>
+        For example, let's print all the command line arguments to the console:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">String</font> argument: args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(argument);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        The <b>for-each</b> loop is used due to it's simple syntax.
+        <br><br>
+        Finally, let's solve out initial example of adding numbers, using the command line arguments! The user will
+        enter 2 numbers as arguments, and the program will use these.
+        ]]>
+    </text>
+    <boxed title="parseInt">
+        <![CDATA[
+        The arguments are given to us as <b>strings</b>, but to add them together they must be converted to
+        integers! A utility method, <b>Integer.parseInt</b> is provided for this:
+        <br><br>
+        <i>int one = Integer.parseInt("1");</i>
+        <br><br>
+        Note that <i>parseInt</i> will throw a <b>NumberFormatException</b> if the given string is not actually an integer.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        We haven't covered exception handling yet, so suppose that the user will only enter valid integers as
+        command line arguments. If this isn't the case, the program will crash.
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//do we have 2 arguments?</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(args.<font color="#ADD8E6">length</font> != <font color="#F0E130">2</font>) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Wrong number of arguments!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp; <font color="#E65100">return</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//convert the strings using parseInt</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> num1 = <font color="#999900">Integer</font>.<font color="#ADD8E6">parseInt</font>(args[<font color="#F0E130">0</font>]);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> num2 = <font color="#999900">Integer</font>.<font color="#ADD8E6">parseInt</font>(args[<font color="#F0E130">1</font>]);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//print the result</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> res = num1 + num2;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"The result is "</font> + res);
+<br/>}
+        
+    ]]></code>
+    <interactive instruction="Complete the program so that it returns instantly when there ARE arguments!">
+        <data><![CDATA[
+
+<font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(___ > <font color="#F0E130">0</font>) <font color="#E65100">return</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Code here...
+</font>
+<br/>}
+
+        ]]></data>
+        <answer place="0">args.length</answer>
+    </interactive>
+    <title text="Using System.in and a Scanner"/>
+    <text>
+        <![CDATA[
+        <i>System.in</i> is an <b>input stream</b> provided by Java, which corresponds to the keyboard input (also knows as standard input).
+        To save the user's input from the console, we use this input stream in combination with a <b>java.util.Scanner</b>.
+        <p>
+        The scanner is used to create primitive types and strings (which we can use in our code) from the raw bytes of the input stream.
+        ]]>
+    </text>
+    <boxed title="Command line interface in the IDE">
+        <![CDATA[
+        Our program gets what the user types through the command line interface (<i>CLI</i>). When necessary, the <i>IDE</i> will
+        "simulate" the <i>CLI</i>, so we can easily test the program while developing.
+        <p>
+        In Eclipse, the "console" will appear near the bottom of the screen, like this:
+        ]]>
+    </boxed>
+    <image name="eclipse_console"/>
+    <text>
+        <![CDATA[
+        Let's create a program that asks for a line of text from the user, and then prints that out:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">import</font> java.<font color="#ADD8E6">util</font>.<font color="#999900">Scanner</font>;
+<br/>
+<br/><font color="#E65100">public class</font> <font color="#999900">Main</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Enter something:"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create the scanner from System.in</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Scanner</font> input = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(<font color="#999900">System</font>.<font color="#ADD8E6">in</font>);
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> line = input.<font color="#ADD8E6">nextLine</font>();
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//echo what the user entered</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"You entered: "</font> + line);
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//close the scanner
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;input.<font color="#ADD8E6">close</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Closing the scanner is not necessary, but recommended. Only close the scanner after you are sure that you
+        won't need it again, otherwise an exception will be thrown.
+        ]]>
+    </text>
+    <boxed title="The nextLine method">
+        <![CDATA[
+        The scanner's <b>nextLine</b> method <b>halts the program</b>, until a line of text arrives from the input stream! In
+        our case, this is until the user types a line to the console, and presses enter. After this, it returns the line as a string.
+        <p>
+        The scanner has other similar methods (<i>nextX</i>), they behave the same: wait until an <i>enter key press</i> is detected,
+        then return an <i>X</i> (or throw an exception if the line can't be converted to an <i>X</i>).
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Now let's solve the number addition problem using <i>System.in and Scanner</i>:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">import</font> java.<font color="#ADD8E6">util</font>.<font color="#999900">Scanner</font>;
+<br/>
+<br/><font color="#E65100">public class</font> <font color="#999900">Main</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create the scanner
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Scanner</font> input = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(<font color="#999900">System</font>.<font color="#ADD8E6">in</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//ask for and read the numbers
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"First number:"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> num1 = input.<font color="#ADD8E6">nextInt</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Second number:"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> num2 = input.<font color="#ADD8E6">nextInt</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> sum = num1 + num2;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">print</font>(<font color="#2E8B57">"Their sum: "</font> + sum);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;input.<font color="#ADD8E6">close</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Note that the <b>nextInt</b> method expects an integer! If it receives a line that cannot be converted to
+        an integer it will throw an <b>InputMismatchException</b>. Since we didn't implement exception handling, this will crash our program.
+        ]]>
+    </text>
+    <interactive instruction="Complete the sample in a way that it keeps going until -1 was entered on the keyboard!">
+        <data><![CDATA[
+
+<font color="#999900">Scanner</font> scanner = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(___);
+<br/><font color="#DF7401">int</font> number = <font color="#F0E130">0</font>;
+<br/><font color="#E65100">while</font>(number ___ <font color="#F0E130">-1</font>) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;number = scanner.<font color="#ADD8E6">___</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(number + <font color="#2E8B57">" was entered..."</font>);
+<br/>}
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"<font color="</font>#999900">Stopping</font>.");
+<br/>scanner.<font color="#ADD8E6">close</font>();
+
+        ]]></data>
+        <answer place="0">System.in</answer>
+        <answer place="1">!=</answer>
+        <answer place="2">nextInt</answer>
+    </interactive>
+    <title text="Reading from files"/>
+    <text>
+        <![CDATA[
+        The last type of input that we'll cover is reading from files. A program usually reads a text file line-by-line, and
+        will read all lines in the file. We will achieve this using the <b>Files</b> utility class.
+        ]]>
+    </text>
+    <boxed title="Storing what we read">
+        <![CDATA[
+        The first idea that comes to mind is using an array to store the lines. There is, however, a problem with this approach.
+        An array has fixed length, but we want our program to work, no matter the number of lines in the file!
+        <p>
+        To counter this, we can use a <b>List</b>. This is a class (an interface, actually, but more on that later) that provides
+         methods to add and remove elements, and it will "resize" itself when necessary.
+        ]]>
+    </boxed>
+    <advanced title="Data structures">
+        <![CDATA[
+        A list is a type of <b>data structure</b> (they are called <b>collections</b> in Java). These store data in a way that
+        certain operations (getting the largest elements for example) are guaranteed to be efficient.
+        <p>
+        The JDK contains many data structure implementations, which will be covered in a later course, but feel free to browse the
+        <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Collection.html">collection subclasses</a> for other examples!
+        ]]>
+    </advanced>
+    <text>
+        <![CDATA[
+        Before we can read text files, let's look at how we can create, and where should we place them. The simplest way is
+        to put them into the folder of our project (this folder is the one containing <b>src and bin</b>).
+        <p>
+        The IDE can assist in this, for example in Eclipse you place a file in the project directory by right clicking the project,
+        then following these instructions:
+        ]]>
+    </text>
+    <image name="eclipse_file_create_1"/>
+    <text>
+        <![CDATA[
+        The name can be anything but we'll have to use it in the source code.
+        Be sure to also enter the <b>file extension (.txt)</b> as well, as seen in the picture below!
+        ]]>
+    </text>
+    <image name="eclipse_file_create_2"/>
+   <text>
+       <![CDATA[
+       Here is a simple example program, that reads all lines from the file we just created, and prints them
+       to the console. Don't forget to <b>type some lines to the file</b> and save it before running this!
+       ]]>
+   </text>
+    <code><![CDATA[
+        
+<font color="#E65100">package</font> input;
+<br/>
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">nio</font>.<font color="#ADD8E6">file</font>.<font color="#999900">Files</font>;
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">nio</font>.<font color="#ADD8E6">file</font>.<font color="#999900">Path</font>;
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">nio</font>.<font color="#ADD8E6">file</font>.<font color="#999900">Paths</font>;
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">util</font>.<font color="#999900">List</font>;
+<br/>
+<br/><font color="#E65100">public class</font> <font color="#999900">Main</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) <font color="#E65100">throws</font> <font color="#999900">Exception</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create the path object of the file</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Path</font> filePath = <font color="#999900">Paths</font>.<font color="#ADD8E6">get</font>(<font color="#2E8B57">"data.txt"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//read the lines into a list</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">String</font>> lines = <font color="#999900">Files</font>.<font color="#ADD8E6">readAllLines</font>(filePath);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//for-each loop on the list</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">String</font> line: lines) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(line);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>}
+        
+    ]]></code>
+    <advanced title="throws Exception">
+        <![CDATA[
+        You might be wondering what the <b>throws Exception</b> means at the end of the main method declaration. In
+        some cases, Java forces us to do exception handling. Reading files is one of these cases. However, we don't know
+        how to do that yet, so this "hacky" solution can be used instead.
+        <p>
+        After you've learned about exception handling, <b>DON't</b> use such a solution. Exceptions should be handled.
+        ]]>
+    </advanced>
+    <advanced title="The first touch of generics">
+        <![CDATA[
+        At the declaration of the list the <b>&lt;String></b> syntax can be seen. List is a <b>generic</b> interface, which means it can
+        contain <b>any type of elements</b>, but we must write the type of the future elements at declaration. This is what that piece of
+        code does.
+        <p>
+        Generics will be covered more in-depth in a later course.
+        ]]>
+    </advanced>
+    <text>
+        <![CDATA[
+        If you get a <b>NoSuchFileException</b> when running your program, make sure that you have the file in the specified directory,
+        and that the name of the file matches with what you written in the code.
+        ]]>
+    </text>
+    <boxed title="The old ways">
+        <![CDATA[
+        The classes we used to read the file were introduced in <b>Java 7</b> with the <b>java.nio</b> package. Before this, a
+        <a href="https://docs.oracle.com/javase/7/docs/api/java/io/BufferedReader.html">BufferedReader</a> was used.
+        <p>
+        This method of reading a file is a bit longer, but still widely used, so if you want to familiarize yourself with
+        it, follow the answers of <a href="https://stackoverflow.com/questions/16104616/using-bufferedreader-to-read-text-file">this</a>
+        StackOverflow question.
+        ]]>
+    </boxed>
+    <title text="The ultimate solution"/>
+    <text>
+        <![CDATA[
+        Here is a solution for the number addition problem. This program can <b>read and sum any amount of numbers</b> from <i>data.txt</b>.
+        Before running, fill the file with integers, only place one number in one line!
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="#E65100">package</font> input;
+<br/>
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">nio</font>.<font color="#ADD8E6">file</font>.<font color="#999900">Files</font>;
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">nio</font>.<font color="#ADD8E6">file</font>.<font color="#999900">Path</font>;
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">nio</font>.<font color="#ADD8E6">file</font>.<font color="#999900">Paths</font>;
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">util</font>.<font color="#999900">List</font>;
+<br/>
+<br/><font color="#E65100">public</font> class <font color="#999900">Main</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> static <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args)
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	<font color="#E65100">throws</font> <font color="#999900">Exception</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create the path object of the file</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Path</font> filePath = <font color="#999900">Paths</font>.<font color="#ADD8E6">get</font>(<font color="#2E8B57">"data.txt"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//read the lines into a list</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">String</font>> lines = <font color="#999900">Files</font>.<font color="#ADD8E6">readAllLines</font>(filePath);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//the sum is 0 at the start</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> sum = <font color="#F0E130">0</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//iterate the lines</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">String</font> line: lines) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//convert the line (string) to int</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> lineAsInt = <font color="#999900">Integer</font>.<font color="#ADD8E6">parseInt</font>(line);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray<font color="#2E8B57">">//increase the sum with it'</font>s value</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum = sum + lineAsInt;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"The sum is "</font> + sum);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>}
+        
+    ]]></code>
+</resources>

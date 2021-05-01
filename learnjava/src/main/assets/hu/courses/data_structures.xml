@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- Course: Data structures --><resources>
+    <coursedata>
+        <id>20</id>
+        <name>Data structures</name>
+        <finished>true</finished>
+    </coursedata>
+    <chapter>201</chapter>
+    <chapter>202</chapter>
+    <chapter>203</chapter>
+    <chapter>204</chapter>
+    <chapter>205</chapter>
+    <task>201</task>
+    <task>202</task>
+    <exam>20</exam>
+</resources>

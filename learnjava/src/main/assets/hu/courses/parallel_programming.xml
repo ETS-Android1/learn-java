@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- Course: Parallel programming --><resources>
+    <coursedata>
+        <id>25</id>
+        <name>Parallel programming</name>
+        <finished>true</finished>
+    </coursedata>
+    <chapter>251</chapter>
+    <chapter>252</chapter>
+    <chapter>253</chapter>
+    <chapter>254</chapter>
+    <chapter>255</chapter>
+    <task>250</task>
+    <task>251</task>
+    <task>252</task>
+    <exam>25</exam>
+</resources>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- 'The first program', belongs to course 'The basics' --><resources>
+    <chapterdata>
+        <id>53</id>
+        <name>Az első program</name>
+    </chapterdata>
+    <text>
+        <![CDATA[
+        Innentől kezdve kimásolhatod a kódmintákat és te magad is kísérletezhetsz velük a
+        fejlesztőkörnyezetedben. Ehhez egy <b>projektet</b> kell létrehoznod, ahova az <i>IDE</i>
+        az egy programhoz tartozó forrásfájlokat gyűjti.
+        ]]>
+    </text>
+    <boxed title="Eclipse projekt létrehozása">
+        <![CDATA[
+        Válasz ki a következő menüpontokat: <b>File -> New -> New project... </b>. Ezután adj meg
+        egy nevet, és nyomj a <i>Finish</i> gombra. A bal oldalon megjelenik a projekted, ami egyenlőre
+        üres.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Ennél az egyszerű projektnél az alapcsomagot fogjuk használni. Egy forrásfájl hozzáadásához kattints
+        jobb egérrel az <i>src</i> mappára és válaszd a <b>New -> Class</b> menüt. Pipáld ki a
+        <b>public static void main(String[] args)</b> nevű mezőt, majd <i>Finish</i>.
+        ]]>
+    </text>
+    <advanced title="Más fejlesztőkörnyezetekben">
+        <![CDATA[
+        Ha egy másik fejlesztőkörnyezetet használsz, akkor itt van néhány segédlet a projektek
+        létrehozásához <a href="https://www.tutorialspoint.com/intellij_idea/intellij_idea_create_first_java_project.htm">IntelliJ-hez</a>
+        és <a href="https://netbeans.org/kb/docs/java/quickstart.html">NetBeans-hez</a>.
+        ]]>
+    </advanced>
+    <text>
+        <![CDATA[
+        A projekt magját az Eclipse legenerálta számodra. Ha most duplán kattintasz arra a forrásfájlra, amit
+        az előbb hoztál létre, akkor valami ehhez hasonlót fogsz látni a szerkesztőben (<i>Main</i> helyett az általad megadott
+        névvel):
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">public class </font> <font color="#999900">Main</font> {
+<br/>
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;public static</font><font color="#DF7401"> void </font><font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">// TODO: Auto-generated method stub</font>
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Azt a részt, ami <i>public static void main</i>-el kezdődik <b>main method</b>-nak (főmetódusnak)
+        hívják. Ez lesz az a kód, amit a <i>JVM</i> lefuttat amikor elindítja a te programodat. Ezért
+        <b>belépési pontnak</b> is nevezik.
+        ]]>
+    </text>
+    <text>
+        <![CDATA[
+        A '<font color="gray">// TODO: Auto-generated method stub</font>' sor, ami a főmetódusban található egy
+        <b>komment</b>. A kommenteknek egy egész fejezetet szentelek a későbbiekben, egyenlőre kitörölheted, vagy akár
+        úgy is hagyhatod.
+        ]]>
+    </text>
+    <boxed title="A program futtatása">
+        <![CDATA[
+        Az IDE által generált kód természetesen helyes, és rögtön le is tudjuk futtatni. Kattints a bal oldalon
+        található projektre jobb egérrel, és válaszd a <b>Run as... -> Java application</b> menüt. A fenti menüsorban lévő
+        zöld <i>Run</i> gombbal szintén indítható a program.
+        <br><br>
+        A futtatás azonban nem lesz igazán látványos, mivel semmilyen kód nem található a főmetódusban. A programunk
+        elindul, majd azonnal véget is ér.
+        ]]>
+    </boxed>
+    <image name="run_project"/>
+    <text>
+        <![CDATA[
+        Adjunk hozzá egy utasítást, aminek hatására a program üzenetet fog írni a konzolra. Java-ban
+        minden utasítást a ' ; ' szimbólummal kell lezárnunk. Győződj meg hogy <b>elmented</b> a forrásfájl
+        mielőtt újra lefuttatod (<i>Control + S</i>), különben a régi verzió fog lefutni!
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello, world!"</font>);
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Az utasítás, ami a konzolra ír a <b>System.out.println()</b> metódus. Minden, amit a
+        " " szimbólumok közé írunk, meg fog jelenni a konzolon. Az általam választott szöveged
+        helyettesítheted a sajátoddal.
+        ]]>
+    </text>
+    <text>
+        <![CDATA[
+        Ha most újra lefuttatod a programodat, akkor az Eclipse a képernyő alján megjeleníti a
+        konzolt, ahol olvasható lesz az általad beírt üzenet.
+        ]]>
+    </text>
+    <title text="Hibaüzenetek"/>
+    <text>
+        <![CDATA[
+        Előfordulhat, hogy ijesztő piros hibaüzenetek jelennek meg a konzolon. Ebben az esetben ellenőrizd, hogy
+        pontosan úgy adtad meg z utasítást, ahogy én. Könnyű lehagyni a ' ; ' jelet a végéről, vagy elfelejteni
+        " " jelek közé tenni a kiírandó szöveget.
+        <br><br>
+        Például tegyük fel, hogy elfelejtettük leírni a " " jeleket, és a kódunk így néz ki:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+         <font color="#E65100">public static</font> <font color="#DF7401">void </font><font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(Hello, world!);
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Az Eclipse még futtatás előtt észreveszi, hogy gond van, és pirossal kijelöli
+        az adott utasítást, sok esetben még a hiba okát is meg tudja találni:
+        ]]>
+    </text>
+    <image name="error_highlight"/>
+    <text>
+        <![CDATA[
+        Az <i>IDE</i>-k hiba kijelölő funkciója nagyon hasznos, ami a későbbiekben sok
+        fejfájást spórol majd meg.
+        ]]>
+    </text>
+    <title text="További utasítások"/>
+    <text>
+        <![CDATA[
+        Adjunk hozzá még egy kiírató utasítást utasítást.
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="#E65100">public static</font> <font color="#DF7401">void </font><font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello, world!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Have a nice day!"</font>);
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Amikor újra futtatjuk a programot, már két sor fog megjelenni a konzolon, méghozzá abban a sorrendben,
+        ahogy az utasításokat megadtuk. Elmondható, hogy az utasítások <b>felülről lefelé</b> kerülnek végrehajtásra.
+        ]]>
+    </text>
+    <interactive instruction="Egészítsd ki a főmetódust úgy, hogy kiírja a szöveget a konzolra!">
+        <data><![CDATA[
+            
+<font color="#E65100">public</font> ___ <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">___</font>(<font color="#2E8B57">"Hello, world!"</font>);
+<br/>}
+        
+        ]]></data>
+        <answer place="0">static</answer>
+        <answer place="1">println</answer>
+        <answer place="1">print</answer>
+    </interactive>
+</resources>

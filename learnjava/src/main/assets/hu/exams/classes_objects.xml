@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- Exam of OOP and classes --><resources>
+    <examdata>
+        <id>15</id>
+        <questionAmount>25</questionAmount>
+        <timeLimit>30</timeLimit>
+        <finished>true</finished>
+    </examdata>
+
+    <!-- Questions for creating classes -->
+    <question type="text">
+        <text>What does OOP stand for?</text>
+        <correct>Object oriented programming</correct>
+        <ignoreCase/>
+    </question>
+    <question type="single_choice">
+        <text>What is a class?</text>
+        <answer>A different name for object.</answer>
+        <answer>An abstract data type with behaviour, and a 'blueprint' for objects.</answer>
+        <answer>A file that contains Java source code.</answer>
+        <answer>A file that contains Java bytecode.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is an object?</text>
+        <answer>A 'blueprint' for creating classes.</answer>
+        <answer>A different name for class.</answer>
+        <answer>An instantiated class.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to create a class?</text>
+        <correct>class</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to create objects?</text>
+        <correct>new</correct>
+    </question>
+    <question type="true_false">
+        <text>The class defines the structure of the objects that can be created from it.</text>
+        <correct>true</correct>
+    </question>
+    <question type="text">
+        <text>We have an object called 'custom', and it has a 'getValue' method. How do we call this method?</text>
+        <correct>custom.getValue()</correct>
+        <correct>custom.getValue();</correct>
+    </question>
+    <question type="text">
+        <text>We have an object called 'handler', and it has a 'value' member. How do we reference this variable?</text>
+        <correct>handler.value</correct>
+        <correct>handler.value;</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these can a class contain?</text>
+        <answer>Methods.</answer>
+        <answer>Packages.</answer>
+        <answer>Member variables.</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+    </question>
+    <question type="true_false">
+        <text>Class members are initialized to their default values.</text>
+        <correct>true</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to reference the current object in the methods of the class?</text>
+        <correct>this</correct>
+    </question>
+
+    <!-- Questions for Encapsulation, overloading and constructors -->
+    <question type="single_choice">
+        <text>What is overloading?</text>
+        <answer>Having multiple classes with the same name.</answer>
+        <answer>Having multiple packages with the same name.</answer>
+        <answer>Having multiple members with the same name.</answer>
+        <answer>Having multiple methods with the same name.</answer>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>How are overloaded methods distinguished?</text>
+        <answer>By their name.</answer>
+        <answer>By their parameters.</answer>
+        <answer>They're just called randomly.</answer>
+        <answer>By return type.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="true_false">
+        <text>Overloaded methods must have different return types.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>Overloaded methods can have different return types.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>Overloaded methods must have different parameters.</text>
+        <correct>true</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these are true for constructors?</text>
+        <answer>They create new objects.</answer>
+        <answer>They can't be overloaded.</answer>
+        <answer>They must be named 'Constructor'</answer>
+        <answer>They're called with the new keyword.</answer>
+        <correct>0</correct>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>A default constructor is always created.</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>How many parameters does the default constructor have?</text>
+        <correct>0</correct>
+        <correct>zero</correct>
+    </question>
+    <question type="text">
+        <text>We have a class called 'Complex'. What must be the name of it's constructors?</text>
+        <correct>Complex</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these are valid visibility classes in Java?</text>
+        <answer>public</answer>
+        <answer>hidden</answer>
+        <answer>protected</answer>
+        <answer>portable</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is encapsulation?</text>
+        <answer>The principle of hiding all classes in one package.</answer>
+        <answer>It's another name for overloading.</answer>
+        <answer>Marking all the members of a class private.</answer>
+        <answer>The principle of hiding the 'implementation' of a class.</answer>
+        <correct>3</correct>
+    </question>
+    <question type="text">
+        <text>How many visibility classes are there in Java?</text>
+        <correct>4</correct>
+        <correct>four</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which visibility class is the 'strictest'? (meaning it's the least visible)</text>
+        <answer>public</answer>
+        <answer>default</answer>
+        <answer>private</answer>
+        <answer>protected</answer>
+        <correct>2</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which visibility class should we use if we want something to be visible only in it's own package?</text>
+        <answer>public</answer>
+        <answer>private</answer>
+        <answer>protected</answer>
+        <answer>default</answer>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which visibility class should we use if we want something to be visible everywhere?</text>
+        <answer>public</answer>
+        <answer>private</answer>
+        <answer>protected</answer>
+        <answer>default</answer>
+        <correct>0</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which visibility class should we use if we want to ensure something is visible inside subclasses?</text>
+        <answer>public</answer>
+        <answer>protected</answer>
+        <answer>default</answer>
+        <answer>private</answer>
+        <correct>1</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which visibility classes can be used on classes?</text>
+        <answer>public</answer>
+        <answer>private</answer>
+        <answer>protected</answer>
+        <answer>package-private</answer>
+        <correct>0</correct>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is a setter?</text>
+        <answer>A class that assigns values to variables.</answer>
+        <answer>A method that assigns a value to a member.</answer>
+        <answer>A method that returns the value of a hidden member.</answer>
+        <correct>1</correct>
+    </question>
+
+    <!-- Questions about inheritance -->
+    <question type="single_choice">
+        <text>What is polymorphism?</text>
+        <answer>Multiple methods can have the same name.</answer>
+        <answer>An object can behave like any class that is above him (superclass) in the inheritance hierarchy.</answer>
+        <answer>Multiple classes can have the same name.</answer>
+        <answer>An object can behave like any class that is below him (subclass) in the inheritance hierarchy.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these does a subclass inherit from its parent class?</text>
+        <answer>public methods</answer>
+        <answer>protected methods</answer>
+        <answer>public members</answer>
+        <answer>private members</answer>
+        <correct>0</correct>
+        <correct>1</correct>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>A class can have multiple subclasses.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>A class can have multiple superclasses.</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to define inheritance between classes?</text>
+        <correct>extends</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to disable subclassing from a class?</text>
+        <correct>final</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is overriding?</text>
+        <answer>Creating a subclass with the same name.</answer>
+        <answer>Redefining a member in a subclass.</answer>
+        <answer>Redefining a method in a subclass.</answer>
+        <answer>Another name for method overloading.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="text">
+        <text>Which class is at the top of the inheritance hierarchy?</text>
+        <correct>Object</correct>
+        <correct>java.lang.Object</correct>
+    </question>
+    <question type="true_false">
+        <text>It's possible to make a method non-overridable.</text>
+        <correct>true</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to call the constructor (or a method) of the superclass?</text>
+        <correct>super</correct>
+    </question>
+    <question type="true_false">
+        <text>The call to the superclass' constructor must be the last statement in the subclass' constructor.</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to check the type of an object?</text>
+        <correct>instanceof</correct>
+    </question>
+    <question type="true_false">
+        <text>Upcasting is safe.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>Downcasting is safe.</text>
+        <correct>false</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is casting?</text>
+        <answer>Changing the type of an object.</answer>
+        <answer>Redefining a method in a subclass.</answer>
+        <answer>Creating multiple methods with the same name in a class.</answer>
+        <answer>Having multiple subclasses for a class.</answer>
+        <correct>0</correct>
+    </question>
+
+    <!-- Questions about static and enum -->
+    <question type="text">
+        <text>Which keyword is used to make a member shared between all objects of a class?</text>
+        <correct>static</correct>
+    </question>
+    <question type="true_false">
+        <text>Static members can also be final.</text>
+        <correct>true</correct>
+    </question>
+    <question type="single_choice">
+        <text>How can a static method be called?</text>
+        <answer>Using the the object it belongs to and the dot operator.</answer>
+        <answer>They can't be called.</answer>
+        <answer>Using the the class it belongs to and the '==' operator.</answer>
+        <answer>Using the the class it belongs to and the dot operator.</answer>
+        <correct>3</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these can be marked static?</text>
+        <answer>Members.</answer>
+        <answer>Classes.</answer>
+        <answer>Methods.</answer>
+        <answer>local variables.</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these can be marked final?</text>
+        <answer>Members.</answer>
+        <answer>Classes.</answer>
+        <answer>Methods.</answer>
+        <answer>local variables.</answer>
+        <correct>0</correct>
+        <correct>1</correct>
+        <correct>3</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to declare an enum?</text>
+        <correct>enum</correct>
+    </question>
+    <question type="multi_choice">
+        <text>How can we create constants?</text>
+        <answer>Using the final keyword.</answer>
+        <answer>Using the static keyword.</answer>
+        <answer>Constants can't be created, every variable can be reassigned.</answer>
+        <answer>Using enums.</answer>
+        <correct>0</correct>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>Final variables must always be assigned in the statement which declares them.</text>
+        <correct>false</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which one of these names is conventional for a constant?</text>
+        <answer>SpeedOfLight</answer>
+        <answer>SPEED_OF_LIGHT</answer>
+        <answer>speedoflight</answer>
+        <answer>speedOfLight</answer>
+        <correct>1</correct>
+    </question>
+    <question type="true_false">
+        <text>Enum values can be safely compared with the '==' operator.</text>
+        <correct>true</correct>
+    </question>
+    <question type="single_choice">
+        <text>What are enums?</text>
+        <answer>Classes that can't be inherited from.</answer>
+        <answer>Variables marked both final and static.</answer>
+        <answer>Classes with only static members and methods.</answer>
+        <answer>Classes that only contain related constants.</answer>
+        <correct>3</correct>
+    </question>
+
+    <!-- Abstract classes and interfaces -->
+    <question type="single_choice">
+        <text>What is an abstract class?</text>
+        <answer>A class with no members, only methods.</answer>
+        <answer>A class that isn't completely coded yet.</answer>
+        <answer>A class that can't be instantiated.</answer>
+        <answer>A class that has at least one abstract method.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to mark that a method has no implementation?</text>
+        <correct>abstract</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these can be marked abstract?</text>
+        <answer>Classes.</answer>
+        <answer>Methods.</answer>
+        <answer>Members.</answer>
+        <answer>Packages.</answer>
+        <correct>0</correct>
+        <correct>1</correct>
+    </question>
+    <question type="true_false">
+        <text>Abstract classes can't have a constructor.</text>
+        <correct>false</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is an interface?</text>
+        <answer>A fully abstract class.</answer>
+        <answer>A class with only methods, no members.</answer>
+        <answer>Another name for abstract class.</answer>
+        <answer>A class with no constructors.</answer>
+        <correct>0</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to declare a fully abstract class?</text>
+        <correct>interface</correct>
+    </question>
+    <question type="single_choice">
+        <text>When a class implements an interface, what must it do with its methods?</text>
+        <answer>Nothing needs to be done with them.</answer>
+        <answer>They must be implemented, or we won't be able to instantiate the class.</answer>
+        <answer>These methods are deleted.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="multi_choice">
+        <text>What is the purpose of interfaces?</text>
+        <answer>Forcing a class to follow a scheme by implementing a set of methods.</answer>
+        <answer>To type less by not giving an implementation to our methods.</answer>
+        <answer>To create objects from them.</answer>
+        <answer>Simulating inheritance from multiple superclasses.</answer>
+        <correct>0</correct>
+        <correct>3</correct>
+    </question>
+
+    <!-- Questions about exception handling -->
+    <question type="multi_choice">
+        <text>Which of these are subclasses of Throwable?</text>
+        <answer>Integer</answer>
+        <answer>Exception</answer>
+        <answer>Error</answer>
+        <answer>RuntimeException</answer>
+        <correct>1</correct>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which of these indicate a more severe problem?</text>
+        <answer>Errors.</answer>
+        <answer>Exceptions.</answer>
+        <correct>0</correct>
+    </question>
+    <question type="true_false">
+        <text>The base class for all unchecked exceptions is RuntimeException.</text>
+        <correct>true</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to raise an exception?</text>
+        <correct>throw</correct>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to declare that a method may produce an exception?</text>
+        <correct>throws</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which of these is used to handle exception?</text>
+        <answer>The else-if block.</answer>
+        <answer>The while-loop.</answer>
+        <answer>The for-loop.</answer>
+        <answer>The try-catch block.</answer>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>How can we create custom unchecked exceptions?</text>
+        <answer>By inheriting from the Exception class.</answer>
+        <answer>By inheriting from the Error class.</answer>
+        <answer>Custom exceptions can't be created.</answer>
+        <answer>By inheriting from the RuntimeException class.</answer>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is a checked exception?</text>
+        <answer>An exception that the programmer is forced to handle.</answer>
+        <answer>An exception surrounded with a try-catch block</answer>
+        <answer>An exception that crashed the application.</answer>
+        <answer>It's another name for errors.</answer>
+        <correct>0</correct>
+    </question>
+    <question type="true_false">
+        <text>Throwable is the base class for all exception and error related classes.</text>
+        <correct>true</correct>
+    </question>
+    <question type="text">
+        <text>What is the base class for all exceptions?</text>
+        <correct>Exception</correct>
+        <correct>java.lang.Exception</correct>
+    </question>
+    <question type="text">
+        <text>What is the base class for all unchecked exceptions?</text>
+        <correct>RuntimeException</correct>
+        <correct>java.lang.RuntimeException</correct>
+    </question>
+    <question type="true_false">
+        <text>Errors should always be handled with try-catch blocks.</text>
+        <correct>false</correct>
+    </question>
+
+    <!--
+   <question type="single_choice">
+       <text></text>
+       <answer></answer>
+       <answer></answer>
+       <answer></answer>
+       <answer></answer>
+       <correct></correct>
+   </question>
+
+   <question type="multi_choice">
+       <text></text>
+       <answer></answer>
+       <answer></answer>
+       <answer></answer>
+       <answer></answer>
+       <correct></correct>
+       <correct></correct>
+   </question>
+
+   <question type="true_false">
+       <text></text>
+       <correct></correct>
+   </question>
+
+   <question type="text">
+       <text></text>
+       <correct></correct>
+       <correct></correct>
+   </question>
+   -->
+</resources>

@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <taskdata>
+        <id>152</id>
+        <name>School system</name>
+    </taskdata>
+    <text>
+        <![CDATA[
+        Your task is to create the system of a school. The main entities that should be included are:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>Person: has <b>name and age</b>, represents someone working or studying at the school.
+        <li>Student: has a <b>subject list</b>, each subject with its own <b>grade</b>.</li>
+        <li>Subject: has <b>name</b> and a <b>teacher</b> who teaches it.</li>
+        <li>Teacher: can have a <b>class</b>, of which he/she is the form master.</li>
+        <li>Class: a group of students of the same age.</li>
+        </ul>
+        ]]>
+    </list>
+    <boxed title="Encapsulate and finalize">
+        <![CDATA[
+        Hide all information behind <i>private members</i>, getters and setters! Disable the changing of information that shouldn't be changed,
+        for example a name of a person is <i>final</i>, but their age isn't.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        You should create a class for each of these entities, but feel free to create more. Remember, the classes should be connected,
+        by containing each other (like a <i>teacher</i> having a <i>class</i>) or by inheritance (students and teachers are persons).
+        ]]>
+    </text>
+    <title text="Behaviour with methods"/>
+    <text>
+        <![CDATA[
+        Implement a behaviour for all the classes with appropriate methods. Each class should have at least a few methods that
+        do something meaningful with the members. Make sure to mark members and methods that should belong
+        to the class static. Here are some examples:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>A method that calculates the average grade of a student.</li>
+        <li>A method that lists all teachers teaching a student.</li>
+        </ul>
+        ]]>
+    </list>
+    <text>
+        <![CDATA[
+        Write a method for <i>Person</i> that is abstract, called <i>printData</i> and implement it for both student
+        and teacher.
+        ]]>
+    </text>
+    <boxed title="Administrator">
+        <![CDATA[
+        Make it so that there is an <i>Admin</i> interface, with methods that can modify the student list of a class.
+        Have <i>Teacher</i> implement this interface, but with a restriction:
+        <p>
+        A teacher should only be able to change the students of their own class!
+        ]]>
+    </boxed>
+    <boxed title="Exception handling">
+        <![CDATA[
+        Don't allow the creation of invalid objects! Make sure a given age is valid, for example. Throw exceptions
+        if something is wrong (use the appropriate exception from the JDK, like <i>IllegalArgumentException</i>).
+        ]]>
+    </boxed>
+    <advanced title="Implement pairs">
+        <![CDATA[
+        The student should have subject-grade pairs. It's up to you how you implement this. In the previous task, the recommendation for a similar
+        problem was using a <b>map</b>.
+        <p>
+        For a different approach, you can create a simple class which holds a subject and the grade (int), and have a list
+        of these.
+        ]]>
+    </advanced>
+    <text>
+        <![CDATA[
+        Since this simple pair class is only used in the <i>Student</i> class, it is a good practice to make it an
+        <a href="https://www.javatpoint.com/java-inner-class">inner class</a>. This means that it's declared inside <i>Student</i>.
+        ]]>
+    </text>
+    <title text="Javadoc"/>
+    <text>
+        <![CDATA[
+        <a href="https://www.tutorialspoint.com/java/java_documentation.htm">Javadoc</a> is the recommended way to document your methods and classes! Try it for this project!
+        Or don't, but write at least some comments.
+        ]]>
+    </text>
+    <title text="Test"/>
+    <text>
+        <![CDATA[
+        Make sure one of the classes has a main method, and test your project by creating some objects and calling their
+        methods to see if everything functions correctly.
+        ]]>
+    </text>
+    <solution>
+        <text>
+            <![CDATA[
+            A possible solution, with javadoc. First, the person base class:
+            ]]>
+        </text>
+        <code><![CDATA[
+            
+<font color="#E65100">package</font> taskschool;
+<br/>
+<br/><font color="gray">/**
+<br/> * Represents a person working or studying at the school.
+<br/> * @see Student
+<br/> * @see Teacher
+<br/> */</font>
+<br/><font color="#E65100">public abstract class</font> <font color="#999900">Person</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected final</font> <font color="#999900">String</font> name;
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** Age of the person. Must be positive. */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> <font color="#DF7401">int</font> age;
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Creates a person object.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @throws IllegalArgumentException If the given age is not positive.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Person</font>(<font color="#999900">String</font> name, <font color="#DF7401">int</font> age) <font color="#E65100">throws</font> <font color="#999900">IllegalArgumentException</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">name</font> = name;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(age &lt;= <font color="#F0E130">0</font>) <font color="#E65100">throw new</font> <font color="#999900">IllegalArgumentException</font>(<font color="#2E8B57">"Age must be positive"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">age</font> = age;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** Prints information about the person */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public abstract</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printData</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">// ----------- Getters and setters. -----------------------</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">getAge</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> age;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">setAge</font>(<font color="#DF7401">int</font> age) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">age</font> = age;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">getName</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> name;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+            
+        ]]></code>
+        <text>
+            <![CDATA[
+            The administrator interface:
+            ]]>
+        </text>
+        <code><![CDATA[
+            
+<font color="#E65100">package</font> taskschool;
+<br/>
+<br/><font color="gray">/** Interface of administrator functions. */</font>
+<br/><font color="#E65100">public interface</font> <font color="#999900">Administrator</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** Adds a student to a class. */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> <font color="#ADD8E6">addStudent</font>(<font color="#999900">SchoolClass</font> schoolClass, <font color="#999900">Student</font> student) <font color="#E65100">throws</font> <font color="#999900">SecurityException</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** Removes a student from a class. */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> <font color="#ADD8E6">removeStudent</font>(<font color="#999900">SchoolClass</font> schoolClass, <font color="#999900">Student</font> student) <font color="#E65100">throws</font> <font color="#999900">SecurityException</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>}
+<br/>
+            
+        ]]></code>
+        <text>
+            <![CDATA[
+            The teacher, implementing the admin interface and inheriting from the <i>Person</i> class:
+            ]]>
+        </text>
+        <code><![CDATA[
+            
+<font color="#E65100">package</font> taskschool;
+<br/>
+<br/><font color="gray">/**
+<br/> * Represents a teacher of the school. Teachers have admin rights. They may also have a class.
+<br/> * @see Administrator
+<br/> */</font>
+<br/><font color="#E65100">public class</font> <font color="#999900">Teacher</font> <font color="#E65100">extends</font> <font color="#999900">Person</font> <font color="#E65100">implements</font> <font color="#999900">Administrator</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** The class of the teacher. If the teacher has no class then this is null. */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">SchoolClass</font> classOfTeacher;
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Creates a teacher object with a class.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @throws IllegalArgumentException If the age is not positive.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Teacher</font>(<font color="#999900">String</font> name, <font color="#DF7401">int</font> age, <font color="#999900">SchoolClass</font> classOfTeacher) <font color="#E65100">throws</font> <font color="#999900">IllegalArgumentException</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>(name, age);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">classOfTeacher</font> = classOfTeacher;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Creates a teacher object without a class. The class can be assigned later.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @throws IllegalArgumentException If the age is not positive.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Teacher</font>(<font color="#999900">String</font> name, <font color="#DF7401">int</font> age) <font color="#E65100">throws</font> <font color="#999900">IllegalArgumentException</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>(name, age);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">classOfTeacher</font> = null;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Adds a student to a class.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @throws SecurityException If the class is not the teachers own class.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">addStudent</font>(<font color="#999900">SchoolClass</font> schoolClass, <font color="#999900">Student</font> student) <font color="#E65100">throws</font> <font color="#999900">SecurityException</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(!schoolClass.<font color="#ADD8E6">equals</font>(classOfTeacher)) <font color="#E65100">throw new</font> <font color="#999900">SecurityException</font>(<font color="#2E8B57"><font color="#2E8B57">"Must be the teachers class"</font></font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(!schoolClass.<font color="#ADD8E6">getStudentList</font>().<font color="#ADD8E6">contains</font>(student)) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;schoolClass.<font color="#ADD8E6">getStudentList</font>().<font color="#ADD8E6">add</font>(student);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Removes a student from a class.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @throws SecurityException If the class is not the teachers own class.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">removeStudent</font>(<font color="#999900">SchoolClass</font> schoolClass, <font color="#999900">Student</font> student) <font color="#E65100">throws</font> <font color="#999900">SecurityException</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(!schoolClass.<font color="#ADD8E6">equals</font>(classOfTeacher)) <font color="#E65100">throw new</font> <font color="#999900">SecurityException</font>(<font color="#2E8B57"><font color="#2E8B57">"Must be the teachers class"</font></font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;schoolClass.<font color="#ADD8E6">getStudentList</font>().<font color="#ADD8E6">remove</font>(student);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** Prints information about the teacher and his/her class. */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printData</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Teacher name: "</font> + name);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Teacher age: "</font> + age);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(<font color="#ADD8E6">hasClass</font>()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"He/She has a class of size "</font> +
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;classOfTeacher.<font color="#ADD8E6">classSize</font>() + <font color="#2E8B57">" with average grade of "</font> + classOfTeacher.<font color="#ADD8E6">classAverage</font>());
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"He/She has no class."</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** Checks if the teacher has a class or not. */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">boolean</font> <font color="#ADD8E6">hasClass</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> classOfTeacher != null;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">SchoolClass</font> <font color="#ADD8E6">getClassOfTeacher</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> classOfTeacher;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">setClassOfTeacher</font>(<font color="#999900">SchoolClass</font> classOfTeacher) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">classOfTeacher</font> = classOfTeacher;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+<br/>
+            
+        ]]></code>
+        <text>
+            <![CDATA[
+            The student class. The subject-grade pairings are implemented with a pair class (which is an inner class).
+            ]]>
+        </text>
+        <code><![CDATA[
+            
+<font color="#E65100">package</font> taskschool;
+<br/>
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">util</font>.<font color="#999900">List</font>;
+<br/>
+<br/><font color="gray">/**
+<br/> * Represents a student of the school.
+<br/> */</font>
+<br/><font color="#E65100">public class</font> <font color="#999900">Student</font> <font color="#E65100">extends</font> <font color="#999900">Person</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * A list of subjects and the grade of the student in that subject.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @see Pair
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @see Subject
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">List</font>&lt;<font color="#999900">Pair</font>> subjects;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Creates a student object.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @param subjects List of subject and grade pairings.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @throws IllegalArgumentException If the age is not positive, or if the subject list is empty.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Student</font>(<font color="#999900">String</font> name, <font color="#DF7401">int</font> age, <font color="#999900">List</font>&lt;<font color="#999900">Pair</font>> subjects) <font color="#E65100">throws</font> <font color="#999900">IllegalArgumentException</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>(name, age);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(subjects.<font color="#ADD8E6">isEmpty</font>()) <font color="#E65100">throw new</font> <font color="#999900">IllegalArgumentException</font>(<font color="#2E8B57">"Must  have some subjects"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">subjects</font> = subjects;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** Prints name, age and subject list of the student */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printData</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Student name: "</font> + name);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Student age: "</font> + age);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"List of subjects and grades:"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Pair</font> pair: subjects) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Subject: "</font> + pair.subject.getName() + <font color="#2E8B57">", grade: "</font> + pair.<font color="#ADD8E6">grade</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Calculates the average grade of the student.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @return The average grade.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">averageGrade</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> avg = <font color="#F0E130">0</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Pair</font> pair: subjects) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;avg += pair.<font color="#ADD8E6">grade</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> avg / subjects.<font color="#ADD8E6">size</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** Two students will be considered equal if they have the same name and age. */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">boolean</font> <font color="#ADD8E6">equals</font>(<font color="#999900">Object</font> obj) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(this == obj) <font color="#E65100">return</font> true;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(obj == null) <font color="#E65100">return</font> false;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(obj <font color="#E65100">instanceof</font> <font color="#999900">Student</font>) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Student</font> s = (<font color="#999900">Student</font>)obj; <font color="gray">//safe
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> s.<font color="#ADD8E6">age</font> == age && s.<font color="#ADD8E6">name</font>.<font color="#ADD8E6">equals</font>(name);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> false;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Helper class for storing subject and grade pairs.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @see Student
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static class</font> <font color="#999900">Pair</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">Subject</font> subject;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">int</font> grade;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Pair</font>(<font color="#999900">Subject</font> subject, <font color="#DF7401">int</font> grade) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">subject</font> = subject;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">grade</font> = grade;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+<br/>
+            
+        ]]></code>
+        <text>
+            <![CDATA[
+            The subject class:
+            ]]>
+        </text>
+        <code><![CDATA[
+            
+<font color="#E65100">package</font> taskschool;
+<br/>
+<br/><font color="gray">/** Represents a subject thought at the school. */</font>
+<br/><font color="#E65100">public class</font> <font color="#999900">Subject</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private final</font> <font color="#999900">String</font> name;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** The teacher responsible for this subject. */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">Teacher</font> teacher;
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Subject</font>(<font color="#999900">String</font> name, <font color="#999900">Teacher</font> teacher) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">name</font> = name;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">teacher</font> = teacher;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">// ------------- Getters and setters. --------------
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Teacher</font> <font color="#ADD8E6">getTeacher</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> teacher;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">setTeacher</font>(<font color="#999900">Teacher</font> teacher) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">teacher</font> = teacher;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">getName</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> name;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+<br/>
+            
+        ]]></code>
+        <text>
+            <![CDATA[
+            And the group of students, called <i>SchoolClass</i>. It isn't a good idea to call it <i>Class</i>,
+            since there is already a class in the JDK with that name.
+            ]]>
+        </text>
+        <code><![CDATA[
+            
+<font color="#E65100">package</font> taskschool;
+<br/>
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">util</font>.<font color="#999900">ArrayList</font>;
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">util</font>.<font color="#999900">List</font>;
+<br/>
+<br/><font color="gray">/**
+<br/> * Represents a group of students of the same age.
+<br/> * @see Student.
+<br/> */</font>
+<br/><font color="#E65100">public class</font> <font color="#999900">SchoolClass</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">List</font>&lt;<font color="#999900">Student</font>> students;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Creates a school class object from a list of students.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @param students The list of students
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @throws IllegalArgumentException If the list is empty, or if not all the students
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; *  in the list have the same age.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">SchoolClass</font>(<font color="#999900">List</font>&lt;<font color="#999900">Student</font>> students) <font color="#E65100">throws</font> <font color="#999900">IllegalArgumentException</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(students.<font color="#ADD8E6">isEmpty</font>()) <font color="#E65100">throw new</font> <font color="#999900">IllegalArgumentException</font>(<font color="#2E8B57">"No students found"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> firstAge = students.<font color="#ADD8E6">get</font>(<font color="#F0E130">0</font>).<font color="#ADD8E6">getAge</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Student</font> student: students) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(student.<font color="#ADD8E6">getAge</font>() != firstAge) <font color="#E65100">throw new</font> <font color="#999900">IllegalArgumentException</font>(<font color="#2E8B57">"Not all students have the same age"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create a new list from the parameter list, to avoid problems with unmodifiable lists
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">students</font> = <font color="#E65100">new</font> <font color="#999900">ArrayList&lt;></font>(students);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Calculates the average grade of the class using {@link Student#averageGrade()}.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @return The class average.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">classAverage</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> avg = <font color="#F0E130">0</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Student</font> student: students) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;avg += student.<font color="#ADD8E6">averageGrade</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> avg / <font color="#ADD8E6">classSize</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** @return The size of the class. */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">classSize</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> students.<font color="#ADD8E6">size</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** @return The list of students, for modifications. Used by the methods of {@link Administrator}. */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> <font color="#999900">List</font>&lt;<font color="#999900">Student</font>> <font color="#ADD8E6">getStudentList</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> students;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">boolean</font> <font color="#ADD8E6">equals</font>(<font color="#999900">Object</font> obj) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font> (<font color="#E65100">this</font> == obj) <font color="#E65100">return</font> true;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font> (obj == null) <font color="#E65100">return</font> false;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(obj <font color="#E65100">instanceof</font> <font color="#999900">SchoolClass</font>) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">SchoolClass</font> sc = (<font color="#999900">SchoolClass</font>)obj;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> students.<font color="#ADD8E6">equals</font>(sc.<font color="#ADD8E6">students</font>); <font color="gray">//list have implemented equals
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> false;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+            
+        ]]></code>
+        <text>
+            <![CDATA[
+            Now that we have all the classes, let's run a few tests:
+            ]]>
+        </text>
+        <code><![CDATA[
+            
+<font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create some teachers, without classes for now</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Teacher</font> mathTeacher = <font color="#E65100">new</font> <font color="#999900">Teacher</font>(<font color="#2E8B57">"Mr. Jani"</font>, <font color="#F0E130">32</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Teacher</font> geoTeacher = <font color="#E65100">new</font> <font color="#999900">Teacher</font>(<font color="#2E8B57">"Mrs. Juli"</font>, <font color="#F0E130">41</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create some subjects</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Subject</font> math = <font color="#E65100">new</font> <font color="#999900">Subject</font>(<font color="#2E8B57">"Mathematics"</font>, mathTeacher);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Subject</font> geology = <font color="#E65100">new</font> <font color="#999900">Subject</font>(<font color="#2E8B57">"Geology"</font>, geoTeacher);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create students, they learn these 2 subjects</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List&lt;Pair></font> pairs = <font color="#E65100">new</font> <font color="#999900">ArrayList&lt;></font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;pairs.<font color="#ADD8E6">add</font>(<font color="#E65100">new</font> <font color="#999900">Pair</font>(math, <font color="#F0E130">4</font>)); <font color="gray">//with grade 4</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;pairs.<font color="#ADD8E6">add</font>(<font color="#E65100">new</font> <font color="#999900">Pair</font>(geology, <font color="#F0E130">3</font>)); <font color="gray">//with grade 3</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Student</font> stud1 = <font color="#E65100">new</font> <font color="#999900">Student</font>(<font color="#2E8B57">"Tomi"</font>, <font color="#F0E130">15</font>, pairs);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Student</font> stud2 = <font color="#E65100">new</font> <font color="#999900">Student</font>(<font color="#2E8B57">"Pali"</font>, <font color="#F0E130">15</font>, pairs); <font color="gray">//they have the same grades</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">SchoolClass</font> class1 = <font color="#E65100">new</font> <font color="#999900">SchoolClass</font>(<font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(stud1, stud2)); <font color="gray">//quick way to make a list</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;mathTeacher.<font color="#ADD8E6">setClassOfTeacher</font>(class1); <font color="gray">//assign this class to the teacher
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;mathTeacher.<font color="#ADD8E6">printData</font>(); <font color="gray">//show info about the teacher</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> { <font color="gray">//try to have the other teacher modify this class
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;geoTeacher.<font color="#ADD8E6">removeStudent</font>(class1, stud1);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">SecurityException</font> se) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">err</font>.<font color="#ADD8E6">println</font>(geoTeacher.<font color="#ADD8E6">getName</font>() + <font color="#2E8B57">" was denied access!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;mathTeacher.<font color="#ADD8E6">removeStudent</font>(class1, stud1); <font color="gray">//no exception</font>
+<br/>}
+            
+        ]]></code>
+    </solution>
+</resources>

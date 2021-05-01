@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <chapterdata>
+        <id>355</id>
+        <name>Other Java 8 features</name>
+    </chapterdata>
+    <text>
+        <![CDATA[
+        This short chapter is for new features that are too small to get a chapter of their own.
+        ]]>
+    </text>
+    <title text="Optional class"/>
+    <text>
+        <![CDATA[
+        The <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html">java.util.Optional</a> class is
+        a wrapper that may or may not contain a value.
+        ]]>
+    </text>
+    <boxed title="Methods with null return">
+        <![CDATA[
+        Let's say we have a method which returns an object based on some parameters (see example below). If we wanted to
+        indicate that no object can be returned, a common practice was to return null.
+        ]]>
+    </boxed>
+    <code><![CDATA[
+        
+        <font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">School</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//contains student id and name pairs
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">Map</font>&lt;<font color="#999900">Integer</font>, <font color="#999900">String</font>> students = <font color="#E65100">new</font> <font color="#999900">HashMap</font>&lt;>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">School</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;students.<font color="#ADD8E6">put</font>(<font color="#F0E130">21</font>, <font color="#2E8B57">"John"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;students.<font color="#ADD8E6">put</font>(<font color="#F0E130">17</font>, <font color="#2E8B57">"Jane"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;students.<font color="#ADD8E6">put</font>(<font color="#F0E130">63</font>, <font color="#2E8B57">"Tom"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//gets a student name by id
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">getStudentById</font>(<font color="#DF7401">int</font> id) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(students.<font color="#ADD8E6">containsKey</font>(id)) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> students.<font color="#ADD8E6">get</font>(id);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> { <font color="gray">//return null if not found
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return null</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        The idea of <i>Optional</i> is to make it very clear that this method may not find a student name! Instead of
+        returning null, we'll clarify this by returning an <i>Optional<String></i>.
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="gray">//gets a student name by id
+</font>
+<br/><font color="#E65100">public</font> <font color="#999900">Optional</font>&lt;<font color="#999900">String</font>> <font color="#ADD8E6">getStudentById</font>(<font color="#DF7401">int</font> id) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(students.<font color="#ADD8E6">containsKey</font>(id)) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#999900">Optional</font>.<font color="#ADD8E6">of</font>(students.<font color="#ADD8E6">get</font>(id));
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> { <font color="gray">//return empty optional if not found
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#999900">Optional</font>.<font color="#ADD8E6">empty</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Note that we create <i>Optional</i> objects with the <i>of</i> and <i>empty</i> static methods. The first one is used to
+        create an <i>Optional</i> with a value, and the second creates an empty one. Now let's see how to interpret the
+        result of the method:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#999900">School</font> school = <font color="#E65100">new</font> <font color="#999900">School</font>();
+<br/><font color="#999900">Optional</font>&lt;<font color="#999900">String</font>> id21Opt = school.<font color="#ADD8E6">getStudentById</font>(<font color="#F0E130">21</font>);
+<br/><font color="gray">//check if this contains a string
+</font>
+<br/><font color="#E65100">if</font>(id21Opt.<font color="#ADD8E6">isPresent</font>()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> name = id21Opt.<font color="#ADD8E6">get</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Student with id 21: "</font> + name);
+<br/>} <font color="#E65100">else</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"No student found with id 21"</font>);
+<br/>}
+<br/><font color="#999900">Optional</font>&lt;<font color="#999900">String</font>> id43Opt = school.<font color="#ADD8E6">getStudentById</font>(<font color="#F0E130">43</font>);
+<br/><font color="gray">//check if this contains a string
+</font>
+<br/><font color="#E65100">if</font>(id43Opt.<font color="#ADD8E6">isPresent</font>()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> name = id43Opt.<font color="#ADD8E6">get</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Student with id 43: "</font> + name);
+<br/>} <font color="#E65100">else</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"No student found with id 43"</font>);
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        The key method here is <i>isPresent</i> which will determine if the <i>Optional</i> holds a value. If this returns
+        true, it's safe to use <i>get</i> to extract the value. However, if you call <i>get</i> on an empty <i>Optional</i>,
+        prepare for a <b>NoSuchElementException</b>.
+        ]]>
+    </text>
+    <title text="Optional and streams"/>
+    <text>
+        <![CDATA[
+        <i>Optional</i> is integrated into the Java 8 streams, seen in the previous chapter. The stream operations that
+        don't always return a value use <i>Optional</i>.
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#999900">List</font>&lt;<font color="#999900">String</font>> names = <font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(<font color="#2E8B57">"John"</font>, "Jane", <font color="#2E8B57">"Tom"</font>);
+<br/><font color="gray">//get the first element of the stream
+</font>
+<br/><font color="#999900">Optional</font>&lt;<font color="#999900">String</font>> nameOpt = names.<font color="#ADD8E6">stream</font>().<font color="#ADD8E6">findFirst</font>();
+<br/><font color="gray">//if the steam is empty, this optional is empty too
+</font>
+<br/><font color="#E65100">if</font>(nameOpt.<font color="#ADD8E6">isPresent</font>()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Stream is not empty, first: "</font> + nameOpt.<font color="#ADD8E6">get</font>());
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        If we do not wan't to bother with the <i>Optional</i>, and get a string even if the stream is empty, we can use
+        the clever <i>orElse</i> method of the <i>Optional</i>. This will get the value if it's present, otherwise it'll
+        get a "default" value (the parameter).
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#999900">List</font>&lt;<font color="#999900">String</font>> names = <font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(<font color="#2E8B57">"John"</font>, "Jane", <font color="#2E8B57">"Tom"</font>);
+<br/><font color="#999900">String</font> firstName = names.<font color="#ADD8E6">stream</font>()
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">findFirst</font>()
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">orElse</font>(<font color="#2E8B57">"Empty stream"</font>);
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(firstName);
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        In these examples, <i>Optional</i> was always used as a return value, however, it's also possible
+        to use it to mark non-necessary parameters as well.
+        ]]>
+    </text>
+    <advanced title="Bad practice?">
+        <![CDATA[
+        Some programmers argue that <i>Optional</i> should only be used as a return value, and not as a parameter
+        or a member. You can find a lengthy <i>Stackoverflow</i> discussion about it
+        <a href="https://stackoverflow.com/questions/31922866/why-should-java-8s-optional-not-be-used-in-arguments">here</a>.
+        ]]>
+    </advanced>
+    <title text="Method references"/>
+    <text>
+        <![CDATA[
+        Method references are used to make lambda expressions even shorter. Consider this example:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="gray">//the same name list again
+</font>
+<br/><font color="#999900">List</font>&lt;<font color="#999900">String</font>> names = <font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(<font color="#2E8B57">"John"</font>, "Jane", <font color="#2E8B57">"Tom"</font>);
+<br/><font color="gray">//print all elements
+</font>
+<br/>names.<font color="#ADD8E6">forEach</font>(name -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(name));
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Instead of this, we can reference the <i>println</i> method of the object <i>System.out</i>. To do this,
+        new syntax is added, <b>::</b>
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="gray">//print all elements</font>
+<br/>names.<font color="#ADD8E6">forEach</font>(<font color="#999900">System</font>.<font color="#ADD8E6">out</font>::println);
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Note that for this to work, the referenced method must have the correct signature! In this case it works, since the
+        <i>forEach</i> here needs a <i>Consumer<String></i>, and the <i>println</i> method consumes a string.
+        ]]>
+    </text>
+    <boxed title="Syntax">
+        <![CDATA[
+        If we have an object <i>obj</i> with type <i>A</i> and it has a method <i>someMethod</i>, then the reference for it is
+        <br><br>
+        <i>obj::someMethod</i>
+        <br><br>
+        If this object has a static method <i>staticMethod</i>, then the type must be used to make a reference:
+        <br><br>
+        <i>A::staticMethod</i>.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Let's see an other example, this time for a static method reference:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="#999900">List</font>&lt;<font color="#999900">Integer</font>> numbers = <font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(<font color="#F0E130">1,3</font>,<font color="#F0E130">-2,2</font>);
+<br/><font color="gray">//convert them to a list of string
+</font>
+<br/><font color="#999900">List</font>&lt;<font color="#999900">String</font>> numStrings = numbers.<font color="#ADD8E6">stream</font>()
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">map</font>(<font color="#999900">String</font>::valueOf)
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">collect</font>(<font color="#999900">Collectors</font>.<font color="#ADD8E6">toList</font>());
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        In this case, the <i>map</i> method expected something that can convert an <i>int</i> to <i>String</i>. We
+        provided the static method <i>String.valueOf</i> which does exactly that.
+        ]]>
+    </text>
+</resources>

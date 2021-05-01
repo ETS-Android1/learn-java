@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <chapterdata>
+        <id>152</id>
+        <name>Encapsulation, overloading and constructors</name>
+    </chapterdata>
+    <title text="Overloading"/>
+    <text>
+        <![CDATA[
+        Overloading allows us to create different methods that have the <b>same name</b>. How does Java distinguishes
+        these methods then, you might ask. Well, they must have different parameters, and this will be used to tell which
+        of them is called!
+        ]]>
+    </text>
+    <boxed title="Static polymorphism">
+        <![CDATA[
+        Overloading is sometimes called static polymorphism. Polymorphism, because there can be multiple methods with the
+        same name. Static, because it's determined at compile time which of these methods is called (by the parameters).
+        ]]>
+    </boxed>
+    <code><![CDATA[
+        
+        <font color="#E65100">public class</font> <font color="#999900">Arithmetic</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> <font color="#ADD8E6">add</font>(<font color="#DF7401">int</font> num1, <font color="#DF7401">int</font> num2) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> num1 + num2;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> <font color="#ADD8E6">add</font>(<font color="#DF7401">double</font> num1, <font color="#DF7401">double</font> num2) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> num1 + num2;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        As you can see, this class has two <i>add</i> methods, but one of them takes integers, the other doubles. Here is how we
+        can use them:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Arithmetic</font> a = <font color="#E65100">new</font> <font color="#999900">Arithmetic</font>(); <font color="gray">//create the object
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(a.<font color="#ADD8E6">add</font>(<font color="#F0E130">1</font>, <font color="#F0E130">3</font>)); <font color="gray">//uses the integer add method
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(a.<font color="#ADD8E6">add</font>(<font color="#F0E130">3.14</font>, <font color="#F0E130">1.22</font>)); <font color="gray">//uses the double add method
+</font>
+<br/>}
+        
+    ]]></code>
+    <advanced title="Return type difference">
+        <![CDATA[
+        Note that we can't overload a method by changing only the return type! If we were to insert a new <i>add</i> method
+        into the previous example with two integer parameters, but with return type <i>int</i> instead of <i>double</i>, that
+        would cause a compile time error.
+        <p>
+        However, changing the return type when we also change the parameters is allowed.
+        ]]>
+    </advanced>
+    <text>
+        <![CDATA[
+        The reason for overloading are pretty straightforward. It allows us to use one method name to perform similar task (
+        like adding integers or doubles, as seen before), instead of cluttering the class with a different name for all tasks.
+        <p>
+        It is also essential for constructors.
+        ]]>
+    </text>
+    <interactive instruction="Complete the method declaration so that it overloads the other method!">
+        <data><![CDATA[
+
+<font color="#DF7401">void</font> <font color="#ADD8E6">setProperties</font>(<font color="#DF7401">int</font> id) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">id</font> = id;
+<br/>}
+<br/>
+<br/><font color="#DF7401">void</font> <font color="#ADD8E6">___</font>(<font color="#DF7401">int</font> id, <font color="#999900">String</font> activityName) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">id</font> = id;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">activityName</font> = activityName;
+<br/>}
+
+        ]]></data>
+        <answer place="0">setProperties</answer>
+    </interactive>
+    <title text="Constructors"/>
+    <text>
+        <![CDATA[
+        Constructors are used to create objects (they are the ones after the <b>new</b> keyword).
+        ]]>
+    </text>
+    <boxed title="Naming rule">
+        <![CDATA[
+        Constructors must have the same name as the class. If for example or class is called <i>Data</i>, then
+        this must also be the name of all of its constructors.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        If we don't write a constructor in the class, Java will create one for us. This won't have any parameters and is
+        called the <b>default constructor</b> (it does nothing other then creating to object). This is what we've been
+        using in the previous examples to create objects!
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">public class</font> <font color="#999900">Animal</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> species;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> age;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; Constructor with 2 parameters, sets the values of both members.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Animal</font>(<font color="#999900">String</font> species, <font color="#DF7401">int</font> age) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//the this keyword is used to reference members
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">species</font> = species;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">age</font> = age;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Constructor with 1 parameter, defaults the value of
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;'age' to 0.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;*/</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Animal</font>(<font color="#999900">String</font> species) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">species</font> = species;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> <font color="#ADD8E6">printData</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Species: "</font> + species +
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2E8B57">", age: "</font> + age);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        You can see that overloading is essential here, as it allows us to have different constructors (we couldn't use
+        different names for them). Now we have multiple ways to create animal objects:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Animal</font> parrot = <font color="#E65100">new</font> <font color="#999900">Animal</font>(<font color="#2E8B57">"Parrot"</font>, <font color="#F0E130">21</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;parrot.<font color="#ADD8E6">printData</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Animal</font> bear = <font color="#E65100">new</font> <font color="#999900">Animal</font>(<font color="#2E8B57">"Bear"</font>); <font color="gray">//age is defaulted to 0
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;bear.<font color="#ADD8E6">printData</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;This is not allowed now! See the next section for the reason.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Animal animal = new Animal();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;*/</font>
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        When we create our own constructors, the default one will no longer be created! This is why the commented code in
+        the code sample is not allowed. If we want a constructor without any parameters as well, we'll have to create that
+        ourselves.
+        ]]>
+    </text>
+    <interactive instruction="Complete the constructor declaration!">
+        <data><![CDATA[
+
+<font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">Activity</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> id = <font color="#F0E130">0</font>;
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#ADD8E6">___</font>(<font color="#DF7401">int</font> id) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;___.<font color="#ADD8E6">id</font> = id;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+
+        ]]></data>
+        <answer place="0">Activity</answer>
+        <answer place="1">this</answer>
+    </interactive>
+    <title text="Encapsulation and visibility"/>
+    <text>
+        <![CDATA[
+        <b>Encapsulation</b> is an important principle of OOP. It means that we only show as much of our
+        classes as necessary (ofter referred to as the 'interface'), the rest ('implementation') is hidden away.
+        <br><br>
+        Why is this done? For two main reasons:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li><u>Security</u>: those who use the class will only see what they SHOULD use. For example, they won't be able to change
+        member values that would break the class.</li>
+        <li><u>Simplicity</u>: the class implementation can be complex. The programmer who later uses this class doesn't
+        need to see and bother with it, so it's hidden.</li>
+        </ul>
+        ]]>
+    </list>
+    <boxed title="Encapsulation in Java">
+        <![CDATA[
+        Encapsulation in Java is implemented with <b>visibility classes</b>. There are 4 of them, <b>public,
+        protected, private, and package private (default)</b>. Let's illustrate them with some examples!
+        ]]>
+    </boxed>
+    <title text="Public visibility"/>
+    <text>
+        <![CDATA[
+        The methods and members marked <b>public</b> will be visible from everywhere. This means inside and outside of
+        the class, even outside of the current package.
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+         <font color="gray">/*
+<br/> Represents a rational number (numerator/denominator).
+<br/> */</font>
+<br/><font color="#E65100">public class</font> <font color="#999900">Rational</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> numerator;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> denominator;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Rational</font>(<font color="#DF7401">int</font> numerator, <font color="#DF7401">int</font> denominator) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">numerator</font> = numerator;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">denominator</font> = denominator;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;This constructor basically creates an 'integer'.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;*/</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Rational</font>(<font color="#DF7401">int</font> numerator) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">numerator</font> = numerator;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">denominator</font> = <font color="#F0E130">1</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; Returns the value of the rational as a double.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">asDouble</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray<font color="#2E8B57">">//needed because '</font>integer division'
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> dNumerator = numerator;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> dNumerator/denominator;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Everything inside this class is marked public, so we can use them in another class (even in another package),
+        for example in the main method:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Rational</font> r1 = <font color="#E65100">new</font> <font color="#999900">Rational</font>(<font color="#F0E130">3</font>, <font color="#F0E130">4</font>); <font color="gray">//represents 3/4
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(r1.<font color="#ADD8E6">asDouble</font>()); <font color="gray">//will print 0.75
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;r1.<font color="#ADD8E6">numerator</font> = <font color="#F0E130">2</font>; <font color="gray">//can also change member values
+</font>
+<br/>}
+        
+    ]]></code>
+    <boxed title="Public classes">
+        <![CDATA[
+        Classes can also be marked public, as it can be seen in all previous examples. A public class will be visible and
+        can be imported in <b>any package</b>.
+        ]]>
+    </boxed>
+    <title text="Private visibility"/>
+    <text>
+        <![CDATA[
+        Methods and members marked <b>private</b> will only be visible inside the class. They can't be referenced our called from
+        any other class!
+        <p>
+        We can use the current <i>Rational</i> class to create the following problematic situation:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#999900">Rational</font> r1 = <font color="#E65100">new</font> <font color="#999900">Rational</font>(<font color="#F0E130">3</font>, <font color="#F0E130">4</font>); <font color="gray">//represents 3/4
+</font>
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(r1.<font color="#ADD8E6">asDouble</font>()); <font color="gray">//will print 0.75
+</font>
+<br/>
+<br/>r1.<font color="#ADD8E6">denominator</font> = <font color="#F0E130">0</font>;
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(r1.<font color="#ADD8E6">asDouble</font>()); <font color="gray">//problem, division by 0</font>
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        We can use private visibility to prevent the value of <i>denominator</i> being set to 0. While we're at it,
+        let's also set the visibility of the <i>numerator</i> to private as well, since it's good practice:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="gray">/*
+<br/> Represents a rational number (numerator/denominator).
+<br/> */</font>
+<br/><font color="#E65100">public class</font> <font color="#999900">Rational</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">int</font> numerator;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">int</font> denominator;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Rational</font>(<font color="#DF7401">int</font> numerator, <font color="#DF7401">int</font> denominator) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">numerator</font> = numerator;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ADD8E6">setDenominator</font>(denominator); <font color="gray">this method will take care of <font color="#F0E130">0</font>, see below</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;This constructor basically creates an 'integer'.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;*/</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Rational</font>(<font color="#DF7401">int</font> numerator) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">numerator</font> = numerator;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">denominator</font> = <font color="#F0E130">1</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; Returns the value of the rational as a double.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">asDouble</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray<font color="#2E8B57">">//needed because '</font>integer division'
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> dNumerator = numerator;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> dNumerator/denominator;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//getter for the numerator
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">getNumerator</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> numerator;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//setter for the numerator
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">setNumerator</font>(<font color="#DF7401">int</font> numerator) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">numerator</font> = numerator;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//getter for the denominator
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">getDenominator</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> denominator;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//setter for the denominator
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">setDenominator</font>(<font color="#DF7401">int</font> denominator) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(denominator == <font color="#F0E130">0</font>) { <font color="gray">//0 is not allowed, set to 1 instead
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;this.<font color="#ADD8E6">denominator</font> = <font color="#F0E130">1</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">denominator</font> = denominator;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+    <boxed title="Getters and setters">
+        <![CDATA[
+        Methods that simply return hidden members are called <b>getters</b>. Methods that set a new value for
+        members (perhaps performs some checks before) are the <b>setters</b>. It's convention to name them accordingly.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        You can see that the constructor also got an update, it now uses the setter to prevent a 0 denominator.
+        Now we can't set the denominator to 0, thus <b>object integrity</b> is ensured:
+        ]]>
+    </text>
+    <image name="not_visible"/>
+    <text>
+        <![CDATA[
+        Instead, outside the class we only have access to the setter, as that is marked public:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#999900">Rational</font> r1 = <font color="#E65100">new</font> <font color="#999900">Rational</font>(<font color="#F0E130">3</font>, <font color="#F0E130">4</font>); <font color="gray">//represents 3/4
+</font>
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(r1.<font color="#ADD8E6">asDouble</font>()); <font color="gray">//will print 0.75
+</font>
+<br/>
+<br/>r1.<font color="#ADD8E6">setDenominator</font>(<font color="#F0E130">0</font>); <font color="gray">//will be set to 1 instead
+</font>
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(r1.<font color="#ADD8E6">asDouble</font>()); <font color="gray">//no problem, will print 3.0</font>
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Unlike <i>public</i>, we can't use <i>private</i> to mark classes, only methods and members!
+        ]]>
+    </text>
+    <title text="Default visibility"/>
+    <text>
+        <![CDATA[
+        If we don't write any visibility type in front of a member or method of a class it'll get <i>default visibility</i>
+        (also known as <b>package-private</b>). Note that this what we've been doing in all the previous chapters.
+        <p>
+        It's easy to guess that something that is package-private will only be visible inside the same package.
+        ]]>
+    </text>
+    <boxed title="Package-private classes">
+        <![CDATA[
+        Classes can also be package private. If we don't write the public modifier in front of their name, they'll
+        only be visible from the same package (can't be imported and used in another package).
+        ]]>
+    </boxed>
+    <title text="Protected visibility"/>
+    <text>
+        <![CDATA[
+        The last visibility type, protected, is similar to the default visibility. Methods or members marked
+        protected will be visible inside the same package AND within <b>subclasses</b> (which can be in different packages as well).
+        <p>
+        Proceed to the next chapter to learn what a subclass means. Classes can't be marked protected.
+        ]]>
+    </text>
+    <title text="Summary"/>
+    <text>
+        <![CDATA[
+        To summarize, there are 4 visibility types. Here they are, ordered from 'strictest' to 'least strict':
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>Private</li>
+        <li>Default, or package-private (can also be used on classes)</li>
+        <li>Protected</li>
+        <li>Public (can also be used on classes)</li>
+        </ul>
+        ]]>
+    </list>
+    <interactive instruction="Make it so that the first variable is only visible inside the class, but the second one is visible everywhere! ">
+        <data><![CDATA[
+
+___ <font color="#999900">String</font> sensitiveData;
+<br/>___ <font color="#999900">Date</font> timeOfCreation;
+
+        ]]></data>
+        <answer place="0">private</answer>
+        <answer place="1">public</answer>
+    </interactive>
+
+    <!-- visibility (why?), class visibility
+    overloading (why, how, examples)
+    constructors (how ,default, overloading)-->
+</resources>

@@ -16,6 +16,7 @@ import com.gaspar.learnjava.curriculum.Task;
 import com.gaspar.learnjava.curriculum.interactive.EmptySpace;
 import com.gaspar.learnjava.curriculum.interactive.EmptySpaceAnswer;
 import com.gaspar.learnjava.curriculum.interactive.InteractiveComponent;
+import com.gaspar.learnjava.utils.LocalizationUtils;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -56,7 +57,8 @@ public class CourseParser {
     public List<Course> parseCourses(@NonNull Context context) throws XmlPullParserException, IOException {
         List<Course> parsedCourses = new ArrayList<>();
         final AssetManager manager = context.getAssets();
-        String courseFolder = "courses";
+        String localizedAssets = LocalizationUtils.getLocalizedAssetPath();
+        String courseFolder = localizedAssets + "/courses";
         final String[] coursePaths = manager.list(courseFolder); //list course XML-s in the courses asset folder
         final XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
         factory.setNamespaceAware(true);
@@ -140,7 +142,8 @@ public class CourseParser {
         Chapter parsedChapter = null;
         //open chapter asset folder
         final AssetManager manager = context.getAssets();
-        String chapterFolder = "chapters";
+        String localizedAssets = LocalizationUtils.getLocalizedAssetPath();
+        String chapterFolder = localizedAssets + "/chapters";
         final String[] chapterPaths = manager.list(chapterFolder); //list chapter XML-s in the chapter asset folder
         final XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
         factory.setNamespaceAware(true);
@@ -297,7 +300,8 @@ public class CourseParser {
      */
     public List<Component> parseGuide(@NonNull Context context) throws XmlPullParserException, IOException {
         List<Component> components;
-        String guidePath = "guide.xml";
+        String localizedAssets = LocalizationUtils.getLocalizedAssetPath();
+        String guidePath = localizedAssets + "/guide.xml";
         //open chapter asset folder
         final AssetManager manager = context.getAssets();
         final XmlPullParserFactory factory = XmlPullParserFactory.newInstance();

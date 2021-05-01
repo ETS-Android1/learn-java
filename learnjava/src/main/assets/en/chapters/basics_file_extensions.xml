@@ -62,8 +62,7 @@
         <![CDATA[
         Our IDE will handle the compilation and execution of all our source files, but by default
         they are done from the command line, by using the <b>javac</b> and the </b>java</b> commands.
-        <br></br>
-        See the guide for links about how to compile and run Java code without an IDE.
+        See the Guide for links about how to compile and run Java code without an IDE.
         ]]>
     </advanced>
     <title text=".jar files"/>
@@ -81,31 +80,29 @@
     <list>
         <![CDATA[
         <ul>
-        <li>A <b>manifest file</b>, inside the META-INF folder, which contains information about the JAR file</li>
-        <li>Compiled java code (<b>.class files</b>) organized into <b>packages</b></li>
-        <li>Other resources, for example images</li>
+        <li>A <b>manifest file</b>, which contains information about the program.</li>
+        <li>Compiled java code (<b>.class files</b>).</li>
+        <li>Other resources, for example images.</li>
         </ul>
         ]]>
     </list>
     <boxed title="Executable JAR files">
         <![CDATA[
-        JAR files also provide a way to start a Java application easily, without the command line. To make
-        a JAR executable all we need to do is add the <b>fully qualified name</b> of the main class to the manifest, like so:
-        <br><br>
-        <i>Main-Class: com.learnjava.Main</i>
+        JAR files also provide a way to start a Java application easily, without the command line, similar
+        to how an <i>exe</i> file works.
         ]]>
     </boxed>
     <title text="packages"/>
     <text>
         <![CDATA[
-        Packages are a way to structure our Java projects. Imagine an application with dozens of source
-        files, all in the same folder. Instead, the recommended way is to organize the <b>classes</b> by function.
-        Packages can not only contain source files, but also other packages as well!
+        Packages are a way to structure our Java projects. EAch package can contain source files, or other packages.
+        <br><br>
+        For each package, there must be a folder with the same name in the file system. The source files in that package
+        must be in the folder of the package. If there are nested packages, their folders must be in the folder of the containing package.
         ]]>
     </text>
     <text>
-        Here is an example project with two packages and two classes (you can think of the class like it's
-        the same as the source file, for now):
+        Here is an example project with two packages and two source files:
     </text>
     <image name="project_structure"/>
     <boxed title="Naming conventions">
@@ -127,8 +124,8 @@
         ]]>
     </text>
     <advanced title="More then just structure">
-        Packages provide much more then just structuring the project. They can hide classes inside them,
-        or allow the programmer to have multiple classes with the same name, in different packages.
+        Packages provide much more then just structuring the project. They can hide source code inside them.
+        We will return to this in a later chapter.
     </advanced>
     <title text="Packages in the code, import"/>
     <text>

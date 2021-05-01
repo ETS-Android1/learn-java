@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <chapterdata>
+        <id>156</id>
+        <name>Exception handling</name>
+    </chapterdata>
+    <text>
+        <![CDATA[
+        An exception is problem that can arise (can be thrown) when executing your program. Exceptions are classes,
+        and they all inherit from <b>java.lang.Exception</b>.
+        <p>
+        An unhandled exception will crash your application.
+        ]]>
+    </text>
+    <title text="The try-catch block"/>
+    <text>
+        <![CDATA[
+        Handling exceptions is done with the <b>try-catch block</b>. We put the code that may throw an exception
+        into the try-block, and what should happen when an exception occurs, into the catch-block.
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Enter a number:"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Scanner</font> s = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(<font color="#999900">System</font>.<font color="#ADD8E6">in</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> number = s.<font color="#ADD8E6">nextInt</font>(); <font color="gray">//this line may throw InputMismatchException</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;s.<font color="#ADD8E6">close</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">InputMismatchException</font> e) { <font color="gray">//InputMismatchException was caught
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Invalid number!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ADD8E6">main</font>(args); <font color="gray">//try again
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+    <boxed title="Recursion">
+        <![CDATA[
+        Recursion is when a method calls itself again (<i>main</i>, in this case). While this is a useful tool, we must be careful
+        to somehow control it, otherwise the method will be stuck in an 'infinite loop', calling itself.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Generally, one catch-block is for one type of exception (although the <a href="https://docs.oracle.com/javase/7/docs/technotes/guides/language/catch-multiple.html">syntax</a> allows for more).
+        If we want to handle an additional exception, the best way is to add another catch-block:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;String> lines = <font color="#999900">Files</font>.<font color="#ADD8E6">readAllLines</font>(<font color="#999900">Paths</font>.<font color="#ADD8E6">get</font>(<font color="#2E8B57">"data.txt"</font>)); <font color="gray">//may throw IOException</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">String</font> line: lines) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> number = <font color="#999900">Integer</font>.<font color="#ADD8E6">parseInt</font>(line); <font color="gray">//may throw NumberFormatException</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">NumberFormatException</font> nfe) { <font color="gray">//format exception was caught</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Invalid line in file!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">IOException</font> ioe) { <font color="gray">//file related exception was caught</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Can'</font>t find file!");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Observe the first example again. We implemented exception handling, but a problem may still arise! If an exception
+        occurs the statement closing our <i>Scanner</i> is not executed.
+        <br><br>
+        The solution is the <b>finally-block</b>:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Scanner</font> s = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(<font color="#999900">System</font>.<font color="#ADD8E6">in</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Enter a number: "</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> number = s.<font color="#ADD8E6">nextInt</font>(); <font color="gray">//this line may throw InputMismatchException
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">InputMismatchException</font> ime) { <font color="gray">//InputMismatchException was caught
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Invalid number!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ADD8E6">main</font>(args); <font color="gray">//try again
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">finally</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;s.<font color="#ADD8E6">close</font>(); <font color="gray">//always executed
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        The finally block must be at the end, and is guaranteed to be executed after either the try, or the catch block.
+        ]]>
+    </text>
+    <advanced title="Errors">
+        <![CDATA[
+        More severe problems are represented by subclasses of <b>java.lang.Error</b>. While they can be handled the same way,
+        they shouldn't be. They indicate a problem that is beyond your application to handle. An example is
+        </i>java.lang.OutOfMemoryError</i>.
+        ]]>
+    </advanced>
+    <interactive instruction="Write the exception handling! Check the samples above for the exception name, or use the base class!">
+        <data><![CDATA[
+
+___ {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Path</font> path = <font color="#999900">Paths</font>.<font color="#ADD8E6">get</font>(<font color="#2E8B57">"input.txt"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">String</font>> lines = <font color="#999900">Files</font>.<font color="#ADD8E6">readAllLines</font>(path);
+<br/>} ___ (___ e) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">err</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Could not find file!"</font>);
+<br/>}
+
+        ]]></data>
+        <answer place="0">try</answer>
+        <answer place="1">catch</answer>
+        <answer place="2">IOException</answer>
+        <answer place="2">Exception</answer>
+        <answer place="2">Throwable</answer>
+    </interactive>
+    <title text="Throw an exception manually"/>
+    <text>
+        <![CDATA[
+        The <b>throw</b> keyword is used to create and throw an exception:
+        ]]>
+    </text>
+    <code><![CDATA[
+        <font color="gray">//you MUST NOT pass 'a' as parameter!</font>
+<br/><font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">charInput</font>(<font color="#DF7401">char</font> c) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(c == <font color="#2E8B57">'a'</font>) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">throw new</font> <font color="#999900">IllegalArgumentException</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Nice character!"</font>);
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        While the JDK contains many pre-written exceptions, programmers still often create custom exceptions. This is
+        very simple, all we need to do is inherit from the <b>java.lang.Exception</b> class (or from <b>java.lang.RuntimeException</b>
+        , see next part).
+        ]]>
+    </text>
+    <title text="Checked and unchecked exceptions"/>
+    <text>
+        <![CDATA[
+        Checked exception is an exception that the programmer is forced to handle. For example, <i>IOException or FileNotFoundException</i>
+        are such. Handling unchecked exceptions (<i>ArithmeticException, NumberFormatException</i>, ...) on the other hand, is optional.
+        ]]>
+    </text>
+    <boxed title="What makes it unchecked?">
+        <![CDATA[
+        Generally, exceptions are checked. Only those will be unchecked which inherit from the special exception
+        <b>java.lang.RuntimeException</b> (errors are also unchecked, as they should not be handled). Here is a picture to help understand:
+        ]]>
+    </boxed>
+    <image name="exception_hierarchy"/>
+    <text>
+        <![CDATA[
+        As you can see there is also a base class for both exceptions and errors, <i>Throwable</i>. Only the subclasses of this class
+        can be used in catch-blocks, and after <i>throw and throws</i> statements.
+        ]]>
+    </text>
+    <title text="Dealing with checked exceptions"/>
+    <text>
+        <![CDATA[
+        We don't always want to encapsulate a checked exception into try-catch blocks. The <b>throws</b> (NOT throw) keyword
+        can be used.
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="gray">//returns the first line of the file on the given path</font>
+<br/><font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">getFirstLine</font>(<font color="#999900">String</font> filePath) <font color="#E65100">throws</font> <font color="#999900">IOException</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Path</font> p = <font color="#999900">Paths</font>.<font color="#ADD8E6">get</font>(filePath);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;String> lines = <font color="#999900">Files</font>.<font color="#ADD8E6">readAllLines</font>(p);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>( lines.<font color="#ADD8E6">size</font>() > <font color="#F0E130">0</font>) { <font color="gray">//there is a first line
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> lines.<font color="#ADD8E6">get</font>(<font color="#F0E130">0</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> null;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Note that the <i>Files.readAllLines</i> method would force us to handle <i>IOException</i> (because it's declared
+        in the same way, with the throws keyword). But by marking the method as '<i>throws IOException</i>', it is going to
+        be the <b>caller of the method</b> who has to handle the exception.
+        ]]>
+    </text>
+    <boxed title="Write throws">
+        <![CDATA[
+        It's good practice to use the <i>throws</i> keyword to indicate all exceptions that your method may throw,
+        even if they are unchecked exceptions. This way the caller will always know what kind of exceptions can he expect.
+        ]]>
+    </boxed>
+    <!-- try-catch-finally, Throwable, Exception, Error, RuntimeException
+     throw and throws keywords -->
+</resources>

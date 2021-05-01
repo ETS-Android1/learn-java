@@ -3,8 +3,42 @@
 <resources>
     <chapterdata>
         <id>51</id>
-        <name>What is Java?</name>
+        <name>Java basics</name>
     </chapterdata>
+    <title text="Installing Java"/>
+    <text>
+        <![CDATA[
+        Before you can do anything, you need to install Java's development version. Here is how you can do it:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>Navigate to the <a href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html">official download site</a> on your computer.</li>
+        <li>Select the download for your operating system.</li>
+        <li>Extract and use the installer.</li>
+        <ul>
+        ]]>
+    </list>
+    <boxed title="JAVA_HOME environmental variable">
+        <![CDATA[
+        Your IDE will look for Java based on the value of <i>JAVA_HOME</i>. If you are familiar with environmental variables, then simply
+        set <i>JAVA_HOME</i> to the <i>bin</i> folder of your JDK install directory. If you need a full tutorial, follow
+        <a href="https://www.wikihow.com/Set-Java-Home">this</a> wikiHow link.
+        ]]>
+    </boxed>
+    <text>
+        Everything is ready to install an IDE now! In this case, I'll use Eclipse IDE, but feel free to use
+        another IDE, if you have other preferences.
+    </text>
+    <title text="Install Eclipse"/>
+    <text>
+        <![CDATA[
+        Navigate to the <a href="https://www.eclipse.org/downloads/">official Eclipse download page</a> on your computer, then select the correct
+        download for your operating system. Then unpack and run the installer! Installing other IDE's is a very similar process.
+        ]]>
+    </text>
+    <title text="What exactly is Java?"/>
     <text>
         <![CDATA[
         Java is a set of specifications for a <b>software platform</b>. It's purpose it to allow programmers to create a wide
@@ -39,7 +73,7 @@
         </ul>
         ]]>
     </list>
-   <title text="The Java Development Kit"/>
+    <title text="The Java Development Kit"/>
     <text>
         <![CDATA[
         Notice that so far we only talked about a list of specifications for a software platform, and not
@@ -51,16 +85,10 @@
         <![CDATA[
         But since creating this takes an immense amount of work, Oracle also provides their implementation,
         called the <b>Java Development Kit (JDK)</b>. This is the most widely used implementation, but others
-        also exist, such as the <a href="https://en.wikipedia.org/wiki/OpenJDK">OpenJDK</a>.
+        also exist, such as the <a href="https://en.wikipedia.org/wiki/OpenJDK">OpenJDK</a>. What you have just installed as
+        "Java" was actually this, the JDK.
         ]]>
     </text>
-    <boxed title="Using an IDE">
-        <![CDATA[
-        The programmer can install the JDK and start to develop and run Java applications with a simple text
-        editor and the command line. As this can be tedious, especially for large projects, usually an
-        <b>integrated development environment</b> is used. More about this topic can be found in the guide!
-        ]]>
-    </boxed>
     <title text="Cross platform and the WORA principle"/>
     <text>
         <![CDATA[

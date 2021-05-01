@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <chapterdata>
+        <id>353</id>
+        <name>Lambda expressions</name>
+    </chapterdata>
+    <text>
+        <![CDATA[
+        Before we jump to lambda expressions, let's take another look at functional interfaces.
+        ]]>
+    </text>
+    <boxed title="Essentially a function">
+        <![CDATA[
+        Notice that a functional interface represents a function, and this function is it's only
+        abstract method.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Using such interfaces, we can <b>treat functions as variables</b>. For example, take a simple
+        functional interface, <i>Runnable</i>. We've seen this one before, when working with threads.
+        <br><br>
+        First things first, is it even a functional interface? Yes it is, it's only (abstract) method is <i>run</i>.
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">final</font> <font color="#999900">Runnable</font> myFunction = <font color="#E65100">new</font> <font color="#999900">Runnable</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Java 8"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>};
+<br/><font color="gray">//we pass a 'function' in as parameter
+</font>
+<br/><font color="#E65100">new</font> <font color="#999900">Thread</font>(myFunction).<font color="#ADD8E6">start</font>();
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Well, there is nothing new in this code, we could do this prior to Java 8 as well. But this is where lambda
+        expressions come in.
+        ]]>
+    </text>
+    <title text="What is a lambda?"/>
+    <text>
+        <![CDATA[
+        A lambda expression is function, that is declared inline, in a very compact way. Here is its syntax:
+        <br><br>
+        <i>(parameters) -> { statements }</i>
+        ]]>
+    </text>
+    <boxed title="Automatic conversion">
+        <![CDATA[
+        The compiler is able to turn lambdas into functional interfaces, and this is how these two concepts are
+        intertwined.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Let's rewrite the example above using a lambda:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#999900">Runnable</font> myFunction = () -> { <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Java 8"</font>); };
+<br/><font color="#E65100">new</font> <font color="#999900">Thread</font>(myFunction).<font color="#ADD8E6">start</font>();
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        The brackets are empty, as the <i>Runnable</i>'s method, <i>run</i> has no parameters. Similarly to <i>if</i>
+        structures, if you only have one statement inside the curly braces, there is no need to write them, making the lambda
+        even more compact:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="#999900">Runnable</font> myFunction = () -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Java 8"</font>);
+<br/><font color="#E65100">new</font> <font color="#999900">Thread</font>(myFunction).<font color="#ADD8E6">start</font>();
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        And from here, it's only one more step to create a <i>Runnable</i>, pass it to a thread, and start that thread
+        using a very compact one-liner statement:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">new</font> <font color="#999900">Thread</font>(() -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Java 8"</font>)).<font color="#ADD8E6">start</font>();
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        This previously unimaginable compactness is why lambdas should be used.
+        ]]>
+    </text>
+    <title text="Lambdas with parameters"/>
+    <text>
+        <![CDATA[
+        Take a look at another functional interface from the standard library, <i>Consumer</i>. The abstract method of this generic
+        interface takes one parameter, does something with it, but returns no result (thus "consuming" the parameter).
+        ]]>
+    </text>
+    <boxed title="Case of one parameter">
+        <![CDATA[
+        If there is exactly one parameter of a lambda expression, it's not necessary to write the
+        brackets around it:
+        <br><br>
+        <i>p -> { ... }</i>
+        <br><br>
+        However, if there are no parameters, you <b>must</b> write the empty brackets!
+        ]]>
+    </boxed>
+    <code><![CDATA[
+        
+        <font color="#999900">Consumer</font>&lt;<font color="#999900">String</font>> printer = s -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(s);
+<br/><font color="gray">//we can call it this way
+</font>
+<br/>printer.<font color="#ADD8E6">accept</font>(<font color="#2E8B57">"Java 8"</font>);
+        
+    ]]></code>
+    <interactive instruction="Correct the lambda expression which prints the sum of two numbers!">
+        <data><![CDATA[
+            
+(n1, n2___ -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(n1 ___ n2)
+            
+        ]]></data>
+        <answer place="0">)</answer>
+        <answer place="1">+</answer>
+        <default place="1">-</default>
+    </interactive>
+    <text>
+        <![CDATA[
+Notice something interesting here. It's enough to only put an identifier into the parameter list (<i>s</i>). For normal functions,
+the types of the parameters also have to be written, but for lambdas, that is not necessary (you can do it though). This is to
+make lambdas as compact as possible.
+        ]]>
+    </text>
+    <boxed title="Must match the parameter list!">
+        <![CDATA[
+        Be warned that the lambda you assign to a functional interface must have the same amount of parameters
+        as the abstract method of that interface! If that is not the case, a compile time error will be thrown.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        For instance, this is <b>invalid code</b>, as <i>Runnable</i>'s run cannot accept parameters:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="gray<font color="#2E8B57">">//the compiler won'</font>t be able to make sense of 'param'
+</font>
+<br/><font color="#E65100">new</font> <font color="#999900">Thread</font>(param -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello"</font>)).<font color="#ADD8E6">start</font>();
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Let's test the previous consumer. In Java 8, most <i>collections</i> (list, map, set, etc...) got a new method: <i>forEach</i>.
+        This method takes a <i>Consumer</i> as parameter, and it will invoke this <i>Consumer<i> on every element in that
+        collection.
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="#999900">List</font>&lt;<font color="#999900">String</font>> myList = <font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(<font color="#2E8B57">"s1"</font>, <font color="#2E8B57">"s2"</font>, <font color="#2E8B57">"s3"</font>);
+<br/>myList.<font color="#ADD8E6">forEach</font>(s -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(s));
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        This is again a demonstration of the power of lambdas, we were able to print all elements in a list
+        with a single, one-liner statement, no for loop needed.
+        ]]>
+    </text>
+    <title text="Lambdas with return value"/>
+    <text>
+        <![CDATA[
+        If we use a functional interface whose method has a return value, then the lambda we assign must
+        also have a return value, and it has to return the same type of object!
+        <p>
+        Take the <i>Function</i> interface from the standard library. This generic interface has 2 type parameters,
+        and it's method takes a parameter of the first type, and "converts" it into the second type somehow.
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#999900">Function</font>&lt;<font color="#999900">String</font>, <font color="#999900">Integer</font>> converter = s -> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#999900">Integer</font>.<font color="#ADD8E6">parseInt</font>(s);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">NumberFormatException</font> e) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> null;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>};
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Here we had to write the curly braces as there are multiple statements inside the body of the lambda. However, if
+        we're willing to let go of the exception handling for the sake of compactness, then this can be written as
+        shortly as this:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#999900">Function</font>&lt;<font color="#999900">String</font>, <font color="#999900">Integer</font>> converter = s -> <font color="#999900">Integer</font>.<font color="#ADD8E6">parseInt</font>(s);
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Note that in this case, we don't even have to write the <i>return</i> keyword. Whatever that single statement returns
+        will be returned by the lambda as well!
+        ]]>
+    </text>
+    <interactive instruction="Correct this declaration of a Predicate!">
+        <data><![CDATA[
+            
+            <font color="#999900">Predicate</font>&lt;<font color="#999900">Double</font>> isNegative = d -> ___ &lt; ___;
+            
+        ]]></data>
+        <answer place="0">d</answer>
+        <answer place="1">0</answer>
+        <answer place="1">0.0</answer>
+    </interactive>
+</resources>

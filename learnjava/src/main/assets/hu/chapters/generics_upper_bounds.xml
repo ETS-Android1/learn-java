@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <chapterdata>
+        <id>303</id>
+        <name>Upper bounds</name>
+    </chapterdata>
+    <title text="Type erasure"/>
+    <text>
+        <![CDATA[
+        Type erasure is a property of Java generics. It means that the generic objects inside the
+        generic class are treated as an <i>Object</i> (or, when an upper bound is present, they're treated as that bound - see below).
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">Calculator</font>&lt;<font color="#999900">T</font>> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">T</font> currentValue;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Calculator</font>(<font color="#999900">T</font> startingValue) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;currentValue = startingValue;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">T</font> <font color="#ADD8E6">add</font>(<font color="#999900">T</font> number) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;How to add the parameter to the current value?!
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;Only Object methods are available, for example:
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;toString(), hashCode()
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> currentValue;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">T</font> <font color="#ADD8E6">subtract</font>(<font color="#999900">T</font> number) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//how to subtract the parameter from the current value?!
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> currentValue;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        In this simple <i>Calculator</i> class we store a value and want to be able add and subtract other values from it.
+        However, with our current generics knowledge, this does not seem possible:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="gray">//Fine, but we still can't add the doubles inside the class!
+</font>
+<br/><font color="#999900">Calculator</font>&lt;<font color="#999900">Double</font>> calc = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(<font color="#F0E130">0.0</font>);
+<br/>
+<br/><font color="gray">//This makes no sense, but it's still allowed.
+</font>
+<br/><font color="#999900">Calculator</font>&lt;<font color="#999900">Boolean</font>> boolCalc = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(<font color="#E65100">false</font>);
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        We need a way to be able to do addition/subtraction (if it is possible, like with the first calculator) and
+        to disallow the creation of invalid objects, such as the boolean calculator.
+        ]]>
+    </text>
+    <title text="Upper bounds"/>
+    <text>
+        <![CDATA[
+        Bounding the generic types is the solution to the problems seen above.
+        ]]>
+    </text>
+    <boxed title="Why upper bound?">
+        <![CDATA[
+        To create an upper bound, we need a <b>base class</b> (or interface). Only the children of this base class will be allowed,
+        thus the base class will be called an <b>upper bound</b> of the possible types (the base class is "<i>above</i>" the
+        possible types in the class hierarchy).
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        When there is an upper bound on a type parameter, objects of this type will be treated as the base class, and not
+        as <i>Object</i> (in other words, type erasure will not reduce to <i>Object</i>, but to the base class).
+        ]]>
+    </text>
+    <boxed title="Calculator base class">
+        <![CDATA[
+        So all we need is a base class for the <i>Calculator</i>. Luckily there is a common base class for
+        numeric types, <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Number.html">java.lang.Number</a>.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        <i>Number</i> has a useful method, <i>doubleValue</i> which returns a primitive double, the actual value of the
+        numeric variable as a real number:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="gray">//Integer and Double extends Number
+</font>
+<br/><font color="#999900">Integer</font> intNum = <font color="#F0E130">1</font>;
+<br/><font color="#999900">Double</font> doubleNum = <font color="#F0E130">3.2</font>;
+<br/>
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(intNum.<font color="#ADD8E6">doubleValue</font>()); <font color="gray">//1.0
+</font>
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(doubleNum.<font color="#ADD8E6">doubleValue</font>()); <font color="gray">//3.2</font>
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        The only thing left is to learn how to write an upper bound. The <b>extends</b> keyword is used, to indicate
+        that the generic type must be a subclass of the upper bound:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">Calculator</font>&lt;<font color="#999900">T</font> <font color="#E65100">extends</font> <font color="#999900">Number</font>> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">double</font> currentValue;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Calculator</font>(<font color="#999900">T</font> startingValue) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;currentValue = startingValue.<font color="#ADD8E6">doubleValue</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">add</font>(<font color="#999900">T</font> number) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//we have access to Number methods too, not only Object methods!
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;currentValue += number.<font color="#ADD8E6">doubleValue</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> currentValue;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">subtract</font>(<font color="#999900">T</font> number) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//we have access to Number methods too, not only Object methods!
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;currentValue += number.<font color="#ADD8E6">doubleValue</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> currentValue;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">getValue</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> currentValue;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        You may have noticed that the change from <i>T</i> to double in some places. Java generics is not that powerful, and you'll
+        undoubtedly come across limitations which will force you to make code a bit less generic to make it work.
+        ]]>
+    </text>
+    <advanced title="Limitations">
+        <![CDATA[
+        Why could the return value not stay <i>T</i>? Because then we'd have to cast from double to <i>T</i>, and that would fail
+        for any <i>T</i> that isn't <i>Double</i>.
+        <br><br>
+        Ok, so make <i>currentValue</i> also <i>T</i>, you might say. But then we could not add or subtract values from
+        that (because <i>Number</i> has only getters, but no setters, and it's abstract)!
+        ]]>
+    </advanced>
+    <text>
+        <![CDATA[
+        Despite these small setbacks, the calculator now supports all numeric types. It'll return its result as doubles.
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="gray">//For example, a float calculator
+</font>
+<br/><font color="#999900">Calculator</font>&lt;<font color="#999900">Float</font>> floatCalc = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(<font color="#F0E130">0.5f</font>);
+<br/>floatCalc.<font color="#ADD8E6">add</font>(<font color="#F0E130">21.44f</font>);
+<br/>floatCalc.<font color="#ADD8E6">subtract</font>(<font color="#F0E130">1.23f</font>);
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Final result: "</font> + floatCalc.<font color="#ADD8E6">getValue</font>());
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Another benefit is that now the compiler will reject invalid types:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="gray">//Compile time ERROR!</font>
+<br/><font color="#999900">Calculator</font>&lt;<font color="#999900">Boolean</font>> boolCalc = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(<font color="#E65100">false</font>);
+        
+    ]]></code>
+    <interactive instruction="Update the vector class from the previous chapter to use an upper bounded type parameter!">
+        <data><![CDATA[
+
+<font color="#E65100">class</font> <font color="#999900">Vector</font>&lt;<font color="#999900">T</font> ___ <font color="#999900">Number</font>> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">T</font>[] elements;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Vector</font>(<font color="#999900">T</font>[] elements) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">elements</font> = elements;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">dotProduct</font>(<font color="#999900">Vector</font>&lt;___> other) <font color="#E65100">throws</font> <font color="#999900">IllegalArgumentException</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(elements.<font color="#ADD8E6">length</font> != other.<font color="#ADD8E6">elements</font>.<font color="#ADD8E6">length</font>) <font color="#E65100">throw</font> <font color="#E65100">new</font> <font color="#999900">IllegalArgumentException</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> product = <font color="#F0E130">0</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;elements.<font color="#ADD8E6">length</font>; i++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;product += elements[i].<font color="#ADD8E6">doubleValue</font>() * other.<font color="#ADD8E6">elements</font>[i].<font color="#ADD8E6">doubleValue</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> product;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+
+        ]]></data>
+        <answer place="0">extends</answer>
+        <answer place="1">T</answer>
+        <answer place="1">?</answer>
+        <answer place="1">? extends Number</answer>
+    </interactive>
+    <title text="Interface bounds"/>
+    <text>
+        <![CDATA[
+        Interfaces can also be used as an upper bound. In this case, only classes that <b>implement</b> the given interface
+        will be allowed. Despite this, when declaring the bound, you must still use the <b>extends</b> keyword, not the <b>implements</b>
+        keyword!
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">class</font> <font color="#999900">MustCompare</font>&lt;<font color="#999900">T</font> <font color="#E65100">extends</font> <font color="#999900">Comparable</font>&lt;<font color="#999900">T</font>>> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Comparing intensifies here...
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        As you can see it's even possible to use the type parameter <i>T</i> to specify the upper bounds type arguments!
+        ]]>
+    </text>
+    <title text="Multiple bounds"/>
+    <text>
+        <![CDATA[
+        It's also allowed to have multiple upper bounds, but there are limitations: among the upper bounds, only one can
+        be an actual class, the rest must be interfaces (this makes sense, since it's impossible to have multiple parent classes).
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="#E65100">class</font> <font color="#999900">PickyClass</font>&lt;<font color="#999900">T</font> <font color="#E65100">extends</font> <font color="#999900">Thread</font> & <font color="#999900">Serializable</font> & <font color="#999900">Comparable</font>&lt;<font color="#999900">T</font>>> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Do something with serializable and comparable
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;background threads.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;*/</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        The <b>&</b> symbol must be used to list the upper bounds, and the class must be the first, the interfaces have to
+        follow it.
+        ]]>
+    </text>
+</resources>

@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <chapterdata>
+        <id>202</id>
+        <name>Lists</name>
+    </chapterdata>
+    <text>
+        <![CDATA[
+        The list is one of the simplest data structures. They're similar to arrays, but unlike arrays,
+        they can change their capacity of elements automatically, when needed (this means that a list can take
+        any number of elements).
+        ]]>
+    </text>
+    <boxed title="Lists in Java">
+        <![CDATA[
+        Lists in the <i>JDK</i> implement the <a href="https://docs.oracle.com/javase/7/docs/api/java/util/List.html">java.util.List</a>
+        interface (which implements the <i>Collection</i> interface, mentioned in the previous chapter).
+        <p>
+        There are two important list implementations available,
+        <a href="https://docs.oracle.com/javase/7/docs/api/java/util/ArrayList.html">java.util.ArrayList</a> and
+        <a href="https://docs.oracle.com/javase/7/docs/api/java/util/LinkedList.html">java.util.LinkedList</a>.
+        ]]>
+    </boxed>
+    <image name="list_hierarchy"/>
+    <title text="ArrayList"/>
+    <text>
+        <![CDATA[
+        As the name suggests, this list uses an array internally. It's capable of dynamically resize
+        the array to make space for more elements.
+        ]]>
+    </text>
+    <boxed title="The internal array">
+        <![CDATA[
+        Resizing the array is a computationally expensive operation. To ensure that it's performed as rarely
+        as possible, the internal array is always <b>doubled</b>, instead of increasing it's size by one.
+        The class also exposes some methods to allow the programmer to control the size of this array.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        To demonstrate the capabilities of <i>ArrayList</i>, let's solve the problem from the previous chapter:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> reading =  <font color="#E65100">true</font>; <font color="gray">//create the variables needed
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> counter = <font color="#F0E130">0</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> input =  <font color="#E65100">null</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Scanner</font> scanner = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(<font color="#999900">System</font>.<font color="#ADD8E6">in</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray<font color="#2E8B57">">//don'</font>t have to worry about how big the internal array is
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;<font color="#999900">Integer</font>> numbers = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">while</font>(reading) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">print</font>(<font color="#2E8B57">"Enter the "</font> + counter + ". number or 'q<font color="#2E8B57">' to stop: "</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;input = scanner.<font color="#ADD8E6">next</font>(); <font color="gray">//save number
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;numbers.<font color="#ADD8E6">add</font>(Integer.<font color="#ADD8E6">parseInt</font>(input)); <font color="gray">//add it to the end of the list
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">NumberFormatException</font> e) { <font color="gray<font color="#2E8B57">">//not a number, maybe '</font>q'?
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(<font color="#2E8B57">"q"</font>.<font color="#ADD8E6">equals</font>(input)) reading =  <font color="#E65100">false</font>; <font color="gray<font color="#2E8B57">">//'</font>q' was entered, stop
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> sum = <font color="#F0E130">0</font>; <font color="gray">//sum the numbers
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i: numbers) { <font color="gray">//not that the for-each loop works with lists too!
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum += i;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Sum is "</font> + sum);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;scanner.<font color="#ADD8E6">close</font>();
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        This code is now efficient and safe from exceptions. Don't forget that the array list needs to be imported before usage.
+        ]]>
+    </text>
+    <boxed title="When to use">
+        <![CDATA[
+        Use an array list when you need to often read values from it (it's fast to get elements from an array). Do not use
+        such a list if lot's of elements need to be inserted into or removed from different positions (for example, when you insert an element, all others after it
+        must be shifted right in the array, and this is expansive).
+        ]]>
+    </boxed>
+    <interactive instruction="Complete this program which adds the first 100 integers to an array list!">
+        <data><![CDATA[
+
+<font color="#999900">List</font>&lt;___> numbers = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
+<br/><font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;<font color="#F0E130">100</font>; i++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;numbers.<font color="#ADD8E6">___</font>(i+<font color="#F0E130">1</font>);
+<br/>}
+
+        ]]></data>
+        <answer place="0">Integer</answer>
+        <answer place="1">add</answer>
+    </interactive>
+    <title text="LinkedList"/>
+    <text>
+        <![CDATA[
+        Linked lists are a bit more difficult to grasp. Each element inside maintains a reference to the element after it, and
+        the list has a reference to the first element. The last element refers to <i>null</i>.
+        ]]>
+    </text>
+    <image name="linked_list"/>
+    <text>
+        <![CDATA[
+        Some implementations also have each element maintain a reference to the previous element as well, so you can
+        <i>walk</i> the list backwards. In these cases it's common for the list to maintain a reference to the last element
+        as well. These are called doubly linked lists.
+        ]]>
+    </text>
+    <boxed title="When to use">
+        <![CDATA[
+        Use a linked list when you often need to insert or remove elements from various indices of the list (this is a
+        cheap operation for a linked list, as only one reference needs to be updated). Do not use such a list when you need
+        to often get elements from it (when you are getting an element, the list has to be <i>walked</i> until the element is found).
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Note that these two list types complement each other nicely. Each one of them is strong in what the other is weak.
+        ]]>
+    </text>
+    <title text="Some list operations"/>
+    <text>
+        <![CDATA[
+        Despite having completely different internal workings, these two list types expose the same methods through the <i>List</i>
+        interface, and thus from the perspective of the programmer, they can be controlled very similarly. Therefore, these examples are
+        only going to be shown for a <i>LinkedList</i>.
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="gray">//create an empty list for doubles
+</font>
+<br/><font color="#999900">LinkedList</font>&lt;<font color="#999900">Double</font>> nums = <font color="#E65100">new</font> <font color="#999900">LinkedList</font>&lt;>();
+<br/>nums.<font color="#ADD8E6">size</font>(); <font color="gray">//get the amount of element in the list
+</font>
+<br/>
+<br/><font color="gray">//add and remove elements
+</font>
+<br/>nums.<font color="#ADD8E6">add</font>(<font color="#F0E130">1.2</font>);
+<br/>nums.<font color="#ADD8E6">add</font>(<font color="#F0E130">-11.3</font>);
+<br/>nums.<font color="#ADD8E6">add</font>(<font color="#999900">Math</font>.PI);
+<br/>nums.<font color="#ADD8E6">remove</font>(<font color="#F0E130">-11.3</font>); <font color="gray">//removes -11.3 from the list
+</font>
+<br/>nums.<font color="#ADD8E6">remove</font>(<font color="#F0E130">1</font>); <font color="gray">//removes the element at index 1.
+</font>
+<br/>
+<br/><font color="gray">//you can quickly create a list from elements this way:
+</font>
+<br/><font color="#999900">List</font>&lt;<font color="#999900">Double</font>> otherList = <font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(<font color="#F0E130">2.3</font>, <font color="#F0E130">-1.32</font>);
+<br/>
+<br/><font color="gray">//you can add other collections to a list, using the addAll method:
+</font>
+<br/>nums.<font color="#ADD8E6">addAll</font>(otherList);
+<br/>
+<br/><font color="gray">//get elements by indices
+</font>
+<br/>nums.<font color="#ADD8E6">get</font>(<font color="#F0E130">0</font>);
+<br/><font color="gray">//linked list also supports getting first/last element
+</font>
+<br/>nums.<font color="#ADD8E6">getFirst</font>();
+<br/>nums.<font color="#ADD8E6">getLast</font>();
+<br>
+<br><font color="gray">//inject an elemet at index 1</font>
+<br/>nums.<font color="#ADD8E6">set</font>(<font color="#F0E130">1</font>, <font color="#F0E130">3.2</font>);
+<br/>
+<br/>nums.<font color="#ADD8E6">clear</font>(); <font color="gray">//remove all elements
+</font>
+<br/>
+<br/><font color="gray">//check if an element is in the list, returns a boolean
+</font>
+<br/>nums.<font color="#ADD8E6">contains</font>(<font color="#999900">Math</font>.PI);
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        For a full list of methods, check the official documentation, linked above.
+        ]]>
+    </text>
+    <interactive instruction="Make this method remove the first and last elements of a list! Don't worry about the '?', it's a generics trick.">
+        <data><![CDATA[
+
+<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">removeFirstLast</font>(<font color="#999900">List</font>&lt;?> list) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;list.<font color="#ADD8E6">___</font>(<font color="#F0E130">0</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;list.<font color="#ADD8E6">remove</font>(___);
+<br/>}
+
+        ]]></data>
+        <answer place="0">remove</answer>
+        <answer place="1">list.size()-1</answer>
+        <answer place="1">list.size() - 1</answer>
+        <answer place="1">list.size()- 1</answer>
+        <answer place="1">list.size() -1</answer>
+    </interactive>
+</resources>

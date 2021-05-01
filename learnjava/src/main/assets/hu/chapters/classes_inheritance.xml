@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <chapterdata>
+        <id>153</id>
+        <name>Inheritance</name>
+    </chapterdata>
+    <text>
+        <![CDATA[
+        When creating classes, we often want to be able to define 'relations' between our classes. Let's look at a
+        classic example: we've created the class <b>Dog</b>, it has <i>name, age, etc...</i>, and now we want a <b>Pug</b> class.
+        ]]>
+    </text>
+    <boxed title="Reusability">
+        <![CDATA[
+        A pug is a specific dog. It would be great if the <b>Pug</b> class could somehow inherit all members and method of the
+        <b>Dog</b> class, without needing to copy and paste them into the <b>Pug</b> class, of course. This (and more)
+        is what inheritance allows us to do.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        The class that we inherit from is called <b>superclass</b> (sometimes parent class), the one that inherits is the
+        <b>subclass</b> (or child class).
+        In Java, the <b>extends</b> keyword is used to define this inheritance relation between our classes:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">public class</font> <font color="#999900">Dog</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> <font color="#999900">String</font> name;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> <font color="#DF7401">int</font> age;
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Dog</font>(<font color="#999900">String</font> name, <font color="#DF7401">int</font> age) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">name</font> = name;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">age</font> = age;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printDogData</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Dog'</font>s name: " + name +
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2E8B57">", age: "</font> + age);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+    <code><![CDATA[
+        
+        <font color="#E65100">public class</font> <font color="#999900">Pug</font> <font color="#E65100">extends</font> <font color="#999900">Dog</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font> pugBreed;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Pug</font>(<font color="#999900">String</font> name, <font color="#DF7401">int</font> age, <font color="#999900">String</font> pugBreed) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>(name, age); <font color="gray">//call the constructor of super class, Dog
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">pugBreed</font> = pugBreed;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        You can notice a few things here: first, the <i>protected</b> visibility is used for the members of <b>Dog</b>. This is
+        done so that they can be accessed inside the <b>Pug</b> class as well.
+        <p>
+        Secondly, the <b>super</b> keyword inside the constructor. It's used to call the constructor of the superclass, in this
+        case <b>Dog</b>'s. That constructor will take care of assigning the values of <i>name and age</i>.
+        ]]>
+    </text>
+    <boxed title="Restriction">
+        <![CDATA[
+        The call to the superclass constructor must always be the first statement in the subclasses' constructor (as it
+        can be seen in the code sample)! The Java Compiler will stop with an error if this isn't the case.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        In the main method (which can be in either of these classes, our in a completely different one) we can create some objects:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create a pug object
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Pug</font> p1 = <font color="#E65100">new</font> <font color="#999900">Pug</font>(<font color="#2E8B57">"Edgar"</font>, 10, <font color="#2E8B57">"Black breed"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Pug inherited this method from Dog!</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;p1.<font color="#ADD8E6">printDogData</font>();
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        As you can see, we can use the <i>printDogData</i> method with our pug object, despite not declaring it inside the
+        class! It inherited the method from its superclass.
+        <p>
+        There is, however, one small problem: notice that when running the code sample, only the name and age of the pug is
+        printed, the breed isn't! This is because the method of the <b>Dog</b> class doesn't know about this member, it was
+        declared in a subclass.
+        ]]>
+    </text>
+    <boxed title="Override methods">
+        <![CDATA[
+        Overriding methods is introduced as a solution for problems such as the one above! It allows us to 'redefine' the
+        method of the superclass inside the subclass.
+        <p>
+        It doesn't require any keywords or such, we simply must declare the same method inside the subclass, and it'll override
+        the method of the superclass.
+        ]]>
+    </boxed>
+    <code><![CDATA[
+        
+        <font color="#E65100">public class</font> <font color="#999900">Pug</font> <font color="#E65100">extends</font> <font color="#999900">Dog</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font> pugBreed;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Pug</font>(<font color="#999900">String</font> name, <font color="#DF7401">int</font> age, <font color="#999900">String</font> pugBreed) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>(name, age); <font color="gray">//call the constructor of super class, Dog
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">pugBreed</font> = pugBreed;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printDogData</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>.<font color="#ADD8E6">printDogData</font>(); <font color="gray">//will print the name and age</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Pug breed: "</font> + pugBreed);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Run the main method again, and you'll see that now the <i>printDogData</i> will also print the pug breed, because the
+        overridden method is called. The <b>@Override</b> annotation is not necessary, but recommended.
+        <p>
+        Note that the super keyword can also be used here, it's used to call the method of the superclass (without it, the method
+        would call itself).
+        ]]>
+    </text>
+    <advanced title="Annotations">
+        <![CDATA[
+        Annotations start with the <b>@</b> symbol, and they provide extra information about the code to the compiler,
+        and to the programmer.
+        <p>
+        For example, if we put the override annotation, and enter a wrong name for the method because of a typo, it'll warn
+        us that the superclass has no such method.
+        ]]>
+    </advanced>
+    <title text="Inheritance hierarchy"/>
+    <text>
+        <![CDATA[
+        Classes can have multiple subclasses, and those can also have their own subclasses, and so on. Together they create
+        an inheritance hierarchy. It's often represented with some kind of diagram, like this one:
+        ]]>
+    </text>
+    <image name="inheritance_hierarchy"/>
+    <advanced title="Multiple superclasses">
+        <![CDATA[
+        Having multiple superclasses is <b>not allowed</b> in Java. A class can only inherit from one superclass.
+        Other languages, such as C++ allow this, and introduce different solutions to the problems that this kind
+        of inheritance causes.
+        ]]>
+    </advanced>
+    <boxed title="java.lang.Object">
+        <![CDATA[
+        The <b>Object</b> (a bit confusing name, indeed) class is at the top of the hierarchy. If we don't explicitly write
+        a superclass for our class, it will inherit from <b>Object</b>.
+        <p>
+        This class has no members, but it does have a few methods, such as <i>equals</i>. Consequently, this methods can be used
+        and in any class, most of them can also be overridden.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        It's possible to mark a class so that it can't be inherited from, using the <b>final</b> keyword:
+        <br><br>
+        <i>public final class Integer { ... }</i>
+        <br><br>
+        Similarly, methods can also be marked final, and they can't be overridden. See
+        <a href="https://stackoverflow.com/questions/5181578/what-is-the-point-of-final-class-in-java">this</a> question
+        for more details.
+        ]]>
+    </text>
+    <interactive instruction="Make this class extends the other one, and also call its constructor!">
+        <data><![CDATA[
+
+<font color="#E65100">class</font> <font color="#999900">FragmentActivity</font> ___ <font color="#999900">Activity</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">FragmentActivity</font>(<font color="#DF7401">int</font> id, <font color="#DF7401">int</font> fragmentCount) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ADD8E6">___</font>(id);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+
+        ]]></data>
+        <answer place="0">extends</answer>
+        <answer place="1">super</answer>
+    </interactive>
+    <title text="Use child as parent"/>
+    <text>
+        <![CDATA[
+        In Java we can also use an object as its superclass. Let's look at some code samples to explain this more clearly.
+        <br><br>
+        Another way to put it is that an object can behave like any other class above him in the inheritance hierarchy.
+        ]]>
+    </text>
+    <boxed title="instanceof">
+        <![CDATA[
+        The <b>instanceof</b> keyword can be used to check if an object belongs to a class. It'll return a boolean.
+        ]]>
+    </boxed>
+    <code><![CDATA[
+        
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create a pug object
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Pug</font> p1 = <font color="#E65100">new</font> <font color="#999900">Pug</font>(<font color="#2E8B57">"Maya"</font>, 10, <font color="#2E8B57">"White breed"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(p1 <font color="#E65100">instanceof</font> <font color="#999900">Pug</font>) { <font color="gray">//this will be true, no surprise there
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"p1 is a Pug object!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(p1 <font color="#E65100">instanceof</font> <font color="#999900">Dog</font>) { <font color="gray">//due to polymorphism, this will also be true!
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"p1 is a Dog object!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Both lines are printed, so a pug object is also a dog object! This is the behaviour that we want, intuitively we know that
+        a pug is special dog, Java also produces this behaviour.
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create dog objects, some of them are pugs</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Dog</font> d1 = <font color="#E65100">new</font> <font color="#999900">Dog</font>(<font color="#2E8B57">"Bernard"</font>, <font color="#F0E130">5</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Pug</font> p1 = <font color="#E65100">new</font> <font color="#999900">Pug</font>(<font color="#2E8B57">"Maya"</font>, 10, <font color="#2E8B57">"White breed"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Dog</font> d2 = <font color="#E65100">new</font> <font color="#999900">Dog</font>(<font color="#2E8B57">"Lassie"</font>, <font color="#F0E130">3</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;Dog> dogList = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;dogList.<font color="#ADD8E6">add</font>(d1);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;dogList.<font color="#ADD8E6">add</font>(p1); <font color="gray">//the pug can also be added!</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;dogList.<font color="#ADD8E6">add</font>(d2);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Dog</font> dog: dogList) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;dog.<font color="#ADD8E6">printDogData</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Without this property of objects, we wouldn't be able to add the pugs into the list of dogs!
+        ]]>
+    </text>
+    <boxed title="Dynamic polymorphism">
+        <![CDATA[
+        Note that when iterating through the list and reaching the <i>Pug</i> object, the correct <i>printDogData</i> method
+        will be called (meaning the one implemented in the <i>Pug</i> class). This is called <b>dynamic polymorphism</b>.
+        <p>
+        Polymorphism, since the method has multiple implementations, dynamic, since it's determined at runtime (from the objects
+        original type) which of them is called.
+        ]]>
+    </boxed>
+    <title text="Casting objects"/>
+    <text>
+        <![CDATA[
+        Casting objects means that we change their types. Obviously, we can't just cast any class type into any other.
+        Valid casts can only be made between classes that are related within the inheritance hierarchy.
+        ]]>
+    </text>
+    <boxed title="How to cast">
+        <![CDATA[
+        Casting is done by putting the class that we want to cast to between brackets. Check the examples below for demonstration.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        There are two types of valid casts: upcast, and downcast. <b>Upcast</b> means that we cast from subclass to superclass.
+        Due to the fact that an object can behave like its superclass (see above), such a cast is always safe, meaning it never
+        results in an error.
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="gray">//upcast a Pug object to a Dog</font>
+<br/><font color="#999900">Dog</font> dog = (<font color="#999900">Dog</font>)new <font color="#999900">Pug</font>(<font color="#2E8B57">"Manni"</font>,5, <font color="#2E8B57">"Gray breed"</font>);
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        In cases like this, it isn't even necessary to write the classname in the brackets. Java can perform the <b>cast
+        implicitly</b>.
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="gray">//upcast a Pug object to a Dog</font>
+<br/><font color="#999900">Dog</font> dog = new <font color="#999900">Pug</font>(<font color="#2E8B57">"Manni"</font>,5, <font color="#2E8B57">"Gray breed"</font>);
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        The same implicit upcast happened when we added the pug into the list of dogs in the above example!
+        <br><br>
+        The other cast, <b>downcast</b> is when we change the type of the superclass into subclass. This isn't safe. First, let's
+        see a downcast that won't result in an exception:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="gray<font color="#2E8B57">">//'</font>dog' is actually a pug, it's safe to downcast</font>
+<br/><font color="#999900">Dog</font> dog = new <font color="#999900">Pug</font>(<font color="#2E8B57">"Manni"</font>,5, <font color="#2E8B57">"Gray breed"</font>);
+<br/>
+<br/><font color="#999900">Pug</font> pug = (<font color="#999900">Pug</font>)dog; <font color="gray">//no exception</font>
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        We can, however, run into a <b>ClassCastException</b> if we aren't careful:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="gray<font color="#2E8B57">">//'</font>dog' is NOT a pug, downcast will fail!</font>
+<br/><font color="#999900">Dog</font> dog = <font color="#E65100">new</font> <font color="#999900">Dog</font>(<font color="#2E8B57">"Sisi"</font>, <font color="#F0E130">7</font>);
+<br/>
+<br/><font color="#999900">Pug</font> pug = (<font color="#999900">Pug</font>)dog; <font color="gray">//ClassCastException</font>
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        It can be tricky to spot dangerous downcasts. Code like the one above is valid, it'll compile, the exception only arises
+        at runtime! Use <i>instanceof</i> to prevent cast related exceptions:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="gray<font color="#2E8B57">">//'</font>dog' is NOT a pug, downcast will fail!</font>
+<br/><font color="#999900">Dog</font> dog = <font color="#E65100">new</font> <font color="#999900">Dog</font>(<font color="#2E8B57">"Sisi"</font>, <font color="#F0E130">7</font>);
+<br/>
+<br/><font color="#E65100">if</font>(dog <font color="#E65100">instanceof</font> <font color="#999900">Pug</font>) { <font color="gray">//false</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Pug</font> pug = (<font color="#999900">Pug</font>)dog; <font color="gray">//not executed, no exception</font>
+<br/>}
+        
+    ]]></code>
+    <!-- how to do inheritance: Object, extends, super, final keywords, polymorphism: instanceof -->
+</resources>

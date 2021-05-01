@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- 'File extensions and project structure', belongs to course 'The basics' --><!--
+<interactive instruction="">
+    <data>
+
+    </data>
+    <answer place="0"></answer>
+</interactive>
+--><resources>
+    <chapterdata>
+        <id>52</id>
+        <name>Fájl kiterjesztések</name>
+    </chapterdata>
+    <text>
+        <![CDATA[
+       Van néhány fájl típus, amikkel érdemes megismerkedni, ha Java fejlesztéssel foglalkozunk.
+        ]]>
+    </text>
+   <title text=".java fájlok"/>
+    <text>
+        <![CDATA[
+        Ezek szöveges fájlok, amiket <b>.java</b> kiterjesztéssel látunk el. Tartalmuk a
+        <b>forráskód</b>, ami könnyen olvasható. A fordítóprogram ezek tartalmát fogja átalakítani
+        bájtkóddá.
+        ]]>
+    </text>
+    <image name="simple_java_file"/>
+    <text>
+        <![CDATA[
+        Látható, hogy egy ilyen fájlt a notepad is gond nélkül meg tud nyitni, a tartalmát akár
+        ilyen módon is szerkeszthetjük.
+        ]]>
+    </text>
+    <boxed title="Elnevezési szabályok">
+        <![CDATA[
+        A Java forrásfájloknak nem lehet akármilyen neve. Meg kell egyeznie a benne lévő
+        publikus osztály nevével. Majd egy későbbi fejezetben lesz ismertetve, hogy mi is egy publikus osztály.
+        <br><br>
+        Addig is azonban megfigyelheted, hogy a fent látható fájlban van egy <b>public class Main</b> rész, és
+        a fájl neve valóban <i>Main</i>.
+        <br><br>
+        Ezzel a szabállyal nekünk nem kell foglalkoznunk, a fejlesztőkörnyezet be fogja tartatni a
+        helyes elnevezést.
+        ]]>
+    </boxed>
+    <title text=".class fájlok"/>
+    <text>
+        <![CDATA[
+        Ezek a fájlok <b>bájtkódot</b> tartalmaznak. A fordító hozza őket létre, a <i>.java</i> fájlok
+        lefordításával. Binárisak, ezért tartalmuk emberi szemnek olvashatatlan. Ez nem gond, mivel a Java
+        virtuális gép könnyedén megérti majd.
+        ]]>
+    </text>
+    <image name="bytecode"/>
+    <text>
+        <![CDATA[
+        Ez az előbb látott <b>Main.java</b> forrásfájl, lefordítás után, <b>Main.class</b> néven.
+        ]]>
+    </text>
+    <advanced title="Fordítás és futtatás a parancssoron">
+        <![CDATA[
+        A fordítást és a kapott <i>.class</i> fájlok futtatását a parancssorról is elvégezhetjük, de
+        a fejlesztőkörnyezet ezt elrejti majd előlünk. Ha mégis szeretnéd kipróbálni, az Útmutatóban találsz
+        egy linket ehhez.
+        ]]>
+    </advanced>
+    <title text=".jar fájlok"/>
+    <text>
+        <![CDATA[
+        Ezek tömörített fájlok (mint egy <i>zip</i>, amik egy teljes Java program <i>.class</i> állományát tartalmazzák. A gyakorlatban
+        a programok elég sok <i>.class</i> fájlból állnak össze, a <i>.jar</i> fájlok pedig lehetőséget biztosítanak
+        ezek csoportosítására.
+        ]]>
+    </text>
+    <text>
+        <![CDATA[
+        <u>Néhány dolog amiket egy <i>.jar</i> fájl tartalmazhat:</u>
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>A <b>manifest</b> fájl, ami információt tartalmaz a programról.</li>
+        <li>Lefordított Java kód (<b>.class fájlok</b>).</li>
+        <li>Egyéb fájlok, amikre a programnak szüksége lehet, például képek.</li>
+        </ul>
+        ]]>
+    </list>
+    <boxed title="Futtatható JAR fájlok">
+        <![CDATA[
+        A <i>.jar</i> fájlok arra is lehetőséget biztosítsanak, hogy egy kattintással elindíthassuk a programot, hasonlóan
+        az <i>exe</i> fájlokhoz.
+        ]]>
+    </boxed>
+    <title text="Csomagok"/>
+    <text>
+        <![CDATA[
+        Ha több forrásfájlból áll össze a programunk (márpedig majdnem mindig így van), akkor ezeket csomagok (package)
+        segítségével csoportosíthatjuk. Csomagban csomag is lehet, ezáltal komoly hierarchiát
+        hozhatunk létre.
+        <br><br>
+        Minden csomaghoz a fájlrendszerben léteznie kell egy azonos nevű mappának, és a csomag fájljainak ebben
+        a mappában kell lenniük. Ha más csomagok is vannak benne, akkor ezek mappájának is a tartalmazó csomag mappájában kell lennie.
+        ]]>
+    </text>
+    <text>
+        Itt van például egy projekt, ahol lét csomag és két forrásfájl található:
+    </text>
+    <image name="project_structure"/>
+    <boxed title="Elnevezési hagyományok">
+        <![CDATA[
+        A csomagok neveinek csak kis betűket ajánlott tartalmaznia.
+        <br><br>
+        A legmagasabb szintű csomag, amiben minden más benne van általában egy domain
+        név, mint a <i>com</i> vagy az <i>org</i>. Az ezutáni csomag gyakran a programot fejlesztő
+        cég vagy programozó neve.
+        <br><br>
+        Ha megfigyeled a fenti projekt struktúrát, látható, hogy ott ezek a szokások be vannak tartva.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        <u>Fontos:</u> Egyes csomagnevek foglaltak a Java nyelv számára. Ilyen például a <i>java</i> vagy a <i>javax</i>. A fordítóprogram
+        az ilyen nevű csomagjaid esetén hibát fog adni.
+        ]]>
+    </text>
+    <advanced title="Több mint struktúra">
+        A csomagok nem csak strukturálásra használhatóak. Arra is képesek, hogy a bennük lévő
+        forráskódot "elrejtsék". Erre az osztályok láthatóságával foglalkozó fejezetben még visszatérünk.
+    </advanced>
+    <title text="Csomag deklaráció, importálás"/>
+    <text>
+        <![CDATA[
+        Minden <i>.java</i> forrásfájlunk első utasítása a csomag deklaráció. Itt meg kell adnunk, hogy
+        az adott forrásfájl melyik csomagokban van. Ha visszanézel a <i>Main.java</i> példához, rögtön az elején láthatod
+        a következő sort:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">package</font> com.<font color="#ADD8E6">learnjava</font>;
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Ez megadja, hogy a <i>Main</i> forrásfájl <i>learnjava</i> csomagban van, az pedig a <i>com</i> csomagban
+        található. A csomagnevek elválasztására a pont jelet használjuk.
+        ]]>
+    </text>
+    <boxed title="Alap csomag">
+        <![CDATA[
+        Nem szükséges csomagokat használnunk. Ha nem írunk egy forrásfájlba csomag deklarációt, akkor ez a fájl az alapcsomagba
+        fog kerülni (<i>default package</i>). Ez azonban több okból sem ajánlott.
+        <p>
+        Elsősorban azért nem, mert az alapcsomagban lévő fájlok nem hivatkozhatóak be más csomagokban,
+        ez pedig a későbbiekben nagy gond lehet.
+        <p>
+        Abban az esetben, ha nagyon egyszerű, egycsomagos programot írunk, akkor használhatjuk az
+        alapcsomagot.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Ha szeretnénk kódot (egy osztályt) felhasználni egy másik forrásfájlból, akkor azt <b>importálnunk</b> kell.
+        Enélkül a programunk nem fog lefordulni. Tegyük fel, hogy a <i>com.learnjava</i> csomagban vagyunk, és
+        szeretnénk használni a <i>java.util</i> csomagban lévő <i>Date</i> osztályt. Ekkor a következőt kell megadni:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">package </font>com.<font color="#ADD8E6">learnjava</font>;
+        <br/>
+        <br/><font color="#E65100">import </font>java.<font color="#ADD8E6">util</font>.<font color="#999900">Date</font>;
+        <br/>
+        <br/><font color="gray">//Rest of the code...</font>
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Az importáló utasítások hagyományosan azonnal a csomag deklaráció után következnek.
+        ]]>
+    </text>
+    <boxed title="java.lang">
+        <![CDATA[
+        Adott egy speciális, nagyon alapvető csomag a <i>JDK</i>-ban, a <i>java.lang</i>. Ebben a Java programozás során
+        használt leggyakoribb osztályok vannak.
+        <p>
+        Mivel ezek annyira fontosak és gyakoriak, ezt a csomagot számunkra a fordító <b>automatikusan importálja</b>,
+        nem kell kiírnunk hozzá az importáló utasítást.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Lehetőség van <b>mindent</b> importálnunk egy adott csomagból. Ekkor a * jelet kell használni. Például a
+        következő utasítás mindent importál a <i>java.nio</i> csomagból:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="#E65100">import</font> java.<font color="#ADD8E6">nio</font>.*;
+        
+    ]]></code>
+    <interactive instruction="Egészítsd ki a csomag deklarációt és az importálásokat!">
+        <data><![CDATA[
+
+___ com.<font color="#ADD8E6">learnjava</font>;
+<br/>
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">util</font>.<font color="#999900">Collections</font>;
+<br/>___ java.<font color="#ADD8E6">util</font>.<font color="#999900">Map</font>;
+
+        ]]></data>
+        <answer place="0">package</answer>
+        <answer place="1">import</answer>
+    </interactive>
+</resources>

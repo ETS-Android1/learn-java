@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <taskdata>
+        <id>352</id>
+        <name>Stream implementation</name>
+    </taskdata>
+    <text>
+        <![CDATA[
+        Your task is to create a generic class that behaves like <i>java.util.stream.Stream</i>.
+        ]]>
+    </text>
+    <boxed title="Not like the real stream">
+        <![CDATA[
+        The real <i>Stream</i> interface and its implementation is very complicated. In this task, you only need to create
+        a class works similarly to the original, and you won't even have to implement all stream operations.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        I suggest you use a collection to store the elements of your "stream". In my solution, I'll use a list.
+        ]]>
+    </text>
+    <title text="Conversions"/>
+    <text>
+        <![CDATA[
+        Have a static method of your class that can convert any <i>Collection</i> into your stream. Hide the
+        constructor.
+        ]]>
+    </text>
+    <boxed title="Collecting">
+        <![CDATA[
+        For converting your stream back into collections, have two methods, <i>collectToList</i> and
+        <i>collectToSet</i>. You don't have to bother writing classes similar to <i>Collectors</i>.
+        ]]>
+    </boxed>
+    <title text="Supported operations"/>
+    <text>
+        <![CDATA[
+        Implement at least the following stream operations for your class:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>Filtering.</li>
+        <li>Mapping to a different stream.</li>
+        <li>Matching: the <i>anyMatch</i> and <i>allMatch</i> methods.</li>
+        <li>Counting.</li>
+        <li>Iterating: the <i>forEach</i> method.</li>
+        <li>Getting the first element: the <i>findFirst</i> method.</li>
+        </ul>
+        ]]>
+    </list>
+    <advanced title="Implement more">
+        <![CDATA[
+        Feel free to implement more stream operations. You can browse the original <i>Stream</i>'s
+        methods for inspiration <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html">here</a>.
+        ]]>
+    </advanced>
+    <text>
+        <![CDATA[
+        It's important that all your stream operations take <b>functional interfaces</b> as parameters, just like
+        the real ones. This will allow you to pass in lambda expressions. Also make sure that you can "chain" the
+        operations. You can achieve that with the return values.
+        ]]>
+    </text>
+    <boxed title="Using the actual stream">
+        <![CDATA[
+        You can use the original <i>Stream</i> inside your implementation, but I suggest you do not, as it
+        might lead to some confusion (method names will be the same as your methods).
+        ]]>
+    </boxed>
+    <solution>
+        <text>
+            <![CDATA[
+            I created the <i>MyStream</i> class, which implements all the necessary operations:
+            ]]>
+        </text>
+        <code><![CDATA[
+            
+<font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">MyStream</font>&lt;<font color="#999900">T</font>> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//stores the elements of the stream
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#E65100">final</font> <font color="#999900">List</font>&lt;<font color="#999900">T</font>> elements;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//static method to create streams
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#E65100">static</font> &lt;<font color="#999900">T</font>> <font color="#999900">MyStream</font>&lt;<font color="#999900">T</font>> <font color="#ADD8E6">of</font>(<font color="#999900">Collection</font>&lt;<font color="#999900">T</font>> collection) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#E65100">new</font> <font color="#999900">MyStream</font>&lt;>(collection);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//private constructor
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">MyStream</font>(<font color="#999900">Collection</font>&lt;<font color="#999900">T</font>> collection) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;elements = <font color="#E65100">new</font> <font color="#999900">LinkedList</font>&lt;<font color="#999900">T</font>>(collection);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//collecting to a list
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">List</font>&lt;<font color="#999900">T</font>> <font color="#ADD8E6">collectToList</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#E65100">new</font> <font color="#999900">LinkedList</font>&lt;<font color="#999900">T</font>>(elements);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//collecting to set
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Set</font>&lt;<font color="#999900">T</font>> <font color="#ADD8E6">collectToSet</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#E65100">new</font> <font color="#999900">HashSet</font>&lt;<font color="#999900">T</font>>(elements);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//filtering
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">MyStream</font>&lt;<font color="#999900">T</font>> <font color="#ADD8E6">filter</font>(<font color="#999900">Predicate</font>&lt;<font color="#999900">T</font>> predicate) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp; * Make a copy, since you can get ConcurrentModificationException
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp; * if you remove elements while iterating.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">T</font>> copy = <font color="#E65100">new</font> <font color="#999900">LinkedList</font>&lt;>(elements);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//iterate over the copy and remove from original
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">T</font> element: copy) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(!predicate.<font color="#ADD8E6">test</font>(element)) elements.<font color="#ADD8E6">remove</font>(element);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#E65100">this</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//mapping to another stream
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> &lt;<font color="#999900">S</font>> <font color="#999900">MyStream</font>&lt;<font color="#999900">S</font>> <font color="#ADD8E6">map</font>(<font color="#999900">Function</font>&lt;<font color="#999900">T</font>,<font color="#999900">S</font>> mapper) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">S</font>> newElements = <font color="#E65100">new</font> <font color="#999900">LinkedList</font>&lt;>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//transform all elements
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">T</font> element: elements) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;newElements.<font color="#ADD8E6">add</font>(mapper.<font color="#ADD8E6">apply</font>(element));
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#E65100">new</font> <font color="#999900">MyStream</font>&lt;>(newElements);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//anyMatch function
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">boolean</font> <font color="#ADD8E6">anyMatch</font>(<font color="#999900">Predicate</font>&lt;<font color="#999900">T</font>> predicate) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">T</font> element: elements) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(predicate.<font color="#ADD8E6">test</font>(element)) <font color="#E65100">return true</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return false</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//allMatch function
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">boolean</font> <font color="#ADD8E6">allMatch</font>(<font color="#999900">Predicate</font>&lt;<font color="#999900">T</font>> predicate) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">T</font> element: elements) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(!predicate.<font color="#ADD8E6">test</font>(element)) <font color="#E65100">return false</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return true</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//counting elements
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">count</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> elements.<font color="#ADD8E6">size</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//iterating
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">forEach</font>(<font color="#999900">Consumer</font>&lt;<font color="#999900">T</font>> consumer) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">T</font> element: elements) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;consumer.<font color="#ADD8E6">accept</font>(element);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//getting the first element
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Optional</font>&lt;<font color="#999900">T</font>> <font color="#ADD8E6">findFirst</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(elements.<font color="#ADD8E6">size</font>() > <font color="#F0E130">0</font>) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#999900">Optional</font>.<font color="#ADD8E6">of</font>(elements.<font color="#ADD8E6">get</font>(<font color="#F0E130">0</font>));
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#999900">Optional</font>.<font color="#ADD8E6">empty</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+            
+        ]]></code>
+    </solution>
+</resources>

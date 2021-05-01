@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- Task of course 'Primitives, control flow and I/O' --><resources>
+    <taskdata>
+        <id>101</id>
+        <name>Handle user data</name>
+    </taskdata>
+
+    <text>
+        <![CDATA[
+        Your task is to create a program that reads input from the user (name, age, etc...) and performs some
+        operations according to this data. It will then finally display its operations in the console and also save
+        it to a text file.
+        ]]>
+    </text>
+    <boxed title="Current year">
+        <![CDATA[
+        This program will need to know the current year. Hardcoding it is bad practice, as the code will give wrong results
+        next year. Instead, take a look at the following code sample which shows how to get the current year as an integer
+        variable:
+        ]]>
+    </boxed>
+    <code><![CDATA[
+        
+        <font color="#DF7401">int</font> year = <font color="#999900">Year</font>.<font color="#ADD8E6">now</font>().<font color="#ADD8E6">getValue</font>();
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        This code uses <a href="https://docs.oracle.com/javase/8/docs/api/java/time/package-summary.html">java.time</a>, which was added with Java 8.
+        ]]>
+    </text>
+    <title text="Required inputs"/>
+    <text>
+        <![CDATA[
+        The program will need one command line argument. This can either be SAVE or NO_SAVE. If it is <b>SAVE</b>, the
+        program must perform the tasks detailed in the 'save to file' paragraph. If it is <b>NO_SAVE</b>, these tasks must
+        not be performed.
+        ]]>
+    </text>
+    <boxed title="Wrong argument">
+        <![CDATA[
+        If no argument is given, or it's neither SAVE not NO_SAVE, then the <b>System.err</b> channel must be used to
+        indicate the problem, and the program should halt. Use the code sample below to terminate the program.
+        <br><br>
+        To compare strings, use the <a href="https://www.tutorialspoint.com/java/java_string_equals.htm">equals method</a>
+        instead of the <b>==</b> operator! The reasons behind this are explained in a later course.
+        ]]>
+    </boxed>
+    <code><![CDATA[
+        
+        <font color="#999900">System</font>.<font color="#ADD8E6">exit</font>();
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        At start, after checking the command line argument, the program must ask the user their name, age and profession. Store these
+        in appropriate variables, as they will be used later.
+        ]]>
+    </text>
+    <boxed title="Wrong inputs">
+        <![CDATA[
+        Try to validate the given data as much as possible. For example, your program should not accept if the user entered
+        nothing for name or profession or a negative age.
+        ]]>
+    </boxed>
+    <advanced title="Handle age related exceptions">
+        <![CDATA[
+        The given age will be parsed to an integer. To make your program more stable, you can try to implement simple
+        exception handling for the <b>NumberFormatException</b>.
+        <p>
+        Use the <a href="https://www.javatpoint.com/try-catch-block">try-catch block</a> to notify the user of the problem
+        instead of crashing the program.
+        ]]>
+    </advanced>
+    <title text="Handle the user data"/>
+    <text>
+        <![CDATA[
+        At this point the inputs should be validated. Calculate and print the following things to the console:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>The year the user was born.</li>
+        <li>The year the user turned 18. If he has not yet turned 18, print that.</li>
+        <li>All the years the user was alive in (see below for details).</li>
+        </ul>
+        ]]>
+    </list>
+    <boxed title="Years">
+        <![CDATA[
+        The years the user was alive should be stored in a <b>list</b>. They should be printed to the
+        console separated by commas in a way that there is a <b>line break after every 6.</b> of them.
+        ]]>
+    </boxed>
+    <title text="Save to file"/>
+    <text>
+        <![CDATA[
+        If the user passed the <b>SAVE</b> command line argument, perform the following things:
+        ]]>
+    </text>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>Create a file called 'userdata.txt'</li>
+        <li>Overwrite and don't append if it exists.</li>
+        <li>Write the name, age and profession into the file, in a formatted way.</li>
+        <li>Write the years the user was alive in using the same formatting specified above.</li>
+        </ul>
+        ]]>
+    </list>
+    <text>
+        <![CDATA[
+        Feel free to use the way shown in chapters 'input' and 'output' to bypass file related exception
+        handling.
+        ]]>
+    </text>
+    <advanced title="File related exceptions">
+        <![CDATA[
+        If you wish to make your code better, try to handle the file related exceptions instead of "suppressing"
+        them with <i>throws Exception</i>.
+        ]]>
+    </advanced>
+    <boxed title="Reminder: conventions">
+        <![CDATA[
+        Don't forget to abide the coding conventions. Comment your code! Write methods for the subtasks and use
+        parameters and return values to communicate between them!
+        ]]>
+    </boxed>
+
+    <solution>
+    <text>
+        <![CDATA[
+        This solution only uses one class, and a few methods. Exception handling was not mandatory, but
+        it's implemented in this example solution.
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="#E65100">package</font> userinput;
+<br/>
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">io</font>.<font color="#999900">IOException</font>;
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">io</font>.<font color="#999900">PrintWriter</font>;
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">time</font>.<font color="#999900">Year</font>;
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">util</font>.<font color="#999900">InputMismatchException</font>;
+<br/><font color="#E65100">import</font> java.<font color="#ADD8E6">util</font>.<font color="#999900">Scanner</font>;
+<br/>
+<br/><font color="#E65100">public class</font> <font color="#999900">Main</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//check the command line argument
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> save = <font color="#ADD8E6">saveEnabled</font>(args);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//ask for user data
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Scanner</font> scanner = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(<font color="#999900">System</font>.<font color="#ADD8E6">in</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">print</font>(<font color="#2E8B57">"Enter your name: "</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> name = scanner.<font color="#ADD8E6">nextLine</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">print</font>(<font color="#2E8B57">"Enter your age: "</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> age = <font color="#F0E130">0</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> { <font color="gray">//exception handling for age
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;age = <font color="#999900">Integer</font>.<font color="#ADD8E6">parseInt</font>(scanner.<font color="#ADD8E6">nextLine</font>());
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">InputMismatchException</font> e) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">err</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Error: invalid age!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">exit</font>(<font color="#F0E130">0</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">print</font>("What is your profession? ");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> prof = scanner.<font color="#ADD8E6">nextLine</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;scanner.<font color="#ADD8E6">close</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ADD8E6">validateData</font>(name, prof, age); <font color="gray">//check inputs
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ADD8E6">ageCalculations</font>(age); <font color="gray">//age related tasks
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(save) { <font color="gray">//if saving is active, write to file
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ADD8E6">saveToFile</font>(name, prof, age);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;This method checks if saving is enabled using the command line arguments.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;If the argument is valid a boolean is returned that indicates if saving is enabled.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font> <font color="#DF7401">boolean</font> <font color="#ADD8E6">saveEnabled</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(args.<font color="#ADD8E6">length</font> != <font color="#F0E130">1</font>) { <font color="gray">//1 argument is allowed
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">err</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Wrong number of args!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">exit</font>(<font color="#F0E130">0</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(args[<font color="#F0E130">0</font>].<font color="#ADD8E6">equals</font>(<font color="#2E8B57">"SAVE"</font>)) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> true;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> <font color="#ADD8E6">if</font>(args[<font color="#F0E130">0</font>].<font color="#ADD8E6">equals</font>(<font color="#2E8B57">"NO_SAVE"</font>)) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> false;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> { <font color="gray">//unknown argument
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">err</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Invalid argument: "</font> + args[<font color="#F0E130">0</font>]);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">exit</font>(<font color="#F0E130">0</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;the program won't get to this return statement,
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;but the compiler requires it.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> false;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//this method checks if the user entered valid inputs
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">validateData</font>(<font color="#999900">String</font> name, <font color="#999900">String</font> prof, <font color="#DF7401">int</font> age) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//the length method counts the characters in a string!
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(name.<font color="#ADD8E6">length</font>() == <font color="#F0E130">0</font> || prof.<font color="#ADD8E6">length</font>() == <font color="#F0E130">0</font>) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">err</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Empty string is not accepted!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">exit</font>(<font color="#F0E130">0</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(age &lt; <font color="#F0E130">0</font>) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">err</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Age can'</font>t be negative!");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">exit</font>(<font color="#F0E130">0</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//performs the age related tasks
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">ageCalculations</font>(<font color="#DF7401">int</font> age) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//calculate the birth year
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> currentYear = <font color="#999900">Year</font>.<font color="#ADD8E6">now</font>().<font color="#ADD8E6">getValue</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> birthYear = currentYear - age;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>("\nYou were born in " + birthYear);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//calculate the year of becoming 18
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(age >= <font color="#F0E130">18</font>) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"You turned 18 in "</font> + (birthYear+<font color="#F0E130">18</font>));
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"You are not yet 18!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//print all years in which the user is/was alive
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"The years you were alive in are:"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#ADD8E6">createYearsString</font>(age));
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Makes a string that contains the years the user was
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;alive in.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;This is extracted to a method so it can be reused when
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;printing to the file as well.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font> <font color="#999900">String</font> <font color="#ADD8E6">createYearsString</font>(<font color="#DF7401">int</font> age) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> currentYear = <font color="#999900">Year</font>.<font color="#ADD8E6">now</font>().<font color="#ADD8E6">getValue</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> birthYear = currentYear - age;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//the string is empty at the beginning
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> printedYears = "";
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> columnCounter = <font color="#F0E130">0</font>; <font color="gray">//this is used to format the years
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> year = birthYear; year &lt;= currentYear; year++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//add the next year to the string
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;printedYears = printedYears + year + <font color="#2E8B57">", "</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;columnCounter++;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(columnCounter == <font color="#F0E130">6</font>) { <font color="gray">//break line at column 6
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;printedYears = printedYears + "\n";
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;columnCounter = <font color="#F0E130">0</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> printedYears;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//creates a file and writes the data into it
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">saveToFile</font>(<font color="#999900">String</font> name, <font color="#999900">String</font> profession, <font color="#DF7401">int</font> age) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> { <font color="gray">//this solution uses exception handling
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">PrintWriter</font> writer = <font color="#E65100">new</font> <font color="#999900">PrintWriter</font>("userdata.<font color="#ADD8E6">txt</font><font color="#2E8B57">", "</font>UTF-8");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//writer all data into the file
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;writer.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Name: "</font> + name);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;writer.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Age: "</font> + age);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;writer.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Profession:"</font> + profession);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;writer.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Years alive: "</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;writer.<font color="#ADD8E6">println</font>(<font color="#ADD8E6">createYearsString</font>(age));
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;writer.<font color="#ADD8E6">close</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">IOException</font> e) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">err</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"File writing exception!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Quite a large price of code, isn't it? If you want to analyze it, go method by method, starting from <i>main</i>.
+        <p>
+        Depending on which parts you extracted into method, your solution may look completely different, but that does not
+        mean it is wrong!
+        ]]>
+    </text>
+    </solution>
+</resources>

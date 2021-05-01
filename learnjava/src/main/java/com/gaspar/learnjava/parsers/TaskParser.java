@@ -10,6 +10,7 @@ import androidx.annotation.WorkerThread;
 
 import com.gaspar.learnjava.curriculum.Component;
 import com.gaspar.learnjava.curriculum.Task;
+import com.gaspar.learnjava.utils.LocalizationUtils;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -49,7 +50,8 @@ public class TaskParser {
             throws XmlPullParserException, RuntimeException, IOException {
         Task parsedTask = null;
         final AssetManager manager = context.getAssets();
-        String taskFolder = "tasks";
+        String localizedAssets = LocalizationUtils.getLocalizedAssetPath();
+        String taskFolder = localizedAssets + "/tasks";
         final String[] taskPaths = manager.list(taskFolder); //list task XML-s in the asset folder
         final XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
         factory.setNamespaceAware(true);

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- Chapter about maps. --><resources>
+    <chapterdata>
+        <id>204</id>
+        <name>Maps</name>
+    </chapterdata>
+    <text>
+        <![CDATA[
+        Maps can hold pairs of data in an efficient way. These pairs are called <b>key-value</b> pairs.
+        A proper map implementation can very quickly get the value of a given key.
+        ]]>
+    </text>
+    <boxed title="Maps in other languages">
+        <![CDATA[
+        If you're familiar with <i>JavaScript</i> or <i>Python</i>, then you may know that these structures
+        are called <b>dictionaries</b> there, and they are built into the languages themselves.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        A way to think about maps it that they're arrays, but not necessarily indexed by integers. Instead, they
+        are indexed by the <b>keys</b>, which can be of any type, as <i>JDK</i> map implementations are also generic.
+        ]]>
+    </text>
+    <boxed title="No ordering">
+        <![CDATA[
+        Maps have no concept of ordering. While lists or queues for example always maintain a precise order of their
+        elements, maps only care if they contain an element or not. There exist other unordered collections as well, such as
+        <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html">sets</a>.
+        ]]>
+    </boxed>
+    <image name="map"/>
+    <text>
+        <![CDATA[
+        The example map in the image has <i>strings</i> as keys. Given a string it will return the float that key string
+        maps to (or null, if the given string is not a key in the map). Similarly as how an array can't have multiple
+        elements at the same index, maps also <b>disallow duplicate keys</b>.
+        ]]>
+    </text>
+    <boxed title="Maps in Java">
+        <![CDATA[
+        Maps in the Java collections framework follow the same pattern as the previously met data structures.
+        There is a top-level interface, <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Map.html">java.util.Map</a>, and several implementations such as
+         <a href="https://docs.oracle.com/javase/7/docs/api/java/util/HashMap.html">java.util.HashMap</a> and <a href="https://docs.oracle.com/javase/7/docs/api/java/util/TreeMap.html">java.util.TreeMap</a>
+        ]]>
+    </boxed>
+    <title text="An example of map usage"/>
+    <text>
+        <![CDATA[
+        Maps come in handy when we efficiently want to pair data. Let's create a silly example where we map each day of the weak to a boolean
+        value, indicating if that day is on the weekend or not.
+        <p>
+        It's good practice to use <b>enums</b> for constants such as days of the week. Take a look at the chapter about them
+        in the previous course if you can't quite remember how to make them.
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">enum</font> <font color="#999900">Day</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;MONDAY,
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;TUESDAY,
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;WEDNESDAY,
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;THURSDAY,
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;FRIDAY,
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;SATURDAY,
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;SUNDAY
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Now let's create a mapping between enum values and booleans, and fill it with pairs.
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="gray">//create map</font>
+<br/><font color="#999900">Map</font>&lt;<font color="#999900">Day</font>,<font color="#999900">Boolean</font>> weekendMap = <font color="#E65100">new</font> <font color="#999900">HashMap</font>&lt;>();
+<br/>
+<br/><font color="gray">//fill it with key-value pairs</font>
+<br/><font color="#E65100">for</font>(<font color="#999900">Day</font> day: <font color="#999900">Day</font>.<font color="#ADD8E6">values</font>()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(day == <font color="#999900">Day</font>.SATURDAY || day == <font color="#999900">Day</font>.SUNDAY) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;weekendMap.<font color="#ADD8E6">put</font>(day, <font color="#E65100">true</font>); <font color="gray">//on weekend</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;weekendMap.<font color="#ADD8E6">put</font>(day, <font color="#E65100">false</font>); <font color="gray">//not on weekend</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        As you can see, the <i>put</i> method can be used to place key-value pairs into the map. Let's retrieve
+        some values using our days as keys:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+           <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Monday is on weekend: "</font> + weekendMap.<font color="#ADD8E6">get</font>(<font color="#999900">Day</font>.MONDAY));
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Saturday is on weekend: "</font> + weekendMap.<font color="#ADD8E6">get</font>(<font color="#999900">Day</font>.SATURDAY));
+        
+    ]]></code>
+    <title text="Iterating the map"/>
+    <text>
+        <![CDATA[
+        When working with maps we sometimes want to iterate all elements, just as we did with lists or arrays, for example.
+        I'll use the previous map to demonstrate the possibilities.
+        <p>
+        If we need to <b>iterate all key</b>, we can do it this way:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"The map has the following days as keys:"</font>);
+<br/><font color="#E65100">for</font>(<font color="#999900">Day</font> key: weekendMap.<font color="#ADD8E6">keySet</font>()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(key.<font color="#ADD8E6">toString</font>());
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+We can <b>iterate all values</b> in the map, the only difference is that instead of the <i>keySet</i> method, the
+<i>values</i> method has to be used. This isn't really interesting for this map, as it only has true and false values anyways.
+<p>
+Instead, let's take a look at how we can <b>iterate the pairs</b> themselves:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"The map has the following key-value pairs:"</font>);
+<br/><font color="#E65100">for</font>(<font color="#999900">Map</font>.<font color="#999900">Entry</font>&lt;<font color="#999900">Day</font>, <font color="#999900">Boolean</font>> pair: weekendMap.<font color="#ADD8E6">entrySet</font>()) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(pair.<font color="#ADD8E6">getKey</font>() + " -> " + pair.<font color="#ADD8E6">getValue</font>());
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        The trick is to realize that there is already an <i>Entry</i> class provided for us, which can hold pairs.
+        ]]>
+    </text>
+    <boxed title="Other methods">
+        <![CDATA[
+        Maps also have almost all other methods that we've seen in previous collections, such as removing elements
+        (by key and by value), replacing elements, clearing the map and getting the size.
+        ]]>
+    </boxed>
+    <advanced title="Map implementations">
+        <![CDATA[
+        A map implementation is significantly harder then a list or other collections based on lists. If you're interested,
+        the descriptions of <i>HashMap</i> and <i>TreeMap</i> are good starting points (linked above).
+        ]]>
+    </advanced>
+    <interactive instruction="This program should ask for 5 names and ages, and place these in a name -&gt; age map.">
+        <data><![CDATA[
+
+<font color="#999900">Map</font>&lt;___,___> userData = <font color="#E65100">new</font> <font color="#999900">HashMap</font>&lt;>();
+<br/><font color="#999900">Scanner</font> scanner = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(<font color="#999900">System</font>.<font color="#ADD8E6">in</font>);
+<br/><font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;<font color="#F0E130">5</font>; i++) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"<font color="</font>#999900">Enter</font> " + (i+<font color="#F0E130">1</font>) + ". user name and age:");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> name = scanner.<font color="#ADD8E6">nextLine</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> age = scanner.<font color="#ADD8E6">nextInt</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;userData.<font color="#ADD8E6">___</font>(name, age);
+<br/>}
+
+        ]]></data>
+        <answer place="0">String</answer>
+        <answer place="1">Integer</answer>
+        <answer place="2">put</answer>
+    </interactive>
+</resources>

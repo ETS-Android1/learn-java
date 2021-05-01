@@ -9,6 +9,8 @@ import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
 
+import com.gaspar.learnjava.utils.LocalizationUtils;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -28,7 +30,8 @@ public abstract class RawParser {
     public static Drawable parseImage(String imageName, @NonNull final Context context) {
         Drawable imageDrawable = null;
         final AssetManager manager = context.getAssets();
-        String imagesFolder = "images";
+        String localizedAssets = LocalizationUtils.getLocalizedAssetPath();
+        String imagesFolder = localizedAssets + "/images";
         try {
             final String[] imagePaths = manager.list(imagesFolder); //list images in the asset folder
             if(imagePaths == null) throw new IOException();
@@ -59,7 +62,8 @@ public abstract class RawParser {
     public static List<Drawable> parseCodeImages(@NonNull final Context context) {
         List<Drawable> drawables = new ArrayList<>();
         final AssetManager manager = context.getAssets();
-        String imagesFolder = "images";
+        String localizedAssets = LocalizationUtils.getLocalizedAssetPath();
+        String imagesFolder = localizedAssets + "/images";
         try {
             final String[] imagePaths = manager.list(imagesFolder); //list images in the asset folder
             if(imagePaths == null) throw new IOException();

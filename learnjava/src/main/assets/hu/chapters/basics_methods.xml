@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- 'Methods', belongs to the course 'The basics' --><resources>
+    <chapterdata>
+        <id>55</id>
+        <name>Methods: return types and parameters</name>
+    </chapterdata>
+    <title text="Methods: Declaration"/>
+    <text>
+        <![CDATA[
+        Methods are code blocks which can take <b>parameters</b>, do some calculations according to these
+        parameters, and finally, <b>return</b> a variable. The reason behind using methods is to structure and
+        simplify our code. Note that we already met one method, the <i>main method</i>.
+        ]]>
+    </text>
+    <boxed title="Declaring a method">
+        <![CDATA[
+        When declaring a method, we must specify a few things. We must provide a name, which we can later
+        use to <b>call the method</b>. We also have to say what the <b>return type</b> and <b>parameter list</b>
+        for our method is.
+        <br><br>
+        Each parameter has a type and a name, which can be used to reference them inside the method. The parameter list
+        can be empty, it isn't necessary to have parameters at all.
+        <br><br>
+        See the code samples below for the syntax of declaration.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        We will use our project to declare some methods. After that we will call these methods to observe
+        what they do. Delete the statements inside the main method for now.
+        <br><br>
+        The first method we declare is a very simple one. Can you guess what it does?
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="#E65100">static</font> <font color="#DF7401">int</font> <font color="#ADD8E6">add</font>(<font color="#DF7401">int </font>n1,<font color="#DF7401"> int </font>n2) {
+<br/><font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>additionResult = n1 + n2;
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;return </font>additionResult;
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        The first <i>int</i> in the first line is the <b>return type</b> of the method. It will return an <i>int</i> to the caller
+        after finishing. Then we write the name of the method, now <i>add</i>.
+        <br><br>
+        Behind the name, comes the <b>parameters</b>, between parentheses. This method has two of them, both <i>int</i>'s, called
+        <i>n1</i> and <i>n2</i>. As you can see, the parameters are separated by commas.
+        ]]>
+    </text>
+    <interactive instruction="Correct the method declaration so that its return type matches the returned value!">
+        <data><![CDATA[
+
+<font color="#E65100">static</font> ___ <font color="#ADD8E6">getZero</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#F0E130">0</font>;
+<br/>}
+
+        ]]></data>
+        <answer place="0">int</answer>
+        <default place="0">String</default>
+    </interactive>
+    <advanced title="The static keyword">
+        <![CDATA[
+        In our method declaration there is also a <i>static</i> keyword. The importance of this will be explained
+        later, for now let's just say that we need this keyword, so we can call our methods later from the main method.
+        ]]>
+    </advanced>
+    <text>
+        <![CDATA[
+        <u>What the method does:</u> The name gives it away. The method will take two <i>int</i>'s as parameters,
+        add them together, and return the result (which is also an <i>int</i> of course).
+        ]]>
+    </text>
+    <boxed title="The return keyword">
+        <![CDATA[
+        The <b>return</b> keyword is used to return the result of the method to the caller (no surprise there).
+        After it we must write the value or variable we want to return, and a ';', as this is a statement. There can
+        be no other statements after the return statement!
+        <br><br>
+        The value after the <i>return</i> keyword must have the same type as the <b>return type</b> of the method.
+        As we can see in the previous example method, the return type is <i>int</i> and the returned value, <i>additionResult</i>
+        is also an integer variable, and the types match.
+        ]]>
+    </boxed>
+    <code><![CDATA[
+        
+        <font color="#E65100">static</font> <font color="#DF7401">void </font>greetMe (<font color="#999900">String</font> myName) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello, "</font> + myName);
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        This method operates on text rather then integers. It takes a <i>String</i> parameter,
+        joins it with 'Hello', and prints it to the console.
+        <br><br>
+        We can also notice a keyword that we haven't seen before, <b>void</b>. Just like having parameters isn't
+        necessary, neither is returning something. The <i>void</i> keyword is used instead of a return type to
+        indicate that the method does not return anything.
+        ]]>
+    </text>
+    <interactive instruction="Declare a method with no return type and a String parameter!">
+        <data><![CDATA[
+            
+<font color="#E65100">static</font> ___ <font color="#ADD8E6">stringConsumer</font>(___ text) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//do something with string here...
+</font>
+<br/>}
+
+        ]]></data>
+        <answer place="0">void</answer>
+        <answer place="1">String</answer>
+    </interactive>
+    <boxed title="Returning in void methods">
+        <![CDATA[
+        The <i>return</i> keyword works a bit differently in void methods. It isn't necessary
+        to even include it (as you can see in the above example, which has no return statement)!
+        <br><br>
+        We can however use it, but in this case we <b>must not put any value after it</b>, like this:
+        <br><br>
+        <i>return;</i>
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Lastly, let's see an example for a method with no parameters.
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="#E65100">static </font><font color="#DF7401">int </font><font color="#ADD8E6">twoPlusTwo</font>() {
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;return </font><font color="#F0E130">2</font> + <font color="#F0E130">2</font>;
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Very simple, right? This method just returns the result of 2+2. No need for any parameters
+        to do this.
+        <br><br>
+        Observe that the lack of parameters isn't indicated with the <i>void</i> keyword! Instead there is simply
+        nothing between the parentheses.
+        ]]>
+    </text>
+    <advanced title="Don't forget the parentheses">
+        <![CDATA[
+        For a method without parameters, why do we need to put the parentheses there if we won't have
+        anything between them, you might ask:
+        <br><br>
+        <i>int myMethod() { ... }</i>
+        <br><br>
+        Because without the parentheses it looks much like a variable declaration, and this confuses
+        both the compiler and the programmer as well! Something like this is <b>invalid code</b>:
+        <br><br>
+        <i>int myMethod { ... }</i>
+        ]]>
+    </advanced>
+    <text>
+        <![CDATA[
+        It's not allowed to declare other methods inside a method. When you declare a method, you must do it
+        <b>within the class</b> but <b>outside other methods</b>. For example, the following code is invalid:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="#E65100">static</font> <font color="#DF7401">int</font> <font color="#ADD8E6">method1</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;     <font color="#E65100">static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">method2</font>() {
+<br/>   	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;       <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"I'</font>m an invalid method!");
+<br/>      	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Make sure all the methods are in your project. Your class will have to look something like this
+        (the order of the methods doesn't matter):
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+           <font color="#E65100">public class</font> <font color="#999900">Main</font> {
+<br/>
+<br/>&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static </font><font color="#DF7401">int </font><font color="#ADD8E6">add</font>(<font color="#DF7401">int </font>n1,<font color="#DF7401"> int </font>n2) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>additionResult = n1 + n2;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return </font>additionResult;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static </font><font color="#DF7401">void </font><font color="#ADD8E6">greetMe</font>(<font color="#999900">String</font> myName) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello, "</font> + myName);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static </font><font color="#DF7401">int </font><font color="#ADD8E6">twoPlusTwo</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;return </font><font color="#F0E130">2</font> + <font color="#F0E130">2</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+    <title text="Calling methods"/>
+    <text>
+        <![CDATA[
+        The whole reason of writing methods is so we can use (call) them later. Let's see how we can achieve this.
+        We will call our previously declared methods from the main method.
+        <br><br>
+        To call our method we must write it's name, and pass it's parameters, similarly to declaration, also
+        between the parentheses:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">public static</font><font color="#DF7401"> void </font><font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/><font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>result = <font color="#ADD8E6">add</font>(<font color="#F0E130">7,8</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>("7+<font color="#F0E130">8</font> is " + result);
+<br/>}
+<br/>
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Write this on your main method as well, and run the project!
+        <br><br>
+        <u>What happens when we run our program:</u> The <i>add</i> method gets called, with our parameters,
+        two integers, 7 and 8, passed to it. After this, the statements inside the <i>add</i> are executed, with the
+        following values:
+        <br><br>
+        <i>n1 = 7, n2 = 8</i>
+        <br><br>
+        Finally, the return value of the method (15 in this case) is assigned to our variable in the main method,
+        <i>result</i>. This value is then printed.
+        ]]>
+    </text>
+    <interactive instruction="Call the greetMe method with parameter 'John'">
+        <data><![CDATA[
+            
+<font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;___ (___);
+<br/>}
+            
+        ]]></data>
+        <answer place="0">greetMe</answer>
+        <answer place="1">"John"</answer>
+    </interactive>
+    <boxed title="Assigning methods?">
+        <![CDATA[
+        In the previous example we can see a line that may look confusing to you:
+        <br><br>
+        <i>result = add(7,8);</i>
+        <br><br>
+        Looks like we are assigning a method to our variable, doesn't it? When Java sees a statement like this,
+        it will calculate the <b>return value of the method, and assign this value to the variable</b>.
+        <br><br>
+        We must be careful not to have a <b>type-mismatch</b>! For example, this statement is <b>invalid</b>, since
+        the return type of <i>add</i> is <i>int</i> and we try to assign it to a <i>String</i> variable:
+        <br><br>
+        String text = add(3,-11);
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Let's see our next method, <i>greetMe</i>. We know that this one takes text, and prints a greeting
+        using the given text. Call it in our main method, and put a name as its parameter, then run the project,
+        and observe the output!
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">public static</font><font color="#DF7401"> void </font><font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/><font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>result = <font color="#ADD8E6">add</font>(<font color="#F0E130">7,8</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>("7+<font color="#F0E130">8</font> is " + result);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ADD8E6">greetMe</font>(<font color="#2E8B57">"Tom"</font>);
+<br/>}
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        I used <i>"Tom"</i> as the name parameter, but any name of you choosing (any text, in fact) can be used.
+        <br><br>
+        Our last method, <i>twoPlusTwo</i> is so simple that we understand how it words, even without an example.
+        ]]>
+    </text>
+    <title text="Use methods to create other methods"/>
+    <text>
+        <![CDATA[
+        Some of you may have already noticed that our 1. and 3. methods are very similar. Could we somehow use
+        our <i>add</i> method to do the same thing as the <i>twoPlusTwo</i> method?
+        <br><br>
+        Of course we can, by calling it like this:
+        <br><br>
+        <i>add(2,2)</i>
+        <br><br>
+        In fact, we can change out <i>twoPlusTwo</i> method, and make it call the <i>add</i> method!
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">static </font><font color="#DF7401">int </font><font color="#ADD8E6">twoPlusTwo</font>() {
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;return </font><font color="#ADD8E6">add</font>(<font color="#F0E130">2,2</font>);
+<br/>}
+        
+    ]]></code>
+    <advanced title="Keep it short">
+        <![CDATA[
+        Generally, writing very long methods is bad practice, which makes out code harder to understand. Our example
+        methods didn't contain more then a few statements, but it might seem easy to dump all our code to a few methods,
+        like <i>main</i>.
+        <br><br>
+        Try to avoid this, by writing short and well-named methods!
+        ]]>
+    </advanced>
+</resources>

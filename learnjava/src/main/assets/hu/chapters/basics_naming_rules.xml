@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- 'Naming rules and conventions', belongs to course 'The basics' --><resources>
+    <chapterdata>
+        <id>56</id>
+        <name>Naming rules and conventions</name>
+    </chapterdata>
+    <text>
+        <![CDATA[
+        We know that we have to name variables and methods (and classes too). However, we don't know what names we <b>can</b>
+        or what names we <b>should</b> use.
+        <br><br>
+        These names are called <b>identifiers</b>.
+        ]]>
+    </text>
+    <title text="Naming rules"/>
+    <text>
+        <![CDATA[
+        There are rules are something we <b>must</b> follow when writing identifiers in our code. Failure to do so will result
+        in compile time errors.
+        ]]>
+    </text>
+    <boxed title="Supported characters">
+        <![CDATA[
+        Java supports Unicode characters. This gives you over 137000 different characters you can use
+        in the source code. You will be able to write code with your native languages characters.
+        <br><br>
+        <b>However, just because you can, doesn't mean you should!</b> Writing your source code with, for example, japanese
+        characters will make it significantly less readable, and other programs communicating with yours may not
+        support unicode, thus you may get errors.
+        <br><br>
+        By convention, you should only use characters from the english alphabet, arabic numbers, and a few
+        other characters, such as underscore.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Java is case-sensitive! For example, <i>Text</i> and <i>text</i> won't be the same.
+        <br>
+        <br>
+        When creating identifiers (names), they
+        ]]>
+    </text>
+    <text>
+        <![CDATA[
+        <ul>
+        <li> must begin with a letter, underscore, or a '<i>$</i>' character.</li>
+        <li> can contain any letter, number, underscore, dollar sign after the first one.</li>
+        <li> can be of any length.</li>
+        <li> can't contain any special characters, such as parentheses, dots or whitespaces.
+        </ul>
+        ]]>
+    </text>
+    <text>
+        <![CDATA[
+        Let's see some valid identifiers. Note that just because all of these are <b>valid</b>, that doesn't
+        mean all of them should actually be used!
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="#DF7401">int </font>counter;
+<font color="#DF7401">
+<br/>int </font>input_counter;
+<font color="#DF7401">
+<br/>int </font>_counter;
+<font color="#DF7401">
+<br/>int </font>$input_counter;
+<br/><font color="#999900">String</font> __Xx_SoMe_TeXt_Xx__;
+<br/><font color="#999900">String</font> A124512999113;
+<br/><font color="#999900">String</font> _________;
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        The first four are not so bad, but the last 3, though perfectly valid, should be considered
+        a criminal offense. Such identifiers should never be used.
+        <br><br>
+        Not, let's see some <b>invalid</b> identifiers:
+        ]]>
+    </text>
+    <code><![CDATA[
+
+<font color="#DF7401"> int </font>0counter;
+<font color="#DF7401">
+<br/>int </font><font color="#ADD8E6">variable_</font>(important);
+<br/><font color="#999900">String</font> <font color="#F0E130">1</font>.<font color="#ADD8E6">text</font>;
+
+    ]]></code>
+    <text>
+        <![CDATA[
+        The first one begins with a number, which is not allowed. The second contains special characters,
+        namely parentheses. The last identifier not only begins with a number, but also has a dot in it.
+        ]]>
+    </text>
+    <text>
+        <![CDATA[
+        There is one more rule, and it's pretty obvious. We aren't allowed to use <b>Java keywords and literals</b>
+        as identifiers. They are reserved. This is no big restriction for us, as most keywords would be horrible
+        identifiers anyways. <i>int</i> is a keyword, for example, and so something like this is not allowed:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="#DF7401">int</font> int = <font color="#F0E130">1</font>;
+        
+    ]]></code>
+    <advanced title="List of keywords">
+        <![CDATA[
+        All keywords and literals are not listed here, as there is a lot of them, but you can find the
+        full list <a href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html">here</a>.
+        ]]>
+    </advanced>
+    <title text="Naming conventions"/>
+    <text>
+        <![CDATA[
+        Now that we know how we can create identifiers, let's see how we <b>should</b>.
+        ]]>
+    </text>
+    <boxed title="Give meaningful names">
+        <![CDATA[
+        Naming our variables and methods with self-describing, meaningful identifiers will help us
+        understand the code! As an example, if we have a variable storing text the user has entered, its name
+        should indicate that:
+        <br>
+        <br>
+        <i>userInput</i>, <i>user_input</i>, ...
+        <br><br>
+        If we have a variable holding a persons age, it shouldn't be named <i>x</i> or <i>foo</i>, but rather
+        something like <i>age</i>.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Using meaningful names is something we should do, no matter what programming language we use! The
+        following conventions are, however, specifically for Java code.
+        ]]>
+    </text>
+    <text>
+        <![CDATA[
+        When <b>naming methods and variables</b>, we should use the <b>camelCase</b> naming style. The first word is
+        lower-case, then any following words are connected with upper-case. No numbers, underscores, etc.
+        <br><br>
+        If we, for example, need a method that reverses some text, the following is a nice, camel-case name:
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+ <font color="#999900">String</font> <font color="#ADD8E6">reverseText</font>(<font color="#999900">String</font> text) { ... }
+        
+    ]]></code>
+    <interactive instruction="Correct the naming of this variable so that it uses the camel case convention!">
+        <data><![CDATA[
+
+<font color="#DF7401">int</font> ___ = <font color="#F0E130">0</font>;
+
+        ]]></data>
+        <answer place="0">matchCounter</answer>
+        <default place="0">match_counter</default>
+    </interactive>
+    <text>
+        <![CDATA[
+        We haven't seen a real example for this, but we will also have to <b>name classes</b>. For these,
+        something very similar to the camel-case style should be used. The only difference is that class
+        names should begin with a capital letter (this is called <b>PascalCase</b>)!
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+<font color="#E65100">public </font>class <font color="#999900">TextFormatter</font> { ... }
+        
+    ]]></code>
+    <interactive instruction="Name the class 'string builder' with the appropriate naming convention!">
+        <data><![CDATA[
+            
+<font color="#E65100">public</font> <font color="#E65100">class</font> ___ {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Class contents...	&nbsp;&nbsp;&nbsp;&nbsp;
+</font>
+<br/>}
+            
+        ]]></data>
+        <answer place="0">StringBuilder</answer>
+    </interactive>
+    <text>
+        <![CDATA[
+        Despite not being as important as others, package identifiers also have their own
+        naming conventions. Package names should only contain one word, fully lower case.
+        ]]>
+    </text>
+    <code><![CDATA[
+        
+        <font color="#E65100">package</font> utils;
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Note that seeing a line like <br><br>
+        <i>package com.project.utils;</i>
+        <br><br>
+        is not against this convention, as these are multiple packages, separated by dots!
+        ]]>
+    </text>
+    <advanced title="Naming constants">
+        <![CDATA[
+        Constants are variables that can't be reassigned. We don't yet know how to create such a variable,
+        but it's important to know their naming convention, for when we will be able to create them.
+        <br><br>
+        Their identifiers should only contain upper case letters, and the words are to be separated by
+        underscores. Here is an example (this will also give a hint about how to declare them):
+        <br><br>
+        <i>final int MAXIMUM_SCORE = 20;
+        ]]>
+    </advanced>
+</resources>

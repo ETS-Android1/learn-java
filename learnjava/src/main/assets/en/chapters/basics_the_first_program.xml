@@ -6,34 +6,41 @@
     </chapterdata>
     <text>
         <![CDATA[
-        From this point on, it's important that you also write or copy the code samples to your IDE
-        and experiment with them.
+        From this point on, you can also write or copy the code samples to your <i>IDE</i>
+        and experiment with them. To do this, you need to create a <b>project</b>, where your
+        <i>IDE</i> will collect the source code for one program.
         ]]>
     </text>
-    <boxed title="How to create a project">
+    <boxed title="Creating an Eclipse project">
         <![CDATA[
-        If you are using eclipse, select <b>File -> New -> New project... </b>, then enter a name for your
+        Select <b>File -> New -> New project... </b>, then enter a name for your
         project and click <i>Finish</i>. You will see that your project appears on the left side, with an empty
         <b>src</b> folder.
-        <br><br>
-        For this simple project we will use the default package. Right click the src folder and select <b>New ->
-        Class</b>, then enter a name for your class. Before clicking <i>Finish</i>, make sure to tick <b>public
-        static void main(String[] args)</b> field!
-        <br><br>
-        If you are using another recommended IDE from the guide, follow the instructions
-         <a href="https://www.tutorialspoint.com/intellij_idea/intellij_idea_create_first_java_project.htm">here</a>
-        for Intellij Idea, and <a href="https://netbeans.org/kb/docs/java/quickstart.html">here</a> for NetBeans.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        The core of the project has been created for you. For Eclipse, you should see something like this on the editor screen (with
-         your own class name, of course):
+        For this simple project we will use the default package. Right click the src folder and select <b>New ->
+        Class</b>, then enter a name for your class. Before clicking <i>Finish</i>, make sure to tick  field!
+        <br><br>
+        ]]>
+    </text>
+    <advanced title="Other IDEs">
+        <![CDATA[
+        If you are using another recommended IDE from the guide, follow the instructions
+        <a href="https://www.tutorialspoint.com/intellij_idea/intellij_idea_create_first_java_project.htm">here</a>
+        for Intellij Idea, and <a href="https://netbeans.org/kb/docs/java/quickstart.html">here</a> for NetBeans.
+        ]]>
+    </advanced>
+    <text>
+        <![CDATA[
+        The core of the project has been created for you. After double clicking the source file you just generated,
+        you should see something like this on the editor screen (with your own class name, of course):
         ]]>
     </text>
     <code><![CDATA[
         
-        <font color="#E65100">public class </font>Main {
+        <font color="#E65100">public class </font> <font color="#999900">Main</font> {
 <br/>
 <br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;public static</font><font color="#DF7401"> void </font><font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">// TODO: Auto-generated method stub</font>
@@ -58,17 +65,19 @@
     </text>
     <boxed title="Running our program">
         <![CDATA[
-        The code that our IDE has generated is valid, and we can run it right away. In Eclipse you can compile run the project
-        by pressing the round green icon with a white arrow in it (see the image below).
+        The code that our IDE has generated is valid, and we can run it right away. To compile and run,
+        right click on your project on the left side, and select <b>Run as... -> Java application</b>. You
+        can also use the green <i>Run</i> button in the toolbar.
         <br><br>
-        Feel free to run the code, but our main method is practically empty, so our application will not do anything, for now!
+        Since your main method is practically empty, the application will not do anything.
         ]]>
     </boxed>
     <image name="run_project"/>
     <text>
         <![CDATA[
         Lets add a statement, so our program will print a line to the console for us. In Java, statements
-        must end with a ';'.
+        must end with a ' ; '. Make sure to <b>save</b>
+        your changes (<i>Control + S</i>), otherwise the old version will run again!
         ]]>
     </text>
     <code><![CDATA[
@@ -123,7 +132,7 @@
     <title text="Let's add more statements"/>
     <text>
         <![CDATA[
-        Let us add another print statement for our code, after the previous one:
+        Let us add another print statement for our code, after the previous one.
         ]]>
     </text>
     <code><![CDATA[
@@ -137,9 +146,7 @@
     <text>
         <![CDATA[
         We expect that the messages will appear in the console in the same order as they are in the code.
-        Run again, and notice that this is exactly what happens.
-        <br><br>
-        In general, statements inside a method are executed <b>from top to bottom</b>.
+        Run again, and notice that this is exactly what happens. In general, statements inside a method are executed <b>from top to bottom</b>.
         ]]>
     </text>
     <interactive instruction="Complete the main method so that it prints the text!">

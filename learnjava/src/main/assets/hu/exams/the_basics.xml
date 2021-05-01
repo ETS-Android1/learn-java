@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- Exam of course 'The basics --><resources>
+    <examdata>
+        <id>5</id>
+        <questionAmount>25</questionAmount>
+        <timeLimit>30</timeLimit>
+        <finished>true</finished>
+    </examdata>
+    <!-- Questions about 'What is Java?' -->
+    <question type="text">
+        <text>Something is missing from the variable declaration 'int x = 5' Write the corrected statement.</text>
+        <correct>int[s]x = 5;</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="text">
+        <text>Something is wrong with the 'String data = 32;' statement. Write the corrected statement, without changing the
+            variables name, or value.</text>
+        <correct>int[s]data = 32;</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="text">
+        <text>What does JDK stand for?</text>
+        <correct>Java Development Kit</correct>
+        <ignoreCase/>
+    </question>
+    <question type="multi_choice">
+        <text>When we say 'Java', what can we mean by it?</text>
+        <answer>A platform for software development</answer>
+        <answer>A database</answer>
+        <answer>A programming language</answer>
+        <answer>Bytecode</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+    </question>
+    <question type="true_false">
+        <text>Java is a cross platform programming language.</text>
+        <correct>true</correct>
+    </question>
+    <question type="single_choice">
+        <text>What does cross platform mean?</text>
+        <answer>You have to compile your program for each platform you want it to support.</answer>
+        <answer>You programs will run in multiple environments, operation systems.</answer>
+        <answer>Your programs are guaranteed to run on Linux.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which corporation take or took part in the development of Java?</text>
+        <answer>Sun Microsystems</answer>
+        <answer>Oracle Corporation</answer>
+        <answer>Google</answer>
+        <answer>IBM</answer>
+        <correct>0</correct>
+        <correct>1</correct>
+    </question>
+    <question type="true_false">
+        <text>Java is currently owned by Sun Microsystems.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>Java is currently owned by the Oracle Corporation.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>The Java platform is designed in a way so that only one programming language, Java, can use it.</text>
+        <correct>false</correct>
+    </question>
+    <question type="single_choice">
+        <text>Select what is not part of the Java platform!</text>
+        <answer>The Java programming language.</answer>
+        <answer>Java compiler (javac)</answer>
+        <answer>The JVM</answer>
+        <answer>An integrated development environment (IDE).</answer>
+        <correct>3</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Select what is part of the Java platform!</text>
+        <answer>The Java programming language.</answer>
+        <answer>Java compiler (javac)</answer>
+        <answer>The JVM</answer>
+        <answer>An integrated development environment (IDE).</answer>
+        <correct>0</correct>
+        <correct>1</correct>
+        <correct>2</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is the JDK</text>
+        <answer>An implementation of the Java platform</answer>
+        <answer>A programming language based on Java.</answer>
+        <answer>A compiler for Java.</answer>
+        <correct>0</correct>
+    </question>
+    <question type="text">
+        <text>What does JVM stand for?</text>
+        <correct>Java Virtual Machine</correct>
+        <ignoreCase/>
+    </question>
+    <question type="text">
+        <text>What does IDE stand for?</text>
+        <correct>Integrated Development Environment</correct>
+        <ignoreCase/>
+    </question>
+    <question type="single_choice">
+        <text>What is the purpose of the JVM?</text>
+        <answer>Compiles Java code to bytecode.</answer>
+        <answer>Contains the specifications for the Java platform.</answer>
+        <answer>Executes Java applications.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which properties are true for the Java programming language?</text>
+        <answer>It can only be executed over Windows OS.</answer>
+        <answer>Object-oriented</answer>
+        <answer>General-purpose</answer>
+        <answer>Dynamically-typed</answer>
+        <correct>1</correct>
+        <correct>2</correct>
+    </question>
+
+    <!-- Questions about 'File extensions and project structure' -->
+    <question type="true_false">
+        <text>.java files are text files.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>Only the JVM may open .java files.</text>
+        <correct>false</correct>
+    </question>
+    <question type="single_choice">
+        <text>Are there any restrictions on naming .java files.</text>
+        <answer>The name of file must match the name of the public class inside it.</answer>
+        <answer>No restrictions.</answer>
+        <answer>The file names can't contain capital letters.</answer>
+        <answer>The file name must begin with an underscore.</answer>
+        <correct>0</correct>
+    </question>
+    <question type="true_false">
+        <text>.class files contain bytecode</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>The JVM can execute .java files.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>The JVM can execute .class files.</text>
+        <correct>true</correct>
+    </question>
+    <question type="multi_choice">
+        <text>What is true about .class files?</text>
+        <answer>They are readable text files.</answer>
+        <answer>The JVM can execute them.</answer>
+        <asnwer>The Java compiler creates them from .java files.</asnwer>
+        <answer>They are binary files.</answer>
+        <correct>1</correct>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="text">
+        <text>What is the file extension of a Java source file?</text>
+        <correct>.java</correct>
+        <correct>java</correct>
+    </question>
+    <question type="text">
+        <text>What is the file extension of compiled Java source file, containing bytecode?</text>
+        <correct>.class</correct>
+        <correct>class</correct>
+    </question>
+    <question type="text">
+        <text>What is the file extension of a Java archive?</text>
+        <correct>.jar</correct>
+        <correct>jar</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is a Java archive?</text>
+        <answer>Output of the Java compiler.</answer>
+        <answer>A collection of Java source files.</answer>
+        <answer>A compressed file containing data for a Java application.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="true_false">
+        <text>JAR files can be made executable.</text>
+        <correct>true</correct>
+    </question>
+    <question type="multi_choice">
+        <text>What is the purpose of packages?</text>
+        <answer>They separate compiled and not compiled Java files.</answer>
+        <answer>They contain the JDK.</answer>
+        <answer>They are used to organize our classes by their function.</answer>
+        <answer>They give the structure of a project.</answer>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>Packages are not allowed to contain other packages.</text>
+        <correct>false</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which package names are restricted?</text>
+        <answer>java</answer>
+        <answer>org</answer>
+        <answer>project</answer>
+        <answer>javax</answer>
+        <correct>0</correct>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>The package declaration line must always be the last line of the source file.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>There must always be a package declaration line in the source file, on the first line.</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>We would like to import a class named 'Utils' from package 'calculator', which is inside package 'com'.
+            What is the import line we must write?</text>
+        <correct>import com.calculator.Utils;</correct>
+    </question>
+    <question type="text">
+        <text>We are creating a class into package 'utils', which is inside package 'org'. What is the package declaration statement
+            we must write?</text>
+        <correct>package org.utils;</correct>
+    </question>
+    <question type="true_false">
+        <text>Using the default package is discouraged.</text>
+        <correct>true</correct>
+    </question>
+
+    <!-- Questions about 'The first program' -->
+    <question type="multi_choice">
+        <text>What is true about the main method?</text>
+        <answer>Every Java program must have this method.</answer>
+        <answer>It has no parameters.</answer>
+        <answer>It's the entry point of the application</answer>
+        <answer>It does not return anything.</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>What does application entry point mean?</text>
+        <answer>It's where the compiler starts compiling your source files.</answer>
+        <answer>The first line of the source file.</answer>
+        <answer>It's where the JVM will start to execute your program.</answer>
+        <answer>It's the only method with no return type.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="text">
+        <text>Write the statement that will print 'Good morning' to the console.</text>
+        <correct>System.out.println("Good morning");</correct>
+    </question>
+    <question type="text">
+        <text>Enter the statement that will print 'ABC' to the console.</text>
+        <correct>System.out.println("ABC");</correct>
+    </question>
+    <question type="true_false">
+        <text>The statement 'System.out.println(Hello, world!);' is valid.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>The statement 'System.out.println("Hello, world!");' is valid.</text>
+        <correct>true</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is true about statement execution?</text>
+        <answer>Inside a method, statements are executed from bottom to top.</answer>
+        <answer>The statements are executed in the order they were compiled in.</answer>
+        <answer>Inside a method, statements are executed from top to bottom.</answer>
+        <correct>2</correct>
+    </question>
+
+    <!-- Questions about 'Variables' -->
+    <question type="true_false">
+        <text>Java is statically typed.</text>
+        <correct>true</correct>
+    </question>
+    <question type="single_choice">
+        <text>What does statically typed mean?</text>
+        <answer>Variables can only have a few different types.</answer>
+        <answer>When declaring a variable, we must say its type, and this type can't be changed.</answer>
+        <answer>We don't need to say a variables type when declaring it.</answer>
+        <answer>Every variable must have a unique identifier, a name.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="true_false">
+        <text>We must initialize our variable in the same statement it was declared in.</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>Something is wrong with the 'String text "my message";' statement. Write the corrected statement, without changing the
+            variables name, or value.</text>
+        <correct>String[s]text = "my[s]message";</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="single_choice">
+        <text>Which operator is used to check equality?</text>
+        <answer>==</answer>
+        <answer>-&gt;</answer>
+        <answer>=</answer>
+        <answer>+</answer>
+        <correct>0</correct>
+    </question>
+    <question type="single_choice">
+        <text>What does this statement do: 'int data = 21;'</text>
+        <answer>Declares an integer variable called 'data', and initializes it with value 21.</answer>
+        <answer>Declares a data variable called 'int', and initializes it with value 21.</answer>
+        <answer>Checks if the variable 'data' is equal to 21.</answer>
+        <answer>This statement is invalid, it won't do anything.</answer>
+        <correct>0</correct>
+    </question>
+    <question type="single_choice">
+        <text>What does this statement do: 'String input;'</text>
+        <answer>Declares an integer variable called 'input'.</answer>
+        <answer>Declares a String variable called 'input' and initializes it to the users input.</answer>
+        <answer>This statement is invalid, it won't do anything.</answer>
+        <answer>Declares a String variable called 'input'.</answer>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>If we assign a value with with a different type to a variable, the variable will update its type.</text>
+        <correct>false</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is a type mismatch?</text>
+        <answer>The variable and it's assigned value have different types.</answer>
+        <answer>Not giving a type to our variable.</answer>
+        <answer>When the compiler doesn't recognize the variable type we wrote.</answer>
+        <answer>Not having a main method in our program.</answer>
+        <correct>0</correct>
+    </question>
+    <question type="true_false">
+        <text>One statement can only declare one variable.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>It is possible to declare 4 variables with a single statement.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>Is the 'String i1 = "i_1", i2 = "i_2";' statement valid?</text>
+        <correct>true</correct>
+    </question>
+    <question type="multi_choice">
+        <text>What is true integer variables?</text>
+        <answer>They can't be reassigned.</answer>
+        <answer>We can perform basic arithmetic like +, -, or * on them.</answer>
+        <answer>They can contain negative numbers.</answer>
+        <correct>1</correct>
+        <correct>2</correct>
+    </question>
+    <question type="multi_choice">
+        <text>What is true about String variables?</text>
+        <answer>They can be reassigned.</answer>
+        <answer>Their values can be printed to the console.</answer>
+        <answer>We can use the '+' operator on them to connect them together.</answer>
+        <answer>They must be printed in the same method they were declared in.</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+    </question>
+
+    <!-- Questions about 'Methods' -->
+    <question type="multi_choice">
+        <text>Which of these are needed to declare a method?</text>
+        <answer>An identifier (method name).</answer>
+        <answer>Writing the method name in the main method.</answer>
+        <answer>A return type for the method.</answer>
+        <answer>A list of parameters, each with their own type and identifier.</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>All methods except the main method must return a value.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>If a method doesn't return a value, we don't have to write anything instead of the return type.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>If a method doesn't have parameters we don't have to write anything inside the parameter's parentheses.</text>
+        <correct>true</correct>
+    </question>
+    <question type="multi_choice">
+        <text>What is true about methods?</text>
+        <answer>They have an identifier (method name).</answer>
+        <answer>Any method will contain at least one return statement.</answer>
+        <answer>All of them must return a value.</answer>
+        <answer>There are methods without any parameters.</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which of these is not true about methods?</text>
+        <answer>The lack of return type is indicated by the 'void' keyword.</answer>
+        <answer>Each parameter must have its own identifier.</answer>
+        <answer>If a method has no parameters, it must return a value.</answer>
+        <answer>Each parameter must have its own type.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="text">
+        <text>Write the keyword that indicates that the method has no return type.</text>
+        <correct>void</correct>
+    </question>
+    <question type="text">
+        <text>What would you write between the parentheses if you declare a method with two parameters.
+            The first one is an integer with the name 'amount', the second is a string with the name 'name'. Don't write the parentheses.</text>
+        <correct>int[s]amount , String[s]name</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="text">
+        <text>What would you write between the parentheses if you declare a method with two parameters.
+            They are both integers with the names 'num1' and 'num2'. Don't write the parentheses.</text>
+        <correct>int[s]num1 , int[s]num2</correct>
+        <correct>int[s]num2 , int[s]num1</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="text">
+        <text>Which keyword is used to return value to the caller in methods?</text>
+        <correct>return</correct>
+    </question>
+    <question type="text">
+        <text>We would like to return the variable called 'determinant'. What statement must we write?</text>
+        <correct>return determinant;</correct>
+    </question>
+    <question type="true_false">
+        <text>The return statement must be the first statement in the method.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>The return statement must be the last statement that is executed in the method.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>Every method must have a return statement.</text>
+        <correct>false</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is true about the return statement?</text>
+        <answer>The main method must have at least one return statement.</answer>
+        <answer>Methods with no return type can have a return statement.</answer>
+        <answer>Methods with no return type must have a return statement.</answer>
+        <answer>All return statements must contain a variable name as well.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these we must write when calling a method?</text>
+        <answer>The return type of the method.</answer>
+        <answer>The name of the method.</answer>
+        <answer>The parameters, between parentheses. We must write the parentheses even if there are no parameters.</answer>
+        <answer>The parameters, between parentheses. we don't need to write the parentheses if there are no parameters.</answer>
+        <correct>1</correct>
+        <correct>2</correct>
+    </question>
+    <question type="true_false">
+        <text>Assuming that the 'compute' methods has integer return type, the statement 'int x = compute();' is valid.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>Assuming that the 'compute' methods has integer return type, the statement 'String x = compute();' is valid.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>Assuming that the 'executeTask' methods has no return type, the statement 'int res = executeTask();' is valid.</text>
+        <correct>false</correct>
+    </question>
+
+    <!-- Questions about 'Naming rules and conventions' -->
+    <question type="multi_choice">
+        <text>Select the characters which can be the first character in an identifier.</text>
+        <answer>A</answer>
+        <answer>_ (underscore)</answer>
+        <answer>(</answer>
+        <answer>,</answer>
+        <correct>0</correct>
+        <correct>1</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Select the characters which can't be the first character in an identifier.</text>
+        <answer>3</answer>
+        <answer>_ (underscore)</answer>
+        <answer>}</answer>
+        <answer>;</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>Identifiers can't be longer then 100 characters.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>'_myVar' is a valid identifier.</text>
+        <correct>false</correct>
+    </question>  <question type="true_false">
+    <text>'9lives' is an invalid identifier.</text>
+    <correct>true</correct>
+</question>
+    <question type="true_false">
+        <text>'my_(well_named)_variable' is a valid identifier</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>Write 'web socket' using the camel case notation.</text>
+        <correct>webSocket</correct>
+    </question>
+    <question type="text">
+        <text>Write 'insert to end' using the camel case notation.</text>
+        <correct>insertToEnd</correct>
+    </question>
+    <question type="text">
+        <text>Write 'remove all' using the camel case notation.</text>
+        <correct>removeAll</correct>
+    </question>
+    <question type="single_choice">
+        <text>We would like to name a method which adds an element to a list. Which of these would be the best naming choice
+            (using java conventions)?</text>
+        <answer>add_element</answer>
+        <answer>addElement</answer>
+        <answer>AddElement</answer>
+        <answer>_addelement</answer>
+        <correct>1</correct>
+    </question>
+    <question type="single_choice">
+        <text>We would like to name a variable which stores a prime number. Which of these would be the best naming choice
+            (using java conventions)?</text>
+        <answer>primeNumber</answer>
+        <answer>$prime_number</answer>
+        <answer>prime_number</answer>
+        <answer>PrimeNumber</answer>
+        <correct>0</correct>
+    </question>
+    <question type="single_choice">
+        <text>We would like to name a class related to matrices. Which of these would be the best naming choice
+            (using java conventions)?</text>
+        <answer>matrix</answer>
+        <answer>Matrix</answer>
+        <answer>_Matrix</answer>
+        <answer>matrix_</answer>
+        <correct>1</correct>
+    </question>
+    <question type="single_choice">
+        <text>We would like to name a package which contains database related classes. Which of these would be the best naming choice
+            (using java conventions)?</text>
+        <answer>Database</answer>
+        <answer>_database</answer>
+        <answer>data_base_</answer>
+        <answer>database</answer>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>We would like to name constant to store the value of the speed of light. Which of these would be the best naming choice
+            (using java conventions)?</text>
+        <answer>speedOfLight</answer>
+        <answer>speedoflight</answer>
+        <answer>SPEED_OF_LIGHT</answer>
+        <answer>SpeedOfLight</answer>
+        <correct>2</correct>
+    </question>
+
+    <!-- Questions about 'Comments in the code' -->
+    <question type="text">
+        <text>Write a single line comment which says 'this is a comment'.</text>
+        <correct>// this[s]is[s]a[s]comment</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="text">
+        <text>Write a single line comment which says 'remember to comment your code!'.</text>
+        <correct>// remember[s]to[s]comment[s]your[s]code!</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="text">
+        <text>Write a multi line comment (in one line) which says 'important information'.</text>
+        <correct>/* important[s]information */</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="single_choice">
+        <text>Which symbols are used to create multi-lined comments?</text>
+        <answer>// and //</answer>
+        <answer>// and \\</answer>
+        <answer>** and **</answer>
+        <answer>/* and */</answer>
+        <correct>3</correct>
+    </question>
+</resources>

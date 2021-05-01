@@ -1,0 +1,525 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- Exam of course 'Primitives, control flow and I/O' --><resources>
+    <examdata>
+        <id>10</id>
+        <questionAmount>25</questionAmount>
+        <timeLimit>30</timeLimit>
+        <finished>true</finished>
+    </examdata>
+
+    <!-- Questions for primitives -->
+    <question type="multi_choice">
+        <text>Which primitive types can you use to store real, non-integer numbers?</text>
+        <answer>long</answer>
+        <answer>float</answer>
+        <answer>byte</answer>
+        <answer>double</answer>
+        <correct>1</correct>
+        <correct>3</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which primitive types can you use to store integer numbers?</text>
+        <answer>char</answer>
+        <answer>boolean</answer>
+        <answer>double</answer>
+        <answer>int</answer>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which of these primitives is not numeric?</text>
+        <answer>boolean</answer>
+        <answer>float</answer>
+        <answer>int</answer>
+        <answer>short</answer>
+        <correct>0</correct>
+    </question>
+    <question type="text">
+        <text>What is the name the of the classes used to provide additional functionality for primitives?</text>
+        <correct>wrapper</correct>
+        <correct>wrapper class</correct>
+        <ignoreCase/>
+    </question>
+    <question type="text">
+        <text>What is the wrapper class for the 'float' primitive type?</text>
+        <correct>Float</correct>
+    </question>
+    <question type="text">
+        <text>What is the wrapper class for the 'char' primitive type?</text>
+        <correct>Character</correct>
+    </question>
+    <question type="true_false">
+        <text>Int can store bigger numbers then long.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>Long can store bigger numbers then byte.</text>
+        <correct>true</correct>
+    </question>
+    <question type="single_choice">
+        <text>What happens when we increase the value of a numeric primitive already at its maximum value?</text>
+        <answer>It won't increase.</answer>
+        <answer>It will overflow, and become negative.</answer>
+        <answer>An error will be raised, and the program stops.</answer>
+        <answer>It's automatically converted to a primitive with a larger range.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="text">
+        <text>What is the default value of a boolean?</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>What is the default value of a double?</text>
+        <correct>0.0</correct>
+    </question>
+    <question type="true_false">
+        <text>When declaring a double, we must use a dot.</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>Declare a short with name 's' and value -124.</text>
+        <correct>short[s]s = -124;</correct>
+        <correct>Short[s]s = -124;</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="text">
+        <text>Declare a double with name 'div' and value 22.435</text>
+        <correct>double[s]div = 22.435;</correct>
+        <correct>Double[s]div = 22.435;</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="text">
+        <text>Declare a float with name 'conv' and a value of half.</text>
+        <correct>float[s]conv = 0.5f;</correct>
+        <correct>Float[s]conv = 0.5f;</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="text">
+        <text>Declare a char with with name 'firstLetter' and a value of c.</text>
+        <correct>char[s]firstLetter = 'c';</correct>
+        <correct>Character[s]firstLetter = 'c';</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="text">
+        <text>Enter the not-equal operator.</text>
+        <correct>!=</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these operators can be used to compare two integers?</text>
+        <answer><![CDATA[
+            <=
+        ]]></answer>
+        <answer>!=</answer>
+        <answer> == </answer>
+        <answer> + </answer>
+        <correct>0</correct>
+        <correct>1</correct>
+        <correct>2</correct>
+    </question>
+    <question type="single_choice">
+        <text>On which primitive type can we use the negate operator?</text>
+        <answer>char</answer>
+        <answer>long</answer>
+        <answer>float</answer>
+        <answer>boolean</answer>
+        <correct>3</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these operators can we use to perform logical operations on two booleans?</text>
+        <answer><![CDATA[
+        &&
+        ]]></answer>
+        <answer><![CDATA[
+        ||
+        ]]></answer>
+        <answer><![CDATA[
+        =
+        ]]></answer>
+        <answer><![CDATA[
+        /
+        ]]></answer>
+        <correct>0</correct>
+        <correct>1</correct>
+    </question>
+    <question type="true_false">
+        <text>If we have a boolean called 'sel', the correct way to negate it is '!sel'.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>If we have a boolean called 'sel', the correct way to negate it is '!=sel'.</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>Enter the AND operator.</text>
+        <correct>&amp;&amp;</correct>
+    </question>
+    <question type="text">
+        <text>Enter the OR operator.</text>
+        <correct>||</correct>
+    </question>
+    <question type="multi_choice">
+        <text>We have two booleans, a is true, b is false. Which of these operations will be true?</text>
+        <answer><![CDATA[
+        a && b
+        ]]></answer>
+        <answer><![CDATA[
+        a || b
+        ]]></answer>
+        <answer><![CDATA[
+        a ^ b
+        ]]></answer>
+        <correct>1</correct>
+        <correct>2</correct>
+    </question>
+    <question type="multi_choice">
+        <text>We have two booleans, both a and b are true. Which of these operations will be true?</text>
+        <answer><![CDATA[
+        a && b
+        ]]></answer>
+        <answer><![CDATA[
+        a || b
+        ]]></answer>
+        <answer><![CDATA[
+        a ^ b
+        ]]></answer>
+        <correct>0</correct>
+        <correct>1</correct>
+    </question>
+
+    <!-- Questions for if-else -->
+    <question type="true_false">
+        <text>For each if block, there must be an else block as well.</text>
+        <correct>false</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these blocks can stand alone, without any other block?</text>
+        <answer>else</answer>
+        <answer>if</answer>
+        <answer>else if</answer>
+        <answer>switch</answer>
+        <correct>1</correct>
+        <correct>3</correct>
+    </question>
+
+    <!-- Questions for loops -->
+    <question type="single_choice">
+        <text>Which loop should be used when we know beforehand how many times a statement must be executed?</text>
+        <answer>for loop</answer>
+        <answer>while loop</answer>
+        <answer>do-while loop</answer>
+        <correct>0</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which loop should be used when we don't know beforehand how many times a statement must be executed?</text>
+        <answer>for loop</answer>
+        <answer>while loop</answer>
+        <correct>1</correct>
+    </question>
+    <question type="true_false">
+        <text>All 3 components of a for loop (iterator initialization, terminating condition, iterator updating) are mandatory.</text>
+        <correct>false</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which are, by convention, good names for iterator variables</text>
+        <answer>x</answer>
+        <answer>var</answer>
+        <answer>i</answer>
+        <answer>j</answer>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is correct about the terminating condition of a loop?</text>
+        <answer>It doesn't allow infinite loops.</answer>
+        <answer>When this condition becomes false, the loop stops.</answer>
+        <answer>When this condition becomes true, the loop stops.</answer>
+        <answer>When creating a for loop, this is the last component.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="single_choice">
+        <text>What does i++ do?</text>
+        <answer>Increments the variable i.</answer>
+        <answer>Creates a for loop where i is the iterator variable.</answer>
+        <answer>Decrements the variable i.</answer>
+        <answer>Sets the value of i to 0.</answer>
+        <correct>0</correct>
+    </question>
+    <question type="single_choice">
+        <text>What does j-- do?</text>
+        <answer>Creates a while loop where j is the iterator variable.</answer>
+        <answer>Increments the variable j.</answer>
+        <answer>Decrements the variable j.</answer>
+        <answer>Deletes j, it can't be used again.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="text">
+        <text>Write the STATEMENT that decrements the value of k.</text>
+        <correct>k--;</correct>
+        <correct>--k;</correct>
+    </question>
+    <question type="text">
+        <text>Write the STATEMENT that increments the value of j.</text>
+        <correct>j++;</correct>
+        <correct>++j;</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is the difference between the while and the do-while loop?</text>
+        <answer>Nothing.</answer>
+        <answer>A do-while loop can never be infinite, a while loop can be.</answer>
+        <answer>The while loop has special syntax to declare an iterator variable, the do-while loop doesn't.</answer>
+        <answer>The do-while loop is guaranteed to iterate at least once, the while loop isn't.</answer>
+        <correct>3</correct>
+    </question>
+    <question type="multi_choice">
+        <text>What is the same in the for and the while loops?</text>
+        <answer>They can be infinite loops.</answer>
+        <answer>Both have special syntax for iterator variables.</answer>
+        <answer>The break and continue statements can be used in both.</answer>
+        <correct>0</correct>
+        <correct>2</correct>
+    </question>
+    <question type="single_choice">
+        <text>What does the break statement do?</text>
+        <answer>Updates the value of the iterator variable.</answer>
+        <answer>Immediately stops a loop.</answer>
+        <answer>Skips the the next iteration of the loop.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="text">
+        <text>Enter the statement that stops a loop.</text>
+        <correct>break;</correct>
+    </question>
+    <question type="single_choice">
+        <text>What does the continue statement do?</text>
+        <answer>Used after a break statement, it restarts the loop.</answer>
+        <answer>Updates the value of the iterator variable.</answer>
+        <answer>Immediately stops a loop.</answer>
+        <answer>Skips the the next iteration of the loop.</answer>
+        <correct>3</correct>
+    </question>
+    <question type="text">
+        <text>Enter the statement that advances a loop the the next iteration.</text>
+        <correct>continue;</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is an infinite loop?</text>
+        <answer>A loop, where the terminating condition never becomes false.</answer>
+        <answer>A special while loop.</answer>
+        <answer>A behaviour which happens when we forget to write the closing curly brace for a loop.</answer>
+        <answer>A special for loop.</answer>
+        <correct>0</correct>
+    </question>
+
+    <!-- Questions for arrays -->
+    <question type="single_choice">
+        <text>Which of these is a correct statement for declaring an integer array?</text>
+        <answer>int[] data = new int[];</answer>
+        <answer>String[] data = new String[5];</answer>
+        <answer>int[] data = new int[10];</answer>
+        <answer>[]int data = new [10]int;</answer>
+        <correct>2</correct>
+    </question>
+    <question type="single_choice">
+        <text>Which of these is a correct statement for declaring a string array, with length 20?</text>
+        <answer>int[] texts = new int[20];</answer>
+        <answer>String[] texts = new String[5];</answer>
+        <answer>String[20] texts = new String[];</answer>
+        <answer>String[] texts = new String[20]</answer>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>Elements in a boolean array are automatically initialized to false.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>Elements in a string array are automatically initialized to 0.</text>
+        <correct>false</correct>
+    </question>
+    <question type="text">
+        <text>What is the index of the first element in an array?</text>
+        <correct>0</correct>
+    </question>
+    <question type="text">
+        <text>What is the index of the 10. element in an array?</text>
+        <correct>9</correct>
+    </question>
+    <question type="single_choice">
+        <text>An array has a length of N. What happens when get reference the element with index N?</text>
+        <answer>We get the referenced element.</answer>
+        <answer>An ArrayIndexOutOfBoundsException occurs.</answer>
+        <answer>A NullPointerException occurs.</answer>
+        <answer>The JVM skips this statement.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="single_choice">
+        <text>An array has a length of N. What happens when get reference the element with index N-1?</text>
+        <answer>We get the referenced element, the last element of the array.</answer>
+        <answer>An ArrayIndexOutOfBoundsException occurs.</answer>
+        <answer>A NullPointerException occurs.</answer>
+        <answer>We get the referenced element, the first element of the array.</answer>
+        <correct>0</correct>
+    </question>
+    <question type="text">
+        <text>Declare an array of characters with name 'letters' and length 25.</text>
+        <correct>char[][s]letters = new[s]char[ 25 ];</correct>
+        <correct>char[s]letters[] = new[s]char[ 25 ];</correct>
+        <correct>Character[][s]letters = new[s]Character[ 25 ];</correct>
+        <correct>Character[s]letters[] = new[s]Character[ 25 ];</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="text">
+        <text>Declare an array of strings called 'sentences' with length 100.</text>
+        <correct>String[][s]sentences = new[s]String[ 100 ];</correct>
+        <correct>String[s]sentences[] = new[s]String[ 100 ];</correct>
+        <ignoreSpace/>
+    </question>
+
+    <!-- Questions for getting input -->
+    <question type="single_choice">
+        <text>How can we access the command line arguments at runtime?</text>
+        <answer>We can't, they are lost.</answer>
+        <answer>They are passed as a parameter of the main method, an array of integers.</answer>
+        <answer>They are passed as a parameter of the main method, an array of strings.</answer>
+        <answer>They are loaded into a static variable of the main class called args.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="text">
+        <text>We have a string named 'textData'. Write a statement that parses it into an newly created integer called 'data'!</text>
+        <correct>int[s]data = Integer.parseInt( "textData" );</correct>
+        <correct>Integer[s]data = Integer.parseInt( "textData" );</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="single_choice">
+        <text>What happens when the parameter of Integer.parseInt is not a string format of an integer?</text>
+        <answer>The method returns 0.</answer>
+        <answer>A NumberFormatException is thrown.</answer>
+        <answer>The method returns Integer.MIN_VALUE</answer>
+        <answer>A NullPointerException is thrown.</answer>
+        <correct>1</correct>
+    </question>
+    <question type="true_false">
+        <text>It is possible to write code that checks how many command line arguments did the program get.</text>
+        <correct>true</correct>
+    </question>
+    <question type="single_choice">
+        <text>What is System.in?</text>
+        <answer>It's a Scanner object that is initialized by Java.</answer>
+        <answer>It's a InputStream object that is initialized by Java. It listens to file input.</answer>
+        <answer>A variable, to which the JVM loads the command line arguments.</answer>
+        <answer>It's a InputStream object that is initialized by Java. It listens to keyboard input.</answer>
+        <correct>3</correct>
+    </question>
+    <question type="true_false">
+        <text>A Scanner object must be closed when we finish using it.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>A Scanner object should be closed when we finish using it.</text>
+        <correct>true</correct>
+    </question>
+    <question type="text">
+        <text>Write a statement that creates a Scanner called 's' set to the standard input!</text>
+        <correct>Scanner[s]s = new[s]Scanner( System.in );</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="text">
+        <text>We have a scanner called 's', tuned to the standard input. Write a statement that captures a line of text
+        from the user, and saves it in a string called 'userInput'!</text>
+        <correct>String[s]userInput = s.nextLine();</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="text">
+        <text>We have a scanner called 's', tuned to the standard input. Write a statement that captures a line of text
+            from the user, and saves it in an integer called 'userInput'!</text>
+        <correct>int[s]userInput = s.nextInt();</correct>
+        <correct>Integer[s]userInput = s.nextInt();</correct>
+        <ignoreSpace/>
+    </question>
+    <question type="text">
+        <text>Which utility class is used to read the contents of a file?</text>
+        <correct>Files</correct>
+        <correct>java.nio.file.Files</correct>
+    </question>
+    <question type="single_choice">
+        <text>What happens when we try to read a file that does not exists?</text>
+        <answer>A NoSuchFileException or a FileNotFoundException is thrown.</answer>
+        <answer>An empty list is returned.</answer>
+        <answer>The file is created, and the reading is re-done.</answer>
+        <answer>A NumberFormatException is thrown.</answer>
+        <correct>0</correct>
+    </question>
+
+    <!-- Questions for output -->
+    <question type="text">
+        <text>What is the line break character in Java?</text>
+        <correct><![CDATA[
+            \n
+        ]]></correct>
+    </question>
+    <question type="true_false">
+        <text>Println is short for print line.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>The 'print' methods of the PrintWriter also write a line break after printing their parameter.</text>
+        <correct>false</correct>
+    </question>
+    <question type="multi_choice">
+        <text>Which of these are true for the PrintWriter class?</text>
+        <answer>It is used to read input from the user.</answer>
+        <answer>It is in InputStream.</answer>
+        <answer>It is used to write text to the console.</answer>
+        <answer>It is used to print text to files.</answer>
+        <correct>2</correct>
+        <correct>3</correct>
+    </question>
+    <question type="single_choice">
+        <text>What happens (by default) when a new PrintWriter starts to print to an existing file?</text>
+        <answer>The lines are appended to the end of the file.</answer>
+        <answer>An exception is thrown.</answer>
+        <answer>The content of the file is erased before printing.</answer>
+        <correct>2</correct>
+    </question>
+    <question type="true_false">
+        <text>A PrintWriter can't be configured to append to an existing file.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>The Files utility class provides methods for reading from and writing to files.</text>
+        <correct>true</correct>
+    </question>
+
+
+    <!--
+    <question type="single_choice">
+        <text></text>
+        <answer></answer>
+        <answer></answer>
+        <answer></answer>
+        <answer></answer>
+        <correct></correct>
+    </question>
+
+    <question type="multi_choice">
+        <text></text>
+        <answer></answer>
+        <answer></answer>
+        <answer></answer>
+        <answer></answer>
+        <correct></correct>
+        <correct></correct>
+    </question>
+
+    <question type="true_false">
+        <text></text>
+        <correct></correct>
+    </question>
+
+    <question type="text">
+        <text></text>
+        <correct></correct>
+        <correct></correct>
+    </question>
+    -->
+
+</resources>

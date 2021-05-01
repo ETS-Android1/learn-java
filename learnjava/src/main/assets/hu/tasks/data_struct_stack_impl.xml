@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <taskdata>
+        <id>202</id>
+        <name>Queue and stack implementation</name>
+    </taskdata>
+    <boxed title="Dependency">
+            <![CDATA[
+            To complete this task, you'll need a list implementation from the previous task. If you absolutely
+            want to skip that task, use a list from the <i>JDK</i> instead.
+            ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        The task is to implement a queue and a stack, <b>using one of the lists we created</b> in the
+        previous task. Since we're using our own list implementations, these data structures also won't
+        be generic.
+        ]]>
+    </text>
+    <advanced title="Needed later">
+        <![CDATA[
+        The result of this task will be needed in a task of a later course (only the stack)! Be sure to do it, and that it's
+        working correctly.
+        ]]>
+    </advanced>
+    <title text="Queue"/>
+    <text>
+        <![CDATA[
+        The queue should have methods to add, remove and peek elements (they should work according to the
+        rules of this data structure). Utility methods that return the queue size and clear the collection are also needed.
+        ]]>
+    </text>
+    <title text="Stack"/>
+    <text>
+    <![CDATA[
+       The stack should have methods to push, pop and peek elements. Also include methods to get the size of the stack
+       and to clear it.
+    ]]>
+    </text>
+    <boxed title="Note">
+        <![CDATA[
+        This task is <b>much</b> easier, as we've done the hard work already at the list implementation, and the
+        only challenge is to decide where to insert to and remove elements in the list.
+        ]]>
+    </boxed>
+    <solution>
+        <text>
+            <![CDATA[
+            The queue implementation. The package structure may differ for you, depending on where you placed this
+            new class and the list implementation.
+            ]]>
+        </text>
+        <code><![CDATA[
+            
+<font color="#E65100">package</font> task_queue_stack;
+<br/>
+<br/><font color="#E65100">import</font> task_lists.MyLinkedList; <font color="gray">//import the list implementation
+</font>
+<br/>
+<br/><font color="#E65100">public class</font> <font color="#999900">MyQueue</font> {
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//the internal list
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">MyLinkedList</font> list;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">MyQueue</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;list = <font color="#E65100">new</font> <font color="#999900">MyLinkedList</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray<font color="#2E8B57">">//add to the '</font>beginning' of the queue
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">enque</font>(<font color="#999900">String</font> element) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(list.<font color="#ADD8E6">size</font>() > <font color="#F0E130">0</font>) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;list.<font color="#ADD8E6">add</font>(element, <font color="#F0E130">0</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> { <font color="gray">//the internal list is empty
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;list.<font color="#ADD8E6">add</font>(element);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//remove from the other side of the queue
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">deque</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(list.<font color="#ADD8E6">size</font>() == <font color="#F0E130">0</font>) <font color="#E65100">return null</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> list.<font color="#ADD8E6">remove</font>(list.<font color="#ADD8E6">size</font>()<font color="#F0E130">-1</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//peek the element that can be removed
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">peek</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(list.<font color="#ADD8E6">size</font>() == <font color="#F0E130">0</font>) <font color="#E65100">return null</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> list.<font color="#ADD8E6">get</font>(list.<font color="#ADD8E6">size</font>()<font color="#F0E130">-1</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//clear the queue
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">clear</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;list.<font color="#ADD8E6">clear</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//size of the queue
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">size</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> list.<font color="#ADD8E6">size</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+<br/>
+            
+        ]]></code>
+        <text>
+            <![CDATA[
+            The stack implementation. It's very similar to the queue, the only difference is that this time we remove
+            elements from the same end we're adding them.
+            ]]>
+        </text>
+        <code><![CDATA[
+            
+<font color="#E65100">package</font> task_queue_stack;
+<br/>
+<br/><font color="#E65100">import</font> task_lists.MyLinkedList;
+<br/>
+<br/><font color="#E65100">public class</font> <font color="#999900">MyStack</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">MyLinkedList</font> list;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">MyStack</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;list = <font color="#E65100">new</font> <font color="#999900">MyLinkedList</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//add the element to the back of the list.
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">push</font>(<font color="#999900">String</font> element) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;list.<font color="#ADD8E6">add</font>(element);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//remove the element at the back of the list.
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">pop</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> list.<font color="#ADD8E6">remove</font>(list.<font color="#ADD8E6">size</font>()<font color="#F0E130">-1</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//peek the element at the back of the list.
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">peek</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> list.<font color="#ADD8E6">get</font>(list.<font color="#ADD8E6">size</font>()<font color="#F0E130">-1</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//clear the stack
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">clear</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;list.<font color="#ADD8E6">clear</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//size of the stack
+</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">size</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> list.<font color="#ADD8E6">size</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+<br/>
+            
+        ]]></code>
+    </solution>
+</resources>
