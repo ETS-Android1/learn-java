@@ -28,8 +28,9 @@
     <title text="IDE telepítése"/>
     <text>
         <![CDATA[
-        A programozás megkönnyítéséhez érdemes használni egy <b>integrált fejlesztőkörnyezetet (IDE)</b>.
-        Ezek a szoftverek kódszerkesztőket és egyéb hasznos eszközöket tartalmaznak.
+        A programozás megkönnyítéséhez érdemes használni egy <b>integrált fejlesztőkörnyezetet (IDE - Integrated Development Environment)</b>.
+        Ezek a szoftverek kódszerkesztőket és egyéb hasznos eszközöket tartalmaznak. Egy <i>IDE</i>
+        telepítését bemutatom az első fejezetben.
         ]]>
     </text>
     <boxed title="Miért használjak IDE-t?">

@@ -54,7 +54,8 @@
             <![CDATA[
             Your divide method may not give the result you expect. This is because Java performs
             <b>integer division</b> on your variables. Simply put, this means that the result will be rounded down
-            to an integer, even if that's not the actual result.
+            to an integer, even if that's not the actual result. For example <i>3 / 2</i> will result in <i>1</i>,
+            because the exact <i>1.5</i> will loose the fraction <i>0.5</i>.
             ]]>
         </advanced>
         <text>

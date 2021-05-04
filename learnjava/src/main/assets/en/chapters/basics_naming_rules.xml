@@ -46,7 +46,7 @@
         <li> must begin with a letter, underscore, or a '<i>$</i>' character.</li>
         <li> can contain any letter, number, underscore, dollar sign after the first one.</li>
         <li> can be of any length.</li>
-        <li> can't contain any special characters, such as parentheses, dots or whitespaces.
+        <li> can't contain any special characters, such as parentheses, dots or whitespaces</li>.
         </ul>
         ]]>
     </text>

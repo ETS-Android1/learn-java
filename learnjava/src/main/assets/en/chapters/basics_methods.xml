@@ -4,10 +4,9 @@
         <id>55</id>
         <name>Methods: return types and parameters</name>
     </chapterdata>
-    <title text="Methods: Declaration"/>
     <text>
         <![CDATA[
-        Methods are code blocks which can take <b>parameters</b>, do some calculations according to these
+        Methods are parts of the code which can take <b>parameters</b>, do some calculations according to these
         parameters, and finally, <b>return</b> a variable. The reason behind using methods is to structure and
         simplify our code. Note that we already met one method, the <i>main method</i>.
         ]]>
@@ -49,17 +48,6 @@
         <i>n1</i> and <i>n2</i>. As you can see, the parameters are separated by commas.
         ]]>
     </text>
-    <interactive instruction="Correct the method declaration so that its return type matches the returned value!">
-        <data><![CDATA[
-
-<font color="#E65100">static</font> ___ <font color="#ADD8E6">getZero</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#F0E130">0</font>;
-<br/>}
-
-        ]]></data>
-        <answer place="0">int</answer>
-        <default place="0">String</default>
-    </interactive>
     <advanced title="The static keyword">
         <![CDATA[
         In our method declaration there is also a <i>static</i> keyword. The importance of this will be explained
@@ -83,6 +71,23 @@
         is also an integer variable, and the types match.
         ]]>
     </boxed>
+    <interactive instruction="Correct the method declaration so that its return type matches the returned value!">
+        <data><![CDATA[
+
+<font color="#E65100">static</font> ___ <font color="#ADD8E6">getZero</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#F0E130">0</font>;
+<br/>}
+
+        ]]></data>
+        <answer place="0">int</answer>
+        <default place="0">String</default>
+    </interactive>
+    <text>
+        <![CDATA[
+        The method seen in this interactive sample has no parameters! This is allowed, but we must write
+        the parentheses' even in this case.
+        ]]>
+    </text>
     <code><![CDATA[
         
         <font color="#E65100">static</font> <font color="#DF7401">void </font>greetMe (<font color="#999900">String</font> myName) {
@@ -117,14 +122,15 @@
         The <i>return</i> keyword works a bit differently in void methods. It isn't necessary
         to even include it (as you can see in the above example, which has no return statement)!
         <br><br>
-        We can however use it, but in this case we <b>must not put any value after it</b>, like this:
+        We can however use it, but in this case we <b>must not put any value after it</b>. This will cause the
+        method to return, without any value.
         <br><br>
         <i>return;</i>
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        Lastly, let's see an example for a method with no parameters.
+        Lastly, let's see another example for a method with no parameters.
         ]]>
     </text>
     <code><![CDATA[
@@ -233,7 +239,7 @@
         <i>result</i>. This value is then printed.
         ]]>
     </text>
-    <interactive instruction="Call the greetMe method with parameter 'John'">
+    <interactive instruction="Call the greetMe method with parameter 'John'!">
         <data><![CDATA[
             
 <font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {

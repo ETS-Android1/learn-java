@@ -2,19 +2,20 @@
 <!-- 'Comments in the code', belongs to course 'The basics' --><resources>
     <chapterdata>
         <id>57</id>
-        <name>Comments in the code</name>
+        <name>Kommentek</name>
     </chapterdata>
     <text>
         <![CDATA[
-Comments are special parts of the code, which are <b>for the programmer only</b>. They are used to make it easier
-to understand and document the code we write.
+        A kommentek a kód olyan részei, amik <b>csak a programozóknak</b> szólnak, a
+        fordítóprogram figyelmen kívül hagyja őket. Arra szolgálnak, hogy magunknak, vagy más programozóknak
+        magyarázatot fűzzünk a saját kódunkhoz.
         ]]>
     </text>
-    <title text="Single-line comments"/>
+    <title text="Egysoros kommentek"/>
     <text>
         <![CDATA[
-        Single-line comments can be created with the '<i>//</i> ' symbols. They make the part of the line
-        right of the slashes into a comment.
+        Egysoros kommentet a  '<i>//</i> ' jelekkel szúrhatunk be. Az adott sorban minden, ami
+        ilyen jelek után van az komment lesz.
         ]]>
     </text>
     <code><![CDATA[
@@ -24,9 +25,9 @@ to understand and document the code we write.
     ]]></code>
     <text>
         <![CDATA[
-In the above example we created a variable to store dates as text. Dates, however, can be in many formats.
-    The purpose of this comment is to remind us that we store our dates in the <i>YYYY:MM:DD</i> format, so when
-    we later open our code we don't have to waste time figuring out what format we used.
+        A fenti példában egy dátumot tároló változót hoztunk létre. Dátumot azonban sokféle formában
+        lehet tárolni, ezért, hogy később is emlékezzünk rá, hogy milyen formátumot választottunk, egy
+        kommentben ezt a változó mellé írjuk.
         ]]>
     </text>
     <code><![CDATA[
@@ -41,12 +42,13 @@ In the above example we created a variable to store dates as text. Dates, howeve
     ]]></code>
     <text>
         <![CDATA[
-        In this example, we warn ourselves that the <i>userInput</i> variable must be checked before we use
-        it in other parts of the program. This might seem obvious when writing the code, but if you continue coding
-        some time later, you might not remember, and use invalid input, which can cause errors!
+        Ebben a példában a komment arra figyelmeztet, hogy a <i>userInput</i> változó értékét ellenőrizni kell,
+        mielőtt továbbadjuk a programban (a felhasználó lehet, hogy érvénytelen adatot gépelt be). Ez elsőre
+        nyilvánvalónak tűnik, de ha később visszatérünk a kódunkhoz, lehet, hogy már nem fogunk emlékezni rá,
+        és a komment lesz az, ami eszünkbe juttatja.
         ]]>
     </text>
-    <interactive instruction="Complete these single-lined comments!">
+    <interactive instruction="Egészítsd ki ezeket az egysoros kommenteket!">
         <data><![CDATA[
 
 <font color="#DF7401">int</font> num = <font color="#F0E130">0</font>;
@@ -57,11 +59,11 @@ In the above example we created a variable to store dates as text. Dates, howeve
         <answer place="0">//</answer>
         <answer place="1">//</answer>
     </interactive>
-    <title text="Multi-line comments"/>
+    <title text="Többsoros kommentek"/>
     <text>
         <![CDATA[
-        Sometimes we would like to write long comments, that span multiple lines. One way to achieve this
-        is using multiple single line comments, like this:
+        Néha hosszú, több sorból álló kommentet szeretnénk írni. Erre egy megoldás az, hogy több,
+        egysoros kommentet használunk:
         ]]>
     </text>
     <code><![CDATA[
@@ -75,11 +77,11 @@ In the above example we created a variable to store dates as text. Dates, howeve
     ]]></code>
     <text>
         <![CDATA[
-        The problem with this approach is that we must write the slashes in the beginning of every line.
+        Ilyenkor azonban minden sor elejére ki kell írnunk a <i>//</i> jeleket, ami nehézkes.
         <br><br>
-        Java offers a way to more conveniently create multi-lined comments: Text between '<i>/*</i>' and
-        '<i>*/</i> ' symbols will be treated as a comment! Here is out previous code sample, with a proper
-        multi-line comment:
+        Ehelyett lehetőség van többsoros komment megadására. Minden, ami '<i>/*</i>' és
+        '<i>*/</i>' jelek között van, az kommentnek fog számítani. Íme az előző kódminta,
+        ahol most már rendes, többsoros kommentet használok:
         ]]>
     </text>
     <code><![CDATA[
@@ -92,7 +94,7 @@ so make sure to call validate method before using!<br>
 <br/><font color="#999900">String</font> userInput = <font color="#ADD8E6">getUserInput</font>();
         
     ]]></code>
-    <interactive instruction="Complete this multi-lined comment!">
+    <interactive instruction="Egészítsd ki a többsoros kommentet!">
         <data><![CDATA[
             
 ___ <font color="gray">The first line of this long, multi-lined comment.
@@ -105,9 +107,9 @@ ___ <font color="gray">The first line of this long, multi-lined comment.
     <title text="TODO"/>
     <text>
         <![CDATA[
-        If our code is not yet complete, and we would like to mark where do we need to work on it, <b>TODO</b>
-        can be used inside a comment. Note that this is not a feature of Java, but our IDE will recognize the TODO
-        word, and highlight it for us, so we can easily find the unfinished part of out code.
+        Ha a kódunk nincs teljesen kész, és meg szeretnénk jelölni, hogy hol kell még rajta fejleszteni,
+        akkor használhatjuk a <b>TODO</b> szót egy komment belsejében (az angol <i>to do</i>, azaz tennivaló kifejezésből).
+        Ezeket a kommenteket az <i>IDE</i> kijelöli számunkra.
         ]]>
     </text>
     <code><![CDATA[
@@ -118,15 +120,15 @@ ___ <font color="gray">The first line of this long, multi-lined comment.
 <br/>}
         
     ]]></code>
-    <title text="Commenting conventions"/>
+    <title text="Kommentelési szokások"/>
     <text>
         <![CDATA[
-        The general advice is to <b>always comment your code</b>, to help you and others make sense of it! Yes,
-        writing comments, and not just actual code takes more time and effort, but it pays out in the long run,
-        and saves you from a lot of hard to trace bugs.
+        Általánosságban igaz, minden programnyelv esetén, hogy mindig írj kommenteket a kódodhoz! Ez
+        neked, és másoknak is segíteni fog, hogy értelmezzék azt. A kommentek írása rövid távon ugyan
+        több időt igényel, de hosszú távon sok hibát fog megspórolni.
         <br><br>
-        Stating the obvious isn't needed. Only write a comment when it has an added value to the code. See the
-        example below for a completely unnecessary comment.
+        A nyilvánvaló dolgokat nem szükséges kommentbe foglalni. A kommentnek extra információt kell
+        hordozni, ami pusztán a kódból ne derül ki. Például ez egy felesleges komment:
         ]]>
     </text>
     <code><![CDATA[
@@ -136,21 +138,22 @@ ___ <font color="gray">The first line of this long, multi-lined comment.
     ]]></code>
     <text>
         <![CDATA[
-        This comment adds no additional information. The variable type, name and the initial value can easily
-        be read from the code alone.
+        Nem ad semmilyen extra információt nekünk. A változó típusa és neve már a deklarációból is
+        azonnal látszik.
         ]]>
     </text>
     <advanced title="Javadoc">
         <![CDATA[
-        Javadoc comments are special type of comments, designed for code documentation. Documentation means
-        that we write detailed messages about our methods and classes, mainly for other programmers, who will
-        use them later.
+        A <i>javadoc</i> (<i>java documentation</i>) kommentek speciálisan a kód dokumentációra vannak
+        tervezve. A dokumentáció azt jelenti, hogy metódusainkhoz és osztályainkhoz részletes, mindenre kiterjedő
+        leírást adunk.
         <br><br>
-        The Java Development Kit contains a program, also called <i>javadoc</i>, which can generate neat, HTML-based documentation
-        simply from our javadoc comments! Even the official Java documentation is created using this program, here is an
-        <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/String.html">example</a> for the <i>String</i> class.
+        A <i>JDK</i> tartalmaz egy programot, szintén <i>javadoc</i> néven, ami képes kinyerni a forrás fájljainkból a
+        <i>javadoc</i> kommenteket, és ezekből szép <i>HTML</i> oldalakat gyártani. Például a <i>String</i> osztály
+        ilyen módszerrel készült dokumentációja <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/String.html">így</a> néz ki.
         <br><br>
-        You can find a detailed guide for writing javadoc comments <a href="https://www.tutorialspoint.com/java/java_documentation.htm">here</a>.
+        <a href="https://www.tutorialspoint.com/java/java_documentation.htm">Ezen</a> a linken részletes
+        útmutatót találsz a <i>javadoc</i> kommentek írásához.
         ]]>
     </advanced>
 </resources>

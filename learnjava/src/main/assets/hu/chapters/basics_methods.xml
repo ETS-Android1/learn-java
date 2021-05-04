@@ -2,54 +2,73 @@
 <!-- 'Methods', belongs to the course 'The basics' --><resources>
     <chapterdata>
         <id>55</id>
-        <name>Methods: return types and parameters</name>
+        <name>Metódusok</name>
     </chapterdata>
-    <title text="Methods: Declaration"/>
     <text>
         <![CDATA[
-        Methods are code blocks which can take <b>parameters</b>, do some calculations according to these
-        parameters, and finally, <b>return</b> a variable. The reason behind using methods is to structure and
-        simplify our code. Note that we already met one method, the <i>main method</i>.
+        A metódusok olyan részei a kódnak, melyeknek <b>paramétereik</b> és <b>visszatérési
+        értékük</b> lehet. A paramétereken valamilyen műveleteket végeznek, majd visszadják
+        az eredményt. Egy metódust már láttunk, ez volt a főmetódus (<i>main</i>, a belépési pont)
         ]]>
     </text>
-    <boxed title="Declaring a method">
+    <boxed title="Metódus deklarálása">
         <![CDATA[
-        When declaring a method, we must specify a few things. We must provide a name, which we can later
-        use to <b>call the method</b>. We also have to say what the <b>return type</b> and <b>parameter list</b>
-        for our method is.
+        Amikor deklarálunk egy metódust, meg kell adnunk a nevét. A változókhoz hasonlóen ezzel hivatkozhatunk
+        majd rá. Azt is meg kell mondani, hogy milyen paramétereket vár, és mi a visszatérési típusa.
         <br><br>
-        Each parameter has a type and a name, which can be used to reference them inside the method. The parameter list
-        can be empty, it isn't necessary to have parameters at all.
-        <br><br>
-        See the code samples below for the syntax of declaration.
+        Minden paraméternek külön nevet és típust kell adnunk. Ezekkel a nevekkel hivatkozhatunk majd rájuk a
+        metóduson belül, pont mintha egyszerű változók lennének. A következő kódmintában ez egy példán keresztül lesz
+        bemutatva.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        We will use our project to declare some methods. After that we will call these methods to observe
-        what they do. Delete the statements inside the main method for now.
-        <br><br>
-        The first method we declare is a very simple one. Can you guess what it does?
+        Az előző fejezetekben készített projektet bővítem a következő metódussal. A neve,
+        paraméterei és a benne lévő utasítások alapján próbáld meg kitalálni, hogy mit
+        csinál ez a metódus.
         ]]>
     </text>
-    <code><![CDATA[
-        
+    <code>
+        <![CDATA[
 <font color="#E65100">static</font> <font color="#DF7401">int</font> <font color="#ADD8E6">add</font>(<font color="#DF7401">int </font>n1,<font color="#DF7401"> int </font>n2) {
 <br/><font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>additionResult = n1 + n2;
 <br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;return </font>additionResult;
 <br/>}
-        
-    ]]></code>
+    ]]>
+    </code>
     <text>
         <![CDATA[
-        The first <i>int</i> in the first line is the <b>return type</b> of the method. It will return an <i>int</i> to the caller
-        after finishing. Then we write the name of the method, now <i>add</i>.
+        Az első <i>int</i> kulcsszó megmondja a metódus visszatérési értékét, ami ebben az
+        esetben egész szám. Ezután a metódus név következik, ami most <i>add</i> lett.
         <br><br>
-        Behind the name, comes the <b>parameters</b>, between parentheses. This method has two of them, both <i>int</i>'s, called
-        <i>n1</i> and <i>n2</i>. As you can see, the parameters are separated by commas.
+        A név után, a zárójelek közt láthatóak a metódus paraméterei. Most kettő van belőlük,
+        mindkettő egész szám (<i>int</i>) típusú, a nevük <i>n1</i> és <i>n2</i>.
         ]]>
     </text>
-    <interactive instruction="Correct the method declaration so that its return type matches the returned value!">
+    <advanced title="A static kulcsszó">
+        <![CDATA[
+        Ebben a metódus deklarációban még egy <i>static</i> szó is látható. Ennek a jelentősége
+        egy későbbi fejezetben lesz elmagyarázva, most legyen elég annyi, hogy enélkül nem tudnánk majd
+        kipróbálni ezt a metódust.
+        ]]>
+    </advanced>
+    <text>
+        <![CDATA[
+        <u>Mit csinál?</u> Az elnevezés árulkodó. Ez a metódus két egész számot kap, melyeket
+        összead, az eredményt pedig visszaadja.
+        ]]>
+    </text>
+    <boxed title="A return kulcsszó">
+        <![CDATA[
+        A <i>return</i> kulcsszóval adunk vissza értéket a metóduson belülről. Utána oda kell írni azt
+        a változót, aminek az értékét vissza szeretnénk adni. A példa metódusban ez a változó az <i>additionResult</i> lesz.
+        <br><br>
+        Figyelni kell, hogy az így visszaadott változó típusa meg kell hogy egyezzen a metódus deklaráció során
+        megadott visszatérési típussal. A példában ez stimmel, mint a metódus visszatérési értéke, mind az
+        <i>additionResult</i> változó típusa <i>int</i>.
+        ]]>
+    </boxed>
+    <interactive instruction="Javítsd ki a metódus deklarációt úgy, hogy a visszatérési típus helyes legyen!">
         <data><![CDATA[
 
 <font color="#E65100">static</font> ___ <font color="#ADD8E6">getZero</font>() {
@@ -60,29 +79,12 @@
         <answer place="0">int</answer>
         <default place="0">String</default>
     </interactive>
-    <advanced title="The static keyword">
-        <![CDATA[
-        In our method declaration there is also a <i>static</i> keyword. The importance of this will be explained
-        later, for now let's just say that we need this keyword, so we can call our methods later from the main method.
-        ]]>
-    </advanced>
     <text>
         <![CDATA[
-        <u>What the method does:</u> The name gives it away. The method will take two <i>int</i>'s as parameters,
-        add them together, and return the result (which is also an <i>int</i> of course).
+        Az ebben az interaktív mintában lévő metódusnak nincsen paramétere! Ez teljesen szabályos,
+        azonban a zárójeleket ilyen esetben is ki kell írni.
         ]]>
     </text>
-    <boxed title="The return keyword">
-        <![CDATA[
-        The <b>return</b> keyword is used to return the result of the method to the caller (no surprise there).
-        After it we must write the value or variable we want to return, and a ';', as this is a statement. There can
-        be no other statements after the return statement!
-        <br><br>
-        The value after the <i>return</i> keyword must have the same type as the <b>return type</b> of the method.
-        As we can see in the previous example method, the return type is <i>int</i> and the returned value, <i>additionResult</i>
-        is also an integer variable, and the types match.
-        ]]>
-    </boxed>
     <code><![CDATA[
         
         <font color="#E65100">static</font> <font color="#DF7401">void </font>greetMe (<font color="#999900">String</font> myName) {
@@ -92,15 +94,15 @@
     ]]></code>
     <text>
         <![CDATA[
-        This method operates on text rather then integers. It takes a <i>String</i> parameter,
-        joins it with 'Hello', and prints it to the console.
+        Ez a metódus szöveges paramétert (<i>String</i>-et) vár. A kapott szöveg elé befűzi a '<i>Hello</i>'
+        szót, majd az egészet kiírja a konzolra.
         <br><br>
-        We can also notice a keyword that we haven't seen before, <b>void</b>. Just like having parameters isn't
-        necessary, neither is returning something. The <i>void</i> keyword is used instead of a return type to
-        indicate that the method does not return anything.
+        Megfigyelhető egy kulcsszó, amit eddig még nem láttunk, a <b>void</b>. Ahogyan nem kell hogy legyen
+        paraméter, úgy a visszatérési érték is opcionális. Ha nem szeretnénk visszatérési értéket, akkor
+        a visszatérési típus helyett <i>void</i>-ot kell írni.
         ]]>
     </text>
-    <interactive instruction="Declare a method with no return type and a String parameter!">
+    <interactive instruction="Deklarálj egy metódust visszatérési érték nélkül, String paraméterrel!">
         <data><![CDATA[
             
 <font color="#E65100">static</font> ___ <font color="#ADD8E6">stringConsumer</font>(___ text) {
@@ -112,19 +114,20 @@
         <answer place="0">void</answer>
         <answer place="1">String</answer>
     </interactive>
-    <boxed title="Returning in void methods">
+    <boxed title="Visszatérés a void metódusokban">
         <![CDATA[
-        The <i>return</i> keyword works a bit differently in void methods. It isn't necessary
-        to even include it (as you can see in the above example, which has no return statement)!
+        A <i>return</i> kulcsszó kicsit máshogy működik abban az esetben, ha a metódus nem ad vissza értéket. Ilyenkor
+        nem is szükséges a használata, ahogy azt a fenti interaktív mintában láthatod.
         <br><br>
-        We can however use it, but in this case we <b>must not put any value after it</b>, like this:
+        Ennek ellenére lehet használni, csak ilyenkor nem írhatunk mögé értéket, magában kell állnia. Ez az
+        utasítás azt fogja eredményezni, hogy a metódus azonnal visszatér, érték nélkül.
         <br><br>
         <i>return;</i>
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        Lastly, let's see an example for a method with no parameters.
+        Végül lássunk egy újabb paraméter nélküli metódust.
         ]]>
     </text>
     <code><![CDATA[
@@ -136,30 +139,30 @@
     ]]></code>
     <text>
         <![CDATA[
-        Very simple, right? This method just returns the result of 2+2. No need for any parameters
-        to do this.
+        Ez a metódus egyszerűen visszaadja a <i>2 + 2</i> értékét. Egy ilyen művelethez semmilyen
+        kívülről érkező paraméterre nincs szükség.
         <br><br>
-        Observe that the lack of parameters isn't indicated with the <i>void</i> keyword! Instead there is simply
-        nothing between the parentheses.
+        Megfigyelheted, hogy a paraméterek hiányát <b>nem</b> a <i>void</i> kulcsszóval jelöljük,
+        hanem egyszerűen nem írunk semmit a zárójelek közé.
         ]]>
     </text>
-    <advanced title="Don't forget the parentheses">
+    <advanced title="Ne felejtsd el a zárójeleket!">
         <![CDATA[
-        For a method without parameters, why do we need to put the parentheses there if we won't have
-        anything between them, you might ask:
+        Talán felmerült benned kérdés, hogy miért kell kiírni az üres zárójeleket, ha nem akarunk egyetlen
+        paramétert sem. Vegyük ezt a kis példát:
         <br><br>
         <i>int myMethod() { ... }</i>
         <br><br>
-        Because without the parentheses it looks much like a variable declaration, and this confuses
-        both the compiler and the programmer as well! Something like this is <b>invalid code</b>:
+        A paraméterek helyét jelző zárójelek nélkül ez nagyon hasonlít egy változó deklarációra, ami
+        megzavarja a fordítóprogramot, ezért hibajelzést fog adni:
         <br><br>
         <i>int myMethod { ... }</i>
         ]]>
     </advanced>
     <text>
         <![CDATA[
-        It's not allowed to declare other methods inside a method. When you declare a method, you must do it
-        <b>within the class</b> but <b>outside other methods</b>. For example, the following code is invalid:
+        Nem szabad metódust deklarálni egy másik metóduson belül! A metódus deklarációt mindig az <b>osztályon
+        belül</b>, de a <b>többi metóduson kívül</b> kell megtenni. Például ez a kódminta <b>hibás</b>:
         ]]>
     </text>
     <code><![CDATA[
@@ -173,8 +176,8 @@
     ]]></code>
     <text>
         <![CDATA[
-        Make sure all the methods are in your project. Your class will have to look something like this
-        (the order of the methods doesn't matter):
+        Most <b>meghívjuk</b> az előző példákban látott metódusokat. A projektnek valahogy így kell
+        kinéznie (a metódusok sorrendje nem számít):
         ]]>
     </text>
     <code><![CDATA[
@@ -200,14 +203,13 @@
 <br/>}
         
     ]]></code>
-    <title text="Calling methods"/>
+    <title text="Metódusok meghívása"/>
     <text>
         <![CDATA[
-        The whole reason of writing methods is so we can use (call) them later. Let's see how we can achieve this.
-        We will call our previously declared methods from the main method.
+        A metódusok írásának az értelme az, hogy később használhassuk, <b>meghívhassuk</b> őket.
         <br><br>
-        To call our method we must write it's name, and pass it's parameters, similarly to declaration, also
-        between the parentheses:
+        Ehhez meg kell adnunk a metódus nevét, és minden paramétert át kell adnunk, amit az adott
+        metódus vár:
         ]]>
     </text>
     <code><![CDATA[
@@ -221,19 +223,18 @@
     ]]></code>
     <text>
         <![CDATA[
-        Write this on your main method as well, and run the project!
+       Módosítsd a <i>main</i> metódus tartalmát így, majd futtasd a programot.
         <br><br>
-        <u>What happens when we run our program:</u> The <i>add</i> method gets called, with our parameters,
-        two integers, 7 and 8, passed to it. After this, the statements inside the <i>add</i> are executed, with the
-        following values:
+        <u>Ami történni fog:</u> Az <i>add</i> metódus meghívódik, az megadott két paraméterrel,
+        amik most a 7 és 8. Ezután metódusban lévő utasítások fognak lefutni, ezekkel az értékekkel:
         <br><br>
         <i>n1 = 7, n2 = 8</i>
         <br><br>
-        Finally, the return value of the method (15 in this case) is assigned to our variable in the main method,
-        <i>result</i>. This value is then printed.
+        Végül a metódusban elérünk a <i>return</i> utasításhoz, és az emögött álló érték (
+        jelenleg 15) visszakerül a metódus hívójához.
         ]]>
     </text>
-    <interactive instruction="Call the greetMe method with parameter 'John'">
+    <interactive instruction="Hívd meg a greetMe metódust 'John' paraméterrel!">
         <data><![CDATA[
             
 <font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
@@ -244,26 +245,27 @@
         <answer place="0">greetMe</answer>
         <answer place="1">"John"</answer>
     </interactive>
-    <boxed title="Assigning methods?">
+    <boxed title="Metódus értékül adása?">
         <![CDATA[
-        In the previous example we can see a line that may look confusing to you:
+       Az előző példában van egy sor, ami furcsának tűnhet:
         <br><br>
         <i>result = add(7,8);</i>
         <br><br>
-        Looks like we are assigning a method to our variable, doesn't it? When Java sees a statement like this,
-        it will calculate the <b>return value of the method, and assign this value to the variable</b>.
+        Úgy tűnik, mintha egy metódust próbálnánk értékül adni a változónak. Amikor a Java ilyen utasítást lát,
+        akkor lefuttatja a metódust, és <b>a visszatérési értékét</b> fogja értékül adni a változónak.
         <br><br>
-        We must be careful not to have a <b>type-mismatch</b>! For example, this statement is <b>invalid</b>, since
-        the return type of <i>add</i> is <i>int</i> and we try to assign it to a <i>String</i> variable:
+        Ahogy a standard változó értékadásnál, itt is figyelni kell a típusok egyezésére. A változó
+        típusa és a metódus visszatérési típusa azonos kell, hogy legyen. Ez például nem jó, mert az <i>add</i>
+        visszatérési típusa <i>int</i>, nem pedig <i>String</i>:
         <br><br>
         String text = add(3,-11);
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        Let's see our next method, <i>greetMe</i>. We know that this one takes text, and prints a greeting
-        using the given text. Call it in our main method, and put a name as its parameter, then run the project,
-        and observe the output!
+        Most meghívjuk a következő, <i>greetMe</i> nevű metódust. Tudjuk, hogy ez szöveget vár,
+        azt módosítja, majd az eredményt a konzolra írja. Módosítsd így a <i>main</i> metódust, majd
+        futtasd a programot!
         ]]>
     </text>
     <code><![CDATA[
@@ -278,22 +280,22 @@
     ]]></code>
     <text>
         <![CDATA[
-        I used <i>"Tom"</i> as the name parameter, but any name of you choosing (any text, in fact) can be used.
-        <br><br>
-        Our last method, <i>twoPlusTwo</i> is so simple that we understand how it words, even without an example.
+        Én most a <i>"Tom"</i> szöveget adtam át, de bármilyen idézőjelek közti szöveg jó lenne.
         ]]>
     </text>
-    <title text="Use methods to create other methods"/>
+    <title text="Metódusok hívása metódusokban"/>
     <text>
         <![CDATA[
-        Some of you may have already noticed that our 1. and 3. methods are very similar. Could we somehow use
-        our <i>add</i> method to do the same thing as the <i>twoPlusTwo</i> method?
-        <br><br>
-        Of course we can, by calling it like this:
+       Talán már megfigyelted, hogy az <i>add</i> és a <i>twoPlusTwo</i> metódusok hasonló műveletet
+       végeznek. Fel lehetne-e használni az <i>add</i>-ot a <i>twoPlusTwo</i>-n belül? Igen, ha így
+       hívjuk meg:
         <br><br>
         <i>add(2,2)</i>
-        <br><br>
-        In fact, we can change out <i>twoPlusTwo</i> method, and make it call the <i>add</i> method!
+        ]]>
+    </text>
+    <text>
+        <![CDATA[
+        Akár át is írhatjuk a <i>twoPlusTwo</i> deklarációját a következőképpen:
         ]]>
     </text>
     <code><![CDATA[
@@ -303,13 +305,13 @@
 <br/>}
         
     ]]></code>
-    <advanced title="Keep it short">
+    <advanced title="Legyenek rövidek!">
         <![CDATA[
-        Generally, writing very long methods is bad practice, which makes out code harder to understand. Our example
-        methods didn't contain more then a few statements, but it might seem easy to dump all our code to a few methods,
-        like <i>main</i>.
+        Általánosságban elmondható, hogy hosszú metódusokat írni rossz szokás. Könnyűnek tűnhet azt
+        mondani, hogy minden kódomat beleírom a főmetódusba, és ezzel több metódusra nem is lesz szükség,
+        azonban ez nehezen átlátható és karbantartható kódhoz vezet.
         <br><br>
-        Try to avoid this, by writing short and well-named methods!
+        Próbáld meg ezt elkerülni úgy, hogy a kódot rövid metódusokba szervezed!
         ]]>
     </advanced>
 </resources>

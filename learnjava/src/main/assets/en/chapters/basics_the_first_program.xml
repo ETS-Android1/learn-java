@@ -20,8 +20,12 @@
     </boxed>
     <text>
         <![CDATA[
-        For this simple project we will use the default package. Right click the src folder and select <b>New ->
-        Class</b>, then enter a name for your class. Before clicking <i>Finish</i>, make sure to tick  field!
+        For this simple project you can use the default package. If you want your own package,
+        right click the src folder and select <b>New -> Package</b>, the name your package.
+        <br><br>
+        Right click the src folder and select <b>New -> Class</b>, then enter a name for your class.
+        Before clicking <i>Finish</i>, make sure to tick the <b>public static void main(String[] args)</b> field!
+        If you created your own package, add the new class to that package, and not the <i>src</i> folder.
         <br><br>
         ]]>
     </text>

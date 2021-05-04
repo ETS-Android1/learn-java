@@ -8,43 +8,42 @@
     </examdata>
     <!-- Questions about 'What is Java?' -->
     <question type="text">
-        <text>Something is missing from the variable declaration 'int x = 5' Write the corrected statement.</text>
+        <text>Valami hiányzik az 'int x = 5' deklarációból. Írd le a javított változatot!</text>
         <correct>int[s]x = 5;</correct>
         <ignoreSpace/>
     </question>
     <question type="text">
-        <text>Something is wrong with the 'String data = 32;' statement. Write the corrected statement, without changing the
-            variables name, or value.</text>
+        <text>Valami nem jó a 'String data = 32;' deklarációban. Javítsd ki, anélkül, hogy a változó nevét vagy értékét megváltoztatnád!</text>
         <correct>int[s]data = 32;</correct>
         <ignoreSpace/>
     </question>
     <question type="text">
-        <text>What does JDK stand for?</text>
+        <text>Minek a rövidítése a JDK?</text>
         <correct>Java Development Kit</correct>
         <ignoreCase/>
     </question>
     <question type="multi_choice">
-        <text>When we say 'Java', what can we mean by it?</text>
-        <answer>A platform for software development</answer>
-        <answer>A database</answer>
-        <answer>A programming language</answer>
-        <answer>Bytecode</answer>
+        <text>Mit érthetünk 'Java' alatt?</text>
+        <answer>Egy szoftver platformot.</answer>
+        <answer>Adatbázist.</answer>
+        <answer>Programozási nyelvet.</answer>
+        <answer>Bájtkódot.</answer>
         <correct>0</correct>
         <correct>2</correct>
     </question>
     <question type="true_false">
-        <text>Java is a cross platform programming language.</text>
+        <text>A java egy cross-platform programozási nyelv.</text>
         <correct>true</correct>
     </question>
     <question type="single_choice">
-        <text>What does cross platform mean?</text>
-        <answer>You have to compile your program for each platform you want it to support.</answer>
-        <answer>You programs will run in multiple environments, operation systems.</answer>
-        <answer>Your programs are guaranteed to run on Linux.</answer>
+        <text>Mit jelent az, hogy egy nyelv cross-platform?</text>
+        <answer>Minden támogatott platformra külön-külön le kell fordítanod a programot.</answer>
+        <answer>A programod egyszeri fordítás után minden támogatott platformon futni fog.</answer>
+        <answer>A programod garantáltan fut majd Linux alatt.</answer>
         <correct>1</correct>
     </question>
     <question type="multi_choice">
-        <text>Which corporation take or took part in the development of Java?</text>
+        <text>Mely cégek vettek rész a Java fejlesztésében?</text>
         <answer>Sun Microsystems</answer>
         <answer>Oracle Corporation</answer>
         <answer>Google</answer>
@@ -53,149 +52,147 @@
         <correct>1</correct>
     </question>
     <question type="true_false">
-        <text>Java is currently owned by Sun Microsystems.</text>
+        <text>A Java jelenleg a Sun Microsystems tulajdonában van.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>Java is currently owned by the Oracle Corporation.</text>
+        <text>A Java jelenleg az Oracle Corporation tulajdonában van.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>The Java platform is designed in a way so that only one programming language, Java, can use it.</text>
+        <text>A Java szoftver platform úgy lett tervezve, hogy csak egy nyelven lehet használni.</text>
         <correct>false</correct>
     </question>
     <question type="single_choice">
-        <text>Select what is not part of the Java platform!</text>
-        <answer>The Java programming language.</answer>
-        <answer>Java compiler (javac)</answer>
-        <answer>The JVM</answer>
-        <answer>An integrated development environment (IDE).</answer>
+        <text>Válaszd ki azt, ami nem része a Java platformnak!</text>
+        <answer>A Java programozási nyelv.</answer>
+        <answer>Java fordító (javac)</answer>
+        <answer>Java virtuális gép.</answer>
+        <answer>Integrált fejlesztőkörnyezet (IDE).</answer>
         <correct>3</correct>
     </question>
     <question type="multi_choice">
-        <text>Select what is part of the Java platform!</text>
-        <answer>The Java programming language.</answer>
-        <answer>Java compiler (javac)</answer>
-        <answer>The JVM</answer>
-        <answer>An integrated development environment (IDE).</answer>
+        <text>Válaszd ki azokat, amik a Java platform részei!</text>
+        <answer>A Java programozási nyelv.</answer>
+        <answer>Java fordító (javac)</answer>
+        <answer>Java virtuális gép.</answer>
+        <answer>Integrált fejlesztőkörnyezet (IDE).</answer>
         <correct>0</correct>
         <correct>1</correct>
         <correct>2</correct>
     </question>
     <question type="single_choice">
-        <text>What is the JDK</text>
-        <answer>An implementation of the Java platform</answer>
-        <answer>A programming language based on Java.</answer>
-        <answer>A compiler for Java.</answer>
+        <text>Mi az a JDK?</text>
+        <answer>A Java platform specifikációjának egy megvalósítása.</answer>
+        <answer>Egy Java alapú programnyelv.</answer>
+        <answer>A Java fordítóprogram.</answer>
         <correct>0</correct>
     </question>
     <question type="text">
-        <text>What does JVM stand for?</text>
+        <text>Minek a rövidítése a JVM?</text>
         <correct>Java Virtual Machine</correct>
         <ignoreCase/>
     </question>
     <question type="text">
-        <text>What does IDE stand for?</text>
+        <text>Minek a rövidítése az IDE?</text>
         <correct>Integrated Development Environment</correct>
         <ignoreCase/>
     </question>
     <question type="single_choice">
-        <text>What is the purpose of the JVM?</text>
-        <answer>Compiles Java code to bytecode.</answer>
-        <answer>Contains the specifications for the Java platform.</answer>
-        <answer>Executes Java applications.</answer>
+        <text>Mi a JVM feladata?</text>
+        <answer>Lefordítja a Java kódot bájtkódra.</answer>
+        <answer>A Java plaform specifikációja.</answer>
+        <answer>Futtatja a lefordított bájtkódot.</answer>
         <correct>2</correct>
     </question>
     <question type="multi_choice">
-        <text>Which properties are true for the Java programming language?</text>
-        <answer>It can only be executed over Windows OS.</answer>
-        <answer>Object-oriented</answer>
-        <answer>General-purpose</answer>
-        <answer>Dynamically-typed</answer>
+        <text>Melyek a Java programnyelv tulajdonságai?</text>
+        <answer>Csak Windows alatt lehet Java programot futtatni.</answer>
+        <answer>Objektum orientált.</answer>
+        <answer>Általános célú.</answer>
+        <answer>Dinamikusan típusozott.</answer>
         <correct>1</correct>
         <correct>2</correct>
     </question>
 
     <!-- Questions about 'File extensions and project structure' -->
     <question type="true_false">
-        <text>.java files are text files.</text>
+        <text>A .java fájlok szöveges, forráskódot tartalmazó fájlok.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>Only the JVM may open .java files.</text>
+        <text>Csak a JVM tudja értelmezni a .java fájlokat.</text>
         <correct>false</correct>
     </question>
     <question type="single_choice">
-        <text>Are there any restrictions on naming .java files.</text>
-        <answer>The name of file must match the name of the public class inside it.</answer>
-        <answer>No restrictions.</answer>
-        <answer>The file names can't contain capital letters.</answer>
-        <answer>The file name must begin with an underscore.</answer>
+        <text>Vannak-e megkötések a .java fájlok elnevezésére?.</text>
+        <answer>A névnek meg kell egyeznie a benne lévő osztály nevével.</answer>
+        <answer>Nincsenek megkötések.</answer>
+        <answer>A név nem tartalmazhat nagybetűket.</answer>
+        <answer>A névnek alulvonással kell kezdődnie.</answer>
         <correct>0</correct>
     </question>
     <question type="true_false">
-        <text>.class files contain bytecode</text>
+        <text>A .class fájlok bájtkódot tartalmaznak.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>The JVM can execute .java files.</text>
+        <text>A JVM tudja futtatni a .java fájlokat.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>The JVM can execute .class files.</text>
+        <text>A JVM tudja futtatni a .class fájlokat.</text>
         <correct>true</correct>
     </question>
     <question type="multi_choice">
-        <text>What is true about .class files?</text>
-        <answer>They are readable text files.</answer>
-        <answer>The JVM can execute them.</answer>
-        <asnwer>The Java compiler creates them from .java files.</asnwer>
-        <answer>They are binary files.</answer>
+        <text>Mely állítások igazak a .class fájlokkal kapcsolatban?</text>
+        <answer>Olvasható szöveges fájlok.</answer>
+        <answer>A JVM futtatni tudja őket.</answer>
+        <asnwer>A fordító hozza őket létre a .java fájlokból.</asnwer>
+        <answer>Bináris fájlok.</answer>
         <correct>1</correct>
         <correct>2</correct>
         <correct>3</correct>
     </question>
     <question type="text">
-        <text>What is the file extension of a Java source file?</text>
+        <text>Milyen kiterjesztésűek a Java forrás fájlok?</text>
         <correct>.java</correct>
         <correct>java</correct>
     </question>
     <question type="text">
-        <text>What is the file extension of compiled Java source file, containing bytecode?</text>
+        <text>Milyen kiterjesztésűek a lefordított forrás fájlok?</text>
         <correct>.class</correct>
         <correct>class</correct>
     </question>
     <question type="text">
-        <text>What is the file extension of a Java archive?</text>
+        <text>Milyen kiterjesztésűek a Java archívumok?</text>
         <correct>.jar</correct>
         <correct>jar</correct>
     </question>
     <question type="single_choice">
-        <text>What is a Java archive?</text>
-        <answer>Output of the Java compiler.</answer>
-        <answer>A collection of Java source files.</answer>
-        <answer>A compressed file containing data for a Java application.</answer>
+        <text>Mi az a Java archívum?</text>
+        <answer>A fordítóprogram által létrehozott fájl.</answer>
+        <answer>Java forrás fájlok gyűjteménye.</answer>
+        <answer>Tömörített fájl, ami egy Java programnak szükséges bájtkódot és adatokat tartalmaz.</answer>
         <correct>2</correct>
     </question>
     <question type="true_false">
-        <text>JAR files can be made executable.</text>
+        <text>A .jar fájlok lehetnek futtathatóak.</text>
         <correct>true</correct>
     </question>
     <question type="multi_choice">
-        <text>What is the purpose of packages?</text>
-        <answer>They separate compiled and not compiled Java files.</answer>
-        <answer>They contain the JDK.</answer>
-        <answer>They are used to organize our classes by their function.</answer>
-        <answer>They give the structure of a project.</answer>
+        <text>Mi a csomagok létrehozásának célja?</text>
+        <answer>Elválasztják a lefordított és nem lefordított kódot.</answer>
+        <answer>Tartalmazzák a JDK-t.</answer>
+        <answer>Struktúrát adnak a kódunknak.</answer>
         <correct>2</correct>
-        <correct>3</correct>
     </question>
     <question type="true_false">
-        <text>Packages are not allowed to contain other packages.</text>
+        <text>Csomagoknak nem szabad további csomagokat tartalmazniuk.</text>
         <correct>false</correct>
     </question>
     <question type="multi_choice">
-        <text>Which package names are restricted?</text>
+        <text>Mely csomagnevek foglaltak a Java számára?</text>
         <answer>java</answer>
         <answer>org</answer>
         <answer>project</answer>
@@ -204,281 +201,271 @@
         <correct>3</correct>
     </question>
     <question type="true_false">
-        <text>The package declaration line must always be the last line of the source file.</text>
+        <text>A csomag deklarációs utasítás mindig a forrás fájl végén van.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>There must always be a package declaration line in the source file, on the first line.</text>
+        <text>Mindig kell lennie csomag deklarálásnak a forrás fájlban.</text>
         <correct>false</correct>
     </question>
     <question type="text">
-        <text>We would like to import a class named 'Utils' from package 'calculator', which is inside package 'com'.
-            What is the import line we must write?</text>
+        <text>Szeretnénk importálni egy 'Utils' nevű osztályt a 'calculator' csomagból, ami a 'com' csomagban van. Mit kell írnunk?</text>
         <correct>import com.calculator.Utils;</correct>
     </question>
     <question type="text">
-        <text>We are creating a class into package 'utils', which is inside package 'org'. What is the package declaration statement
-            we must write?</text>
+        <text>A forrás fájlunk az 'utils' csomagban van, ami pedig az 'org' csomagban található. Milyen csomag deklarációs utasítást kell írnunk?</text>
         <correct>package org.utils;</correct>
     </question>
     <question type="true_false">
-        <text>Using the default package is discouraged.</text>
+        <text>Az alap csomag használata csak egyszerű projektek esetén ajánlott.</text>
         <correct>true</correct>
     </question>
 
     <!-- Questions about 'The first program' -->
     <question type="multi_choice">
-        <text>What is true about the main method?</text>
-        <answer>Every Java program must have this method.</answer>
-        <answer>It has no parameters.</answer>
-        <answer>It's the entry point of the application</answer>
-        <answer>It does not return anything.</answer>
+        <text>Mi igaz a főmetódussal kapcsolatban?</text>
+        <answer>Minden Java programnak van ilyen metódusa.</answer>
+        <answer>Nincsenek paraméterei.</answer>
+        <answer>Ez az alkalmazás belépési pontja.</answer>
+        <answer>A neve mindig 'main'.</answer>
         <correct>0</correct>
         <correct>2</correct>
         <correct>3</correct>
     </question>
     <question type="single_choice">
-        <text>What does application entry point mean?</text>
-        <answer>It's where the compiler starts compiling your source files.</answer>
-        <answer>The first line of the source file.</answer>
-        <answer>It's where the JVM will start to execute your program.</answer>
-        <answer>It's the only method with no return type.</answer>
+        <text>Mit jelent a belépési pont?</text>
+        <answer>A fordító itt kezdi el lefordítani a programot.</answer>
+        <answer>A forrás fájl első sora..</answer>
+        <answer>Itt indul majd a program futása.</answer>
+        <answer>Az egyetlen visszatérési érték nélküli metódus.</answer>
         <correct>2</correct>
     </question>
     <question type="text">
-        <text>Write the statement that will print 'Good morning' to the console.</text>
+        <text>Írd le az utasítást, ami kiírja a konzolra, hogy 'Jó reggelt'!</text>
         <correct>System.out.println("Good morning");</correct>
     </question>
     <question type="text">
-        <text>Enter the statement that will print 'ABC' to the console.</text>
+        <text>Írd le az utasítást, ami kiírja a konzolra, hogy 'ABC'!</text>
         <correct>System.out.println("ABC");</correct>
     </question>
     <question type="true_false">
-        <text>The statement 'System.out.println(Hello, world!);' is valid.</text>
+        <text>A 'System.out.println(Hello, world!);' utasítás helyes.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>The statement 'System.out.println("Hello, world!");' is valid.</text>
+        <text>A 'System.out.println("Hello, world!");' utasítás helyes.</text>
         <correct>true</correct>
     </question>
     <question type="single_choice">
-        <text>What is true about statement execution?</text>
-        <answer>Inside a method, statements are executed from bottom to top.</answer>
-        <answer>The statements are executed in the order they were compiled in.</answer>
-        <answer>Inside a method, statements are executed from top to bottom.</answer>
+        <text>Mi igaz az utasítások végrehajtásával kapcsolatban?</text>
+        <answer>Metóduson belül felülről lefelé hajtódnak végre.</answer>
+        <answer>Mindig pontosan a fordítás sorrendjében hajtódnak végre.</answer>
+        <answer>Metóduson belül lentről felfelé hajtódnak végre.</answer>
         <correct>2</correct>
     </question>
 
     <!-- Questions about 'Variables' -->
     <question type="true_false">
-        <text>Java is statically typed.</text>
+        <text>A Java statikusan típusozott.</text>
         <correct>true</correct>
     </question>
     <question type="single_choice">
-        <text>What does statically typed mean?</text>
-        <answer>Variables can only have a few different types.</answer>
-        <answer>When declaring a variable, we must say its type, and this type can't be changed.</answer>
-        <answer>We don't need to say a variables type when declaring it.</answer>
-        <answer>Every variable must have a unique identifier, a name.</answer>
+        <text>Mit jelent a statikus típusozottság?</text>
+        <answer>Csak néhány típus áll rendelkezésre.</answer>
+        <answer>Változó deklaráláskor meg kell adnunk a típust.</answer>
+        <answer>Változó deklaráláskor nem kell megadnunk a típust.</answer>
+        <answer>Minden változót el kell neveznünk.</answer>
         <correct>1</correct>
     </question>
     <question type="true_false">
-        <text>We must initialize our variable in the same statement it was declared in.</text>
+        <text>A változókat mindig ott kell inicializálni, ahol deklarálva lettek.</text>
         <correct>false</correct>
     </question>
     <question type="text">
-        <text>Something is wrong with the 'String text "my message";' statement. Write the corrected statement, without changing the
-            variables name, or value.</text>
+        <text>Valami nem helyes a 'String text "my message";' deklarációban. Írd le a helyes utasítást, a név és az érték változtatása nélkül!</text>
         <correct>String[s]text = "my[s]message";</correct>
         <ignoreSpace/>
     </question>
     <question type="single_choice">
-        <text>Which operator is used to check equality?</text>
-        <answer>==</answer>
-        <answer>-&gt;</answer>
-        <answer>=</answer>
-        <answer>+</answer>
+        <text>Mit csinál ez az utasítás: 'int data = 21;'?</text>
+        <answer>Int típusú változót hoz létre, és inicializálja a 21 értékkel.</answer>
+        <answer>Egy 'int' nevű változót hoz létre, és inicializálja a 21 értékkel.</answer>
+        <answer>Összehasonlítja a 'data' változó értékét 21-el.</answer>
+        <answer>Ez hibás utasítás, nem fog lefordulni.</answer>
         <correct>0</correct>
     </question>
     <question type="single_choice">
-        <text>What does this statement do: 'int data = 21;'</text>
-        <answer>Declares an integer variable called 'data', and initializes it with value 21.</answer>
-        <answer>Declares a data variable called 'int', and initializes it with value 21.</answer>
-        <answer>Checks if the variable 'data' is equal to 21.</answer>
-        <answer>This statement is invalid, it won't do anything.</answer>
-        <correct>0</correct>
-    </question>
-    <question type="single_choice">
-        <text>What does this statement do: 'String input;'</text>
-        <answer>Declares an integer variable called 'input'.</answer>
-        <answer>Declares a String variable called 'input' and initializes it to the users input.</answer>
-        <answer>This statement is invalid, it won't do anything.</answer>
-        <answer>Declares a String variable called 'input'.</answer>
+        <text>Mit csinál a következő utasítás: 'String input;'?</text>
+        <answer>Egy egész szám típusú, 'input' nevű változót hoz létre.</answer>
+        <answer>Egy szöveges típusú, 'input' nevű változót hoz létre, és inicializálja is.</answer>
+        <answer>Ez hibás utasítás, nem fog lefordulni.</answer>
+        <answer>Egy szöveges típusú, 'input' nevű változót hoz létre.</answer>
         <correct>3</correct>
     </question>
     <question type="true_false">
-        <text>If we assign a value with with a different type to a variable, the variable will update its type.</text>
+        <text>Ha új típusú értéket adunk egy változónak, akkor a változó típusa frissülni fog.</text>
         <correct>false</correct>
     </question>
     <question type="single_choice">
-        <text>What is a type mismatch?</text>
-        <answer>The variable and it's assigned value have different types.</answer>
-        <answer>Not giving a type to our variable.</answer>
-        <answer>When the compiler doesn't recognize the variable type we wrote.</answer>
-        <answer>Not having a main method in our program.</answer>
+        <text>Mit jelent a típus konverziós hiba?</text>
+        <answer>A változó típusa és a neki adott érték típusa nem egyezik.</answer>
+        <answer>A változó nem kapott típust.</answer>
+        <answer>A fordító nem ismeri fel a típust.</answer>
+        <answer>Nincs főmetódus a programban.</answer>
         <correct>0</correct>
     </question>
     <question type="true_false">
-        <text>One statement can only declare one variable.</text>
+        <text>Egy utasításban csak egy változót deklarálhatunk.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>It is possible to declare 4 variables with a single statement.</text>
+        <text>Négy változót is deklarálhatunk egy utasításban.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>Is the 'String i1 = "i_1", i2 = "i_2";' statement valid?</text>
+        <text>A 'String i1 = "i_1", i2 = "i_2";' utasítás helyes.</text>
         <correct>true</correct>
     </question>
     <question type="multi_choice">
-        <text>What is true integer variables?</text>
-        <answer>They can't be reassigned.</answer>
-        <answer>We can perform basic arithmetic like +, -, or * on them.</answer>
-        <answer>They can contain negative numbers.</answer>
+        <text>Mi igaz az egész szám típusú változókra?</text>
+        <answer>Nem kaphatnak új értéket.</answer>
+        <answer>Matematikai műveletet végezhetünk rajtuk.</answer>
+        <answer>Negatív értékük is lehet.</answer>
         <correct>1</correct>
         <correct>2</correct>
     </question>
     <question type="multi_choice">
-        <text>What is true about String variables?</text>
-        <answer>They can be reassigned.</answer>
-        <answer>Their values can be printed to the console.</answer>
-        <answer>We can use the '+' operator on them to connect them together.</answer>
-        <answer>They must be printed in the same method they were declared in.</answer>
+        <text>Mi igaz a String típusú változókra?</text>
+        <answer>Nem kaphatnak új értéket.</answer>
+        <answer>Értékük kiírható a konzolra.</answer>
+        <answer>A + operátorral összefűzhetjük őket.</answer>
+        <answer>Ugyanabban a metódusban kell őket kiíratni, ahol létre lettek hozva.</answer>
         <correct>0</correct>
         <correct>2</correct>
     </question>
 
     <!-- Questions about 'Methods' -->
     <question type="multi_choice">
-        <text>Which of these are needed to declare a method?</text>
-        <answer>An identifier (method name).</answer>
-        <answer>Writing the method name in the main method.</answer>
-        <answer>A return type for the method.</answer>
-        <answer>A list of parameters, each with their own type and identifier.</answer>
+        <text>Ezek közül melyekre van szükség metódus deklarálásához?</text>
+        <answer>Azonosító (metódus név).</answer>
+        <answer>Bele kell írni a metódus nevét a főmetódusba.</answer>
+        <answer>visszatérési típus, vagy void.</answer>
+        <answer>Paraméter lista, ami akár üres is lehet.</answer>
         <correct>0</correct>
         <correct>2</correct>
         <correct>3</correct>
     </question>
     <question type="true_false">
-        <text>All methods except the main method must return a value.</text>
+        <text>A főmetóduson kívül minden metódusnak kell visszatérési érték.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>If a method doesn't return a value, we don't have to write anything instead of the return type.</text>
+        <text>Ha nincsenek paraméterek, akkor a metódus deklarációban nem kell visszatérési értéket írni.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>If a method doesn't have parameters we don't have to write anything inside the parameter's parentheses.</text>
+        <text>Ha nincsenek paraméterek, akkor a metódus deklarációban a zárójelek közti rész üresen maradhat.</text>
         <correct>true</correct>
     </question>
     <question type="multi_choice">
-        <text>What is true about methods?</text>
-        <answer>They have an identifier (method name).</answer>
-        <answer>Any method will contain at least one return statement.</answer>
-        <answer>All of them must return a value.</answer>
-        <answer>There are methods without any parameters.</answer>
+        <text>Mi igaz a metódusokkal kapcsolatban?</text>
+        <answer>Van azonosítójuk.</answer>
+        <answer>Biztosan lesz bennük return utasítás.</answer>
+        <answer>Biztosan lesz visszatérési értékük.</answer>
+        <answer>Vannak paraméter nélküli metódusok.</answer>
         <correct>0</correct>
         <correct>2</correct>
     </question>
     <question type="single_choice">
-        <text>Which of these is not true about methods?</text>
-        <answer>The lack of return type is indicated by the 'void' keyword.</answer>
-        <answer>Each parameter must have its own identifier.</answer>
-        <answer>If a method has no parameters, it must return a value.</answer>
-        <answer>Each parameter must have its own type.</answer>
+        <text>Mely állítás NEM igaz a metódusokkal kapcsolatban?</text>
+        <answer>Ha nincs visszatérési érték, azt 'void'-al jelöljük.</answer>
+        <answer>Minden paraméternek saját neve van.</answer>
+        <answer>Paraméterekkel rendelkező metódusnak kell visszatérési érték.</answer>
+        <answer>Minden paraméternek saját típusa van.</answer>
         <correct>2</correct>
     </question>
     <question type="text">
-        <text>Write the keyword that indicates that the method has no return type.</text>
+        <text>Írd le a kulcsszót, amivel a visszatérési érték hiányát jelöljük!</text>
         <correct>void</correct>
     </question>
     <question type="text">
-        <text>What would you write between the parentheses if you declare a method with two parameters.
-            The first one is an integer with the name 'amount', the second is a string with the name 'name'. Don't write the parentheses.</text>
+        <text>Mit írnál a zárójelek közé ha a metódusnak két paramétere van, az első egész szám
+        'amount' névvel, a második szöveg 'name' névvel?</text>
         <correct>int[s]amount , String[s]name</correct>
+        <correct>(int[s]amount , String[s]name)</correct>
         <ignoreSpace/>
     </question>
     <question type="text">
-        <text>What would you write between the parentheses if you declare a method with two parameters.
-            They are both integers with the names 'num1' and 'num2'. Don't write the parentheses.</text>
+        <text>Mit írnál a zárójelek közé ha a metódusnak két paramétere van, mindkettő egész szám,
+            'num1' és 'num2' nevekkel?</text>
         <correct>int[s]num1 , int[s]num2</correct>
         <correct>int[s]num2 , int[s]num1</correct>
         <ignoreSpace/>
     </question>
     <question type="text">
-        <text>Which keyword is used to return value to the caller in methods?</text>
+        <text>Melyik kulcsszóval lehet visszatérni egy metódusból?</text>
         <correct>return</correct>
     </question>
     <question type="text">
-        <text>We would like to return the variable called 'determinant'. What statement must we write?</text>
+        <text>Szeretnénk visszatérni a 'determinant' változó értékével. Milyen utasítást kell írnunk?</text>
         <correct>return determinant;</correct>
     </question>
     <question type="true_false">
-        <text>The return statement must be the first statement in the method.</text>
+        <text>A return utasítás mindig az első utasítás a metódusban.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>The return statement must be the last statement that is executed in the method.</text>
+        <text>A return utasítás mindig az utolsó utasítás a metódusban.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>Every method must have a return statement.</text>
+        <text>Minden metódusban lesz return utasítás.</text>
         <correct>false</correct>
     </question>
     <question type="single_choice">
-        <text>What is true about the return statement?</text>
-        <answer>The main method must have at least one return statement.</answer>
-        <answer>Methods with no return type can have a return statement.</answer>
-        <answer>Methods with no return type must have a return statement.</answer>
-        <answer>All return statements must contain a variable name as well.</answer>
+        <text>Mi igaz a return utasítással kapcsolatban?</text>
+        <answer>Biztos lesz ilyen a főmetódusban.</answer>
+        <answer>Visszatérési érték nélküli metódusban is lehet ilyen utasítás.</answer>
+        <answer>Visszatérési érték nélküli metódusban MINDIG van ilyen utasítás.</answer>
+        <answer>Az ilyen utasításban mindig szerepel egy változó is, melynek az értékét visszaadjuk.</answer>
         <correct>1</correct>
     </question>
     <question type="multi_choice">
-        <text>Which of these we must write when calling a method?</text>
-        <answer>The return type of the method.</answer>
-        <answer>The name of the method.</answer>
-        <answer>The parameters, between parentheses. We must write the parentheses even if there are no parameters.</answer>
-        <answer>The parameters, between parentheses. we don't need to write the parentheses if there are no parameters.</answer>
+        <text>Melyekre van szükség a metódus meghívásához?</text>
+        <answer>Visszatérési típus.</answer>
+        <answer>A metódus neve.</answer>
+        <answer>Paraméterek, zárójelek közt. A zárójeleket még üres paraméter lista esetén is ki kell írni.</answer>
+        <answer>Paraméterek, zárójelek közt. A zárójeleket még üres paraméter lista esetén NEM kell kiírni.</answer>
         <correct>1</correct>
         <correct>2</correct>
     </question>
     <question type="true_false">
-        <text>Assuming that the 'compute' methods has integer return type, the statement 'int x = compute();' is valid.</text>
+        <text>Tegyük fel, hogy a 'compute' metódus visszatérési típusa 'int'. Ekkor az 'int x = compute();' utasítás helyes.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>Assuming that the 'compute' methods has integer return type, the statement 'String x = compute();' is valid.</text>
+        <text>Tegyük fel, hogy a 'compute' metódus visszatérési típusa 'int'. Ekkor az 'String x = compute();' utasítás helyes.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>Assuming that the 'executeTask' methods has no return type, the statement 'int res = executeTask();' is valid.</text>
+        <text>Tegyük fel, hogy az 'executeTask' metódusnak nincs visszatérési értéke. Ekkor az 'int x = executeTask();' utasítás helyes.</text>
         <correct>false</correct>
     </question>
 
     <!-- Questions about 'Naming rules and conventions' -->
     <question type="multi_choice">
-        <text>Select the characters which can be the first character in an identifier.</text>
+        <text>Válaszd ki azokat a karaktereket, amikkel kezdődhet egy azonosító!</text>
         <answer>A</answer>
-        <answer>_ (underscore)</answer>
+        <answer>_ (alulvonás)</answer>
         <answer>(</answer>
         <answer>,</answer>
         <correct>0</correct>
         <correct>1</correct>
     </question>
     <question type="multi_choice">
-        <text>Select the characters which can't be the first character in an identifier.</text>
+        <text>Válaszd ki azokat a karaktereket, amikkel NEM kezdődhet egy azonosító!</text>
         <answer>3</answer>
-        <answer>_ (underscore)</answer>
+        <answer>_ (alulvonás)</answer>
         <answer>}</answer>
         <answer>;</answer>
         <correct>0</correct>
@@ -486,35 +473,35 @@
         <correct>3</correct>
     </question>
     <question type="true_false">
-        <text>Identifiers can't be longer then 100 characters.</text>
+        <text>Az azonosítók maximum 100 karakter hosszúak lehetnek.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>'_myVar' is a valid identifier.</text>
-        <correct>false</correct>
-    </question>  <question type="true_false">
-    <text>'9lives' is an invalid identifier.</text>
-    <correct>true</correct>
-</question>
+        <text>A '_myVar' azonosító szabályos.</text>
+        <correct>true</correct>
+    </question>
     <question type="true_false">
-        <text>'my_(well_named)_variable' is a valid identifier</text>
+        <text>A '9lives' azonosító NEM szabályos.</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>A 'my_(well_named)_variable' azonosító szabályos.</text>
         <correct>false</correct>
     </question>
     <question type="text">
-        <text>Write 'web socket' using the camel case notation.</text>
+        <text>Írd le, hogy 'web socket' a 'teve' elnevezési móddal!</text>
         <correct>webSocket</correct>
     </question>
     <question type="text">
-        <text>Write 'insert to end' using the camel case notation.</text>
+        <text>Írd le, hogy 'insert to end' a 'teve' elnevezési móddal!</text>
         <correct>insertToEnd</correct>
     </question>
     <question type="text">
-        <text>Write 'remove all' using the camel case notation.</text>
+        <text>Írd le, hogy 'remove all' a 'teve' elnevezési móddal!</text>
         <correct>removeAll</correct>
     </question>
     <question type="single_choice">
-        <text>We would like to name a method which adds an element to a list. Which of these would be the best naming choice
-            (using java conventions)?</text>
+        <text>Melyik név lenne a legjobb egy metódusnak, a Java elnevezési szokások alapján?</text>
         <answer>add_element</answer>
         <answer>addElement</answer>
         <answer>AddElement</answer>
@@ -522,8 +509,7 @@
         <correct>1</correct>
     </question>
     <question type="single_choice">
-        <text>We would like to name a variable which stores a prime number. Which of these would be the best naming choice
-            (using java conventions)?</text>
+        <text>Melyik név lenne a legjobb egy változónak, a Java elnevezési szokások alapján?</text>
         <answer>primeNumber</answer>
         <answer>$prime_number</answer>
         <answer>prime_number</answer>
@@ -531,8 +517,7 @@
         <correct>0</correct>
     </question>
     <question type="single_choice">
-        <text>We would like to name a class related to matrices. Which of these would be the best naming choice
-            (using java conventions)?</text>
+        <text>Melyik név lenne a legjobb egy osztálynak, a Java elnevezési szokások alapján?</text>
         <answer>matrix</answer>
         <answer>Matrix</answer>
         <answer>_Matrix</answer>
@@ -540,8 +525,7 @@
         <correct>1</correct>
     </question>
     <question type="single_choice">
-        <text>We would like to name a package which contains database related classes. Which of these would be the best naming choice
-            (using java conventions)?</text>
+        <text>Melyik név lenne a legjobb egy csomagnak, a Java elnevezési szokások alapján?</text>
         <answer>Database</answer>
         <answer>_database</answer>
         <answer>data_base_</answer>
@@ -549,8 +533,7 @@
         <correct>3</correct>
     </question>
     <question type="single_choice">
-        <text>We would like to name constant to store the value of the speed of light. Which of these would be the best naming choice
-            (using java conventions)?</text>
+        <text>Melyik név lenne a legjobb egy konstansnak, a Java elnevezési szokások alapján?</text>
         <answer>speedOfLight</answer>
         <answer>speedoflight</answer>
         <answer>SPEED_OF_LIGHT</answer>
@@ -560,22 +543,22 @@
 
     <!-- Questions about 'Comments in the code' -->
     <question type="text">
-        <text>Write a single line comment which says 'this is a comment'.</text>
+        <text>Írj egy egysoros kommentet, 'this is a comment' szöveggel!</text>
         <correct>// this[s]is[s]a[s]comment</correct>
         <ignoreSpace/>
     </question>
     <question type="text">
-        <text>Write a single line comment which says 'remember to comment your code!'.</text>
-        <correct>// remember[s]to[s]comment[s]your[s]code!</correct>
+        <text>Írj egy egysoros kommentet, 'remember to comment your code' szöveggel!</text>
+        <correct>// remember[s]to[s]comment[s]your[s]code</correct>
         <ignoreSpace/>
     </question>
     <question type="text">
-        <text>Write a multi line comment (in one line) which says 'important information'.</text>
+        <text>Írj egy többsoros kommentet (ebbe az egy sorba), 'important information' szöveggel!</text>
         <correct>/* important[s]information */</correct>
         <ignoreSpace/>
     </question>
     <question type="single_choice">
-        <text>Which symbols are used to create multi-lined comments?</text>
+        <text>Mely jelekkel lehet többsoros kommentet írni?</text>
         <answer>// and //</answer>
         <answer>// and \\</answer>
         <answer>** and **</answer>

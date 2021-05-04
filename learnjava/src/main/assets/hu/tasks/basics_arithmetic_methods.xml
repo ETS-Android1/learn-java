@@ -2,12 +2,13 @@
 <!-- Task of course 'The basics' --><resources>
     <taskdata>
         <id>51</id>
-        <name>Create arithmetic methods</name>
+        <name>Aritmetikai metódusok írása</name>
     </taskdata>
         <text>
             <![CDATA[
-            In the chapter '<i>Methods: return types and parameters</i>' you can see a method which adds two integers (see below). Your task
-            is to create similar methods for subtraction, multiplication and division.
+            A metódusokkal kapcsolatos fejezetben szerepel az <i>add</i> nevű metódus, ami két egész szám
+            összeadását végzi, majd visszaadja az eredményt. A feladatod az lesz, hogy hasonló
+            metódusokat írj kivonásra, szorzásra és osztásra.
             ]]>
         </text>
         <code><![CDATA[
@@ -20,75 +21,77 @@
         ]]></code>
         <text>
             <![CDATA[
-            Write all your methods to the same class, and make sure to have the <b>main method</b> in this class, as
-            you'll have to call the newly declared methods. You can create a package for the project, or simply use the
-            default package.
+            Írd a metódusokat egy forrás fájlba, ahol ott van a főmetódus is, mivel abban kell majd
+            meghívni, kipróbálni az eredményt. Ehhez használhatod az alapcsomagot, vagy készíthetsz
+            saját csomagot.
             ]]>
         </text>
         <text>
             <![CDATA[
-            <u>List of all methods you have to create:</u>
+            <u>Ezeket a metódusokat kell elkészítened:</u>
             ]]>
         </text>
         <list>
             <![CDATA[
             <ul>
-            <li> 1. A method that takes two integers and returns the <b>difference</b> (x-y) of them.</li>
-            <li> 2. A method that takes two integers and returns the <b>product</b> (x*y) of them.</li>
-            <li> 3. A method that takes two integers and returns the <b>quotient</b> (x/y) of them.</li>
-            <li> 4. A method that takes 3 integers, and prints the result of their sum to the console (no return value).</li>
+            <li> 1. Kivonás: két egész számot kap, majd visszaadja a <b>különbséget</b>: (x - y).</li>
+            <li> 2. Szorzás: két egész számot kap, majd visszaadja a <b>szorzatukat</b>: (x * y).</li>
+            <li> 3. Osztás: két egész számot kap, majd visszaadja a <b>hányadosukat</b>: (x - y).</li>
+            <li> 4. Egy metódus ami <b>3 egész számot kap paraméterben</b>, ezeket összeadja, és az eredményt a konzolra írja.</li>
             </ul>
             ]]>
         </list>
-        <advanced title="Division with zero">
+        <advanced title="Nullával osztás">
             <![CDATA[
-            The most secure way for the division method is to use <b>exception handling</b>. This, however, will be
-            covered in a later course, and not required for this task.
+            A legbiztonságosabb és elegánsabb módja az osztást végző metódusnak, ha <b>kivétel kezelést</b>
+            alkalmazol. Erről azonban csak egy későbbi kurzusban lesz szó, ezért nem kell foglalkoznod vele.
             <br><br>
-            If you would like to try to use exception handling in this project, you can find a great tutorial for
-            it <a href="https://www.javatpoint.com/exception-handling-in-java">here</a>. The very first example of this
-            tutorial is, in fact, how to handle division with zero!
+            Ha azonban mégis szeretnéd kipróbálni már most, akkor <a href="https://www.javatpoint.com/exception-handling-in-java">ezen</a> a
+            linken minden szükséges információt megtalálsz.
             ]]>
         </advanced>
-        <advanced title="The result of division">
+        <advanced title="Az osztás eredménye">
             <![CDATA[
-            Your divide method may not give the result you expect. This is because Java performs
-            <b>integer division</b> on your variables. Simply put, this means that the result will be rounded down
-            to an integer, even if that's not the actual result.
+            Amikor majd teszteled az osztó metódusodat, furcsa eredményt láthatsz. Ennek az oka, hogy a
+            Java egész számokon <b>egészosztást</b> for végezni, ami azt jelenti, hogy az eredmény törtrészét
+            el fogja dobni. Például <i>3 / 2</i> eredménye <i>1</i> lesz, mivel a pontos <i>1.5</i>
+            eredményből a <i>0.5</i> törtrész el lesz dobva.
             ]]>
         </advanced>
         <text>
             <![CDATA[
-            Once you have finished writing the methods, <b>call the first 3 of them in the main method</b> and save the return
-            values in <b>integer variables</b>.
+            Miután a metódusok elkészültek, hívd meg az első hármat a főmetódusban, mindegyik eredményét
+            add értékül 1-1 változónak.
             <br><br>
-            Choose any integers as parameters for the methods. Feel free to use negative numbers, or large numbers! Only divide with
-            zero if you implemented exception handling as well!
+            Tetszőleges számokat átadhatsz paraméterként, akár negatívakat is. Ha még a kivétel kezelléssel
+            is foglalkoztál, nézd meg mi történik, ha 0-val próbálsz osztani!
             <br><br>
-            Finally, <b>call the fourth method, using the newly created three integer variables</b>, the return values of the previous methods.
+            Végül hívd meg a negyedik, utolsó metódust. Paraméterként kapja meg azokat a
+            változókat, amiknek az első három metódus adott értéket.
             ]]>
         </text>
-        <title text="Follow the conventions in this project"/>
+        <title text="Kövesd a szokásokat"/>
         <text>
             <![CDATA[
-            When creating the project, be sure to name your class, methods and variables according to the naming
-            conventions.
+            Amikor ezt a feladatot csinálod, nevezd ez az osztályt, csomagot (ha készítettél sajátot),
+            változókat és metódusokat az ajánlott módon.
             <br><br>
-            <b>Add comments to your code</b>. Write at least one single lined comment for each method, which
-            briefly explains what it does.
+            <b>Kommenteld a kódot</b>. Minden metódushoz írj legalább valamennyi kommentet, amik
+            megmagyarázzák, hogy mi is történik ott.
             ]]>
         </text>
-        <boxed title="And not just in this project">
+        <boxed title="Nem csak ebben a feladatban">
             <![CDATA[
-            In the following tasks these won't be explicitly said. You are always expected to follow the
-            coding conventions and properly comment your source code.
+            A következő feladatokban ez már nem lesz kiírva, de mindig jó ötlet az elnevezési
+            szabályokat és a kommentelést betartani.
             ]]>
         </boxed>
 
         <solution>
             <text>
                 <![CDATA[
-                This project required you create one class. Here is one good solution:
+                Egyetlen forrás fájlra volt szükség. Én ezt a <i>task</i> csomagba helyeztem. Egy
+                lehetséges megoldás itt látható:
                 ]]>
             </text>
             <code><![CDATA[
@@ -137,8 +140,8 @@
             ]]></code>
             <text>
                 <![CDATA[
-                If you want to use exception handling for the division method, here is a possible
-                solution:
+                Le a kalappal, ha a kivétel kezelést is megpróbáltad. Itt láthatsz egy helyes
+                osztó metódust, ami kivétel kezelést is használ:
                 ]]>
             </text>
             <code><![CDATA[

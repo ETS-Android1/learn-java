@@ -12,7 +12,7 @@
     </text>
     <boxed title="Creating a variable">
         <![CDATA[
-        Before we can use a variable, we must first tell the application about it. This is called
+        Before we can use a variable, we must first tell the program about it. This is called
         <b>declaration</b>. It includes naming the variable.
         <br><br>
         After declaring our variable, the program will know it exists, and we can <b>reference</b> it,
@@ -146,7 +146,7 @@
     <image name="type_mismatch"/>
     <text>
         <![CDATA[
-        An example of Eclipse warning us about a <b>type-mismatch</b>, and even offering a solution</b>.
+        An example of Eclipse warning us about a <b>type-mismatch</b>, and even offering a solution.
         ]]>
     </text>
     <text>
@@ -190,7 +190,7 @@
         careful not to divide by 0, as this will result in an error when running our application!
        ]]>
    </advanced>
-    <interactive instruction="Complete the sample so that the variables final value is 8!">
+    <interactive instruction="Complete the sample so that the variable's final value is 8!">
         <data><![CDATA[
                  
                <font color="#DF7401">int</font> num = ___;

@@ -8,13 +8,13 @@
     </examdata>
     <!-- Questions about 'What is Java?' -->
     <question type="text">
-        <text>Something is missing from the variable declaration 'int x = 5' Write the corrected statement.</text>
+        <text>Something is missing from the variable declaration 'int x = 5' Write the corrected statement!</text>
         <correct>int[s]x = 5;</correct>
         <ignoreSpace/>
     </question>
     <question type="text">
         <text>Something is wrong with the 'String data = 32;' statement. Write the corrected statement, without changing the
-            variables name, or value.</text>
+            variables name, or value!</text>
         <correct>int[s]data = 32;</correct>
         <ignoreSpace/>
     </question>
@@ -25,10 +25,10 @@
     </question>
     <question type="multi_choice">
         <text>When we say 'Java', what can we mean by it?</text>
-        <answer>A platform for software development</answer>
-        <answer>A database</answer>
-        <answer>A programming language</answer>
-        <answer>Bytecode</answer>
+        <answer>A platform for software development.</answer>
+        <answer>A database.</answer>
+        <answer>A programming language.</answer>
+        <answer>Bytecode.</answer>
         <correct>0</correct>
         <correct>2</correct>
     </question>
@@ -83,8 +83,8 @@
         <correct>2</correct>
     </question>
     <question type="single_choice">
-        <text>What is the JDK</text>
-        <answer>An implementation of the Java platform</answer>
+        <text>What is the JDK?</text>
+        <answer>An implementation of the Java platform.</answer>
         <answer>A programming language based on Java.</answer>
         <answer>A compiler for Java.</answer>
         <correct>0</correct>
@@ -109,9 +109,9 @@
     <question type="multi_choice">
         <text>Which properties are true for the Java programming language?</text>
         <answer>It can only be executed over Windows OS.</answer>
-        <answer>Object-oriented</answer>
-        <answer>General-purpose</answer>
-        <answer>Dynamically-typed</answer>
+        <answer>Object-oriented.</answer>
+        <answer>General-purpose.</answer>
+        <answer>Dynamically-typed.</answer>
         <correct>1</correct>
         <correct>2</correct>
     </question>
@@ -134,7 +134,7 @@
         <correct>0</correct>
     </question>
     <question type="true_false">
-        <text>.class files contain bytecode</text>
+        <text>.class files contain bytecode.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
@@ -222,7 +222,7 @@
         <correct>package org.utils;</correct>
     </question>
     <question type="true_false">
-        <text>Using the default package is discouraged.</text>
+        <text>Using the default package is discouraged for complex projects.</text>
         <correct>true</correct>
     </question>
 
@@ -232,7 +232,7 @@
         <answer>Every Java program must have this method.</answer>
         <answer>It has no parameters.</answer>
         <answer>It's the entry point of the application</answer>
-        <answer>It does not return anything.</answer>
+        <answer>It's name is always 'main'.</answer>
         <correct>0</correct>
         <correct>2</correct>
         <correct>3</correct>
@@ -246,11 +246,11 @@
         <correct>2</correct>
     </question>
     <question type="text">
-        <text>Write the statement that will print 'Good morning' to the console.</text>
+        <text>Write the statement that will print 'Good morning' to the console!</text>
         <correct>System.out.println("Good morning");</correct>
     </question>
     <question type="text">
-        <text>Enter the statement that will print 'ABC' to the console.</text>
+        <text>Enter the statement that will print 'ABC' to the console!</text>
         <correct>System.out.println("ABC");</correct>
     </question>
     <question type="true_false">
@@ -337,7 +337,7 @@
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>Is the 'String i1 = "i_1", i2 = "i_2";' statement valid?</text>
+        <text>The 'String i1 = "i_1", i2 = "i_2";' statement is valid.</text>
         <correct>true</correct>
     </question>
     <question type="multi_choice">
@@ -363,8 +363,8 @@
         <text>Which of these are needed to declare a method?</text>
         <answer>An identifier (method name).</answer>
         <answer>Writing the method name in the main method.</answer>
-        <answer>A return type for the method.</answer>
-        <answer>A list of parameters, each with their own type and identifier.</answer>
+        <answer>A return type for the method, or void.</answer>
+        <answer>A list of parameters, which can be empty.</answer>
         <correct>0</correct>
         <correct>2</correct>
         <correct>3</correct>
@@ -374,7 +374,7 @@
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>If a method doesn't return a value, we don't have to write anything instead of the return type.</text>
+        <text>If a method doesn't return a value, we don't have to write a return type.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
@@ -391,7 +391,7 @@
         <correct>2</correct>
     </question>
     <question type="single_choice">
-        <text>Which of these is not true about methods?</text>
+        <text>Which of these is NOT true about methods?</text>
         <answer>The lack of return type is indicated by the 'void' keyword.</answer>
         <answer>Each parameter must have its own identifier.</answer>
         <answer>If a method has no parameters, it must return a value.</answer>
@@ -399,13 +399,14 @@
         <correct>2</correct>
     </question>
     <question type="text">
-        <text>Write the keyword that indicates that the method has no return type.</text>
+        <text>Write the keyword that indicates that the method has no return type!</text>
         <correct>void</correct>
     </question>
     <question type="text">
         <text>What would you write between the parentheses if you declare a method with two parameters.
             The first one is an integer with the name 'amount', the second is a string with the name 'name'. Don't write the parentheses.</text>
         <correct>int[s]amount , String[s]name</correct>
+        <correct>(int[s]amount , String[s]name)</correct>
         <ignoreSpace/>
     </question>
     <question type="text">
@@ -467,7 +468,7 @@
 
     <!-- Questions about 'Naming rules and conventions' -->
     <question type="multi_choice">
-        <text>Select the characters which can be the first character in an identifier.</text>
+        <text>Select the characters which can be the first character in an identifier!</text>
         <answer>A</answer>
         <answer>_ (underscore)</answer>
         <answer>(</answer>
@@ -491,13 +492,13 @@
     </question>
     <question type="true_false">
         <text>'_myVar' is a valid identifier.</text>
-        <correct>false</correct>
+        <correct>true</correct>
     </question>  <question type="true_false">
     <text>'9lives' is an invalid identifier.</text>
     <correct>true</correct>
 </question>
     <question type="true_false">
-        <text>'my_(well_named)_variable' is a valid identifier</text>
+        <text>'my_(well_named)_variable' is a valid identifier.</text>
         <correct>false</correct>
     </question>
     <question type="text">
@@ -505,16 +506,15 @@
         <correct>webSocket</correct>
     </question>
     <question type="text">
-        <text>Write 'insert to end' using the camel case notation.</text>
+        <text>Write 'insert to end' using the camel case notation!</text>
         <correct>insertToEnd</correct>
     </question>
     <question type="text">
-        <text>Write 'remove all' using the camel case notation.</text>
+        <text>Write 'remove all' using the camel case notation!</text>
         <correct>removeAll</correct>
     </question>
     <question type="single_choice">
-        <text>We would like to name a method which adds an element to a list. Which of these would be the best naming choice
-            (using java conventions)?</text>
+        <text>We would like to name a method. Which of these would be the best choice (using java conventions)?</text>
         <answer>add_element</answer>
         <answer>addElement</answer>
         <answer>AddElement</answer>
@@ -522,8 +522,7 @@
         <correct>1</correct>
     </question>
     <question type="single_choice">
-        <text>We would like to name a variable which stores a prime number. Which of these would be the best naming choice
-            (using java conventions)?</text>
+        <text>We would like to name a variable. Which of these would be the best choice (using java conventions)?</text>
         <answer>primeNumber</answer>
         <answer>$prime_number</answer>
         <answer>prime_number</answer>
@@ -531,8 +530,7 @@
         <correct>0</correct>
     </question>
     <question type="single_choice">
-        <text>We would like to name a class related to matrices. Which of these would be the best naming choice
-            (using java conventions)?</text>
+        <text>We would like to name a class. Which of these would be the best choice (using java conventions)?</text>
         <answer>matrix</answer>
         <answer>Matrix</answer>
         <answer>_Matrix</answer>
@@ -540,8 +538,7 @@
         <correct>1</correct>
     </question>
     <question type="single_choice">
-        <text>We would like to name a package which contains database related classes. Which of these would be the best naming choice
-            (using java conventions)?</text>
+        <text>We would like to name a package. Which of these would be the best choice (using java conventions)?</text>
         <answer>Database</answer>
         <answer>_database</answer>
         <answer>data_base_</answer>
@@ -549,8 +546,7 @@
         <correct>3</correct>
     </question>
     <question type="single_choice">
-        <text>We would like to name constant to store the value of the speed of light. Which of these would be the best naming choice
-            (using java conventions)?</text>
+        <text>We would like to name a constant. Which of these would be the best choice (using java conventions)?</text>
         <answer>speedOfLight</answer>
         <answer>speedoflight</answer>
         <answer>SPEED_OF_LIGHT</answer>
@@ -560,13 +556,13 @@
 
     <!-- Questions about 'Comments in the code' -->
     <question type="text">
-        <text>Write a single line comment which says 'this is a comment'.</text>
+        <text>Write a single line comment which says 'this is a comment'!</text>
         <correct>// this[s]is[s]a[s]comment</correct>
         <ignoreSpace/>
     </question>
     <question type="text">
-        <text>Write a single line comment which says 'remember to comment your code!'.</text>
-        <correct>// remember[s]to[s]comment[s]your[s]code!</correct>
+        <text>Write a single line comment which says 'remember to comment your code'!</text>
+        <correct>// remember[s]to[s]comment[s]your[s]code</correct>
         <ignoreSpace/>
     </question>
     <question type="text">

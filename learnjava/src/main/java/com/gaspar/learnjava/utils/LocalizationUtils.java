@@ -37,4 +37,6 @@ public abstract class LocalizationUtils {
         //if there are other supported languages, they must return their code here.
         return ENGLISH;
     }
+
+
 }

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- General -->
+    <string name="app_name">Java Programozás</string>
+    <string name="navigation_drawer_open">Menü megnyitása</string>
+    <string name="navigation_drawer_close">Menü bezárása</string>
+    <string name="nav_header_title">Learn Java</string>
+    <string name="nav_header_subtitle">Kurzusok és vizsgák</string>
+    <string name="nav_header_desc">Menü fejléc</string>
+    <string name="action_settings">Beállítások</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Mégse</string>
+    <string name="yes">Igen</string>
+    <string name="status_icon">Státusz ikon</string>
+    <string name="loading_error">Hiba történt a(z) %1$s betöltése során!</string>
+    <string name="tap_to_see_details">Kattints ide a részletekért</string>
+    <string name="in_development">Fejlesztés alatt</string>
+    <string name="course_development_info">Ez a kurzus fejlesztés alatt áll. A jövőben további fejezetek jelennek majd meg.</string>
+    <string name="swipe_horizontally">Vízszintes húzás</string>
+
+    <!-- Ads -->
+    <string name="loading_ad">Hirdetés betöltése…</string>
+    <string name="ad_load_fail">A hirdetés nem töltődött be!</string>
+    <!-- Individual ad IDs are extracted, and only present on my machine. No ads build type works without them. -->
+
+    <!-- Settings -->
+    <string name="notifications">Értesítések</string>
+    <string name="exam_notifications">Vizsga értesítések bekapcsolása</string>
+    <string name="difficulty">Nehézség</string>
+    <string name="difficulty_easy">Könnyű: 50% a sikerhez.</string>
+    <string name="difficulty_default">Alap: 60% a sikerhez.</string>
+    <string name="difficulty_challenging">Kihívás: 80% a sikerhez, kevés idő.</string>
+    <string name="reset">Előrehaladás törlése</string>
+    <string name="reset_details">Minden kurzus, fejezet és vizsga eredmény törlése.</string>
+    <string name="reset_warning">Ezt nem lehet visszavonni. Biztos vagy benne?</string>
+    <string name="reset_successful">Az előrehaladás törölve lett.</string>
+    <string name="themes">Támák</string>
+    <string name="orange_theme">Narancs</string>
+    <string name="dark_theme">Sötét</string>
+    <string name="screen">Képernyő</string>
+    <string name="keep_awake_description">Képernyő ébren tartása az alkalmazásban.</string>
+
+    <!-- ClipSync -->
+    <string name="clip_sync">ClipSync</string>
+    <string name="clip_sync_intro">Oszd meg a telefonod vágólapját a számítógépedével, hogy könnyen átvihess kódmintákat!</string>
+    <string name="get_started">Kezdő lépések</string>
+    <string name="get_started_info_1">Ez az alkalmazás beépített ClipSync-et tartalmaz: töltsd le a segéd alkalmazást a GitHub oldalamról:</string>
+    <string name="get_started_info_2">Indítsd el a letöltött alkalmazást, ahol válasz az általad preferált módot.</string>
+    <string name="clip_sync_modes">ClipSync módok</string>
+    <string name="network">Hálózat</string>
+    <string name="clip_sync_modes_info_1">Használhatsz Bluetooth-ot, ha mind a telefonod, mind a számítógéped rendelkezik vele.</string>
+    <string name="clip_sync_modes_info_2">Használhatod a helyi hálózatot, ha mind a telefonod, mind a számítógéped arra csatlakozik.</string>
+    <string name="clip_sync_remember_description">Az alkalmazás megjegyzi a döntésedet. Csak akkor kell ide visszatérned, ha meg akarod változtatni azt.</string>
+    <string name="clip_sync_mode_not_selected">Érintsd meg valamelyik ikont egy mód választásához!</string>
+    <string name="clip_sync_bluetooth_selected">BLUETOOTH kiválasztva! Ellenőrizd, hogy a segédalkalmazásban is ezt választottad.</string>
+    <string name="clip_sync_network_selected">HÁLÓZAT kiválasztva! Ellenőrizd, hogy a segédalkalmazásban is ezt választottad.</string>
+    <string name="bluetooth_not_supported">Ez az eszköz sajnos nem támogatja a Bluetooh-ot. Megpróbálkozhatsz a hálózati móddal.</string>
+    <string name="using_bluetooth_clip_sync">Bluetooth-os ClipSync aktív!</string>
+    <string name="using_network_clip_sync">Hálózatos ClipSync aktív!</string>
+    <string name="clip_sync_disable">Kikapcsolás</string>
+    <string name="clip_sync_disabled">ClipSync kikapcsolva!</string>
+    <string name="clip_sync_test">Próba</string>
+    <string name="clip_sync_test_description">Ezen a teszt kódmintán kipróbálhatod, hogy minden rendben van-e:</string>
+    <string name="clip_sync_bluetooth_try_again">Bluetooth bekapcsolva. Próbáld újra most.</string>
+    <string name="clip_sync_success">Szinkronizálva a másik eszközzel!</string>
+    <string name="clip_sync_fail">Sikertelen szinkronizálás: időtúllépés.</string>
+    <string name="clip_sync_bluetooth_cancelled">Nem használhatod a Bluetooth-is módot a Bluetooth engedélyezése nélkül…</string>
+    <string name="clip_sync_pairing">Párosítás</string>
+    <string name="clip_sync_pairing_info">Keresés a közeli eszközök között…</string>
+    <string name="clip_sync_pairing_description">A Bluetooth-nak meg kell találnia az eszközt, amin a segéd alkalmazás van. Ezt csak egyszer kell elvégezni.</string>
+    <string name="clip_sync_pairing_handshake">A segéd alkalmazás megtalálva! Párosítás…</string>
+    <string name="clip_sync_not_paired">Nem találtam párosított eszközt. Kérlek kezd el a párosítást a ClipSync menüben!</string>
+    <string name="clip_sync_misc_error">Nem találtam a segéd alkalmazást! Ellenőrizd, hogy elindítottad a számítógépeden, kiválaszottad a Bluetooth módot, és zöld pipát mutat!</string>
+    <string name="clip_sync_location">Ez az engedély szükséges a Bluetooth-os adatküldéshez! Kérlek engedélyezd.</string>
+    <string name="clip_sync_location_denied">Enélkül az engedély nélkül nem lehet használni a Bluetooth-os módot!</string>
+    <string name="scanning_device">Eszköt szkennelése</string>
+
+    <!-- Notification data -->
+    <string name="notification_exam_ready">Egy vizsga készen áll</string>
+    <string name="notification_exam_name_message">A \'%1$s\' vizsga mostantól újra elindítható!</string>
+
+    <!-- Text for the drawer -->
+    <string name="courses">Kurzusok</string>
+    <string name="tasks">Feladatok</string>
+    <string name="exams">Vizsgák</string>
+    <string name="guide">Útmutató</string>
+    <string name="starter_screen">Kezdő képernyő</string>
+    <string name="open_drawer_for_exam_prompt">A következő kurzust egy vizsga teljesítésével nyithatod meg!</string>
+
+    <!-- When the user has not started a course yet -->
+    <string name="before_you_start">Olvasd el az útmutatót indulás előtt:</string>
+    <string name="start_learning">Tananyag indítása</string>
+    <!-- When the user already started some course -->
+    <string name="continue_where_you_left_off">Folytasd ahol abbahagytad</string>
+
+    <!-- Exam selection -->
+    <string name="take_exam">Vizsga indítása</string>
+    <string name="exam_countdown_prompt">Vizsga elérhető: </string>
+    <string name="exam_locked">Vizsga lezárva</string>
+    <string name="exam_unfinished">Vizsga fejlesztés alatt</string>
+    <string name="exam_development_info">Ez a vizsga jelenleg fejlesztés alatt áll. Jelenleg nem lehet elindítani.</string>
+    <string name="hour_suffix">ó</string>
+    <string name="minute_suffix">p</string>
+    <string name="second_suffix">mp</string>
+    <string name="exam">Vizsga</string>
+    <string name="time_remaining">Hátralévő idő:</string>
+    <string name="finish_exam">Befejezés</string>
+    <string name="close_exam">Bezárás</string>
+    <string name="confirm_finish_exam">Biztosan be akarod fejezni a vizsgát?</string>
+    <string name="exam_time_expired">Az idő lejárt!</string>
+    <string name="unfortunate">Sajnálatos</string>
+    <string name="confirm_abandon_exam">Biztos abba akarod hagyni a vizsgát?</string>
+    <string name="exam_passed">Siekres vizsga!</string>
+    <string name="exam_failed">Sikertelen vizsga!</string>
+    <string name="points">pont</string>
+    <string name="ongoing_exam">Aktív vizsga</string>
+    <string name="ongoing_exam_detail">Ne felejtsd el befejezni az elindított vizsgát!</string>
+    <string name="top_score">Maximum pontszám:</string>
+    <string name="no_answer_given">Nincs válasz…</string>
+    <string name="confirm_exam_start">Biztos, hogy el akarod indítani a vizsgát?</string>
+
+    <!-- Question -->
+    <string name="question_icon">Kérdés ikon</string>
+    <string name="unanswered_question">Egy megválaszolatlan kérdés van!</string>
+    <string name="unanswered_questions">%1$s megválaszolatlan kérdés van!</string>
+    <string name="multi_choice">több helyes válasz lehet</string>
+    <string name="text_question_hint">Írd ide a választ</string>
+    <string name="text_question_solution">Egy lehetséges megoldás:</string>
+    <string name="true_answer">IGAZ</string>
+    <string name="false_answer">HAMIS</string>
+
+    <!-- Tasks -->
+    <string name="task">Feladat:</string>
+    <string name="must_unlock_course_before_task">
+        Ki kell nyitnod a kurzust, mielőtt elindíthatod ezt a feladatot.
+    </string>
+    <string name="mark_task_as_completed">Megjelölés teljesítettként</string>
+    <string name="show_solution">Megoldás mutatása</string>
+    <string name="hide_solution">Megoldás elrejtése</string>
+
+    <!-- Chapter components -->
+    <string name="code">KÓD</string>
+    <string name="copy_content">Másolás</string>
+    <string name="copy_successful">Kimásolva a vágólapra!</string>
+    <string name="copy_failed">Nem sikerült kimásolni!</string>
+    <string name="advanced">NEHEZEBB RÉSZ</string>
+    <string name="confirm_chapter">Fejezet befejezése</string>
+    <string name="image_component_desc">Kép</string>
+    <string name="zoom_in">Zoomolás</string>
+    <string name="zoom_out">Kizoomolás</string>
+    <string name="interactive_code">INTERAKTÍV KÓD</string>
+    <string name="interactive_check_solution">Ellenőrzés</string>
+    <string name="interactive_help">Segítség</string>
+    <string name="interactive_reset">Visszaállítás</string>
+    <string name="interactive_correct">Helyes!</string>
+    <string name="interactive_incorrect">Valami nem stimmel…</string>
+
+    <!-- All exams completed -->
+    <string name="congratulations">Gratulálok!</string>
+    <string name="congratulations_info_1">Átmentél minden vizsgán.</string>
+    <string name="congratulations_info_2">A jövőben új kurzusok kerülnek majd hozzáadásra. Következő tervezett kurzus:</string>
+    <string name="do_not_show_again">Ne mutasd újra.</string>
+    <string name="next_planned_course">Swing GUI fejlesztés.</string>
+
+    <!-- Contact and rate -->
+    <string name="contact_me">Kapcsolat</string>
+    <string name="contact_prompt">Segíthetsz javítani az alkalmazást, ha kapcsolatba lépsz velem, amennyiben ezek egyikét észreveszed:</string>
+    <string-array name="contact_me_when">
+        <item>- Elírás, vagy értelmetlen mondat.</item>
+        <item>- Ez egyik kódminta hibás kódot tartalmaz (és ez nincs odaírva).</item>
+        <item>- Rossz vizsgakérdés. A jó válasz nincs elfogadva, stb…</item>
+        <item>- Általános javítási ötleted van.</item>
+    </string-array>
+    <string name="write_email">Email írása</string>
+    <string name="my_email">gaspar.tamas97@protonmail.com</string>
+    <string name="default_email_subject">A Learn Java alkalmazásról</string>
+    <string name="email_chooser">Válassz email klienst!</string>
+
+    <!-- Dark theme prompt. -->
+    <string name="dark_theme_title">Sötét téma</string>
+    <string name="dark_theme_info">Van sötét téma is! Kipróbálhatod most itt, vagy bármikor a beállításoknál.</string>
+    <string name="dark_theme_denied">Nem, kösz</string>
+    <string name="dark_theme_accepted">Megnézem</string>
+    <string name="dark_theme_system">
+        Észrevettem, hogy a rendszer sötét témára van állítva. Szeretnéd az alkalmazást is sötét módba rakni?
+    </string>
+</resources>

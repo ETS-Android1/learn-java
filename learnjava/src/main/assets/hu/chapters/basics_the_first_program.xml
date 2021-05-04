@@ -20,12 +20,15 @@
     </boxed>
     <text>
         <![CDATA[
-        Ennél az egyszerű projektnél az alapcsomagot fogjuk használni. Egy forrásfájl hozzáadásához kattints
-        jobb egérrel az <i>src</i> mappára és válaszd a <b>New -> Class</b> menüt. Pipáld ki a
-        <b>public static void main(String[] args)</b> nevű mezőt, majd <i>Finish</i>.
+        Ennél az egyszerű projektnél használható az alapcsomag. Ha saját csomagot akarsz készíteni,
+        akkor kattints jobb egérrel az <i>src</i> mappára és válaszd a <b>New -> Package</b> menüt, majd adj nevet a csomagnak.
+        <br><br>
+        Egy forrás fájl hozzáadásához kattints jobb egérrel az <i>src</i> mappára és válaszd a <b>New -> Class</b> menüt. Pipáld ki a
+        <b>public static void main(String[] args)</b> nevű mezőt, majd <i>Finish</i>. Ha saját csomagot készítettél,
+        akkor ne az <i>src</i> mappához, hanem ahhoz a csomaghoz add hozzá a forrás fájlt.
         ]]>
     </text>
-    <advanced title="Más fejlesztőkörnyezetekben">
+    <advanced title="Más fejlesztő környezetekben">
         <![CDATA[
         Ha egy másik fejlesztőkörnyezetet használsz, akkor itt van néhány segédlet a projektek
         létrehozásához <a href="https://www.tutorialspoint.com/intellij_idea/intellij_idea_create_first_java_project.htm">IntelliJ-hez</a>
@@ -34,7 +37,7 @@
     </advanced>
     <text>
         <![CDATA[
-        A projekt magját az Eclipse legenerálta számodra. Ha most duplán kattintasz arra a forrásfájlra, amit
+        A projekt magját, az egyetlen forrás fájlt az Eclipse legenerálta számodra. Ha most duplán kattintasz arra a forrás fájlra, amit
         az előbb hoztál létre, akkor valami ehhez hasonlót fogsz látni a szerkesztőben (<i>Main</i> helyett az általad megadott
         névvel):
         ]]>

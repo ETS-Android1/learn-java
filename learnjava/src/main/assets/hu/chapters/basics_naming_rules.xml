@@ -2,58 +2,54 @@
 <!-- 'Naming rules and conventions', belongs to course 'The basics' --><resources>
     <chapterdata>
         <id>56</id>
-        <name>Naming rules and conventions</name>
+        <name>Elnevezési szabályok és szokások</name>
     </chapterdata>
     <text>
         <![CDATA[
-        We know that we have to name variables and methods (and classes too). However, we don't know what names we <b>can</b>
-        or what names we <b>should</b> use.
-        <br><br>
-        These names are called <b>identifiers</b>.
+        Már tudjuk, hogy a változókat és a metódusokat el kell nevezni, amikor deklaráljuk őket. A
+        neveket más szóval <b>azonosítóknak</b> is hívjuk. Arról
+        azonban még nem volt szó, hogy milyen neveket használhatunk, vagy, hogy milyeneket
+        ajánlott használni.
         ]]>
     </text>
-    <title text="Naming rules"/>
+    <title text="Elnevezési szabályok"/>
     <text>
         <![CDATA[
-        There are rules are something we <b>must</b> follow when writing identifiers in our code. Failure to do so will result
-        in compile time errors.
+        A most következő szabályokat <b>kötelező</b> betartanunk, különben a program nem
+        fog lefordulni.
         ]]>
     </text>
-    <boxed title="Supported characters">
+    <boxed title="Támogatott karakterek">
         <![CDATA[
-        Java supports Unicode characters. This gives you over 137000 different characters you can use
-        in the source code. You will be able to write code with your native languages characters.
+        A Java unicode karakter kódolású, ezért több mint 137000 különféle karaktert használhatsz a
+        forráskódban, a saját nyelveden programozhatsz.
         <br><br>
-        <b>However, just because you can, doesn't mean you should!</b> Writing your source code with, for example, japanese
-        characters will make it significantly less readable, and other programs communicating with yours may not
-        support unicode, thus you may get errors.
-        <br><br>
-        By convention, you should only use characters from the english alphabet, arabic numbers, and a few
-        other characters, such as underscore.
+        <b>Azonban az, hogy lehetséges, nem jelenti azt, hogy ajánlott!</b>. A programozás nyelve
+        az angol, ezért erősen ajánlott az angol ABC betűit használni.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        Java is case-sensitive! For example, <i>Text</i> and <i>text</i> won't be the same.
-        <br>
-        <br>
-        When creating identifiers (names), they
+        A Java érzékeny a kis-, és nagybetűkre, azaz például a <i>Valami</i> és a <i>valami</i> szavakat
+        különbözőnek veszi.
+        <br><br>
+        Amkor azonosítókat (neveket) adsz meg, ezekre figyelj:
         ]]>
     </text>
     <text>
         <![CDATA[
         <ul>
-        <li> must begin with a letter, underscore, or a '<i>$</i>' character.</li>
-        <li> can contain any letter, number, underscore, dollar sign after the first one.</li>
-        <li> can be of any length.</li>
-        <li> can't contain any special characters, such as parentheses, dots or whitespaces.
+        <li> Csak betűvel, alulvonással, vagy a '<i>$</i>' karakterekkel kezdődhet.</li>
+        <li> Az első utáni karakter lehet bármilyen betű, szám, vagy alulvonás.</li>
+        <li> Tetszőleges hosszúságú lehet.</li>
+        <li> Nem tartalmazhat speciális karaktert, például zárójelet, pontot vagy szóközt.</li>.
         </ul>
         ]]>
     </text>
     <text>
         <![CDATA[
-        Let's see some valid identifiers. Note that just because all of these are <b>valid</b>, that doesn't
-        mean all of them should actually be used!
+        Lássunk néhány szabályos nevet. Megjegyezném, hogy ugyan ezek mind szabályosak, de ez még
+        nem jelenti azt, hogy mindegyik jó névnek számít.
         ]]>
     </text>
     <code><![CDATA[
@@ -72,10 +68,11 @@
     ]]></code>
     <text>
         <![CDATA[
-        The first four are not so bad, but the last 3, though perfectly valid, should be considered
-        a criminal offense. Such identifiers should never be used.
+        Az első négy azonosító elég jó, az utolsó három viszont, annak ellenére, hogy szabályosak
+        rendkívül csúnyák és nem írják le a változó tartalmát sem, ezért ilyen neveket sosem ajánlott
+        használni.
         <br><br>
-        Not, let's see some <b>invalid</b> identifiers:
+        Itt van néhány <b>szabálytalan</b> azonosító:
         ]]>
     </text>
     <code><![CDATA[
@@ -88,15 +85,16 @@
     ]]></code>
     <text>
         <![CDATA[
-        The first one begins with a number, which is not allowed. The second contains special characters,
-        namely parentheses. The last identifier not only begins with a number, but also has a dot in it.
+        Az első számmal kezdődik, ami nem engedélyezett. A másodikban tiltott karakter van, zárójel. A
+        harmadik egyszerre több szabályt is megszeg, mert számmal kezdődik, és még egy pont is van benne. Az
+        ilyen azonosítók fordítási hibát okoznak.
         ]]>
     </text>
     <text>
         <![CDATA[
-        There is one more rule, and it's pretty obvious. We aren't allowed to use <b>Java keywords and literals</b>
-        as identifiers. They are reserved. This is no big restriction for us, as most keywords would be horrible
-        identifiers anyways. <i>int</i> is a keyword, for example, and so something like this is not allowed:
+        Van még egy elég nyilvánvaló szabály: nem használhatjuk azonosítóként a Java nyelv
+        kulcsszavait. Ez nem jelent nagy gondot, mivel a kulcsszavak egyébként is elég rövid,
+        semmitmondó nevek lennének. Például az <i>int</i> kulcsszót nem használhatjuk, ezért ez szabálytalan:
         ]]>
     </text>
     <code><![CDATA[
@@ -106,41 +104,42 @@
     ]]></code>
     <advanced title="List of keywords">
         <![CDATA[
-        All keywords and literals are not listed here, as there is a lot of them, but you can find the
-        full list <a href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html">here</a>.
+        Itt nem sorom fel az összes azonosítót, azonban akit érdekel, az
+        <a href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html">ezen a linken</a>
+        megtekintheti őket, és a későbbi fejezetekben is sokkal találkozni fogunk.
         ]]>
     </advanced>
-    <title text="Naming conventions"/>
+    <title text="Elnevezési szokások"/>
     <text>
         <![CDATA[
-        Now that we know how we can create identifiers, let's see how we <b>should</b>.
+        Már tudjuk, hogy milyen neveket szabad adni, most megnézzük azt is, hogy milyet <b>ajánlott</b>.
+        A most felsorolt "szabályok" nem kötelező érvényűek, de a használtuk jobb minőségű kódot eredményez.
         ]]>
     </text>
-    <boxed title="Give meaningful names">
+    <boxed title="Leíró nevek">
         <![CDATA[
-        Naming our variables and methods with self-describing, meaningful identifiers will help us
-        understand the code! As an example, if we have a variable storing text the user has entered, its name
-        should indicate that:
-        <br>
-        <br>
+        Az azonosítóknak le kell írniuk annak a tartalmát, amit azonosítanak. Például, hogyha egy változó,
+        felhasználói inputot (<i>user input</i> tartalmaz, akkor a nevéből ez derüljön ki:
+        <br><br>
         <i>userInput</i>, <i>user_input</i>, ...
         <br><br>
-        If we have a variable holding a persons age, it shouldn't be named <i>x</i> or <i>foo</i>, but rather
-        something like <i>age</i>.
+        Egy olyan változó, ami valakinek az életkorát (<i>age</i>) tartalmazza, akkor ennek
+        az <i>age</i> egy jó név, nem pedig <i>x</i> vagy <i>y</i>.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        Using meaningful names is something we should do, no matter what programming language we use! The
-        following conventions are, however, specifically for Java code.
+        Minden programnyelv esetén ajánlott a leíró nevek használata. Azonban Java esetén még vannak további
+        ajánlások is. Ezek nem feltétlenül igazak más nyelvek esetén.
         ]]>
     </text>
     <text>
         <![CDATA[
-        When <b>naming methods and variables</b>, we should use the <b>camelCase</b> naming style. The first word is
-        lower-case, then any following words are connected with upper-case. No numbers, underscores, etc.
+        Amikor <b>metódusokat és változókat</b> nevezünk el, érdemes az úgynevezett "teve" elnevezést (<i>camel case</i>)
+        használni.
         <br><br>
-        If we, for example, need a method that reverses some text, the following is a nice, camel-case name:
+        Ez azt jelenti, hogyha a név több szóból áll, akkor ezek legyenek egybe írva úgy, hogy az első
+        szó kisbetűs, majd minden további nagybetűvel kezdődik. Például:
         ]]>
     </text>
     <code><![CDATA[
@@ -148,7 +147,7 @@
  <font color="#999900">String</font> <font color="#ADD8E6">reverseText</font>(<font color="#999900">String</font> text) { ... }
         
     ]]></code>
-    <interactive instruction="Correct the naming of this variable so that it uses the camel case convention!">
+    <interactive instruction="Javítsd ki a változó nevet úgy, hogy a camel case kompatibilis legyen!">
         <data><![CDATA[
 
 <font color="#DF7401">int</font> ___ = <font color="#F0E130">0</font>;
@@ -159,9 +158,9 @@
     </interactive>
     <text>
         <![CDATA[
-        We haven't seen a real example for this, but we will also have to <b>name classes</b>. For these,
-        something very similar to the camel-case style should be used. The only difference is that class
-        names should begin with a capital letter (this is called <b>PascalCase</b>)!
+        Erről ugyan még nem volt szó, de a Java-ban <b>osztályok</b> is vannak, ezeknek az ajánlott elnevezése
+        hasonló a "teve" módszerhez, csak itt az első szót is nagy betűvel kell írni. Ezt egyébként
+        <i>Pascal case</i> elnevezési stratégiának hívják. Például:
         ]]>
     </text>
     <code><![CDATA[
@@ -169,7 +168,7 @@
 <font color="#E65100">public </font>class <font color="#999900">TextFormatter</font> { ... }
         
     ]]></code>
-    <interactive instruction="Name the class 'string builder' with the appropriate naming convention!">
+    <interactive instruction="Nevezd el a 'string builder' osztályt a fenti ajánlásnak megfelelően!">
         <data><![CDATA[
             
 <font color="#E65100">public</font> <font color="#E65100">class</font> ___ {
@@ -182,8 +181,8 @@
     </interactive>
     <text>
         <![CDATA[
-        Despite not being as important as others, package identifiers also have their own
-        naming conventions. Package names should only contain one word, fully lower case.
+        Talán kevésbé fontos, de a <b>csomagoknak</b> is van saját elnevezési ajánlásuk. Ezeket
+        csupa kisbetűvel írjuk, és érdemes csak egy szóból állniuk.
         ]]>
     </text>
     <code><![CDATA[
@@ -193,19 +192,20 @@
     ]]></code>
     <text>
         <![CDATA[
-        Note that seeing a line like <br><br>
+        Megjegyzem, hogy egy ilyen "csomag" név nem mond ellent ennek:
+        <br><br>
         <i>package com.project.utils;</i>
         <br><br>
-        is not against this convention, as these are multiple packages, separated by dots!
+        Itt ugyanis több, egymásba ágyazott csomagról van szó, nem pedig egyről.
         ]]>
     </text>
-    <advanced title="Naming constants">
+    <advanced title="Konstansok elnevezése">
         <![CDATA[
-        Constants are variables that can't be reassigned. We don't yet know how to create such a variable,
-        but it's important to know their naming convention, for when we will be able to create them.
+        A konstansok olyan változók, amiknek csak egyszer lehet értéket adni. Még nem tanultuk, hogy
+        hogyan kell ilyet készíteni, de ezeknek is van elnevezési ajánlásuk.
         <br><br>
-        Their identifiers should only contain upper case letters, and the words are to be separated by
-        underscores. Here is an example (this will also give a hint about how to declare them):
+        A nevük csakis nagybetűket tartalmazzon, több szó esetén ezek legyenek alulvonással elválasztva.
+        Egy példa:
         <br><br>
         <i>final int MAXIMUM_SCORE = 20;
         ]]>
