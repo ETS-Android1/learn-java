@@ -2,23 +2,23 @@
 <!--Belongs to course 'Primitives, control flow and I/O' --><resources>
     <chapterdata>
         <id>103</id>
-        <name>Controlling the flow: loops</name>
+        <name>Vezérlés: ciklusok</name>
     </chapterdata>
     <text>
         <![CDATA[
-        There are cases when we want to execute statements multiple times. This is when we should use
-        <b>loops</b>. Consider the following example:
+        Sokszor előfordul, hogy bizonyos utasításokat többször is szeretnénk futtatni.
+        Ilyenkor érdemes <b>ciklusokat</b> használni. Vegyünk egy példát.
         ]]>
     </text>
-    <boxed title="Example">
+    <boxed title="Példa">
         <![CDATA[
-        We would like to print the first 10 natural numbers, 0-9, each in their own line.
+        Szeretném kiíratni az első 10 természetes számot a konzolra, mindegyiket egy új sorba.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        You may think 'wait a minute, I can already do this'. Simply calling the <b>println</b> method
-        10 times is going to to do exactly what we want:
+        Az ehhez használt kiírató utasítást már ismerjük, ezért a feladatot a következőképpen tudnánk
+        elvégezni:
         ]]>
     </text>
     <code><![CDATA[
@@ -37,18 +37,19 @@
     ]]></code>
     <text>
         <![CDATA[
-        This code is, however, very long and ugly. Now we will take a look at the different <b>loops</b>
-        in Java, and we will solve our example using the loop best suited to it.
+        Az ilyen kód azonban nem elegáns, és jóval hosszabb mint kellene. Érdemes megismerni a
+        <b>ciklusokat</b>, mert az ehhez hasonló feladatok megoldását megkönnyítik, és sok olyan
+        probléma is van, ahol elengedhetetlenek.
         ]]>
     </text>
-    <title text="for loop"/>
+    <title text="For ciklus"/>
     <text>
         <![CDATA[
-        The for loop should be used when we would like to execute statements repeatedly, and we <b>know
-        exactly how many times we must execute the statements</b>. Thus, this loops offers the best solution
-        for the example, as we know that the print method must be called 10 times!
+        A <i>for</i> ciklus segítségével utasítás blokkokat tudunk többször futtatni. Olyankor célszerű
+        a használata, amikor előre ismerjük, hogy hányszor szeretnénk futtatni a kód blokkot. Mivel az
+        előző példára ez igaz (10 ismétlés), ezért a <i>for</i> ciklus használata célszerű.
         <br><br>
-        Here is the solution. The syntax of the for loop is analyzed below.
+        Itt látható a <i>for</i> ciklusos megoldás:
         ]]>
     </text>
     <code><![CDATA[
@@ -60,47 +61,46 @@
     ]]></code>
     <text>
         <![CDATA[
-        As you can see, 3 things can be specified when creating a for loop, and these are separated
-        by semi colons.
+        Látható hogy egy ilyen ciklus írásához három dolgot "kell" megadni, pontosvesszővel elválasztva:
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li> Declaring and initializing the <b>iterator variable</b> (or variables). In our case,
-         this is <i>'int i=0</i>. This variable is only visible inside the loop.</li>
-        <li> Giving a <b>terminating condition</b>. When this condition is true, the loop continues, as soon
-        as it becomes false, it stops. These conditions are usually about the iterator variable. Our condition is '<i>i&lt;10</i>'.</li>
-        <li> <b>Updating the iterator variable</b>. This is done so that the terminating condition can eventually
-        become false.</li>
+        <li> Az <b>iterátor változót</b> (<i>'int i = 0</i>).
+        Ez a változó csak a cikluson belül elérhető.</li>
+        <li> A <b>megállási feltételt</b> (<i>i < 10</i>). Amíg ez a feltétel igaz, addig a ciklus
+        ismétlődik. Gyakran az iterátor változóra adunk meg feltételt (ahogy a példában is).</li>
+        <li>Az <b>iterátor változó frissítését</b>, ami minden ismétlés után futni fog. Ez azt a célt szolgálja, hogy a megállási feltétel
+        valamennyi ismétlés után hamissá váljon.</li>
         </ul>
         ]]>
     </list>
     <boxed title="i++, i--">
         <![CDATA[
-        The <b>++</b> operator is not something we have seen before. It is, however, very simple. All it does is
-        <b>increment</b> (add one to) the integer variable it's called on. Thus, it's just a short version of <b>i = i+1</b>.
+        A <b>++</b> operátor újdonság, azonban a használata elég egyszerű. Az <i>int</i> típusú változókon
+        lehet használni és az értéküket eggyel meg fogja növelni (<b>inkrementálás</b>). Az <b>i++</b> lényegében csak
+        egy rövidítése az <i>i = i + 1</i> utasításnak.
         <br><br>
-        Similarly, we can also <b>decrement</b> such a variable using the <b>--</b> operator. It is short for <b>i = i-1</b>.
+        Hasonlóképpen működik a <b>--</b> operátor, ami eggyel csökkenti (dekrementálja) a változó
+        értékét.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        By convention, the iterator variable is usually called <i>i</i>, or <i>j, k, etc</i> if <i>i</i> is taken.
+        Szokás az iterátor változót <i>i</i>-nek nevezni, vagy ha ez a név foglalt lenne, akkor
+        az ABC rákövetkező betűivel.
         ]]>
     </text>
-    <advanced title="Optional for loop components">
+    <advanced title="Opcionális komponensek">
         <![CDATA[
-        Surprisingly, none of the 3 listed components is actually required. For example, we can simply not
-        update the value of the iterator variable in the for statement, like this:
+        Meglepő módon a for ciklus egyik fent felsorol komponensét sem kell megadni. Ha például nem adjuk meg a
+        megállási feltételt, akkor a ciklus nem fog megállni. A pontosvesszőket azonban így is ki kell írni:
         <br><br>
-        <i>for(int j=-3; j>=-10;) { ... }</i>
-        <br><br>
-        We must be careful to manually update the value of <i>j</i> inside the loop, to eventually satisfy the
-        terminating condition.
+        <i>for(int j=-3 ; ; j++) { ... }</i>
         ]]>
     </advanced>
-    <interactive instruction="Complete the for loop so that it iterates 8 times!">
+    <interactive instruction="Egészítsd ki ezt a for ciklust úgy, hogy 8-szor fusson le!">
         <data><![CDATA[
 
 ___ (<font color="#DF7401">int</font> i = <font color="#F0E130">0</font>; i &lt; ___; i++) {
@@ -115,9 +115,10 @@ ___ (<font color="#DF7401">int</font> i = <font color="#F0E130">0</font>; i &lt;
     <title text="while loop"/>
     <text>
         <![CDATA[
-        The while loop is for cases when we <b>don't know how many times the statements must be executed</b>. This loop,
-        unlike <i>for</i>, can't be used to declare an iterator variable. It can only have a terminating condition, which
-        is going to be repeatedly checked. The loop is stopped when this condition becomes <b>false</b>, hence the name, <i>while</i>.
+        A <i>while</i> ("amíg") ciklust olyan esetekben érdemes használni, amikor nem ismerjük
+        előre, hogy hány ismétlésre van szükség. A <i>for</i> ciklussal ellentétben itt csak egy
+        komponens adható meg: a megállási feltétel. Ha iterátor változóra van szükség, azt nekünk a
+        ciklus előtt kell deklarálni.
         ]]>
     </text>
     <code><![CDATA[
@@ -133,25 +134,26 @@ ___ (<font color="#DF7401">int</font> i = <font color="#F0E130">0</font>; i &lt;
     ]]></code>
     <text>
         <![CDATA[
-        This is a bit more advanced example. The while loop prints the characters of the <i>string</i>, until it finds
-        an '<b>X</b>'. The first part of the condition, connected with the <b>AND</b> operator, is necessary to guarantee
-        that the the code works, even if our text has no '<b>X</b>' in it.
+        A fenti kódmintában addig írjuk ki a <i>String</i> karaktereit, amíg egy <i>X</i> betűhöz nem
+        érünk. A megállási feltétel összetett, ÉS logikai operátort tartalmaz. A feltétel első része arra szolgát,
+        hogy a ciklus akkor is megálljon, ha a <i>String</i>-ben esetleg nincs <i>X</i> betű. A második részen megnézzük,
+        hogy a vizsgált karakter <i>X</i>-e, ha igen, akkor a ciklus megáll.
         <br><br>
-        We can now understand why this loop is used for this specific example: We don't know the position of '<b>X</b>' in the text
-        (it isn't even sure if there is one), so we <b>don't know how many times we must print a character</b> beforehand.
+        Ennek a feladatnak a megoldásához azért választottam a <i>while</i> ciklust, mert nem tudjuk előre,
+        hogy hányadik betű lesz az <i>X</i>.
         ]]>
     </text>
-    <boxed title="Iterator in while">
+    <boxed title="Iterátor változó a while ciklusban">
         <![CDATA[
-        This example shows that it's possible to use iterator variables with a while loop, we just can't use
-        any special syntax to declare and update them like in the for loop. Thus, the variable must be <b>declared
-        before</b> and <b>updated inside</b> the while loop.
+        A fenti példa azt is megmutatja, hogy lehetséges a <i>while</i> ciklusban is iterátor változót
+        használni. Ilyenkor azonban a deklarálást és inicializálást a ciklus előtt kell elvégezni, a
+        frissítését pedig a ciklus blokkján belül (mivel a <i>while</i> nem biztosít erre speciális szintaxist).
         <br><br>
-        We now also have a way to "convert" a for loop into a while loop. The iterator variable must be
-        handled in the way described above, and the <i>for</i> keyword must be replaced with <i>while</i>.
+        A <i>while</i> és a <i>for</i> ciklusok átkonvertálhatóak egymásba. Például, ha a <i>for</i> ciklusnak nem adunk meg
+        iterátor változót, és iterátor frissítést sem, akkor az úgy fog működni, mint egy <i>while</i> ciklus.
         ]]>
     </boxed>
-    <interactive instruction="Write a while loop that keeps cutting the last character off a string until the length is only 3!">
+    <interactive instruction="Egészítsd ki a ciklust hogy addig vágja le a karaktereket a String végéről, amíg a hossza 3 lesz!">
         <data><![CDATA[
 
 <font color="#999900">String</font> text = <font color="#2E8B57">"a1b2c3d4e5f6"</font>;
@@ -166,12 +168,12 @@ ___ (<font color="#DF7401">int</font> i = <font color="#F0E130">0</font>; i &lt;
         <answer place="0">while</answer>
         <answer place="1">3</answer>
     </interactive>
-    <title text="do-while loop"/>
+    <title text="do-while ciklus"/>
     <text>
         <![CDATA[
-        This loop is very similar to the while loop, the only difference is that it checks the terminating condition
-        <b>after</b> executing the statements inside. Due to this, it's guaranteed that the do-while loop executes its
-        statements <b>at least once</b>.
+        Ez a ritkán használt ciklus a <i>while</i>-hoz hasonló, azzal a különbséggel, hogy a megállási
+        feltétel minden ismétlés <b>után</b> lesz ellenőrizve, nem pedig előtte. Ez azt eredményezi, hogy
+        a <i>do-while</i> ciklus mindig legalább egyszer fut.
         ]]>
     </text>
     <code><![CDATA[
@@ -186,18 +188,17 @@ ___ (<font color="#DF7401">int</font> i = <font color="#F0E130">0</font>; i &lt;
     ]]></code>
     <text>
         <![CDATA[
-        Suppose that the <i>getInt</i> method returns some integer. The loop will keep printing and decrementing
-        it, until it reaches zero. One line, however, will always the printed: the number that the method returned.
-        Even if it's not positive, the statements are executed, and only then will the do-while loop check the
-        condition and stop.
+        Tegyük fel, hogy a <i>getInt</i> metódus visszaad egy számot. Ez a ciklus addig íratja ki és
+        csökkenti a számot, amíg az pozitív. Mivel azonban ez egy <i>do-while</i> ciklus, ezért akkor is le fog futni egyszer,
+        ha a kapott szám nem pozitív.
         ]]>
     </text>
-    <title text="Stopping early: break"/>
+    <title text="Korai megállás: break"/>
     <text>
         <![CDATA[
-        It is possible to use the <b>break</b> statement to stop looping immediately, to "break out" of the loop.
-        Remember the example where we printed the characters of the text until an '<b>X</b>' is found? Here is the
-        same example, this time with break:
+        A <b>break</b> azonnal "ki tudunk törni" a ciklusból, és az utána következő utasításra ugrani.
+        Menjünk vissza ahhoz a példához, ahol az <i>X</i> betűig írtuk ki a <i>String</i> karaktereit.
+        Ennek egy alternatív megoldása így néz ki <i>break</i> használatával:
         ]]>
     </text>
     <code><![CDATA[
@@ -217,24 +218,27 @@ ___ (<font color="#DF7401">int</font> i = <font color="#F0E130">0</font>; i &lt;
     ]]></code>
     <text>
         <![CDATA[
-        Instead of checking for an '<b>X</b>' within the terminating condition, we used a combination of
-        the <b>if and break</b> statements.
+        Látható, hogy a <i>break</i> segítségével sikerült egyszerűsíteni a megállási feltételt. Az is
+        világos, hogy a ciklusokon belül akár elágazásokat is írhatunk (például <i>if</i>-et), ahogy az
+        elágazásokon belülre is írhatunk ciklusokat.
         ]]>
     </text>
-    <advanced title="Return from a loop">
+    <advanced title="Visszatérés a ciklusból">
         <![CDATA[
-        It is possible to <b>return</b> from inside a loop. This will also stop the loop, just like the
-        break statement. There is only one exception for this, the <b>finally block</b>, which will be covered in a later course.
+        A <b>return</b> (visszatérés) utasítás lehet akár egy cikluson belül is. Mivel ilyenkor a
+        teljes metódusból kilépünk, ezért a ciklus futása is megszakad.
         ]]>
     </advanced>
-    <title text="To the next step: continue"/>
+    <title text="Előrelépés: continue"/>
     <text>
         <![CDATA[
-        There might be cases where we want to "skip" to the next iteration of a loop. Note that this isn't
-        the same as breaking out of the loop! To achieve this, the <b>continue</b> statement can be used.
+        A <b>continue</b> utasítással arra is lehetőség van, hogy egy ismétlésnek azonnal a
+        végére ugorjunk, hogy kezdődhessen a következő. A <i>break</i>-kel ellentétben ez nem fog
+        az egész ciklusból kilépni.
         <br><br>
-        Suppose that we must print the characters of a string, but again, we really dislike '<b>X</b>', and so
-        every time we see this character, we want to ignore it instead of printing!
+        Tegyük fel, hogy egy <i>String</i> karaktereit szeretnénk kiíratni, de az <i>X</i> betűt nem
+        szeretjük, ezért ezt minden esetben át akarjuk ugorni. A <i>continue</i> utasítás tökéletes
+        erre a feladatra:
         ]]>
     </text>
     <code><![CDATA[
@@ -251,20 +255,20 @@ ___ (<font color="#DF7401">int</font> i = <font color="#F0E130">0</font>; i &lt;
     ]]></code>
     <text>
         <![CDATA[
-        Note that this is very similar to the previous example, only in this case we choose to use a for loop instead
-        of a while one. The <b>break</b> statement is replaced with <b>continue</b>. This guarantees that the characters
-        after the despicable '<b>X</b>' are also printed!
+        Ebben az esetben a <i>for</i> ciklus használata mellett döntöttem, mert előre tudjuk,
+        hogy hányszor szeretnénk ismételni a ciklust (annyiszor, amilyen hosszú a szöveg, ezt
+        pedig a ciklus indulása előtt megtudhatjuk a <i>length</i> segítségével).
         ]]>
     </text>
-    <interactive instruction="">
+    <interactive instruction="Egészítsd ki a ciklust úgy, hogy az X átugrásra kerül, a Q pedig megállítja a ciklust!">
         <data><![CDATA[
 
 <font color="#999900">String</font> data = <font color="#2E8B57">"aaabbabaXabXaabQab"</font>;
 <br/><font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i &lt; data.<font color="#ADD8E6">length</font>(); ___) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(data.<font color="#ADD8E6">charAt</font>(i) == <font color="#2E8B57"><font color="#2E8B57">'<font color="</font></font>#999900">X</font>') { <font color="gray<font color="#2E8B57">">//X, skip but don'</font>t stop
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(data.<font color="#ADD8E6">charAt</font>(i) == <font color="#2E8B57">'X'</font>) { <font color="gray">//X, skip but don't stop</font>
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;___;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> <font color="#E65100">if</font>(data.<font color="#ADD8E6">charAt</font>(i) == <font color="#2E8B57"><font color="#2E8B57">'<font color="</font></font>#999900">Q</font>') { <font color="gray">//Q, stop
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> <font color="#E65100">if</font>(data.<font color="#ADD8E6">charAt</font>(i) == <font color="#2E8B57">'Q'</font>) { <font color="gray">//Q, stop
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;___;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
@@ -277,26 +281,23 @@ ___ (<font color="#DF7401">int</font> i = <font color="#F0E130">0</font>; i &lt;
         <answer place="1">continue</answer>
         <answer place="2">break</answer>
     </interactive>
-    <title text="Infinite loops"/>
+    <title text="Végtelen ciklusok"/>
     <text>
         <![CDATA[
-        You may have already wondered about or experimented with the possibility of using a terminating condition
-        that can <b>never become false</b>. In this case out loop will iterate ever onwards, unless explicitly using a break
-        statement (or shutting down the program or the computer, of course).
+        Amennyiben a megállási feltétel sosem lesz hamis, akkor a ciklus nem áll meg. Egészen addig
+        fog ismétlődni, amíg a programot, vagy magát a számítógépet nem kapcsolják ki.
         ]]>
     </text>
-    <boxed title="Debugging">
+    <boxed title="Végtelen ciklus javítása">
         <![CDATA[
-        You will most often encounter infinite loops when something is wrong with your terminating condition, and so
-        your loop can't stop. If your program performs relatively simple tasks, yet it fails to halt for a very long time, it's likely
-        that a loop "got stuck" and iterates infinitely. In case of printing inside the loop, you'll notice that the
-        application repeatedly prints to the console.
+        Egy végtelenül futó ciklus általában hibát jelez. Ilyenkor érdemes alaposan megnézni, hogy milyen
+        megállási feltételt adtunk meg.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        Though rarely, there are actually cases when we want to use an infinite loop. One common
-        example for this is a server application:
+        Ritkán azonban előfordul az is, hogy szándékosan adunk meg végtelen ciklust. Például szerver
+        programok esetén:
         ]]>
     </text>
     <code><![CDATA[
@@ -310,9 +311,10 @@ ___ (<font color="#DF7401">int</font> i = <font color="#F0E130">0</font>; i &lt;
     ]]></code>
     <text>
         <![CDATA[
-        Suppose that the <i>connectionDetected</i> and the <i>processConnection</i> methods are written somewhere else.
-        We can see that the server waits indefinitely, and when it detects that someone want to connect it'll
-        handle that connection request, and continue to wait, for the next request.
+        A <i>connectionDetected</i> és a <i>processConnection</i> metódusok máshol vannak megírva.
+        A szerver addig várakozik a ciklus segítségével, amíg nem jön bejövő csatlakozás, majd azt
+        feldolgozza, és tovább várakozik, mivel a ciklus végtelen (a megállási feltétel egyszerűen <i>true</i>,
+        ami nyilván sosem lesz hamis).
         ]]>
     </text>
 </resources>

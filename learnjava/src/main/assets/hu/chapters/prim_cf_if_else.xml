@@ -2,20 +2,22 @@
 <!--Belongs to course 'Primitives, control flow and I/O' --><resources>
     <chapterdata>
         <id>102</id>
-        <name>Controlling the flow: if-else</name>
+        <name>Vezérlés: elágazások</name>
     </chapterdata>
     <text>
         <![CDATA[
-        The following ways will allow us to check for certain conditions, and only execute
-        parts of our code if they are true. To do this, we rely heavily on <b>booleans</b>, so be sure
-        to revise the <i>Primitives</i> chapter if you are unsure about your knowledge about booleans.
+        Most olyan módszereket fogunk tanulni, amik segítségével ellenőrzihetjük feltételek teljesítését,
+        és ennek megfelelően futtatunk bizonyos kódrészleteket. Ez minden komplex program alapvető része. Ennek során
+        erősen támaszkodunk majd a <b>boolean</b>-ekre, ezért fontos, hogy az előző fejezet <i>boolean</i>
+        részét jól megérted.
         ]]>
     </text>
-    <title text="The if block"/>
+    <title text="Az if blokk"/>
     <text>
         <![CDATA[
-        The if block is the simplest tool at our disposal. The statements inside it will only be executed if
-        it's condition is true! Observe the example for the correct syntax:
+        Az <i>if</i> blokk egy olyan eszköz, melynek segítségével bizonyos kódrészletet (blokkot)
+        csak akkor futtatunk le, ha az adott feltétel teljesül. Nem meglepő módon a feltételt egy
+        <i>boolean</i> segítségével adjuk meg.
         ]]>
     </text>
     <code><![CDATA[
@@ -29,21 +31,32 @@
     <text>
         <![CDATA[
         <p>
-        When the execution arrives at the if statement, the condition is evaluated. In this case, Java will check
-        if the <i>testChar</i> variable equals to 'a'. It obviously is, we just assigned it in the previous statement!
-        </p><p>
-        The condition is true, and so the statement inside the <b>if block</b> (the part between the curly braces) is executed.</p>
+        Amikor a program elérkezik az <i>if</i> blokkhoz, a megadott feltétel (egyenlő-e a <i>testChar 'a'</i>-val?) ki fog értékelődni,
+        azaz a Java megnézi, hogy igaz-e, vagy hamis. Ebben az esetben nyilván igaz lesz, mert épp az
+        előző utasításban állítottuk be.
+        </p>
+        <p>
+        Ha a feltétel igaz, akkor minden le fog futni, ami az <i>if</i> blokkon belül van (azaz a kapcsos
+        zárójeleken belül). Jelen esetben ez egy kiírató utasítás lesz.
+        </p>
         <br><br>
-        Run this code and confirm that the text will be printed! Now, change the value of the variable to something that is not 'a',
-        and run again. Will anything be printed?
+        Ha ezt a kódot futtatod, akkor látható, hogy a kiíratás meg fog történni, mivel a feltétel igaz.
+        Ha azonban megváltoztatod a <i>testChar</i> értékét, akkor már nem fog kiíratás történni.
         ]]>
     </text>
-    <boxed title="Multiple conditions">
+    <boxed title="Több feltétel">
         <![CDATA[
-        We said that the if block can have one condition. But what if we want to check if multiple conditions are true?
-        Well, one not-so-elegant way would be to use another if block inside the the first one:
+        Egy <i>if</i> blokknak úgy adhatunk komplex logikai kifejezést, ha az előző fejezetben említett logikai
+        műveletekkel (ÉS, VAGY, stb) több feltételt összekapcsolunk.
         ]]>
     </boxed>
+    <text>
+        <![CDATA[
+        Szeretnénk két feltételt vizsgálni. Először is azt, hogy <i>n1</i> egyenlő-e kettővel, és azt
+        is, hogy <i>n2</i> egyenlő-e hárommal. Kicsit nehézkesen, de ezt megtehetjük úgy, hogy az <i>if</i>
+        blokkba belerakunk még egy <i>if</i> blokkot:
+        ]]>
+    </text>
     <code><![CDATA[
         
         <font color="#DF7401">int </font>n1 = <font color="#F0E130">2</font>, n2 = <font color="#F0E130">3</font>;
@@ -56,7 +69,8 @@
     ]]></code>
     <text>
         <![CDATA[
-        This is where the <b>logical operators</b> come in to the rescue. The AND operator is perfect for this example:
+        Szebb megoldás azonban az ÉS operátor használata. Ezzel összekapcsolhatjuk a két feltételt egy nagy
+        feltétellé, ami pontosan akkor lesz igaz, ha mindkét eredeti feltétel igaz:
         ]]>
     </text>
     <code><![CDATA[
@@ -67,7 +81,7 @@
 <br/>}
         
     ]]></code>
-    <interactive instruction="Complete the program so that it only prints when the number is 10!">
+    <interactive instruction="Egészítsd ki a programot úgy, hogy csak akkor történjen kiíratás, ha a szám 10!">
         <data><![CDATA[
 
 <font color="#DF7401">int</font> number = <font color="#ADD8E6">getNumber</font>(); <font color="gray">//suppose this returns an integer</font>
@@ -79,22 +93,23 @@
         <answer place="0">if</answer>
         <answer place="1">==</answer>
     </interactive>
-    <advanced title="One statement">
+    <advanced title="Egy utasítás esetén">
         <![CDATA[
-        It is not required to write the curly braces of the <i>if</i> block. In this case, <b>only one
-        statement</b> (the next one) will belong to the "block". For example, something like this is allowed:
+        Az <i>if</i> esetén nem szükséges kiírni a kapcsos zárójeleket. Ilyenkor nem igazán beszélhetünk
+        blokkról. A Java ezen esetekben mindig csak a rákövetkező első utasítást fogja az <i>if</i>-hez csatolni.
         <br><br>
-        if(condition) statement;
+        <i>if(feltétel) utasítás;</i>
         <br><br>
-        While not always necessary, it's never a bad practice to write the curly braces.
+        Kapcsos zárójelek nélkül könnyen összezavarodhatunk, hogy mi is tartozik az <i>if</i>-hez, és mi nem.
+        Ezért minden esetben érdemes kiírni a zárójelet, még akkor is, ha csak egy utasítás van a blokkban.
         ]]>
     </advanced>
-    <title text="The if-else blocks"/>
+    <title text="Az if-else blokk"/>
     <text>
         <![CDATA[
-        There are cases, where we would like to evaluate a condition, but not only run some statements when it's
-        true, but also when it's false! We could use the <b>negate operator</b> to achieve this, but the if-else blocks
-        should be used instead:
+       Sokszor kerülünk olyan helyzetbe, hogy adott feltétel esetén nem csak akkor akarunk futtatni valami, ha
+       a feltétel igaz, hanem akkor is, ha hamis. Ilyenkor az <i>if</i> egy bővített változatára, az <i>if-else</i>
+       blokkra van szükség.
         ]]>
     </text>
     <code><![CDATA[
@@ -109,22 +124,24 @@
     ]]></code>
     <text>
         <![CDATA[
-        We extended our <i>testChar</i> example with an <b>else block</b>. Notice that the condition is now false, so the
-        statements in the else block will be executed, instead of the ones in the if block!
+        A két külön esetet <i>if</i> ágnak, és <i>else</i> ágnak is nevezzük.
+        <br><br>
+        Kibővítettem a korábban látott példát egy <b>else blokkal</b>. Figyeld meg, hogy most más a <i>testChar</i>
+        értéke, ezért ami az <i>if</i> blokkban van, az nem fog lefutni, ellenben ami az <i>else</i> blokkban van, az igen.
         ]]>
     </text>
-    <boxed title="Always one, never both">
+    <boxed title="Csak az egyik">
         <![CDATA[
-        When using if-else blocks, always <b>exactly one</b> of the blocks are executed! A condition must be true or false,
-        so one of the blocks will run. It is impossible for the condition to be true and false at the same time, so both blocks
-        will never run.
+        Amikor <i>if-else</i> blokkot írsz, hasznos tudni, hogy mindig <b>pontosan egy ág</b> fog lefutni.
+        Ennek oka az, hogy egy <i>boolean</i> (feltétel) mindig vagy igaz (<i>if</i> ág), vagy hamis (<i>else</i> ág).
         ]]>
     </boxed>
-    <title text="Additional else-if blocks"/>
+    <title text="További else-if blokkok"/>
     <text>
         <![CDATA[
-        It is possible to add additional, so called <b>else-if blocks</b> to an if block or to if-else blocks. What they do is
-        quite intuitive, see the example:
+        Lehetséges újabb blokkokat (ágakat) hozzárakni az <i>if</i> blokkhoz. Ezek neve <i>else if</i>,
+        és az <i>if</i>-hez hasonlóan mindegyik vár egy feltételt, a bennük lévő utasítások akkor fognak
+        futni, ha a feltétel igaz.
         ]]>
     </text>
     <code><![CDATA[
@@ -144,22 +161,25 @@
     ]]></code>
     <text>
         <![CDATA[
-        A very important detail to know about these else-if blocks, is the conditions are evaluated from top
-        to bottom, and if Java finds a condition that is <b>true</b>, the block of that condition will be executed,
-        <b>and no other blocks</b>!
+        Fontos tudni, hogy ilyenkor a feltételek felülről lefelé kerülnek ellenőrzésre. Amint a Java talál
+        egy igaz feltételt (ez lehet az <i>if</i> vagy egy <i>else if</i> feltétele), akkor abban a blokkban
+        lévő utasításokat végrehajtja, és <b>tovább nem nézi a feltételeket</b>.
         <br><br>
-        If you run this example, you will notice that only <i>'Bigger then 3'</i> is printed, but our number is also bigger
-        then 1! This is because the previously mentioned rule, that only one block can be executed.
+        A fenti példa futtatásánál látható, hogy a <i>'Bigger then 3'</i> ki lesz íratva, de a megadott szám
+        az 1-nél is nagyobb. Ehhez a <i>else if</i> ághoz azonban már nem jutunk el, mivel az előző ág
+        feltétele igaz lesz.
+        <br><br>
+        <i>Else</i> ág megadása nem szükséges, de ha meg van adva, akkor ez fog lefutni, ha egyetlen
+        feltétel sem volt igaz.
         ]]>
     </text>
-    <boxed title="Infinite possibilities">
+    <boxed title="Végtelen sok lehetőség">
         <![CDATA[
-        We can add any number of additional <i>else-if</i> blocks to an existing if block. We can also nest other
-        blocks, method calls inside them. This behaviour, in combination with reading user input (later chapter)
-        allows us to write complex code, that takes many factors into account.
+        Egy <i>if</i> blokkhoz tetszőleges sok <i>else if</i> ágat adhatunk, ezekben további blokkok és
+        metódus hívások lehetnek. Ezek az eszközök lehetővé teszik a komplex programok készítését.
         ]]>
     </boxed>
-    <interactive instruction="Complete and correct this program in a way that 'Middle' is only printed when the number is between 0.25 and 0.75!">
+    <interactive instruction="Egészítsd ki a programot úgy, hogy a 'Middle' csak akkor íródik ki, ha a szám 0.25 és 0.75 között van!">
         <data><![CDATA[
 
 <font color="gray">//this double can have a value between 0 and 1
@@ -177,11 +197,12 @@
         <answer place="2">else</answer>
         <default place="2">if</default>
     </interactive>
-    <title text="The switch block"/>
+    <title text="A switch blokk"/>
     <text>
         <![CDATA[
-        The switch block can be used, when otherwise a lot of <i>else-if</i> blocks would be needed. See this example for
-        the syntax. Assume that the <i>assignGrade</i> method returns an integer between 1 and 5.
+        A <i>switch</i> blokk szintén feltételeket ellenőriz. Akkor érdemes használni, ha egy
+        <i>if</i>-hez sok <i>else if</i> ág tartozna. Egy változót vár, és azt képes ellenőrizni sok
+        értékre, hogy a változó felveszi-e éppen az adott értékeket.
         ]]>
     </text>
     <code><![CDATA[
@@ -207,18 +228,20 @@
     ]]></code>
     <text>
         <![CDATA[
-        <p>
-        As you can see, we can give a variable to the switch statement, and list it's states we are interested in
-        using <b>case</b> labels. A <b>default</b> label can be used, this will be reached when no other state was equal
-        to our variables value.
-        </p><p>The <b>break</b> statements are necessary, they tell the switch statement that we would like to "jump out"
-        out the switch statement when we found out variables value.
+        Látható, hogy a <i>switch</i>-nek átadjuk a <i>grade</i> változót, majd a <i>case</i> kulcsszóval
+        felsoroljuk, hogy mely értékekre vagyunk kíváncsiak: jelen esetben az 1 és 5 közöttiekre.
+        <br><br>
+        A <b>break</b> utasítás szükséges, ezzel adjuk meg, hogy egy ág (<i>case</i>) végére értünk.
+        <br><br>
+        A <b>default</b> ág hasonló az <i>else</i>-hez. A benne lévő utasítások akkor futnak le, ha
+        egyetlen <i>case</i>-el megadott feltétel sem teljesül.
         ]]>
     </text>
-    <advanced title="Limitations of switch">
+    <advanced title="A switch limitációi">
         <![CDATA[
-        While the switch statement is useful in some cases, it can only compare certain types of variables. To see a list of allowed
-        types, and to read more about the switch statement, see the <a href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/switch.html">official documentation</a>.
+        A <i>switch</i> ugyan hasznos, de nem minden típusú változóra működik. A
+        <a href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/switch.html">hivatalos dokumentációban</a>
+        megnézheted az összes ilyen típust.
         ]]>
     </advanced>
 </resources>

@@ -2,21 +2,22 @@
 <!--Belongs to course 'Primitives, control flow and I/O' --><resources>
     <chapterdata>
         <id>104</id>
-        <name>Arrays</name>
+        <name>Tömbök</name>
     </chapterdata>
     <text>
         <![CDATA[
-        If a large numbers of variables (of the same type) must be created, we can use an <b>array</b>.
+        Ha nagyszámú (azonos típusú) változót kell létrehozni, használhatunk <b>tömböket</b>. Ezek olyan változók, 
+		amik több értéket is tartalmaznak. Például egy 5 hosszú <i>int</i> tömb 5 darab <i>int</i> értéket tartalmaz. 
         ]]>
     </text>
-    <title text="Declaration and initialization"/>
+    <title text="Deklaráció és inicializálás"/>
     <text>
         <![CDATA[
-        The declaration of arrays is similar to the declaration of single variables. You must specify the
-        type and the name, then use the <b>[]</b>(square brackets) symbols to indicate it is an array.
+        A tömbök deklarálása hasonló az egyes változók deklarálásához. Meg kell adnunk a
+        típusát és a nevét, majd a <b>[]</b>(szögletes zárójelek) szimbólumokkal jelezzük, hogy tömbről van szó.
         <p>
-        To initialize it, the <b>new</b> keyword must be used, then again the square brackets, to specify
-        the <b>length</b> of the array (number of variables it contains).
+        Az inicializáláshoz a <b>new</b> kulcsszót kell használni, majd ismét a szögletes zárójeleket, hogy megadjuk a
+        a tömb <b>hosszát (length)</b> (azaz benne lévő értékek számát).
         ]]>
     </text>
     <code><![CDATA[
@@ -27,8 +28,8 @@
     ]]></code>
     <text>
         <![CDATA[
-        The above code creates an array of integers. The array will hold 100 integer variables. Just like with
-        variables, the declaration and initialization can be written in one statement:
+        A fenti kód egy egész számokból álló tömböt hoz létre. A tömb 100 egész szám változót fog tartalmazni. Csakúgy, mint egyszerű
+        változókhoz hasonlóan a deklaráció és az inicializálás egyetlen utasításban is megírható:
         ]]>
     </text>
     <code><![CDATA[
@@ -38,8 +39,8 @@
     ]]></code>
     <text>
         <![CDATA[
-        It is of course possible to create an array not only from primitive types, but from classes as well. For example,
-        the following code creates an array of <i>String</i>s, which will contain 25 string objects:
+        Természetesen nemcsak primitív típusokból, hanem osztályokból is lehet tömböt létrehozni. Például,
+        a következő kód létrehoz egy <i>String</i>-ekből álló tömböt, amely 25 string objektumot fog tartalmazni:
         ]]>
     </text>
     <code><![CDATA[
@@ -47,16 +48,16 @@
         <font color="#999900">String</font>[] strings = <font color="#E65100">new</font> <font color="#999900">String</font>[<font color="#F0E130">25</font>];
         
     ]]></code>
-    <boxed title="Default value of the elements">
+    <boxed title="Az elemek alap értéke">
         <![CDATA[
-        When creating an <b>array of primitives</b> (int, double, char, ...), Java will automatically initialize
-        all elements to their default value.
+        Amikor egy <b>primitívekből</b> álló tömböt (int, double, char, ...) hozol létre, a Java automatikusan inicializálja a 
+		benne lévő elemeket, mindegyiket az alapértelmezett értékkel (például egy <i>int</i> típusú tömb elemei alapból nullák lesznek).
         <p>
-        If we create an <b>array from a class</b>, then each element will be initialized to <b>null</b>. Null will be covered in the
-        course of classes, for now it's enough to know that the programmer must initialize the elements of such arrays.
+        Ha egy <b>osztályból</b> hozunk létre tömböt, akkor minden elem <b>null</b>-ra lesz inicializálva. A <i>null</i>-t később vesszük majd, 
+		egyelőre elég annyit tudni, hogy a programozónak inicializálnia kell az ilyen tömbök elemeit.
         ]]>
     </boxed>
-    <interactive instruction="Declare an array for doubles with size 20!">
+    <interactive instruction="Deklarálj egy 20 hosszú double tömböt!">
         <data><![CDATA[
 
 <font color="#DF7401">double</font>___ reals = <font color="#E65100">new</font> <font color="#DF7401">double</font>[___];
@@ -65,11 +66,11 @@
         <answer place="0">[]</answer>
         <answer place="1">20</answer>
     </interactive>
-    <title text="Array initializer"/>
+    <title text="Gyors inicializálás"/>
     <text>
         <![CDATA[
-        Java provides special syntax for <b>quickly initializing small arrays</b>. We simply have to list the elements
-        of our array between curly braces! Here are a few examples:
+        A Java speciális szintaxist biztosít a kis tömbök gyors inicializálásához. Egyszerűen csak fel kell sorolnunk az elemeket
+        szögletes zárójelek között! Íme néhány példa:
         ]]>
     </text>
     <code><![CDATA[
@@ -82,10 +83,10 @@
     ]]></code>
     <text>
         <![CDATA[
-        Using this technique initializes not only the array itself, but each element individually. We also don't
-        have to explicitly write the length of the array, it will be determined automatically.
+        Ez a módszer nem csak magát a tömböt, hanem minden egyes elemet külön-külön inicializál. Nekünk is nem
+        kell explicit módon megírnunk a tömb hosszát, az automatikusan meghatározásra kerül.
         <p>
-        We must, however, be careful not to put elements of different types between the curly braces!
+        Vigyáznunk kell azonban, hogy a szögletes zárójelek közé ne tegyünk különböző típusú elemeket!
         ]]>
     </text>
     <code><![CDATA[
@@ -94,7 +95,7 @@
 <br/><font color="#DF7401">int</font>[] integers = {<font color="#F0E130">1,2</font>,<font color="#F0E130">3</font>,<font color="#2E8B57">"four"</font>};
         
     ]]></code>
-    <interactive instruction="Declare an array which has the first 3 letters of the ABC!">
+    <interactive instruction="Deklarálj egy tömböt, ami az ABC első három betűjét tartalmazza!">
         <data><![CDATA[
 
 ___[] letters = { <font color="#2E8B57">'a'</font>, ___, <font color="#2E8B57">'c'</font> };
@@ -103,18 +104,20 @@ ___[] letters = { <font color="#2E8B57">'a'</font>, ___, <font color="#2E8B57">'
         <answer place="0">char</answer>
         <answer place="0">Character</answer>
         <answer place="1">'b'</answer>
+		<answer place="1">'B'</answer>
     </interactive>
-    <title text="Reference the elements"/>
+    <title text="Hivatkozás az elemekre"/>
     <text>
         <![CDATA[
-        For arrays to be useful, the programmer must be able to reference each element they contain. Again, the square brackets
-        are used to achieve this.
+        Ahhoz, hogy a tömbök hasznosak legyenek, a programozónak képesnek kell lennie minden egyes elemükre hivatkozni. Ismét a szögletes 
+		zárójeleket kell segítségül hívnunk.
         ]]>
     </text>
-    <boxed title="Array indexing">
+    <boxed title="Tömb indexelés">
         <![CDATA[
-        Arrays are <b>INDEXED FROM 0</b>! This means the that first element in the array will have index 0, the second one
-        will have index 1, and so on.
+        A tömbök <b>0-TÓL VANNAK INDEXELVE</b>! Ez azt jelenti, hogy a tömb első elemének indexe 0, a másodiké pedig 
+		1 lesz, és így tovább. Tehát ha egy tömb X elemű, akkor annak nem lesz X. eleme, csak X-1. , mivel az indexelés 
+		nem az 1-től, hanem a 0-tól indul.
         ]]>
     </boxed>
     <code><![CDATA[
@@ -139,7 +142,7 @@ ___[] letters = { <font color="#2E8B57">'a'</font>, ___, <font color="#2E8B57">'
     ]]></code>
     <text>
         <![CDATA[
-        Notice how that we used indices <i>0,1,2</i> to reference the elements, and not indices <i>1,2,3</i>!
+        Figyeljük meg, hogy a <i>0,1,2</i> indexeket használtunk az elemekre való hivatkozáshoz, és nem az <i>1,2,3</i> indexeket!
         ]]>
     </text>
     <code><![CDATA[
@@ -168,7 +171,7 @@ ___[] letters = { <font color="#2E8B57">'a'</font>, ___, <font color="#2E8B57">'
     ]]></code>
     <text>
         <![CDATA[
-        In java, we can always get the length (number of elements) of an array this way:
+        A Java-ban mindig így kaphatjuk meg egy tömb hosszát (elemeinek számát):
         ]]>
     </text>
     <code><![CDATA[
@@ -179,13 +182,13 @@ ___[] letters = { <font color="#2E8B57">'a'</font>, ___, <font color="#2E8B57">'
 <br/><font color="#DF7401">int</font> charAmount = chars.<font color="#ADD8E6">length</font>;
         
     ]]></code>
-    <title text="Dangers of arrays"/>
+    <title text="A tömbök veszélyei"/>
     <text>
         <![CDATA[
-        When using arrays, we must be careful to only reference existing elements, otherwise
-        our program will stop with an <b>ArrayIndexOutOfBoundsException</b>.
+        Amikor tömböket használunk, ügyelnünk kell arra, hogy csak a már létező elemekre hivatkozzunk, különben
+        a programunk egy <b>ArrayIndexOutOfBoundsException</b> hibaüzenettel fog leállni.
         <p>
-        The following code sample is faulty, and the image shows what happens if we run it:
+        Az alábbi kódminta hibás, a képen látható, hogy mi történik, ha lefuttatjuk:
         ]]>
     </text>
     <code><![CDATA[
@@ -200,11 +203,11 @@ ___[] letters = { <font color="#2E8B57">'a'</font>, ___, <font color="#2E8B57">'
     <image name="array_index_exception"/>
     <text>
         <![CDATA[
-        When creating arrays from classes, it's important to initialize the values before using them!
-        Trying to call a method of the class while our variable is actually null will cause a
-        <b>NullPointerException</b>.
+        Ha osztályokból hozunk létre tömböket, fontos, hogy használat előtt inicializáljuk az értékeket!
+        Ha megpróbáljuk meghívni az osztály egy metódusát, miközben a változónk valójában <i>null</i>, akkor egy
+        <b>NullPointerException</b> hiba keletkezik.
         <p>
-        See this code and the exception it throws:
+        Lásd ezt a kódot és az általa dobott kivételt:
         ]]>
     </text>
     <code><![CDATA[
@@ -218,11 +221,12 @@ ___[] letters = { <font color="#2E8B57">'a'</font>, ___, <font color="#2E8B57">'
     <image name="null_pointer_exception"/>
     <text>
         <![CDATA[
-        Note that both of these "faulty" examples are <b>valid code</b>. They will compile without any
-        error! These exceptions are thrown when we run the code.
+        Vegyük észre, hogy mindkét "hibás" példa <b>érvényes kód</b>. Lefordíthatók mindenféle
+        hiba nélkül! Ezek a kivételek akkor dobódnak, amikor futtatjuk a kódot. Más szóval, a fordítóprogram 
+		ilyen szempontból nem ellenőrzi a kódunkat.
         ]]>
     </text>
-    <interactive instruction="Correct the indices so that they are within bounds!">
+    <interactive instruction="Javítsd ki az indexeket, hogy azok a határokon belül legyenek!">
         <data><![CDATA[
 
 <font color="#DF7401">double</font>[] reals = <font color="#E65100">new</font> <font color="#DF7401">double</font>[<font color="#F0E130">20</font>];
@@ -239,13 +243,14 @@ ___[] letters = { <font color="#2E8B57">'a'</font>, ___, <font color="#2E8B57">'
         <default place="0">1</default>
         <default place="1">20</default>
     </interactive>
-    <title text="Iterate arrays"/>
+    <title text="Tömbök iterálása"/>
     <text>
         <![CDATA[
-        Though it's possible to initialize and modify the elements of an array the way the above examples show,
-        but in most cases, this isn't how we do it. Instead, the usage of the <b>for loop</b> is recommended!
+        Bár a fenti példák szerint is lehet inicializálni és módosítani egy tömb elemeit,
+        de a legtöbb esetben nem így csináljuk. Ehelyett a <b>for ciklus</b> használata ajánlott!
         <p>
-        In this example, an array of 100 integers is created. In it, we would like to store first 100 positive numbers:
+        Ebben a példában egy 100 egész számból álló tömböt hozunk létre. Ebben szeretnénk az első 100 pozitív számot tárolni. 
+		Alapból mindegyik elem nulla, viszont ezzel a ciklussal beállíthatóak a megfelelő értékek:
         ]]>
     </text>
     <code><![CDATA[
@@ -269,20 +274,20 @@ ___[] letters = { <font color="#2E8B57">'a'</font>, ___, <font color="#2E8B57">'
     ]]></code>
     <text>
         <![CDATA[
-        As you can see, the iterator variable <i>i</i> is used to initialize all elements in our array.
-        At first, the value of <i>i</i> is 0, because that is the index of the first element.
+        Mint látható, az <i>i</i> iterátor változót használjuk a tömbünk összes elemének inicializálására.
+        Először a <i>i</i> értéke 0, mert ez az első elem indexe.
         <p>
-        The loop will stop when <i>i</i> is no longer smaller then the length of the array (100). This will occur
-        when <i>i</i> is 100. It's important that we stop here, since <b>posNums[100]</b> would throw an <i>
-        ArrayIndexOutOfBoundsException</i>!
+        A ciklus akkor áll meg, amikor <i>i</i> már nem kisebb, mint a tömb hossza (100). Ez akkor történik
+        amikor az <i>i</i> 100 lesz. Fontos, hogy itt megálljunk, mivel a <b>posNums[100]</b> egy <i>
+        ArrayIndexOutOfBoundsException</i>-t okozna!
         ]]>
     </text>
-    <advanced title="For-each loop">
+    <advanced title="For-each ciklus">
         <![CDATA[
-        The for loop has a special version to iterate arrays, called <b>for-each loop</b>. It's more compact
-        and easier to write then a normal for loop.
+        A for ciklusnak van egy speciális változata a tömbök iterálására, az úgynevezett <b>for-each ciklus</b>. Ez sokkal kompaktabb
+        és könnyebb megírni, mint egy normál for ciklust.
         <p>
-        It can, for example, be used when we would like to print all elements of an array:
+        Használható például akkor, ha egy tömb összes elemét szeretnénk kiírni:
         ]]>
     </advanced>
     <code><![CDATA[
@@ -302,23 +307,23 @@ ___[] letters = { <font color="#2E8B57">'a'</font>, ___, <font color="#2E8B57">'
     ]]></code>
     <text>
         <![CDATA[
-        Note that the iterator variable here isn't a number! Instead, it's a <b>String</b> called <i>text</i>.
-        The for each loop will always load the next element in the array into this variable. It will also automatically
-        stop when the end of our array is reached.
+        Figyeljük meg, hogy az iterátor változó itt nem szám! Ehelyett ez egy <b>String</b>, melynek neve <i>text</i>.
+        A for each ciklus mindig a tömb következő elemét tölti be ebbe a változóba. Továbbá automatikusan
+        megáll, amikor elérjük a tömb végét.
         ]]>
     </text>
-    <title text="Multi-dimensional arrays"/>
+    <title text="Több dimenziós tömbök"/>
     <text>
         <![CDATA[
-        Java supports multi-dimensional arrays. Such array is essentially an array of other arrays.
+        A Java támogatja a többdimenziós tömböket. Az ilyen tömb lényegében tömbök tömbje.
         ]]>
     </text>
     <image name="multi_dim_array"/>
     <text>
         <![CDATA[
-        Those with knowledge of linear algebra may also think of such arrays as <b>matrices</b>.
+        A lineáris algebrát ismerők az ilyen tömbökre <b>mátrixokként</b> is gondolhatnak.
         <br><br>
-        Note that we can use the array initializer for multi-dimensional arrays too:
+        Megjegyezzük, hogy a tömbinicializálót többdimenziós tömbökhöz is használhatjuk:
         ]]>
     </text>
     <code><![CDATA[
@@ -332,8 +337,8 @@ ___[] letters = { <font color="#2E8B57">'a'</font>, ___, <font color="#2E8B57">'
     ]]></code>
     <text>
         <![CDATA[
-        To traverse these arrays, we can use <b>nested loops</b> (loop inside loop). This example prints
-        the elements of our multi dimensional array, formatted as a matrix:
+        E tömbök iterálásához használhatunk <b>beágyazott ciklusokat</b> (ciklus a ciklusban). Ez a példa kiírja a
+        többdimenziós tömbünk elemeit, sorokba rendezve (mint egy mátrix):
         ]]>
     </text>
     <code><![CDATA[
@@ -356,13 +361,13 @@ ___[] letters = { <font color="#2E8B57">'a'</font>, ___, <font color="#2E8B57">'
     ]]></code>
     <text>
         <![CDATA[
-        Though harder to visualize, you can create more then just 2 dimensional arrays as well.
+        Bár nehezebb szemléltetni, de több mint kétdimenziós tömböt is létrehozhatsz.
         ]]>
     </text>
-    <title text="Another look at the main method"/>
+    <title text="A főmetódus újra"/>
     <text>
         <![CDATA[
-        Now that we know about arrays, we'll understand a part of the <b>main method</b>, which we previously didn't.
+        Most, hogy már tudunk a tömbökről, megértjük a <b>main metódus</b> egy részét, amit korábban nem értettünk.
         ]]>
     </text>
     <code><![CDATA[
@@ -374,8 +379,8 @@ ___[] letters = { <font color="#2E8B57">'a'</font>, ___, <font color="#2E8B57">'
     ]]></code>
     <text>
         <![CDATA[
-        The parameter called <b>args</b> is actually an array of strings! This special array is loaded by the JVM, and will
-        contain the command line arguments. More about this in the next chapter.
+        A <b>args</b> nevű paraméter valójában egy stringekből álló tömb! Ezt a speciális tömböt a JVM tölti be, és a
+        tartalmazza a parancssori argumentumokat. Erről bővebben a következő fejezetben.
         ]]>
     </text>
 </resources>

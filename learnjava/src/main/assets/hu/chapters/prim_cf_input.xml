@@ -2,64 +2,64 @@
 <!--Belongs to course 'Primitives, control flow and I/O' --><resources>
     <chapterdata>
         <id>105</id>
-        <name>Getting input</name>
+        <name>Input</name>
     </chapterdata>
     <text>
         <![CDATA[
-        Knowing how to get input from the user, and how to read files is essential. This will allow us
-        to perform some tasks according to the given input!
+        Lényeges tudni, hogyan lehet a felhasználótól bemenetet (inputot) kapni, és hogyan lehet fájlokat olvasni. Ez lehetővé teszi számunkra, hogy
+        hogy bizonyos feladatokat a megadott bemenetnek megfelelően hajtsunk végre!
         <p>
-        Consider this example: our application must be able to add 2 given numbers together. The user selects
-        the numbers when (or before) starting the app.
+        Vegyük a következő példát: alkalmazásunknak képesnek kell lennie 2 megadott szám összeadására. A felhasználó kiválasztja
+        a számokat az alkalmazás indításakor (vagy előtte).
         ]]>
     </text>
-    <title text="Command line arguments"/>
+    <title text="Parancssori argumentumok"/>
     <text>
         <![CDATA[
-        This is a straightforward way provided by Java to get some input. We have already seen parts of it at the
-        end of the previous chapter.
+        Ez a Java által biztosított egyszerű módja annak, hogy némi bemenetet kapjunk. Ennek egyes részeit már láttuk a
+        előző fejezet végén.
         ]]>
     </text>
-    <advanced title="Set arguments without an IDE">
+    <advanced title="Argumentumok megadása IDE nélkül">
         <![CDATA[
-        If you are using the command line, providing arguments is actually simpler. You must simply enter the arguments
-        (separated by whitespaces) at the end of the <b>java</b> command.
+        Ha a parancssort használod, akkor az argumentumok megadása valójában egyszerűbb. Csak meg kell adnod az argumentumokat
+        (szóközökkel elválasztva) a <b>java</b> parancs végén.
         <p>
-        For an example, you can check the <a href="https://docs.oracle.com/javase/tutorial/essential/environment/cmdLineArgs.html">
-        official oracle tutorial</a> of command line arguments.
+        Példaként megnézheted a <a href="https://docs.oracle.com/javase/tutorial/essential/environment/cmdLineArgs.html">
+        hivatalos oracle bemutatót</a> parancssori argumentumokról.
         ]]>
     </advanced>
     <text>
         <![CDATA[
-        When using an <i>IDE</i>, we don't have access to the console, however, we can give the arguments to the <i>IDE</i> and
-        it will pass them to the <i>JVM</i> instead.
+        Amikor egy <i>IDE</i>-t használunk, nincs hozzáférésünk a konzolhoz, azonban megadhatjuk az argumentumokat a <i>IDE</i>-nek és a
+        az átadja azokat a <i>JVM</i>-nek helyettünk.
         <p>
-        In Eclipse, follow these steps to set the arguments:
+        Az Eclipse-ben kövesd az alábbi lépéseket az argumentumok beállításához:
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li>1. Click on <b>Run</b> -> <b>Run Configurations</b>.</li>
-        <li>2. Click on the <b>Arguments</b> tab.</li>
-        <li>3. In <b>Program Arguments section</b> enter your arguments.</li>
-        <li>4. Click <b>Apply</b>.</li>
+        <li>1. Válasz ki a <b>Run</b> -> <b>Run Configurations</b> menüt.</li>
+        <li>2. Kattints az <b>Arguments</b> tabra.</li>
+        <li>3. A <b>Program Arguments section</b> szövegdobozba írd be az argumentumokat, szóközzel elválasztva.</li>
+        <li>4. Nyomj az <b>Apply</b> gombra.</li>
         </ul>
         ]]>
     </list>
     <image name="eclipse_arguments"/>
-    <boxed title="For other IDEs">
+    <boxed title="Más IDE-k esetén">
         <![CDATA[
-        If you are using one of the other recommended environments, see <a href="https://stackoverflow.com/questions/2066307/how-do-you-input-commandline-argument-in-intellij-idea">this</a>
-        StackOverflow question for Intellij Idea, and <a href="https://stackoverflow.com/questions/9168759/netbeans-how-to-set-command-line-arguments-in-java">this one</a> for Netbeans.
+        Ha a más ajánlott környezetek valamelyikét használod, lásd <a href="https://stackoverflow.com/questions/2066307/how-do-you-input-commandline-argument-in-intellij-idea">ezt</a> 
+        a StackOverflow kérdést az Intellij Idea-hoz, és <a href="https://stackoverflow.com/questions/9168759/netbeans-how-to-set-command-line-arguments-in-java">ezt</a> a Netbeans esetében.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        Now that we know how to set the arguments, let's look at how we can access them at runtime. The <i>JVM</i> will place them
-        in the <b>String array parameter</b> of the main method (called <i>args</i> by default).
+        Most, hogy tudjuk, hogyan állíthatjuk be az argumentumokat, nézzük meg, hogyan érhetjük el őket futás közben. A <i>JVM</i> elhelyezi őket a
+        a main metódus <b>String tömb paraméterébe</b> (alapértelmezés szerint <i>args</i> néven).
         <p>
-        For example, let's print all the command line arguments to the console:
+        Például írjuk ki az összes parancssori argumentumot a konzolra:
         ]]>
     </text>
     <code><![CDATA[
@@ -73,26 +73,27 @@
     ]]></code>
     <text>
         <![CDATA[
-        The <b>for-each</b> loop is used due to it's simple syntax.
+        A <b>for-each</b> ciklust használtam az egyszerű szintaxisa miatt.
         <br><br>
-        Finally, let's solve out initial example of adding numbers, using the command line arguments! The user will
-        enter 2 numbers as arguments, and the program will use these.
+        Végül oldjuk meg a számok összeadásának kezdeti példáját, a parancssori argumentumok felhasználásával! A felhasználó
+        2 számot ad meg argumentumként, és a program ezeket fogja használni.
         ]]>
     </text>
     <boxed title="parseInt">
         <![CDATA[
-        The arguments are given to us as <b>strings</b>, but to add them together they must be converted to
-        integers! A utility method, <b>Integer.parseInt</b> is provided for this:
+        TAz argumentumokat <b>String</b> formában kapjuk meg, de ahhoz, hogy összeadjuk őket, át kell alakítani őket egész számokká! 
+		Ehhez egy segédmetódus, az <b>Integer.parseInt</b> áll rendelkezésre:
         <br><br>
         <i>int one = Integer.parseInt("1");</i>
         <br><br>
-        Note that <i>parseInt</i> will throw a <b>NumberFormatException</b> if the given string is not actually an integer.
+        Vegyük észre, hogy a <i>parseInt</i> <b>NumberFormatException</b>-t dob, ha a megadott karakterlánc valójában nem egész szám. 
+		Mindig figyeljünk tehát, hogy a szöveg amit megadunk neki, az tényleg egész számmá alakítható.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        We haven't covered exception handling yet, so suppose that the user will only enter valid integers as
-        command line arguments. If this isn't the case, the program will crash.
+        Még nem foglalkoztunk a kivételek kezelésével, ezért tegyük fel, hogy a felhasználó csak érvényes egész számokat fog megadni, mint
+        parancssori argumentumokat. Ha ez nem így van, a program összeomlik.
         ]]>
     </text>
     <code><![CDATA[
@@ -113,7 +114,7 @@
 <br/>}
         
     ]]></code>
-    <interactive instruction="Complete the program so that it returns instantly when there ARE arguments!">
+    <interactive instruction="Egészítse ki a programot úgy, hogy azonnal visszatérjen, ha vannak parancssori argumentumok!">
         <data><![CDATA[
 
 <font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
@@ -125,27 +126,27 @@
         ]]></data>
         <answer place="0">args.length</answer>
     </interactive>
-    <title text="Using System.in and a Scanner"/>
+    <title text="System.in és Scanner használata"/>
     <text>
         <![CDATA[
-        <i>System.in</i> is an <b>input stream</b> provided by Java, which corresponds to the keyboard input (also knows as standard input).
-        To save the user's input from the console, we use this input stream in combination with a <b>java.util.Scanner</b>.
+        A <i>System.in</i> a Java által biztosított <b>bemeneti folyam</b> (input stream), amely a billentyűzet bemenetnek (más néven standard inputnak) felel meg.
+        A felhasználó konzolról történő bemenetének elmentéséhez ezt egy <b>java.util.Scanner</b>-el kombinálva használjuk.
         <p>
-        The scanner is used to create primitive types and strings (which we can use in our code) from the raw bytes of the input stream.
+        A szkenner arra szolgál, hogy a bemeneti adatfolyam nyers bájtjaiból primitív típusokat és karakterláncokat hozzon létre (amelyeket a kódunkban használhatunk).
         ]]>
     </text>
-    <boxed title="Command line interface in the IDE">
+    <boxed title="Parancssor az IDE-n belül">
         <![CDATA[
-        Our program gets what the user types through the command line interface (<i>CLI</i>). When necessary, the <i>IDE</i> will
-        "simulate" the <i>CLI</i>, so we can easily test the program while developing.
+        A programunk a parancssori felületen (<i>CLI</i> - Command Line Interface) keresztül kapja meg, amit a felhasználó beír. Szükség esetén az <i>IDE</i> 
+        "szimulálja" a <i>CLI</i>-t, így fejlesztés közben könnyen tesztelhetjük a programot.
         <p>
-        In Eclipse, the "console" will appear near the bottom of the screen, like this:
+        Az Eclipse-ben a "konzol" a képernyő alja közelében jelenik meg, így:
         ]]>
     </boxed>
     <image name="eclipse_console"/>
     <text>
         <![CDATA[
-        Let's create a program that asks for a line of text from the user, and then prints that out:
+        Hozzunk létre egy programot, amely egy sor szöveget kér a felhasználótól, majd azt kiírja:
         ]]>
     </text>
     <code><![CDATA[
@@ -174,22 +175,22 @@
     ]]></code>
     <text>
         <![CDATA[
-        Closing the scanner is not necessary, but recommended. Only close the scanner after you are sure that you
-        won't need it again, otherwise an exception will be thrown.
+        A szkenner lezárása nem szükséges, de ajánlott. Csak akkor zárd le, ha megbizonyosodtál arról, hogy
+        hogy nem lesz rá többé szükséged, mivel lezárt szkenner már többé nem használható, olyankor újat kell létrehozni.
         ]]>
     </text>
-    <boxed title="The nextLine method">
+    <boxed title="A nextLine metódus">
         <![CDATA[
-        The scanner's <b>nextLine</b> method <b>halts the program</b>, until a line of text arrives from the input stream! In
-        our case, this is until the user types a line to the console, and presses enter. After this, it returns the line as a string.
+        A beolvasó <b>nextLine</b> metódusa <b>megállítja a programot</b>, amíg nem érkezik egy sor szöveg a bemeneti adatfolyamból! A
+        esetünkben ez addig tart, amíg a felhasználó beír egy sort a konzolra, és megnyomja az enter billentyűt. Ezt követően a sort stringként adja vissza.
         <p>
-        The scanner has other similar methods (<i>nextX</i>), they behave the same: wait until an <i>enter key press</i> is detected,
-        then return an <i>X</i> (or throw an exception if the line can't be converted to an <i>X</i>).
+        A beolvasónak vannak más hasonló metódusai is (<i>nextX</i>), ezek ugyanúgy viselkednek: megvárják, amíg az <i>enter billentyű lenyomását</i> nem érzékelik,
+        majd visszaad egy <i>X</i>-et (vagy kivételt dob, ha a sort nem lehet <i>X</i>-vé alakítani). Például <i>nextInt, nextDouble</i>, stb.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        Now let's solve the number addition problem using <i>System.in and Scanner</i>:
+        Most a <i>System.in és a Scanner</i> segítségével oldjuk meg a számok összeadásának feladatát:
         ]]>
     </text>
     <code><![CDATA[
@@ -219,11 +220,11 @@
     ]]></code>
     <text>
         <![CDATA[
-        Note that the <b>nextInt</b> method expects an integer! If it receives a line that cannot be converted to
-        an integer it will throw an <b>InputMismatchException</b>. Since we didn't implement exception handling, this will crash our program.
+        Vegyük észre, hogy a <b>nextInt</b> metódus egész számot vár! Ha olyan sort kap, amely nem konvertálható át
+        egész számra, akkor <b>InputMismatchException</b>-t fog dobni. Mivel nem implementáltuk a kivételkezelést, ez összeomlasztja a programunkat.
         ]]>
     </text>
-    <interactive instruction="Complete the sample in a way that it keeps going until -1 was entered on the keyboard!">
+    <interactive instruction="Egészítsd ki a ciklust úgy, hogy addig megy, amíg a billentyűzeten -1-et nem írtál be!">
         <data><![CDATA[
 
 <font color="#999900">Scanner</font> scanner = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(___);
@@ -240,52 +241,53 @@
         <answer place="1">!=</answer>
         <answer place="2">nextInt</answer>
     </interactive>
-    <title text="Reading from files"/>
+    <title text="Fájlok olvasása"/>
     <text>
         <![CDATA[
-        The last type of input that we'll cover is reading from files. A program usually reads a text file line-by-line, and
-        will read all lines in the file. We will achieve this using the <b>Files</b> utility class.
+        Az utolsó bemeneti típus, amellyel foglalkozunk, a fájlokból való olvasás. Egy program általában soronként olvas be egy szöveges fájlt. 
+		Ezt a <b>Files</b> segédosztály segítségével fogjuk megtenni.
         ]]>
     </text>
-    <boxed title="Storing what we read">
+    <boxed title="A beolvasott szöveg tárolása">
         <![CDATA[
-        The first idea that comes to mind is using an array to store the lines. There is, however, a problem with this approach.
-        An array has fixed length, but we want our program to work, no matter the number of lines in the file!
+        Az első ötlet, ami eszünkbe jut, hogy egy tömböt használjunk a sorok tárolására. Ezzel a megközelítéssel azonban van egy probléma.
+        Egy tömbnek fix hosszúsága van, de mi azt szeretnénk, hogy a programunk működjön, függetlenül attól, hogy hány sor van a fájlban!
         <p>
-        To counter this, we can use a <b>List</b>. This is a class (an interface, actually, but more on that later) that provides
-         methods to add and remove elements, and it will "resize" itself when necessary.
+        Ennek kiküszöbölésére használhatunk egy <b>List</b>-t (listát). Ez egy olyan osztály (valójában egy interfész, de erről majd később), 
+		amely biztosítja a metódusokat az elemek hozzáadásához és eltávolításához, és szükség esetén "átméretezi" magát.
         ]]>
     </boxed>
-    <advanced title="Data structures">
+    <advanced title="Adatstruktúra">
         <![CDATA[
-        A list is a type of <b>data structure</b> (they are called <b>collections</b> in Java). These store data in a way that
-        certain operations (getting the largest elements for example) are guaranteed to be efficient.
+        A lista egyfajta <b>adatstruktúra</b> (Javában <b>gyűjteményeknek</b> vagy <b>kollekcióknak</b> nevezik őket). Ezek úgy tárolják az adatokat, hogy
+        bizonyos műveletek (például a legnagyobb elemek kinyerése) garantáltan hatékonyak legyenek.
         <p>
-        The JDK contains many data structure implementations, which will be covered in a later course, but feel free to browse the
-        <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Collection.html">collection subclasses</a> for other examples!
+        A JDK számos adatszerkezeti implementációt tartalmaz, amelyekről egy későbbi kurzusban lesz szó, de bátran böngészhetsz a
+        <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Collection.html">kollekciók</a> között további példákért!
         ]]>
     </advanced>
     <text>
         <![CDATA[
-        Before we can read text files, let's look at how we can create, and where should we place them. The simplest way is
-        to put them into the folder of our project (this folder is the one containing <b>src and bin</b>).
+        Mielőtt szöveges fájlokat olvashatnánk, nézzük meg, hogyan tudunk létrehozni, és hova kell helyeznünk őket. A legegyszerűbb módja
+        ha a projektünk mappájába tesszük őket (ez a mappa az, amelyikben a <b>src és bin</b> mappák találhatóak).
         <p>
-        The IDE can assist in this, for example in Eclipse you place a file in the project directory by right clicking the project,
-        then following these instructions:
+        Ebben az IDE is tud segíteni, például az Eclipse-ben a projekt könyvtárába helyezhetünk el egy fájlt, ha jobb egérgombbal kattintunk a projektre,
+        majd a következő utasításokat követjük:
         ]]>
     </text>
     <image name="eclipse_file_create_1"/>
     <text>
         <![CDATA[
-        The name can be anything but we'll have to use it in the source code.
-        Be sure to also enter the <b>file extension (.txt)</b> as well, as seen in the picture below!
+        A név bármi lehet, de a forráskódban ezt kell használnunk.
+        Ne felejtsük el megadni a <b>fájl kiterjesztést (.txt)</b> is, ahogy az alábbi képen látható!
         ]]>
     </text>
     <image name="eclipse_file_create_2"/>
    <text>
        <![CDATA[
-       Here is a simple example program, that reads all lines from the file we just created, and prints them
-       to the console. Don't forget to <b>type some lines to the file</b> and save it before running this!
+       Íme egy egyszerű példaprogram, amely beolvassa és kiírja az összes sort az imént létrehozott fájlból.
+       a konzolra. Ne felejtsd el <b>beírni néhány sort a fájlba és elmenteni</b>, mielőtt futtatod! Enélkül a program 
+	   nem lesz túl látványos, mivel a fájl alapból üres.
        ]]>
    </text>
     <code><![CDATA[
@@ -315,45 +317,45 @@
 <br/>}
         
     ]]></code>
-    <advanced title="throws Exception">
+    <advanced title="'throws Exception' rész">
         <![CDATA[
-        You might be wondering what the <b>throws Exception</b> means at the end of the main method declaration. In
-        some cases, Java forces us to do exception handling. Reading files is one of these cases. However, we don't know
-        how to do that yet, so this "hacky" solution can be used instead.
+        Talán kíváncsi vagy, hogy mit jelent a <b>throws Exception</b> a main metódus deklarációjának végén. 
+        Bizonyos esetekben a Java rákényszerít minket a kivételek kezelésére. A fájlok olvasása az egyik ilyen eset. Azonban még nem volt szó arról, hogy
+        hogyan kell ezt csinálni, ezért helyette ezt a "haknizós" megoldást használhatjuk.
         <p>
-        After you've learned about exception handling, <b>DON't</b> use such a solution. Exceptions should be handled.
+        Miután megismertük a kivételkezelést, <b>NE</b> használjunk ilyen megoldást. A kivételeket kezelni kell, főleg 
+		az ilyen esetekben.
         ]]>
     </advanced>
-    <advanced title="The first touch of generics">
+    <advanced title="Első pillantás generikus kódra">
         <![CDATA[
-        At the declaration of the list the <b>&lt;String></b> syntax can be seen. List is a <b>generic</b> interface, which means it can
-        contain <b>any type of elements</b>, but we must write the type of the future elements at declaration. This is what that piece of
-        code does.
+        A lista deklarációjánál az <b>&lt;String></b> szintaxis látható. A List egy <b>generikus</b> objektum, ami azt jelenti, hogy 
+        tartalmazhat <b>mindenféle típusú elemet</b>, de a deklarációnál meg kell írnunk a leendő elemek típusát. Ez az, amit ez a darab
+        kódrészlet csinál. Megmondja, hogy ez a lista <i>String</i>-eket tartalmaz majd.
         <p>
-        Generics will be covered more in-depth in a later course.
+        A generikus kódról egy későbbi kurzuson részletesebben is szó lesz.
         ]]>
     </advanced>
     <text>
         <![CDATA[
-        If you get a <b>NoSuchFileException</b> when running your program, make sure that you have the file in the specified directory,
-        and that the name of the file matches with what you written in the code.
+        Ha a program futtatásakor <b>NoSouchFileException</b> hibaüzenetet kapsz, győződj meg róla, hogy a fájl a megadott könyvtárban van,
+        és hogy a fájl neve megegyezik azzal, amit a kódba írtál.
         ]]>
     </text>
-    <boxed title="The old ways">
+    <boxed title="Régi módszerek">
         <![CDATA[
-        The classes we used to read the file were introduced in <b>Java 7</b> with the <b>java.nio</b> package. Before this, a
-        <a href="https://docs.oracle.com/javase/7/docs/api/java/io/BufferedReader.html">BufferedReader</a> was used.
+        A fájl beolvasásához itt használt használt osztályok a <b>Java 7</b>-ben kerültek bevezetésre a <b>java.nio</b> csomaggal. Ezt megelőzően egy
+        <a href="https://docs.oracle.com/javase/7/docs/api/java/io/BufferedReader.html">BufferedReader</a> osztályt használtuk.
         <p>
-        This method of reading a file is a bit longer, but still widely used, so if you want to familiarize yourself with
-        it, follow the answers of <a href="https://stackoverflow.com/questions/16104616/using-bufferedreader-to-read-text-file">this</a>
-        StackOverflow question.
+        Ez a fájlolvasási módszer egy kicsit hosszabb, de még mindig széles körben használt, ezért ha meg akarsz ismerkedni vele, 
+		kövesd <a href="https://stackoverflow.com/questions/16104616/using-bufferedreader-to-read-text-file">ezt</a> a linket.
         ]]>
     </boxed>
-    <title text="The ultimate solution"/>
+    <title text="A legmenőbb megoldás"/>
     <text>
         <![CDATA[
-        Here is a solution for the number addition problem. This program can <b>read and sum any amount of numbers</b> from <i>data.txt</b>.
-        Before running, fill the file with integers, only place one number in one line!
+        Íme a számok összeadásának egy újabb változata. Ez a program képes <b>bármennyi számot</b> beolvasni és összeadni <i>data.txt</b>-ből.
+        Futtatás előtt töltsük fel a fájlt egész számokkal, egy sorba csak egy számot tegyünk!
         ]]>
     </text>
     <code><![CDATA[

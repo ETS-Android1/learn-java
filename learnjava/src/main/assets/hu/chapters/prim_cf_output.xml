@@ -1,52 +1,53 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<!--Belongs to course 'Primitives, control flow and I/O' --><resources>
+<!--Belongs to course 'Primitives, control flow and I/O' -->
+<resources>
     <chapterdata>
         <id>106</id>
-        <name>Providing output</name>
+        <name>Output</name>
     </chapterdata>
     <text>
         <![CDATA[
-        In the previous chapter we learned about receiving input from the user. It's equally important
-        to display the results of our program.
+        Az előző fejezetben megtanultuk, hogyan fogadjuk a felhasználótól a bemenetet. Ugyanilyen fontos
+        hogy megjelenítsük a programunk eredményeit, kimenetként (output).
         ]]>
     </text>
-    <title text="Using System.out"/>
+    <title text="A System.out használata"/>
     <text>
         <![CDATA[
-        This is the standard way of printing the the console. We've already used it many times.
+        Ez a konzolra történő kiírás szabványos módja. Már sokszor használtuk.
         ]]>
     </text>
     <boxed title="PrintStream">
         <![CDATA[
-        Just like <i>System.in</i>, <i>System.out</i> is also a kind of stream. It is however not an InputSteam,
-        but an OutputStream, more specifically a <b>PrintStream</b>. This class turns primitive types and strings into
-        bytes, before sending them to its output (in case of <i>System.out</i>, this is the console).
+        A <i>System.in</i>-hez hasonlóan a <i>System.out</i> is egyfajta adatfolyam. Ez azonban nem egy <i>InputSteam</i>,
+        hanem egy egy <b>PrintStream</b>. Ez az osztály a primitív típusokat és a karakterláncokat alakítja át
+        bájtokká, mielőtt elküldi őket a kimenetére (a <i>System.out</i> esetében ez a konzol).
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        The <i>PrintStream</i> has <b>print methods</b> for each primitive type, and more. It also has a
-        corresponding <b>println method</b> for each print method. These do almost the same, but they also
-        insert a <b>line break</b> after printing their parameter (println is short for print line).
+        A <i>PrintStream</i> minden primitív típushoz rendelkezik <b>kiíró metódusokkal</b>, és még sok mással is. Továbbá van egy
+        megfelelő <b>println metódus</b> minden egyes kiíró metódushoz. Ezek majdnem ugyanazt csinálják, de
+        <b>sortörést</b> illesztenek be a paraméterük kinyomtatása után (a println a print line rövidítése).
         ]]>
     </text>
-    <boxed title="Escape characters">
+    <boxed title="Védő karakterek">
         <![CDATA[
-        We can use some special characters to manipulate strings. One is the <b>new line character</b>, which is
-        <b>"\n"</b>. It inserts a line break where it's used.
+        Néhány speciális karaktert használhatunk a karakterláncok manipulálásához. Ezeket védő karaktereknek, vagy escape karaktereknek 
+		nevezzük. Az egyik az <b>új sor karakter</b>, amely a következő: <b>\n</b>. Ez egy sortörést illeszt be ott, ahol használjuk.
         <p>
-        Another one is the tabulator character, <b>"\t"</b>, which creates a tabulator space in the string.
+        Egy másik a tabulátor karakter, <b>\t</b>, amely egy tabulálást hoz létre a karakterláncban.
         <p>
-        For a full list, check the 'escape sequences' part of <a href="https://docs.oracle.com/javase/tutorial/java/data/characters.html">
-        character documentation</a>.
+        A teljes listát a <a href="https://docs.oracle.com/javase/tutorial/java/data/characters.html">karakterdokumentáció</a> 
+		"escape sequences" részében találod.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        So all the <i>println</i> methods do is calling the corresponding print method, but they add the <b>"\n"</b> character
-        to the end of their parameter!
+        Így már érthető, hogy a <i>println</i> metódusok csak a megfelelő <i>print</i> metódust hívják meg, de hozzáadják 
+		a <b>\n</b> karaktert a szöveg végére, ami sortörést fog okozni.
         <br><br>
-        See this code sample and image for some examples:
+        Lásd ezt a kódmintát és képet néhány példáért:
         ]]>
     </text>
     <code><![CDATA[
@@ -68,21 +69,21 @@
     ]]></code>
     <text>
         <![CDATA[
-        When running this code, the text will indeed appear formatted in the console:
+        A kód futtatásakor a szöveg valóban formázva jelenik meg a konzolon:
         ]]>
     </text>
     <image name="formatted_text"/>
     <advanced title="System.err">
         <![CDATA[
-        <i>System.err</i> is another <i>PrintStream</i>, tuned to the standard error output. By default this also
-        appears on the console, but with a red text color. You can test this yourself.
+        A <i>System.err</i> egy másik <i>PrintStream</i>, amely a standard hibakimenetre van hangolva. Alapértelmezés szerint ez is
+        megjelenik a konzolon, de piros szövegszínnel. Ezt te magad is kipróbálhatod.
         ]]>
     </advanced>
-    <title text="Writing to files"/>
+    <title text="Fájlok írása"/>
     <text>
         <![CDATA[
-        Another way of providing output is to write to files. The <b>PrintWriter</b> class is very useful, as we
-        can use it not only to print to the console, but also to a file!
+        A kimenet biztosításának másik módja a fájlokba való írás. A <b>PrintWriter</b> osztály nagyon hasznos, mivel mi
+        nem csak a konzolra, hanem egy fájlba is nyomtathatunk vele!
         ]]>
     </text>
     <code><![CDATA[
@@ -103,28 +104,28 @@
     ]]></code>
     <text>
         <![CDATA[
-        Just as with reading from files, Java requires us to implement some exception handling, but we don't
-        know how to do that yet, so the same hacky solution is used (<i>throws Exception</i>).
+        Ahogy a fájlokból való olvasásnál, a Java megköveteli, hogy implementáljunk némi kivételkezelést, de 
+        még nem tudjuk, hogyan kell ezt megtenni, ezért ugyanazt a "hacker" megoldást használjuk (<i>throws Exception</i>), amit az 
+		előző fejezetben.
         <p>
-        The second parameter of the PrintWriter specifies the <a href="https://en.wikipedia.org/wiki/Character_encoding">
-        character encoding</a>. A solid choice is <b>UTF-8</b>.
+        A <i>PrintWriter</i> második paramétere megadja a <a href="https://en.wikipedia.org/wiki/Character_encoding">
+        karakterkódolást</a>. Egy megbízható választás az <b>UTF-8</b>.
         ]]>
     </text>
-    <boxed title="Existing file">
+    <boxed title="Létező és nem létező fájl">
         <![CDATA[
-        If we give the name of a file that <b>doesn't exist</b> in the file system, the file will be created, and then
-        our program will print to it.
+        Ha megadjuk egy olyan fájl nevét, amely <b>nem létezik</b> az fájlrendszerben, akkor a fájl létrejön, majd
+        programunk bele fogja írni a megadott szöveget.
         <p>
-        If the file we gave to the PrintWriter <b>already exists</b>, then all its content will be erased, and only then will
-        our program print to it.
+        Ha a <i>PrintWriter</i>-nek megadott <b>fájl már létezik</b>, akkor annak minden tartalma törlődik, és csak ezután lesz
+        beleírva a megadott szöveg.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        In many cases, we don't want to erase the content of the file we are writing to, instead, we want to <b>append</b>
-        lines to the end of it.
+        Sok esetben nem akarjuk törölni a fájl tartalmát, amibe írunk, hanem inkább <b>új sorokat akarunk hozzáírni</b> (append).
         <p>
-        We must construct our <i>PrintWriter</i> a bit differently to achieve this behaviour:
+        A <i>PrintWriter</i>-t egy kicsit másképp kell létehoznunk ahhoz, hogy ezt a viselkedést elérjük:
         ]]>
     </text>
     <code><![CDATA[
@@ -147,13 +148,13 @@
     ]]></code>
     <text>
         <![CDATA[
-        The key is the second parameter of the <b>FileOutputSteam</b>. By setting it to true we enable the append mode.
+        A kulcs a <b>FileOutputSteam</b> második paramétere. Ha true-ra állítjuk, akkor engedélyezzük a hozzáírás módot.
         <p>
-        Run the code multiple times, and note that the contents of <i>output.txt</i> will increase by one line
-        after every run!
+        Futtasd a kódot többször, és figyeld meg, hogy a <i>output.txt</i> tartalma egy sorral növekszik.
+        minden futtatás után!
         ]]>
     </text>
-    <interactive instruction="Complete the program so that it writes the array to a file called 'results.txt'">
+    <interactive instruction="Egészítsük ki a programot úgy, hogy az 'results.txt' nevű fájlba írja a tömb értékeit!">
         <data><![CDATA[
             
 <font color="#999900">String</font>[] lines = <font color="#ADD8E6">calculate</font>(); <font color="gray">//suppose this works
@@ -173,11 +174,11 @@
         <answer place="2">PrintWriter</answer>
         <answer place="3">for</answer>
     </interactive>
-    <title text="Another way to write to file"/>
+    <title text="A Files osztály használata"/>
     <text>
         <![CDATA[
-        Similarly to how we read files, we can also use the <b>Files</b> utility class as well. This is useful when
-        we already have out lines placed in a list or an array:
+        Hasonlóan ahhoz, ahogyan a fájlokat olvasásánál is, használhatjuk a modern <b>Files</b> segédosztályt is. Ez akkor hasznos, ha
+        már eleve egy listába vagy tömbbe akarjuk rakni a sorokat:
         ]]>
     </text>
     <code><![CDATA[
@@ -216,8 +217,8 @@
     ]]></code>
     <text>
         <![CDATA[
-        Note that this method does not append by default! To make is append lines to existing files we
-        must add an additional parameter to the write method, like so:
+        Ez a módszer alapértelmezés szerint nem hozzáír, hanem törli a fájl tartalmát! Ahhoz, hogy a meglévő fájlokhoz hozzáírja 
+		a sorokat, hozzá kell adnunk egy további paramétert a write metódushoz, például így:
         ]]>
     </text>
     <code><![CDATA[

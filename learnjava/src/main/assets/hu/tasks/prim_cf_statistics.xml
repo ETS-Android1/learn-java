@@ -1,57 +1,58 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<!-- Task of course 'Primitives, control flow and I/O' --><resources>
+<!-- Task of course 'Primitives, control flow and I/O' -->
+<resources>
     <taskdata>
         <id>102</id>
-        <name>Simple statistics</name>
+        <name>Statisztikák</name>
     </taskdata>
     <text>
         <![CDATA[
-        In this task your job is to create program that reads some numbers from a file,
-        and performs some basic statistics on them (according to command line arguments)!
+        Ebben a feladatban egy olyan programot készíts, amely beolvas néhány számot egy fájlból,
+        és elvégez rajtuk néhány alapvető statisztikát (a parancssori argumentumoknak megfelelően)!
         ]]>
     </text>
-    <boxed title="Create the input file">
+    <boxed title="Az input fájl létrehozása">
         <![CDATA[
-        This program will read integers from a file called '<b>numbers.txt</b>', so you'll have to
-        create this file and fill it with numbers first.
+        Ez a program egész számokat fog beolvasni a '<b>numbers.txt</b>' nevű fájlból, amit neked kell létrehozni és feltölteni számokkal.
         <p>
-        Make it so that every number has its own line, like this:
+        Töltsd fel úgy, hogy minden számnak saját sora legyen, valahogy így:
         <br><br>
         11<br>
         -223<br>
         43<br>
         ...
         <br><br>
-        Your program can assume that the file contains only valid integers.
+        A programod feltételezheti, hogy a fájl csak érvényes egész számokat tartalmaz, de egy elegánsabb megoldás az, ha le van 
+		kezelve, hogy mi történik hibás sor esetén.
         ]]>
     </boxed>
-    <title text="The command line arguments"/>
+    <title text="Parancssori argumentumok"/>
     <text>
         <![CDATA[
-        The user can tell the program which operations to perform using command line arguments. The following
-        arguments should be supported:
+        A felhasználó a parancssori argumentumok segítségével mondhatja meg a programnak, hogy milyen műveleteket hajtson végre. A következő
+        argumentumokat kell támogatni:
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li><b>AVG</b>: passing this argument must make the program calculate the average of the numbers.</li>
-        <li><b>MAX</b>: passing this argument must make the program calculate the maximum of the numbers.</li>
-        <li><b>MIN</b>: passing this argument must make the program calculate the minimum of the numbers.</li>
-        <li><b>RANGE</b>: passing this argument must make the program calculate the range of the numbers.</li>
+        <li><b>AVG</b>: ennek az argumentumnak az átadása azt eredményezi, hogy a program a számok átlagát számolja ki.</li>
+        <li><b>MAX</b>: ennek az argumentumnak a megadásával a program a számok maximumát számolja ki.</li>
+        <li><b>MIN</b>: ennek az argumentumnak a megadásával a programnak a számok minimumát kell kiszámítania.</li>
+        <li><b>RANGE</b>: ennek az argumentumnak a megadásával a program a számok tartományát számolja ki.</li>
         </ul>
         ]]>
     </list>
-    <boxed title="Definitions">
+    <boxed title="Definíciók">
         <![CDATA[
-        If you don't know the meaning of some of these statistical terms, consult online guides! Finding
-        formulas is especially useful, as you can implement these in your program.
+        Ha nem tudod, mit jelentenek ezek a statisztikai kifejezések, nézz utána online útmutatókban! A képletek különösen hasznosak, 
+		mivel ezeket a programodban is alkalmazhatod.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        Allow the user to pass these arguments in any combination. If no argument is given, print an error message
-        and terminate the program. See the code example below to learn how to do so.
+        Engedje meg a felhasználónak, hogy ezeket az argumentumokat tetszőleges kombinációban adja át. Ha nem adunk meg argumentumot, 
+		hibaüzenetet írj ki, és állítsd le a programot. Az alábbi kódmintából megtudhatod, hogyan kell ezt megtenni.
         ]]>
     </text>
     <code><![CDATA[
@@ -59,59 +60,58 @@
         <font color="#999900">System</font>.<font color="#ADD8E6">exit</font>();
         
     ]]></code>
-    <boxed title="Wrong argument">
+    <boxed title="Hibás argumentum">
         <![CDATA[
-        If an invalid argument is given use <b>System.err</b> to notify the user, then stop the program.
-        You can also ignore the invalid argument if you prefer that.
+        Érvénytelen argumentum megadása esetén a <b>System.err</b> használatával értesítsd a felhasználót, majd állítsd le a programot.
         ]]>
     </boxed>
-    <title text="Read the numbers"/>
+    <title text="A számok beolvasása"/>
     <text>
         <![CDATA[
-        Read the numbers from '<b>numbers.txt</b>'. Using a list is recommended, as the program can't know the amount of
-        numbers in the file!
+        Olvassa be a számokat a '<b>numbers.txt</b>' fájlból. A lista használata ajánlott, mivel a program nem tudhatja, hogy mennyi
+        szám lesz a fájlban!
         ]]>
     </text>
-    <advanced title="Handle invalid file data">
+    <advanced title="Hibás sorok kezelése">
         <![CDATA[
-        You can use exception handling to handle if the file contains some invalid line that can't be parsed
-        into an integer.
+        Kivételkezeléssel lehet felkészülni arra, ha a fájl tartalmaz valamilyen érvénytelen sort, amelyet nem lehet konverálni
+        egész számmá.
         <p>
-        One possible course of action is to skip (ignore) such a line, another is to terminate the program.
+        Az egyik lehetséges megoldás az ilyen sor kihagyása (figyelmen kívül hagyása), a másik a program megszakítása.
         ]]>
     </advanced>
     <text>
         <![CDATA[
-        After reading the numbers, validate if the list is not actually empty!
+        A számok beolvasása után ellenőrizd, hogy a lista nem üres-e. Az üres lista azt jelenti, hogy a fájl is üres volt, 
+		így pedig nem lehet műveleteket végezni.
         ]]>
     </text>
-    <title text="Perform the operations"/>
+    <title text="A műveletek elvégzése"/>
     <text>
         <![CDATA[
-        Print all the numbers to the console. Then, go through the given command line arguments and perform
-        the operations that user requested.
+        Az összes számot írd ki a konzolra. Ezután menj végig a megadott parancssori argumentumokon, és hajtsd végre 
+		a felhasználó által kért műveleteket.
         <p>
-        The program must always print which operations it is performing, and the result of this operation.
+        A programnak mindig ki kell írnia, hogy milyen műveleteket hajt végre, és az adott művelet eredményét.
         ]]>
     </text>
-    <boxed title="Structure recommendation">
+    <boxed title="Metódus ajánlás">
         <![CDATA[
-        It's recommended that you create a method for each statistical operation. They can, for example take
-        the list of numbers as parameters, and return the result!
+        Javaslom, hogy minden statisztikai művelethez hozz létre egy metódust. Ezek például megkaphatják a számok listáját paraméterként, 
+		és visszaadhatják az eredményt.
         ]]>
     </boxed>
-    <boxed title="Compare strings">
+    <boxed title="String-ek összehasonlítása">
         <![CDATA[
-        To compare strings, use the <a href="https://www.tutorialspoint.com/java/java_string_equals.htm">equals method</a>
-        instead of the <b>==</b> operator! The reasons behind this are explained in a later course.
+        A <i>String</i>-ek összehasonlításához használd az <a href="https://www.tutorialspoint.com/java/java_string_equals.htm">equals</a> 
+		metódust a <b>==</b> operátor helyett! Ennek okait egy későbbi kurzusban ismertetjük.
         ]]>
     </boxed>
     <solution>
         <text>
             <![CDATA[
-            One class and a few methods are enough to solve this task. Although the description said that
-            the program can assume that the lines in the file are valid, this solution does not do so. Instead,
-            it removes invalid lines.
+            Egy osztály és néhány metódus elegendő a feladat megoldásához. Bár a leírás szerint
+            a program feltételezheti, hogy a fájlban lévő sorok érvényesek, ez a megoldás a hibás sorokat is lekezeli, méghozzá azok kihagyásával. 
             ]]>
         </text>
         <code><![CDATA[
@@ -280,8 +280,8 @@
         ]]></code>
         <text>
             <![CDATA[
-            It's worth noting that the <b>Collections</b> utility class has methods for finding maximum
-            and minimum, so the methods can be simplified to this (or they can be replaced by the utility methods):
+            Érdemes megjegyezni, hogy a <b>Collections</b> segédosztály rendelkezik olyan metódusokkal, amelyekkel megtalálhatjuk a maximumot
+            és a minimumot, így a metódusok leegyszerűsíthetők erre (vagy helyettesíthetők a segédprogram metódusaival):
             ]]>
         </text>
         <code><![CDATA[

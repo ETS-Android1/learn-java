@@ -84,7 +84,7 @@
         It is not required to write the curly braces of the <i>if</i> block. In this case, <b>only one
         statement</b> (the next one) will belong to the "block". For example, something like this is allowed:
         <br><br>
-        if(condition) statement;
+        <i>if(condition) statement</i>;
         <br><br>
         While not always necessary, it's never a bad practice to write the curly braces.
         ]]>
@@ -207,11 +207,11 @@
     ]]></code>
     <text>
         <![CDATA[
-        <p>
         As you can see, we can give a variable to the switch statement, and list it's states we are interested in
         using <b>case</b> labels. A <b>default</b> label can be used, this will be reached when no other state was equal
-        to our variables value.
-        </p><p>The <b>break</b> statements are necessary, they tell the switch statement that we would like to "jump out"
+        to our variables value (similar to the <i>else</i> branch).
+         <br><br>
+         The <b>break</b> statements are necessary, they tell the switch statement that we would like to "jump out"
         out the switch statement when we found out variables value.
         ]]>
     </text>

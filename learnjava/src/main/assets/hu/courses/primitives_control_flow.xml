@@ -2,7 +2,7 @@
 <!-- Course: 'Primitives, control flow and I/O' --><resources>
     <coursedata>
         <id>10</id>
-        <name>Primitives, control flow and I/O</name>
+        <name>Primitívek, vezérlés, I/O</name>
         <finished>true</finished>
     </coursedata>
     <chapter>101</chapter>

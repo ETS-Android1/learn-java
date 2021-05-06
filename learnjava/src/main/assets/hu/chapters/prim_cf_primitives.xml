@@ -9,30 +9,31 @@
 --><resources>
     <chapterdata>
         <id>101</id>
-        <name>Primitives types</name>
+        <name>Primitív típusok</name>
     </chapterdata>
     <text>
         <![CDATA[
-        Primitives are the most basic types of variables that we can use. In this chapter we will
-        go through all of them to see how they work and what they can be used for.
+        A primitívek azok az alap típusok, amiket használhatunk. Lehetnek például változók típusai,
+        vagy metódusok visszatérési értékei.
         ]]>
     </text>
-    <boxed title="Wrappers">
+    <boxed title="Wrapperek">
         <![CDATA[
-        In a later course we will see how creating classes allows us to write useful methods for out data types. Primitives
-        are not classes however, they can't have methods! To counter this, <b>wrapper classes</b> are provided. They "wrap"
-        a primitive type into a class, and give us access to utility methods.
+        Egy későbbi kurzusban szó lesz az osztályokról. Fontos megjegyezni, hogy a primitívek
+        nem osztályok. Vannak azonban az osztályoknak nagyon hasznos tulajdonságai, amiket a
+        primitívek esetén is szeretnénk kihasználni. Ezért jöttek létre a <b>wrapper</b> osztályok.
+        Itt most csak megemlítem, hogy mely wrapper osztályok tartoznak a primitívekhez.
         ]]>
     </boxed>
     <title text="int"/>
     <text>
         <![CDATA[
-        We already know the <b>int</b> primitive. It's a numeric type to store signed integers.
+        Az <i>int</i> primitívet már ismerjük a korábbi fejezetekből. Egész számok tárolására alkalmas.
         <br><br>
-        <u>Wrapper:</u> The wrapper class of the <i>int</i> primitive is <b>Integer</b>.
+        <u>Wrapper:</u> az <b>Integer</b> nevű osztály.
         <br><br>
-        <u>Range:</u> 32 bits are used to store an <i>int</i>, and so they can have a minimum value of -2^31 and a maximum value of 2^31-1.
-        These values are stored as constants of the wrapper class:
+        <u>Tartomány:</u> 32 bitet tárol, ezért az értéke -2^31 és 2^31-1 között mozoghat. Ezeket nem kell
+        megjegyezni, mert a programunkban mindig elérhetjük őket, méghozzá a wrapper osztály segítségével:
         ]]>
     </text>
     <code><![CDATA[
@@ -43,31 +44,33 @@
     ]]></code>
     <text>
         <![CDATA[
-        <u>Default value:</u> The default value of an <i>int</i> is 0.
+        <u>Alap érték:</u> 0.
         ]]>
     </text>
-    <advanced title="Under-, and overflow">
+    <advanced title="Túl-, és alulcsordulás">
         <![CDATA[
-        You may wonder what happens when we add 1 to an <i>int</i> which has maximum value. An intuitive answer is that
-        it won't grow any more, but this isn't the case. Instead, it <b>overflows</b>, and becomes the smallest possible value.
+        Tudjuk, hogy az <i>int</i>-nek van maximum és minimum értéke. Érdekes kérdés, hogy mi történik, ha a
+        maximum értéken túlnövünk (vagy a minimum alá megyünk). Intuitív lenne, hogy az érték nem lépi túl a
+        szélsőértéket, de nem ez fog történni, hanem úgynevezett <b>túlcsordulás és alulcsordulás</b>.
         <br><br>
-        You can read more about this on it's <a href="https://en.wikipedia.org/wiki/Integer_overflow">Wikipedia article</a>
+        Ezekről részletesebben olvashatsz a <a href="https://en.wikipedia.org/wiki/Integer_overflow">túlcsordulás wikipédia oldalán</a>
         <br><br>
-        The following numeric types also exhibit this behaviour, with their respective minimum and maximum values.
+        A most következő szám típusoknál ez szintén igaz lesz, a saját szélsőértékeikkel.
         ]]>
     </advanced>
     <title text="long"/>
     <text>
         <![CDATA[
-        Long is another numeric type. It can be used when we wish to work with values so big, that they are outside the
-        range of <i>int</i>.
+        A <i>long</i> egy újabb szám típus, egész számokhoz. Azokra az esetekre hozták létre,
+        amikor az <i>int</i> érték tartománya nem elég.
         <br><br>
-        <u>Wrapper:</u> The wrapper class of the <i>long</i> primitive is <b>Long</b>.
+        <u>Wrapper:</u> a <i>Long</i> nevű osztály.
         <br><br>
-        <u>Range:</u> 64 bits are used to store a <i>long</i>. It can have a minimum value of -2^63 and a maximum value of 2^63-1.
-        Just like with <i>int</i>, you can get the these bounds as wrapper class constants.
+        <u>Tartomány:</u> 64 biten van tárolva, ezért az értékek -2^63 és 2^63-1 közé eshetnek. Látható,
+        hogy ez sokkal nagyobb, mint az <i>int</i> esetén. A szélső értékeket itt is megkaphatjuk a
+        wrapper osztálytól.
         <br><br>
-        <u>Default value:</u> The default value of a <i>long</i> is 0.
+        <u>Alap érték:</u> 0.
         ]]>
     </text>
     <code><![CDATA[
@@ -78,46 +81,48 @@
     ]]></code>
     <text>
         <![CDATA[
-        As an example, and a demonstration that the <i>long</i> type has a wider range, we can see that this variable has the
-        value of twice the upper bound of an <i>int</i>, and still, it <b>won't overflow</b>.
+        Ebben a példában látható egy művelet, ahol egy <i>long</i> típusú változónak értékül adjuk a
+        maximális <i>int</i> érték kétszeresét. Egy <i>int</i> típusú változónál ez túlcsordulást okozna,
+        de a <i>long</i> gond nélkül tárol egy ekkora értéket is.
         <br><br>
-        The second example shows that the <b>l or L</b> characters can be used at the end of declaration
-        to emphasise that we declared a <i>long</i>. Note that this is optional.
+        A második utasításban látható <i>L</i> betű azt jelzi, hogy a megadott érték <i>long</i> típusú.
+        Ezt nem kell kiírni, csak a programozónak segíthet a kód megértésében.
         ]]>
     </text>
-    <title text="byte and short"/>
+    <title text="byte és short"/>
     <text>
         <![CDATA[
-        More numeric types. Their range is smaller then <i>int</i>, so they use less memory. They are rarely used, since
-        nowadays our computers have access to an excess amount of memory.
+        Újabb egész szám típusok, amik az <i>int</i>-nél kevesebb helyet foglalnak, ezért az érték tartományuk is
+        szűkebb. Manapság ezeket nagyon ritkán használják, mivel a számítógépek rengeteg memóriával
+        rendelkeznek és néhány bit nem számít.
         <br><br>
-        <u>Wrapper:</u> The wrapper classes are <b>Byte and Short</b>.
+        <u>Wrapperek:</u> A <b>Byte and Short</b> nevű osztályok.
         <br><br>
-        <u>Range:</u> 8 bits for <i>byte</i> and 16 bits for <i>short</i>. This leaves the bounds at [-128,127] for <i>byte</i>
-        and [-32768,32767] for <i>short</i>.
+        <u>Tartomány:</u> 8 bit a <i>byte</i> számára és 16 bit a <i>short</i>-nak. Emiatt a <i>byte</i> érték tartománya
+        [-128,127], a <i>short</i>é pedig [-32768,32767].
         <br><br>
-        <u>Default value:</u> 0 for both types.
+        <u>Alap értékek:</u> 0 mindkét típusnak.
         ]]>
     </text>
     <title text="double"/>
     <text>
         <![CDATA[
-        Yet another numeric type, but unlike the previous ones, this can store real numbers, not just integers.
+        Szám típus, ami <b>nem csak egészet</b> tárol, hanem tört számokat is.
         <br><br>
-        <u>Wrapper:</u> The wrapper class is <b>Double</b>.
+        <u>Wrapper:</u> <b>Double</b>.
         <br><br>
-        <u>Range:</u> Their range is far greater then any previous types, and for almost all applications, you
-        can assume it's boundless.
+        <u>Tartomány:</u> Nagyobb, mint eddigi primitívek bármelyikének. Majdnem minden esetben lehet úgy
+        tekinteni, mintha nem lenne felső és alsó korlát.
         <br><br>
-        <u>Default value:</u> 0.0
+        <u>Alap érték:</u> 0.0, vagy csak simán 0.
         ]]>
     </text>
     <code><![CDATA[
         
         <font color="#DF7401">double </font>d1 = <font color="#F0E130">3.65</font>;
 <font color="#DF7401">
-<br/>double </font>d2 = <font color="#F0E130">-21.941743242</font>;
-<br/><font color="gray<font color="#2E8B57">">//Don'</font>t need to write 423.0, but we can</font>
+<br/><font color="#2E8B57">double</font> d2 = <font color="#F0E130">-21.941743242</font>;
+<br/><font color="gray>//Don't need to write 423.0, but we can</font>
 <br/><font color="#DF7401">double</font> d3 = <font color="#F0E130">423</font>;
 <br/>
 <br/><font color="#DF7401">double</font> res = d1 + d2;
@@ -125,19 +130,20 @@
     ]]></code>
     <text>
         <![CDATA[
-        Observe the above examples to see that a <b>dot</b> is used to declare <i>double</i>s. Arithmetic can
-        also be performed on them.
+        A példákból látszik, hogy a pont karakter használt az egész és a törtrész elválasztására.
+        A magyar írásmódban használt vessző fordítási hibákat fog okozni! Az egész értékű típusokhoz
+        hasonlóan ezeken is végezhetünk matematikai műveleteket.
         ]]>
     </text>
     <title text="float"/>
     <text>
         <![CDATA[
-        A primitive to store real numbers, but it has a smaller range then double, and thus uses less memory.
-        It's rarely used, for the same reason as <i>byte</i> and <i>short</i>.
+        Az utolsó szám típus, ami a <i>double</i>-hoz hasonló, de kisebb memória használattal, és ezért kisebb
+        érték tartománnyal. A <i>byte</i> és <i>short</i> típusokhoz hasonlóan ezt is ritkán használják manapság.
         <br><br>
-        <u>Wrapper:</u> The wrapper class is <b>Float</b>.
+        <u>Wrapper:</u> <b>Float</b>.
         <br><br>
-        <u>Default value:</u> 0f
+        <u>Alap érték:</u> 0f
         ]]>
     </text>
     <code><![CDATA[
@@ -147,18 +153,19 @@
     ]]></code>
     <text>
         <![CDATA[
-        It's declared similarly as a <i>double</i>, but notice the <b>f</b> at the end. It <b>must</b> be used to
-        tell the compiler we are declaring a <i>float</i>.
+        Egy <i>double</i>-höz hasonlóan deklaráljuk, de itt <b>kötelező</b> kiírni az <b>f</b> betűt a végére.
+        Ez is hozzájárul ahhoz, hogy a programozók inkább a <i>double</i>-t preferálják.
         ]]>
     </text>
     <title text="boolean"/>
     <text>
         <![CDATA[
-        Our first non numeric primitive type. It can only have two possible values, <b>true and false</b>.
+        Két értékű, logikai típus (Igaz - Hamis). A lehetséges értékei a <i>true</i> (igaz) és a
+        <i>false</i> hamis.
         <br><br>
-        <u>Wrapper:</u> The wrapper class is <b>Boolean</b>.
+        <u>Wrapper:</u> <b>Boolean</b>.
         <br><br>
-        <u>Default value:</u> false
+        <u>Alap érték:</u> <i>false</i>
         ]]>
     </text>
     <code><![CDATA[
@@ -172,11 +179,14 @@
     ]]></code>
     <text>
         <![CDATA[
-        As you can see, additional <b>comparison operators</b> are at our disposal when using <i>boolean</i>s. They can <b>compare</b>
-        other (mostly numeric) primitives. The comparison is either true of false, so the result can be assigned to a <i>boolean</i>.
+        Látszik, hogy <i>boolean</i> változókon nem végezhetünk matematikai műveletet. Ehelyett úgynevezett
+        <b>összehasonlító</b> műveletek vannak, melyek értéke <i>boolean</i>. A deklarált két <i>int</i> változó
+        értékét összehasonlítjuk (egyenlőek-e? különbözőek-e? az egyik nagyobb-e, mint a másik? stb) és az összehasonlítások eredményét
+        <i>boolean</i> változókba mentjük.
         <br><br>
-        These are pretty straightforward, the only ones that may need explanation are <b>&lt;= and &gt;=</b> (greater-or-equal, less-or-equal),
-        and <b>!=</b> (not equal).
+        A legtöbb összehasonlító operátor magától értetődően működik. Ami magyarázatra szorul, az
+        a <b>&lt;= és &gt;=</b> operátorok, amik a nagyobb-egyenlő és a kisebb-egyenlő, valamint a
+        <b>!=</b>, ami a nem egyenlő.
         ]]>
     </text>
     <code><![CDATA[
@@ -187,18 +197,20 @@
     ]]></code>
     <text>
         <![CDATA[
-        This example illustrates the <b>negate operator</b>. You can use it on a boolean to quickly "swap"
-        it's value.
+        Itt látható a <b>tagadás</b> operátor. Ez "megfordítja" a kapott boolean értékét, azaz igazból
+        hamis lesz, hamisból igaz. Itt a <i>b</i> változó értéke alapból igaz, majd értékül adjuk neki
+        a saját tagadását, azaz a hamist.
         <br><br>
-        We can also use the <b>AND, OR and XOR</b> logical operators on <i>boolean</i>s:
+        Még vannak további logikai operátorok, az <b>ÉS, VAGY, kizáró VAGY</b>:
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li> AND (a && b): Will only result in true of both <i>a</i> and <i>b</i> are true.</li>
-        <li> AND (a || b): Will only result in true of either <i>a</i> or <i>b</i> are true.</li>
-        <li> XOR (a ^ b): Will only result in true of either <i>a</i> or <i>b</i>, but not both are true.</li>
+        <li> ÉS (a && b): Csak akkor lesz igaz, ha <i>a</i> és <i>b</i> is igazak.</li>
+        <li> VAGY (a || b): Csak akkor lesz igaz, ha vagy <i>a</i>, vagy <i>b</i> igaz (legalább az egyik).</li>
+        <li> Kizáró VAGY (a ^ b): Csak akkor lesz igaz, ha vagy <i>a</i>, vagy <i>b</i> igaz, de <b>nem mindkettő</b>. Ez
+        az, amit hétköznapi nyelven legtöbbször "vagy" alatt értünk.</li>
         </ul>
         ]]>
     </list>
@@ -213,7 +225,7 @@
 <br/>c = a ^ b; <font color="gray">//true</font>
         
     ]]></code>
-    <interactive instruction="Enter a boolean operator which makes the value of 'c' true!">
+    <interactive instruction="Írj be olyan logikai operátort, amitől a c értéke igaz lesz!">
         <data><![CDATA[
             
 <font color="#DF7401">boolean</font> a = false, b = true;
@@ -226,12 +238,11 @@
     <title text="char"/>
     <text>
         <![CDATA[
-        The last primitive, it's used to represent unicode characters. It's got 16 bits to store the integer
-        representation of the unicode characters.
+        Végül az utolsó primitív, aminek Unicode karakter lehet az értéke.
         <br><br>
-        <u>Wrapper:</u> The wrapper class is <b>Character</b>.
+        <u>Wrapper:</u> <b>Character</b>.
         <br><br>
-        <u>Default value:</u> '\u0000'
+        <u>Alap érték:</u> '\u0000' (ez az úgynevezett NUL karakter)
         ]]>
     </text>
     <code><![CDATA[
@@ -245,23 +256,23 @@
     ]]></code>
     <text>
         <![CDATA[
-        As you can see, we must always put the declared character between apostrophes, but we aren't required
-        to use the unicode integer codes, it's enough to simply place any character there.
+        Látható, hogy itt a konkrét karakter értékeket aposztrófok közé kell tenni (egyszeres idézőjel).
+        Megadhatunk konkrét Unicode kódot is, mint az első esetben, de a kívánt karaktert is
+        beírhatjuk, ahogy a második és harmadik esetekben.
         ]]>
     </text>
-    <boxed title="Not a String">
+    <boxed title="Ez nem String">
         <![CDATA[
-        We have already seen the <b>String</b> class. We use quotation marks to declare them, and they aren't primitives.
-        A <i>char</i> is not a String with only one character!
+        A szöveges változó típust, a <i>String</i>-et már láttuk. Azokat a hagyományos idézőjellel adjuk meg.
+        Fontos, hogy a <i>char</i> nem egy <i>String</i>! A <i>String</i> nem primitív típus.
         <br><br>
-        Despite this, Java allows us to use them together in certain situations.
+        Ennek ellenére a Java bizonyos esetekben lehetővé teszi, hogy együtt használjuk a kettőt:
         ]]>
     </boxed>
     <code><![CDATA[
         
  <font color="#999900">String</font> s = <font color="#2E8B57">"mam"</font>;
-<font color="#DF7401">
-<br/>char </font>aChar = <font color="#2E8B57">'a'</font>;
+<br/><font color="#DF7401">char</font> aChar = <font color="#2E8B57">'a'</font>;
 <br/>s = s + aChar;
 <br/><font color="gray">//will print mama
 </font>
@@ -270,11 +281,11 @@
     ]]></code>
     <text>
         <![CDATA[
-        Notice that the + operator that is used to "join" two strings together is now used on a String
-        and a <i>char</i>.
+       Itt például az látszik, hogy az összefűzés nem csak két <i>String</i>, hanem <i>String</i> és
+       <i>char</i> között is működik.
         ]]>
     </text>
-    <interactive instruction="Declare a character variable with value 'C'!">
+    <interactive instruction="Deklarálj egy karakter típusú változót 'C' értékkel!">
         <data><![CDATA[
 
 ___ letter = ___;
@@ -284,11 +295,13 @@ ___ letter = ___;
         <answer place="0">Character</answer>
         <answer place="1">'C'</answer>
     </interactive>
-    <title text="Autoboxing"/>
+    <title text="Automatikus csomagolás"/>
     <text>
         <![CDATA[
-        A primitive type is <b>not the same</b> as its wrapper class, however, they can be interchanged
-        in the code. The compiler will do the necessary conversions. This is called <b>autoboxing</b>.
+        A primitív típus <b>nem azonos</b> a wrapper (csomagoló) osztályával. Azaz például az <i>int</i>
+        nem ugyanaz, mint az <i>Integer</i>. Azonban, mivel ezek gyakran együtt vannak használva, a Java
+        képes arra, hogy primitívet automatikusan átalakítson a wrapper osztályává, és fordítva is (ezt nevezzük
+        "csomagolásnak" és "kicsomagolásnak").
         ]]>
     </text>
     <code><![CDATA[
@@ -300,7 +313,8 @@ ___ letter = ___;
     ]]></code>
     <text>
         <![CDATA[
-        This method takes a <i>char</i> primitive, but passing a <i>Character</i> (wrapper) variable is also fine:
+        Ez a metódus egy <i>char</i>, primitív típusú paramétert vár, de elfogad egy
+        <i>Character</i> (wrapper) változót is:
         ]]>
     </text>
     <code><![CDATA[
@@ -314,7 +328,8 @@ ___ letter = ___;
     ]]></code>
     <text>
         <![CDATA[
-        This is going to be especially useful when using <b>generics</b> (covered in a later course).
+        Ennek oka, hogy a háttérben a Java a <i>Character</i> típust ki fogja csomagolni a primitív
+        megfelelőjévé.
         ]]>
     </text>
 </resources>

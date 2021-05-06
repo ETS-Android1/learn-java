@@ -9,7 +9,7 @@
 
     <!-- Questions for primitives -->
     <question type="multi_choice">
-        <text>Which primitive types can you use to store real, non-integer numbers?</text>
+        <text>Milyen primitív típusokat használhatunk valós, nem egész számok tárolására?</text>
         <answer>long</answer>
         <answer>float</answer>
         <answer>byte</answer>
@@ -18,7 +18,7 @@
         <correct>3</correct>
     </question>
     <question type="multi_choice">
-        <text>Which primitive types can you use to store integer numbers?</text>
+        <text>Milyen primitív típusokat használhatunk egész számok tárolására?</text>
         <answer>char</answer>
         <answer>boolean</answer>
         <answer>double</answer>
@@ -27,7 +27,7 @@
         <correct>3</correct>
     </question>
     <question type="single_choice">
-        <text>Which of these primitives is not numeric?</text>
+        <text>Melyik primitív nem numerikus?</text>
         <answer>boolean</answer>
         <answer>float</answer>
         <answer>int</answer>
@@ -35,77 +35,77 @@
         <correct>0</correct>
     </question>
     <question type="text">
-        <text>What is the name the of the classes used to provide additional functionality for primitives?</text>
+        <text>Mi a neve azoknak az osztályoknak, amelyek a primitívek további funkcionalitását biztosítják?</text>
         <correct>wrapper</correct>
         <correct>wrapper class</correct>
         <ignoreCase/>
     </question>
     <question type="text">
-        <text>What is the wrapper class for the 'float' primitive type?</text>
+        <text>Mi a 'float' primitív típus wrapper osztálya?</text>
         <correct>Float</correct>
     </question>
     <question type="text">
-        <text>What is the wrapper class for the 'char' primitive type?</text>
+        <text>Mi a 'char' primitív típus wrapper osztálya?</text>
         <correct>Character</correct>
     </question>
     <question type="true_false">
-        <text>Int can store bigger numbers then long.</text>
+        <text>Az int nagyobb számokat tud tárolni, mint a long.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>Long can store bigger numbers then byte.</text>
+        <text>A long nagyobb számokat tud tárolni, mint a byte.</text>
         <correct>true</correct>
     </question>
     <question type="single_choice">
-        <text>What happens when we increase the value of a numeric primitive already at its maximum value?</text>
-        <answer>It won't increase.</answer>
-        <answer>It will overflow, and become negative.</answer>
-        <answer>An error will be raised, and the program stops.</answer>
-        <answer>It's automatically converted to a primitive with a larger range.</answer>
+        <text>Mi történik, ha egy már maximális értéken lévő numerikus primitív értékét növeljük?</text>
+        <válasz>Nem fog növekedni.</answer>
+        <válasz>Túlcsordul, és negatívvá válik.</válasz>
+        <válasz>Egy hiba fog jelentkezni, és a program leáll.</válasz>
+        <válasz>Automatikusan átalakul egy nagyobb tartományú primitívvé.</válasz>
         <correct>1</correct>
     </question>
     <question type="text">
-        <text>What is the default value of a boolean?</text>
+        <text>Mi a boolean alapértelmezett értéke?</text>
         <correct>false</correct>
     </question>
     <question type="text">
-        <text>What is the default value of a double?</text>
+        <text>Mi a double alapértelmezett értéke?</text>
         <correct>0.0</correct>
     </question>
     <question type="true_false">
-        <text>When declaring a double, we must use a dot.</text>
+        <text>A double deklarálásakor pontot kell használnunk.</text>
         <correct>false</correct>
     </question>
     <question type="text">
-        <text>Declare a short with name 's' and value -124.</text>
+        <text>Deklarálj egy short-ot 's' névvel és -124 értékkel.</text>
         <correct>short[s]s = -124;</correct>
         <correct>Short[s]s = -124;</correct>
         <ignoreSpace/>
     </question>
     <question type="text">
-        <text>Declare a double with name 'div' and value 22.435</text>
+        <text>Deklarálj	egy double-t 'div' névvel és 22.435 értékkel.</text>
         <correct>double[s]div = 22.435;</correct>
         <correct>Double[s]div = 22.435;</correct>
         <ignoreSpace/>
     </question>
     <question type="text">
-        <text>Declare a float with name 'conv' and a value of half.</text>
+        <text>Deklarálj egy float-ot 'conv' névvel és fél értékkel.</text>
         <correct>float[s]conv = 0.5f;</correct>
         <correct>Float[s]conv = 0.5f;</correct>
         <ignoreSpace/>
     </question>
     <question type="text">
-        <text>Declare a char with with name 'firstLetter' and a value of c.</text>
+        <text>Deklarálj egy char-t a 'firstLetter' névvel és c értékkel.</text>
         <correct>char[s]firstLetter = 'c';</correct>
         <correct>Character[s]firstLetter = 'c';</correct>
         <ignoreSpace/>
     </question>
     <question type="text">
-        <text>Enter the not-equal operator.</text>
+        <text>Add meg a not-equal (nem egyenlő) operátort.</text>
         <correct>!=</correct>
     </question>
     <question type="multi_choice">
-        <text>Which of these operators can be used to compare two integers?</text>
+        <text>Mely operátorok használhatóak két egész szám összehasonlítására?</text>
         <answer><![CDATA[
             <=
         ]]></answer>
@@ -117,7 +117,7 @@
         <correct>2</correct>
     </question>
     <question type="single_choice">
-        <text>On which primitive type can we use the negate operator?</text>
+        <text>Melyik primitív típuson használhatjuk a negate (tagadás) operátort?</text>
         <answer>char</answer>
         <answer>long</answer>
         <answer>float</answer>
@@ -125,7 +125,7 @@
         <correct>3</correct>
     </question>
     <question type="multi_choice">
-        <text>Which of these operators can we use to perform logical operations on two booleans?</text>
+        <text>Melyik operátorral végezhetünk logikai műveleteket két boolean-on?</text>
         <answer><![CDATA[
         &&
         ]]></answer>
@@ -142,23 +142,23 @@
         <correct>1</correct>
     </question>
     <question type="true_false">
-        <text>If we have a boolean called 'sel', the correct way to negate it is '!sel'.</text>
+        <text>Ha van egy 'sel' nevű boolean, akkor a helyes módja a tagadásának a '!sel'.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>If we have a boolean called 'sel', the correct way to negate it is '!=sel'.</text>
+        <text>Ha van egy 'sel' nevű boolean, akkor a helyes módja a tagadásának a '!=sel'.</text>
         <correct>false</correct>
     </question>
     <question type="text">
-        <text>Enter the AND operator.</text>
+        <text>Add meg az ÉS operátort.</text>
         <correct>&amp;&amp;</correct>
     </question>
     <question type="text">
-        <text>Enter the OR operator.</text>
+        <text>Add meg a VAGY operátort.</text>
         <correct>||</correct>
     </question>
     <question type="multi_choice">
-        <text>We have two booleans, a is true, b is false. Which of these operations will be true?</text>
+        <text>Van két boolean, a igaz, b hamis. Melyik művelet lesz igaz?</text>
         <answer><![CDATA[
         a && b
         ]]></answer>
@@ -172,7 +172,7 @@
         <correct>2</correct>
     </question>
     <question type="multi_choice">
-        <text>We have two booleans, both a and b are true. Which of these operations will be true?</text>
+        <text>Van két boolean, a és b egyaránt igaz. Melyik művelet lesz igaz?</text>
         <answer><![CDATA[
         a && b
         ]]></answer>
@@ -188,11 +188,11 @@
 
     <!-- Questions for if-else -->
     <question type="true_false">
-        <text>For each if block, there must be an else block as well.</text>
+        <text>Minden if blokkhoz egy else blokknak is kell tartoznia.</text>
         <correct>false</correct>
     </question>
     <question type="multi_choice">
-        <text>Which of these blocks can stand alone, without any other block?</text>
+        <text>Melyik blokk állhat önmagában, más blokkok nélkül?</text>
         <answer>else</answer>
         <answer>if</answer>
         <answer>else if</answer>
@@ -203,24 +203,24 @@
 
     <!-- Questions for loops -->
     <question type="single_choice">
-        <text>Which loop should be used when we know beforehand how many times a statement must be executed?</text>
+        <text>Melyik ciklust érdemes használni, ha előre tudjuk, hogy hányszor kell ismételni?</text>
         <answer>for loop</answer>
         <answer>while loop</answer>
         <answer>do-while loop</answer>
         <correct>0</correct>
     </question>
     <question type="single_choice">
-        <text>Which loop should be used when we don't know beforehand how many times a statement must be executed?</text>
+        <text>Melyik ciklust érdemes használni, ha nem tudjuk előre, hányszor kell ismételni?</text>
         <answer>for loop</answer>
         <answer>while loop</answer>
         <correct>1</correct>
     </question>
     <question type="true_false">
-        <text>All 3 components of a for loop (iterator initialization, terminating condition, iterator updating) are mandatory.</text>
+        <text>A for ciklus mindhárom összetevője (iterátor változó létrehozása, megállási feltétel, iterátor frissítése) kötelező.</text>
         <correct>false</correct>
     </question>
     <question type="multi_choice">
-        <text>Which are, by convention, good names for iterator variables</text>
+        <text>Melyek a jó nevek az iterátor változóknak?</text>
         <answer>x</answer>
         <answer>var</answer>
         <answer>i</answer>
@@ -229,90 +229,90 @@
         <correct>3</correct>
     </question>
     <question type="single_choice">
-        <text>What is correct about the terminating condition of a loop?</text>
-        <answer>It doesn't allow infinite loops.</answer>
-        <answer>When this condition becomes false, the loop stops.</answer>
-        <answer>When this condition becomes true, the loop stops.</answer>
-        <answer>When creating a for loop, this is the last component.</answer>
+        <text>Mi a helyes a ciklus megállási feltételével kapcsolatban?</text>
+        <válasz>Ez soha nem engedi meg a végtelen ciklusokat.</válasz>
+        <válasz>Amikor ez a feltétel hamis lesz, a ciklus leáll.</válasz>
+        <válasz>Amikor ez a feltétel igazzá válik, a ciklus leáll.</válasz>
+        <válasz>A for ciklus létrehozásakor ez az utolsó komponens.</válasz>
         <correct>1</correct>
     </question>
     <question type="single_choice">
-        <text>What does i++ do?</text>
-        <answer>Increments the variable i.</answer>
-        <answer>Creates a for loop where i is the iterator variable.</answer>
-        <answer>Decrements the variable i.</answer>
-        <answer>Sets the value of i to 0.</answer>
+        <text>Mit csinál az i++?</text>
+        <válasz>Megnöveli az i változót.</válasz>
+        <válasz>Elkészít egy for ciklust, ahol az i az iterátor változó.</válasz>
+        <válasz>Csökkenti az i változót.</válasz>
+        <válasz>Az i értékét 0-ra állítja.</válasz>
         <correct>0</correct>
     </question>
     <question type="single_choice">
-        <text>What does j-- do?</text>
-        <answer>Creates a while loop where j is the iterator variable.</answer>
-        <answer>Increments the variable j.</answer>
-        <answer>Decrements the variable j.</answer>
-        <answer>Deletes j, it can't be used again.</answer>
+        <text>Mit csinál j--?</text>
+        <válasz>Elkészít egy while ciklust, ahol j az iterátor változó.</válasz>
+        <válasz>Eggyel növeli a j változót.</válasz>
+        <válasz>Csökkenti a j változót.</válasz>
+        <válasz>Törli a j változót, nem használható fel újra.</válasz>
         <correct>2</correct>
     </question>
     <question type="text">
-        <text>Write the STATEMENT that decrements the value of k.</text>
+        <text>Írd meg az utasítást, amely csökkenti k értékét.</text>
         <correct>k--;</correct>
         <correct>--k;</correct>
     </question>
     <question type="text">
-        <text>Write the STATEMENT that increments the value of j.</text>
+        <text>Írd meg az utasítást, amely növeli a j értékét.</text>
         <correct>j++;</correct>
         <correct>++j;</correct>
     </question>
     <question type="single_choice">
-        <text>What is the difference between the while and the do-while loop?</text>
-        <answer>Nothing.</answer>
-        <answer>A do-while loop can never be infinite, a while loop can be.</answer>
-        <answer>The while loop has special syntax to declare an iterator variable, the do-while loop doesn't.</answer>
-        <answer>The do-while loop is guaranteed to iterate at least once, the while loop isn't.</answer>
+        <text>Mi a különbség a while és a do-while ciklus között?</text>
+        <válasz>Semmi.</answer>
+        <válasz>A do-while ciklus soha nem lehet végtelen, a while ciklus viszont igen.</válasz>
+        <válasz>A while ciklusnak speciális szintaxisa van egy iterátor változó deklarálására, a do-while ciklusnak nincs.</válasz>
+        <válasz>A do-while ciklus garantáltan legalább egyszer fut, a while ciklus nem.</answer>
         <correct>3</correct>
     </question>
     <question type="multi_choice">
-        <text>What is the same in the for and the while loops?</text>
-        <answer>They can be infinite loops.</answer>
-        <answer>Both have special syntax for iterator variables.</answer>
-        <answer>The break and continue statements can be used in both.</answer>
+        <text>Mi ugyanaz a for és a while ciklusban?</text>
+        <válasz>Akár végtelen ciklusok is lehetnek.</válasz>
+        <válasz>Mindkettőnek speciális szintaxisa van az iterátor változókra.</válasz>
+        <válasz>A break és a continue utasításokat mindkettőben használhatjuk.</válasz>
         <correct>0</correct>
         <correct>2</correct>
     </question>
     <question type="single_choice">
-        <text>What does the break statement do?</text>
-        <answer>Updates the value of the iterator variable.</answer>
-        <answer>Immediately stops a loop.</answer>
-        <answer>Skips the the next iteration of the loop.</answer>
+        <text>Mit csinál a break utasítás?</text>
+        <válasz>Frissíti az iterátor változó értékét.</válasz>
+        <válasz>Megállítja a ciklust.</válasz>
+        <válasz>Átugrik ciklus következő futására.</válasz>
         <correct>1</correct>
     </question>
     <question type="text">
-        <text>Enter the statement that stops a loop.</text>
+        <text>Adja meg azt az utasítást, amely megállítja a ciklust.</text>
         <correct>break;</correct>
     </question>
     <question type="single_choice">
-        <text>What does the continue statement do?</text>
-        <answer>Used after a break statement, it restarts the loop.</answer>
-        <answer>Updates the value of the iterator variable.</answer>
-        <answer>Immediately stops a loop.</answer>
-        <answer>Skips the the next iteration of the loop.</answer>
+        <text>Mit csinál a continue utasítás?</text>
+        <válasz>Egy break utasítás után használjuk, újraindítja a ciklust.</válasz>
+        <válasz>Módosítja az iterátor változó értékét.</válasz>
+        <válasz>Megállítja a ciklust.</válasz>
+        <válasz>Átugrik ciklus következő futására.</válasz>
         <correct>3</correct>
     </question>
     <question type="text">
-        <text>Enter the statement that advances a loop the the next iteration.</text>
+        <text>Add meg az utasítást, ami átugrik ciklus következő futására.</text>
         <correct>continue;</correct>
     </question>
     <question type="single_choice">
-        <text>What is an infinite loop?</text>
-        <answer>A loop, where the terminating condition never becomes false.</answer>
-        <answer>A special while loop.</answer>
-        <answer>A behaviour which happens when we forget to write the closing curly brace for a loop.</answer>
-        <answer>A special for loop.</answer>
+        <text>Mi a végtelen ciklus?</text>
+        <válasz>Egy olyan ciklus, ahol a befejező feltétel soha nem lesz hamis.</válasz>
+        <válasz>Egy speciális while ciklus.</válasz>
+        <válasz>Akkor következik be, ha elfelejtjük a záró zárójelet írni egy ciklushoz.</válasz>
+        <válasz>Egy speciális for ciklus.</válasz>
         <correct>0</correct>
     </question>
 
     <!-- Questions for arrays -->
     <question type="single_choice">
-        <text>Which of these is a correct statement for declaring an integer array?</text>
+        <text>Melyik a helyes állítás egy integer tömb deklarálására?</text>
         <answer>int[] data = new int[];</answer>
         <answer>String[] data = new String[5];</answer>
         <answer>int[] data = new int[10];</answer>
@@ -320,7 +320,7 @@
         <correct>2</correct>
     </question>
     <question type="single_choice">
-        <text>Which of these is a correct statement for declaring a string array, with length 20?</text>
+        <text>Melyik a helyes állítás egy 20 hosszúságú String tömb deklarálására?</text>
         <answer>int[] texts = new int[20];</answer>
         <answer>String[] texts = new String[5];</answer>
         <answer>String[20] texts = new String[];</answer>
@@ -328,39 +328,39 @@
         <correct>3</correct>
     </question>
     <question type="true_false">
-        <text>Elements in a boolean array are automatically initialized to false.</text>
+        <text>A boolean tömb elemei automatikusan false-ra inicializálódnak.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>Elements in a string array are automatically initialized to 0.</text>
+        <text>A String tömb elemei automatikusan 0-ra inicializálódnak.</text>
         <correct>false</correct>
     </question>
     <question type="text">
-        <text>What is the index of the first element in an array?</text>
+        <text>Mi az első elem indexe egy tömbben?</text>
         <correct>0</correct>
     </question>
     <question type="text">
-        <text>What is the index of the 10. element in an array?</text>
+        <text>Mi a 10. elem indexe egy tömbben?</text>
         <correct>9</correct>
     </question>
     <question type="single_choice">
-        <text>An array has a length of N. What happens when get reference the element with index N?</text>
-        <answer>We get the referenced element.</answer>
-        <answer>An ArrayIndexOutOfBoundsException occurs.</answer>
-        <answer>A NullPointerException occurs.</answer>
-        <answer>The JVM skips this statement.</answer>
+        <text>Egy tömb hossza N. Mi történik, ha az N indexű elemre hivatkozunk?</text>
+        <válasz>Megkapjuk a hivatkozott elemet.</válasz>
+        <válasz>Egy ArrayIndexOutOfOfBoundsException következik be.</válasz>
+        <válasz>Egy NullPointerException következik be.</válasz>
+        <válasz>A JVM kihagyja ezt az utasítást.</válasz>
         <correct>1</correct>
     </question>
     <question type="single_choice">
-        <text>An array has a length of N. What happens when get reference the element with index N-1?</text>
-        <answer>We get the referenced element, the last element of the array.</answer>
-        <answer>An ArrayIndexOutOfBoundsException occurs.</answer>
-        <answer>A NullPointerException occurs.</answer>
-        <answer>We get the referenced element, the first element of the array.</answer>
+        <text>Egy tömb hossza N. Mi történik, ha az N-1 indexű elemre hivatkozunk?</text>
+        <válasz>A hivatkozott elemet, a tömb utolsó elemét kapjuk meg.</válasz>
+        <válasz>Egy ArrayIndexOutOfOfBoundsException következik be.</válasz>
+        <válasz>Egy NullPointerException következik be.</válasz>
+        <válasz>A hivatkozott elemet, a tömb első elemét kapjuk meg.</válasz>
         <correct>0</correct>
     </question>
     <question type="text">
-        <text>Declare an array of characters with name 'letters' and length 25.</text>
+        <text>Deklaráljon egy karakter tömböt a 'letters' névvel és 25 hosszúsággal.</text>
         <correct>char[][s]letters = new[s]char[ 25 ];</correct>
         <correct>char[s]letters[] = new[s]char[ 25 ];</correct>
         <correct>Character[][s]letters = new[s]Character[ 25 ];</correct>
@@ -368,7 +368,7 @@
         <ignoreSpace/>
     </question>
     <question type="text">
-        <text>Declare an array of strings called 'sentences' with length 100.</text>
+        <text>Deklaráljuk a 'sentences' nevű, 100 hosszúságú String tömböt.</text>
         <correct>String[][s]sentences = new[s]String[ 100 ];</correct>
         <correct>String[s]sentences[] = new[s]String[ 100 ];</correct>
         <ignoreSpace/>
@@ -376,116 +376,116 @@
 
     <!-- Questions for getting input -->
     <question type="single_choice">
-        <text>How can we access the command line arguments at runtime?</text>
-        <answer>We can't, they are lost.</answer>
-        <answer>They are passed as a parameter of the main method, an array of integers.</answer>
-        <answer>They are passed as a parameter of the main method, an array of strings.</answer>
-        <answer>They are loaded into a static variable of the main class called args.</answer>
+        <text>Hogyan érhetjük el a parancssori argumentumokat futás közben?</text>
+        <válasz>Nem tudjuk, elvesznek.</answer>
+        <válasz>A main metódus paramétereként kapjuk őket, egy egész számokból álló tömbként.</válasz>
+        <válasz>A main metódus paramétereként kapjuk őket, egy String-ekből álló tömbként.</válasz>
+        <válasz>A fő osztály egy statikus változójába töltődnek be, az args nevű statikus változóba.</válasz>
         <correct>2</correct>
     </question>
     <question type="text">
-        <text>We have a string named 'textData'. Write a statement that parses it into an newly created integer called 'data'!</text>
+        <text>Van egy 'textData' nevű String-ünk. Írjunk egy olyan utasítást, amely egy újonnan létrehozott egész számra konvertálja, 'data' néven!</text>
         <correct>int[s]data = Integer.parseInt( "textData" );</correct>
         <correct>Integer[s]data = Integer.parseInt( "textData" );</correct>
         <ignoreSpace/>
     </question>
     <question type="single_choice">
-        <text>What happens when the parameter of Integer.parseInt is not a string format of an integer?</text>
-        <answer>The method returns 0.</answer>
-        <answer>A NumberFormatException is thrown.</answer>
-        <answer>The method returns Integer.MIN_VALUE</answer>
-        <answer>A NullPointerException is thrown.</answer>
+        <text>Mi történik, ha az Integer.parseInt paramétere nem megfelelő formájú?</text>
+        <válasz>A metódus 0-t ad vissza.</answer>
+        <válasz>Egy NumberFormatException-t dob.</válasz>
+        <válasz>A metódust az Integer.MIN_VALUE értéket adja vissza</válasz>
+        <answer>A NullPointerException-t dobja.</answer>
         <correct>1</correct>
     </question>
     <question type="true_false">
-        <text>It is possible to write code that checks how many command line arguments did the program get.</text>
+        <text>Lehetséges olyan kódot írni, amely ellenőrzi, hogy hány parancssori argumentumot kapott a program.</text>
         <correct>true</correct>
     </question>
     <question type="single_choice">
-        <text>What is System.in?</text>
-        <answer>It's a Scanner object that is initialized by Java.</answer>
-        <answer>It's a InputStream object that is initialized by Java. It listens to file input.</answer>
-        <answer>A variable, to which the JVM loads the command line arguments.</answer>
-        <answer>It's a InputStream object that is initialized by Java. It listens to keyboard input.</answer>
+        <text>Mi a System.in?</text>
+        <válasz>Ez egy szkenner objektum, amelyet a Java inicializál.</válasz>
+        <válasz>Ez egy InputStream objektum, amelyet a Java inicializál. Fájl bemenetre figyel.</answer>
+        <válasz>Egy változó, amelybe a JVM betölti a parancssori érveket.</válasz>
+        <válasz>Ez egy InputStream objektum, amelyet a Java inicializál. A billentyűzet bemenetet figyeli.</answer>
         <correct>3</correct>
     </question>
     <question type="true_false">
-        <text>A Scanner object must be closed when we finish using it.</text>
+        <text>A Scanner objektumot be kell zárni, amikor befejezzük a használatát.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>A Scanner object should be closed when we finish using it.</text>
+        <text>A Scanner objektumot ajánlott bezárni, ha befejeztük a használatát.</text>
         <correct>true</correct>
     </question>
     <question type="text">
-        <text>Write a statement that creates a Scanner called 's' set to the standard input!</text>
+        <text>Írj egy utasítást, amely létrehoz egy 's' nevű Scanner-t a standard bemenetre!</text>
         <correct>Scanner[s]s = new[s]Scanner( System.in );</correct>
         <ignoreSpace/>
     </question>
     <question type="text">
-        <text>We have a scanner called 's', tuned to the standard input. Write a statement that captures a line of text
-        from the user, and saves it in a string called 'userInput'!</text>
+        <text>Van egy 's' nevű Scanner, amely a standard bemenetre van hangolva. Írjunk egy utasítást, amely beolvas egy sor szöveget 
+        a felhasználótól, és elmenti a 'userInput' nevű String-be!</text>
         <correct>String[s]userInput = s.nextLine();</correct>
         <ignoreSpace/>
     </question>
     <question type="text">
-        <text>We have a scanner called 's', tuned to the standard input. Write a statement that captures a line of text
-            from the user, and saves it in an integer called 'userInput'!</text>
+        <text>Van egy 's' nevű Scanner, amely a standard bemenetre van hangolva. Írjunk egy utasítást, amely beolvas egy egész számot 
+            a felhasználótól, és elmenti egy 'userInput' nevű int változóba!</text>
         <correct>int[s]userInput = s.nextInt();</correct>
         <correct>Integer[s]userInput = s.nextInt();</correct>
         <ignoreSpace/>
     </question>
     <question type="text">
-        <text>Which utility class is used to read the contents of a file?</text>
+        <text>Melyik osztályt használjuk egy fájl összes sorának azonnali beolvasására?</text>
         <correct>Files</correct>
         <correct>java.nio.file.Files</correct>
     </question>
     <question type="single_choice">
-        <text>What happens when we try to read a file that does not exists?</text>
-        <answer>A NoSuchFileException or a FileNotFoundException is thrown.</answer>
-        <answer>An empty list is returned.</answer>
-        <answer>The file is created, and the reading is re-done.</answer>
-        <answer>A NumberFormatException is thrown.</answer>
+        <text>Mi történik, ha egy nem létező fájlt próbálunk beolvasni?</text>
+        <válasz>Egy NoSuchFileException vagy egy FileNotFoundException kerül kidobásra.</válasz>
+        <válasz>Egy üres listát kapunk vissza.</válasz>
+        <válasz>A fájl létrejön, és a beolvasás újra megtörténik.</válasz>
+        <válasz>A NumberFormatException-t dobódik.</válasz>
         <correct>0</correct>
     </question>
 
     <!-- Questions for output -->
     <question type="text">
-        <text>What is the line break character in Java?</text>
+        <text>Mi a sortörés karakter Java-ban?</text>
         <correct><![CDATA[
             \n
         ]]></correct>
     </question>
     <question type="true_false">
-        <text>Println is short for print line.</text>
+        <text>A Println a print line rövidítése.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>The 'print' methods of the PrintWriter also write a line break after printing their parameter.</text>
+        <text>A PrintWriter 'print' metódusai írnak egy sortörést a paraméterük kiírása után.</text>
         <correct>false</correct>
     </question>
     <question type="multi_choice">
-        <text>Which of these are true for the PrintWriter class?</text>
-        <answer>It is used to read input from the user.</answer>
-        <answer>It is in InputStream.</answer>
-        <answer>It is used to write text to the console.</answer>
-        <answer>It is used to print text to files.</answer>
+        <text>Melyik igaz a PrintWriter osztályra?</text>
+        <válasz>A felhasználó adatainak beolvasására szolgál.</válasz>
+        <válasz>Ez egy bemeneti (input) osztály.</válasz>
+        <válasz>Szövegnek (vagy egyéb adatnak) a konzolra való írására szolgál.</válasz>
+        <válasz>Szöveg (vagy egyéb adatnak) fájlba való írására szolgál.</válasz>
         <correct>2</correct>
         <correct>3</correct>
     </question>
     <question type="single_choice">
-        <text>What happens (by default) when a new PrintWriter starts to print to an existing file?</text>
-        <answer>The lines are appended to the end of the file.</answer>
-        <answer>An exception is thrown.</answer>
-        <answer>The content of the file is erased before printing.</answer>
+        <text>Mi történik (alapértelmezés szerint), amikor egy új PrintWriter egy meglévő fájlba kezd nyomtatni?</text>
+        <válasz>A sorok a fájl végére lesznek csatolva.</válasz>
+        <válasz>Egy kivétel dobódik.</válasz>
+        <válasz>A fájl tartalma a nyomtatás előtt törlődik.</válasz>
         <correct>2</correct>
     </question>
     <question type="true_false">
-        <text>A PrintWriter can't be configured to append to an existing file.</text>
+        <text>A PrintWriter nem konfigurálható úgy, hogy meglévő fájlhoz csatolja az új sorokat.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>The Files utility class provides methods for reading from and writing to files.</text>
+        <text>A Files segédosztály metódusokat biztosít a fájlokból való olvasáshoz és a fájlba való íráshoz.</text>
         <correct>true</correct>
     </question>
 

@@ -133,7 +133,7 @@ ___ (<font color="#DF7401">int</font> i = <font color="#F0E130">0</font>; i &lt;
     ]]></code>
     <text>
         <![CDATA[
-        This is a bit more advanced example. The while loop prints the characters of the <i>string</i>, until it finds
+        This is a bit more advanced example. The while loop prints the characters of the <i>String</i>, until it finds
         an '<b>X</b>'. The first part of the condition, connected with the <b>AND</b> operator, is necessary to guarantee
         that the the code works, even if our text has no '<b>X</b>' in it.
         <br><br>
@@ -256,15 +256,15 @@ ___ (<font color="#DF7401">int</font> i = <font color="#F0E130">0</font>; i &lt;
         after the despicable '<b>X</b>' are also printed!
         ]]>
     </text>
-    <interactive instruction="">
+    <interactive instruction="Complete the loops so that X is skipped, and Q stops the loop!">
         <data><![CDATA[
 
 <font color="#999900">String</font> data = <font color="#2E8B57">"aaabbabaXabXaabQab"</font>;
 <br/><font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i &lt; data.<font color="#ADD8E6">length</font>(); ___) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(data.<font color="#ADD8E6">charAt</font>(i) == <font color="#2E8B57"><font color="#2E8B57">'<font color="</font></font>#999900">X</font>') { <font color="gray<font color="#2E8B57">">//X, skip but don'</font>t stop
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(data.<font color="#ADD8E6">charAt</font>(i) == <font color="#2E8B57">'X'</font>) { <font color="gray">//X, skip but don't stop</font>
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;___;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> <font color="#E65100">if</font>(data.<font color="#ADD8E6">charAt</font>(i) == <font color="#2E8B57"><font color="#2E8B57">'<font color="</font></font>#999900">Q</font>') { <font color="gray">//Q, stop
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> <font color="#E65100">if</font>(data.<font color="#ADD8E6">charAt</font>(i) == <font color="#2E8B57">'Q'</font>) { <font color="gray">//Q, stop
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;___;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}

@@ -116,8 +116,8 @@
         
         <font color="#DF7401">double </font>d1 = <font color="#F0E130">3.65</font>;
 <font color="#DF7401">
-<br/>double </font>d2 = <font color="#F0E130">-21.941743242</font>;
-<br/><font color="gray<font color="#2E8B57">">//Don'</font>t need to write 423.0, but we can</font>
+<br/><font color="#2E8B57">double</font> d2 = <font color="#F0E130">-21.941743242</font>;
+<br/><font color="gray">//Don't need to write 423.0, but we can</font>
 <br/><font color="#DF7401">double</font> d3 = <font color="#F0E130">423</font>;
 <br/>
 <br/><font color="#DF7401">double</font> res = d1 + d2;

@@ -2,21 +2,20 @@
 <!-- Task of course 'Primitives, control flow and I/O' --><resources>
     <taskdata>
         <id>101</id>
-        <name>Handle user data</name>
+        <name>Felhasználó adatainak kezelése</name>
     </taskdata>
 
     <text>
         <![CDATA[
-        Your task is to create a program that reads input from the user (name, age, etc...) and performs some
-        operations according to this data. It will then finally display its operations in the console and also save
-        it to a text file.
+        A feladatod egy olyan program létrehozása, amely beolvassa a felhasználó adatait (név, életkor, stb...), és végrehajt néhány
+        műveletet ezen adatok alapján. Végül a műveletel eredményeit megjeleníti a konzolon, és elmenti őket egy szöveges fájlba.
         ]]>
     </text>
-    <boxed title="Current year">
+    <boxed title="Jelenlegi év meghatározása">
         <![CDATA[
-        This program will need to know the current year. Hardcoding it is bad practice, as the code will give wrong results
-        next year. Instead, take a look at the following code sample which shows how to get the current year as an integer
-        variable:
+        Ennek a programnak ismernie kell majd az aktuális évet. Az aktuális év beleírása rossz szokás, mivel a kód így a jövő 
+		évben futtatva már helytelen eredményt ad (valódi programoknál ez komoly hibákhoz vezet). Ehelyett nézzük meg a következő kódmintát, 
+		amely megmutatja, hogyan kapjuk meg az aktuális évet egész számként változó:
         ]]>
     </boxed>
     <code><![CDATA[
@@ -26,24 +25,25 @@
     ]]></code>
     <text>
         <![CDATA[
-        This code uses <a href="https://docs.oracle.com/javase/8/docs/api/java/time/package-summary.html">java.time</a>, which was added with Java 8.
+        Ez a kód a <a href="https://docs.oracle.com/javase/8/docs/api/java/time/package-summary.html">java.time</a> csomagot 
+		használja, amely a Java 8-cal jelent meg.
         ]]>
     </text>
-    <title text="Required inputs"/>
+    <title text="Szükséges inputok"/>
     <text>
         <![CDATA[
-        The program will need one command line argument. This can either be SAVE or NO_SAVE. If it is <b>SAVE</b>, the
-        program must perform the tasks detailed in the 'save to file' paragraph. If it is <b>NO_SAVE</b>, these tasks must
-        not be performed.
+        A programnak egy parancssori argumentumra van szüksége. Ez lehet SAVE vagy NO_SAVE. Ha ez <b>SAVE</b>, akkor a program a
+        a programnak el kell végeznie a "mentés fájlba" bekezdésben részletezett feladatokat. Ha <b>NO_SAVE</b>, akkor ezeket a feladatokat 
+		a programnak nem kell végrehajtani.
         ]]>
     </text>
-    <boxed title="Wrong argument">
+    <boxed title="Hibás parancssori argumentum">
         <![CDATA[
-        If no argument is given, or it's neither SAVE not NO_SAVE, then the <b>System.err</b> channel must be used to
-        indicate the problem, and the program should halt. Use the code sample below to terminate the program.
+        Ha nem adunk meg argumentumot, vagy ha nem SAVE vagy NO_SAVE, akkor a <b>System.err</b> csatornát kell használni a
+        jelezni a problémát, és a programnak meg kell állnia. A program leállításához használjuk az alábbi kódmintát.
         <br><br>
-        To compare strings, use the <a href="https://www.tutorialspoint.com/java/java_string_equals.htm">equals method</a>
-        instead of the <b>==</b> operator! The reasons behind this are explained in a later course.
+        A <i>String</i>-ek összehasonlításához használd az <a href="https://www.tutorialspoint.com/java/java_string_equals.htm">equals metódust</a> 
+        a <b>==</b> operátor helyett! Ennek okait egy későbbi kurzusban ismertetjük.
         ]]>
     </boxed>
     <code><![CDATA[
@@ -53,86 +53,85 @@
     ]]></code>
     <text>
         <![CDATA[
-        At start, after checking the command line argument, the program must ask the user their name, age and profession. Store these
-        in appropriate variables, as they will be used later.
+        Induláskor, a parancssori argumentum ellenőrzése után a programnak meg kell kérdeznie a felhasználótól a nevét, életkorát és foglalkozását. 
+		Tárolja ezeket a megfelelő változókban, mivel ezeket a későbbiekben használni fogjuk.
         ]]>
     </text>
-    <boxed title="Wrong inputs">
+    <boxed title="Hibás inputok">
         <![CDATA[
-        Try to validate the given data as much as possible. For example, your program should not accept if the user entered
-        nothing for name or profession or a negative age.
+        Próbáld meg a megadott adatokat validálni. Például a programod ne fogadja el, ha a felhasználó nem ad meg semmit a név vagy a 
+		szakma esetében, vagy negatív életkort ad meg. Hibás input esetén írj a <i>System.err</i>-re üzenetet!
         ]]>
     </boxed>
-    <advanced title="Handle age related exceptions">
+    <advanced title="Korral kapcsolatos hibás kezelése">
         <![CDATA[
-        The given age will be parsed to an integer. To make your program more stable, you can try to implement simple
-        exception handling for the <b>NumberFormatException</b>.
+        A megadott életkor egész számra lesz konvertálva. Hogy a programodat stabilabbá tedd, megpróbálhatod implementálni a
+        kivételkezelést a <b>NumberFormatException</b> esetére.
         <p>
-        Use the <a href="https://www.javatpoint.com/try-catch-block">try-catch block</a> to notify the user of the problem
-        instead of crashing the program.
+        Használd a <a href="https://www.javatpoint.com/try-catch-block">try-catch blokkot</a>, hogy értesítsd a felhasználót a problémáról 
+        a program összeomlása helyett. Persze mivel ezt még nem vettük, ezért nem kötelező.
         ]]>
     </advanced>
-    <title text="Handle the user data"/>
+    <title text="Az adatok kezelése"/>
     <text>
         <![CDATA[
-        At this point the inputs should be validated. Calculate and print the following things to the console:
+        Ezen a ponton a bemeneteket már biztosan helyesek. Számítsd ki és írd a konzolra a következő dolgokat:
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li>The year the user was born.</li>
-        <li>The year the user turned 18. If he has not yet turned 18, print that.</li>
-        <li>All the years the user was alive in (see below for details).</li>
+        <li>A felhasználó születési éve.</li>
+        <li>Az év, amikor a felhasználó 18 éves lett. Ha még nem töltötte be a 18. életévét, akkor ezt kell kiírni.</li>
+        <li>Az összes év, amelyben a felhasználó élt (a részleteket lásd alább).</li>
         </ul>
         ]]>
     </list>
-    <boxed title="Years">
+    <boxed title="Évek">
         <![CDATA[
-        The years the user was alive should be stored in a <b>list</b>. They should be printed to the
-        console separated by commas in a way that there is a <b>line break after every 6.</b> of them.
+        Azon éveket, amikor a felhasználó élt egy <b>listában vagy tömbben</b> kell tárolni (a lista az elegánsabb). Az éveket ki kell írni a
+        konzolra vesszővel elválasztva úgy, hogy minden 6. év után <b>sortörés</b> legyen.
         ]]>
     </boxed>
-    <title text="Save to file"/>
+    <title text="Fájlba írás"/>
     <text>
         <![CDATA[
-        If the user passed the <b>SAVE</b> command line argument, perform the following things:
+        Ha a felhasználó átadta a <b>SAVE</b> parancssori argumentumot, hajtsd végre a következő műveleteket:
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li>Create a file called 'userdata.txt'</li>
-        <li>Overwrite and don't append if it exists.</li>
-        <li>Write the name, age and profession into the file, in a formatted way.</li>
-        <li>Write the years the user was alive in using the same formatting specified above.</li>
+        <li>Hozz létre egy "userdata.txt" nevű fájlt.</li>
+        <li>Minden futtatásnál törlődjön a fájl tartalma (azaz ne a hozzáírást használd).</li>
+        <li>A fájlba írd be a nevet, a kort és a foglalkozást, formázottan.</li>
+        <li>Az éveket, amikor a felhasználó élt, a fent megadott formázással írja be a fájlba.</li>
         </ul>
         ]]>
     </list>
     <text>
         <![CDATA[
-        Feel free to use the way shown in chapters 'input' and 'output' to bypass file related exception
-        handling.
+        Nyugodtan használd a 'bemenet' és 'kimenet' fejezetekben bemutatott módot a fájlokkal kapcsolatos kivételek megkerülésére.
         ]]>
     </text>
-    <advanced title="File related exceptions">
+    <advanced title="Fájlokkal kapcsolatos kivételek">
         <![CDATA[
-        If you wish to make your code better, try to handle the file related exceptions instead of "suppressing"
-        them with <i>throws Exception</i>.
+        Ha azonban elegánsabbá szeretnéd tenni a kódot, próbáld meg kezelni a fájlokkal kapcsolatos kivételeket ahelyett, 
+		hogy "elnyomnád" őket a <i>throws Exception</i> módszerrel.
         ]]>
     </advanced>
-    <boxed title="Reminder: conventions">
+    <boxed title="Emlékeztető: szokások">
         <![CDATA[
-        Don't forget to abide the coding conventions. Comment your code! Write methods for the subtasks and use
-        parameters and return values to communicate between them!
+        Ne felejtsd el betartani a kódolási konvenciókat. Kommentáld a kódodat! Írj metódusokat a részfeladatokhoz, és használd a
+        paramétereket és visszatérési értékeket a közöttük való kommunikációhoz!
         ]]>
     </boxed>
 
     <solution>
     <text>
         <![CDATA[
-        This solution only uses one class, and a few methods. Exception handling was not mandatory, but
-        it's implemented in this example solution.
+        Ez a megoldás csak egy osztályt és néhány metódust használ. A kivételek kezelése nem volt kötelező, de
+        ebben a példamegoldásban implementálva van.
         ]]>
     </text>
     <code><![CDATA[
@@ -299,10 +298,10 @@
     ]]></code>
     <text>
         <![CDATA[
-        Quite a large price of code, isn't it? If you want to analyze it, go method by method, starting from <i>main</i>.
+        Ha elemezni akarod, haladj metódusról metódusra, kezdve a <i>main</i>-től.
         <p>
-        Depending on which parts you extracted into method, your solution may look completely different, but that does not
-        mean it is wrong!
+        Attól függően, hogy melyik részeket szedted ki metódusba, a megoldásod teljesen másképp nézhet ki, de ez nem
+        azt jelenti, hogy biztosan rossz!
         ]]>
     </text>
     </solution>
