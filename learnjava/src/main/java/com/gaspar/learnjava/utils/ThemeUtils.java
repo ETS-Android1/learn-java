@@ -28,18 +28,30 @@ public abstract class ThemeUtils {
     @Themes
     private static int selectedTheme;
 
+    /**
+     * Name of the selected theme preference.
+     */
     private static final String THEME_PREF_NAME = "selected_theme";
 
     /**
-     * Called on start of the application, initialized the selected theme from preferences.
+     * Stores if the theme initialization already happened or not.
+     */
+    private static boolean initialized = false;
+
+    /**
+     * Called on the creation of a {@link com.gaspar.learnjava.ThemedActivity}, initializes the selected theme from preferences.
+     * It will only do real work on the first activity start, which happens when the application starts.
      */
     public static void initSelectedTheme(final @NonNull Context context) {
-        SharedPreferences prefs = context.getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
-        if(prefs.contains(THEME_PREF_NAME)) {
-            selectedTheme = prefs.getInt(THEME_PREF_NAME, Themes.ORANGE);
-        } else { //default theme is orange
-            prefs.edit().putInt(THEME_PREF_NAME, Themes.ORANGE).apply();
-            selectedTheme = Themes.ORANGE;
+        if(!initialized) { //only if it is not initialized
+            SharedPreferences prefs = context.getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
+            if(prefs.contains(THEME_PREF_NAME)) {
+                selectedTheme = prefs.getInt(THEME_PREF_NAME, Themes.ORANGE);
+            } else { //default theme is orange
+                prefs.edit().putInt(THEME_PREF_NAME, Themes.ORANGE).apply();
+                selectedTheme = Themes.ORANGE;
+            }
+            initialized = true; //save that initialization happened
         }
     }
 
@@ -49,7 +61,7 @@ public abstract class ThemeUtils {
     @IntDef
     public @interface Themes {
         int ORANGE = 0; //the default orange theme
-        int DARK = 2;
+        int DARK = 2; //dark theme
     }
 
     /**

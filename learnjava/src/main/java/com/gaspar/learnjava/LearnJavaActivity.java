@@ -100,7 +100,6 @@ public class LearnJavaActivity extends ThemedActivity
             if(LearnJavaAds.LOAD_ADS) {
                 MobileAds.initialize(this, result -> {}); //initialize admob
             }
-            ThemeUtils.initSelectedTheme(this); //initialize themes
             ClipSyncActivity.initClipSync(this, findViewById(R.id.learnJavaMainView)); //initialize clip sync
             showStartContinueComponent();
             runOnUiThread(() -> {

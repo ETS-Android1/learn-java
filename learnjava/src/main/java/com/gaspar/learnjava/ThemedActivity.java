@@ -33,6 +33,7 @@ public class ThemedActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ThemeUtils.initSelectedTheme(this); //initialize themes. wont do anything if already initialized
         themeId = ThemeUtils.getTheme(); //save current theme
         setTheme(themeId);
     }

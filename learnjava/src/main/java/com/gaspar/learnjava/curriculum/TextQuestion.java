@@ -56,24 +56,26 @@ public class TextQuestion extends Question implements Serializable {
      * If this character is in the answer, it will be treated as a required space even if spaces are
      * ignored. Useful for something like this: 'int[s]x = 5;
      * <br>
-     * Must only be used in questions where spaces are ignored to mark a space as important. Otherwise it's
-     * redundant anyways.
+     * Must only be used in questions where spaces are ignored to mark a space as important.
      */
-    private static final String DO_NOT_IGNORE_SPACE = "\\[s]";
+    private static final String DO_NOT_IGNORE_SPACE = Pattern.quote("[s]");
 
     /**
      * The texts that can be accepted as answers. The first one in the list will be shown as
      * an accepted answer.
      */
     private final List<String> correctAnswers;
+
     /**
      * The answer that the user has entered. Initially this is the empty string.
      */
     private String enteredAnswer;
+
     /**
      * Determines if this answer will ignore spaces or not.
      */
     private final boolean ignoreSpace;
+
     /**
      * Determines if the answer is case sensitive or not.
      */
@@ -97,9 +99,9 @@ public class TextQuestion extends Question implements Serializable {
         ((TextView)questionView.findViewById(R.id.questionTextView)).setText(text);
         //this wont be visible on start
         //replace important space markers with actual space
-        String correctText = correctAnswers.get(0).replace(DO_NOT_IGNORE_SPACE, " ");
+        String correctText = correctAnswers.get(0);
+        correctText = correctText.replace("[s]", " ");
         ((TextView)questionView.findViewById(R.id.possibleSolutionTextView)).setText(correctText);
-        //TODO: add a listener to the edit text to update entered answer
         EditText answerEditText = questionView.findViewById(R.id.answerEditText);
         answerEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -113,7 +115,7 @@ public class TextQuestion extends Question implements Serializable {
         });
         if(ThemeUtils.isDarkTheme()) {
             recolorSeparators(questionView, context);
-            questionView.setBackground(context.getDrawable(R.drawable.question_background_dark));
+            questionView.setBackground(ContextCompat.getDrawable(context, R.drawable.question_background_dark));
         }
         return questionView;
     }
@@ -146,7 +148,7 @@ public class TextQuestion extends Question implements Serializable {
                 //split up the answer between the 'words'
                 String[] splitAnswer = correctAnswer.split("\\s+"); //split on spaces (on ignorable spaces)
                 for(String part: splitAnswer) {
-                    regexBuilder.append(part).append(" *");
+                    regexBuilder.append(Pattern.quote(part)).append(" *");
                 }
                 regexBuilder.setLength(regexBuilder.length()-2); //cut last unnecessary " *"
                 String answerRegexString = regexBuilder.toString().replaceAll(DO_NOT_IGNORE_SPACE, " ");
@@ -171,7 +173,8 @@ public class TextQuestion extends Question implements Serializable {
     }
 
     /**
-     * Reveals the correct answer part of the question.
+     * Displays the result. If the answer is correct, then highlights it with green. If it is incorrect, then
+     * highlights it with red and reveals the 'correct answer' part of the question.
      */
     @Override
     @UiThread
