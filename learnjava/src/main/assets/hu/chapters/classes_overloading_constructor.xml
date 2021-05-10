@@ -2,20 +2,20 @@
 <resources>
     <chapterdata>
         <id>152</id>
-        <name>Encapsulation, overloading and constructors</name>
+        <name>Overload és konstruktorok</name>
     </chapterdata>
-    <title text="Overloading"/>
+    <title text="Overload"/>
     <text>
         <![CDATA[
-        Overloading allows us to create different methods that have the <b>same name</b>. How does Java distinguishes
-        these methods then, you might ask. Well, they must have different parameters, and this will be used to tell which
-        of them is called!
+        Az overload ("túltöltés") lehetővé teszi, hogy különböző metódusokat hozzunk létre, amelyeknek <b>egyezik a nevük</b>. 
+		De hogyan különbözteti meg a Java a ezeket a metódusokat? Nos, különböző paraméterekkel kell rendelkezniük, és ez alapján lehet megmondani, hogy melyik
+        meghívásra kerül közülük!
         ]]>
     </text>
-    <boxed title="Static polymorphism">
+    <boxed title="Statikus polimorfizmus">
         <![CDATA[
-        Overloading is sometimes called static polymorphism. Polymorphism, because there can be multiple methods with the
-        same name. Static, because it's determined at compile time which of these methods is called (by the parameters).
+        A overload-ot néha statikus polimorfizmusnak is nevezik (a polimorfizmus <b>többalakúságot</b> jelent). Polimorfizmus, mivel több olyan metódus is létezhet, amelyeknek a
+        azonos a nevük. Statikus, mert a fordításkor már ismert, hogy ezek közül melyik metódus hívódik meg (a paraméterek alapján).
         ]]>
     </boxed>
     <code><![CDATA[
@@ -35,8 +35,8 @@
     ]]></code>
     <text>
         <![CDATA[
-        As you can see, this class has two <i>add</i> methods, but one of them takes integers, the other doubles. Here is how we
-        can use them:
+        Mint látható, ennek az osztálynak két <i>add</i> metódusa van, de az egyik egész számokat, a <i>double</i> paramétereket használ. 
+		Itt van, hogyan használhatjuk őket:
         ]]>
     </text>
     <code><![CDATA[
@@ -51,24 +51,22 @@
 <br/>}
         
     ]]></code>
-    <advanced title="Return type difference">
+    <advanced title="Különbség a visszatérési értékben">
         <![CDATA[
-        Note that we can't overload a method by changing only the return type! If we were to insert a new <i>add</i> method
-        into the previous example with two integer parameters, but with return type <i>int</i> instead of <i>double</i>, that
-        would cause a compile time error.
+        Nem tudunk egy metódust overload-olni úgy, hogy csak a visszatérési típust változtatjuk meg! Ha beillesztenénk egy új <i>add</i> metódust
+        az előző példába két egész szám paraméterrel, de <i>int</i> visszatérési típussal <i>double</i> helyett, akkor ez 
+        fordítási hibát okozna (mivel a két metódus közt csak a visszatérési típus lenne a különbség).
         <p>
-        However, changing the return type when we also change the parameters is allowed.
+        A visszatérési típus megváltoztatása azonban megengedett, ha a paramétereket is megváltoztatjuk.
         ]]>
     </advanced>
     <text>
         <![CDATA[
-        The reason for overloading are pretty straightforward. It allows us to use one method name to perform similar task (
-        like adding integers or doubles, as seen before), instead of cluttering the class with a different name for all tasks.
-        <p>
-        It is also essential for constructors.
+        A overload-olás oka meglehetősen egyszerű. Lehetővé teszi, hogy egy metódusnevet használjunk hasonló feladatok elvégzésére (
+        mint például egész számok vagy páros számok összeadása, mint korábban láttuk), ahelyett, hogy az osztályt minden feladathoz más-más névvel zsúfolnánk tele.
         ]]>
     </text>
-    <interactive instruction="Complete the method declaration so that it overloads the other method!">
+    <interactive instruction="Egészítsd ki a metódus deklarációját úgy, hogy az overload-olja a másik metódust!">
         <data><![CDATA[
 
 <font color="#DF7401">void</font> <font color="#ADD8E6">setProperties</font>(<font color="#DF7401">int</font> id) {
@@ -83,23 +81,24 @@
         ]]></data>
         <answer place="0">setProperties</answer>
     </interactive>
-    <title text="Constructors"/>
+    <title text="Konstruktorok"/>
     <text>
         <![CDATA[
-        Constructors are used to create objects (they are the ones after the <b>new</b> keyword).
+        A konstruktorok objektumok létrehozására szolgálnak (ez a <b>new</b> kulcsszó után következnek). Arra használjuk őket, 
+		hogy az objektum tagjainak kezdeti értéket adjunk.
         ]]>
     </text>
-    <boxed title="Naming rule">
+    <boxed title="Elnevezési szabály">
         <![CDATA[
-        Constructors must have the same name as the class. If for example or class is called <i>Data</i>, then
-        this must also be the name of all of its constructors.
+        A konstruktorok nevének meg kell egyeznie az osztály nevével. Ha például az osztály neve <i>Data</i>, akkor a konstruktoroknak is 
+		ez kell, hogy legyen a neve.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        If we don't write a constructor in the class, Java will create one for us. This won't have any parameters and is
-        called the <b>default constructor</b> (it does nothing other then creating to object). This is what we've been
-        using in the previous examples to create objects!
+        Ha nem írunk konstruktort az osztályba, a Java létrehoz egyet helyettünk. Ennek nem lesznek paraméterei, és
+        <b>alapértelmezett konstruktornak</b> nevezzük (az objektum létrehozásán kívül semmi mást nem csinál). Ez az, amit mi
+        használtunk az előző példákban objektumok létrehozására!
         ]]>
     </text>
     <code><![CDATA[
@@ -138,8 +137,8 @@
     ]]></code>
     <text>
         <![CDATA[
-        You can see that overloading is essential here, as it allows us to have different constructors (we couldn't use
-        different names for them). Now we have multiple ways to create animal objects:
+        Láthatjuk, hogy az overload itt is működik, lehetővé teszi, hogy különböző konstruktoraink legyenek (ez fontos, mert minden 
+		konstruktornak azonos neve kell, hogy legyen). Most már többféleképpen is létrehozhatunk objektumokat:
         ]]>
     </text>
     <code><![CDATA[
@@ -162,12 +161,11 @@
     ]]></code>
     <text>
         <![CDATA[
-        When we create our own constructors, the default one will no longer be created! This is why the commented code in
-        the code sample is not allowed. If we want a constructor without any parameters as well, we'll have to create that
-        ourselves.
+        Amikor létrehozzuk a saját konstruktorainkat, az alapértelmezett már nem fog létrejönni! Ezért van az, hogy a kommentált kód a
+        példában nem megengedett. Ha szeretnénk egy paraméterek nélküli konstruktort is a többi mellé, akkor azt nekünk kell létrehoznunk.
         ]]>
     </text>
-    <interactive instruction="Complete the constructor declaration!">
+    <interactive instruction="Egészítsd ki a kontstruktort!">
         <data><![CDATA[
 
 <font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">Activity</font> {
@@ -182,36 +180,36 @@
         <answer place="0">Activity</answer>
         <answer place="1">this</answer>
     </interactive>
-    <title text="Encapsulation and visibility"/>
+    <title text="Egységbe zárás, láthatóság"/>
     <text>
         <![CDATA[
-        <b>Encapsulation</b> is an important principle of OOP. It means that we only show as much of our
-        classes as necessary (ofter referred to as the 'interface'), the rest ('implementation') is hidden away.
+        Az <b>egységbe zárás</b> az OOP egyik fontos alapelve. Ez azt jelenti, hogy csak annyit mutatunk meg a
+        osztályainkból, amennyit szükséges (gyakran "interfésznek" nevezik), a többit ("megvalósítás") elrejtjük.
         <br><br>
-        Why is this done? For two main reasons:
+        Miért van ez így? Két fő okból:
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li><u>Security</u>: those who use the class will only see what they SHOULD use. For example, they won't be able to change
-        member values that would break the class.</li>
-        <li><u>Simplicity</u>: the class implementation can be complex. The programmer who later uses this class doesn't
-        need to see and bother with it, so it's hidden.</li>
+        <li><u>Biztonság</u>: azok, akik az osztályt használják, csak azt látják, amit használni KELL. Például nem lesznek képesek megváltoztatni a
+        olyan tagértékeket, amelyek megváltoztatásával hibás állapotba hozhatnák az objektumot.</li>
+        <li><u>Egyszerűség</u>: az osztály megvalósítása lehet összetett. Annak a programozónak, aki később használja ezt az osztályt, nem
+        kell látnia és foglalkoznia vele, mert el van rejtve.</li>
         </ul>
         ]]>
     </list>
-    <boxed title="Encapsulation in Java">
+    <boxed title="Egységbe zárás Java-ban">
         <![CDATA[
-        Encapsulation in Java is implemented with <b>visibility classes</b>. There are 4 of them, <b>public,
-        protected, private, and package private (default)</b>. Let's illustrate them with some examples!
+        A Java-ban a kapszulázást <b>láthatósági fokozatokkal</b> valósítják meg. Ezekből 4 van, <b>public,
+        protected, private és package private (alapértelmezett)</b>. Illusztrálom őket néhány példával:
         ]]>
     </boxed>
-    <title text="Public visibility"/>
+    <title text="Publikus láthatóság"/>
     <text>
         <![CDATA[
-        The methods and members marked <b>public</b> will be visible from everywhere. This means inside and outside of
-        the class, even outside of the current package.
+        A <b>public</b> jelölésű metódusok és tagok mindenhonnan láthatóak és hivatkozhatóak lesznek. Ez azt jelenti, hogy használhatjuk 
+		őket az osztályon belülről, kívülről, vagy akár más csomagokból is.
         ]]>
     </text>
     <code><![CDATA[
@@ -253,8 +251,8 @@
     ]]></code>
     <text>
         <![CDATA[
-        Everything inside this class is marked public, so we can use them in another class (even in another package),
-        for example in the main method:
+        Ebben az osztályban minden nyilvános, így egy másik osztályban (akár egy másik csomagban) is használhatjuk őket,
+        például a main metódusban (a main metódus egy másik osztályban van):
         ]]>
     </text>
     <code><![CDATA[
@@ -269,19 +267,20 @@
 <br/>}
         
     ]]></code>
-    <boxed title="Public classes">
+    <boxed title="Publikus osztályok">
         <![CDATA[
-        Classes can also be marked public, as it can be seen in all previous examples. A public class will be visible and
-        can be imported in <b>any package</b>.
+        Az osztályok is jelölhetők nyilvánosnak, ahogyan ez az előző példákban is látható. Egy nyilvános osztály látható és 
+        importálható lesz <b>minden csomagba</b>. Azok az osztályok, amiket nem jelölünk publikusnak, csak a saját csomagjukban lesznek 
+		használhatóak.
         ]]>
     </boxed>
-    <title text="Private visibility"/>
+    <title text="Privát láthatóság"/>
     <text>
         <![CDATA[
-        Methods and members marked <b>private</b> will only be visible inside the class. They can't be referenced our called from
-        any other class!
+        A <b>private</b> jelzésű metódusok és tagok csak az osztályon belül lesznek láthatóak. Nem lehet rájuk hivatkozni, vagy meghívni őket a
+        más osztályból!
         <p>
-        We can use the current <i>Rational</i> class to create the following problematic situation:
+        Az előbb látott <i>Rational</i> osztállyal a következő problémás helyzetet hozhatjuk létre:
         ]]>
     </text>
     <code><![CDATA[
@@ -297,8 +296,8 @@
     ]]></code>
     <text>
         <![CDATA[
-        We can use private visibility to prevent the value of <i>denominator</i> being set to 0. While we're at it,
-        let's also set the visibility of the <i>numerator</i> to private as well, since it's good practice:
+        A privát láthatósággal megakadályozhatjuk, hogy a <i>denominator</i> (nevező) értéke 0 legyen. Ha már itt tartunk,
+        a <i>numerator</i> (számláló) láthatóságát is állítsuk privátra, mivel ez jó szokás:
         ]]>
     </text>
     <code><![CDATA[
@@ -367,22 +366,26 @@
 <br/>}
         
     ]]></code>
-    <boxed title="Getters and setters">
+    <boxed title="Getter-ek és setter-ek">
         <![CDATA[
-        Methods that simply return hidden members are called <b>getters</b>. Methods that set a new value for
-        members (perhaps performs some checks before) are the <b>setters</b>. It's convention to name them accordingly.
+        Azokat a metódusokat, amelyek egyszerűen csak rejtett tagokat adnak vissza, <b>getter-eknek</b> nevezzük. Azok a metódusok, 
+		amelyek új értéket állítanak be egy privát tagnak (esetleg előtte elvégeznek néhány ellenőrzést), a <b>setterek</b>. 
+		Szokás szerint ennek megfelelően nevezzük el őket. 
+		<br><br>
+		A nevezőt tehát elrejtettük, és csak getter és setter segítségével férhetünk hozzá kívülről. A setter soha nem fogja megengedni, 
+		hogy a nevező 0 legyen. Ezzel megakadájoztuk, hogy az objektum hibás állapotba kerüljön.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        You can see that the constructor also got an update, it now uses the setter to prevent a 0 denominator.
-        Now we can't set the denominator to 0, thus <b>object integrity</b> is ensured:
+        Láthatjuk, hogy a konstruktor is kapott egy frissítést, most már a setter-t használja, hogy megakadályozza a 0 nevezőt.
+        Most már nem tudjuk a nevezőt 0-ra állítani, így <b>az objektum integritása</b> biztosított:
         ]]>
     </text>
     <image name="not_visible"/>
     <text>
         <![CDATA[
-        Instead, outside the class we only have access to the setter, as that is marked public:
+        Ehelyett az osztályon kívül csak a setterhez van hozzáférésünk, mivel az nyilvános:
         ]]>
     </text>
     <code><![CDATA[
@@ -399,50 +402,51 @@
     ]]></code>
     <text>
         <![CDATA[
-        Unlike <i>public</i>, we can't use <i>private</i> to mark classes, only methods and members!
+        A <i>public</i>-tól eltérően a <i>private</i>-et nem használhatjuk osztályok jelölésére, csak metódusok és tagok jelölésére!
         ]]>
     </text>
-    <title text="Default visibility"/>
+    <title text="Alap láthatóság"/>
     <text>
         <![CDATA[
-        If we don't write any visibility type in front of a member or method of a class it'll get <i>default visibility</i>
-        (also known as <b>package-private</b>). Note that this what we've been doing in all the previous chapters.
+        Ha nem írunk semmilyen láthatóságot egy osztály tagja vagy metódusa elé, akkor az <i>alap láthatóságú</i> lesz.
+        (más néven <b>csomag-privát</b>). Vegyük észre, hogy az összes korábbi fejezetbeli példák ilyenek voltak.
         <p>
-        It's easy to guess that something that is package-private will only be visible inside the same package.
+        Könnyű kitalálni, hogy valami, ami csomag-privát, az csak ugyanazon a csomagon belül lesz látható.
         ]]>
     </text>
-    <boxed title="Package-private classes">
+    <boxed title="Csomag privát osztályok">
         <![CDATA[
-        Classes can also be package private. If we don't write the public modifier in front of their name, they'll
-        only be visible from the same package (can't be imported and used in another package).
+        Az osztályok is lehetnek alap láthatóságúak. Ha nem írjuk a <i>public</i> módosítót a nevük elé, akkor
+        csak ugyanabból a csomagból lesznek láthatóak (nem importálhatók és nem használhatók egy másik csomagban).
         ]]>
     </boxed>
-    <title text="Protected visibility"/>
+    <title text="Védett láthatóság"/>
     <text>
         <![CDATA[
-        The last visibility type, protected, is similar to the default visibility. Methods or members marked
-        protected will be visible inside the same package AND within <b>subclasses</b> (which can be in different packages as well).
+        Az utolsó láthatósági típus, a védett (<b>protected</b>), hasonló az alapértelmezett láthatósághoz. A
+        védettnek jelölt tagok és metódusok csak ugyanabban a csomagban ÉS az <b>alosztályokban</b> (amelyek különböző csomagokban is lehetnek) 
+		lesznek láthatóak.
         <p>
-        Proceed to the next chapter to learn what a subclass means. Classes can't be marked protected.
+        A következő fejezetben lesz részletezve, hogy mit jelent az alosztály. Az osztályok nem jelölhetők védettnek.
         ]]>
     </text>
-    <title text="Summary"/>
+    <title text="Összegzés"/>
     <text>
         <![CDATA[
-        To summarize, there are 4 visibility types. Here they are, ordered from 'strictest' to 'least strict':
+        Összefoglalva, 4 láthatósági típus létezik. Itt vannak, a legszigorúbbtól a legkevésbé szigorúig:
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li>Private</li>
-        <li>Default, or package-private (can also be used on classes)</li>
-        <li>Protected</li>
-        <li>Public (can also be used on classes)</li>
+        <li>Privát (private).</li>
+        <li>Alap, vagy csomag-privát (osztályokra is használható).</li>
+        <li>Védett (protected).</li>
+        <li>Nyilvános, azaz public (osztályokra is használható).</li>
         </ul>
         ]]>
     </list>
-    <interactive instruction="Make it so that the first variable is only visible inside the class, but the second one is visible everywhere! ">
+    <interactive instruction="Legyen úgy, hogy az első változó csak az osztályon belül látható, de a második mindenhol látható!">
         <data><![CDATA[
 
 ___ <font color="#999900">String</font> sensitiveData;

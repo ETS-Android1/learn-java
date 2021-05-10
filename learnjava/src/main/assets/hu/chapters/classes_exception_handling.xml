@@ -2,21 +2,22 @@
 <resources>
     <chapterdata>
         <id>156</id>
-        <name>Exception handling</name>
+        <name>Kivételkezelés</name>
     </chapterdata>
     <text>
         <![CDATA[
-        An exception is problem that can arise (can be thrown) when executing your program. Exceptions are classes,
-        and they all inherit from <b>java.lang.Exception</b>.
+        A kivétel olyan probléma, amely a program végrehajtása során felmerülhet. A kivételek osztályok,
+        és mindannyian a <b>java.lang.Exception</b>-ből származnak.
         <p>
-        An unhandled exception will crash your application.
+        Egy kezeletlen kivétel összeomlasztja az alkalmazásodat, ezért a biztonságos programozás egyik 
+		alapfeltétele a kivételek kezelése.
         ]]>
     </text>
-    <title text="The try-catch block"/>
+    <title text="A try-catch blokk"/>
     <text>
         <![CDATA[
-        Handling exceptions is done with the <b>try-catch block</b>. We put the code that may throw an exception
-        into the try-block, and what should happen when an exception occurs, into the catch-block.
+        A kivételek kezelése a <b>try-catch blokk</b> segítségével történik. A kódot, amely kivételt dobhat, a
+        a <i>try</i> blokkba rakjuk, a <i>catch</i> blokkba pedig azt, aminek történnie kell, ha a kivétel bekövetkezik.
         ]]>
     </text>
     <code><![CDATA[
@@ -35,17 +36,25 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
         
-    ]]></code>
-    <boxed title="Recursion">
+    ]]>
+	</code>
+	<text>
+	<![CDATA[
+		Ha a <i>nextInt</i> metódus kivételt dob, akkor azt a <i>catch</i> blokk "elkapja", és az 
+		alkalmazás nem omlik össze, hanem azok az utasítások fognak futni, amik a <i>catch</i> blokkban 
+		vannak.
+	]]>
+	</text>
+    <boxed title="Rekurzió">
         <![CDATA[
-        Recursion is when a method calls itself again (<i>main</i>, in this case). While this is a useful tool, we must be careful
-        to somehow control it, otherwise the method will be stuck in an 'infinite loop', calling itself.
+        A rekurzió az, amikor egy metódus újra meghívja önmagát (mint a fenti példában a <i>main</i>). Bár ez egy hasznos eszköz, 
+		óvatosnak kell lennünk hogy valahogyan kontrolláljuk, különben a metódus egy "végtelen ciklusba" ragad, és önmagát megállás nélkül hívja.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        Generally, one catch-block is for one type of exception (although the <a href="https://docs.oracle.com/javase/7/docs/technotes/guides/language/catch-multiple.html">syntax</a> allows for more).
-        If we want to handle an additional exception, the best way is to add another catch-block:
+        Általában egy <i>catch</i> blokk egyféle kivételhez tartozik (bár a <a href="https://docs.oracle.com/javase/7/docs/technotes/guides/language/catch-multiple.html">szintaxis</a> többféle kivételt is megenged).
+        Ha további kivételeket szeretnénk kezelni, a legjobb megoldás egy újabb catch-block hozzáadása:
         ]]>
     </text>
     <code><![CDATA[
@@ -67,10 +76,12 @@
     ]]></code>
     <text>
         <![CDATA[
-        Observe the first example again. We implemented exception handling, but a problem may still arise! If an exception
-        occurs the statement closing our <i>Scanner</i> is not executed.
+        Nézzük meg újra az első példát. Megvalósítottuk a kivételkezelést, de még mindig felmerülhet 
+		egy probléma! Ha egy kivétel lép fel, a <i>Scanner</i>-ünket lezáró (<i>close</i>) utasítás 
+		nem kerül végrehajtásra.
         <br><br>
-        The solution is the <b>finally-block</b>:
+        Egy megoldás, ha a <i>catch</i> blokkba is beleírjuk a lezáró utasítást. Elegánsabb azonban a 
+		<b>finally blokk</b> használata:
         ]]>
     </text>
     <code><![CDATA[
@@ -95,17 +106,18 @@
     ]]></code>
     <text>
         <![CDATA[
-        The finally block must be at the end, and is guaranteed to be executed after either the try, or the catch block.
+        A finally blokknak a végén kell lennie, és a benne lévő utasítások <b>garantáltan</b> le fognak futni, 
+		akkor is ha történt kivétel, és akkor is ha nem.
         ]]>
     </text>
-    <advanced title="Errors">
+    <advanced title="Hibák">
         <![CDATA[
-        More severe problems are represented by subclasses of <b>java.lang.Error</b>. While they can be handled the same way,
-        they shouldn't be. They indicate a problem that is beyond your application to handle. An example is
-        </i>java.lang.OutOfMemoryError</i>.
+        A súlyosabb problémákat a <b>java.lang.Error</b> alosztályai képviselik. Olyan problémát jeleznek, 
+		amelyet az alkalmazás nem tud jól kezelni. Ennek ellenére a hibákat is el lehet kapni <i>catch</i> blokk segítségével.
+        Egy példa a </i>java.lang.OutOfMemoryError</i>, ami akkor dobódik, ha a <i>JVM</i> kifogy a memóriából.
         ]]>
     </advanced>
-    <interactive instruction="Write the exception handling! Check the samples above for the exception name, or use the base class!">
+    <interactive instruction="Írd meg a kivételkezelést! Nézd meg a fenti mintákban a kivétel nevét, vagy használd az ősosztályt!">
         <data><![CDATA[
 
 ___ {
@@ -122,16 +134,16 @@ ___ {
         <answer place="2">Exception</answer>
         <answer place="2">Throwable</answer>
     </interactive>
-    <title text="Throw an exception manually"/>
+    <title text="Kivételek dobása"/>
     <text>
         <![CDATA[
-        The <b>throw</b> keyword is used to create and throw an exception:
+        A <b>throw</b> kulcsszó egy kivétel létrehozására és dobására szolgál:
         ]]>
     </text>
     <code><![CDATA[
         <font color="gray">//you MUST NOT pass 'a' as parameter!</font>
-<br/><font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">charInput</font>(<font color="#DF7401">char</font> c) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(c == <font color="#2E8B57">'a'</font>) {
+<br/><font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">charInput</font>(<font color="#DF7401">char</font> letter) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(letter == <font color="#2E8B57">'a'</font>) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">throw new</font> <font color="#999900">IllegalArgumentException</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Nice character!"</font>);
@@ -140,36 +152,39 @@ ___ {
     ]]></code>
     <text>
         <![CDATA[
-        While the JDK contains many pre-written exceptions, programmers still often create custom exceptions. This is
-        very simple, all we need to do is inherit from the <b>java.lang.Exception</b> class (or from <b>java.lang.RuntimeException</b>
-        , see next part).
+        Bár a <i>JDK</i> számos előre megírt kivételt tartalmaz, a programozók mégis gyakran készítenek 
+		egyéni kivételeket. Ez nagyon egyszerű, csak annyit kell tennünk, hogy az osztályunkat a 
+		<i>java.lang.Exception</i> osztályból származtatjuk (vagy a <b>java.lang.RuntimeException</b>-ből, 
+		lásd a következő részt).
         ]]>
     </text>
-    <title text="Checked and unchecked exceptions"/>
+    <title text="Ellenőrzött és nem ellenőrzött kivételek"/>
     <text>
         <![CDATA[
-        Checked exception is an exception that the programmer is forced to handle. For example, <i>IOException or FileNotFoundException</i>
-        are such. Handling unchecked exceptions (<i>ArithmeticException, NumberFormatException</i>, ...) on the other hand, is optional.
+        Az ellenőrzött kivétel olyan kivétel, amelyet a programozó kénytelen kezelni. Például az <i>IOException vagy a FileNotFoundException</i>.
+        ilyenek. A nem ellenőrzött kivételek (<i>ArithmeticException, NumberFormatException</i>, ...) kezelése ezzel szemben opcionális.
         ]]>
     </text>
-    <boxed title="What makes it unchecked?">
+    <boxed title="Mitől lesz ellenőrzött?">
         <![CDATA[
-        Generally, exceptions are checked. Only those will be unchecked which inherit from the special exception
-        <b>java.lang.RuntimeException</b> (errors are also unchecked, as they should not be handled). Here is a picture to help understand:
+        Alapesetben a kivételek ellenőrzöttek. Az <i>Exception</i>-nek azonban van egy speciális gyerek osztálya, 
+		a <b>java.lang.RuntimeException</b>. Amegyik kivétel ebből származik, az nem lesz ellenőrzött.
+		Íme egy kép a könnyebb megértéshez:
         ]]>
     </boxed>
     <image name="exception_hierarchy"/>
     <text>
         <![CDATA[
-        As you can see there is also a base class for both exceptions and errors, <i>Throwable</i>. Only the subclasses of this class
-        can be used in catch-blocks, and after <i>throw and throws</i> statements.
+        Mint látható, a kivételeknek és a hibáknak is van egy alaposztálya, a <i>Throwable</i>. Csak ennek az osztálynak az alosztályai
+        használhatóak <i>catch</i> blokkokban, valamint a <i>throw és throws</i> utasítások után.
         ]]>
     </text>
-    <title text="Dealing with checked exceptions"/>
+    <title text="Ellenőrzött kivételek kezelése"/>
     <text>
         <![CDATA[
-        We don't always want to encapsulate a checked exception into try-catch blocks. The <b>throws</b> (NOT throw) keyword
-        can be used.
+        Nem mindig akarunk egy ellenőrzött kivételt <i>try-catch</i> blokkba zárni. A <b>throws</b> 
+		(NEM <i>throw</i>) kulcsszó használható arra, hogy egy hibát továbbadjunk egy metódusból. 
+		Ilyenkor ezt annak kell kezelnie, aki meghívja a metódust.
         ]]>
     </text>
     <code><![CDATA[
@@ -189,17 +204,25 @@ ___ {
     ]]></code>
     <text>
         <![CDATA[
-        Note that the <i>Files.readAllLines</i> method would force us to handle <i>IOException</i> (because it's declared
-        in the same way, with the throws keyword). But by marking the method as '<i>throws IOException</i>', it is going to
-        be the <b>caller of the method</b> who has to handle the exception.
+        Vegyük észre, hogy a <i>Files.readAllLines</i> metódus arra kényszerítene minket, hogy kezeljük a <i>IOException</i>-t (mivel a <i>Files.readAllLines</i> metódus
+        a throws kulcsszóval feljebb dobja azt). De azzal, hogy a mi metódusunkat is '<i>throws IOException</i>'-ként jelöljük meg, 
+		a kivételt majd a metódus hívójának kell kezelnie.
         ]]>
     </text>
-    <boxed title="Write throws">
+    <boxed title="Throws kiírása">
         <![CDATA[
-        It's good practice to use the <i>throws</i> keyword to indicate all exceptions that your method may throw,
-        even if they are unchecked exceptions. This way the caller will always know what kind of exceptions can he expect.
+        Jó gyakorlat, hogy a <i>throws</i> kulcsszóval jelezzük az összes olyan kivételt, amelyet a metódusunk dobhat,
+        még akkor is, ha ezek nem ellenőrzött kivételek. Így a hívó mindig tudni fogja, hogy milyen kivételekre számíthat.
         ]]>
     </boxed>
+	<text>
+		<![CDATA[
+		A korábbi fejezetekben az ellenőrzött kivételekkel úgy birkóztunk meg, hogy még a főmetódusból 
+		is feljebb dobtuk őket. Mivel azonban a főmetódusnál nincs feljebb, ezért ezek a kivételek valójában 
+		nem lesznek kezelve, és összeomlasztják a programot. Most, hogy ismerjük a kivétel kezelést, már a 
+		megfelelő módon reagálhatunk a kivételekre.
+		]]>
+	</text>
     <!-- try-catch-finally, Throwable, Exception, Error, RuntimeException
      throw and throws keywords -->
 </resources>

@@ -2,98 +2,112 @@
 <resources>
     <taskdata>
         <id>151</id>
-        <name>Online shopping</name>
+        <name>Online bolt</name>
     </taskdata>
     <text>
         <![CDATA[
-        Your task is to create (part of) an online shopping system. The main entities in your model
-        should be:
+        A feladatod egy online vásárlási rendszer (részének) létrehozása. A modell fő entitásai
+        a következők legyenek:
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li>Customer: Has <b>name, age and Address</b>, and a purchase history of <i>orders</i>.</li>
-        <li>Returning customer: a special type of customer, with a discount on products.</li>
-        <li>Address: Contains <b>postal code, city, street and house number</b>.</li>
-        <li>Product: Has a <b>name, price, type and unique id</b>. Ensure that the id is unique for every product object.</li>
-        <li>Product type: constants that represent the possible types of products in the store.</li>
-        <li>Order: Pairs of <b>products</b> and their <b>amounts</b>. This represents a purchase in the store.</li>
+        <li>Customer (vevő): <b>névvel, életkorral és címmel</b> rendelkezik, valamint vásárlási előzményekkel.</li>
+        <li>ReturningCustomer (visszatérő vevő): Egy speciális vásárlótípus, akinek kedvezményt adnak a termékekre.</li>
+        <li>Address (cím): Tartalmazza a <b>postai irányítószámot, a várost, az utcát és a házszámot</b>.</li>
+        <li>Product (termék): <b>névvel, árral, típussal és egyedi azonosítóval</b> rendelkezik. Győződj meg róla, hogy az azonosító minden termékobjektumnál egyedi.</li>
+        <li>ProductType (termékek típusai): Konstansok, amelyek az áruházban található lehetséges terméktípusokat képviselik.</li>
+        <li>Order (rendelés): <b>termékek</b> és azok <b>mennyiségeinek</b> párjai. Ez egy vásárlást reprezentál a boltban.</li>
         </ul>
         ]]>
     </list>
-    <boxed title="Encapsulate and finalize">
+    <boxed title="Egységbe zárás">
         <![CDATA[
-        Hide all information behind <i>private members</i>, getters and setters! Disable the changing of information that shouldn't be changed,
-        for example a name of a customer is <i>final</i>, but their address isn't.
+        Rejts el minden információt <i>privát tagok</i>, getterek és setterek mögé! Tiltsd le a nem módosítható 
+		információk megváltoztatását (<i>final</i>). Ilyen lehet például az ügyfél neve.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        You should create a class for each of these entities, but feel free to create more. Remember, the classes should be connected,
-        by containing each other (like a customer having an address) or by inheritance (customer and returning customer).
+        Minden ilyen entitáshoz létre kell hoznod egy-egy osztályt, de nyugodtan hozhatsz létre többet is. 
+		Az osztályoknak össze kell kapcsolódniuk, egymást tartalmazzák (például egy ügyfélnek van egy 
+		címe), vagy öröklődnek egymásból (ügyfél és visszatérő ügyfél).
         ]]>
     </text>
-    <title text="Behaviour with methods"/>
+    <title text="Viselkedés metódusokkal"/>
     <text>
         <![CDATA[
-        Implement a behaviour for all the classes with appropriate methods. Each class should have at least a few methods that
-        do something meaningful with the members. Make sure to mark members and methods that should belong
-        to the class static. Here are some examples:
+        Implementálj viselkedést minden osztály számára megfelelő metódusokkal. Minden osztálynak 
+		rendelkeznie kell legalább néhány olyan metódussal, amelyek valami értelmes dolgot csinálnak. 
+		Íme néhány példa:
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li>A method that calculates the total price of the orders of a customer.</li>
-        <li>A method that lists all the possible products of a certain type.</li>
+        <li>Egy metódus, amely kiszámítja egy ügyfél megrendeléseinek teljes árát.</li>
+        <li>Egy metódus, amely felsorolja egy adott termék típushoz tartozó összes terméket.</li>
         </ul>
         ]]>
     </list>
-    <boxed title="Exception handling">
+    <boxed title="Kivétel kezelés">
         <![CDATA[
-        Don't allow the creation of invalid objects! Make sure a given age is valid, for example. Throw exceptions
-        if something is wrong (use the appropriate exception from the JDK, like <i>IllegalArgumentException</i>).
+        Ne engedélyezd az érvénytelen objektumok létrehozását! Győződj meg például arról, hogy egy adott 
+		életkor érvényes. Kivételek dobódjanak, ha valami nem stimmel (használd a <i>JDK</i> 
+		megfelelő kivételét, például <i>IllegalArgumentException</i>).
         ]]>
     </boxed>
-    <advanced title="Custom exceptions">
+    <advanced title="Saját kivétel">
         <![CDATA[
-        As an extra task, create custom exceptions that better describe the problems of the project. For example,
-        upon receiving an invalid name for a product in the constructor, throw an <i>InvalidProductException</i>.
+        Extra feladatként hozz létre olyan saját kivételeket, amelyek jobban leírják a projekt problémáit. 
+		Például, amikor a konstruktorban egy termék érvénytelen nevét kapja, dobj egy 
+		<i>InvalidProductException</i>-t nevű saját kivételt.
         ]]>
     </advanced>
     <advanced title="Implement pairs">
         <![CDATA[
-        The order should contain product-amount pairs (which products are in the order, and how many of them per different product).
-        It's possible to implement this with 2 lists, but the elegant way is with a <b>map</b>.
+        A megrendelésnek termék-mennyiség párokat kell tartalmaznia (mely termékek szerepelnek a 
+		megrendelésben, és különböző termékenként hány darab). Ezt 2 listával is meg lehet valósítani, 
+		de az elegánsabb megoldás egy <b>Map</b> (hozzárendelés).
         <p>
-        The JDK contains map implementations which you can use, here is a tutorial for <a href="https://www.tutorialspoint.com/java/java_hashmap_class.htm">HashMap</a>.
+        A <i>JDK</i> tartalmaz map implementációkat, amelyeket használhatsz, itt van egy 
+		bemutató a <a href="https://www.tutorialspoint.com/java/java_hashmap_class.htm">HashMap</a>-hez.
+		<p>
+		Egy másik szintén jó módszer ha saját osztályt készítesz a pároknak, majd ezeket rakod 
+		egy listába.
         ]]>
     </advanced>
+	<text>
+		 <![CDATA[
+		 A termékek típusait leíró konstansok esetén a legjobb módszer egy <i>enum</i> használata. 
+		 ]]>
+	<text>
     <title text="Javadoc"/>
     <text>
         <![CDATA[
-        <a href="https://www.tutorialspoint.com/java/java_documentation.htm">Javadoc</a> is the recommended way to document your methods and classes! Try it for this project!
-        Or don't, but write at least some comments.
+        A <a href="https://www.tutorialspoint.com/java/java_documentation.htm">javadoc</a> az ajánlott módszer a 
+		metódusok és osztályok dokumentálására! Próbáld ki ebben a projektben!
+        Vagy ne tedd, de írj legalább néhány kommentet.
         ]]>
     </text>
-    <title text="Test"/>
+    <title text="Teszt"/>
     <text>
         <![CDATA[
-        Make sure one of the classes has a main method, and test your project by creating some objects and calling their
-        methods to see if everything functions correctly.
+        Legyen az egyik osztályban <i>main</i> metódus. Teszteld a projektet néhány objektum 
+		létrehozásával a <i>main</i>-ben.
         ]]>
     </text>
 
     <solution>
         <text>
             <![CDATA[
-            One possible solution with a custom exception, and javadoc comments.
+            Egy lehetséges megoldás egyéni kivétellel és javadoc kommentekkel.
             ]]>
         </text>
         <text>
             <![CDATA[
-            The customer, returning customer classes:
+            A vásárló (<i>Customer</i> osztály:
             ]]>
         </text>
         <code><![CDATA[
@@ -185,8 +199,15 @@
 <br/>}
 <br/>
             
-        ]]></code>
-        <code><![CDATA[
+        ]]>
+		</code>
+		<text>
+			<![CDATA[
+			A viszatérő vásárló (<i>ReturningCustomer</i>), ami a vásárlóból származik:
+			]]>
+		</text>
+        <code>
+			<![CDATA[
             
 <font color="#E65100">package</font> taskshop;
 <br/>
@@ -236,7 +257,7 @@
         ]]></code>
         <text>
             <![CDATA[
-            The custom exception used:
+            A saját kivétel, amit használok hibás életkor esetén:
             ]]>
         </text>
         <code><![CDATA[
@@ -259,7 +280,7 @@
         ]]></code>
         <text>
             <![CDATA[
-            The address class, very simple:
+           A cím (<i>Address</i>) osztály:
             ]]>
         </text>
         <code><![CDATA[
@@ -299,7 +320,7 @@
         ]]></code>
         <text>
             <![CDATA[
-            The product class and the <i>ProductType</i> enum:
+            A termék (<i>Product</i>) osztály:
             ]]>
         </text>
         <code><![CDATA[
@@ -379,8 +400,15 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
             
-        ]]></code>
-        <code><![CDATA[
+        ]]>
+		</code>
+		 <text>
+            <![CDATA[
+            A termékek típusait tartalmazó enum (<i>ProductType</i>):
+            ]]>
+        </text>
+        <code>
+		<![CDATA[
             
 <font color="#E65100">package</font> taskshop;
 <br/>
@@ -402,8 +430,8 @@
         ]]></code>
         <text>
             <![CDATA[
-            The order class, implemented with a <b>HashMap</b>. Don't worry if you don't quite get this. Maps will be
-            covered in the next course.
+            A rendelések osztálya (<i>Order</i>, amelyet egy <b>HashMap</b> segítségével valósítottam meg. 
+			Ne aggódj, ha ezt nem egészen érted. A kollekciók következő kurzusban lesznek részletesen ismertetve.
             ]]>
         </text>
         <code><![CDATA[
@@ -456,7 +484,7 @@
         ]]></code>
         <text>
             <![CDATA[
-            The only thing left is to run some tests in the main method:
+            Már csak néhány teszt futtatása van hátra a <i>main</i> metódusban:
             ]]>
         </text>
         <code><![CDATA[
@@ -497,7 +525,8 @@
         ]]></code>
         <text>
             <![CDATA[
-            When running it, we can see that the total spending will be indeed less when he is a returning customer.
+            A futtatás során láthatjuk, hogy a teljes költés valóban kevesebb lesz, 
+			ha visszatérő vásárlóról van szó.
             ]]>
         </text>
         <!-- for some reason it cant find any image here...

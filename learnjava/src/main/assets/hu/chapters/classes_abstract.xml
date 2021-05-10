@@ -2,13 +2,14 @@
 <resources>
     <chapterdata>
         <id>155</id>
-        <name>Abstract classes and interfaces</name>
+        <name>Absztrakt osztályok, interfészek</name>
     </chapterdata>
     <text>
         <![CDATA[
-        An abstract class is a class which can't be instantiated (can't explicitly create objects of this class).
+        Az absztrakt osztály egy olyan osztály, amely nem példányosítható (nem lehet belőle objektumot létrehozni). 
+		Gyerek osztályai iszont példányosíthatóak lesznek, ezért bizonyos értelemben az absztrakt osztály is az lesz.
         <p>
-        We can use the <b>abstract</b> keyword to mark a class as abstract:
+        Az <b>abstract</b> kulcsszóval jelölhetünk egy osztályt absztraktnak:
         ]]>
     </text>
     <code><![CDATA[
@@ -21,67 +22,70 @@
     ]]></code>
     <text>
         <![CDATA[
-        Trying to instantiate such a class will result in a compile time error:
+        Egy ilyen osztály példányosítása fordítási hibát eredményez:
         ]]>
     </text>
     <image name="abstract_class_error"/>
-    <title text="What is the point?"/>
+    <title text="Miért vannak ilyen osztályok?"/>
     <text>
         <![CDATA[
-        So what is the point of this? Creating objects is a fundamental part of <i>OOP</i>. Why disable this
-        for some classes?
+        Mi értelme van ennek? Az objektumok létrehozása a <i>OOP</i> alapvető része. Miért érdemes ezt letiltani 
+        néhány osztály esetében?
         <p>
-        Firstly, for <b>utility classes</b>.
+        Először is a <b>segédosztályok</b> létrehozásához.
         ]]>
     </text>
-    <boxed title="Utility class">
+    <boxed title="Segédosztály">
         <![CDATA[
-        A utility class is a class which contains only static, helper methods. The JDK contains such classes, for example
-        <b>Arrays</b> (helper methods for arrays, like sorting), and <b>Collections</b> (similar methods as in <i>Arrays</i>
-        but for data structure implementations).
+        A segédosztály olyan osztály, amely csak statikus metódusokat tartalmaz. A <i>JDK</i> tartalmaz ilyen osztályokat, 
+		például az <b>Arrays</b>-t (metódusok a tömbökhöz, mint például a rendezés), és a <b>Collections</b>-t 
+		(hasonló, mint a <i>Arrays</i>, de az adatszerkezetekhez).
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        As the utility class only has static methods, there is not reason to create objects from it. As such, the programmers can
-        disable instantiation altogether by making it abstract.
+        Mivel a segédosztály csak statikus metódusokkal rendelkezik, nincs értelme objektumokat létrehozni belőle. Mint ilyen, a programozók
+        teljesen kikapcsolhatják a példányosítását azzal, hogy absztraktnak jelölik.
         ]]>
     </text>
-    <advanced title="Bad practice?">
+    <advanced title="Rossz szokás?">
         <![CDATA[
-        Some programmers believe that the <i>abstract</i> keyword should not be used for utility classes, and they suggest a
-        private constructor instead. You can find a discussion about this topic <a href="https://stackoverflow.com/questions/25223553/how-can-i-create-an-utility-class">here</a>.
+        Egyes programozók úgy vélik, hogy a <i>abstract</i> kulcsszót nem szabad használni a segédosztályok esetében, és azt javasolják, hogy egy
+        privát konstruktort írjunk inkább. Erről a témáról <a href="https://stackoverflow.com/questions/25223553/how-can-i-create-an-utility-class">itt</a> találsz egy vitát.
         ]]>
     </advanced>
     <text>
         <![CDATA[
-        <u>Secondly</u>, to allow us to better map our models into Java code. Let's understand this through an example:
+        Absztrakt osztályok segítségével jobban leképezhetjük modelljeinket Java kódba. Értsük ezt 
+		meg egy példán keresztül:
         <br><br>
-        We are operating a computer service. The clients bring computers, each of them is either a <b>PC</b> or a <b>Laptop</b>. So,
-        which classes will we need?
+        Egy számítógépes szolgáltatást üzemeltetünk. Az ügyfelek számítógépeket hoznak, mindegyikük vagy egy <b>PC</b> vagy egy <b>Laptop</b>. 
+		Milyen osztályokra lesz szükség ennek a modellezéséhez?
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li>PC and Laptop classes, of course.</li>
-        <li>A Computer superclass, since PCs and laptops share lots of things, and we can model this using a common superclass.</li>
+        <li>PC és laptop osztályok, természetesen.</li>
+        <li>Egy <i>Computer</i> szülő osztály, mivel a PC-k és a laptopok sok közös tulajdonsággal rendelkeznek, 
+		és ezt egy közös ősosztály segítségével tudjuk modellezni.</li>
         </ul>
         ]]>
     </list>
     <image name="abstract_hierarchy"/>
     <text>
         <![CDATA[
-        Since each computer brought to us is either a PC or a laptop, we never need to instantiate the <i>Computer</i> class. To emphasise
-        this, we can mark it as abstract. It's only used as a common superclass. We'll continue with this example later in this
-        chapter.
+        Mivel minden hozzánk hozott számítógép vagy PC, vagy laptop, soha nincs szükségünk a <i>Computer</i> osztály példányosítására. Hogy hangsúlyozzuk
+        ezt, jelölhetjük absztraktnak. Csak közös szuperosztályként használjuk. Ezt a példát a későbbiekben folytatjuk.
         ]]>
     </text>
-    <title text="Abstract methods"/>
+    <title text="Absztrakt metódusok"/>
     <text>
         <![CDATA[
-        Methods can also be marked as abstract (in this case, the class has to be abstract as well). An abstract methods is a method
-        which is <b>declared, but not implemented</b>:
+        A metódusok is megjelölhetők absztraktként (ebben az esetben az osztálynak, melyhez tartoznak 
+		is absztraktnak kell lennie). Az absztrakt metódus egy metódus
+        amely <b>deklarálva van, de nincs implementálva</b>. A metódus implementációja a kapcsos zárójelek közti rész. 
+		Absztrakt metódus esetén ez nincs:
         ]]>
     </text>
     <code><![CDATA[
@@ -104,10 +108,11 @@
     ]]></code>
     <text>
         <![CDATA[
-        This class not only has an abstract method, but also has a constructor! Where will this constructor be used, if the class
-        can't be instantiated anyways? How can the abstract method be called, if it's not even implemented?
+        Ennek az osztálynak nem csak egy absztrakt metódusa van, hanem egy konstruktora is! Hol fogjuk használni ezt a konstruktort, ha az osztályt
+        amúgy sem lehet példányosítani? Hogyan hívható meg az absztrakt metódus, ha nincs is implementálva?
         <p>
-        The answer is the subclass. It's constructor will call this class' constructor, and it'll implement the abstract method!
+        A válasz az alosztály. Annak a konstruktora meg fogja hívni ennek az osztálynak a konstruktorát, és fogja implementálni az absztrakt metódust 
+		(méghozzá úgy, hogy felülírja).
         ]]>
     </text>
     <code><![CDATA[
@@ -157,17 +162,17 @@
     ]]></code>
     <text>
         <![CDATA[
-        You may have noticed that this is similar to method overriding. Note that, however, in this case the subclass <b>has to implement</b>
-        the method (unless the subclass is abstract as well).
+        Az <i>@Override</i> is utatja, hogy itt felülírás történik, de ebben az esetben az alosztálynak 
+		<b>meg kell valósítania</b> a metódust.
         ]]>
     </text>
-    <title text="Interfaces"/>
+    <title text="Interfészek"/>
     <text>
         <![CDATA[
-        Interfaces are fully abstract classes. They can be <b>implemented</b> by other classes (which means that the implementing
-        class will have to give implementations for all abstract methods in the interface).
+        Az interfészek teljesen absztrakt osztályok. Ezeket más osztályok <b>implementálhatják</b> (ami azt jelenti, hogy az implementáló
+        osztálynak implementációt kell adnia az interfész összes absztrakt metódusához).
         <p>
-        They are declared similarly to classes, but with the keyword <b>interface</b> instead:
+        Az osztályokhoz hasonlóan deklaráljuk őket, de helyette a <b>interface</b> kulcsszóval:
         ]]>
     </text>
     <code><![CDATA[
@@ -185,11 +190,14 @@
     ]]></code>
     <text>
         <![CDATA[
-        By default all methods are <b>abstract, and public</b>. It's redundant to write the modifiers there. Since interfaces represent
-        a property, their name is by convention an adjective (like <i>Printable</i> in this case).
+        Alapértelmezés szerint egy interfész minden metódusa <b>absztrakt és nyilvános (public)</b>. Felesleges oda írni 
+		ezeket a módosítókat. Az interfészek neve a konvenció szerint egy melléknév, tulajdonság (mint ebben az esetben a <i>Printable</i>, 
+		azaz kiírható, kinyomtatható).
+		<p>
+		Amelyik osztály implementálja az interfészt, azzal jelzi, hogy ő is rendlkezik ezzel a tulajdonsággal.
         ]]>
     </text>
-    <interactive instruction="This interface has 2 methods: read and readAll. Complete the declaration!">
+    <interactive instruction="Ennek az interfésznek 2 metódusa van: read és readAll. Egészítsd ki a deklarációt!">
         <data><![CDATA[
 
 <font color="#E65100">public</font> ___ <font color="#999900">Readable</font> {
@@ -201,16 +209,19 @@
         <answer place="0">interface</answer>
         <answer place="1">readAll</answer>
     </interactive>
-    <boxed title="Reasons for interfaces">
+    <boxed title="Az interfészek célja">
         <![CDATA[
-        Interfaces are a good way to force a class to have a set of methods. They're also used to simulate inheritance from
-        multiple classes. A class can only inherit from one superclass, it can however implement any number of interfaces (while also
-        having a superclass).
+        Az interfészek segítségével egy osztályt arra kényszeríthetünk, hogy rendelkezzen bizonyos metódussal 
+		(például a fenti <i>Readable</i>-t implementáló osztály biztosan rendlkezik majd a <i>read</i> és a <i>readAll</i> metódusokkal).  
+		<br><br>
+		Arra is használják őket, hogy szimulálják a "többszörös" öröklődést. Egy osztály csak egy 
+		szülő osztálytól örökölhet, azonban tetszőleges számú interfészt implementálhat (miközben a
+        miközben van egy szülő osztálya).
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        Now, let's create a simple class that implements the <i>Printable</i> interface (the <b>implements</b> keyword is used):
+        Most hozzunk létre egy egyszerű osztályt, amely megvalósítja a <i>Printable</i> interfészt (a <b>implements</b> kulcsszót használjuk):
         ]]>
     </text>
     <code><![CDATA[
@@ -236,23 +247,25 @@
     ]]></code>
     <text>
         <![CDATA[
-        When implementing multiple interfaces, their names must be separated by commas, after the <i>implements</i> keyword.
+        Több interfész implementálása esetén a neveket vesszővel kell elválasztani a <i>implements</i> kulcsszó után.
         <br><br>
-        Do not try to create objects from interfaces, as that isn't allowed (they are abstract classes after all).
+        Ne próbálj meg objektumokat létrehozni interfészekből, mivel ez nem megengedett (végül is ezek absztrakt osztályok).
         ]]>
     </text>
-    <advanced title="Additional interface functions">
+    <advanced title="További interfész funkciók">
         <![CDATA[
-        Interfaces overgone multiple changes when Java 8 was introduced. You can now add static methods, and members, and even
-        give implementations for methods, using the <b>default</b> keyword. Read <a href="https://www.journaldev.com/2752/java-8-interface-changes-static-method-default-method">this</a>
-        article, for more information.
+        A Java 8 bevezetésekor az interfészek több változáson mentek keresztül. Onnantól statikus 
+		metódusokat és tagokat adhatunk hozzá, sőt, még implementációkat is adhatunk a metódusokhoz, 
+		a <b>default</b> kulcsszó használatával. Olvasd el <a href="https://www.journaldev.com/2752/java-8-interface-changes-static-method-default-method">ezt</a>
+        a cikket, további információkért.
         <p>
-        It isn't necessary true anymore that an interface is fully abstract, yet this definition is still often used (even in this chapter).
+        Már nem feltétlenül igaz, hogy egy interfész teljesen absztrakt, ezt a definíciót viszont még mindig gyakran használják 
+		(még ebben a fejezetben is).
         <p>
-        More on this in the course '<b>Java 8</b>'.
+        Erről bővebben a '<b>Java 8</b>' című kurzusban tanulunk majd.
         ]]>
     </advanced>
-    <interactive instruction="Use the previous interactive sample to fill the gaps!">
+    <interactive instruction="Használd az előző interaktív mintát a kód kiegészítéséhez!">
         <data><![CDATA[
             
 <font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">TextFile</font> ___ <font color="#999900">File</font> ___ <font color="#999900">Readable</font> {

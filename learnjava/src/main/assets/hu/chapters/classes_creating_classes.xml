@@ -2,43 +2,45 @@
 <resources>
     <chapterdata>
         <id>151</id>
-        <name>Creating classes</name>
+        <name>Osztályok létrehozása</name>
     </chapterdata>
     <text>
         <![CDATA[
-        Classes have been mentioned many times in the previous courses. It's time to explain what they are,
-        and how they can be created.
+        Az osztályokról már sokszor esett szó az előző fejezetekben. Itt az ideje megtanulni, hogy mik is ezek,
+        és hogyan hozhatók létre.
         ]]>
     </text>
     <boxed title="OOP">
         <![CDATA[
-        <b>Object oriented programming (OOP)</b> has 3 basic principles. These are <b>encapsulation, inheritance and
-        polymorphism</b>. In the following chapters it'll be explained what these terms mean and how they are implemented
-        in Java.
+        Az <b>objektum-orinetált programozásnak (OOP)</b> 3 alapelve van. Ezek a következők: <b>egységbe zárás, öröklődés és
+        polimorfizmus</b>. A következő fejezetekben elmagyarázom, hogy mit jelentenek ezek a kifejezések, és hogyan valósulnak meg.
+        Java-ban.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        A <u>class</u> is an abstract data type, but it's more then just a bundle of primitive types. We can also define
-        behaviour for it by creating methods.
+        Az <b>osztály</b> egy absztrakt adattípus, több mint egy primitív típus. Definiálhatunk
+        viselkedést hozzá metódusok létrehozásával.
         <p>
-        The class defines the structure. It's a blueprint for objects.
+        Az osztály meghatározza az adattípus struktúráját. Úgy gondolhatunk rá, mint egy tervrajzra.
         <br><br>
-        An <u>object</u> is what we get when a class is <b>instantiated</b>. Let's demonstrate this with an example project:
+        Az <b>objektum</b> az, amit akkor kapunk, ha egy osztályt <b>példányosítunk</b>. Gondulhatunk rá így, mint a 
+		tervrajz (osztály) segítségével elkészített tárgy.
+		Ezt egy példaprojekt segítségével mutatom be:
         ]]>
     </text>
-    <boxed title="Example project">
+    <boxed title="Példaprojekt">
         <![CDATA[
-        Create a project, and add a class which has the main method (This is what we've been doing so far). Then,
-        add another class in the same package. This abstract data type will represent cats, because everyone likes cats.
-        Name the class <b>Cat</b>.
+        Hozzunk létre egy projektet, és adjunk hozzá egy osztályt, amely rendelkezik a main metódussal (ezt eddig is csináltuk). Ezután,
+        adjunk hozzá egy másik osztályt ugyanabban a csomagban. Ez az absztrakt adattípus a macskákat fogja reprezentálni, mert mindenki szereti a macskákat.
+        Nevezzük el az osztályt <b>Cat</b>-nek.
         <br><br>
-        See the code samples and instructions below for details!
+        A részleteket lásd az alábbi kódmintákat és utasításokat!
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        Your <b>Main</b> class should look something like this:
+        A <b>Main</b> osztályodnak valahogy így kell kinéznie:
         ]]>
     </text>
     <code><![CDATA[
@@ -57,8 +59,8 @@
     ]]></code>
     <text>
         <![CDATA[
-        Create the <b>Cat</b> class. In Eclipse this can be done by right clicking your package, then
-        <b>New > Class</b>. This will create a file called <i>Cat.java</i>, and write the skeleton of the class for us:
+        Hozzuk létre a <b>Cat</b> osztályt. Az Eclipse-ben ezt úgy lehet megtenni, hogy jobb egérgombbal kattintunk a csomagunkra, majd az 
+        <b>Új --> osztály</b> menüket választjuk. Ez létrehoz egy <i>Cat.java</i> nevű fájlt, és megírja nekünk az osztály vázát:
         ]]>
     </text>
     <code><![CDATA[
@@ -72,24 +74,23 @@
     ]]></code>
     <text>
         <![CDATA[
-        Remember that we are now creating the abstract type cat! Let's encode the following information in our data type (
-        these are called <b>members</b> of the class):
+        Ne feledjük, hogy most egy absztrakt típust szeretnénk létrehozni! Kódoljuk a következő információt az adattípusunkba (
+        ezeket az osztály <b>tagjainak</b> nevezzük):
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li><u>Name</u>: stored in a <i>String</i>.</li>
-        <li><u>Age</u>: stored in an <i>int</i>.</li>
-        <li><u>Gender</u>: we can use a <i>boolean</i>, since each cat is either male or female.</li>
-        <li></li>
+        <li><u>Név</u>: egy <i>String</i>-ben van tárolva.</li>
+        <li><u>Kor</u>: egy <i>int</i>-ben van tárolva.</li>
+        <li><u>Nem</u>: egy <i>boolean</i>-t használhatunk, mivel minden macska vagy hím vagy nőstény.</li>
         </ul>
         ]]>
     </list>
     <text>
         <![CDATA[
-        Here is our class after we include these members. As you can see, it's like local variable declaration,
-        but in this case these are written <b>outside methods, but inside the class</b>.
+        Itt van az osztályunk, miután felvettük ezeket a tagokat. Amint láthatod, ez olyan, mint a helyi változók deklarálása,
+        de ebben az esetben ezeket <b>a metódusokon kívül, de az osztályon belül</b> írjuk.
         ]]>
     </text>
     <code><![CDATA[
@@ -111,8 +112,8 @@
     ]]></code>
     <text>
         <![CDATA[
-        Let's also add some behaviour to this cat class using methods. One method will print the properties of
-        the cat to the console, the other will calculate and return it's birth year.
+        Adjunk hozzá 'viselkedést' is ehhez az osztályhoz metódusok segítségével. Az egyik metódus kiírja a
+        a macska tulajdonságait a konzolra, a másik pedig kiszámítja és visszaadja a macska születési évét.
         ]]>
     </text>
     <code><![CDATA[
@@ -148,18 +149,18 @@
 <br/>}
         
     ]]></code>
-    <boxed title="Get current year">
+    <boxed title="Jelenlegi év megszerzése">
         <![CDATA[
-        Those who did the tasks of the previous course are already familiar with this, but for those who did not, here it is again:
+        Akik az előző tanfolyam feladatait elvégezték, azok ezt már ismerik, de akik nem, azoknak itt van:
         <br><br>
-        The <i>Year.now().getValue()</i> returns the current year as an integer. This is a better way then 'hardcoding' the year into
-        our code.
+        A <i>Year.now().getValue()</i> az aktuális évet adja vissza egész számként. Ez egy jobb módszer, mint az évszám beleégetése a
+        kódunkba.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        Now that we have the 'blueprint' (class) for cats, we can create actual cat <b>objects</b> in our program! For this, we'll use
-        the main method:
+        Most, hogy megvan a macskák "tervrajza" (osztálya), létrehozhatunk tényleges macska <b>objektumokat</b> a programunkban! Ehhez a
+        a főmetódust használom:
         ]]>
     </text>
     <code><![CDATA[
@@ -196,10 +197,10 @@
     ]]></code>
     <text>
         <![CDATA[
-        Notice that the objects are created using the <b>new</b> keyword.
+        Vegyük észre, hogy az objektumok létrehozása a <b>new</b> kulcsszó használatával történik.
         ]]>
     </text>
-    <interactive instruction="Complete the class declaration!">
+    <interactive instruction="Egészítsd ki az osztály deklarációt!">
         <data><![CDATA[
 
 <font color="#E65100">public</font> ___ <font color="#999900">Activity</font> {
@@ -211,25 +212,25 @@
         <answer place="0">class</answer>
         <answer place="1">String</answer>
     </interactive>
-    <boxed title="Referencing members and methods">
+    <boxed title="Hivatkozás metódusokra és tagokra">
         <![CDATA[
-        As you can see in this example, to reference the member variables and methods of an object, the
-        <b>dot operator</b> can be used.
+        Ahogy a példában is látható, egy objektum tagváltozóira és metódusaira való hivatkozáshoz a
+        <b>pont operátor</b> használható.
         ]]>
     </boxed>
-    <advanced title="Default values">
+    <advanced title="Alap értékek">
         <![CDATA[
-        When creating the object all members are set to their <b>default values</b>. For example, if we didn't explicitly
-        give a name to the cat, it would be null. If we didn't initialize the age, it would be 0.
+        Az objektum létrehozásakor az összes tag <b>alapértelmezett értékre</b> kerül beállításra. Például, ha nem adtuk meg a
+        nevet a macskának, akkor az <i>null</i> lenne. Ha nem inicializálnánk a kort, akkor az 0 lenne.
         ]]>
     </advanced>
-    <title text="Object identity"/>
+    <title text="Objektumok azonossága"/>
     <text>
         <![CDATA[
-        Each object has an <b>identity</b>. This means that even if they are of the same class and all their members are equal,
-        that still does not mean they themselves are equal!
+        Minden objektumnak van <b>identitása</b>. Ez azt jelenti, ha ugyanabba az osztályba tartoznak, és minden tagjuk azonos,
+        akkor sem azonosak!
         <br><br>
-        This code sample demonstrates this:
+        Ez a kódminta ezt szemlélteti:
         ]]>
     </text>
     <code><![CDATA[
@@ -259,19 +260,19 @@
     ]]></code>
     <text>
         <![CDATA[
-        This isn't very intuitive in most cases, we want to have a way to check 'equality' between our objects. As this example
-        demonstrates, the <b>==</b> operator won't work. Java offers a solution, and it's called the <b>equals</b> method. More on this
-        when we've already learned about <i>inheritance and method overwriting</i>.
+        Ez az esetek többségében nem túl intuitív, szeretnénk, ha lenne módunk az objektumaink közötti "egyenlőség" ellenőrzésére. Mint ez a példa
+        mutatja, a <b>==</b> operátor nem fog működni. A Java megoldást kínál, és ezt <b>equals</b> metódusnak hívják. Bővebben erről
+        amikor már tanultunk az <i>öröklésről és a metódusok felülírásáról</i>.
         ]]>
     </text>
-    <title text="The this keyword"/>
+    <title text="A this kulcsszó"/>
     <text>
         <![CDATA[
-        The <b>this</b> keyword is used to reference the current object in the methods of the class. If that sounds confusing,
-        don't worry. Here are some examples of it's usage that should clear it up:
+        A <b>this</b> kulcsszó az osztály metódusaiban az aktuális objektumra való hivatkozásra szolgál. Ha ez zavaróan hangzik,
+        ne aggódj. Itt van néhány példa a használatára, ami tisztázza a helyzetet:
         <br><br>
-        Suppose we need a method for our <i>Cat</i> class that increases the age of the cat by one, then returns the
-        <i>Cat</i> object.
+        Tegyük fel, hogy a <i>Cat</i> osztályunkhoz szükségünk van egy olyan metódusra, amely eggyel növeli a macska életkorát, majd visszaadja a
+        teljes objektumot.
         ]]>
     </text>
     <code><![CDATA[
@@ -284,12 +285,13 @@
     ]]></code>
     <text>
         <![CDATA[
-        Without the <b>this</b> keyword, we wouldn't have any way of referencing the current cat object!
+        A <b>this</b> kulcsszó nélkül nem tudnánk hivatkozni az aktuális macska objektumra (arra, aminek a metódusa éppen meghívódik)!
         <br><br>
-        For the next example, we need a method that updates the value of the cats name, and for the sake of clarity the
-        parameter of this method is also called <i>name</i>, just like the member variable.
+        A következő példához szükségünk van egy olyan metódusra, amely frissíti a macska nevét. Az egyszerűség kedvéért a
+        paraméterét is <i>name</i>-nek hívjuk, akárcsak a tagváltozót.
         <p>
-        <b>this</b> will now be used to remove the ambiguity of the variable <i>name</i>!
+        A <i>this</i> most a <i>name</i> változó 'kétértelműségének' megszüntetésére szolgál (honnan tudjuk, hogy a paraméterre, vagy a 
+		tagváltozóra gondolunk). A <i>this</i> nélkül csak a paraméterre tudunk hivatkozni.
         ]]>
     </text>
     <code><![CDATA[
@@ -297,7 +299,7 @@
 <font color="#DF7401">void</font> <font color="#ADD8E6">setName</font>(<font color="#999900">String</font> name) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;When we write 'name' here, it'll mean the parameter, and not the
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;member variable! To reference the member, the this keyword can be used.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;member variable! To reference the member, the this keyword must be used.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">name</font> = name;
 <br/>}
@@ -305,8 +307,8 @@
     ]]></code>
     <text>
         <![CDATA[
-        These types of methods that update member values are called <b>setters</b>. You can see that the naming of the method
-        reflects this.
+        Az ilyen típusú metódusokat, amelyek a tagok értékeit frissítik, <b>setter</b>-eknek nevezzük. Láthatjuk, hogy a metódus elnevezése
+        ezt tükrözi (<i>set</i>).
         ]]>
     </text>
 

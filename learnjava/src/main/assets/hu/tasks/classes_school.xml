@@ -2,105 +2,104 @@
 <resources>
     <taskdata>
         <id>152</id>
-        <name>School system</name>
+        <name>Iskola rendszer</name>
     </taskdata>
     <text>
         <![CDATA[
-        Your task is to create the system of a school. The main entities that should be included are:
+        A feladatod, hogy létrehozd egy iskola "rendszerét". A fő entitások, amelyeknek szerepelniük kell 
+		a következők:
+        ]]>
+    </tewxt>
+    <list>
+        <![CDATA[
+        <ul>
+        <li>Person (személy): <b>névvel és életkorral</b> rendelkezik, az iskolában dolgozó vagy tanuló személyt képviseli.
+        <li>Student (tanuló): rendelkezik egy <b>tantárgy listával</b>, minden tantárgynak saját <b>osztályzata</b> van.</li>
+        <li>Subject (tantárgy): <b>névvel</b> és egy <b>tanárral</b> rendelkezik, aki tanítja.</li>
+        <li>Teacher (tanár): lehet egy <b>osztálya</b>, amelynek ő az osztályfőnöke.</li>
+        <li>SchoolClass (osztály): azonos korú tanulók csoportja.</li>
+        </ul>
+        ]]>
+    </list>
+    <boxed title="Egységbe zárás">
+        <![CDATA[
+        Rejts el minden információt <i>privát tagok</i>, getterek és setterek mögé! Tiltsd le a nem 
+		módosítható információk megváltoztatását, például egy személy nevét <i>final</i>-al.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Minden entitáshoz létre kell hoznod egy-egy osztályt, de nyugodtan hozhatsz létre többet is. Ne feledd, 
+		hogy az osztályoknak össze kell kapcsolódniuk, egymást tartalmazva (például egy <i>tanár</i>-nak 
+		van egy <i>osztálya</i>) vagy örökléssel (a diákok és a tanárok is személyek).
+        ]]>
+    </text>
+    <title text="Viselkedés metódusokkal"/>
+    <text>
+        <![CDATA[
+        Implementálj viselkedést minden osztály számára megfelelő metódusokkal. Minden osztálynak 
+		rendelkeznie kell legalább néhány olyan metódussal, amelyek valami értelmes dolgot csinálnak. 
+		Íme néhány példa:
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li>Person: has <b>name and age</b>, represents someone working or studying at the school.
-        <li>Student: has a <b>subject list</b>, each subject with its own <b>grade</b>.</li>
-        <li>Subject: has <b>name</b> and a <b>teacher</b> who teaches it.</li>
-        <li>Teacher: can have a <b>class</b>, of which he/she is the form master.</li>
-        <li>Class: a group of students of the same age.</li>
-        </ul>
-        ]]>
-    </list>
-    <boxed title="Encapsulate and finalize">
-        <![CDATA[
-        Hide all information behind <i>private members</i>, getters and setters! Disable the changing of information that shouldn't be changed,
-        for example a name of a person is <i>final</i>, but their age isn't.
-        ]]>
-    </boxed>
-    <text>
-        <![CDATA[
-        You should create a class for each of these entities, but feel free to create more. Remember, the classes should be connected,
-        by containing each other (like a <i>teacher</i> having a <i>class</i>) or by inheritance (students and teachers are persons).
-        ]]>
-    </text>
-    <title text="Behaviour with methods"/>
-    <text>
-        <![CDATA[
-        Implement a behaviour for all the classes with appropriate methods. Each class should have at least a few methods that
-        do something meaningful with the members. Make sure to mark members and methods that should belong
-        to the class static. Here are some examples:
-        ]]>
-    </text>
-    <list>
-        <![CDATA[
-        <ul>
-        <li>A method that calculates the average grade of a student.</li>
-        <li>A method that lists all teachers teaching a student.</li>
+        <li>Egy metódus, amely kiszámítja a tanuló átlagos osztályzatát.</li>
+        <li>Egy metódus, amely felsorolja az összes tanárt, aki egy diákot tanít.</li>
         </ul>
         ]]>
     </list>
     <text>
         <![CDATA[
-        Write a method for <i>Person</i> that is abstract, called <i>printData</i> and implement it for both student
-        and teacher.
+        Írj egy absztrakt metódust a <i>Person</i> osztály számára <i>printData</i> néven, és valósítsd 
+		meg a diák és a tanár számára is.
         ]]>
     </text>
-    <boxed title="Administrator">
+    <boxed title="Admin interfész">
         <![CDATA[
-        Make it so that there is an <i>Admin</i> interface, with methods that can modify the student list of a class.
-        Have <i>Teacher</i> implement this interface, but with a restriction:
+        Legyen egy <i>Admin</i> interfész, amelynek metódusai módosíthatják egy osztály tanulólistáját.
+        A <i>Teacher</i> valósítsa meg ezt az interfészt, de egy korlátozással:
         <p>
-        A teacher should only be able to change the students of their own class!
+        Egy tanár csak a saját osztályának diákjait változtathatja meg!
         ]]>
     </boxed>
-    <boxed title="Exception handling">
+    <boxed title="Kivétel kezelés">
         <![CDATA[
-        Don't allow the creation of invalid objects! Make sure a given age is valid, for example. Throw exceptions
-        if something is wrong (use the appropriate exception from the JDK, like <i>IllegalArgumentException</i>).
+        Ne engedélyezd az érvénytelen objektumok létrehozását! Győződj meg például arról, hogy egy 
+		adott életkor érvényes. Kivételek dobódjanak ha valami nem stimmel 
+		(használhatod a <i>JDK</i> megfelelő kivételét, például <i>IllegalArgumentException</i>-t).
         ]]>
     </boxed>
-    <advanced title="Implement pairs">
+    <advanced title="Párok">
         <![CDATA[
-        The student should have subject-grade pairs. It's up to you how you implement this. In the previous task, the recommendation for a similar
-        problem was using a <b>map</b>.
+        A tanulónak tantárgy-osztályzat párokkal kell rendelkeznie. Rajtad áll, hogy ezt hogyan valósítod meg. 
+		Az előző feladatban az ajánlás egy <b>Map</b> (hozzárendelés) használata volt.
         <p>
-        For a different approach, you can create a simple class which holds a subject and the grade (int), and have a list
-        of these.
+        Egy másik megközelítéshez létrehozhatsz egy egyszerű osztályt, amely egy tantárgyat és az osztályzatot tárolja. 
+		Ezután ebből az osztályból egy listát hozhatsz létre.
         ]]>
     </advanced>
-    <text>
-        <![CDATA[
-        Since this simple pair class is only used in the <i>Student</i> class, it is a good practice to make it an
-        <a href="https://www.javatpoint.com/java-inner-class">inner class</a>. This means that it's declared inside <i>Student</i>.
-        ]]>
-    </text>
     <title text="Javadoc"/>
     <text>
         <![CDATA[
-        <a href="https://www.tutorialspoint.com/java/java_documentation.htm">Javadoc</a> is the recommended way to document your methods and classes! Try it for this project!
-        Or don't, but write at least some comments.
+        A <a href="https://www.tutorialspoint.com/java/java_documentation.htm">javadoc</a> az ajánlott módszer a 
+		metódusok és osztályok dokumentálására! Próbáld ki ebben a projektben!
+        Vagy ne tedd, de írj legalább néhány kommentet.
         ]]>
     </text>
-    <title text="Test"/>
+    <title text="Teszt"/>
     <text>
         <![CDATA[
-        Make sure one of the classes has a main method, and test your project by creating some objects and calling their
-        methods to see if everything functions correctly.
+        Legyen az egyik osztályban <i>main</i> metódus. Teszteld a projektet néhány objektum 
+		létrehozásával a <i>main</i>-ben.
         ]]>
     </text>
     <solution>
         <text>
             <![CDATA[
-            A possible solution, with javadoc. First, the person base class:
+            Egy lehetséges megoldás, javadoc kommentzéssel együtt. Először is, a <i>Person</i> 
+			absztrakt ősosztály:
             ]]>
         </text>
         <code><![CDATA[
@@ -149,7 +148,7 @@
         ]]></code>
         <text>
             <![CDATA[
-            The administrator interface:
+            Az adminisztrátor interfész:
             ]]>
         </text>
         <code><![CDATA[
@@ -171,7 +170,8 @@
         ]]></code>
         <text>
             <![CDATA[
-            The teacher, implementing the admin interface and inheriting from the <i>Person</i> class:
+            A tanár (<i>Teacher</i>), aki az <i>Admin</i> interfészt valósítja meg, és a 
+			<i>Person</i> osztályból származik:
             ]]>
         </text>
         <code><![CDATA[
@@ -258,7 +258,8 @@
         ]]></code>
         <text>
             <![CDATA[
-            The student class. The subject-grade pairings are implemented with a pair class (which is an inner class).
+            A diák (<i>Student</i>). A tantárgy-osztály párosítások egy segédosztállyal valósulnak meg. Itt most ezt a 
+			<i>Student</i>-en belülre írtam, de az is tökéletes, ha saját forrásájlt kap.
             ]]>
         </text>
         <code><![CDATA[
@@ -346,7 +347,7 @@
         ]]></code>
         <text>
             <![CDATA[
-            The subject class:
+            A tantárgy (<i>Subject<i>) osztálya:
             ]]>
         </text>
         <code><![CDATA[
@@ -385,8 +386,8 @@
         ]]></code>
         <text>
             <![CDATA[
-            And the group of students, called <i>SchoolClass</i>. It isn't a good idea to call it <i>Class</i>,
-            since there is already a class in the JDK with that name.
+            És a diákok csoportja, az úgynevezett <i>SchoolClass</i>. Nem jó ötlet <i>Class</i>-nak 
+			nevezni, mivel a <i>JDK</i>-ban már van egy ilyen nevű osztály.
             ]]>
         </text>
         <code><![CDATA[
@@ -459,7 +460,7 @@
         ]]></code>
         <text>
             <![CDATA[
-            Now that we have all the classes, let's run a few tests:
+            Most, hogy megvan az összes osztály, futtassunk le néhány tesztet:
             ]]>
         </text>
         <code><![CDATA[

@@ -351,7 +351,6 @@
         <answer>A class with no members, only methods.</answer>
         <answer>A class that isn't completely coded yet.</answer>
         <answer>A class that can't be instantiated.</answer>
-        <answer>A class that has at least one abstract method.</answer>
         <correct>2</correct>
     </question>
     <question type="text">

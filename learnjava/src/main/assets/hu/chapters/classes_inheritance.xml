@@ -2,26 +2,27 @@
 <resources>
     <chapterdata>
         <id>153</id>
-        <name>Inheritance</name>
+        <name>Öröklődés</name>
     </chapterdata>
     <text>
         <![CDATA[
-        When creating classes, we often want to be able to define 'relations' between our classes. Let's look at a
-        classic example: we've created the class <b>Dog</b>, it has <i>name, age, etc...</i>, and now we want a <b>Pug</b> class.
+        Osztályok létrehozásakor gyakran szeretnénk "kapcsolatokat" definiálni az osztályaink között. Nézzünk meg egy
+        példát: létrehoztuk a <b>Dog</b> (kutya) osztályt, <i>név, kor, stb...</i> tagokkal. Szeretnénk egy <b>TrainedDog</b> (kiképzett kutya) 
+		osztályt is.
         ]]>
     </text>
-    <boxed title="Reusability">
+    <boxed title="Újrafelhasználhatóság">
         <![CDATA[
-        A pug is a specific dog. It would be great if the <b>Pug</b> class could somehow inherit all members and method of the
-        <b>Dog</b> class, without needing to copy and paste them into the <b>Pug</b> class, of course. This (and more)
-        is what inheritance allows us to do.
+        A kiképzett kutya is csak egy kutya. Jó lenne, ha a <b>TrainedDog</b> osztály valahogyan örökölhetné a <b>Dog</b> osztály összes tagját 
+		és metódusát, természetesen anélkül, hogy azokat át kellene másolni és beilleszteni a <b>TrainedDog</b> osztályba. Ezt (és még sok mást)
+        tesz lehetővé számunkra az öröklődés.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        The class that we inherit from is called <b>superclass</b> (sometimes parent class), the one that inherits is the
-        <b>subclass</b> (or child class).
-        In Java, the <b>extends</b> keyword is used to define this inheritance relation between our classes:
+        Az osztályt, amelytől örökölünk, <b>superclass</b>-nak (néha szülő osztálynak) nevezzük, az öröklődő osztály pedig a <b>subclass</b> 
+        (vagy gyermek osztály, alosztály).
+        Java-ban a <b>extends</b> kulcsszóval határozzuk meg ezt az öröklési kapcsolatot az osztályaink között:
         ]]>
     </text>
     <code><![CDATA[
@@ -46,14 +47,14 @@
     ]]></code>
     <code><![CDATA[
         
-        <font color="#E65100">public class</font> <font color="#999900">Pug</font> <font color="#E65100">extends</font> <font color="#999900">Dog</font> {
+        <font color="#E65100">public class</font> <font color="#999900">TrainedDog</font> <font color="#E65100">extends</font> <font color="#999900">Dog</font> {
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font> pugBreed;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font> skill;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Pug</font>(<font color="#999900">String</font> name, <font color="#DF7401">int</font> age, <font color="#999900">String</font> pugBreed) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">TrainedDog</font>(<font color="#999900">String</font> name, <font color="#DF7401">int</font> age, <font color="#999900">String</font> skill) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>(name, age); <font color="gray">//call the constructor of super class, Dog
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">pugBreed</font> = pugBreed;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">skill</font> = skill;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
 <br/>}
@@ -61,129 +62,127 @@
     ]]></code>
     <text>
         <![CDATA[
-        You can notice a few things here: first, the <i>protected</b> visibility is used for the members of <b>Dog</b>. This is
-        done so that they can be accessed inside the <b>Pug</b> class as well.
+        Itt észrevehetünk néhány dolgot: először is, <i>védett</b> láthatóságot használunk a <i>Dog</i> adattagjaira. Ez azért van, hogy 
+        a <i>TrainedDog</i> osztályon belül is elérhetők legyenek.
         <p>
-        Secondly, the <b>super</b> keyword inside the constructor. It's used to call the constructor of the superclass, in this
-        case <b>Dog</b>'s. That constructor will take care of assigning the values of <i>name and age</i>.
+        Másodszor, a <b>super</b> kulcsszó a konstruktoron belül. Ezt arra használjuk, hogy meghívjuk a szülő osztály konstruktorát, ebben a
+        ebben az esetben a <i>Dog</i> osztályét. Ez a konstruktor gondoskodik a név és a kor értékek beállításáról.
         ]]>
     </text>
-    <boxed title="Restriction">
+    <boxed title="Megkötés">
         <![CDATA[
-        The call to the superclass constructor must always be the first statement in the subclasses' constructor (as it
-        can be seen in the code sample)! The Java Compiler will stop with an error if this isn't the case.
+        A superclass konstruktorának hívása mindig az első utasítás kell, hogy legyen az alosztályok konstruktorában (ahogyan az
+        a kódpéldában is látható)! A Java fordító hibaüzenettel áll le, ha ez nem így van.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        In the main method (which can be in either of these classes, our in a completely different one) we can create some objects:
+        A main metódusban (amely lehet bármelyik osztályban) létrehozunk néhány objektumot:
         ]]>
     </text>
     <code><![CDATA[
         
         <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create a pug object
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create a trained dog object
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Pug</font> p1 = <font color="#E65100">new</font> <font color="#999900">Pug</font>(<font color="#2E8B57">"Edgar"</font>, 10, <font color="#2E8B57">"Black breed"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">TrainedDog</font> t1 = <font color="#E65100">new</font> <font color="#999900">TrainedDog</font>(<font color="#2E8B57">"Edgar"</font>, 10, <font color="#2E8B57">"Guide dog"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Pug inherited this method from Dog!</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;p1.<font color="#ADD8E6">printDogData</font>();
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//TrainedDog inherited this method from Dog!</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;t1.<font color="#ADD8E6">printDogData</font>();
 <br/>}
         
     ]]></code>
     <text>
         <![CDATA[
-        As you can see, we can use the <i>printDogData</i> method with our pug object, despite not declaring it inside the
-        class! It inherited the method from its superclass.
+        Amint láthatjuk, használhatjuk a <i>printDogData</i> metódust a <i>TrainedDog</i> objektumunkkal, annak ellenére, hogy nem deklaráltuk azt az
+        osztályban! A metódust a szuperosztályától (<i>Dog</i> örökölte.
         <p>
-        There is, however, one small problem: notice that when running the code sample, only the name and age of the pug is
-        printed, the breed isn't! This is because the method of the <b>Dog</b> class doesn't know about this member, it was
-        declared in a subclass.
+        Van azonban egy apró probléma: vegyük észre, hogy a kódminta futtatásakor csak a kutya neve és kora jelenik meg, 
+        a képesség nem! Ennek az az oka, hogy a <i>Dog</i> osztály metódusa nem tud erről a tagról, mivel az alosztályban lett deklarálva.
         ]]>
     </text>
-    <boxed title="Override methods">
+    <boxed title="Metódusok felülírása">
         <![CDATA[
-        Overriding methods is introduced as a solution for problems such as the one above! It allows us to 'redefine' the
-        method of the superclass inside the subclass.
+        A metódusok felülírását a fentihez hasonló problémák megoldására vezették be! Lehetővé teszi számunkra, hogy "újra definiáljuk" a
+        szülő osztály metódusát az alosztályon belül.
         <p>
-        It doesn't require any keywords or such, we simply must declare the same method inside the subclass, and it'll override
-        the method of the superclass.
+        Nem igényel semmilyen kulcsszót, egyszerűen csak deklarálnunk kell ugyanazt a metódust az alosztályon belül, és az felülírja az eredeti metódust.
         ]]>
     </boxed>
     <code><![CDATA[
         
-        <font color="#E65100">public class</font> <font color="#999900">Pug</font> <font color="#E65100">extends</font> <font color="#999900">Dog</font> {
+        <font color="#E65100">public class</font> <font color="#999900">TrainedDog</font> <font color="#E65100">extends</font> <font color="#999900">Dog</font> {
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font> pugBreed;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font> skill;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Pug</font>(<font color="#999900">String</font> name, <font color="#DF7401">int</font> age, <font color="#999900">String</font> pugBreed) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">TrainedDog</font>(<font color="#999900">String</font> name, <font color="#DF7401">int</font> age, <font color="#999900">String</font> skill) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>(name, age); <font color="gray">//call the constructor of super class, Dog
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">pugBreed</font> = pugBreed;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">skill</font> = skill;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printDogData</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>.<font color="#ADD8E6">printDogData</font>(); <font color="gray">//will print the name and age</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Pug breed: "</font> + pugBreed);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Skill: "</font> + skill);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
         
     ]]></code>
     <text>
         <![CDATA[
-        Run the main method again, and you'll see that now the <i>printDogData</i> will also print the pug breed, because the
-        overridden method is called. The <b>@Override</b> annotation is not necessary, but recommended.
+        Futtassuk újra a main metódust, és látni fogjuk, hogy most a <i>printDogData</i> kiírja a kiképzett kutya képességét is, mert a
+        felülírt metódus fog meghívódni. A <b>@Override</b> annotáció nem szükséges, de ajánlott.
         <p>
-        Note that the super keyword can also be used here, it's used to call the method of the superclass (without it, the method
-        would call itself).
+        Vegyük észre, hogy a super kulcsszó itt is használható, a szülő osztály metódusának meghívására szolgál (nélküle a metódus
+        önmagát hívná meg).
         ]]>
     </text>
-    <advanced title="Annotations">
+    <advanced title="Annotációk">
         <![CDATA[
-        Annotations start with the <b>@</b> symbol, and they provide extra information about the code to the compiler,
-        and to the programmer.
+        Az annotációk az <b>@</b> szimbólummal kezdődnek, és extra információkat szolgáltatnak a kódról,
+        a programozónak és a fordító programnak.
         <p>
-        For example, if we put the override annotation, and enter a wrong name for the method because of a typo, it'll warn
-        us that the superclass has no such method.
+        Ha például az <i>@Override</i> annotációt tesszük be egy metódus elé, és egy elírás miatt rossz nevet adunk meg a metódusnak, 
+		a program figyelmeztetni fog minket, hogy a szuperosztály nem rendelkezik ilyen metódussal (mivel felülírni csak a szülő osztályban 
+		létező metódust lehet).
         ]]>
     </advanced>
-    <title text="Inheritance hierarchy"/>
+    <title text="Öröklődési hierarchia"/>
     <text>
         <![CDATA[
-        Classes can have multiple subclasses, and those can also have their own subclasses, and so on. Together they create
-        an inheritance hierarchy. It's often represented with some kind of diagram, like this one:
+        Az osztályoknak több alosztályuk is lehet, ezeknek is lehetnek saját alosztályaik, és így tovább. Ezek együttesen hozzák létre a
+        öröklődési hierarchiát. Ezt gyakran ábrázolják valamilyen diagrammal, például így:
         ]]>
     </text>
     <image name="inheritance_hierarchy"/>
-    <advanced title="Multiple superclasses">
+    <advanced title="Több szülő osztály">
         <![CDATA[
-        Having multiple superclasses is <b>not allowed</b> in Java. A class can only inherit from one superclass.
-        Other languages, such as C++ allow this, and introduce different solutions to the problems that this kind
-        of inheritance causes.
+        A Java-ban <b>nem megengedett</b>, hogy egy osztálynak több szülője is legyen. Egy osztály csak egy szuperosztálytól örökölhet.
+        Más nyelvek, mint például a C++, megengedik ezt.
         ]]>
     </advanced>
     <boxed title="java.lang.Object">
         <![CDATA[
-        The <b>Object</b> (a bit confusing name, indeed) class is at the top of the hierarchy. If we don't explicitly write
-        a superclass for our class, it will inherit from <b>Object</b>.
+        Az <b>Object</b> (valóban kissé zavaros név) osztály áll a hierarchia csúcsán. Ha nem írunk explicit módon
+        szülő osztályt az osztályunknak, akkor az <b>Object</b>-től fog örökölni.
         <p>
-        This class has no members, but it does have a few methods, such as <i>equals</i>. Consequently, this methods can be used
-        and in any class, most of them can also be overridden.
+        Ennek az osztálynak nincsenek tagjai, de van néhány metódusa, például a <i>equals</i>. Következésképpen ezeket a metódusokat használhatjuk
+        és felülírhatjuk bármelyik osztályban.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        It's possible to mark a class so that it can't be inherited from, using the <b>final</b> keyword:
+        A <b>final</b> kulcsszóval lehet egy osztályt úgy megjelölni, hogy ne lehessen tőle örökölni:
         <br><br>
         <i>public final class Integer { ... }</i>
         <br><br>
-        Similarly, methods can also be marked final, and they can't be overridden. See
-        <a href="https://stackoverflow.com/questions/5181578/what-is-the-point-of-final-class-in-java">this</a> question
-        for more details.
+        Hasonlóképpen a metódusokat is jelölhetjük finalnak, és akkor nem lehet felülírni őket. Lásd 
+        <a href="https://stackoverflow.com/questions/5181578/what-is-the-point-of-final-class-in-java">ezt</a> a kérdést
+        további részletekért.
         ]]>
     </text>
-    <interactive instruction="Make this class extends the other one, and also call its constructor!">
+    <interactive instruction="Egészítsd ki a kódot úgy, hogy öröklődés legyen, és a szülő osztály konstruktora meghívódjon!">
         <data><![CDATA[
 
 <font color="#E65100">class</font> <font color="#999900">FragmentActivity</font> ___ <font color="#999900">Activity</font> {
@@ -196,55 +195,55 @@
         <answer place="0">extends</answer>
         <answer place="1">super</answer>
     </interactive>
-    <title text="Use child as parent"/>
+    <title text="Alosztály használata szülőként"/>
     <text>
         <![CDATA[
-        In Java we can also use an object as its superclass. Let's look at some code samples to explain this more clearly.
+        Javában egy objektumot szuperosztályként is használhatunk. Nézzünk néhány kódmintát, hogy ez érthetőbb legyen.
         <br><br>
-        Another way to put it is that an object can behave like any other class above him in the inheritance hierarchy.
+        Másképpen úgy is fogalmazhatunk, hogy egy objektum úgy viselkedhet, mint az öröklési hierarchiában fölötte lévő bármelyik osztály.
         ]]>
     </text>
     <boxed title="instanceof">
         <![CDATA[
-        The <b>instanceof</b> keyword can be used to check if an object belongs to a class. It'll return a boolean.
+        A <b>instanceof</b> kulcsszóval ellenőrizhetjük, hogy egy objektum egy osztályhoz tartozik-e. Ez egy bólusú értéket ad vissza.
         ]]>
     </boxed>
     <code><![CDATA[
         
         <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create a pug object
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create a trained dog object
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Pug</font> p1 = <font color="#E65100">new</font> <font color="#999900">Pug</font>(<font color="#2E8B57">"Maya"</font>, 10, <font color="#2E8B57">"White breed"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">TrainedDog</font> t1 = <font color="#E65100">new</font> <font color="#999900">TrainedDog</font>(<font color="#2E8B57">"Rex"</font>, 10, <font color="#2E8B57">"Police dog"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(p1 <font color="#E65100">instanceof</font> <font color="#999900">Pug</font>) { <font color="gray">//this will be true, no surprise there
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(t1 <font color="#E65100">instanceof</font> <font color="#999900">TrainedDog</font>) { <font color="gray">//this will be true, no surprise there
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"p1 is a Pug object!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"t1 is a TrainedDog object!"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(p1 <font color="#E65100">instanceof</font> <font color="#999900">Dog</font>) { <font color="gray">//due to polymorphism, this will also be true!
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(t1 <font color="#E65100">instanceof</font> <font color="#999900">Dog</font>) { <font color="gray">//due to polymorphism, this will also be true!
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"p1 is a Dog object!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"t1 is also a Dog object!"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
         
     ]]></code>
     <text>
         <![CDATA[
-        Both lines are printed, so a pug object is also a dog object! This is the behaviour that we want, intuitively we know that
-        a pug is special dog, Java also produces this behaviour.
+        Mindkét sor kiíródik, tehát a <i>TrainedDog</i> objektum egyben <i>Dog</i> objektum is! Ez az a viselkedés, amit szeretnénk, mert 
+		intuitívan tudjuk, hogy a kiképzett kutya egy speciális kutya. 
         ]]>
     </text>
     <code><![CDATA[
         
         <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create dog objects, some of them are pugs</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create dog objects, some of them are trained dogs</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Dog</font> d1 = <font color="#E65100">new</font> <font color="#999900">Dog</font>(<font color="#2E8B57">"Bernard"</font>, <font color="#F0E130">5</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Pug</font> p1 = <font color="#E65100">new</font> <font color="#999900">Pug</font>(<font color="#2E8B57">"Maya"</font>, 10, <font color="#2E8B57">"White breed"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">TrainedDog</font> t1 = <font color="#E65100">new</font> <font color="#999900">TrainedDog</font>(<font color="#2E8B57">"Maya"</font>, 10, <font color="#2E8B57">"Drug sniffer dog"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Dog</font> d2 = <font color="#E65100">new</font> <font color="#999900">Dog</font>(<font color="#2E8B57">"Lassie"</font>, <font color="#F0E130">3</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;Dog> dogList = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;dogList.<font color="#ADD8E6">add</font>(d1);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;dogList.<font color="#ADD8E6">add</font>(p1); <font color="gray">//the pug can also be added!</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;dogList.<font color="#ADD8E6">add</font>(t1); <font color="gray">//the trained dog can also be added!</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;dogList.<font color="#ADD8E6">add</font>(d2);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Dog</font> dog: dogList) {
@@ -255,97 +254,98 @@
     ]]></code>
     <text>
         <![CDATA[
-        Without this property of objects, we wouldn't be able to add the pugs into the list of dogs!
+        Az objektumok ezen tulajdonsága nélkül nem tudnánk hozzáadni a kiképzett kutyákat a kutyák listájához!
         ]]>
     </text>
-    <boxed title="Dynamic polymorphism">
+    <boxed title="Dinamikus polimorfizmus (többalakúság)">
         <![CDATA[
-        Note that when iterating through the list and reaching the <i>Pug</i> object, the correct <i>printDogData</i> method
-        will be called (meaning the one implemented in the <i>Pug</i> class). This is called <b>dynamic polymorphism</b>.
+        Figyeljük meg, hogy amikor a listán végigmegyünk és elérjük a <i>TrainedDog</i> objektumot, a helyes <i>printDogData</i> metódus
+        (azaz a <i>TrainedDog</i> osztályban implementált) metódus lesz meghívva. Ezt nevezzük <b>dinamikus polimorfizmusnak</b>.
         <p>
-        Polymorphism, since the method has multiple implementations, dynamic, since it's determined at runtime (from the objects
-        original type) which of them is called.
+        Polimorfizmus, mivel a metódusnak több implementációja van, dinamikus, mivel futásidőben határozza meg a Java (az objektum 
+        eredeti típusából), hogy ezek közül melyiket hívjuk meg.
         ]]>
     </boxed>
-    <title text="Casting objects"/>
+    <title text="Objektumok átalakítása"/>
     <text>
         <![CDATA[
-        Casting objects means that we change their types. Obviously, we can't just cast any class type into any other.
-        Valid casts can only be made between classes that are related within the inheritance hierarchy.
+        Az objektumok átalakítása (cast-olás) azt jelenti, hogy megváltoztatjuk a típusukat. Nyilvánvaló, hogy nem tudunk bármelyik osztálytípust 
+		bármelyik másikba átvinni. Érvényes átalakítást csak az öröklési hierarchián belül rokon osztályok között lehet végrehajtani.
         ]]>
     </text>
-    <boxed title="How to cast">
+    <boxed title="Hogyan alakítsunk át">
         <![CDATA[
-        Casting is done by putting the class that we want to cast to between brackets. Check the examples below for demonstration.
+        Az átalakítás úgy történik, hogy zárójelek közé tesszük az osztályt, amelyre cast-olni szeretnénk. 
+		Nézd meg az alábbi példákat a demonstrációhoz.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        There are two types of valid casts: upcast, and downcast. <b>Upcast</b> means that we cast from subclass to superclass.
-        Due to the fact that an object can behave like its superclass (see above), such a cast is always safe, meaning it never
-        results in an error.
+        Az érvényes átalakításoknak két típusa van: upcast és downcast. <b>Az upcast</b> ("átalakítás felfelé") azt jelenti, hogy alosztályból 
+		szülő osztályba cast-olunk.
+        Mivel egy objektum úgy viselkedhet, mint a szuperosztálya (lásd fentebb), az ilyen átalakítás mindig biztonságos, nem fog hibát okozni.
         ]]>
     </text>
     <code><![CDATA[
         
-        <font color="gray">//upcast a Pug object to a Dog</font>
-<br/><font color="#999900">Dog</font> dog = (<font color="#999900">Dog</font>)new <font color="#999900">Pug</font>(<font color="#2E8B57">"Manni"</font>,5, <font color="#2E8B57">"Gray breed"</font>);
+        <font color="gray">//upcast a TrainedDog object to a Dog</font>
+<br/><font color="#999900">Dog</font> dog = (<font color="#999900">Dog</font>)new <font color="#999900">TrainedDog</font>(<font color="#2E8B57">"Manni"</font>,5, <font color="#2E8B57">"Therapy dog"</font>);
         
     ]]></code>
     <text>
         <![CDATA[
-        In cases like this, it isn't even necessary to write the classname in the brackets. Java can perform the <b>cast
-        implicitly</b>.
+        Ilyen esetekben nem is szükséges az osztálynevet zárójelbe írni. A Java képes <b>cast-olni implicit módon</b> (azaz magától 
+		kitalálja, hogy mire kell átalakítani).
         ]]>
     </text>
     <code><![CDATA[
         
-        <font color="gray">//upcast a Pug object to a Dog</font>
-<br/><font color="#999900">Dog</font> dog = new <font color="#999900">Pug</font>(<font color="#2E8B57">"Manni"</font>,5, <font color="#2E8B57">"Gray breed"</font>);
+        <font color="gray">//upcast a TrainedDog object to a Dog</font>
+<br/><font color="#999900">Dog</font> dog = new <font color="#999900">TrainedDog</font>(<font color="#2E8B57">"Manni"</font>,5, <font color="#2E8B57">"Therapy dog"</font>);
         
     ]]></code>
     <text>
         <![CDATA[
-        The same implicit upcast happened when we added the pug into the list of dogs in the above example!
+        Ugyanez az implicit upcast történt, amikor a listás példában a <i>TrainedDog</i>-ot hozzáadtuk a kutyák listájához!
         <br><br>
-        The other cast, <b>downcast</b> is when we change the type of the superclass into subclass. This isn't safe. First, let's
-        see a downcast that won't result in an exception:
+        A másik cast, <b>downcast</b> az, amikor a szuperosztály típusát alosztályra változtatjuk. Ez nem biztonságos. Először is
+        lássunk egy olyan downcastot, amely nem eredményez hibát:
         ]]>
     </text>
     <code><![CDATA[
         
-        <font color="gray<font color="#2E8B57">">//'</font>dog' is actually a pug, it's safe to downcast</font>
-<br/><font color="#999900">Dog</font> dog = new <font color="#999900">Pug</font>(<font color="#2E8B57">"Manni"</font>,5, <font color="#2E8B57">"Gray breed"</font>);
+        <font color="gray">//'dog' is actually a TrainedDog, it's safe to downcast</font>
+<br/><font color="#999900">Dog</font> dog = new <font color="#999900">TrainedDog</font>(<font color="#2E8B57">"Manni"</font>,5, <font color="#2E8B57">"Therapy dog"</font>);
 <br/>
-<br/><font color="#999900">Pug</font> pug = (<font color="#999900">Pug</font>)dog; <font color="gray">//no exception</font>
+<br/><font color="#999900">TrainedDog</font> td = (<font color="#999900">TrainedDog</font>)dog; <font color="gray">//no exception</font>
         
     ]]></code>
     <text>
         <![CDATA[
-        We can, however, run into a <b>ClassCastException</b> if we aren't careful:
+        Azonban belefuthatunk egy <b>ClassCastException</b>-be, ha nem vagyunk óvatosak:
         ]]>
     </text>
     <code><![CDATA[
         
-<font color="gray<font color="#2E8B57">">//'</font>dog' is NOT a pug, downcast will fail!</font>
+<font color="gray">//'dog' is NOT a TrainedDog, downcast will fail!</font>
 <br/><font color="#999900">Dog</font> dog = <font color="#E65100">new</font> <font color="#999900">Dog</font>(<font color="#2E8B57">"Sisi"</font>, <font color="#F0E130">7</font>);
 <br/>
-<br/><font color="#999900">Pug</font> pug = (<font color="#999900">Pug</font>)dog; <font color="gray">//ClassCastException</font>
+<br/><font color="#999900">TrainedDog</font> td = (<font color="#999900">TrainedDog</font>)dog; <font color="gray">//ClassCastException</font>
         
     ]]></code>
     <text>
         <![CDATA[
-        It can be tricky to spot dangerous downcasts. Code like the one above is valid, it'll compile, the exception only arises
-        at runtime! Use <i>instanceof</i> to prevent cast related exceptions:
+        Nehéz lehet észrevenni a hibás cast-okat. A fentihez hasonló kód érvényes, lefordítható, a kivétel csak futás közben történik! 
+		Használd az <i>instanceof</i>-ott a cast-tal kapcsolatos kivételek megelőzésére:
         ]]>
     </text>
     <code><![CDATA[
         
-        <font color="gray<font color="#2E8B57">">//'</font>dog' is NOT a pug, downcast will fail!</font>
+        <font color="gray">//'dog' is NOT a TrainedDog, downcast will fail!</font>
 <br/><font color="#999900">Dog</font> dog = <font color="#E65100">new</font> <font color="#999900">Dog</font>(<font color="#2E8B57">"Sisi"</font>, <font color="#F0E130">7</font>);
 <br/>
-<br/><font color="#E65100">if</font>(dog <font color="#E65100">instanceof</font> <font color="#999900">Pug</font>) { <font color="gray">//false</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Pug</font> pug = (<font color="#999900">Pug</font>)dog; <font color="gray">//not executed, no exception</font>
+<br/><font color="#E65100">if</font>(dog <font color="#E65100">instanceof</font> <font color="#999900">TrainedDog</font>) { <font color="gray">//false</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">TrainedDog</font> td = (<font color="#999900">TrainedDog</font>)dog; <font color="gray">//not executed, no exception</font>
 <br/>}
         
     ]]></code>

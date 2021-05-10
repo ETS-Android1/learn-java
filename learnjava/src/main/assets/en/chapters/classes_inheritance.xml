@@ -6,14 +6,14 @@
     </chapterdata>
     <text>
         <![CDATA[
-        When creating classes, we often want to be able to define 'relations' between our classes. Let's look at a
-        classic example: we've created the class <b>Dog</b>, it has <i>name, age, etc...</i>, and now we want a <b>Pug</b> class.
+        When creating classes, we often want to be able to define 'relations' between our classes. Let's look at an
+        example: we've created the class <b>Dog</b>, it has <i>name, age, etc...</i>, and now we want a <b>TrainedDog</b> class.
         ]]>
     </text>
     <boxed title="Reusability">
         <![CDATA[
-        A pug is a specific dog. It would be great if the <b>Pug</b> class could somehow inherit all members and method of the
-        <b>Dog</b> class, without needing to copy and paste them into the <b>Pug</b> class, of course. This (and more)
+        A trained dog is also a dog. It would be great if the <b>TrainedDog</b> class could somehow inherit all members and methods of the
+        <b>Dog</b> class, without needing to copy and paste them into the <b>TrainedDog</b> class, of course. This (and more)
         is what inheritance allows us to do.
         ]]>
     </boxed>
@@ -46,14 +46,14 @@
     ]]></code>
     <code><![CDATA[
         
-        <font color="#E65100">public class</font> <font color="#999900">Pug</font> <font color="#E65100">extends</font> <font color="#999900">Dog</font> {
+        <font color="#E65100">public class</font> <font color="#999900">TrainedDog</font> <font color="#E65100">extends</font> <font color="#999900">Dog</font> {
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font> pugBreed;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font> skill;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Pug</font>(<font color="#999900">String</font> name, <font color="#DF7401">int</font> age, <font color="#999900">String</font> pugBreed) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">TrainedDog</font>(<font color="#999900">String</font> name, <font color="#DF7401">int</font> age, <font color="#999900">String</font> skill) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>(name, age); <font color="gray">//call the constructor of super class, Dog
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">pugBreed</font> = pugBreed;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">skill</font> = skill;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
 <br/>}
@@ -62,7 +62,7 @@
     <text>
         <![CDATA[
         You can notice a few things here: first, the <i>protected</b> visibility is used for the members of <b>Dog</b>. This is
-        done so that they can be accessed inside the <b>Pug</b> class as well.
+        done so that they can be accessed inside the <b>TrainedDog</b> class as well.
         <p>
         Secondly, the <b>super</b> keyword inside the constructor. It's used to call the constructor of the superclass, in this
         case <b>Dog</b>'s. That constructor will take care of assigning the values of <i>name and age</i>.
@@ -82,22 +82,22 @@
     <code><![CDATA[
         
         <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create a pug object
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create a trained dog object
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Pug</font> p1 = <font color="#E65100">new</font> <font color="#999900">Pug</font>(<font color="#2E8B57">"Edgar"</font>, 10, <font color="#2E8B57">"Black breed"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">TrainedDog</font> t1 = <font color="#E65100">new</font> <font color="#999900">TrainedDog</font>(<font color="#2E8B57">"Edgar"</font>, 10, <font color="#2E8B57">"Guide dog"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Pug inherited this method from Dog!</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//TrainedDog inherited this method from Dog!</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;p1.<font color="#ADD8E6">printDogData</font>();
 <br/>}
         
     ]]></code>
     <text>
         <![CDATA[
-        As you can see, we can use the <i>printDogData</i> method with our pug object, despite not declaring it inside the
+        As you can see, we can use the <i>printDogData</i> method with our trained dog object, despite not declaring it inside the
         class! It inherited the method from its superclass.
         <p>
-        There is, however, one small problem: notice that when running the code sample, only the name and age of the pug is
-        printed, the breed isn't! This is because the method of the <b>Dog</b> class doesn't know about this member, it was
+        There is, however, one small problem: notice that when running the code sample, only the name and age of the trained dog is
+        printed, the skill isn't! This is because the method of the <b>Dog</b> class doesn't know about this member, it was
         declared in a subclass.
         ]]>
     </text>
@@ -112,27 +112,27 @@
     </boxed>
     <code><![CDATA[
         
-        <font color="#E65100">public class</font> <font color="#999900">Pug</font> <font color="#E65100">extends</font> <font color="#999900">Dog</font> {
+        <font color="#E65100">public class</font> <font color="#999900">TrainedDog</font> <font color="#E65100">extends</font> <font color="#999900">Dog</font> {
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font> pugBreed;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font> skill;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Pug</font>(<font color="#999900">String</font> name, <font color="#DF7401">int</font> age, <font color="#999900">String</font> pugBreed) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">TrainedDog</font>(<font color="#999900">String</font> name, <font color="#DF7401">int</font> age, <font color="#999900">String</font> skill) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>(name, age); <font color="gray">//call the constructor of super class, Dog
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">pugBreed</font> = pugBreed;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">skill</font> = skill;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printDogData</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>.<font color="#ADD8E6">printDogData</font>(); <font color="gray">//will print the name and age</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Pug breed: "</font> + pugBreed);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Skill: "</font> + skill);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
         
     ]]></code>
     <text>
         <![CDATA[
-        Run the main method again, and you'll see that now the <i>printDogData</i> will also print the pug breed, because the
+        Run the main method again, and you'll see that now the <i>printDogData</i> will also print the trained dog skill, because the
         overridden method is called. The <b>@Override</b> annotation is not necessary, but recommended.
         <p>
         Note that the super keyword can also be used here, it's used to call the method of the superclass (without it, the method
@@ -144,7 +144,7 @@
         Annotations start with the <b>@</b> symbol, and they provide extra information about the code to the compiler,
         and to the programmer.
         <p>
-        For example, if we put the override annotation, and enter a wrong name for the method because of a typo, it'll warn
+        For example, if we put the <i>@Override</i> annotation, and enter a wrong name for the method because of a typo, it'll warn
         us that the superclass has no such method.
         ]]>
     </advanced>
@@ -212,39 +212,39 @@
     <code><![CDATA[
         
         <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create a pug object
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create a trained dog object
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Pug</font> p1 = <font color="#E65100">new</font> <font color="#999900">Pug</font>(<font color="#2E8B57">"Maya"</font>, 10, <font color="#2E8B57">"White breed"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">TrainedDog</font> t1 = <font color="#E65100">new</font> <font color="#999900">TrainedDog</font>(<font color="#2E8B57">"Rex"</font>, 10, <font color="#2E8B57">"Police dog"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(p1 <font color="#E65100">instanceof</font> <font color="#999900">Pug</font>) { <font color="gray">//this will be true, no surprise there
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(t1 <font color="#E65100">instanceof</font> <font color="#999900">TrainedDog</font>) { <font color="gray">//this will be true, no surprise there
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"p1 is a Pug object!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"t1 is a TrainedDog object!"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(p1 <font color="#E65100">instanceof</font> <font color="#999900">Dog</font>) { <font color="gray">//due to polymorphism, this will also be true!
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(t1 <font color="#E65100">instanceof</font> <font color="#999900">Dog</font>) { <font color="gray">//due to polymorphism, this will also be true!
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"p1 is a Dog object!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"t1 is also a Dog object!"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
         
     ]]></code>
     <text>
         <![CDATA[
-        Both lines are printed, so a pug object is also a dog object! This is the behaviour that we want, intuitively we know that
-        a pug is special dog, Java also produces this behaviour.
+        Both lines are printed, so a trained dog object is also a dog object! This is what we want, intuitively we know that
+        a trained dog is special dog, so Java also produces this behaviour.
         ]]>
     </text>
     <code><![CDATA[
         
         <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create dog objects, some of them are pugs</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create dog objects, some of them are trained dogs</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Dog</font> d1 = <font color="#E65100">new</font> <font color="#999900">Dog</font>(<font color="#2E8B57">"Bernard"</font>, <font color="#F0E130">5</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Pug</font> p1 = <font color="#E65100">new</font> <font color="#999900">Pug</font>(<font color="#2E8B57">"Maya"</font>, 10, <font color="#2E8B57">"White breed"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">TrainedDog</font> t1 = <font color="#E65100">new</font> <font color="#999900">TrainedDog</font>(<font color="#2E8B57">"Maya"</font>, 10, <font color="#2E8B57">"Drug sniffing dog"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Dog</font> d2 = <font color="#E65100">new</font> <font color="#999900">Dog</font>(<font color="#2E8B57">"Lassie"</font>, <font color="#F0E130">3</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;Dog> dogList = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;dogList.<font color="#ADD8E6">add</font>(d1);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;dogList.<font color="#ADD8E6">add</font>(p1); <font color="gray">//the pug can also be added!</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;dogList.<font color="#ADD8E6">add</font>(p1); <font color="gray">//the trained dog can also be added!</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;dogList.<font color="#ADD8E6">add</font>(d2);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Dog</font> dog: dogList) {
@@ -255,13 +255,13 @@
     ]]></code>
     <text>
         <![CDATA[
-        Without this property of objects, we wouldn't be able to add the pugs into the list of dogs!
+        Without this property of objects, we wouldn't be able to add the trained dogs into the list of dogs!
         ]]>
     </text>
     <boxed title="Dynamic polymorphism">
         <![CDATA[
-        Note that when iterating through the list and reaching the <i>Pug</i> object, the correct <i>printDogData</i> method
-        will be called (meaning the one implemented in the <i>Pug</i> class). This is called <b>dynamic polymorphism</b>.
+        Note that when iterating through the list and reaching the <i>TrainedDog</i> object, the correct <i>printDogData</i> method
+        will be called (meaning the one implemented in the <i>TrainedDog</i> class). This is called <b>dynamic polymorphism</b>.
         <p>
         Polymorphism, since the method has multiple implementations, dynamic, since it's determined at runtime (from the objects
         original type) which of them is called.
@@ -288,8 +288,8 @@
     </text>
     <code><![CDATA[
         
-        <font color="gray">//upcast a Pug object to a Dog</font>
-<br/><font color="#999900">Dog</font> dog = (<font color="#999900">Dog</font>)new <font color="#999900">Pug</font>(<font color="#2E8B57">"Manni"</font>,5, <font color="#2E8B57">"Gray breed"</font>);
+        <font color="gray">//upcast a TrainedDog object to a Dog</font>
+<br/><font color="#999900">Dog</font> dog = (<font color="#999900">Dog</font>)new <font color="#999900">TrainedDog</font>(<font color="#2E8B57">"Manni"</font>,5, <font color="#2E8B57">"Therapy dog"</font>);
         
     ]]></code>
     <text>
@@ -300,13 +300,13 @@
     </text>
     <code><![CDATA[
         
-        <font color="gray">//upcast a Pug object to a Dog</font>
-<br/><font color="#999900">Dog</font> dog = new <font color="#999900">Pug</font>(<font color="#2E8B57">"Manni"</font>,5, <font color="#2E8B57">"Gray breed"</font>);
+        <font color="gray">//upcast a TrainedDog object to a Dog</font>
+<br/><font color="#999900">Dog</font> dog = new <font color="#999900">TrainedDog</font>(<font color="#2E8B57">"Manni"</font>,5, <font color="#2E8B57">"Therapy dog"</font>);
         
     ]]></code>
     <text>
         <![CDATA[
-        The same implicit upcast happened when we added the pug into the list of dogs in the above example!
+        The same implicit upcast happened when we added the trained dog into the list of dogs in the above example!
         <br><br>
         The other cast, <b>downcast</b> is when we change the type of the superclass into subclass. This isn't safe. First, let's
         see a downcast that won't result in an exception:
@@ -314,10 +314,10 @@
     </text>
     <code><![CDATA[
         
-        <font color="gray<font color="#2E8B57">">//'</font>dog' is actually a pug, it's safe to downcast</font>
-<br/><font color="#999900">Dog</font> dog = new <font color="#999900">Pug</font>(<font color="#2E8B57">"Manni"</font>,5, <font color="#2E8B57">"Gray breed"</font>);
+        <font color="gray">//'dog' is actually a trained dog, it's safe to downcast</font>
+<br/><font color="#999900">Dog</font> dog = new <font color="#999900">TrainedDog</font>(<font color="#2E8B57">"Manni"</font>,5, <font color="#2E8B57">"Therapy dog"</font>);
 <br/>
-<br/><font color="#999900">Pug</font> pug = (<font color="#999900">Pug</font>)dog; <font color="gray">//no exception</font>
+<br/><font color="#999900">TrainedDog</font> td = (<font color="#999900">TrainedDog</font>)dog; <font color="gray">//no exception</font>
         
     ]]></code>
     <text>
@@ -327,10 +327,10 @@
     </text>
     <code><![CDATA[
         
-<font color="gray<font color="#2E8B57">">//'</font>dog' is NOT a pug, downcast will fail!</font>
+<font color="gray">//'dog' is NOT a trained dog, downcast will fail!</font>
 <br/><font color="#999900">Dog</font> dog = <font color="#E65100">new</font> <font color="#999900">Dog</font>(<font color="#2E8B57">"Sisi"</font>, <font color="#F0E130">7</font>);
 <br/>
-<br/><font color="#999900">Pug</font> pug = (<font color="#999900">Pug</font>)dog; <font color="gray">//ClassCastException</font>
+<br/><font color="#999900">TrainedDog</font> td = (<font color="#999900">TrainedDog</font>)dog; <font color="gray">//ClassCastException</font>
         
     ]]></code>
     <text>
@@ -341,11 +341,11 @@
     </text>
     <code><![CDATA[
         
-        <font color="gray<font color="#2E8B57">">//'</font>dog' is NOT a pug, downcast will fail!</font>
+        <font color="gray">//'dog' is NOT a trained dog, downcast will fail!</font>
 <br/><font color="#999900">Dog</font> dog = <font color="#E65100">new</font> <font color="#999900">Dog</font>(<font color="#2E8B57">"Sisi"</font>, <font color="#F0E130">7</font>);
 <br/>
-<br/><font color="#E65100">if</font>(dog <font color="#E65100">instanceof</font> <font color="#999900">Pug</font>) { <font color="gray">//false</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Pug</font> pug = (<font color="#999900">Pug</font>)dog; <font color="gray">//not executed, no exception</font>
+<br/><font color="#E65100">if</font>(dog <font color="#E65100">instanceof</font> <font color="#999900">TrainedDog</font>) { <font color="gray">//false</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">TrainedDog</font> td = (<font color="#999900">TrainedDog</font>)dog; <font color="gray">//not executed, no exception</font>
 <br/>}
         
     ]]></code>
