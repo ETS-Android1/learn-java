@@ -1,6 +1,9 @@
 package com.gaspar.learnjava.curriculum;
 
 import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -34,6 +37,7 @@ import com.gaspar.learnjava.LearnJavaActivity;
 import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.asynctask.NetworkExchangeTask;
 import com.gaspar.learnjava.parsers.RawParser;
+import com.gaspar.learnjava.utils.AnimationUtils;
 import com.gaspar.learnjava.utils.LearnJavaBluetooth;
 import com.gaspar.learnjava.utils.ListTagHandler;
 import com.gaspar.learnjava.utils.ThemeUtils;
@@ -230,16 +234,60 @@ public class Component implements Serializable {
      */
     @UiThread
     public void initZoomButtons(@NonNull View codeSampleView) {
-        ImageButton zoomIn = codeSampleView.findViewById(R.id.zoomInButton);
-        ImageButton zoomOut = codeSampleView.findViewById(R.id.zoomOutButton);
+        final ImageButton zoomIn = codeSampleView.findViewById(R.id.zoomInButton);
+        final ImageButton zoomOut = codeSampleView.findViewById(R.id.zoomOutButton);
         final int minFontSize = (int)codeSampleView.getContext().getResources().getDimension(R.dimen.code_text_size);
         final TextView codeArea = codeSampleView.findViewById(R.id.codeArea);
-        zoomIn.setOnClickListener(view ->
-                codeArea.setTextSize(TypedValue.COMPLEX_UNIT_PX, codeArea.getTextSize() + ZOOM_SIZE_CHANGE));
+        //using value animator for smooth font size change
+        zoomIn.setOnClickListener(view -> {
+            int currentSize = (int)codeArea.getTextSize();
+            final ValueAnimator animator = ValueAnimator.ofInt(currentSize, currentSize + ZOOM_SIZE_CHANGE);
+            animator.setDuration(AnimationUtils.DURATION);
+            //disable zoom buttons while ongoing
+            animator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    super.onAnimationStart(animation);
+                    zoomIn.setEnabled(false);
+                    zoomOut.setEnabled(false);
+                }
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    zoomIn.setEnabled(true);
+                    zoomOut.setEnabled(true);
+
+                }
+            });
+            //update text size
+            animator.addUpdateListener(pAnimator -> codeArea.setTextSize(TypedValue.COMPLEX_UNIT_PX, (int)pAnimator.getAnimatedValue()));
+            animator.start();
+        });
         zoomOut.setOnClickListener(view -> {
-            float newSize = codeArea.getTextSize() - ZOOM_SIZE_CHANGE;
+            int currentSize = (int)codeArea.getTextSize();
+            int newSize = currentSize - ZOOM_SIZE_CHANGE;
             if(newSize < minFontSize) return;
-            codeArea.setTextSize(TypedValue.COMPLEX_UNIT_PX, newSize);
+            final ValueAnimator animator = ValueAnimator.ofInt(currentSize, newSize);
+            animator.setDuration(AnimationUtils.DURATION);
+            //disable zoom buttons while ongoing
+            animator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    super.onAnimationStart(animation);
+                    zoomIn.setEnabled(false);
+                    zoomOut.setEnabled(false);
+                }
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    zoomIn.setEnabled(true);
+                    zoomOut.setEnabled(true);
+
+                }
+            });
+            //update text size
+            animator.addUpdateListener(pAnimator -> codeArea.setTextSize(TypedValue.COMPLEX_UNIT_PX, (int)pAnimator.getAnimatedValue()));
+            animator.start();
         });
     }
 

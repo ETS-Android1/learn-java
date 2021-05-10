@@ -27,7 +27,7 @@
         <item name="materialButtonStyle">@style/button_style_dark</item>
         <item name="imageButtonStyle">@style/image_button_style_dark</item>
         <!-- Text view style -->
-        <item name="android:textViewStyle">@style/text_view_style</item>
+        <item name="android:textViewStyle">@style/text_view_style_dark</item>
         <item name="android:textColor">@color/darkThemeTextColor</item>
         <item name="android:textColorPrimary">@color/darkThemeTextColor</item>
 
@@ -120,6 +120,10 @@
     <!-- Text view customization -->
     <style name="text_view_style" parent="TextAppearance.AppCompat.Title">
         <item name="android:padding">@dimen/padding</item>
+    </style>
+    <style name="text_view_style_dark" parent="TextAppearance.AppCompat.Title">
+        <item name="android:padding">@dimen/padding</item>
+        <item name="android:textColor">@color/darkThemeTextColor</item>
     </style>
 
     <!-- custom components styles for dark mode -->

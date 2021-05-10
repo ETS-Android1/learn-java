@@ -167,7 +167,7 @@
     <string name="contact_prompt">Segíthetsz javítani az alkalmazást, ha kapcsolatba lépsz velem, amennyiben ezek egyikét észreveszed:</string>
     <string-array name="contact_me_when">
         <item>- Elírás, vagy értelmetlen mondat.</item>
-        <item>- Ez egyik kódminta hibás kódot tartalmaz (és ez nincs odaírva).</item>
+        <item>- Az egyik kódminta hibás kódot tartalmaz (és ez nincs odaírva).</item>
         <item>- Rossz vizsgakérdés. A jó válasz nincs elfogadva, stb…</item>
         <item>- Általános javítási ötleted van.</item>
     </string-array>

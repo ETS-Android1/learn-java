@@ -30,7 +30,7 @@ public abstract class AnimationUtils {
     /**
      * Animation duration time, in milliseconds.
      */
-    private static final int DURATION = 800;
+    public static final int DURATION = 800;
 
     /**
      * Slides in a previously 'GONE' view. Up/Down animation.
@@ -136,4 +136,6 @@ public abstract class AnimationUtils {
         });
         v.startAnimation(animation);
     }
+
+
 }

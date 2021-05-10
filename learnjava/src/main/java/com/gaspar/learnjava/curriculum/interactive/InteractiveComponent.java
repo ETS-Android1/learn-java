@@ -1,7 +1,11 @@
 package com.gaspar.learnjava.curriculum.interactive;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.text.Html;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.curriculum.Component;
+import com.gaspar.learnjava.utils.AnimationUtils;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
@@ -163,38 +168,84 @@ public final class InteractiveComponent extends Component {
         final int minFontSize = (int)codeSampleView.getContext().getResources().getDimension(R.dimen.code_text_size);
         final LinearLayout codeArea = codeSampleView.findViewById(R.id.codeArea);
         zoomIn.setOnClickListener(v -> {
-            for(int i=0; i<codeArea.getChildCount(); i++) { //iterate all, change font size everywhere
-                final LinearLayout lineLayout = (LinearLayout) codeArea.getChildAt(i);
-                for(int j=0; j<lineLayout.getChildCount(); j++) {
-                    final View child = lineLayout.getChildAt(j);
-                    if(child instanceof TextView) {
-                        ((TextView) child).setTextSize(TypedValue.COMPLEX_UNIT_PX,
-                                ((TextView) child).getTextSize() + ZOOM_SIZE_CHANGE);
-                    } else { //this is an empty space view
-                        final EditText inputField = child.findViewById(R.id.inputField);
-                        inputField.setTextSize(TypedValue.COMPLEX_UNIT_PX, inputField.getTextSize() + ZOOM_SIZE_CHANGE);
-                    }
+            int currentSize = getCurrentFontSize(codeArea);
+            final ValueAnimator animator = ValueAnimator.ofInt(currentSize, currentSize + ZOOM_SIZE_CHANGE);
+            animator.setDuration(AnimationUtils.DURATION);
+            //disable zoom buttons while ongoing
+            animator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    super.onAnimationStart(animation);
+                    zoomIn.setEnabled(false);
+                    zoomOut.setEnabled(false);
                 }
-            }
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    zoomIn.setEnabled(true);
+                    zoomOut.setEnabled(true);
+
+                }
+            });
+            //update text size
+            animator.addUpdateListener(pAnimator -> updateTextSizes(codeArea, (int)pAnimator.getAnimatedValue()));
+            animator.start();
         });
         zoomOut.setOnClickListener(v -> {
-            for(int i=0; i<codeArea.getChildCount(); i++) { //iterate all, change font size everywhere
-                final LinearLayout lineLayout = (LinearLayout) codeArea.getChildAt(i);
-                for(int j=0; j<lineLayout.getChildCount(); j++) {
-                    final View child = lineLayout.getChildAt(j);
-                    if(child instanceof TextView) {
-                        float newSize = ((TextView) child).getTextSize() - ZOOM_SIZE_CHANGE;
-                        if(newSize < minFontSize) return;
-                        ((TextView) child).setTextSize(TypedValue.COMPLEX_UNIT_PX, newSize);
-                    } else { //this is an empty space view
-                        final EditText inputField = child.findViewById(R.id.inputField);
-                        float newSize = inputField.getTextSize() - ZOOM_SIZE_CHANGE;
-                        if(newSize < minFontSize) return;
-                        inputField.setTextSize(TypedValue.COMPLEX_UNIT_PX, newSize);
-                    }
+            int currentSize = getCurrentFontSize(codeArea);
+            int newSize = currentSize - ZOOM_SIZE_CHANGE;
+            if(newSize < minFontSize) return;
+            final ValueAnimator animator = ValueAnimator.ofInt(currentSize, currentSize - ZOOM_SIZE_CHANGE);
+            animator.setDuration(AnimationUtils.DURATION);
+            //disable zoom buttons while ongoing
+            animator.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationStart(Animator animation) {
+                    super.onAnimationStart(animation);
+                    zoomIn.setEnabled(false);
+                    zoomOut.setEnabled(false);
+                }
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    super.onAnimationEnd(animation);
+                    zoomIn.setEnabled(true);
+                    zoomOut.setEnabled(true);
+
+                }
+            });
+            //update text size
+            animator.addUpdateListener(pAnimator -> updateTextSizes(codeArea, (int)pAnimator.getAnimatedValue()));
+            animator.start();
+        });
+    }
+
+    private int getCurrentFontSize(@NonNull final LinearLayout codeArea) {
+        if(codeArea.getChildCount() == 0) {
+            Log.d("LearnJava", "Warning: interactive sample has no code!");
+            return (int)codeArea.getContext().getResources().getDimension(R.dimen.code_text_size);
+        }
+        View child = codeArea.getChildAt(0);
+        if(child instanceof TextView) {
+            return  (int)((TextView) child).getTextSize();
+        } else { //an edit text
+            final EditText inputField = child.findViewById(R.id.inputField);
+            return (int)inputField.getTextSize();
+        }
+    }
+
+    private void updateTextSizes(@NonNull final LinearLayout codeArea, int newSize) {
+        for(int i=0; i<codeArea.getChildCount(); i++) { //iterate all, change font size everywhere
+            final LinearLayout lineLayout = (LinearLayout) codeArea.getChildAt(i);
+            for(int j=0; j<lineLayout.getChildCount(); j++) {
+                final View child = lineLayout.getChildAt(j);
+                if(child instanceof TextView) {
+                    ((TextView) child).setTextSize(TypedValue.COMPLEX_UNIT_PX, newSize);
+                } else { //this is an empty space view
+                    final EditText inputField = child.findViewById(R.id.inputField);
+                    inputField.setTextSize(TypedValue.COMPLEX_UNIT_PX, newSize);
                 }
             }
-        });
+        }
     }
 
     /**

@@ -9,7 +9,7 @@
     <color name="colorPrimaryDark_Dark">#000000</color>
     <color name="colorAccent_Dark">#E65100</color>
     <color name="windowBackground_Dark">#696969</color>
-    <color name="darkThemeTextColor">#C0C0C0</color>
+    <color name="darkThemeTextColor">@android:color/white</color>
 
     <color name="separator_color">#FFFFE4AA</color>
 
