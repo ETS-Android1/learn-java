@@ -23,6 +23,9 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
  */
 public class FillCourseActivityTask extends AsyncTask<CoursesActivity, Void, CoursesActivity> {
 
+    /**
+     * The adapter which displays course views.
+     */
     private CourseAdapter adapter;
 
     @Override
@@ -54,9 +57,14 @@ public class FillCourseActivityTask extends AsyncTask<CoursesActivity, Void, Cou
         }
     }
 
-    static void showFailDialog(AppCompatActivity activity, String errorLocation) {
-        androidx.appcompat.app.AlertDialog.Builder builder = new MaterialAlertDialogBuilder(ThemeUtils.createDialogWrapper(activity));
-        String message = activity.getString(R.string.loading_error, errorLocation);
+    /**
+     * Shows a dialog which displays an error message to the user if the content could not be loaded.
+     * @param activity Activity in which the dialog appears.
+     * @param whatFailedToLoad The content that failed to load.
+     */
+    static void showFailDialog(AppCompatActivity activity, String whatFailedToLoad) {
+        androidx.appcompat.app.AlertDialog.Builder builder = new MaterialAlertDialogBuilder(activity, ThemeUtils.getThemedDialogStyle());
+        String message = activity.getString(R.string.loading_error, whatFailedToLoad);
         builder.setMessage(message);
         builder.setOnCancelListener(dialogInterface -> {
            dialogInterface.dismiss();

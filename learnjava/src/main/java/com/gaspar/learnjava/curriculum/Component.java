@@ -188,7 +188,7 @@ public class Component implements Serializable {
                                 LearnJavaBluetooth.getInstance().sendData(copyFromThis.getText().toString(), serverSocketOpt.get(), activity);
                             } else {
                                 //no permission yet, ask for it
-                                MaterialAlertDialogBuilder builder1 = new MaterialAlertDialogBuilder(ThemeUtils.createDialogWrapper(activity));
+                                MaterialAlertDialogBuilder builder1 = new MaterialAlertDialogBuilder(activity, ThemeUtils.getThemedDialogStyle());
                                 builder1.setMessage(R.string.clip_sync_location);
                                 builder1.setIcon(R.drawable.bluetooth_icon);
                                 builder1.setPositiveButton(R.string.ok, (dialog, i) -> {

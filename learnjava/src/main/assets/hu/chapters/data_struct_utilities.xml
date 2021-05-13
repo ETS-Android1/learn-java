@@ -2,32 +2,33 @@
 <!-- Chapter about collection utilities. --><resources>
     <chapterdata>
         <id>205</id>
-        <name>Collection utilities</name>
+        <name>További információk adatstruktúrákról</name>
     </chapterdata>
-    <title text="Every collection"/>
     <text>
         <![CDATA[
-        Before we proceed, it's important to note that the previous chapters didn't cover all data structures
-        in the <i>JDK</i>, only the most widely used ones. For a complete set, see the <a href="https://docs.oracle.com/javase/8/docs/technotes/guides/collections/overview.html">collection framework documentation</a>.
+        Mielőtt folytatnánk, fontos megjegyezni, hogy az előző fejezetek nem fedték le az összes adatszerkezetet.
+        Jóval több van a <i>JDK</i>-ban. A teljes készletet lásd a 
+		<a href="https://docs.oracle.com/javase/8/docs/technotes/guides/collections/overview.html">kollekciós keretrendszer dokumentációja</a>.
         ]]>
     </text>
-    <title text="The Collections class"/>
+    <title text="A Collections osztály"/>
     <text>
         <![CDATA[
-        When working with collections, it's useful to know about the <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Collections.html">java.util.Collections</a> utility class.
-        Let's take a look at a few methods.
+        Ha kollekciókkal dolgozunk, hasznos, ha ismerjük a 
+		<a href="https://docs.oracle.com/javase/7/docs/api/java/util/Collections.html">java.util.Collections</a> segédosztályt. 
+        Most megnézünk ebből néhány metódust.
         ]]>
     </text>
-    <advanced title="Readonly collections">
+    <advanced title="Csak olvasható kollekciók">
         <![CDATA[
-        Many collections created by the following methods are either <b>immutable</b> or <b>unmodifiable</b>.
-        The two terms are <a href="https://stackoverflow.com/questions/7713274/java-immutable-collections">not exactly the same</a>, but very similar.
-        Such collections disallow you to change their elements. You can think of them as <i>readonly</i> collections.
+        Sok, a következő metódusokkal létrehozott kollekció <b>csak olvasható</b> (<i>read only</i>).
+        Az ilyen kollekciók nem engedik, hogy új elemeket adjunk hozzá, töröljünk, vagy pozíciót módosítsunk. 
+		Gondolhatunk rájuk úgy is, mint egyfajta konstansokra.
         ]]>
     </advanced>
     <text>
         <![CDATA[
-        Multiple methods exists to quickly create lists:
+        Többféle metódus létezik a listák gyors létrehozására. Ezek hasonlóak a tömb inicializálóhoz.
         ]]>
     </text>
     <code><![CDATA[
@@ -41,12 +42,13 @@
     ]]></code>
     <text>
         <![CDATA[
-        The lists created are readonly. Attempting to modify them will result in an <b>UnsupportedOperationException</b>.
+        Az így létrehozott listák csak olvashatóak. Ha módosítani próbáljuk őket, az <b>UnsupportedOperationException</b> 
+		kivételt eredményez.
         ]]>
     </text>
     <text>
         <![CDATA[
-        The <i>fill</i> method can save us from writing a for loop.
+        A <i>fill</i> metódussal megspórolhatjuk egy for ciklus írását, mivel ez fel tud tölteni egy kollekciót elemekkel.
         ]]>
     </text>
     <code><![CDATA[
@@ -57,7 +59,7 @@
     ]]></code>
     <text>
         <![CDATA[
-        The <i>frequency</i> utility can count the occurrence of a particular element in the collection.
+        A <i>frequency</i> metódus meg tudja számolni egy adott elem előfordulását a kollekcióban.
         ]]>
     </text>
     <code><![CDATA[
@@ -69,13 +71,13 @@
     ]]></code>
     <text>
         <![CDATA[
-        If you seek to change the order of elements, look no further. These methods only work for lists, as
-        other collections may not have a concept of ordering.
+        Ha az elemeket át szeretnéd rendezni, az is lehetséges. Ezek a metódusok csak listák esetében működnek, mivel
+        más kollekciók nem feltétlenül rendelkeznek a sorrend fogalmával.
         ]]>
     </text>
     <code><![CDATA[
         
-<font color="gray">//revers the order of the elements</font>
+<font color="gray">//reverse the order of the elements</font>
 <br/><font color="#999900">Collections</font>.<font color="#ADD8E6">reverse</font>(numbers);
 <br/>
 <br/><font color="gray">//rearrange the elements in a random order</font>
@@ -84,7 +86,8 @@
     ]]></code>
     <text>
         <![CDATA[
-        Easily find the minimum or maximum of a collection using these methods.
+		Hasonló a <i>sort</i> metódus, ami növekvő sorrendbe rendezi az elemeket.
+        Szintén lehetséges a minimum és a maximum megkeresése:
         ]]>
     </text>
     <code><![CDATA[
@@ -98,21 +101,22 @@
     ]]></code>
     <text>
         <![CDATA[
-        For these to work, there must be a way to compare elements. For primitive wrappers this works as expected, but
-        you must be cautious to use them when the elements are other classes. As an exception, it's also safe for strings,
-        where it orders alphabetically.
+        Ahhoz, hogy ezek a metódusok működjenek, az elemeknek <b>összehasonlíthatónak</b> kell lenni. A primitív 
+		wrapperek és a <i>String</i> esetében ez az elvárásoknak megfelelően működik, de a
+		óvatosnak kell lennünk a használatukkal, ha az elemek más osztályok.
         ]]>
     </text>
     <advanced title="Comparable">
         <![CDATA[
-        If you want to create a class that can be used by methods such as this, you must implement the
-        <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html">Comparable</a> interface.
+        Ha olyan osztályt akarsz létrehozni, amelyet az ehhez hasonló módszerek használhatnak, akkor implementálnod kell a
+        <a href="https://docs.oracle.com/javase/8/docs/api/java/lang/Comparable.html">Comparable</a> interfészt. Ennek egy 
+		metódusa van, a <i>compareTo</i>, ami két objektum összehasonlítását végzi.
         ]]>
     </advanced>
     <text>
         <![CDATA[
-        Let's see an example of the <i>Comparable</i> interface. Here is a <i>Person</i> class that
-        implements it.
+        Lássunk egy példát a <i>Comparable</i> interfészre. Az ezt megvalósító osztályok <b>összehasonlíthatóak</b> 
+		lesznek. Itt van egy <i>Person</i> osztály, amelyik megvalósítja:
         ]]>
     </text>
     <code><![CDATA[
@@ -129,9 +133,9 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Here is the crucial method. When THIS object is 'bigger', it returns 1. When
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;the OTHER object (the parameter) is bigger, it returns -1. Upon equality, 0 is returned.
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Comparing must always work like this in compareTo implementations.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Itt van a fontos metódus. Ha EZ az objektum 'nagyobb', akkor 1-et ad vissza. Amikor a
+<br/> 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a MÁSIK objektum (a paraméter) nagyobb, -1-et ad vissza. Egyenlőség esetén 0-t ad vissza.
+<br/> 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Az összehasonlításnak mindig így kell működnie a compareTo implementációkban.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">compareTo</font>(<font color="#999900">Person</font> other) {
@@ -148,7 +152,8 @@
     ]]></code>
     <text>
         <![CDATA[
-        Person objects are now ordered by their ages, and using this class in the previously shown methods is safe:
+        A <i>Person</i> objektumok mostantól életkoruk szerint összehasonlíthatóak, és ennek az osztálynak 
+		a használata a korábban bemutatott metódusokban már lehetséges:
         ]]>
     </text>
     <code><![CDATA[
@@ -163,7 +168,7 @@
 <br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"The oldest person is "</font> + oldest.<font color="#ADD8E6">name</font>);
         
     ]]></code>
-    <interactive instruction="Complete the method so that it removes the minimum and maximum of the double list!">
+    <interactive instruction="Egészítsd ki a metódust úgy, hogy a lista minimumát és maximumát eltávolítja!">
         <data><![CDATA[
 
 <font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">removeMinMax</font>(<font color="#999900">List</font>&lt;<font color="#999900">Double</font>> numbers) {

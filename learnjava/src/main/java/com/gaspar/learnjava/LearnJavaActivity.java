@@ -23,6 +23,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import androidx.annotation.AnyThread;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
@@ -65,7 +66,7 @@ public class LearnJavaActivity extends ThemedActivity
     public static final String APP_PREFERENCES_NAME = "learn_java_prefs";
 
     /**
-     * The string used for the active chapter preference.
+     * The constant used to find the active (last started) chapter ID in the preferences.
      */
     public static final String ACTIVE_CHAPTER_ID_PREFERENCE = "active_chapter_pref";
 
@@ -76,13 +77,25 @@ public class LearnJavaActivity extends ThemedActivity
     private volatile Chapter startedChapter;
 
     /**
-     * Used at loading time.
+     * Used at loading time to store if the loading was successful or not.
      */
     public volatile boolean successfulLoad;
 
+    /**
+     * Stores if the activity is starting, or just resuming.
+     */
+    private boolean onCreate;
+
+    /**
+     * Called on application startup. Initializes preferences, database, and home screen. Most of the
+     * initialization happens in the background while a loading indicator is shown.
+     * @param savedInstanceState Unused.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //initialize preferences needed in this activity
+        GuideActivity.initializeGuideReadPreference(this);
         //check if it's debug or release, and set flag accordingly
         DEBUG = getResources().getBoolean(R.bool.is_debug);
         setContentView(R.layout.learn_java);
@@ -101,7 +114,7 @@ public class LearnJavaActivity extends ThemedActivity
                 MobileAds.initialize(this, result -> {}); //initialize admob
             }
             ClipSyncActivity.initClipSync(this, findViewById(R.id.learnJavaMainView)); //initialize clip sync
-            showStartContinueComponent();
+            showStartContinueComponent(); //initialize the main component, curriculum is guaranteed to be loaded here
             runOnUiThread(() -> {
                 //once everything is loaded, check for system dark theme
                 ThemeUtils.showSystemDarkModeDialogIfNeeded(LearnJavaActivity.this);
@@ -110,8 +123,6 @@ public class LearnJavaActivity extends ThemedActivity
         setUpUI(); //init toolbar and drawer here
         onCreate = true;
     }
-
-    private boolean onCreate;
 
     @Override
     protected void onResume() {
@@ -263,11 +274,17 @@ public class LearnJavaActivity extends ThemedActivity
     /**
      * Finds which chapter was last opened from the app preferences. If no chapter was found
      * than the "get started" screen is shown.
+     * This can be called from both background and UI thread. If the activity is launched, then it
+     * will be called from background, after the curriculum is initialized. If the activity is just
+     * resumed, then it will be called from the main thread.
      */
+    @AnyThread
     private void showStartContinueComponent() {
+        //retrieve the id from preferences
         SharedPreferences preferences = getSharedPreferences(APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
         boolean started = preferences.contains(ACTIVE_CHAPTER_ID_PREFERENCE);
         int startedChapterId = preferences.getInt(ACTIVE_CHAPTER_ID_PREFERENCE, -1);
+        //start async task to find the name of this chapter (this will display the result)
         new InitStarterViewTask(started ? startedChapterId : -1, started).execute(this);
     }
 
@@ -292,8 +309,12 @@ public class LearnJavaActivity extends ThemedActivity
      */
     public void continueLearningOnClick(View view) {
         if(startedChapter == null) return;
-        //this is not an updatable activity, so view is null. exam and extra exam view are also null
-        Chapter.startChapterActivity(this, startedChapter, null, null, null);
+        //offer the guid if needed
+        Runnable runIfNoGuide = () -> {
+            //this is not an updatable activity, so view is null. exam and extra exam view are also null
+            Chapter.startChapterActivity(this, startedChapter, null, null, null);
+        };
+        GuideActivity.displayGuideNotReadDialogIfNeeded(this, runIfNoGuide);
     }
 
     /**
@@ -320,7 +341,6 @@ public class LearnJavaActivity extends ThemedActivity
             notificationManager.createNotificationChannel(channel);
         }
     }
-
 
     @Override
     public void onBackPressed() {

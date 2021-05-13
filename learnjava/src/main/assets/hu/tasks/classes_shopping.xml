@@ -65,13 +65,13 @@
 		<i>InvalidProductException</i>-t nevű saját kivételt.
         ]]>
     </advanced>
-    <advanced title="Implement pairs">
+    <advanced title="Párok">
         <![CDATA[
         A megrendelésnek termék-mennyiség párokat kell tartalmaznia (mely termékek szerepelnek a 
 		megrendelésben, és különböző termékenként hány darab). Ezt 2 listával is meg lehet valósítani, 
-		de az elegánsabb megoldás egy <b>Map</b> (hozzárendelés).
+		de az elegánsabb megoldás egy <b>szótár</b> (<i>map</i>) használata (ezekről a következő kurzus során lesz szó).
         <p>
-        A <i>JDK</i> tartalmaz map implementációkat, amelyeket használhatsz, itt van egy 
+        A <i>JDK</i> tartalmaz szótár implementációkat, amelyeket használhatsz, itt van egy 
 		bemutató a <a href="https://www.tutorialspoint.com/java/java_hashmap_class.htm">HashMap</a>-hez.
 		<p>
 		Egy másik szintén jó módszer ha saját osztályt készítesz a pároknak, majd ezeket rakod 
@@ -82,7 +82,7 @@
 		 <![CDATA[
 		 A termékek típusait leíró konstansok esetén a legjobb módszer egy <i>enum</i> használata. 
 		 ]]>
-	<text>
+	</text>
     <title text="Javadoc"/>
     <text>
         <![CDATA[

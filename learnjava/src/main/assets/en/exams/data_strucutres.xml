@@ -212,10 +212,10 @@
     </question>
     <question type="single_choice">
         <text>What is another name for maps?</text>
-        <answer>stack</answer>
-        <answer>dictionary</answer>
-        <answer>queue</answer>
-        <answer>pair</answer>
+        <answer>Stack.</answer>
+        <answer>Dictionary.</answer>
+        <answer>Queue.</answer>
+        <answer>Pair.</answer>
         <correct>1</correct>
     </question>
     <question type="true_false">
@@ -232,11 +232,11 @@
         <correct>java.util.Map</correct>
     </question>
     <question type="multi_choice">
-        <text>Which of these can a map contain?</text>
-        <answer>keys</answer>
-        <answer>collections</answer>
-        <answer>lists</answer>
-        <answer>pairs</answer>
+        <text>Which of these make up the pairs of a map?</text>
+        <answer>Keys.</answer>
+        <answer>Collections.</answer>
+        <answer>Lists.</answer>
+        <answer>Pairs.</answer>
         <correct>0</correct>
         <correct>3</correct>
     </question>
@@ -270,7 +270,7 @@
         <correct>java.lang.Comparable</correct>
     </question>
     <question type="true_false">
-        <text>Methods that require an ordering of elements will work for primitives and their wrappers.</text>
+        <text>Methods that require an ordering of elements will work for primitive wrappers.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">

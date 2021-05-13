@@ -2,6 +2,7 @@ package com.gaspar.learnjava.curriculum;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
@@ -54,27 +55,27 @@ public class Course implements Serializable {
     /**
      * The id of the course.
      */
-    private int id;
+    private final int id;
 
     /**
      * Name of the course.
      */
-    private String courseName;
+    private final String courseName;
 
     /**
      * The chapters of the course.
      */
-    private List<Chapter> chapters;
+    private final List<Chapter> chapters;
 
     /**
      * The tasks that belong to this course.
      */
-    private List<Task> tasks;
+    private final List<Task> tasks;
 
     /**
      * The exam belonging to this course.
      */
-    private Exam exam;
+    private final Exam exam;
 
     /**
      * Stores if this course is finished.
@@ -101,14 +102,20 @@ public class Course implements Serializable {
      * Sets the status view for this object. This is done some time after creation.
      * This will also start querying the database for the status of this course, and then
      * displaying the status using the image view.
+     * @param imageView The status icon.
+     * @param activity The activity in which the status wil be displayed.
+     * @param autoOpenView The contents of the course view, which can be auto opened,
+     *                     depending on settings and if the course is unlocked.
      */
-    public void queryAndDisplayStatus(final ImageView imageView, final AppCompatActivity activity) {
-        new CourseStatusDisplayerTask(this).execute(imageView, activity);
+    public void queryAndDisplayStatus(final ImageView imageView, final AppCompatActivity activity, View autoOpenView) {
+        new CourseStatusDisplayerTask(this).execute(imageView, activity, autoOpenView);
     }
-
+    
     /**
      * Same as the method above but with an additional runnable that will be called when the task
      * ends, on the UI thread.
+     * @param imageView The status icon.
+     * @param activity The activity in which the status wil be displayed.
      */
     public void queryAndDisplayStatus(final ImageView imageView, Runnable callAtEnd, final AppCompatActivity activity) {
         new CourseStatusDisplayerTask(this, callAtEnd).execute(imageView, activity);

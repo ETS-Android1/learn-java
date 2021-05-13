@@ -97,7 +97,7 @@ public class ExamActivity extends ThemedActivity {
             stopService(new Intent(this, ExamSwipeClosedService.class)); //stop dismiss listening service
             super.onBackPressed();
         } else {
-            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(ThemeUtils.createDialogWrapper(ExamActivity.this));
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, ThemeUtils.getThemedDialogStyle());
             builder.setMessage(R.string.confirm_abandon_exam);
             builder.setIcon(R.drawable.warning_icon);
             builder.setPositiveButton(R.string.ok, ((dialogInterface, i) -> {
@@ -119,7 +119,7 @@ public class ExamActivity extends ThemedActivity {
            for(Question question: exam.getQuestions()) { //count unanswered questions
                if(!question.isAnswered()) unansweredQuestions++;
            }
-           MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(ThemeUtils.createDialogWrapper(ExamActivity.this));
+           MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, ThemeUtils.getThemedDialogStyle());
            builder.setTitle(R.string.confirm_finish_exam);
            builder.setIcon(R.drawable.warning_icon);
            builder.setView(inflateUnansweredWarningView(unansweredQuestions)); //warn about unanswered
@@ -220,7 +220,7 @@ public class ExamActivity extends ThemedActivity {
         countdownView.pause();
         if(notificationVisible) showExamNotification(false); //update notification if it's active
         finishExam(findViewById(R.id.finishExamButton)); //exam will be locked and corrected
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(ThemeUtils.createDialogWrapper(ExamActivity.this));
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, ThemeUtils.getThemedDialogStyle());
         builder.setMessage(R.string.exam_time_expired);
         builder.setIcon(R.drawable.problem_icon);
         builder.setPositiveButton(R.string.unfortunate, (dialogIF, i) -> dialogIF.dismiss());

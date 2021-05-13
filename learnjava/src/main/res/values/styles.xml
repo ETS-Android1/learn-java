@@ -11,6 +11,8 @@
         <item name="imageButtonStyle">@style/image_button_style_orange</item>
         <!-- Text view style -->
         <item name="android:textViewStyle">@style/text_view_style</item>
+        <!-- Separator style -->
+        <item name="separatorBackgroundColor">@color/separator_color</item>
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -30,6 +32,8 @@
         <item name="android:textViewStyle">@style/text_view_style_dark</item>
         <item name="android:textColor">@color/darkThemeTextColor</item>
         <item name="android:textColorPrimary">@color/darkThemeTextColor</item>
+        <!-- Separator style -->
+        <item name="separatorBackgroundColor">@color/separator_color_dark</item>
 
         <!-- toolbar style -->
         <item name="toolbarStyle">@style/DarkToolbarStyle</item>
@@ -56,6 +60,20 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:colorBackground">?android:windowBackground</item>
+    </style>
+
+    <!-- Material alert dialog styles. -->
+    <style name="AppDialogStyle" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="buttonBarPositiveButtonStyle">@style/button_style_orange</item>
+        <item name="buttonBarNeutralButtonStyle">@style/button_style_orange</item>
+        <item name="buttonBarNegativeButtonStyle">@style/button_style_orange</item>
+        <item name="android:layout_margin">2dp</item>
+    </style>
+    <style name="AppDialogStyleDark" parent="ThemeOverlay.MaterialComponents.Dialog.Alert">
+        <item name="buttonBarPositiveButtonStyle">@style/button_style_dark</item>
+        <item name="buttonBarNeutralButtonStyle">@style/button_style_dark</item>
+        <item name="buttonBarNegativeButtonStyle">@style/button_style_dark</item>
+        <item name="android:layout_margin">2dp</item>
     </style>
 
     <!-- Custom text appearances -->

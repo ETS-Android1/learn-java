@@ -39,7 +39,7 @@ public class ShowCongratulationTask extends AsyncTask<CoursesActivity, Void, Sho
             if (status == com.gaspar.learnjava.curriculum.Status.COMPLETED) counter++;
         }
         if(counter == result.examStatuses.size()) { //all exams completed
-            AlertDialog.Builder builder = new AlertDialog.Builder(ThemeUtils.createDialogWrapper(result.activity));
+            AlertDialog.Builder builder = new AlertDialog.Builder(result.activity, ThemeUtils.getThemedDialogStyle());
             View congratulationsView = View.inflate(result.activity, R.layout.congratulation_prompt, null);
             builder.setView(congratulationsView);
 

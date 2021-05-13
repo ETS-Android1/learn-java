@@ -9,74 +9,78 @@
 
     <!-- Questions for 'problems with arrays' -->
     <question type="single_choice">
-        <text>What is the difference between arrays and collections?</text>
-        <answer>Arrays don't support primitive types, while collections do.</answer>
-        <answer>Collections are always unordered, while arrays keep an order of their elements.</answer>
-        <answer>Arrays are a built in concept of Java, while the collections are classes.</answer>
-        <answer>Collections have no size limit, while arrays can only support up to 1000 elements.</answer>
+        <text>Mi a különbség a tömbök és a kollekciók között?</text>
+        <answer>A tömbök nem támogatják a primitív típusokat, míg a kollekciók igen.</answer>
+        <answer>A kollekciók mindig rendezetlenek, míg a tömbök megtartják az elemeik sorrendjét.</answer>
+        <answer>A tömbök a Java beépített koncepciója, míg a kollekciók osztályok.</answer>
+        <answer>A kollekcióknak nincs méretkorlátozásuk, míg a tömbök csak 1000 elemig támogatják az elemeket.</answer>
         <correct>2</correct>
     </question>
     <question type="multi_choice">
-        <text>What is true about JDK collections?</text>
-        <answer>They support any type of element.</answer>
-        <answer>They're generic classes.</answer>
-        <answer>The size of them is fixed.</answer>
-        <answer>They don't support primitive element types.</answer>
+        <text>Mi igaz a JDK kollekciókra?</text>
+        <answer>Minden típusú elemet támogatnak.</answer>
+        <answer>Generikus osztályok.</answer>
+        <answer>A méretük fix.</answer>
+        <answer>Nem támogatják a primitív elemtípusokat.</answer>
         <correct>1</correct>
         <correct>3</correct>
     </question>
     <question type="multi_choice">
-        <text>What are limiting factors of arrays?</text>
-        <answer>Their size is fixed after creation.</answer>
-        <answer>Arrays can't be used efficiently when the amount of elements is unknown beforehand.</answer>
-        <answer>They only support primitive types.</answer>
-        <answer>Arrays can only store up to 1000 elements.</answer>
+        <text>Melyek a tömbök korlátozó tényezői?</text>
+        <answer>A méretük a létrehozásuk után fix.</answer>
+        <answer>A tömbök nem használhatók hatékonyan, ha az elemek mennyisége előre ismeretlen.</answer>
+        <answer>Kizárólag primitív típusokat támogatnak.</answer>
+        <answer>A tömbök csak legfeljebb 1000 elemet tudnak tárolni.</answer>
         <correct>0</correct>
         <correct>1</correct>
     </question>
     <question type="multi_choice">
-        <text>Which one these are data structures?</text>
-        <answer>Arrays.</answer>
-        <answer>Lists.</answer>
-        <answer>Files.</answer>
-        <answer>Maps.</answer>
+        <text>Melyek ezek közül az adatstruktúrák?</text>
+        <answer>Tömbök.</answer>
+        <answer>Listák.</answer>
+        <answer>Fájlok.</answer>
+        <answer>Szótárak.</answer>
         <correct>0</correct>
         <correct>1</correct>
         <correct>3</correct>
     </question>
     <question type="text">
-        <text>Declare and initialize an empty array list of strings called 'lines'. Use the diamond operator!</text>
+        <text>Deklaráld és inicializáld a String-ek egy tömblistáját, 'lines' néven!</text>
         <correct>ArrayList&lt;String&gt;[s]lines = new[s]ArrayList&lt;&gt;();</correct>
         <correct>List&lt;String&gt;[s]lines = new[s]ArrayList&lt;&gt;();</correct>
+		<correct>ArrayList&lt;String&gt;[s]lines = new[s]ArrayList&lt;String&gt;();</correct>
+		<correct>List&lt;String&gt;[s]lines = new[s]ArrayList&lt;String&gt;();</correct>
         <ignoreSpace/>
     </question>
     <question type="text">
-        <text>Declare and initialize an empty linked list of integers called 'nums'. Use the diamond operator!</text>
+        <text>Deklaráld és inicializáld az egész számok egy láncolt listáját, 'nums' néven!</text>
         <correct>LinkedList&lt;Integer&gt;[s]nums = new[s]LinkedList&lt;&gt;();</correct>
         <correct>List&lt;Integer&gt;[s]nums = new[s]LinkedList&lt;&gt;();</correct>
+		<correct>LinkedList&lt;Integer&gt;[s]nums = new[s]LinkedList&lt;Integer&gt;();</correct>
+		<correct>List&lt;Integer&gt;[s]nums = new[s]LinkedList&lt;Integer&gt;();</correct>
         <ignoreSpace/>
     </question>
     <question type="text">
-        <text>Enter the 'diamond operator'.</text>
+        <text>Írd be a 'gyémánt' opertátort, ami kollekciók létrehozásakor használható!</text>
         <correct>&lt;&gt;</correct>
     </question>
     <question type="true_false">
-        <text>Generic collections directly support primitive types.</text>
+        <text>Az generikus kollekciók közvetlenül támogatják a primitív típusokat.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>Generic classes indirectly (through some utility classes) support primitives.</text>
+        <text>Az generikus kollekciók közvetve (wrapperek segítségével) támogatják a primitíveket.</text>
         <correct>true</correct>
     </question>
     <question type="text">
-        <text>What is the common interface of the JDK data structures?</text>
+        <text>Mi a JDK adatszerkezetek közös, legfelsőbb interfésze?</text>
         <correct>Collection</correct>
         <correct>java.util.Collection</correct>
     </question>
 
     <!-- Questions for lists -->
     <question type="multi_choice">
-        <text>Which of these interfaces do lists in the JDK implement?</text>
+        <text>Melyik interfészeket valósítják meg a JDK-ban található listák?</text>
         <answer>java.util.List</answer>
         <answer>java.util.Map</answer>
         <answer>java.lang.Runnable</answer>
@@ -85,98 +89,99 @@
         <correct>3</correct>
     </question>
     <question type="text">
-        <text>Which JDK list implementation uses an internal array?</text>
+        <text>Melyik JDK lista implementáció használ belső tömböt (az osztály nevét add meg)?</text>
         <correct>ArrayList</correct>
         <correct>java.util.ArrayList</correct>
     </question>
     <question type="text">
-        <text>Which JDK list implementation uses a chain of element references to store it's data?</text>
+        <text>Melyik JDK lista implementáció használ elemreferenciák láncolatát az adatok tárolására (az osztály nevét add meg)?</text>
         <correct>LinkedList</correct>
         <correct>java.util.LinkedList</correct>
     </question>
     <question type="single_choice">
-        <text>What is the difference between array lists and linked lists?</text>
-        <answer>The JDK only has linked list implementations.</answer>
-        <answer>Only array lists can dynamically make space for any amount of elements.</answer>
-        <answer>Their internal workings.</answer>
-        <answer>Nothing, an array list is just an alias for linked list.</answer>
+        <text>Mi a különbség a tömblisták és a láncolt listák között?</text>
+        <answer>A JDK csak láncolt lista implementációkkal rendelkezik.</answer>
+        <answer>Csak a tömblisták képesek dinamikusan helyet biztosítani tetszőleges számú elemnek.</answer>
+        <answer>A belső működésük eltérő.</answer>
+        <answer>Semmi, a tömblista csak egy másik név a láncolt lista számára.</answer>
         <correct>2</correct>
     </question>
     <question type="single_choice">
-        <text>What operation can array lists efficiently perform?</text>
-        <answer>Getting an element by index.</answer>
-        <answer>Resizing their internal array.</answer>
-        <answer>Injecting elements to any position.</answer>
-        <answer>Removing elements from any position.</answer>
+        <text>Milyen műveletet tudnak hatékonyan elvégezni a tömblisták?</text>
+        <answer>Elemek pozíció szerinti lekérdezése.</answer>
+        <answer>A belső tömbjük átméretezését.</answer>
+        <answer>Elemek beillesztése tetszőleges pozícióba.</answer>
+        <answer>Elemek eltávolítása bármely pozícióból.</answer>
         <correct>0</correct>
     </question>
     <question type="multi_choice">
-        <text>What operations can linked lists efficiently perform?</text>
-        <answer>Getting an element by index.</answer>
-        <answer>Getting the first element.</answer>
-        <answer>Injecting an element into any position.</answer>
+        <text>Milyen műveleteket tudnak hatékonyan végrehajtani a láncolt listák?</text>
+        <answer>Elemek pozíció alapján történő lekérdezése.</answer>
+        <answer>Az első elem kinyerése.</answer>
+        <answer>Elem beillesztése tetszőleges pozícióba.</answer>
         <correct>1</correct>
         <correct>2</correct>
     </question>
     <question type="single_choice">
-        <text>What are doubly linked lists?</text>
-        <answer>Linked lists for doubles.</answer>
-        <answer>The list stores it's elements in two linked 'chains'.</answer>
-        <answer>An element not only hold the reference to the next one, but also the previous one.</answer>
+        <text>Mi az a duplán láncolt lista?</text>
+        <answer>Láncolt lista további listák számára számára.</answer>
+        <answer>A lista két összekapcsolt "láncban" tárolja az elemeit.</answer>
+        <answer>Egy elem nem csak a következő elemre való hivatkozást tárolja, hanem az előzőre valót is.</answer>
         <correct>2</correct>
     </question>
     <question type="true_false">
-        <text>Doubly linked lists are more efficient than singly linked ones, but harder to implement.</text>
+        <text>A duplán láncolt listák általában hatékonyabbak, mint az egszeresen láncoltak, de nehezebb őket leprogramozni.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>An array based list is more efficient then a linked list.</text>
+        <text>Egy tömb alapú lista mindig hatékonyabb, mint egy láncolt lista.</text>
         <correct>false</correct>
     </question>
 
     <!-- Questions about queues and stacks -->
     <question type="text">
-        <text>Which acronym is used to describe queues?</text>
+        <text>Melyik rövidítést használják a sorok működésének leírására?</text>
         <correct>FIFO</correct>
         <ignoreCase/>
     </question>
     <question type="text">
-        <text>Which acronym is used to describe stacks?</text>
+        <text>Melyik betűszóval írják le a veremek működését?</text>
         <correct>LIFO</correct>
         <ignoreCase/>
     </question>
+	
     <question type="multi_choice">
-        <text>What is true about queues?</text>
-        <answer>They are special lists.</answer>
-        <answer>They are last-in-first-out data structures.</answer>
-        <answer>They only allow adding and removing elements on the ends.</answer>
-        <answer>They are special maps.</answer>
+        <text>Mi igaz a sorokra?</text>
+        <answer>Ezek speciális, korlátozot listák.</answer>
+        <answer>Ezek 'last-in-first-out' jellegű adatstruktúrák.</answer>
+        <answer>Kizárólag a végükön engedik meg az elemek hozzáadását és eltávolítását.</answer>
+        <answer>Ezek szótárak.</answer>
         <correct>0</correct>
         <correct>2</correct>
     </question>
     <question type="multi_choice">
-        <text>What is true about stacks?</text>
-        <answer>They are last-in-first-out data structures.</answer>
-        <answer>They are special maps.</answer>
-        <answer>They only allow adding and removing elements at the 'top'.</answer>
-        <answer>They are first-in-first-out data structures.</answer>
+        <text>Mi igaz a vermekre?</text>
+        <answer>Ezek 'last-in-first-out' adatszerkezetek.</answer>
+        <answer>Ezek szótárak.</answer>
+        <answer>Kizárólag a "tetejükön" lehet elemeket hozzáadni és eltávolítani.</answer>
+        <answer>Ezek 'first-in-first-out' adatszerkezetek.</answer>
         <correct>0</correct>
         <correct>2</correct>
     </question>
     <question type="true_false">
-        <text>A stack is a FIFO data structure.</text>
+        <text>A verem egy FIFO adatszerkezet.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>A stack is a LIFO data structure.</text>
+        <text>A verem egy LIFO adatszerkezet.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>A queue is a FIFO data structure.</text>
+        <text>A sor egy FIFO adatszerkezet.</text>
         <correct>true</correct>
     </question>
     <question type="multi_choice">
-        <text>Which of these methods does a stack usually have?</text>
+        <text>Melyik  metódusokkal rendelkezik egy verem?</text>
         <answer>push</answer>
         <answer>collect</answer>
         <answer>pop</answer>
@@ -186,107 +191,111 @@
         <correct>3</correct>
     </question>
     <question type="single_choice">
-        <text>What is the difference between double ended and standard queues?</text>
-        <answer>A double ended queue is a data structure which only accepts and removes elements from one side.</answer>
-        <answer>Double ended queues can accept and remove elements at both sides.</answer>
-        <answer>A double ended queue is a data structure which consists of two queues.</answer>
+        <text>Mi a különbség a kétvégű és a normál sorok között?</text>
+        <answer>A kétvégű sor egy olyan adatstruktúra, amely csak az egyik oldalról fogad és távolít el elemeket.</answer>
+        <answer>A kétvégű sorok mindkét oldalon fogadhatnak és távolíthatnak el elemeket.</answer>
+        <answer>A kétvégű sor egy olyan adatszerkezet, amely két sorból áll össze.</answer>
         <correct>1</correct>
     </question>
     <question type="text">
-        <text>What is the name of the interface in the JDK for double ended queues?</text>
+        <text>Mi a neve a JDK-ban a kétvégű sorok interfészének?</text>
         <correct>Deque</correct>
         <correct>java.util.Deque</correct>
     </question>
     <question type="true_false">
-        <text>Stacks cannot be generic.</text>
+        <text>A vermek nem lehetnek generikusak.</text>
         <correct>false</correct>
     </question>
 
     <!-- Questions about maps -->
     <question type="single_choice">
-        <text>What is the difference between lists and maps?</text>
-        <answer>Maps are not data structures, lists are.</answer>
-        <answer>JDK maps are not generic, but lists are.</answer>
-        <answer>Maps contain pairs of elements, while lists contain single elements.</answer>
+        <text>Mi a különbség a listák és a szótárak között?</text>
+        <answer>A szótárak nem adatszerkezetek, a listák viszont igen.</answer>
+        <answer>A JDK szótár implementációi nem generikusak, a listák viszont igen.</answer>
+        <answer>A szótárak elempárokat tartalmaznak, míg a listák elemet sorozatát.</answer>
         <correct>2</correct>
     </question>
     <question type="single_choice">
-        <text>What is another name for maps?</text>
-        <answer>stack</answer>
-        <answer>dictionary</answer>
-        <answer>queue</answer>
-        <answer>pair</answer>
+        <text>Mi a szótárak másik neve?</text>
+        <answer>Verem.</answer>
+        <answer>Map.</answer>
+        <answer>Sor.</answer>
+        <answer>Pár.</answer>
         <correct>1</correct>
     </question>
     <question type="true_false">
-        <text>In Java, maps are built into the language itself, map classes are not needed.</text>
-        <correct>false</correct>
-    </question>
-    <question type="true_false">
-        <text>In Java, lists are built into the language, list classes are not needed.</text>
+        <text>A Java-ban a listák be vannak építve a nyelvbe, nincs szükség lista osztályokra.</text>
         <correct>false</correct>
     </question>
     <question type="text">
-        <text>What interface do dictionaries in the JDK implement?</text>
+        <text>Milyen interfészt valósítanak meg a szótárak a JDK-ban?</text>
         <correct>Map</correct>
         <correct>java.util.Map</correct>
     </question>
     <question type="multi_choice">
-        <text>Which of these can a map contain?</text>
-        <answer>keys</answer>
-        <answer>collections</answer>
-        <answer>lists</answer>
-        <answer>pairs</answer>
+        <text>Ezek közül melyekből állnak össze egy szótár párjai?</text>
+        <answer>Kulcsok.</answer>
+        <answer>Kollekciók.</answer>
+        <answer>Listák.</answer>
+        <answer>Értékek.</answer>
         <correct>0</correct>
         <correct>3</correct>
     </question>
     <question type="multi_choice">
-        <text>What is true about maps?</text>
-        <answer>They hold pairs of elements.</answer>
-        <answer>Duplicate keys are allowed.</answer>
-        <answer>Duplicate values are allowed.</answer>
-        <answer>The keys of a map are always integers.</answer>
+        <text>Mi igaz a szótárakra?</text>
+        <answer>Elempárokat tartalmaznak.</answer>
+        <answer>A duplikált kulcsok megengedettek.</answer>
+        <answer>A duplikált értékek megengedettek.</answer>
+        <answer>A szótár kulcsai mindig egész számok.</answer>
         <correct>0</correct>
         <correct>2</correct>
     </question>
     <question type="true_false">
-        <text>Maps can efficiently retrieve a value, given a key.</text>
+        <text>A szótárakból hatékonyan lekérdezhetünk egy értéket, ha megadunk egy kulcsot.</text>
         <correct>true</correct>
     </question>
 
     <!-- Questions about collection utilities -->
     <question type="true_false">
-        <text>Immutable collections are readonly.</text>
+        <text>Vannak csak olvasható kollekciók.</text>
         <correct>true</correct>
     </question>
     <question type="text">
-        <text>Which class provides utility methods for data structures?</text>
+        <text>Melyik JDK-s osztály nyújt segéd metódusokat az adatszerkezetekhez?</text>
         <correct>Collections</correct>
         <correct>java.util.Collections</correct>
     </question>
     <question type="text">
-        <text>Which interface can be implemented if we want to define an ordering between objects?</text>
+        <text>Melyik interfészt kell megvalósítani, ha az objektumok között rendezést akarunk meghatározni?</text>
         <correct>Comparable</correct>
         <correct>java.lang.Comparable</correct>
     </question>
     <question type="true_false">
-        <text>Methods that require an ordering of elements will work for primitives and their wrappers.</text>
+        <text>Azok a metódusok, amelyek az elemek rendezhetőségét igénylik, működni fognak wrapperek esetében.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>Methods that require an ordering of elements will work for strings.</text>
+        <text>Az elemek rendezhetőségét igénylő metódusok a String-ekre működnek.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>Methods that require an ordering of elements will work for any class.</text>
+        <text>Az elemek rendezhetőségét igénylő metódusok bármely osztály esetében működnek.</text>
         <correct>false</correct>
     </question>
     <question type="text">
-        <text>We're comparing the current object with another one, and we find they're equal. What should we return?</text>
+        <text>A compareTo metódusban összehasonlítjuk az aktuális objektumot egy másikkal, és azt találjuk, hogy egyenlőek. Mit adjunk vissza?</text>
         <correct>0</correct>
     </question>
+	<question type="text">
+        <text>A compareTo metódusban összehasonlítjuk az aktuális objektumot egy másikkal, és azt találjuk, hogy az aktuális nagyobb. Mit adjunk vissza?</text>
+        <correct>1</correct>
+    </question>
+	<question type="text">
+        <text>A compareTo metódusban összehasonlítjuk az aktuális objektumot egy másikkal, és azt találjuk, hogy a másik nagyobb. Mit adjunk vissza?</text>
+        <correct>-1</correct>
+    </question>
     <question type="multi_choice">
-        <text>Which interfaces are part of the Java collections framework?</text>
+        <text>Mely interfészek tartoznak a Java kollekciók keretrendszeréhez?</text>
         <answer>java.util.List</answer>
         <answer>java.lang.Comparable</answer>
         <answer>java.util.Map</answer>
@@ -295,11 +304,11 @@
         <correct>2</correct>
     </question>
     <question type="multi_choice">
-        <text>Which collections maintain an ordering of their elements?</text>
-        <answer>Lists.</answer>
-        <answer>Sets.</answer>
-        <answer>Maps.</answer>
-        <answer>Stacks.</answer>
+        <text>Mely gyűjtemények tartják fenn az elemeik sorrendjét?</text>
+        <answer>Listák.</answer>
+        <answer>Halmazok.</answer>
+        <answer>Szótárak.</answer>
+        <answer>Vermek.</answer>
         <correct>0</correct>
         <correct>3</correct>
     </question>

@@ -21,16 +21,32 @@ import com.gaspar.learnjava.parsers.CourseParser;
 import com.google.android.material.snackbar.Snackbar;
 
 /**
- * Finds the name of a single chapter from it's id. Sets the view in the main menu on completion.
+ * Finds the name of a single chapter from it's id. This was the chapter that the user
+ * last started. Special result is displayed if no chapter was started yet.
+ * Sets the view in the main menu on completion.
  */
 public class InitStarterViewTask extends AsyncTask<Object, Void, LearnJavaActivity> {
 
+    /**
+     * Constant that indicates no chapter was started.
+     */
     private static final int NO_STARTED_CHAPTER = Integer.MIN_VALUE;
 
+    /**
+     * Id of the chapter.
+     */
     private final int chapterId;
 
+    /**
+     * Stores if the user even opened a chapter or not.
+     */
     private final boolean started;
 
+    /**
+     * In some cases, the user can not progress further from the home screen, because
+     * all chapters in the course are completed, and an exam must be taken. This flag
+     * is true in such cases.
+     */
     private boolean showOpenDrawerForExamPrompt;
 
     public InitStarterViewTask(int chapterId, boolean started) {

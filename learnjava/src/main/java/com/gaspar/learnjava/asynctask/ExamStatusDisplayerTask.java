@@ -114,7 +114,7 @@ public class ExamStatusDisplayerTask extends AsyncTask<Object, Void, ExamStatusD
         }
 
         takeExamButton.setOnClickListener(view -> { //button always gets a listener
-            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(ThemeUtils.createDialogWrapper(result.activity));
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(result.activity, ThemeUtils.getThemedDialogStyle());
             builder.setTitle(R.string.exam);
             builder.setMessage(R.string.confirm_exam_start);
             builder.setPositiveButton(R.string.yes, (dialog, which) -> Exam.startExamActivity(result, exam));
@@ -141,7 +141,7 @@ public class ExamStatusDisplayerTask extends AsyncTask<Object, Void, ExamStatusD
     //adds a dialog that notifies about unfinished exams on click
     private void addDialogOnClick(AppCompatActivity activity, View examView) {
         examView.setOnClickListener(v -> {
-            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(ThemeUtils.createDialogWrapper(activity));
+            MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(activity, ThemeUtils.getThemedDialogStyle());
             builder.setTitle(R.string.in_development);
             builder.setMessage(R.string.exam_development_info);
             builder.setPositiveButton(R.string.ok, (dialog, which) -> dialog.dismiss());

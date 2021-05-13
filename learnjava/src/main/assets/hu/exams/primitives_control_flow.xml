@@ -14,6 +14,7 @@
         <answer>float</answer>
         <answer>byte</answer>
         <answer>double</answer>
+        <answer>double</answer>
         <correct>1</correct>
         <correct>3</correct>
     </question>
@@ -58,10 +59,10 @@
     </question>
     <question type="single_choice">
         <text>Mi történik, ha egy már maximális értéken lévő numerikus primitív értékét növeljük?</text>
-        <válasz>Nem fog növekedni.</answer>
-        <válasz>Túlcsordul, és negatívvá válik.</válasz>
-        <válasz>Egy hiba fog jelentkezni, és a program leáll.</válasz>
-        <válasz>Automatikusan átalakul egy nagyobb tartományú primitívvé.</válasz>
+        <answer>Nem fog növekedni.</answer>
+        <answer>Túlcsordul, és negatívvá válik.</answer>
+        <answer>Egy hiba fog jelentkezni, és a program leáll.</answer>
+        <answer>Automatikusan átalakul egy nagyobb tartományú primitívvé.</answer>
         <correct>1</correct>
     </question>
     <question type="text">
@@ -142,11 +143,11 @@
         <correct>1</correct>
     </question>
     <question type="true_false">
-        <text>Ha van egy 'sel' nevű boolean, akkor a helyes módja a tagadásának a '!sel'.</text>
+        <text>Ha van egy 'sel' nevű boolean, akkor a correct módja a tagadásának a '!sel'.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>Ha van egy 'sel' nevű boolean, akkor a helyes módja a tagadásának a '!=sel'.</text>
+        <text>Ha van egy 'sel' nevű boolean, akkor a correct módja a tagadásának a '!=sel'.</text>
         <correct>false</correct>
     </question>
     <question type="text">
@@ -229,27 +230,27 @@
         <correct>3</correct>
     </question>
     <question type="single_choice">
-        <text>Mi a helyes a ciklus megállási feltételével kapcsolatban?</text>
-        <válasz>Ez soha nem engedi meg a végtelen ciklusokat.</válasz>
-        <válasz>Amikor ez a feltétel hamis lesz, a ciklus leáll.</válasz>
-        <válasz>Amikor ez a feltétel igazzá válik, a ciklus leáll.</válasz>
-        <válasz>A for ciklus létrehozásakor ez az utolsó komponens.</válasz>
+        <text>Mi a correct a ciklus megállási feltételével kapcsolatban?</text>
+        <answer>Ez soha nem engedi meg a végtelen ciklusokat.</answer>
+        <answer>Amikor ez a feltétel hamis lesz, a ciklus leáll.</answer>
+        <answer>Amikor ez a feltétel igazzá válik, a ciklus leáll.</answer>
+        <answer>A for ciklus létrehozásakor ez az utolsó komponens.</answer>
         <correct>1</correct>
     </question>
     <question type="single_choice">
         <text>Mit csinál az i++?</text>
-        <válasz>Megnöveli az i változót.</válasz>
-        <válasz>Elkészít egy for ciklust, ahol az i az iterátor változó.</válasz>
-        <válasz>Csökkenti az i változót.</válasz>
-        <válasz>Az i értékét 0-ra állítja.</válasz>
+        <answer>Megnöveli az i változót.</answer>
+        <answer>Elkészít egy for ciklust, ahol az i az iterátor változó.</answer>
+        <answer>Csökkenti az i változót.</answer>
+        <answer>Az i értékét 0-ra állítja.</answer>
         <correct>0</correct>
     </question>
     <question type="single_choice">
         <text>Mit csinál j--?</text>
-        <válasz>Elkészít egy while ciklust, ahol j az iterátor változó.</válasz>
-        <válasz>Eggyel növeli a j változót.</válasz>
-        <válasz>Csökkenti a j változót.</válasz>
-        <válasz>Törli a j változót, nem használható fel újra.</válasz>
+        <answer>Elkészít egy while ciklust, ahol j az iterátor változó.</answer>
+        <answer>Eggyel növeli a j változót.</answer>
+        <answer>Csökkenti a j változót.</answer>
+        <answer>Törli a j változót, nem használható fel újra.</answer>
         <correct>2</correct>
     </question>
     <question type="text">
@@ -264,25 +265,25 @@
     </question>
     <question type="single_choice">
         <text>Mi a különbség a while és a do-while ciklus között?</text>
-        <válasz>Semmi.</answer>
-        <válasz>A do-while ciklus soha nem lehet végtelen, a while ciklus viszont igen.</válasz>
-        <válasz>A while ciklusnak speciális szintaxisa van egy iterátor változó deklarálására, a do-while ciklusnak nincs.</válasz>
-        <válasz>A do-while ciklus garantáltan legalább egyszer fut, a while ciklus nem.</answer>
+        <answer>Semmi.</answer>
+        <answer>A do-while ciklus soha nem lehet végtelen, a while ciklus viszont igen.</answer>
+        <answer>A while ciklusnak speciális szintaxisa van egy iterátor változó deklarálására, a do-while ciklusnak nincs.</answer>
+        <answer>A do-while ciklus garantáltan legalább egyszer fut, a while ciklus nem.</answer>
         <correct>3</correct>
     </question>
     <question type="multi_choice">
         <text>Mi ugyanaz a for és a while ciklusban?</text>
-        <válasz>Akár végtelen ciklusok is lehetnek.</válasz>
-        <válasz>Mindkettőnek speciális szintaxisa van az iterátor változókra.</válasz>
-        <válasz>A break és a continue utasításokat mindkettőben használhatjuk.</válasz>
+        <answer>Akár végtelen ciklusok is lehetnek.</answer>
+        <answer>Mindkettőnek speciális szintaxisa van az iterátor változókra.</answer>
+        <answer>A break és a continue utasításokat mindkettőben használhatjuk.</answer>
         <correct>0</correct>
         <correct>2</correct>
     </question>
     <question type="single_choice">
         <text>Mit csinál a break utasítás?</text>
-        <válasz>Frissíti az iterátor változó értékét.</válasz>
-        <válasz>Megállítja a ciklust.</válasz>
-        <válasz>Átugrik ciklus következő futására.</válasz>
+        <answer>Frissíti az iterátor változó értékét.</answer>
+        <answer>Megállítja a ciklust.</answer>
+        <answer>Átugrik ciklus következő futására.</answer>
         <correct>1</correct>
     </question>
     <question type="text">
@@ -291,10 +292,10 @@
     </question>
     <question type="single_choice">
         <text>Mit csinál a continue utasítás?</text>
-        <válasz>Egy break utasítás után használjuk, újraindítja a ciklust.</válasz>
-        <válasz>Módosítja az iterátor változó értékét.</válasz>
-        <válasz>Megállítja a ciklust.</válasz>
-        <válasz>Átugrik ciklus következő futására.</válasz>
+        <answer>Egy break utasítás után használjuk, újraindítja a ciklust.</answer>
+        <answer>Módosítja az iterátor változó értékét.</answer>
+        <answer>Megállítja a ciklust.</answer>
+        <answer>Átugrik ciklus következő futására.</answer>
         <correct>3</correct>
     </question>
     <question type="text">
@@ -303,16 +304,16 @@
     </question>
     <question type="single_choice">
         <text>Mi a végtelen ciklus?</text>
-        <válasz>Egy olyan ciklus, ahol a befejező feltétel soha nem lesz hamis.</válasz>
-        <válasz>Egy speciális while ciklus.</válasz>
-        <válasz>Akkor következik be, ha elfelejtjük a záró zárójelet írni egy ciklushoz.</válasz>
-        <válasz>Egy speciális for ciklus.</válasz>
+        <answer>Egy olyan ciklus, ahol a befejező feltétel soha nem lesz hamis.</answer>
+        <answer>Egy speciális while ciklus.</answer>
+        <answer>Akkor következik be, ha elfelejtjük a záró zárójelet írni egy ciklushoz.</answer>
+        <answer>Egy speciális for ciklus.</answer>
         <correct>0</correct>
     </question>
 
     <!-- Questions for arrays -->
     <question type="single_choice">
-        <text>Melyik a helyes állítás egy integer tömb deklarálására?</text>
+        <text>Melyik a correct állítás egy integer tömb deklarálására?</text>
         <answer>int[] data = new int[];</answer>
         <answer>String[] data = new String[5];</answer>
         <answer>int[] data = new int[10];</answer>
@@ -320,7 +321,7 @@
         <correct>2</correct>
     </question>
     <question type="single_choice">
-        <text>Melyik a helyes állítás egy 20 hosszúságú String tömb deklarálására?</text>
+        <text>Melyik a correct állítás egy 20 hosszúságú String tömb deklarálására?</text>
         <answer>int[] texts = new int[20];</answer>
         <answer>String[] texts = new String[5];</answer>
         <answer>String[20] texts = new String[];</answer>
@@ -345,18 +346,18 @@
     </question>
     <question type="single_choice">
         <text>Egy tömb hossza N. Mi történik, ha az N indexű elemre hivatkozunk?</text>
-        <válasz>Megkapjuk a hivatkozott elemet.</válasz>
-        <válasz>Egy ArrayIndexOutOfOfBoundsException következik be.</válasz>
-        <válasz>Egy NullPointerException következik be.</válasz>
-        <válasz>A JVM kihagyja ezt az utasítást.</válasz>
+        <answer>Megkapjuk a hivatkozott elemet.</answer>
+        <answer>Egy ArrayIndexOutOfOfBoundsException következik be.</answer>
+        <answer>Egy NullPointerException következik be.</answer>
+        <answer>A JVM kihagyja ezt az utasítást.</answer>
         <correct>1</correct>
     </question>
     <question type="single_choice">
         <text>Egy tömb hossza N. Mi történik, ha az N-1 indexű elemre hivatkozunk?</text>
-        <válasz>A hivatkozott elemet, a tömb utolsó elemét kapjuk meg.</válasz>
-        <válasz>Egy ArrayIndexOutOfOfBoundsException következik be.</válasz>
-        <válasz>Egy NullPointerException következik be.</válasz>
-        <válasz>A hivatkozott elemet, a tömb első elemét kapjuk meg.</válasz>
+        <answer>A hivatkozott elemet, a tömb utolsó elemét kapjuk meg.</answer>
+        <answer>Egy ArrayIndexOutOfOfBoundsException következik be.</answer>
+        <answer>Egy NullPointerException következik be.</answer>
+        <answer>A hivatkozott elemet, a tömb első elemét kapjuk meg.</answer>
         <correct>0</correct>
     </question>
     <question type="text">
@@ -377,10 +378,10 @@
     <!-- Questions for getting input -->
     <question type="single_choice">
         <text>Hogyan érhetjük el a parancssori argumentumokat futás közben?</text>
-        <válasz>Nem tudjuk, elvesznek.</answer>
-        <válasz>A main metódus paramétereként kapjuk őket, egy egész számokból álló tömbként.</válasz>
-        <válasz>A main metódus paramétereként kapjuk őket, egy String-ekből álló tömbként.</válasz>
-        <válasz>A fő osztály egy statikus változójába töltődnek be, az args nevű statikus változóba.</válasz>
+        <answer>Nem tudjuk, elvesznek.</answer>
+        <answer>A main metódus paramétereként kapjuk őket, egy egész számokból álló tömbként.</answer>
+        <answer>A main metódus paramétereként kapjuk őket, egy String-ekből álló tömbként.</answer>
+        <answer>A fő osztály egy statikus változójába töltődnek be, az args nevű statikus változóba.</answer>
         <correct>2</correct>
     </question>
     <question type="text">
@@ -391,9 +392,9 @@
     </question>
     <question type="single_choice">
         <text>Mi történik, ha az Integer.parseInt paramétere nem megfelelő formájú?</text>
-        <válasz>A metódus 0-t ad vissza.</answer>
-        <válasz>Egy NumberFormatException-t dob.</válasz>
-        <válasz>A metódust az Integer.MIN_VALUE értéket adja vissza</válasz>
+        <answer>A metódus 0-t ad vissza.</answer>
+        <answer>Egy NumberFormatException-t dob.</answer>
+        <answer>A metódust az Integer.MIN_VALUE értéket adja vissza</answer>
         <answer>A NullPointerException-t dobja.</answer>
         <correct>1</correct>
     </question>
@@ -403,10 +404,10 @@
     </question>
     <question type="single_choice">
         <text>Mi a System.in?</text>
-        <válasz>Ez egy szkenner objektum, amelyet a Java inicializál.</válasz>
-        <válasz>Ez egy InputStream objektum, amelyet a Java inicializál. Fájl bemenetre figyel.</answer>
-        <válasz>Egy változó, amelybe a JVM betölti a parancssori érveket.</válasz>
-        <válasz>Ez egy InputStream objektum, amelyet a Java inicializál. A billentyűzet bemenetet figyeli.</answer>
+        <answer>Ez egy szkenner objektum, amelyet a Java inicializál.</answer>
+        <answer>Ez egy InputStream objektum, amelyet a Java inicializál. Fájl bemenetre figyel.</answer>
+        <answer>Egy változó, amelybe a JVM betölti a parancssori érveket.</answer>
+        <answer>Ez egy InputStream objektum, amelyet a Java inicializál. A billentyűzet bemenetet figyeli.</answer>
         <correct>3</correct>
     </question>
     <question type="true_false">
@@ -442,10 +443,10 @@
     </question>
     <question type="single_choice">
         <text>Mi történik, ha egy nem létező fájlt próbálunk beolvasni?</text>
-        <válasz>Egy NoSuchFileException vagy egy FileNotFoundException kerül kidobásra.</válasz>
-        <válasz>Egy üres listát kapunk vissza.</válasz>
-        <válasz>A fájl létrejön, és a beolvasás újra megtörténik.</válasz>
-        <válasz>A NumberFormatException-t dobódik.</válasz>
+        <answer>Egy NoSuchFileException vagy egy FileNotFoundException kerül kidobásra.</answer>
+        <answer>Egy üres listát kapunk vissza.</answer>
+        <answer>A fájl létrejön, és a beolvasás újra megtörténik.</answer>
+        <answer>A NumberFormatException-t dobódik.</answer>
         <correct>0</correct>
     </question>
 
@@ -466,18 +467,18 @@
     </question>
     <question type="multi_choice">
         <text>Melyik igaz a PrintWriter osztályra?</text>
-        <válasz>A felhasználó adatainak beolvasására szolgál.</válasz>
-        <válasz>Ez egy bemeneti (input) osztály.</válasz>
-        <válasz>Szövegnek (vagy egyéb adatnak) a konzolra való írására szolgál.</válasz>
-        <válasz>Szöveg (vagy egyéb adatnak) fájlba való írására szolgál.</válasz>
+        <answer>A felhasználó adatainak beolvasására szolgál.</answer>
+        <answer>Ez egy bemeneti (input) osztály.</answer>
+        <answer>Szövegnek (vagy egyéb adatnak) a konzolra való írására szolgál.</answer>
+        <answer>Szöveg (vagy egyéb adatnak) fájlba való írására szolgál.</answer>
         <correct>2</correct>
         <correct>3</correct>
     </question>
     <question type="single_choice">
         <text>Mi történik (alapértelmezés szerint), amikor egy új PrintWriter egy meglévő fájlba kezd nyomtatni?</text>
-        <válasz>A sorok a fájl végére lesznek csatolva.</válasz>
-        <válasz>Egy kivétel dobódik.</válasz>
-        <válasz>A fájl tartalma a nyomtatás előtt törlődik.</válasz>
+        <answer>A sorok a fájl végére lesznek csatolva.</answer>
+        <answer>Egy kivétel dobódik.</answer>
+        <answer>A fájl tartalma a nyomtatás előtt törlődik.</answer>
         <correct>2</correct>
     </question>
     <question type="true_false">

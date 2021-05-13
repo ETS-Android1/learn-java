@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.content.res.Configuration;
-import android.view.ContextThemeWrapper;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.IntDef;
@@ -156,15 +155,23 @@ public abstract class ThemeUtils {
         throw new RuntimeException("Theme error!");
     }
 
-    public static ContextThemeWrapper createDialogWrapper(AppCompatActivity activity) {
+    /**
+     * Finds the style of the material alert dialogs, based on the current style.
+     * @return A style ID.
+     */
+    public static @StyleRes int getThemedDialogStyle() {
         if (selectedTheme == Themes.ORANGE) {
-            return new ContextThemeWrapper(activity, R.style.dialog_orange);
+            return R.style.AppDialogStyle;
         } else if(selectedTheme == Themes.DARK) { //dark
-            return new ContextThemeWrapper(activity, R.style.dialog_dark);
+            return R.style.AppDialogStyleDark;
         }
         throw new RuntimeException("Theme error!");
     }
 
+    /**
+     * Constant in the preferences, which is used to find out if the
+     * dark theme prompt needs to be shown.
+     */
     private static final String SHOW_DARK_THEME_PROMPT = "show_dark_theme_prompt";
 
     /**
@@ -180,7 +187,7 @@ public abstract class ThemeUtils {
 
         if(!preferences.contains(SHOW_DARK_THEME_PROMPT)) {
             //never been shown before, show it now
-            new MaterialAlertDialogBuilder(ThemeUtils.createDialogWrapper(activity))
+            new MaterialAlertDialogBuilder(activity, ThemeUtils.getThemedDialogStyle())
                     .setTitle(R.string.dark_theme_title)
                     .setMessage(R.string.dark_theme_info)
                     .setPositiveButton(R.string.dark_theme_accepted, (dialog, which) -> {
@@ -215,7 +222,7 @@ public abstract class ThemeUtils {
                 //the app has not asked about this before
                 if(!isDarkTheme()) {
                     //the app is not in dark theme already
-                    new MaterialAlertDialogBuilder(createDialogWrapper(activity))
+                    new MaterialAlertDialogBuilder(activity, ThemeUtils.getThemedDialogStyle())
                             .setTitle(R.string.dark_theme_title)
                             .setMessage(R.string.dark_theme_system)
                             .setPositiveButton(R.string.dark_theme_accepted, (dialog, which) -> {

@@ -1,13 +1,17 @@
 package com.gaspar.learnjava;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -15,6 +19,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.gaspar.learnjava.asynctask.FillGuideActivityTask;
 import com.gaspar.learnjava.utils.DrawerUtils;
 import com.gaspar.learnjava.utils.LearnJavaBluetooth;
+import com.gaspar.learnjava.utils.ThemeUtils;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -22,6 +28,11 @@ import com.google.android.material.snackbar.Snackbar;
  * Activity where the application guide is displayed.
  */
 public class GuideActivity extends ThemedActivity implements NavigationView.OnNavigationItemSelectedListener {
+
+    /**
+     * The constant used to find if the user read the guide in the preferences.
+     */
+    private static final String GUIDE_READ_PREFERENCE = "guide_read_pref";
 
     /**
      * Used at component loading.
@@ -33,6 +44,9 @@ public class GuideActivity extends ThemedActivity implements NavigationView.OnNa
         super.onCreate(savedState);
         setContentView(R.layout.guide);
         setUpUI();
+        //the guide was opened, save this information
+        final SharedPreferences preferences = getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
+        preferences.edit().putBoolean(GUIDE_READ_PREFERENCE, true).apply();
     }
 
     private void setUpUI() {
@@ -124,5 +138,49 @@ public class GuideActivity extends ThemedActivity implements NavigationView.OnNa
      */
     public void closeButtonOnClick(View view) {
         finish();
+    }
+
+    /**
+     * Initializes the preferences so that it contains the {@link #GUIDE_READ_PREFERENCE} value,
+     * which stores if the user has read the guide or not. This is called on application launch.
+     */
+    public static void initializeGuideReadPreference(@NonNull final AppCompatActivity activity) {
+        final SharedPreferences preferences = activity.getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
+        if(!preferences.contains(GUIDE_READ_PREFERENCE)) {
+            //at first, the guide was not read
+            preferences.edit().putBoolean(GUIDE_READ_PREFERENCE, false).apply();
+        }
+    }
+
+    /**
+     * Shows a dialog which informs the user that they haven't read the guide yet.
+     * Offers to open the guide.
+     * @param activity Activity in which the dialog opens.
+     * @param runElse Will be called if the dialog is displayed, but the user says no.
+     */
+    public static void displayGuideNotReadDialogIfNeeded(@NonNull final AppCompatActivity activity, @Nullable final Runnable runElse) {
+        final SharedPreferences preferences = activity.getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
+        if(preferences.getBoolean(GUIDE_READ_PREFERENCE, false)) {
+            //guide was read already, don't do anything
+            //run whatever needed
+            if(runElse != null) runElse.run();
+        } else {
+            //the guide was not read
+            new MaterialAlertDialogBuilder(activity, ThemeUtils.getThemedDialogStyle())
+                    .setTitle(R.string.guide)
+                    .setMessage(R.string.guide_not_read)
+                    .setPositiveButton(R.string.ok, (dialog, which) -> {
+                        dialog.dismiss();
+                        //start guide
+                        Intent i = new Intent(activity, GuideActivity.class);
+                        activity.startActivity(i);
+                    })
+                    .setNegativeButton(R.string.no, (dialog, which) -> {
+                        dialog.dismiss();
+                        //run whatever needed if no is selected
+                        if(runElse != null) runElse.run();
+                    })
+                    .show();
+        }
     }
 }

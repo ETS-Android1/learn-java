@@ -50,6 +50,11 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
      */
     private static final String KEEP_AWAKE_PREF_NAME = "keep_awake_pref_name";
 
+    /**
+     * Constant for the 'automatically slide unlocked content open' preference.
+     */
+    public static final String AUTO_SLIDE_OPEN_PREF_NAME = "auto_slide_open_pref_name";
+
     @Override
     public void onCreate(Bundle savedState) {
         super.onCreate(savedState);
@@ -58,6 +63,10 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
         setUpUI();
     }
 
+    /**
+     * Initialized the UI components of the activity, such as the switches and radio buttons,
+     * so they are consistent with the current settings.
+     */
     private void setUpUI() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -119,7 +128,7 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
     private void initScreenSettings() {
         //keep awake functionality
         SwitchMaterial keepAwakeSwitch = findViewById(R.id.keepAwakeSwitch);
-        keepAwakeSwitch.setChecked(prefs.getBoolean(KEEP_AWAKE_PREF_NAME, false)); //false by default
+        keepAwakeSwitch.setChecked(prefs.getBoolean(KEEP_AWAKE_PREF_NAME, false));
         keepAwakeSwitch.setOnCheckedChangeListener((compoundButton, checked) -> {
                 prefs.edit().putBoolean(KEEP_AWAKE_PREF_NAME, checked).apply();
                 if(checked) { //update settings activity as well
@@ -128,6 +137,12 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
                     getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
                 }
         });
+        //auto slide open functionality
+        SwitchMaterial autoSlideOpenSwitch = findViewById(R.id.autoOpenSwitch);
+        autoSlideOpenSwitch.setChecked(prefs.getBoolean(AUTO_SLIDE_OPEN_PREF_NAME, false));
+        autoSlideOpenSwitch.setOnCheckedChangeListener((compoundButton, checked) ->
+                //save preference
+                prefs.edit().putBoolean(AUTO_SLIDE_OPEN_PREF_NAME, checked).apply());
     }
 
     /**
@@ -165,7 +180,7 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
      * Called when the reset button is clicked. Asks for confirmation before resetting.
      */
     public void resetButtonOnClick(View resetButton) {
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(ThemeUtils.createDialogWrapper(SettingsActivity.this));
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, ThemeUtils.getThemedDialogStyle());
         builder.setMessage(R.string.reset_warning);
         builder.setPositiveButton(R.string.ok, (dialogInterface, i) -> {
             //deletes the contents of the database, and then re-validates it, filling it with default values.
@@ -199,7 +214,7 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
     /**
      * Checks if the exam notifications are enabled.
      */
-    public static boolean examNotificationsEnabled(Context context) {
+    public static boolean examNotificationsEnabled(@NonNull final Context context) {
         final SharedPreferences prefs = context.getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
         return prefs.getBoolean(EXAM_NOTIFICATIONS_PREF_NAME, true);
     }
@@ -207,9 +222,17 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
     /**
      * Checks if the keep screen awake function is enabled.
      */
-    public static boolean keepAwakeEnabled(Context context) {
+    public static boolean keepAwakeEnabled(@NonNull final Context context) {
         final SharedPreferences prefs = context.getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
         return prefs.getBoolean(KEEP_AWAKE_PREF_NAME, false); //false by default
+    }
+
+    /**
+     * Checks if the auto slide open preference is enabled.
+     */
+    public static boolean autoSlideOpenEnabled(@NonNull final Context context) {
+        final SharedPreferences prefs = context.getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
+        return prefs.getBoolean(AUTO_SLIDE_OPEN_PREF_NAME, false); //false by default
     }
 
     /**
@@ -226,12 +249,20 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
      */
     public static void initSettings(Context context) {
         final SharedPreferences prefs = context.getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = prefs.edit();
         if(!prefs.contains(EXAM_NOTIFICATIONS_PREF_NAME)) {
-            prefs.edit().putBoolean(EXAM_NOTIFICATIONS_PREF_NAME, true).apply(); //enabled by default
+            editor.putBoolean(EXAM_NOTIFICATIONS_PREF_NAME, true); //exam notification is enabled by default
         }
         if(!prefs.contains(DIFFICULTY_PREF_NAME)) {
-            prefs.edit().putString(DIFFICULTY_PREF_NAME, Difficulties.DEFAULT).apply(); //default difficulty
+            editor.putString(DIFFICULTY_PREF_NAME, Difficulties.DEFAULT); //default difficulty
         }
+        if(!prefs.contains(KEEP_AWAKE_PREF_NAME)) {
+            editor.putBoolean(KEEP_AWAKE_PREF_NAME, false); //screen awake is disabled by default
+        }
+        if(!prefs.contains(AUTO_SLIDE_OPEN_PREF_NAME)) {
+            editor.putBoolean(AUTO_SLIDE_OPEN_PREF_NAME, false); //auto slide open is disabled by default
+        }
+        editor.apply();
     }
 
 }

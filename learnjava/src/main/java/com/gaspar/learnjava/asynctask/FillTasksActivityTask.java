@@ -19,6 +19,9 @@ import com.gaspar.learnjava.parsers.CourseParser;
  */
 public class FillTasksActivityTask extends AsyncTask<TasksActivity, Void, TasksActivity> {
 
+    /**
+     * The adapter which displays task views.
+     */
     private TaskAdapter taskAdapter;
 
     @Override

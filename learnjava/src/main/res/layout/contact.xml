@@ -43,7 +43,7 @@
             android:layout_height="@dimen/separator_height"
             android:id="@+id/sep1"
             app:layout_constraintTop_toBottomOf="@id/textView8"
-            android:background="@color/separator_color"/>
+            android:background="?separatorBackgroundColor"/>
 
         <LinearLayout
             android:id="@+id/contactMeWhenLayout"
@@ -58,7 +58,7 @@
         <View android:layout_height="@dimen/separator_height"
             android:layout_width="match_parent"
             android:id="@id/sep2"
-            android:background="@color/separator_color"
+            android:background="?separatorBackgroundColor"
             app:layout_constraintTop_toBottomOf="@id/contactMeWhenLayout"/>
 
         <Button

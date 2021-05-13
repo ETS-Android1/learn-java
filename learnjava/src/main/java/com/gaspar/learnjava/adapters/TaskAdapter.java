@@ -29,6 +29,9 @@ import java.util.List;
  */
 public class TaskAdapter extends ArrayAdapter<Course> {
 
+    /**
+     * Activity in which the adapter displays.
+     */
     private final AppCompatActivity activity;
 
     /**
@@ -36,6 +39,11 @@ public class TaskAdapter extends ArrayAdapter<Course> {
      */
     private final Animation clickAnimation;
 
+    /**
+     * Create a task adapter which displays task views.
+     * @param activity Activity in which it will appear.
+     * @param courses List of courses (each course will be queried for tasks).
+     */
     public TaskAdapter(AppCompatActivity activity, @Size(min=1) List<Course> courses) {
         super(activity, R.layout.tasks_of_course, courses);
         this.activity = activity;
@@ -60,12 +68,7 @@ public class TaskAdapter extends ArrayAdapter<Course> {
         }
         if(course != null) { //fill data here using view holder
             holder.courseNameView.setText(course.getCourseName());
-            Runnable showTasksAtEnd = () -> { //runnable that shows the tasks for unlocked courses
-                if(course.getStatus() != Status.LOCKED) {
-                    holder.tasksLayout.setVisibility(View.VISIBLE);
-                }
-            };
-            course.queryAndDisplayStatus(holder.courseStatusIcon, showTasksAtEnd, activity);
+            course.queryAndDisplayStatus(holder.courseStatusIcon, activity, holder.tasksLayout);
             addTasksToCourse(course, holder.tasksLayout); //add tasks selectors
         }
         return convertView;

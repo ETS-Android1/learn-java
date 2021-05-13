@@ -12,6 +12,7 @@
     <color name="darkThemeTextColor">@android:color/white</color>
 
     <color name="separator_color">#FFFFE4AA</color>
+    <color name="separator_color_dark">@android:color/black</color>
 
     <!-- code formatting -->
     <color name="code_text_color">#D3D3D3</color>

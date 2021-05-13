@@ -309,6 +309,14 @@
         reflects this.
         ]]>
     </text>
+	<title text="Null"/>
+	<text>
+		<![CDATA[
+        <i>null</i> is the default value of all objects. It is important that you initialize all objects, otherwise 
+		their value will remain <i>null</i>. If we try to reference the methods or members of <i>null</i> objects, 
+		a <i>NullPointerException</i> will be thrown! 
+        ]]>
+	</text>
 
     <!-- mention OOP and concepts: details in chapter 152, 153
     class: blueprint, object: can be built using blueprint

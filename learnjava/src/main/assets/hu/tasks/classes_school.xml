@@ -9,7 +9,7 @@
         A feladatod, hogy létrehozd egy iskola "rendszerét". A fő entitások, amelyeknek szerepelniük kell 
 		a következők:
         ]]>
-    </tewxt>
+    </text>
     <list>
         <![CDATA[
         <ul>
@@ -74,7 +74,7 @@
     <advanced title="Párok">
         <![CDATA[
         A tanulónak tantárgy-osztályzat párokkal kell rendelkeznie. Rajtad áll, hogy ezt hogyan valósítod meg. 
-		Az előző feladatban az ajánlás egy <b>Map</b> (hozzárendelés) használata volt.
+		Az előző feladatban az ajánlás egy <b>szótár</b> (<i>map</i>) használata volt.
         <p>
         Egy másik megközelítéshez létrehozhatsz egy egyszerű osztályt, amely egy tantárgyat és az osztályzatot tárolja. 
 		Ezután ebből az osztályból egy listát hozhatsz létre.

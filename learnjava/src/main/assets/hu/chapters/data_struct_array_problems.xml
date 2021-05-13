@@ -2,19 +2,19 @@
 <resources>
     <chapterdata>
         <id>201</id>
-        <name>Problems with arrays</name>
+        <name>A tömbök hátrányai</name>
     </chapterdata>
     <text>
         <![CDATA[
-        We've learned about arrays, which are useful tools to handle groups of data, but they do have
-        serious limitations. In this chapter we'll see a few examples, and introduce the solution.
+        Tanultunk a tömbökről, amelyek hasznos eszközök az adatcsoportok kezelésére, de jelentős korlátaik vannak. 
+		Ebben a fejezetben látunk néhány példát ezekre a korlátokra.
         ]]>
     </text>
-    <title text="Examples"/>
+    <title text="Példák"/>
     <text>
         <![CDATA[
-        Suppose that we need a simple program that asks numbers from the user, and calculates their sum.
-        Let's create a solution using an array!
+        Tegyük fel, hogy szükségünk van egy egyszerű programra, amely számokat kér a felhasználótól, és kiszámítja 
+		azok összegét. Hozzunk létre egy tömböt használó megoldást!
         ]]>
     </text>
     <code><![CDATA[
@@ -53,67 +53,69 @@
     ]]></code>
     <text>
         <![CDATA[
-        The code works, but only if we are careful. It's easy to see that we run out of array indices, if we try to enter
-        more then 5 numbers (because that is the array size):
+        A kód működik, de csak akkor, ha óvatosak vagyunk. Könnyen látható, hogy kifogyunk a tömbindexekből, 
+		ha megpróbálunk beírni 5-nél több számot (mert ez a tömb mérete):
         ]]>
     </text>
     <image name="array_problem"/>
     <text>
         <![CDATA[
-        Well, the solution is elementary, no? Just increase the array size to some large integer, like
-        <b>1000</b>. The user will surely not enter 1000 numbers. But this is not a good solution, maybe not
-        a solution at all, since:
+        Hát akkor növeljük a tömb méretét valamilyen nagy egész számra, például
+        <b>1000</b>-re! A felhasználó szinte biztosan nem fog 1000 számot beírni. De ez nem egy jó megoldás, 
+		talán nem is megoldás, mivel:
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li>Inefficient usage of memory.</li>
-        <li>It's still possible to get errors if the user decides to actually enter that much numbers.</li>
-        <li>It's not an elegant way to write code, it's bad practice.</li>
+        <li>A memória nem hatékony használatát eredményezi.</li>
+        <li>Még mindig előfordulhatnak hibák, ha a felhasználó úgy dönt, hogy valóban több ezer számot ír be.</li>
+        <li>Ez nem egy elegáns módja a kód megírásának, ez rossz gyakorlat.</li>
         </ul>
         ]]>
     </list>
-    <boxed title="Inefficient memory usage">
+    <boxed title="Nem hatékony memória használat">
         <![CDATA[
-        If we allocate an array for 1000 integers, and the user only enters
-        3 for example, we are wasting the amount of memory needed to store 997 integers. Not too terrible, considering the
-        amount of <i>RAM</i> there is in computers nowadays, but still.
+        Ha egy 1000 egész számot tartalmazó tömböt hozunk létre, és a felhasználó csak például 3 számot ad meg, 
+		akkor 997 egész szám tárolásához szükséges memóriát pazarolunk. Nem túl szörnyű, figyelembe véve a modern számítógépek 
+        <i>RAM</i> mennyiségét, de mégis pazarlás.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        This leads us to the conclusion that we need more efficient and easy to use ways to store and manage
-        sets of data. These are called advanced data structures.
+        Hatékonyabb és könnyebben használható módszerekre, implementációkra van szükségünk 
+		adatok tároláshoz és kezeléshez. Ezeket nevezzük fejlett adatstruktúráknak.
         ]]>
     </text>
-    <advanced title="Solution with arrays only">
+    <advanced title="Biztonságos megoldás tömbökkel">
         <![CDATA[
-        Some of you may've realized that arrays can still be used to solve this problem, we just need to
-        catch some more possible exceptions, and increase the array size if needed, by allocating a new
-        arrays and copying the numbers there. This, however leads to complicated code and instead the usage of
-        other data structures is preferred.
+		A tömbök használhatók a fenti probléma biztonságos megoldására, csak figyelnünk kell bizonyos kivételekre. 
+		Ha a tömb megtelik, akkor új, nagyobb tömböt kell létrehozni, és a régi elemeket átmásolni. 
+		Ez azonban még egyszerű feladatokhoz is bonyolult kódot eredményez, és helyette a más 
+		adatszerkezetek használata előnyösebb.
         ]]>
     </advanced>
-    <title text="What is a data structure?"/>
+    <title text="Adatstruktúra"/>
     <text>
         <![CDATA[
-        A data structure can be anything that stores data in an organized way (even an array). Each data structure has it's
-        own advantages and disadvantages, so we must take care to choose the appropriate structure for the problems.
+        Adatstruktúra lehet bármi, ami az adatokat szervezett módon tárolja (akár egy tömb is). Minden adatstruktúrának 
+		megvannak a maga előnyei és hátrányai, ezért ügyelnünk kell arra, hogy a problémákhoz a megfelelő struktúrát 
+		válasszuk. Egy adatstruktúrát fejlettnek nevezünk, ha a tömböknél több funkcióval bír.
         ]]>
     </text>
-    <boxed title="Collections">
+    <boxed title="Kollekció">
         <![CDATA[
-        Advanced data structures are called <b>collections</b> in Java. All of them in the <i>JDK</i> implement the
-        interface <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Collection.html">java.util.Collection</a>.
-        It contains basic methods to add and remove elements, get the size of the collection and so on.
+        A fejlett adatszerkezeteket a Java-ban <b>kollekcióknak</b> nevezik. A <i>JDK-ban</i> mindegyikük megvalósítja 
+		a <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Collection.html">java.util.Collection</a> 
+		interfészt. Ez alapvető metódusokat tartalmaz elemek hozzáadására és eltávolítására, a gyűjtemény méretének 
+		lekérdezésére, stb. Ezeket minden kollekcióban használhatjuk.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        Java collections are often <b>generic</b> (for those with a background in <i>C++</i>, this is the Java word for template).
-        It's enough to know for now that a generic collection allows us to add any type of object into it, but the type of
-        elements must be declared together with the object:
+        A <i>JDK</i>-s kollekciók <b>generikusak</b> (azoknak, akiknek van <i>C++</i> háttere, ez a sablonok Java-s verziója). 
+        Egyelőre elég annyit tudni, hogy egy generikus kollekció lehetővé teszi, hogy bármilyen típusú objektumot 
+		felvegyünk bele, de a típust az objektummal együtt kell deklarálni:
         ]]>
     </text>
     <code><![CDATA[
@@ -124,28 +126,28 @@
     ]]></code>
     <text>
         <![CDATA[
-        Note that writing the type of elements for the second time (after the <i>new</i> keyword) is not necessary after
-        Java 7, the compiler can do that for us. This is sometimes called the <b>diamond operator</b>, named after the empty
-        <i>&lt;></i> symbols.
+        Vegyük észre, hogy az elemek típusának második alkalommal történő megírása (a <i>new</i> kulcsszó után) nem szükséges, 
+		a fordító ezt kitalálja helyettünk. Ezt néha <b>gyémánt operátornak</b> hívják, nevét az üres
+        <i>&lt;></i> szimbólumok után kapta.
         ]]>
     </text>
-    <advanced title="Writing generic code">
+    <advanced title="Generikus kód írása">
         <![CDATA[
-        Writing generic data structures (or any generics in Java, actually) is not an easy job. It'll be covered
-        in a later course. For now we'll use the generic classes of the <i>JDK</i>, but when implementing our your own in the
-        tasks of this course, only non-generic data structures will be required.
+        Generikus adatszerkezetek (vagy bármilyen generikus Java kód) írása nem könnyű feladat. Ez lesz a tárgya
+        egy későbbi kurzusnak. Egyelőre a <i>JDK</i> generikus osztályait fogjuk használni, de amikor a sajátjainkat a 
+		implementáljuk a kurzus feladatai során, akkor csak nem generikus, egyszerű változatok kellenek majd.
         ]]>
     </advanced>
     <text>
         <![CDATA[
-        It must be noted that generic collections can only take in other classes as element types. They cannot accept primitives.
-        Something like <i>LinkedList&lt;int></i> is <b>invalid code</b>!
+        A generikus kollekciók csak más osztályokat vehetnek fel elemtípusként. Primitíveket nem fogadhatnak el! 
+        Például a <i>LinkedList&lt;int></i> nem szabályos, mert az <i>int</i> primitív, nem pedig osztály.
         <p>
-        Fortunately this is not a serious problem, since we already learned about wrapper classes in the chapter of primitives.
-        Use these wrappers as element types instead (<i>List&lt;Integer></i>)!
+        Szerencsére ez nem jelent komoly problémát, hiszen a wrapper osztályokról már tanultunk a primitívek fejezetben.
+        Használjuk ezeket a wrappereket elemtípusokként a primitívek helyett (<i>List&lt;Integer></i>).
         ]]>
     </text>
-    <interactive instruction="Complete the generic list declaration for float types!">
+    <interactive instruction="Egészítsd ki az generikus listadeklarációt úgy, hogy float eleleket tároljon!">
         <data><![CDATA[
             
 ___&lt;<font color="#999900">Float</font>> numbers = <font color="#E65100">new</font> <font color="#999900">ArrayList</font><font color="#ADD8E6">___</font>();

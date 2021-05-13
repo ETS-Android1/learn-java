@@ -59,7 +59,7 @@
                    android:layout_width="0dp"
                    android:layout_height="@dimen/separator_height"
                    android:layout_marginTop="@dimen/margin"
-                   android:background="@color/separator_color"
+                   android:background="?separatorBackgroundColor"
                    app:layout_constraintEnd_toEndOf="parent"
                    app:layout_constraintStart_toStartOf="parent"
                    app:layout_constraintTop_toBottomOf="@id/examNotificationsSwitch" />
@@ -107,7 +107,7 @@
                    android:layout_width="0dp"
                    android:layout_height="@dimen/separator_height"
                    android:layout_marginTop="@dimen/margin"
-                   android:background="@color/separator_color"
+                   android:background="?separatorBackgroundColor"
                    app:layout_constraintEnd_toEndOf="parent"
                    app:layout_constraintStart_toStartOf="parent"
                    app:layout_constraintTop_toBottomOf="@id/difficultyButtons" />
@@ -120,38 +120,48 @@
                    app:layout_constraintStart_toStartOf="parent"
                    app:layout_constraintTop_toBottomOf="@+id/view1" />
 
-               <TextView
-                   android:id="@+id/textView7"
-                   android:layout_width="wrap_content"
+               <RelativeLayout
+                   android:layout_width="match_parent"
                    android:layout_height="wrap_content"
-                   android:text="@string/reset_details"
-                   android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                   android:textSize="@dimen/small_text_size"
-                   app:layout_constraintStart_toStartOf="parent"
-                   app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-               <ImageButton
-                   android:id="@+id/resetButton"
-                   android:layout_width="@dimen/icon_size"
-                   android:layout_height="@dimen/icon_size"
-                   android:contentDescription="@string/reset_details"
-                   android:onClick="resetButtonOnClick"
-                   app:layout_constraintBottom_toBottomOf="@+id/textView7"
-                   app:layout_constraintStart_toEndOf="@+id/textView7"
+                   android:id="@+id/resetBar"
                    app:layout_constraintTop_toBottomOf="@+id/textView6"
+                   app:layout_constraintStart_toStartOf="parent"
                    app:layout_constraintEnd_toEndOf="parent"
-                   app:srcCompat="@drawable/right_arrow"
-                   android:layout_marginStart="@dimen/margin"/>
+                   android:padding="@dimen/padding">
+
+                   <TextView
+                       android:id="@+id/textView7"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="@string/reset_details"
+                       android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                       android:textSize="@dimen/small_text_size"
+                       android:layout_alignParentStart="true"
+                       android:layout_centerVertical="true"
+                       android:layout_toStartOf="@id/resetButton"/>
+
+                   <ImageButton
+                       android:id="@+id/resetButton"
+                       android:layout_width="@dimen/icon_size"
+                       android:layout_height="@dimen/icon_size"
+                       android:contentDescription="@string/reset_details"
+                       android:onClick="resetButtonOnClick"
+                       app:srcCompat="@drawable/right_arrow"
+                       android:layout_marginStart="@dimen/margin"
+                       android:layout_alignParentEnd="true"
+                       android:layout_centerVertical="true"/>
+
+               </RelativeLayout>
 
                <View
                    android:id="@+id/view2"
                    android:layout_width="0dp"
                    android:layout_height="@dimen/separator_height"
                    android:layout_marginTop="@dimen/margin"
-                   android:background="@color/separator_color"
+                   android:background="?separatorBackgroundColor"
                    app:layout_constraintEnd_toEndOf="parent"
                    app:layout_constraintStart_toStartOf="parent"
-                   app:layout_constraintTop_toBottomOf="@id/resetButton" />
+                   app:layout_constraintTop_toBottomOf="@id/resetBar" />
 
                <TextView
                    android:id="@+id/textView5"
@@ -193,13 +203,24 @@
                        tools:ignore="ButtonStyle" />
 
                </LinearLayout>
+
+               <View
+                   android:id="@+id/view3"
+                   android:layout_width="0dp"
+                   android:layout_height="@dimen/separator_height"
+                   android:layout_marginTop="@dimen/margin"
+                   android:background="?separatorBackgroundColor"
+                   app:layout_constraintEnd_toEndOf="parent"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@id/themeSelectors" />
+
                <TextView
                    android:id="@+id/textView8"
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
                    android:text="@string/screen"
                    app:layout_constraintStart_toStartOf="parent"
-                   app:layout_constraintTop_toBottomOf="@+id/themeSelectors" />
+                   app:layout_constraintTop_toBottomOf="@+id/view3" />
 
                <com.google.android.material.switchmaterial.SwitchMaterial
                    android:id="@+id/keepAwakeSwitch"
@@ -210,6 +231,16 @@
                    android:text="@string/keep_awake_description"
                    app:layout_constraintStart_toStartOf="parent"
                    app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+               <com.google.android.material.switchmaterial.SwitchMaterial
+                   android:id="@+id/autoOpenSwitch"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_margin="@dimen/margin"
+                   android:switchPadding="@dimen/padding"
+                   android:text="@string/auto_open_unlocked_content_description"
+                   app:layout_constraintStart_toStartOf="parent"
+                   app:layout_constraintTop_toBottomOf="@+id/keepAwakeSwitch" />
 
            </androidx.constraintlayout.widget.ConstraintLayout>
 

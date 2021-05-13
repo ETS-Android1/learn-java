@@ -57,7 +57,7 @@ android:fitsSystemWindows="true">
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/separator_height"
                     android:layout_marginTop="@dimen/margin"
-                    android:background="@color/separator_color" />
+                    android:background="?separatorBackgroundColor" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -93,7 +93,7 @@ android:fitsSystemWindows="true">
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/separator_height"
                     android:layout_marginTop="@dimen/margin"
-                    android:background="@color/separator_color" />
+                    android:background="?separatorBackgroundColor" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -168,7 +168,7 @@ android:fitsSystemWindows="true">
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/separator_height"
                     android:layout_marginTop="@dimen/margin"
-                    android:background="@color/separator_color" />
+                    android:background="?separatorBackgroundColor" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -205,7 +205,7 @@ android:fitsSystemWindows="true">
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/separator_height"
                     android:layout_marginTop="@dimen/margin"
-                    android:background="@color/separator_color" />
+                    android:background="?separatorBackgroundColor" />
 
                 <TextView
                     android:layout_width="wrap_content"

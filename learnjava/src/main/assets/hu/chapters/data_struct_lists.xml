@@ -2,22 +2,21 @@
 <resources>
     <chapterdata>
         <id>202</id>
-        <name>Lists</name>
+        <name>Listák</name>
     </chapterdata>
     <text>
         <![CDATA[
-        The list is one of the simplest data structures. They're similar to arrays, but unlike arrays,
-        they can change their capacity of elements automatically, when needed (this means that a list can take
-        any number of elements).
+        A lista az egyik legegyszerűbb adatszerkezet. Hasonlít a tömbökhöz, de a tömböktől eltérően,
+        szükség esetén automatikusan képes átméretezni magát.
         ]]>
     </text>
-    <boxed title="Lists in Java">
+    <boxed title="Listák a Java-ban">
         <![CDATA[
-        Lists in the <i>JDK</i> implement the <a href="https://docs.oracle.com/javase/7/docs/api/java/util/List.html">java.util.List</a>
-        interface (which implements the <i>Collection</i> interface, mentioned in the previous chapter).
+        A <i>JDK</i> listái a <a href="https://docs.oracle.com/javase/7/docs/api/java/util/List.html">java.util.List</a> 
+		interfészt valósítják meg. (amely pedig az előző fejezetben említett <i>Collection</i> interfészt valósítja meg).
         <p>
-        There are two important list implementations available,
-        <a href="https://docs.oracle.com/javase/7/docs/api/java/util/ArrayList.html">java.util.ArrayList</a> and
+        Két fontos lista implementáció áll rendelkezésre: 
+        <a href="https://docs.oracle.com/javase/7/docs/api/java/util/ArrayList.html">java.util.ArrayList</a> és 
         <a href="https://docs.oracle.com/javase/7/docs/api/java/util/LinkedList.html">java.util.LinkedList</a>.
         ]]>
     </boxed>
@@ -25,20 +24,22 @@
     <title text="ArrayList"/>
     <text>
         <![CDATA[
-        As the name suggests, this list uses an array internally. It's capable of dynamically resize
-        the array to make space for more elements.
+        Ahogy a neve is mutatja, ez a lista belsőleg egy tömböt használ (<i>tömblista</i>). Képes dinamikusan átméretezni
+        a tömböt, hogy több elemnek helyet biztosítson. Az átméretezés és a belső tömb el van rejtve 
+		előlünk (privát láthatóság). A programozónak azzal nem kell foglalkoznia.
         ]]>
     </text>
-    <boxed title="The internal array">
+    <boxed title="A belső tömb">
         <![CDATA[
-        Resizing the array is a computationally expensive operation. To ensure that it's performed as rarely
-        as possible, the internal array is always <b>doubled</b>, instead of increasing it's size by one.
-        The class also exposes some methods to allow the programmer to control the size of this array.
+        A tömb átméretezése számításigényes művelet. Annak biztosítása érdekében, hogy ez a művelet ritkán kerüljön 
+		végrehajtásra, a belső tömböt mindig <b>duplázódni</b> fog ahelyett, hogy csak eggyel növekedne. 
+        Az osztály tartalmaz néhány metódust is, amelyekkel a programozó beleszólhat ebbe.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        To demonstrate the capabilities of <i>ArrayList</i>, let's solve the problem from the previous chapter:
+        A <i>ArrayList</i> képességeinek bemutatásához oldjuk meg az előző fejezetben szereplő feladatot, 
+		a számok bekérését és összeadását:
         ]]>
     </text>
     <code><![CDATA[
@@ -79,17 +80,18 @@
     ]]></code>
     <text>
         <![CDATA[
-        This code is now efficient and safe from exceptions. Don't forget that the array list needs to be imported before usage.
+        Ez a kód most már hatékony és kivételektől mentes. Ne felejtsük el, hogy az <i>ArrayList</i>-et a használat 
+		előtt importálni kell.
         ]]>
     </text>
-    <boxed title="When to use">
+    <boxed title="Mikor használjuk?">
         <![CDATA[
-        Use an array list when you need to often read values from it (it's fast to get elements from an array). Do not use
-        such a list if lot's of elements need to be inserted into or removed from different positions (for example, when you insert an element, all others after it
-        must be shifted right in the array, and this is expansive).
+        Használj <i>ArrayList</i>-et, ha gyakran kell értékeket olvasni belőle (az elemek kinyerése egy tömbből gyors). 
+		Ne használj ilyen listát, ha sok elemet kell különböző pozíciókba beilleszteni vagy onnan eltávolítani (például, 
+		ha beillesztünk egy elemet, az összes többi utána következő elemet odébb kell mozdítani, és ez drága művelet).
         ]]>
     </boxed>
-    <interactive instruction="Complete this program which adds the first 100 integers to an array list!">
+    <interactive instruction="Egészítsd ki a programot, amely az első 100 természetes számot hozzáadja egy tömblistához!">
         <data><![CDATA[
 
 <font color="#999900">List</font>&lt;___> numbers = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
@@ -104,36 +106,41 @@
     <title text="LinkedList"/>
     <text>
         <![CDATA[
-        Linked lists are a bit more difficult to grasp. Each element inside maintains a reference to the element after it, and
-        the list has a reference to the first element. The last element refers to <i>null</i>.
+        A láncolt (<i>linked</i> listákat egy kicsit nehezebb megérteni. Minden egyes elem a listán belül hivatkozik az 
+		utána következő elemre, és a lista tárol egy hivatkozást az első elemre. Az utolsó elem <i>null</i>-ra hivatkozik. 
+		<br><br>
+		Egy ilyen listát úgy járhatunk be, hogy elindulunk az tárolt első elemtől, majd elkérjük tőle a következő elemet, és így 
+		tovább. Amikor egy elem azt mondja, hogy a következő elem <i>null</i>, akkor tudjuk, hogy a lista végére értünk.
         ]]>
     </text>
     <image name="linked_list"/>
     <text>
         <![CDATA[
-        Some implementations also have each element maintain a reference to the previous element as well, so you can
-        <i>walk</i> the list backwards. In these cases it's common for the list to maintain a reference to the last element
-        as well. These are called doubly linked lists.
+        Egyes implementációkban minden elem fenntartja a hivatkozást az előző elemre is, így a listát visszafelé is 
+		bejárhatjuk. Ezekben az esetekben gyakori, hogy a lista az utolsó elemre való hivatkozást is fenntartja.
+        Ezeket a listákat <b>duplán láncolt</b> listáknak nevezzük.
         ]]>
     </text>
-    <boxed title="When to use">
+    <boxed title="Mikor használjuk?">
         <![CDATA[
-        Use a linked list when you often need to insert or remove elements from various indices of the list (this is a
-        cheap operation for a linked list, as only one reference needs to be updated). Do not use such a list when you need
-        to often get elements from it (when you are getting an element, the list has to be <i>walked</i> until the element is found).
+        Láncolt listát akkor használjunk, ha gyakran kell elemeket beszúrni vagy eltávolítani a lista különböző 
+		pontjairól (ez egy olcsó művelet egy láncolt lista esetében, mivel csak egy hivatkozást kell frissíteni). 
+		Ne használj ilyen listát, ha gyakran kell elemekre hivatkozni belőle (amikor egy elemetet keresünk, a listát 
+		<i>be kell járni</i>, amíg az elemet meg nem találjuk).
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        Note that these two list types complement each other nicely. Each one of them is strong in what the other is weak.
+        Vegyük észre, hogy ez a két lista típus szépen kiegészíti egymást. Mindegyikük abban erős, amiben a másik gyenge.
         ]]>
     </text>
-    <title text="Some list operations"/>
+    <title text="Műveletek listákon"/>
     <text>
         <![CDATA[
-        Despite having completely different internal workings, these two list types expose the same methods through the <i>List</i>
-        interface, and thus from the perspective of the programmer, they can be controlled very similarly. Therefore, these examples are
-        only going to be shown for a <i>LinkedList</i>.
+        Annak ellenére, hogy teljesen eltérő a belső működésük, ez a két lista típus ugyanazokat a metódusokat teszi 
+		elérhetővé a <i>List</i> interfész miatt. A programozó szemszögéből nézve nagyon hasonlóan működnek. 
+		Ezért ezek a példák csak a <i>LinkedList</i> esetében kerülnek bemutatásra (<i>ArrayList</i>-re pont ugyanígy 
+		fog működni).
         ]]>
     </text>
     <code><![CDATA[
@@ -183,10 +190,10 @@
     ]]></code>
     <text>
         <![CDATA[
-        For a full list of methods, check the official documentation, linked above.
+        A metódusok teljes listáját a listák fentebb linkelt hivatalos dokumentációjában találod.
         ]]>
     </text>
-    <interactive instruction="Make this method remove the first and last elements of a list! Don't worry about the '?', it's a generics trick.">
+    <interactive instruction="Ez a metódus távolítsa el a lista első és utolsó elemét! Egyenlőre ne foglalkozz a '?' szimbólummal.">
         <data><![CDATA[
 
 <font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">removeFirstLast</font>(<font color="#999900">List</font>&lt;?> list) {

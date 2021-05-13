@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- color is applies in styles -->
 <View android:layout_height="@dimen/separator_height"
     android:layout_width="match_parent"
-    android:background="@color/separator_color"
+    android:background="?separatorBackgroundColor"
     xmlns:android="http://schemas.android.com/apk/res/android" />

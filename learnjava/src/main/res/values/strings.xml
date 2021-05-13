@@ -10,6 +10,7 @@
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
     <string name="yes">Yes</string>
+    <string name="no">No</string>
     <string name="status_icon">Status icon</string>
     <string name="loading_error">An error has occurred while loading %1$s!</string>
     <string name="tap_to_see_details">Tap to see details</string>
@@ -38,6 +39,10 @@
     <string name="dark_theme">Dark</string>
     <string name="screen">Screen</string>
     <string name="keep_awake_description">Prevent screen from turning off</string>
+    <string name="auto_open_unlocked_content_description">Automatically slide open unlocked content</string>
+
+    <!-- Guide -->
+    <string name="guide_not_read">You haven\'t read the Guide yet! Do you want to read it now?</string>
 
     <!-- ClipSync -->
     <string name="clip_sync">ClipSync</string>

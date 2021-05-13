@@ -11,6 +11,7 @@
     <string name="ok">OK</string>
     <string name="cancel">Mégse</string>
     <string name="yes">Igen</string>
+    <string name="no">Nem</string>
     <string name="status_icon">Státusz ikon</string>
     <string name="loading_error">Hiba történt a(z) %1$s betöltése során!</string>
     <string name="tap_to_see_details">Kattints ide a részletekért</string>
@@ -23,6 +24,9 @@
     <string name="ad_load_fail">A hirdetés nem töltődött be!</string>
     <!-- Individual ad IDs are extracted, and only present on my machine. No ads build type works without them. -->
 
+    <!-- Guide -->
+    <string name="guide_not_read">Még nem olvastad el az útmutatót! Meg akarod nézni most?</string>
+
     <!-- Settings -->
     <string name="notifications">Értesítések</string>
     <string name="exam_notifications">Vizsga értesítések bekapcsolása</string>
@@ -34,11 +38,12 @@
     <string name="reset_details">Minden kurzus, fejezet és vizsga eredmény törlése.</string>
     <string name="reset_warning">Ezt nem lehet visszavonni. Biztos vagy benne?</string>
     <string name="reset_successful">Az előrehaladás törölve lett.</string>
-    <string name="themes">Támák</string>
+    <string name="themes">Témák</string>
     <string name="orange_theme">Narancs</string>
     <string name="dark_theme">Sötét</string>
     <string name="screen">Képernyő</string>
     <string name="keep_awake_description">Képernyő ébren tartása az alkalmazásban.</string>
+    <string name="auto_open_unlocked_content_description">Elérhető tartalmak automatikus kinyitása</string>
 
     <!-- ClipSync -->
     <string name="clip_sync">ClipSync</string>
@@ -115,7 +120,7 @@
     <string name="points">pont</string>
     <string name="ongoing_exam">Aktív vizsga</string>
     <string name="ongoing_exam_detail">Ne felejtsd el befejezni az elindított vizsgát!</string>
-    <string name="top_score">Maximum pontszám:</string>
+    <string name="top_score">Legjobb pontszám:</string>
     <string name="no_answer_given">Nincs válasz…</string>
     <string name="confirm_exam_start">Biztos, hogy el akarod indítani a vizsgát?</string>
 

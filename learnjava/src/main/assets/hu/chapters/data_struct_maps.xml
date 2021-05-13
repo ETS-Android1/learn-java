@@ -2,56 +2,55 @@
 <!-- Chapter about maps. --><resources>
     <chapterdata>
         <id>204</id>
-        <name>Maps</name>
+        <name>Szótár</name>
     </chapterdata>
     <text>
         <![CDATA[
-        Maps can hold pairs of data in an efficient way. These pairs are called <b>key-value</b> pairs.
-        A proper map implementation can very quickly get the value of a given key.
+        A szótárak (<i>map</i>) hatékonyan képesek adat párokat tárolni. Ezeket a párokat <b>kulcs-érték</b> pároknak nevezzük.
+        Egy megfelelő implementációval nagyon gyorsan megkaphatjuk egy adott kulcs értékét.
         ]]>
     </text>
-    <boxed title="Maps in other languages">
-        <![CDATA[
-        If you're familiar with <i>JavaScript</i> or <i>Python</i>, then you may know that these structures
-        are called <b>dictionaries</b> there, and they are built into the languages themselves.
-        ]]>
-    </boxed>
     <text>
         <![CDATA[
-        A way to think about maps it that they're arrays, but not necessarily indexed by integers. Instead, they
-        are indexed by the <b>keys</b>, which can be of any type, as <i>JDK</i> map implementations are also generic.
+        A a <i>map</i>-re gondolkodhatunk úgy, mint egy tömbre, de nem feltétlenül egész számokkal indexelve. Ehelyett
+        a <b>kulcsok</b> az indexek, amelyek bármilyen típusúak lehetnek, mivel a <i>JDK</i>-s szótár implementációk 
+		is generikusak.
         ]]>
     </text>
-    <boxed title="No ordering">
+    <boxed title="Nincs sorrend">
         <![CDATA[
-        Maps have no concept of ordering. While lists or queues for example always maintain a precise order of their
-        elements, maps only care if they contain an element or not. There exist other unordered collections as well, such as
-        <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html">sets</a>.
+        A szótárak nem rendelkeznek a sorrend fogalmával. Míg például a listák vagy a sorok mindig pontos sorrendet 
+		tartanak fenn, a szótárak csak azzal törődnek, hogy tartalmaznak-e egy elemet vagy sem. Léteznek más rendezetlen 
+		kollekciók is, mint például a
+        <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Set.html">halmaz</a>.
         ]]>
     </boxed>
     <image name="map"/>
     <text>
         <![CDATA[
-        The example map in the image has <i>strings</i> as keys. Given a string it will return the float that key string
-        maps to (or null, if the given string is not a key in the map). Similarly as how an array can't have multiple
-        elements at the same index, maps also <b>disallow duplicate keys</b>.
+        A képen látható szótár kulcs típusa a <i>String</i>. Egy <i>String</i>-et megadva visszaadja a valós számot, 
+		amely ahhoz a kulcshoz tartozik. (vagy <i>null</i>-t, ha az adott <i>String</i> nem létezik a szótárban). 
+		Hasonlóan ahhoz, ahogyan egy tömbnek sem több eleme egy indexen, a szótárak sem fogják engedni a 
+		<b>duplikált kulcsokat</b>.
         ]]>
     </text>
-    <boxed title="Maps in Java">
+    <boxed title="Szórárak Java-ban">
         <![CDATA[
-        Maps in the Java collections framework follow the same pattern as the previously met data structures.
-        There is a top-level interface, <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Map.html">java.util.Map</a>, and several implementations such as
-         <a href="https://docs.oracle.com/javase/7/docs/api/java/util/HashMap.html">java.util.HashMap</a> and <a href="https://docs.oracle.com/javase/7/docs/api/java/util/TreeMap.html">java.util.TreeMap</a>
+        A Java kollekciók keretrendszerében a szótárak ugyanazt a mintát követik, mint a korábban megismert 
+		adatszerkezetek. Van egy legfelső interfész, <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Map.html">java.util.Map</a>, 
+		és ennek adott több implementációja: 
+        <a href="https://docs.oracle.com/javase/7/docs/api/java/util/HashMap.html">java.util.HashMap</a> és 
+		<a href="https://docs.oracle.com/javase/7/docs/api/java/util/TreeMap.html">java.util.TreeMap</a>.
         ]]>
     </boxed>
-    <title text="An example of map usage"/>
+    <title text="Példa a szótár használatára"/>
     <text>
         <![CDATA[
-        Maps come in handy when we efficiently want to pair data. Let's create a silly example where we map each day of the weak to a boolean
-        value, indicating if that day is on the weekend or not.
+        A szótárak akkor jönnek jól, ha hatékonyan szeretnénk adatokat párosítani. Hozzunk létre egy példát, 
+		ahol a hét minden egyes napját egy logikai értékre képezzük le, amely jelzi, hogy az adott nap 
+		hétvégére esik-e vagy sem.
         <p>
-        It's good practice to use <b>enums</b> for constants such as days of the week. Take a look at the chapter about them
-        in the previous course if you can't quite remember how to make them.
+        Jó gyakorlat, ha <b>enumokat</b> használunk az olyan állandókhoz, mint például a hét napjai:
         ]]>
     </text>
     <code><![CDATA[
@@ -69,7 +68,7 @@
     ]]></code>
     <text>
         <![CDATA[
-        Now let's create a mapping between enum values and booleans, and fill it with pairs.
+        Ezután hozzunk létre egy szótárat az enum értékek és a <i>boolean</i>-ek között, és töltsük fel a párokkal:
         ]]>
     </text>
     <code><![CDATA[
@@ -89,8 +88,8 @@
     ]]></code>
     <text>
         <![CDATA[
-        As you can see, the <i>put</i> method can be used to place key-value pairs into the map. Let's retrieve
-        some values using our days as keys:
+        Mint látható, a <i>put</i> metódussal kulcs-érték párokat helyezhetünk el a szótárba. A benne lévő 
+		párokra a kulcsok segítségével hivatkozhatunk:
         ]]>
     </text>
     <code><![CDATA[
@@ -99,13 +98,14 @@
 <br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Saturday is on weekend: "</font> + weekendMap.<font color="#ADD8E6">get</font>(<font color="#999900">Day</font>.SATURDAY));
         
     ]]></code>
-    <title text="Iterating the map"/>
+    <title text="A szótár bejárása"/>
     <text>
         <![CDATA[
-        When working with maps we sometimes want to iterate all elements, just as we did with lists or arrays, for example.
-        I'll use the previous map to demonstrate the possibilities.
+        Amikor szótárakkal dolgozunk, néha az összes párt végig akarjuk iterálni, ugyanúgy, mint például a 
+		listák vagy tömbök esetében. Arra azonban figyelni kell, hogy a szórárnak nincs sorrendje. 
+		Az előző szótárat fogom használni a lehetőségek bemutatására.
         <p>
-        If we need to <b>iterate all key</b>, we can do it this way:
+        Ha <b>minden kulcsot</b> be akarunk járni, akkor ezt így megtehetjük:
         ]]>
     </text>
     <code><![CDATA[
@@ -118,10 +118,11 @@
     ]]></code>
     <text>
         <![CDATA[
-We can <b>iterate all values</b> in the map, the only difference is that instead of the <i>keySet</i> method, the
-<i>values</i> method has to be used. This isn't really interesting for this map, as it only has true and false values anyways.
-<p>
-Instead, let's take a look at how we can <b>iterate the pairs</b> themselves:
+		<b>Minden értéket</b> hasonlóan tudunk iterálni, a különbség csak annyi, hogy a <i>keySet</b> metódus helyett 
+		a <i>values</i> metódust kell használnunk. Ez a példa szótár esetében nem igazán érdekes, 
+		mivel amúgy csak <i>true</i> és <i>false</i> értékeket tartalmaz.
+		<p>
+		Ehelyett nézzük meg, hogyan tudjuk <b>bejárni magukat a párokat</b>:
         ]]>
     </text>
     <code><![CDATA[
@@ -134,22 +135,26 @@ Instead, let's take a look at how we can <b>iterate the pairs</b> themselves:
     ]]></code>
     <text>
         <![CDATA[
-        The trick is to realize that there is already an <i>Entry</i> class provided for us, which can hold pairs.
+        Van egy számunkra biztosított <i>Entry</i> osztály, amely képes a párokat tárolni.
         ]]>
     </text>
-    <boxed title="Other methods">
+    <boxed title="További metódusok">
         <![CDATA[
-        Maps also have almost all other methods that we've seen in previous collections, such as removing elements
-        (by key and by value), replacing elements, clearing the map and getting the size.
+        A szótárak szinte minden más, a korábbi gyűjteményekben már látott metódusokkal is rendelkeznek, mint például 
+		az elemek eltávolítása (kulcs és érték szerint), elemek cseréje, törlése és a méret lekérdezése.
+		<p>
+		Itt nincsenek azonban olyan metódusok, amik pozíció alapján adnak vissza elemet ("első, "utolsó", stb), 
+		mivel a szótárnak nincsen sorrendje.
         ]]>
     </boxed>
-    <advanced title="Map implementations">
+    <advanced title="Megvalósítások">
         <![CDATA[
-        A map implementation is significantly harder then a list or other collections based on lists. If you're interested,
-        the descriptions of <i>HashMap</i> and <i>TreeMap</i> are good starting points (linked above).
+        Egy szótár hatékony megvalósítása lényegesen nehezebb, mint egy lista vagy más listákon alapuló gyűjteményeké. 
+		Ha érdekel, a <i>HashMap</i> és <i>TreeMap</i> leírásai jó kiindulópontok (fentebb linkelve). Egy nem hatékony, 
+		de instruktív implementáció, ha egy párokat tartalmazó listát készítünk.
         ]]>
     </advanced>
-    <interactive instruction="This program should ask for 5 names and ages, and place these in a name -&gt; age map.">
+    <interactive instruction="Ennek a programnak 5 nevet és életkort kell kérnie, majd ezeket egy szótárba helyeznie!">
         <data><![CDATA[
 
 <font color="#999900">Map</font>&lt;___,___> userData = <font color="#E65100">new</font> <font color="#999900">HashMap</font>&lt;>();

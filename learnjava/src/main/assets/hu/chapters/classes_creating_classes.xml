@@ -311,6 +311,14 @@
         ezt tükrözi (<i>set</i>).
         ]]>
     </text>
+	<title text="Null"/>
+	<text>
+		<![CDATA[
+        A <i>null</i> egy speciális érték, amit minden objektum alapértéke. Fontos, hogy inicializáljuk az objektumokat, 
+		különben <i>null</i> marad az értékük. Az ilyen objektumoknak nem lehet hivatkozni a metódusait vagy tagjait, 
+		mert <i>NullPointerException</i> keletkezik! 
+        ]]>
+	</text>
 
     <!-- mention OOP and concepts: details in chapter 152, 153
     class: blueprint, object: can be built using blueprint

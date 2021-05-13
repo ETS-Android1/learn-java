@@ -43,6 +43,11 @@ public class CourseAdapter extends ArrayAdapter<Course> {
      */
     private final Animation clickAnimation;
 
+    /**
+     * Create a course adapter which displays course views.
+     * @param activity Activity in which it will appear.
+     * @param courses List of courses.
+     */
     public CourseAdapter(CoursesActivity activity, @Size(min=1) List<Course> courses) {
         super(activity, R.layout.course_selector_view, courses);
         this.activity = activity;
@@ -73,8 +78,8 @@ public class CourseAdapter extends ArrayAdapter<Course> {
             viewHolder.courseNameView.setText(course.getCourseName());
             //register listener that shows or hides contents
             viewHolder.courseNameBar.setOnClickListener(v -> onCourseNameClick(position, viewHolder.statusIcon, viewHolder.showHideView));
-            course.queryAndDisplayStatus(viewHolder.statusIcon, activity);
-            addHiddenViews(viewHolder, course); //add chapter, task exam selectors
+            course.queryAndDisplayStatus(viewHolder.statusIcon, activity, viewHolder.showHideView);
+            addContentViews(viewHolder, course); //add chapter, task exam selectors
         }
         return convertView;
     }
@@ -104,12 +109,11 @@ public class CourseAdapter extends ArrayAdapter<Course> {
     }
 
     /**
-     * Adds the initially hidden views of chapter, task and exam selectors to the course view.
-     *
+     * Adds the views consisting of chapter, task and exam selectors to the course view.
      * @param viewHolder The cache object of this course selector view.
      * @param course The course object of this view.
      */
-    private void addHiddenViews(CourseViewHolder viewHolder, Course course) {
+    private void addContentViews(CourseViewHolder viewHolder, Course course) {
         LayoutInflater inflater = LayoutInflater.from(activity);
         viewHolder.chaptersView.removeAllViews(); //remove previous chapters
         for(Chapter chapter: course.getChapters()) { //add all chapters

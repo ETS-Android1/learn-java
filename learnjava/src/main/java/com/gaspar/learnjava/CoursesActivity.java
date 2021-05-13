@@ -151,7 +151,7 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
             ListView listView = findViewById(R.id.courseSelectors);
             View nextCourseView = listView.getChildAt((i+1) - listView.getFirstVisiblePosition());
             if(nextCourseView != null) { //next course view is null when it isn't visible, but then it gets updated when it appears
-                nextCourse.queryAndDisplayStatus(nextCourseView.findViewById(R.id.statusIconView), this);
+                nextCourse.queryAndDisplayStatus(nextCourseView.findViewById(R.id.statusIconView), this, nextCourseView.findViewById(R.id.slideInView));
             }
         }
     }

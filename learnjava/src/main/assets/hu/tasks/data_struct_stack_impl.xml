@@ -2,52 +2,56 @@
 <resources>
     <taskdata>
         <id>202</id>
-        <name>Queue and stack implementation</name>
+        <name>Sor és verem implementációk</name>
     </taskdata>
-    <boxed title="Dependency">
-            <![CDATA[
-            To complete this task, you'll need a list implementation from the previous task. If you absolutely
-            want to skip that task, use a list from the <i>JDK</i> instead.
-            ]]>
+    <boxed title="Függőség">
+        <![CDATA[
+        A feladat elvégzéséhez szükséged lesz az előző feladatból származó egyik lista implementációjára. Ha az a 
+		feladat nincsen kész, és nem is szeretnéd megcsinálni, akkor használhatsz helyette egy listát a <i>JDK</i>-ból.
+		<p>
+		Ehhez a feladathoz ne hozz létre új projektet, hanem használd azt, ahol a listákat megvalósítottad.
+        ]]>
     </boxed>
     <text>
         <![CDATA[
-        The task is to implement a queue and a stack, <b>using one of the lists we created</b> in the
-        previous task. Since we're using our own list implementations, these data structures also won't
-        be generic.
+        A feladat egy sor és egy verem megvalósítása, <b>az egyik listát használva, amelyet a
+        előző feladatban készítettünk</b>. Mivel a saját listáink implementációját használjuk, ezek az adatszerkezetek 
+		sem lesznek generikusak.
         ]]>
     </text>
-    <advanced title="Needed later">
+   <advanced title="Később kelleni fog">
         <![CDATA[
-        The result of this task will be needed in a task of a later course (only the stack)! Be sure to do it, and that it's
-        working correctly.
+        Ennek a feladatnak az eredményére egy későbbi tanfolyam egyik feladatában szükség lesz! 
         ]]>
     </advanced>
-    <title text="Queue"/>
+    <title text="Sor"/>
     <text>
         <![CDATA[
-        The queue should have methods to add, remove and peek elements (they should work according to the
-        rules of this data structure). Utility methods that return the queue size and clear the collection are also needed.
+        A sornak rendelkeznie kell metódusokkal az elemek hozzáadására, eltávolítására és <i>peek</i>-re (a sor 
+        szabályainak megfelelően). Ha nem emlékszel a szabályokra, akkor lásd a megfelelő fejezetet.
+		<p>
+		Szükség van továbbá olyan segédmetódusokra, amelyek visszaadják a sor méretét, vagy kiürítik azt.
         ]]>
     </text>
-    <title text="Stack"/>
+    <title text="Verem"/>
     <text>
     <![CDATA[
-       The stack should have methods to push, pop and peek elements. Also include methods to get the size of the stack
-       and to clear it.
+       A veremnek rendelkeznie kell metódusokkalaz elemek hozzáadására, eltávolítására és <i>peek</i>-re (a verem 
+       szabályainak megfelelően). Ha nem emlékszel a szabályokra, akkor lásd a megfelelő fejezetet.
     ]]>
     </text>
-    <boxed title="Note">
+    <boxed title="Megjegyzés">
         <![CDATA[
-        This task is <b>much</b> easier, as we've done the hard work already at the list implementation, and the
-        only challenge is to decide where to insert to and remove elements in the list.
+        Ez a feladat <b>sokkal</b> egyszerűbb, hiszen a nehéz munkát már elvégeztük a lista implementációjánál. 
+        Az egyetlen kihívás annak eldöntése, hogy hova illesszünk be és honnan távolítsunk el elemeket ezekből 
+		az adatstruktúrákból.
         ]]>
     </boxed>
     <solution>
         <text>
             <![CDATA[
-            The queue implementation. The package structure may differ for you, depending on where you placed this
-            new class and the list implementation.
+            A sor megvalósítása. A csomag struktúrája neked eltérhet, attól függően, hogy hova helyezted a 
+			lista implementációkat az előző feladatban.
             ]]>
         </text>
         <code><![CDATA[
@@ -109,8 +113,8 @@
         ]]></code>
         <text>
             <![CDATA[
-            The stack implementation. It's very similar to the queue, the only difference is that this time we remove
-            elements from the same end we're adding them.
+            A verem megvalósítása. Nagyon hasonlít a sorhoz, az egyetlen különbség az, hogy itt csak az 
+			adatstruktúra elejére szúrunk be és onnan is távolítjuk el az elemeket.
             ]]>
         </text>
         <code><![CDATA[
