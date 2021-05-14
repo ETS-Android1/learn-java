@@ -119,6 +119,9 @@ public class ExamParser {
                     questions.add(parseQuestion(parser));
                 } else if(tagName.equalsIgnoreCase(TagName.FINISHED)) {
                     finished = Boolean.parseBoolean(parser.nextText());
+                    if(!parseQuestions) {
+                        break; //no need to go further if we don't need questions
+                    }
                 }
             }
             eventType = parser.next();

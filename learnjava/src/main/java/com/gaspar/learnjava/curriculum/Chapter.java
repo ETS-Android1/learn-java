@@ -191,8 +191,10 @@ public class Chapter implements Serializable {
      */
     @WorkerThread
     public static void validateChapterStatus(int chapterId, Context context) {
+        Log.d("LearnJava","Validation chapter " + chapterId);
         ChapterStatus status = LearnJavaDatabase.getInstance(context).getChapterDao().queryChapterStatus(chapterId);
         if(status == null) { //not found in the database
+            Log.d("LearnJava", "This chapter was not in the database, adding...");
             @Status final int DEF_STATUS = Status.UNLOCKED;
             ChapterStatus newStatus = new ChapterStatus(chapterId, DEF_STATUS);
             LearnJavaDatabase.getInstance(context).getChapterDao().addChapterStatus(newStatus); //add to database

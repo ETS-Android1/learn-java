@@ -98,6 +98,9 @@ public class TaskParser {
                     taskId = Integer.parseInt(parser.nextText());
                 } else if(tagName.equalsIgnoreCase(TagName.NAME)) {
                     taskName = parser.nextText();
+                    if(!parseComponents) {
+                        break; //no need to go further if we don't need components
+                    }
                 } else if(tagName.equalsIgnoreCase(TagName.TEXT) && parseComponents) {
                     components.add(new Component(Component.ComponentType.TEXT, parser.nextText()));
                 } else if(tagName.equalsIgnoreCase(TagName.CODE) && parseComponents) {

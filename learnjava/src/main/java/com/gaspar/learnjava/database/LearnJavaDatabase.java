@@ -2,6 +2,7 @@ package com.gaspar.learnjava.database;
 
 import android.content.Context;
 import android.content.res.AssetManager;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
@@ -16,6 +17,7 @@ import com.gaspar.learnjava.curriculum.Task;
 import com.gaspar.learnjava.parsers.CourseParser;
 import com.gaspar.learnjava.parsers.ExamParser;
 import com.gaspar.learnjava.parsers.TaskParser;
+import com.gaspar.learnjava.utils.LocalizationUtils;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -75,15 +77,17 @@ public abstract class LearnJavaDatabase extends RoomDatabase {
      * are added to the database or not. If not it adds them.
      */
     public static void validateDatabase(@NonNull Context context) {
+        Log.d("LearnJava", "BEGINNING TO VALIDATE DATABASE!");
         List<Integer> idList = new ArrayList<>();
         final AssetManager manager = context.getAssets(); //get access to assets
+        final String localizedAssets = LocalizationUtils.getLocalizedAssetPath();
         try {
             final XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
             factory.setNamespaceAware(true);
             //list all courses
-            final String[] coursePaths = manager.list("courses"); //list course XML-s in the courses asset folder
+            final String[] coursePaths = manager.list(localizedAssets + "/courses"); //list course XML-s in the courses asset folder
             for(String relCoursePath: coursePaths) { //check every course XML for the correct id
-                String coursePath = "courses/" + relCoursePath;
+                String coursePath = localizedAssets + "/courses/" + relCoursePath;
                 try(final InputStream is = manager.open(coursePath)) { //open course XML as input stream
                     final XmlPullParser parser = factory.newPullParser();
                     parser.setInput(is, "UTF-8");
@@ -97,9 +101,9 @@ public abstract class LearnJavaDatabase extends RoomDatabase {
                 Course.validateCourseStatus(courseId, context);
             }
             //list and validate all chapters
-            final String[] chapterPaths = manager.list("chapters");
+            final String[] chapterPaths = manager.list(localizedAssets + "/chapters");
             for(String relChapterPath: chapterPaths) { //check every chapter XML for the correct id
-                String chapterPath = "chapters/" + relChapterPath;
+                String chapterPath = localizedAssets + "/chapters/" + relChapterPath;
                 try(final InputStream is = manager.open(chapterPath)) { //open chapter XML as input stream
                     final XmlPullParser parser = factory.newPullParser();
                     parser.setInput(is, "UTF-8");
@@ -108,9 +112,9 @@ public abstract class LearnJavaDatabase extends RoomDatabase {
                 }
             }
             //list and validate tasks
-            final String[] taskPaths = manager.list("tasks");
+            final String[] taskPaths = manager.list(localizedAssets + "/tasks");
             for(String relTaskPath: taskPaths) { //check every task XML for the correct id
-                String taskPath = "tasks/" + relTaskPath;
+                String taskPath = localizedAssets + "/tasks/" + relTaskPath;
                 try(final InputStream is = manager.open(taskPath)) { //open task XML as input stream
                     final XmlPullParser parser = factory.newPullParser();
                     parser.setInput(is, "UTF-8");
@@ -119,9 +123,9 @@ public abstract class LearnJavaDatabase extends RoomDatabase {
                 }
             }
             //list and validate exams
-            final String[] examPaths = manager.list("exams");
+            final String[] examPaths = manager.list(localizedAssets + "/exams");
             for(String relExamPath: examPaths) { //check every exam XML for the correct id
-                String examPath = "exams/" + relExamPath;
+                String examPath = localizedAssets + "/exams/" + relExamPath;
                 try(final InputStream is = manager.open(examPath)) { //open exam XML as input stream
                     final XmlPullParser parser = factory.newPullParser();
                     parser.setInput(is, "UTF-8");
@@ -132,6 +136,7 @@ public abstract class LearnJavaDatabase extends RoomDatabase {
         } catch (XmlPullParserException | IOException e) {
             throw new RuntimeException("Failed to validate database: " + e.getClass().getSimpleName() + " - " + e.getMessage());
         }
+        Log.d("LearnJava", "FINISHED VALIDATION OF DATABASE!");
     }
 
     /**

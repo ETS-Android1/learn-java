@@ -6,7 +6,7 @@
         <timeLimit>30</timeLimit>
         <finished>true</finished>
     </examdata>
-    <!-- Questions about 'What is Java?' -->
+    <!-- Questions answer 'What is Java?' -->
     <question type="text">
         <text>Valami hiányzik az 'int x = 5' deklarációból. Írd le a javított változatot!</text>
         <correct>int[s]x = 5;</correct>
@@ -115,7 +115,7 @@
         <correct>2</correct>
     </question>
 
-    <!-- Questions about 'File extensions and project structure' -->
+    <!-- Questions answer 'File extensions and project structure' -->
     <question type="true_false">
         <text>A .java fájlok szöveges, forráskódot tartalmazó fájlok.</text>
         <correct>true</correct>
@@ -221,7 +221,7 @@
         <correct>true</correct>
     </question>
 
-    <!-- Questions about 'The first program' -->
+    <!-- Questions answer 'The first program' -->
     <question type="multi_choice">
         <text>Mi igaz a főmetódussal kapcsolatban?</text>
         <answer>Minden Java programnak van ilyen metódusa.</answer>
@@ -249,11 +249,11 @@
         <correct>System.out.println("ABC");</correct>
     </question>
     <question type="true_false">
-        <text>A 'System.out.println(Hello, world!);' utasítás helyes.</text>
+        <text>A 'System.out.println(Hello, world!);' utasítás correct.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>A 'System.out.println("Hello, world!");' utasítás helyes.</text>
+        <text>A 'System.out.println("Hello, world!");' utasítás correct.</text>
         <correct>true</correct>
     </question>
     <question type="single_choice">
@@ -264,7 +264,7 @@
         <correct>2</correct>
     </question>
 
-    <!-- Questions about 'Variables' -->
+    <!-- Questions answer 'Variables' -->
     <question type="true_false">
         <text>A Java statikusan típusozott.</text>
         <correct>true</correct>
@@ -282,7 +282,7 @@
         <correct>false</correct>
     </question>
     <question type="text">
-        <text>Valami nem helyes a 'String text "my message";' deklarációban. Írd le a helyes utasítást, a név és az érték változtatása nélkül!</text>
+        <text>Valami nem correct a 'String text "my message";' deklarációban. Írd le a correct utasítást, a név és az érték változtatása nélkül!</text>
         <correct>String[s]text = "my[s]message";</correct>
         <ignoreSpace/>
     </question>
@@ -323,7 +323,7 @@
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>A 'String i1 = "i_1", i2 = "i_2";' utasítás helyes.</text>
+        <text>A 'String i1 = "i_1", i2 = "i_2";' utasítás correct.</text>
         <correct>true</correct>
     </question>
     <question type="multi_choice">
@@ -344,7 +344,7 @@
         <correct>2</correct>
     </question>
 
-    <!-- Questions about 'Methods' -->
+    <!-- Questions answer 'Methods' -->
     <question type="multi_choice">
         <text>Ezek közül melyekre van szükség metódus deklarálásához?</text>
         <answer>Azonosító (metódus név).</answer>
@@ -440,19 +440,19 @@
         <correct>2</correct>
     </question>
     <question type="true_false">
-        <text>Tegyük fel, hogy a 'compute' metódus visszatérési típusa 'int'. Ekkor az 'int x = compute();' utasítás helyes.</text>
+        <text>Tegyük fel, hogy a 'compute' metódus visszatérési típusa 'int'. Ekkor az 'int x = compute();' utasítás correct.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>Tegyük fel, hogy a 'compute' metódus visszatérési típusa 'int'. Ekkor az 'String x = compute();' utasítás helyes.</text>
+        <text>Tegyük fel, hogy a 'compute' metódus visszatérési típusa 'int'. Ekkor az 'String x = compute();' utasítás correct.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>Tegyük fel, hogy az 'executeTask' metódusnak nincs visszatérési értéke. Ekkor az 'int x = executeTask();' utasítás helyes.</text>
+        <text>Tegyük fel, hogy az 'executeTask' metódusnak nincs visszatérési értéke. Ekkor az 'int x = executeTask();' utasítás correct.</text>
         <correct>false</correct>
     </question>
 
-    <!-- Questions about 'Naming rules and conventions' -->
+    <!-- Questions answer 'Naming rules and conventions' -->
     <question type="multi_choice">
         <text>Válaszd ki azokat a karaktereket, amikkel kezdődhet egy azonosító!</text>
         <answer>A</answer>
@@ -541,7 +541,7 @@
         <correct>2</correct>
     </question>
 
-    <!-- Questions about 'Comments in the code' -->
+    <!-- Questions answer 'Comments in the code' -->
     <question type="text">
         <text>Írj egy egysoros kommentet, 'this is a comment' szöveggel!</text>
         <correct>// this[s]is[s]a[s]comment</correct>
