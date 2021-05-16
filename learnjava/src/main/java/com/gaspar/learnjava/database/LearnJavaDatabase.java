@@ -2,7 +2,6 @@ package com.gaspar.learnjava.database;
 
 import android.content.Context;
 import android.content.res.AssetManager;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
@@ -18,6 +17,7 @@ import com.gaspar.learnjava.parsers.CourseParser;
 import com.gaspar.learnjava.parsers.ExamParser;
 import com.gaspar.learnjava.parsers.TaskParser;
 import com.gaspar.learnjava.utils.LocalizationUtils;
+import com.gaspar.learnjava.utils.LogUtils;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -77,7 +77,7 @@ public abstract class LearnJavaDatabase extends RoomDatabase {
      * are added to the database or not. If not it adds them.
      */
     public static void validateDatabase(@NonNull Context context) {
-        Log.d("LearnJava", "BEGINNING TO VALIDATE DATABASE!");
+        LogUtils.log("BEGINNING TO VALIDATE DATABASE!");
         List<Integer> idList = new ArrayList<>();
         final AssetManager manager = context.getAssets(); //get access to assets
         final String localizedAssets = LocalizationUtils.getLocalizedAssetPath();
@@ -136,7 +136,7 @@ public abstract class LearnJavaDatabase extends RoomDatabase {
         } catch (XmlPullParserException | IOException e) {
             throw new RuntimeException("Failed to validate database: " + e.getClass().getSimpleName() + " - " + e.getMessage());
         }
-        Log.d("LearnJava", "FINISHED VALIDATION OF DATABASE!");
+        LogUtils.log("FINISHED VALIDATION OF DATABASE!");
     }
 
     /**

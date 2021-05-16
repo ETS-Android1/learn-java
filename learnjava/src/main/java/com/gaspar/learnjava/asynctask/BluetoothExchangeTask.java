@@ -3,7 +3,6 @@ package com.gaspar.learnjava.asynctask;
 import android.bluetooth.BluetoothSocket;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -11,6 +10,7 @@ import androidx.annotation.Size;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gaspar.learnjava.R;
+import com.gaspar.learnjava.utils.LogUtils;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
@@ -90,15 +90,15 @@ public class BluetoothExchangeTask extends AsyncTask<AppCompatActivity, Void, Bl
             if(loadingIndicator != null) loadingIndicator.setVisibility(View.VISIBLE);
         });
         try {
-            Log.d("LearnJava", "Attempting to connect to server...");
+            LogUtils.log("Attempting to connect to server...");
             socket.connect(); //attempt connecting
-            Log.d("LearnJava", "BT connected: " + socket.isConnected());
+            LogUtils.log("BT connected: " + socket.isConnected());
             //connection is live here
             final OutputStream output = socket.getOutputStream();
             output.write((data+DATA_DELIMITER).getBytes(StandardCharsets.UTF_8)); //send data
             output.flush();
             output.close();
-            Log.d("LearnJava", "Message sent!");
+            LogUtils.log("Message sent!");
             socket.close();
             return new Result(activity, true);
         } catch (IOException | UncheckedIOException e) {

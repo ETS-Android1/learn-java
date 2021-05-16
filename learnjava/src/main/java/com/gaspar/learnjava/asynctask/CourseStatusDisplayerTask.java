@@ -1,7 +1,6 @@
 package com.gaspar.learnjava.asynctask;
 
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -13,6 +12,7 @@ import com.gaspar.learnjava.SettingsActivity;
 import com.gaspar.learnjava.curriculum.Course;
 import com.gaspar.learnjava.database.CourseStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
+import com.gaspar.learnjava.utils.LogUtils;
 import com.gaspar.learnjava.utils.ThemeUtils;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -97,7 +97,7 @@ public class CourseStatusDisplayerTask extends AsyncTask<Object, Void, CourseSta
                 }
                 break;
             case com.gaspar.learnjava.curriculum.Status.NOT_QUERIED:
-                Log.d("LearnJava" , "Incorrect behavior: NOT_QUERIED status");
+                LogUtils.logError("Incorrect behavior: NOT_QUERIED status");
         }
         //automatically open non-locked courses
         boolean autoSlideOpen = SettingsActivity.autoSlideOpenEnabled(result.activity);

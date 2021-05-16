@@ -14,7 +14,6 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +37,7 @@ import com.gaspar.learnjava.parsers.CourseParser;
 import com.gaspar.learnjava.parsers.RawParser;
 import com.gaspar.learnjava.utils.AnimationUtils;
 import com.gaspar.learnjava.utils.DrawerUtils;
+import com.gaspar.learnjava.utils.LogUtils;
 import com.gaspar.learnjava.utils.OnSwipeTouchListener;
 import com.gaspar.learnjava.utils.ThemeUtils;
 import com.google.android.gms.ads.MobileAds;
@@ -103,7 +103,7 @@ public class LearnJavaActivity extends ThemedActivity
             try { //parse course objects
                 CoursesActivity.setParsedCourses(CourseParser.getInstance().parseCourses(this));
             } catch (Exception e) {
-                Log.d("LearnJava", "Failed to parse courses!");
+                LogUtils.logError("Failed to parse courses!");
             }
             CourseStatus.initCourseCount(CoursesActivity.getParsedCourses().size(), this); //pass in new course size for check
             LearnJavaDatabase.validateDatabase(this); //check/add all elements

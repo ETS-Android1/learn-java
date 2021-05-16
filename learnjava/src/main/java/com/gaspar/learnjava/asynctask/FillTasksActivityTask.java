@@ -1,7 +1,6 @@
 package com.gaspar.learnjava.asynctask;
 
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
@@ -12,6 +11,7 @@ import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.TasksActivity;
 import com.gaspar.learnjava.adapters.TaskAdapter;
 import com.gaspar.learnjava.parsers.CourseParser;
+import com.gaspar.learnjava.utils.LogUtils;
 
 /**
  * Loads the tasks sorted by courses and shows them in the list view. When this process finishes
@@ -35,7 +35,7 @@ public class FillTasksActivityTask extends AsyncTask<TasksActivity, Void, TasksA
             }
             taskAdapter = new TaskAdapter(activity, CoursesActivity.getParsedCourses()); //create adapter
         } catch (Exception e) {
-            Log.e("[LearnJava]","Exception", e);
+            LogUtils.logError("Exception while loading tasks!", e);
             activity.successfulLoad = false; //save that load failed.
         }
         return activity;

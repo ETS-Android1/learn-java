@@ -107,7 +107,7 @@ public class ListTagHandler implements Html.TagHandler {
         }
         else
         {
-            Log.d("TagHandler", "Found an unsupported tag " + tag);
+            LogUtils.logError("Found an unsupported tag " + tag);
         }
     }
 

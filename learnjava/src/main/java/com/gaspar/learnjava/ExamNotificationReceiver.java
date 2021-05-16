@@ -8,7 +8,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 
 import androidx.annotation.UiThread;
 import androidx.core.app.NotificationCompat;
@@ -19,6 +18,7 @@ import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.database.ExamStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.parsers.CourseParser;
+import com.gaspar.learnjava.utils.LogUtils;
 import com.gaspar.learnjava.utils.ThemeUtils;
 
 /**
@@ -50,7 +50,7 @@ public class ExamNotificationReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent passedIntent) {
         String examName = passedIntent.getStringExtra(PASSED_EXAM_NAME);
         if(examName == null) { //maybe not passed
-            Log.d("LearnJava", "No exam name string passed with intent!");
+            LogUtils.logError( "No exam name string passed with intent!");
             examName = "";
         }
         Intent intent = new Intent(context, CoursesActivity.class); //intent of activity
@@ -72,7 +72,7 @@ public class ExamNotificationReceiver extends BroadcastReceiver {
         mBuilder.setLights(ContextCompat.getColor(context, ThemeUtils.getPrimaryColor()), 500, 500);
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         if(mNotificationManager == null) {
-            Log.d("LearnJava", "Can't post notification...");
+            LogUtils.logError("Can't post notification, system service is null!");
         } else {
             mNotificationManager.notify(NOTIFICATION_REQUEST_CODE, mBuilder.build());
         }
@@ -92,7 +92,7 @@ public class ExamNotificationReceiver extends BroadcastReceiver {
                 try {
                     CoursesActivity.getParsedCourses().addAll(CourseParser.getInstance().parseCourses(context));
                 } catch (Exception e) {
-                    Log.e("LearnJava", "Exception", e);
+                    LogUtils.logError("Exception while parsing courses!", e);
                     return;
                 }
             }
@@ -105,7 +105,7 @@ public class ExamNotificationReceiver extends BroadcastReceiver {
             }
             ExamStatus examStatus = LearnJavaDatabase.getInstance(context).getExamDao().queryExamStatus(failedExam.getId());
             if(examStatus == null) { //should not happen as database is validated on start
-                Log.d("LearnJava", "Database error!");
+                LogUtils.logError("Database error!");
                 return;
             }
             long examTime = System.currentTimeMillis() - examStatus.getLastStarted(); //time it took the user to finish exam
@@ -116,7 +116,7 @@ public class ExamNotificationReceiver extends BroadcastReceiver {
             PendingIntent pendingIntent = PendingIntent.getBroadcast(context, NOTIFICATION_REQUEST_CODE, intent, 0);
             AlarmManager am = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
             if(am == null) {
-                Log.d("LearnJava", "No alarm service found!");
+                LogUtils.logError("No alarm service found!");
             } else {
                 am.setExact(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + displayInMillis, pendingIntent);
             }

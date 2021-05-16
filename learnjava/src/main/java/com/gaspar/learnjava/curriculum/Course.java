@@ -1,7 +1,6 @@
 package com.gaspar.learnjava.curriculum;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -13,6 +12,7 @@ import com.gaspar.learnjava.CoursesActivity;
 import com.gaspar.learnjava.asynctask.CourseStatusDisplayerTask;
 import com.gaspar.learnjava.database.CourseStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
+import com.gaspar.learnjava.utils.LogUtils;
 
 import java.io.Serializable;
 import java.util.List;
@@ -130,7 +130,7 @@ public class Course implements Serializable {
         CourseStatus status = LearnJavaDatabase.getInstance(context).getCourseDao().queryCourseStatus(courseId);
         if(status == null) { //not found in the database
             CourseStatus newStatus;
-            Log.d("LearnJava", "Validating new course, count: " + CourseStatus.getCourseCount());
+            LogUtils.log("Validating new course, count: " + CourseStatus.getCourseCount());
             if(CourseStatus.getCourseCount() == 0) { //this is first course to be added to the database
                 newStatus = new CourseStatus(courseId, Status.UNLOCKED); //first one is unlocked
             } else { //there are other courses already

@@ -23,7 +23,7 @@
     <boxed title="JAVA_HOME environmental variable">
         <![CDATA[
         Your IDE will look for Java based on the value of <i>JAVA_HOME</i>. If you are familiar with environmental variables, then simply
-        set <i>JAVA_HOME</i> to the <i>bin</i> folder of your JDK install directory. If you need a full tutorial, follow
+        set <i>JAVA_HOME</i> to the folder of your JDK install directory. If you need a full tutorial, follow
         <a href="https://www.wikihow.com/Set-Java-Home">this</a> wikiHow link.
         ]]>
     </boxed>

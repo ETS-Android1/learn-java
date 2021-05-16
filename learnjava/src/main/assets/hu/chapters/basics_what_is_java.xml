@@ -23,7 +23,7 @@
     <boxed title="JAVA_HOME környezeti változó">
         <![CDATA[
         Az <i>IDE</i> programodnak szüksége lesz a <i>JAVA_HOME</i> környezeti változóra. Ha nem idegen számodra
-        egy környezeti változó beállítása, akkor állítsd be ezt a <i>Java</i> telepítési könyvtár <i>bin</i> mappájára.
+        egy környezeti változó beállítása, akkor állítsd be ezt a <i>Java</i> telepítési könyvtár mappájára.
         Egyébként <a href="https://www.wikihow.com/Set-Java-Home">itt</a> találsz egy teljes útmutatót (angol
         szöveggel, de a képeken minden látszik).
         ]]>

@@ -1,7 +1,6 @@
 package com.gaspar.learnjava.asynctask;
 
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
@@ -12,6 +11,7 @@ import com.gaspar.learnjava.ExamsActivity;
 import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.adapters.ExamAdapter;
 import com.gaspar.learnjava.parsers.CourseParser;
+import com.gaspar.learnjava.utils.LogUtils;
 
 /**
  * Fills the exams activity with 'exam_selector_view' views.
@@ -31,7 +31,7 @@ public class FillExamsActivityTask extends AsyncTask<ExamsActivity, Void, ExamsA
             }
             adapter = new ExamAdapter(activity, CoursesActivity.getParsedCourses());
         } catch (Exception e) {
-            Log.e("LearnJava", "Exception", e);
+            LogUtils.logError( "Exception while loading exam!", e);
             activity.successfulLoad = false;
         }
         return activity;

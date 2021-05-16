@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.animation.Animation;
@@ -26,6 +25,7 @@ import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.curriculum.Question;
 import com.gaspar.learnjava.curriculum.Status;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
+import com.gaspar.learnjava.utils.LogUtils;
 import com.gaspar.learnjava.utils.ThemeUtils;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -54,12 +54,12 @@ public class ExamActivity extends ThemedActivity {
         setContentView(R.layout.exam);
         examFinished = false;
         if(getIntent().getExtras() == null) { //should not happen
-            Log.d("LearnJava", "Incorrect behaviour: No extras passed!");
+            LogUtils.logError("Incorrect behaviour: No extras passed!");
             finish();
         }
         exam = (Exam)getIntent().getExtras().getSerializable(Exam.EXAM_PREFERENCE_STRING);
         if(exam == null) {
-            Log.d("LearnJava", "Incorrect behaviour: No exam passed in extras!");
+            LogUtils.logError("Incorrect behaviour: No exam passed in extras!");
             finish();
         } else {
             setUpUI();
@@ -289,7 +289,7 @@ public class ExamActivity extends ThemedActivity {
         mBuilder.setLights(ContextCompat.getColor(this, ThemeUtils.getPrimaryColor()), 500, 500);
         if(notificationManager == null) notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         if(notificationManager == null) { //system service may return null
-            Log.d("LearnJava", "Can't post notification...");
+            LogUtils.logError("Can't exam post notification, system service is null!");
         } else {
             notificationManager.notify(NOTIFICATION_REQUEST_CODE, mBuilder.build());
             notificationVisible = true;

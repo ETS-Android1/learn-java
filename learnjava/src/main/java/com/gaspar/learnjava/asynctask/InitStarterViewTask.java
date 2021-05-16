@@ -2,7 +2,6 @@ package com.gaspar.learnjava.asynctask;
 
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -18,6 +17,7 @@ import com.gaspar.learnjava.database.ChapterStatus;
 import com.gaspar.learnjava.database.CourseStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.parsers.CourseParser;
+import com.gaspar.learnjava.utils.LogUtils;
 import com.google.android.material.snackbar.Snackbar;
 
 /**
@@ -81,7 +81,7 @@ public class InitStarterViewTask extends AsyncTask<Object, Void, LearnJavaActivi
                 activity.setStartedChapter(firstChapter);
             }
         } catch (Exception e) {
-            Log.e("LearnJava", "Exception", e);
+            LogUtils.logError("Exception while initializing starter view!", e);
             activity.successfulLoad = false;
         }
         return activity;
@@ -145,7 +145,7 @@ public class InitStarterViewTask extends AsyncTask<Object, Void, LearnJavaActivi
         } catch (IndexOutOfBoundsException e) { //expected exception
             return currentChapterId;
         } catch (Exception e) { //unexpected exceptions
-            Log.e("LearnJava", "Exception", e);
+            LogUtils.logError("Exception while initializing starter view!", e);
             return currentChapterId;
         }
         return currentChapterId; //should not get here

@@ -3,10 +3,14 @@ package com.gaspar.learnjava;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.DragEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -19,10 +23,13 @@ import com.gaspar.learnjava.asynctask.ShowCongratulationTask;
 import com.gaspar.learnjava.curriculum.Chapter;
 import com.gaspar.learnjava.curriculum.Course;
 import com.gaspar.learnjava.curriculum.Exam;
+import com.gaspar.learnjava.curriculum.Status;
 import com.gaspar.learnjava.curriculum.Task;
 import com.gaspar.learnjava.database.CourseStatus;
+import com.gaspar.learnjava.utils.AnimationUtils;
 import com.gaspar.learnjava.utils.DrawerUtils;
 import com.google.android.gms.ads.AdView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
@@ -54,10 +61,29 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
      */
     private AdView adView;
 
+    /**
+     * X position of the draggable floating action button.
+     */
+    private float dX;
+
+    /**
+     * Y position of the draggable floating action button.
+     */
+    private float dY;
+
+    /**
+     * Stores if the drop down floating button should open (drop down) or close (drop up)
+     * all unlocked course selectors. The initial value of this depends on the auto drop down
+     * setting.
+     */
+    private boolean dropDown;
+
     @Override
     public void onCreate(Bundle savedState) {
         super.onCreate(savedState);
         setContentView(R.layout.courses);
+        //true if auto slide open is DISABLED, false otherwise
+        dropDown = !SettingsActivity.autoSlideOpenEnabled(this);
         setUpUI();
     }
 
@@ -93,12 +119,120 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        //initialize floating action button
+        final FloatingActionButton fab = findViewById(R.id.dropDownAllIcon);
+        setUpFloatingActionButton(fab);
+
         if(LearnJavaAds.LOAD_ADS) {
             int adId = LearnJavaAds.DEBUG_ADS ? R.string.ad_unit_id_banner_test : R.string.ad_unit_id_banner_courses;
             adView = LearnJavaAds.loadBannerAd(adId, findViewById(R.id.adContainer));
         } else {
             findViewById(R.id.adContainer).setVisibility(View.GONE);
         }
+    }
+
+    /**
+     * Initializes the floating action button so it responds to clicks, and becomes draggable.
+     * @param fab The floating action button.
+     */
+    private void setUpFloatingActionButton(@NonNull final FloatingActionButton fab) {
+        //add action to perform on short click
+        fab.setOnClickListener(this::onDropdownButtonClicked);
+        //dragging will begin on long click
+        fab.setOnLongClickListener(v -> {
+            View.DragShadowBuilder myShadow = new View.DragShadowBuilder(fab);
+            v.startDragAndDrop(null, myShadow, null, View.DRAG_FLAG_GLOBAL);
+            return true;
+        });
+        //dragging on the root
+        final View root = findViewById(R.id.coursesRoot);
+        root.setOnDragListener((v, event) -> {
+            switch (event.getAction()) {
+                case DragEvent.ACTION_DRAG_LOCATION:
+                    dX = event.getX();
+                    dY = event.getY();
+                    break;
+                case DragEvent.ACTION_DRAG_ENDED:
+                    //these changes will make the position "permanent"
+                    RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) fab.getLayoutParams();
+                    params.removeRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+                    params.removeRule(RelativeLayout.ALIGN_PARENT_END);
+                    int leftMargin = (int)dX - fab.getWidth()/2;
+                    int topMargin = (int)dY - fab.getHeight()/2;
+                    params.leftMargin = leftMargin;
+                    params.topMargin = topMargin;
+                    fab.layout(leftMargin, topMargin, (int)dX + fab.getWidth()/2, (int)dY + fab.getHeight()/2);
+                    break;
+            }
+            return true;
+        });
+        //update initial rotation if needed
+        if(!dropDown) {
+            Animation rotateAnimation = new RotateAnimation(0.0f, 180.0f,
+                    Animation.RELATIVE_TO_SELF, 0.5f,
+                    Animation.RELATIVE_TO_SELF, 0.5f);
+            rotateAnimation.setFillAfter(true); //persist after
+            rotateAnimation.setRepeatCount(0);
+            rotateAnimation.setDuration(10); //near instant
+            fab.startAnimation(rotateAnimation);
+        }
+    }
+
+    /**
+     * Called when the user clicks the dropdown floating button. By default it will open all
+     * closed courses that can be opened. Then it changes to drop up mode which will close all
+     * opened courses, changing back to drop down mode.
+     * @param fab The floating button.
+     */
+    private void onDropdownButtonClicked(@NonNull final View fab) {
+        //create the rotate animation
+        float startAngle = dropDown ? 0.0f : 180.0f;
+        float endAngle = dropDown ? 180.0f : 0.0f;
+        Animation rotateAnimation = new RotateAnimation(startAngle, endAngle,
+                Animation.RELATIVE_TO_SELF, 0.5f,
+                Animation.RELATIVE_TO_SELF, 0.5f);
+        rotateAnimation.setFillAfter(true); //persist after
+        rotateAnimation.setRepeatCount(0);
+        rotateAnimation.setDuration(AnimationUtils.DURATION);
+        //disable while animation is ongoing
+        rotateAnimation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                fab.setEnabled(false);
+            }
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                fab.setEnabled(true);
+            }
+            @Override
+            public void onAnimationRepeat(Animation animation) { }
+        });
+        fab.startAnimation(rotateAnimation);
+
+        //open/close the necessary courses
+        final ListView courseSelectors = findViewById(R.id.courseSelectors);
+        for(int pos = 0; pos < courseSelectors.getChildCount(); pos++) {
+            //this course belongs to this selector
+            final Course course = getParsedCourses().get(pos);
+            //current selector
+            final View courseSelector = courseSelectors.getChildAt(pos);
+            //show hide view
+            final View showHideView = courseSelector.findViewById(R.id.slideInView);
+            //what happens depends on the drop variable
+            if(dropDown) { //need to open unlocked, opened courses
+               if(course.getStatus() == Status.LOCKED || course.getStatus() == Status.NOT_QUERIED) {
+                   continue; //don't open locked courses
+               }
+               if(showHideView.getVisibility() == View.GONE) {
+                   AnimationUtils.slideIn(showHideView); //only open if not opened
+               }
+            } else { //need to close opened courses
+               if(showHideView.getVisibility() == View.VISIBLE) {
+                   AnimationUtils.slideOut(showHideView); //only hide if visible
+               }
+            }
+        }
+        dropDown = !dropDown; //update drop down mode
     }
 
     /**

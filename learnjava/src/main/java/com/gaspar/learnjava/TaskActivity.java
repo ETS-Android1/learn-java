@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
@@ -25,6 +24,7 @@ import com.gaspar.learnjava.database.TaskStatus;
 import com.gaspar.learnjava.utils.AnimationUtils;
 import com.gaspar.learnjava.utils.DrawerUtils;
 import com.gaspar.learnjava.utils.LearnJavaBluetooth;
+import com.gaspar.learnjava.utils.LogUtils;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
@@ -54,13 +54,13 @@ public class TaskActivity extends ThemedActivity implements NavigationView.OnNav
         super.onCreate(savedState);
         setContentView(R.layout.task);
         if(getIntent().getExtras() == null) { //should not happen
-            Log.d("LearnJava", "Incorrect behaviour: No extras passed!");
+            LogUtils.logError("Incorrect behaviour: No extras passed!");
             finish();
         }
         //this task has no components, only name and id
         Task passedTask = (Task) getIntent().getExtras().getSerializable(Task.TASK_PREFERENCE_STRING);
         if(passedTask == null) {
-            Log.d("LearnJava", "Incorrect behaviour: No task passed in extras!");
+            LogUtils.logError("Incorrect behaviour: No task passed in extras!");
             finish();
         } else {
             setTitle(passedTask.getName());

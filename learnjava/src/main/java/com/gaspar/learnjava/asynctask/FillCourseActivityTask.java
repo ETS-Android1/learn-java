@@ -1,7 +1,6 @@
 package com.gaspar.learnjava.asynctask;
 
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
@@ -12,6 +11,7 @@ import com.gaspar.learnjava.CoursesActivity;
 import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.adapters.CourseAdapter;
 import com.gaspar.learnjava.parsers.CourseParser;
+import com.gaspar.learnjava.utils.LogUtils;
 import com.gaspar.learnjava.utils.ThemeUtils;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -39,7 +39,7 @@ public class FillCourseActivityTask extends AsyncTask<CoursesActivity, Void, Cou
             }
             adapter = new CourseAdapter(activity, CoursesActivity.getParsedCourses());
         } catch (Exception e) {
-            Log.e("[LearnJava]","Exception", e);
+            LogUtils.logError("Exception while loading course", e);
             activity.successfulLoad = false; //save that load failed.
         }
         return activity;

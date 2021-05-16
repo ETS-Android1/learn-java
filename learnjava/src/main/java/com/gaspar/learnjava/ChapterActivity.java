@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -20,6 +19,7 @@ import com.gaspar.learnjava.curriculum.Chapter;
 import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.utils.DrawerUtils;
 import com.gaspar.learnjava.utils.LearnJavaBluetooth;
+import com.gaspar.learnjava.utils.LogUtils;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
@@ -48,7 +48,7 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chapter);
         if(getIntent().getExtras() == null) { //should not happen
-            Log.d("LearnJava", "Incorrect behaviour: No extras passed!");
+            LogUtils.logError("Incorrect behaviour: No extras passed!");
             finish();
         }
         //this chapter object has no components, only id and name
@@ -56,7 +56,7 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
         if(passedChapter != null) {
             setTitle(passedChapter.getName());
         } else {
-            Log.d("LearnJava", "Incorrect behaviour: No chapter passed in extras!");
+            LogUtils.logError("Incorrect behaviour: No chapter passed in extras!");
             finish();
         }
         if(getIntent().getExtras().containsKey(Exam.EXAM_PREFERENCE_STRING)) { //get passed exam, if included
@@ -70,7 +70,7 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
                 @Override
                 public void onAdLoaded(@NonNull InterstitialAd iad) {
                     interstitialAd = iad;
-                    Log.d("LearnJava", "Interstitial Ad loaded!");
+                    LogUtils.log("Interstitial Ad loaded!");
                 }
             });
         }

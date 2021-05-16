@@ -4,4 +4,8 @@
     <declare-styleable name="separator">
         <attr name="separatorBackgroundColor" format="reference"/>
     </declare-styleable>
+    <!-- Style dependent colors. -->
+    <declare-styleable name="learn_java_colors">
+        <attr name="learnJavaTextColor" format="reference"/>
+    </declare-styleable>
 </resources>

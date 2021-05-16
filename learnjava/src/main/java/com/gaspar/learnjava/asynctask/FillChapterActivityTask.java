@@ -1,7 +1,6 @@
 package com.gaspar.learnjava.asynctask;
 
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -13,6 +12,7 @@ import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.curriculum.Chapter;
 import com.gaspar.learnjava.curriculum.Component;
 import com.gaspar.learnjava.parsers.CourseParser;
+import com.gaspar.learnjava.utils.LogUtils;
 import com.gaspar.learnjava.utils.ThemeUtils;
 
 /**
@@ -36,7 +36,7 @@ public class FillChapterActivityTask extends AsyncTask<ChapterActivity, Void, Fi
             parsedChapter = CourseParser.getInstance().parseChapter(receivedChapter.getId(),
                     true, activity); //this will have components
         } catch (Exception e) {
-            Log.e("LearnJava", "Exception", e);
+            LogUtils.logError("Exception when parsing chapter!", e);
             successfulLoad = false;
         }
         return new Result(activity, successfulLoad, parsedChapter);

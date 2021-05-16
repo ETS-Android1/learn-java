@@ -1,6 +1,5 @@
 package com.gaspar.learnjava.adapters;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +23,7 @@ import com.gaspar.learnjava.curriculum.Course;
 import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.curriculum.Status;
 import com.gaspar.learnjava.curriculum.Task;
+import com.gaspar.learnjava.utils.LogUtils;
 
 import java.util.List;
 
@@ -92,7 +92,7 @@ public class CourseAdapter extends ArrayAdapter<Course> {
      * @param showHideView This is the part of the course item view that is shown/hidden on click.
      */
     private void onCourseNameClick(int position, @NonNull final View iconView, @NonNull final View showHideView) {
-        Log.e("LearnJava","Clicked on course name! " + LearnJavaActivity.DEBUG);
+        LogUtils.log("Clicked on course name!");
         Course c = CoursesActivity.getParsedCourses().get(position);
         if(!LearnJavaActivity.DEBUG) { //only some shaking happens on locked, except in debug
             if(c.getStatus() == Status.LOCKED || c.getStatus()==Status.NOT_QUERIED) {

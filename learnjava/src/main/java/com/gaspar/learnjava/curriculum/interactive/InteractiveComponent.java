@@ -5,7 +5,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.text.Html;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.curriculum.Component;
 import com.gaspar.learnjava.utils.AnimationUtils;
+import com.gaspar.learnjava.utils.LogUtils;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
@@ -221,7 +221,7 @@ public final class InteractiveComponent extends Component {
 
     private int getCurrentFontSize(@NonNull final LinearLayout codeArea) {
         if(codeArea.getChildCount() == 0) {
-            Log.d("LearnJava", "Warning: interactive sample has no code!");
+            LogUtils.logError("Warning: interactive sample has no code!");
             return (int)codeArea.getContext().getResources().getDimension(R.dimen.code_text_size);
         }
         View child = codeArea.getChildAt(0);

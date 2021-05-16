@@ -82,7 +82,7 @@
     <text>
         <![CDATA[
         Adjunk hozzá egy utasítást, aminek hatására a program üzenetet fog írni a konzolra. Java-ban
-        minden utasítást a ' ; ' szimbólummal kell lezárnunk. Győződj meg hogy <b>elmented</b> a forrásfájl
+        minden utasítást a ' ; ' szimbólummal kell lezárnunk. Győződj meg hogy <b>elmented</b> a forrásfájlt
         mielőtt újra lefuttatod (<i>Control + S</i>), különben a régi verzió fog lefutni!
         ]]>
     </text>
@@ -96,7 +96,7 @@
     <text>
         <![CDATA[
         Az utasítás, ami a konzolra ír a <b>System.out.println()</b> metódus. Minden, amit a
-        " " szimbólumok közé írunk, meg fog jelenni a konzolon. Az általam választott szöveged
+        " " szimbólumok közé írunk, meg fog jelenni a konzolon. Az általam választott szöveget
         helyettesítheted a sajátoddal.
         ]]>
     </text>

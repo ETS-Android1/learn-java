@@ -1,7 +1,6 @@
 package com.gaspar.learnjava.asynctask;
 
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
@@ -15,6 +14,7 @@ import com.gaspar.learnjava.curriculum.Task;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.database.TaskStatus;
 import com.gaspar.learnjava.parsers.TaskParser;
+import com.gaspar.learnjava.utils.LogUtils;
 import com.gaspar.learnjava.utils.ThemeUtils;
 
 /**
@@ -44,7 +44,7 @@ public class FillTaskActivityTask extends AsyncTask<TaskActivity, Void, TaskActi
             parsedTask.setTaskStatus(taskStatus.getStatus()); //save task status
             activity.setDisplayedTask(parsedTask); //parse and save task, now with components and status
         } catch (Exception e) {
-            Log.e("LearnJava", "Exception", e);
+            LogUtils.logError("Exception while loading task!", e);
             activity.successfulLoad = false;
         }
         return activity;

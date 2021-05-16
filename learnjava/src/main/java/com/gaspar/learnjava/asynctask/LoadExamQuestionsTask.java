@@ -1,7 +1,6 @@
 package com.gaspar.learnjava.asynctask;
 
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -13,6 +12,7 @@ import com.gaspar.learnjava.SettingsActivity;
 import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.curriculum.Question;
 import com.gaspar.learnjava.parsers.ExamParser;
+import com.gaspar.learnjava.utils.LogUtils;
 
 import java.util.Collections;
 import java.util.Random;
@@ -48,7 +48,7 @@ public class LoadExamQuestionsTask extends AsyncTask<ExamActivity, Void, ExamAct
             Collections.shuffle(parsedExam.getQuestions()); //shuffle question order
             activity.setExam(parsedExam); //save exam
         } catch (Exception e) {
-            Log.e("LearnJava", "Exception", e);
+            LogUtils.logError("Exception while loading exam questions!", e);
             activity.setLoadSuccessful(false);
         }
         return activity;

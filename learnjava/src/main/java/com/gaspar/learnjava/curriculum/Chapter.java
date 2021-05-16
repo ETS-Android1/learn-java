@@ -3,7 +3,6 @@ package com.gaspar.learnjava.curriculum;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -21,6 +20,7 @@ import com.gaspar.learnjava.database.ChapterStatus;
 import com.gaspar.learnjava.database.ExamStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.parsers.CourseParser;
+import com.gaspar.learnjava.utils.LogUtils;
 
 import java.io.Serializable;
 import java.util.List;
@@ -143,7 +143,7 @@ public class Chapter implements Serializable {
                 try {
                     CoursesActivity.getParsedCourses().addAll(CourseParser.getInstance().parseCourses(context));
                 } catch (Exception e) {
-                    Log.e("LearnJava", "Exception", e);
+                    LogUtils.logError("Exception while parsing courses!", e);
                 }
             }
             Course courseOfChapter = null; //find course of chapter
@@ -191,10 +191,10 @@ public class Chapter implements Serializable {
      */
     @WorkerThread
     public static void validateChapterStatus(int chapterId, Context context) {
-        Log.d("LearnJava","Validation chapter " + chapterId);
+        LogUtils.log("Validating chapter " + chapterId);
         ChapterStatus status = LearnJavaDatabase.getInstance(context).getChapterDao().queryChapterStatus(chapterId);
         if(status == null) { //not found in the database
-            Log.d("LearnJava", "This chapter was not in the database, adding...");
+            LogUtils.log("This chapter was not in the database, adding...");
             @Status final int DEF_STATUS = Status.UNLOCKED;
             ChapterStatus newStatus = new ChapterStatus(chapterId, DEF_STATUS);
             LearnJavaDatabase.getInstance(context).getChapterDao().addChapterStatus(newStatus); //add to database

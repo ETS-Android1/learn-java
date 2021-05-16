@@ -5,7 +5,6 @@ import android.net.DhcpInfo;
 import android.net.wifi.WifiManager;
 import android.os.AsyncTask;
 import android.os.CountDownTimer;
-import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -13,6 +12,7 @@ import androidx.annotation.Size;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gaspar.learnjava.R;
+import com.gaspar.learnjava.utils.LogUtils;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
@@ -86,12 +86,12 @@ public class NetworkExchangeTask extends AsyncTask<AppCompatActivity, Void, Blue
     InetAddress getBroadcastAddress(@NonNull final Context context) throws IOException {
         WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         if(wifi == null) {
-            Log.e("LearnJava", "Wifi manager is null!");
+            LogUtils.logError("Wifi manager is null!");
             return InetAddress.getByName("255.255.255.255");
         }
         DhcpInfo dhcpInfo = wifi.getDhcpInfo();
         if(dhcpInfo == null) {
-            Log.e("LearnJava", "D H C P info is null!");
+            LogUtils.logError("D H C P info is null!");
             return InetAddress.getByName("255.255.255.255");
         }
         int broadcast = (dhcpInfo.ipAddress & dhcpInfo.netmask) | ~dhcpInfo.netmask;
@@ -113,13 +113,13 @@ public class NetworkExchangeTask extends AsyncTask<AppCompatActivity, Void, Blue
             socket.setBroadcast(true);
             byte[] buffer = (data+BluetoothExchangeTask.DATA_DELIMITER).getBytes(StandardCharsets.UTF_8);
             InetAddress broadcastAddress = getBroadcastAddress(activity);
-            Log.d("LearnJava", "Broadcasting on " + broadcastAddress.toString());
+            LogUtils.log("Broadcasting on " + broadcastAddress.toString());
             DatagramPacket messageToServer = new DatagramPacket(buffer, buffer.length, broadcastAddress, SERVER_PORT_NUMBER);
             socket.send(messageToServer);
 
             socket.setBroadcast(false);
             //wait for the servers confirmation message
-            Log.d("LearnJava", "Waiting for responses...");
+            LogUtils.log("Waiting for responses...");
             boolean receivedResponse = false;
             while(!receivedResponse) {
                 byte[] responseBuffer = new byte[CONFIRMATION_MESSAGE.length()];
@@ -129,7 +129,7 @@ public class NetworkExchangeTask extends AsyncTask<AppCompatActivity, Void, Blue
                     continue; //this message is not from the server
                 }
                 String responseString = new String(response.getData(), 0, response.getLength(), StandardCharsets.UTF_8);
-                Log.d("LearnJava", "Received response: " + responseString);
+                LogUtils.log("Received response: " + responseString);
                 receivedResponse = true;
             }
 

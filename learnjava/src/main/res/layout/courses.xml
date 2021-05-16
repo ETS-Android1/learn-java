@@ -51,6 +51,7 @@
 
         <!-- Actual content of the activity -->
         <RelativeLayout
+            android:id="@+id/coursesRoot"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="visible"
@@ -88,7 +89,25 @@
                    android:id="@+id/courseSelectors"
                    android:layout_width="match_parent"
                    android:layout_height="match_parent" />
+
            </LinearLayout>
+
+            <!-- Drop down all floating button. -->
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/dropDownAllIcon"
+                android:contentDescription="@string/drop_down_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="@dimen/margin"
+                android:src="@drawable/dropdown_icon"
+                app:borderWidth="0dp"
+                app:backgroundTint="?colorPrimaryDark"
+                app:tint="?learnJavaTextColor"
+                app:rippleColor="@android:color/white"
+                app:fabSize="mini"/>
 
             <!-- Loading indicator -->
             <ProgressBar

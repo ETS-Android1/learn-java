@@ -18,6 +18,7 @@
     <string name="in_development">Fejlesztés alatt</string>
     <string name="course_development_info">Ez a kurzus fejlesztés alatt áll. A jövőben további fejezetek jelennek majd meg.</string>
     <string name="swipe_horizontally">Vízszintes húzás</string>
+    <string name="drop_down_all">Összes lenyitása</string>
 
     <!-- Ads -->
     <string name="loading_ad">Hirdetés betöltése…</string>

@@ -1,7 +1,6 @@
 package com.gaspar.learnjava.asynctask;
 
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -14,6 +13,7 @@ import com.gaspar.learnjava.GuideActivity;
 import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.curriculum.Component;
 import com.gaspar.learnjava.parsers.CourseParser;
+import com.gaspar.learnjava.utils.LogUtils;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ public class FillGuideActivityTask extends AsyncTask<GuideActivity, Void, FillGu
         try {
             components = CourseParser.getInstance().parseGuide(activity);
         } catch (Exception e) {
-            Log.e("LearnJava","Exception", e);
+            LogUtils.logError("Exception while loading guide!", e);
             activity.successfulLoad = false;
         }
 

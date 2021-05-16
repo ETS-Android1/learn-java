@@ -17,6 +17,7 @@
     <string name="in_development">In development</string>
     <string name="course_development_info">This course is in development! More chapters will be released in the future.</string>
     <string name="swipe_horizontally">Swipe horizontally</string>
+    <string name="drop_down_all">Drop down all</string>
 
     <!-- Ads -->
     <string name="loading_ad">Loading ad…</string>
