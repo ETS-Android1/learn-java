@@ -141,7 +141,8 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
         //dragging will begin on long click
         fab.setOnLongClickListener(v -> {
             View.DragShadowBuilder myShadow = new View.DragShadowBuilder(fab);
-            v.startDragAndDrop(null, myShadow, null, View.DRAG_FLAG_GLOBAL);
+            v.startDragAndDrop(null, myShadow, null, View.DRAG_FLAG_OPAQUE);
+            v.setVisibility(View.INVISIBLE);
             return true;
         });
         //dragging on the root
@@ -162,6 +163,7 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
                     params.leftMargin = leftMargin;
                     params.topMargin = topMargin;
                     fab.layout(leftMargin, topMargin, (int)dX + fab.getWidth()/2, (int)dY + fab.getHeight()/2);
+                    fab.setVisibility(View.VISIBLE);
                     break;
             }
             return true;
@@ -224,11 +226,11 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
                    continue; //don't open locked courses
                }
                if(showHideView.getVisibility() == View.GONE) {
-                   AnimationUtils.slideIn(showHideView); //only open if not opened
+                   AnimationUtils.showView(showHideView); //only open if not opened
                }
             } else { //need to close opened courses
                if(showHideView.getVisibility() == View.VISIBLE) {
-                   AnimationUtils.slideOut(showHideView); //only hide if visible
+                   AnimationUtils.hideView(showHideView, courseSelector.findViewById(R.id.courseNameBar)); //only hide if visible
                }
             }
         }

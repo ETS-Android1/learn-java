@@ -1,5 +1,6 @@
 package com.gaspar.learnjava.adapters;
 
+import android.animation.LayoutTransition;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,13 +72,18 @@ public class CourseAdapter extends ArrayAdapter<Course> {
             viewHolder.showHideView = convertView.findViewById(R.id.slideInView);
             viewHolder.courseNameBar = convertView.findViewById(R.id.courseNameBar);
             convertView.setTag(viewHolder);
+
+            //this will handle appear animations
+            LayoutTransition lt = new LayoutTransition();
+            lt.disableTransitionType(LayoutTransition.DISAPPEARING);
+            ((ViewGroup)convertView).setLayoutTransition(lt);
         } else { //recycling
             viewHolder = (CourseViewHolder)convertView.getTag();
         }
         if(course != null) { //fill data here using view holder
             viewHolder.courseNameView.setText(course.getCourseName());
             //register listener that shows or hides contents
-            viewHolder.courseNameBar.setOnClickListener(v -> onCourseNameClick(position, viewHolder.statusIcon, viewHolder.showHideView));
+            viewHolder.courseNameBar.setOnClickListener(v -> onCourseNameClick(position, viewHolder.courseNameBar, viewHolder.statusIcon, viewHolder.showHideView));
             course.queryAndDisplayStatus(viewHolder.statusIcon, activity, viewHolder.showHideView);
             addContentViews(viewHolder, course); //add chapter, task exam selectors
         }
@@ -88,10 +94,11 @@ public class CourseAdapter extends ArrayAdapter<Course> {
      * Called when the user taps the name of one of the courses. Will show the contents if the course is unlocked.
      * In debug mode, it will always show the contents.
      * @param position Position of the item that was clicked. Used to find which course this view belongs to.
+     * @param clickView The click on this view triggered this event.
      * @param iconView Status icon of the course. Animated when a locked course is tapped.
      * @param showHideView This is the part of the course item view that is shown/hidden on click.
      */
-    private void onCourseNameClick(int position, @NonNull final View iconView, @NonNull final View showHideView) {
+    private void onCourseNameClick(int position, @NonNull final View clickView, @NonNull final View iconView, @NonNull final View showHideView) {
         LogUtils.log("Clicked on course name!");
         Course c = CoursesActivity.getParsedCourses().get(position);
         if(!LearnJavaActivity.DEBUG) { //only some shaking happens on locked, except in debug
@@ -101,10 +108,10 @@ public class CourseAdapter extends ArrayAdapter<Course> {
                 return;
             }
         }
-        if(showHideView.getVisibility() == View.GONE) {
-            com.gaspar.learnjava.utils.AnimationUtils.slideIn(showHideView);
-        } else { //visible
-            com.gaspar.learnjava.utils.AnimationUtils.slideOut(showHideView);
+        if(showHideView.getVisibility() == View.GONE) { //not visible, make it appear
+            com.gaspar.learnjava.utils.AnimationUtils.showView(showHideView);
+        } else { //visible, so hide it
+            com.gaspar.learnjava.utils.AnimationUtils.hideView(showHideView, clickView);
         }
     }
 

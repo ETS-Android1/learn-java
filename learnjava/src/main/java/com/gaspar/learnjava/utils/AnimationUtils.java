@@ -2,7 +2,6 @@ package com.gaspar.learnjava.utils;
 
 import android.content.Context;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
@@ -33,59 +32,29 @@ public abstract class AnimationUtils {
     public static final int DURATION = 800;
 
     /**
-     * Slides in a previously 'GONE' view. Up/Down animation.
-     *
-     * @author neoteknic, StackOverflow.com
+     * Makes the given view appear. Animations are handled by the system, so only
+     * the visibility is set here.
      */
-    public static void slideIn(final View v) {
-        v.measure(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
-        final int targetHeight = v.getMeasuredHeight();
-        // Older versions of android (pre API 21) cancel animations for views with a height of 0.
-        v.getLayoutParams().height = 1;
+    public static void showView(final View v) {
         v.setVisibility(View.VISIBLE);
-        Animation a = new Animation() {
-            @Override
-            protected void applyTransformation(float interpolatedTime, Transformation t) {
-                v.getLayoutParams().height = interpolatedTime == 1
-                        ? WindowManager.LayoutParams.WRAP_CONTENT
-                        : (int)(targetHeight * interpolatedTime);
-                v.requestLayout();
-            }
-            @Override
-            public boolean willChangeBounds() {
-                return true;
-            }
-        };
-        a.setDuration(DURATION);
-        //a.setDuration((int) (targetHeight / v.getContext().getResources().getDisplayMetrics().density));
-        a.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-                v.setVisibility(View.VISIBLE);
-            }
-            @Override
-            public void onAnimationEnd(Animation animation) { }
-            @Override
-            public void onAnimationRepeat(Animation animation) { }
-        });
-        v.startAnimation(a);
     }
 
     /**
-     * Slides out a previously visible view. Up/Down animation.
-     *
-     * @author neoteknic, StackOverflow.com
+     * Makes the given view disappear.
+     * @param view The view that will disappear.
+     * @param clickedView The click on this view triggered the event.
      */
-    public static void slideOut(final View v) {
-        final int initialHeight = v.getMeasuredHeight();
+    public static void hideView(final View view, @NonNull final View clickedView) {
+        final int initialHeight = view.getLayoutParams().height;
+        final int initialMesHeight = view.getMeasuredHeight();
         Animation a = new Animation() {
             @Override
             protected void applyTransformation(float interpolatedTime, Transformation t) {
                 if(interpolatedTime == 1) {
-                    v.setVisibility(View.GONE);
+                    view.setVisibility(View.GONE);
                 } else {
-                    v.getLayoutParams().height = initialHeight - (int)(initialHeight * interpolatedTime);
-                    v.requestLayout();
+                    view.getLayoutParams().height = initialMesHeight - (int)(initialMesHeight * interpolatedTime);
+                    view.requestLayout();
                 }
             }
             @Override
@@ -97,15 +66,21 @@ public abstract class AnimationUtils {
         //a.setDuration((int)(initialHeight / v.getContext().getResources().getDisplayMetrics().density));
         a.setAnimationListener(new Animation.AnimationListener() {
             @Override
-            public void onAnimationStart(Animation animation) { }
+            public void onAnimationStart(Animation animation) {
+                clickedView.setEnabled(false); //don't allow interaction until it slides out
+                view.setEnabled(false);
+            }
             @Override
             public void onAnimationEnd(Animation animation) {
-                v.setVisibility(View.GONE);
+                clickedView.setEnabled(true);
+                view.setEnabled(true); //allow interaction
+                view.setVisibility(View.GONE); //hide after animation concludes
+                view.getLayoutParams().height = initialHeight; //IMPORTANT: give back initial height
             }
             @Override
             public void onAnimationRepeat(Animation animation) { }
         });
-        v.startAnimation(a);
+        view.startAnimation(a);
     }
 
     /**

@@ -107,7 +107,7 @@
                 app:backgroundTint="?colorPrimaryDark"
                 app:tint="?learnJavaTextColor"
                 app:rippleColor="@android:color/white"
-                app:fabSize="mini"/>
+                app:fabSize="normal"/>
 
             <!-- Loading indicator -->
             <ProgressBar

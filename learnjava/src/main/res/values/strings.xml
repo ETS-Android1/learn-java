@@ -146,7 +146,7 @@
     <!-- Tasks -->
     <string name="task">Task:</string>
     <string name="must_unlock_course_before_task">
-        You must unlock the course it belongs to before you can start this task.
+        You must unlock this course before you can start these tasks.
     </string>
     <string name="mark_task_as_completed">Mark this task as completed</string>
     <string name="show_solution">Show solution</string>

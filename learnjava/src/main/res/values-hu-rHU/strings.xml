@@ -138,7 +138,7 @@
     <!-- Tasks -->
     <string name="task">Feladat:</string>
     <string name="must_unlock_course_before_task">
-        Ki kell nyitnod a kurzust, mielőtt elindíthatod ezt a feladatot.
+        Ki kell nyitnod a kurzust, mielőtt elindíthatod ezeket a feladatokat.
     </string>
     <string name="mark_task_as_completed">Megjelölés teljesítettként</string>
     <string name="show_solution">Megoldás mutatása</string>

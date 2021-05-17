@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.gaspar.learnjava.adapters.TaskAdapter;
 import com.gaspar.learnjava.asynctask.FillTasksActivityTask;
 import com.gaspar.learnjava.curriculum.Course;
 import com.gaspar.learnjava.curriculum.Status;
@@ -95,12 +96,16 @@ public class TasksActivity extends ThemedActivity implements NavigationView.OnNa
         ListView tasks = findViewById(R.id.taskSelectors);
         tasks.setOnItemClickListener((adapterView, view, position, l) -> {
             Course course = CoursesActivity.getParsedCourses().get(position);
-            if(course.getStatus() == Status.NOT_QUERIED || course.getStatus() == Status.LOCKED) return;
+            if(course.getStatus() == Status.NOT_QUERIED || course.getStatus() == Status.LOCKED) {
+                //inform about the course
+                TaskAdapter.buildDialog(this).show();
+                return;
+            }
             View tasksOfCourseView = view.findViewById(R.id.tasksOfCourse);
             if(tasksOfCourseView.getVisibility() == View.GONE) {
-                AnimationUtils.slideIn(tasksOfCourseView);
+                AnimationUtils.showView(tasksOfCourseView);
             } else { //visible
-                AnimationUtils.slideOut(tasksOfCourseView);
+                AnimationUtils.hideView(tasksOfCourseView, adapterView);
             }
         });
     }

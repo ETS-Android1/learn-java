@@ -1,6 +1,6 @@
 package com.gaspar.learnjava.adapters;
 
-import android.app.AlertDialog;
+import android.animation.LayoutTransition;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +20,8 @@ import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.curriculum.Course;
 import com.gaspar.learnjava.curriculum.Status;
 import com.gaspar.learnjava.curriculum.Task;
+import com.gaspar.learnjava.utils.ThemeUtils;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import java.util.List;
 
@@ -63,6 +65,11 @@ public class TaskAdapter extends ArrayAdapter<Course> {
             holder.courseStatusIcon = convertView.findViewById(R.id.statusIconView);
             holder.tasksLayout = convertView.findViewById(R.id.tasksOfCourse);
             convertView.setTag(holder);
+
+            //this will handle appear animations
+            LayoutTransition lt = new LayoutTransition();
+            lt.disableTransitionType(LayoutTransition.DISAPPEARING);
+            ((ViewGroup)convertView).setLayoutTransition(lt);
         } else { //recycling
             holder = (TaskViewHolder)convertView.getTag();
         }
@@ -99,21 +106,17 @@ public class TaskAdapter extends ArrayAdapter<Course> {
      * Handles what happens when a click is made on a task selector view.
      */
     private void taskSelectorOnClick(final Course course, final Task task, View taskView) {
-        if(course.getStatus() == Status.NOT_QUERIED) return;
-        if(course.getStatus() == Status.LOCKED) { //notify user that course must be unlocked.
-            buildDialog().show();
-        } else { //unlocked or completed
-           Task.startTaskActivity(activity, task, taskView);
-        }
+        if(course.getStatus() == Status.NOT_QUERIED || course.getStatus() == Status.LOCKED) return;
+        Task.startTaskActivity(activity, task, taskView);
     }
 
     @NonNull
     @CheckResult
-    private AlertDialog buildDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+    public static MaterialAlertDialogBuilder buildDialog(@NonNull final AppCompatActivity activity) {
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(activity, ThemeUtils.getThemedDialogStyle());
         builder.setMessage(R.string.must_unlock_course_before_task);
         builder.setPositiveButton(R.string.ok, (dialog,id) -> dialog.dismiss());
-        return builder.create();
+        return builder;
     }
 
     private static class TaskViewHolder {

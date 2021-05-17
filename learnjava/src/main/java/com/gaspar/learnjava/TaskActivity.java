@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -134,12 +135,24 @@ public class TaskActivity extends ThemedActivity implements NavigationView.OnNav
             AnimationUtils.slideOutHorizontal(solutionScroller, AnimationUtils.Direction.RIGHT, this);
             AnimationUtils.slideInHorizontal(taskScroller, AnimationUtils.Direction.LEFT, this);
             promptText.setText(R.string.show_solution);
-            iconView.setImageResource(R.drawable.right_arrow);
+            final Animation rotateAnimation = new RotateAnimation(180.0f, 0.0f,
+                    RotateAnimation.RELATIVE_TO_SELF, 0.5f,
+                    RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+            rotateAnimation.setDuration(AnimationUtils.DURATION);
+            rotateAnimation.setFillAfter(true);
+            rotateAnimation.setRepeatCount(0);
+            iconView.startAnimation(rotateAnimation);
         } else { //make solution appear
             AnimationUtils.slideOutHorizontal(taskScroller, AnimationUtils.Direction.LEFT, this);
             AnimationUtils.slideInHorizontal(solutionScroller, AnimationUtils.Direction.RIGHT, this);
             promptText.setText(R.string.hide_solution);
-            iconView.setImageResource(R.drawable.left_arrow);
+            final Animation rotateAnimation = new RotateAnimation(0.0f, 180.0f,
+                    RotateAnimation.RELATIVE_TO_SELF, 0.5f,
+                    RotateAnimation.RELATIVE_TO_SELF, 0.5f);
+            rotateAnimation.setDuration(AnimationUtils.DURATION);
+            rotateAnimation.setFillAfter(true);
+            rotateAnimation.setRepeatCount(0);
+            iconView.startAnimation(rotateAnimation);
         }
         solutionShowing = !solutionShowing;
     }
