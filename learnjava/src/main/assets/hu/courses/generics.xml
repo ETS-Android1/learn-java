@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!-- Course: Generics --><resources>
     <coursedata>
-        <id>30</id>
-        <name>Generics</name>
+        <id>25</id>
+        <name>Generikus programozás</name>
         <finished>true</finished>
     </coursedata>
+    <!-- The course id doesn't quite match the chapter id-s, this is because the order of courses was changed. -->
     <chapter>301</chapter>
     <chapter>302</chapter>
     <chapter>303</chapter>

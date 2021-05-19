@@ -52,6 +52,15 @@
         is that single, capital letters are used! For some reason, <i>T</i> and <i>E</i> is especially popular.
         ]]>
     </boxed>
+	<text>
+        <![CDATA[
+        We <b>cannot</b> use the type parameter to create objects or arrays! Things like this are not allowed, for 
+		a type parameter <i>T</i>:
+		<br><br>
+		<i>T t = new T();</i><br>
+		<i>T[] array = new T[5];</i>
+        ]]>
+    </text>
     <text>
         <![CDATA[
         This class can then be constructed like this:

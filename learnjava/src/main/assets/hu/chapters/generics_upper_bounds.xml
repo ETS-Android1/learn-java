@@ -2,13 +2,13 @@
 <resources>
     <chapterdata>
         <id>303</id>
-        <name>Upper bounds</name>
+        <name>Felső korlát</name>
     </chapterdata>
-    <title text="Type erasure"/>
+    <title text="Típus erózió"/>
     <text>
         <![CDATA[
-        Type erasure is a property of Java generics. It means that the generic objects inside the
-        generic class are treated as an <i>Object</i> (or, when an upper bound is present, they're treated as that bound - see below).
+        A típus törlődése (erózió) a Java generikus kód tulajdonsága. Ez azt jelenti, hogy a generikus objektumok a
+        generikus osztályon belül <i>Object</i>-ként kezelik a típusparamétert.
         ]]>
     </text>
     <code><![CDATA[
@@ -23,8 +23,8 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">T</font> <font color="#ADD8E6">add</font>(<font color="#999900">T</font> number) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;How to add the parameter to the current value?!
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;Only Object methods are available, for example:
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;Hogyan adjuk hozzá a paramétert az aktuális értékhez?!
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;Csak az Object metóduait használhatjuk:
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;toString(), hashCode()
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> currentValue;
@@ -40,61 +40,64 @@
     ]]></code>
     <text>
         <![CDATA[
-        In this simple <i>Calculator</i> class we store a value and want to be able add and subtract other values from it.
-        However, with our current generics knowledge, this does not seem possible:
+        Ebben az egyszerű <i>Calculator</i> osztályban tárolunk egy értéket, és szeretnénk, ha más értékeket tudnánk hozzáadni 
+		vagy kivonni belőle. A jelenlegi generikus ismereteinkkel azonban ez nem tűnik lehetségesnek:
         ]]>
     </text>
     <code><![CDATA[
         
-        <font color="gray">//Fine, but we still can't add the doubles inside the class!
+        <font color="gray">//Rendben, de még mindig nem fog működni valós számokra!
 </font>
 <br/><font color="#999900">Calculator</font>&lt;<font color="#999900">Double</font>> calc = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(<font color="#F0E130">0.0</font>);
 <br/>
-<br/><font color="gray">//This makes no sense, but it's still allowed.
+<br/><font color="gray">//Ennek semmi értelme, de ettől még megengedett.
 </font>
 <br/><font color="#999900">Calculator</font>&lt;<font color="#999900">Boolean</font>> boolCalc = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(<font color="#E65100">false</font>);
         
     ]]></code>
     <text>
         <![CDATA[
-        We need a way to be able to do addition/subtraction (if it is possible, like with the first calculator) and
-        to disallow the creation of invalid objects, such as the boolean calculator.
+        Szükségünk van egy olyan módszerre, amellyel összeadást/kivonást tudunk végezni. Valahogy azt is szeretnénk 
+		megtiltani, hogy "értelmetlen" objektumokat lehessen létrehozni, mint például a <i>boolean</i> vagy <i>String</i> 
+		típusparaméterű <i>Calculator</i>.
         ]]>
     </text>
-    <title text="Upper bounds"/>
+    <title text="Felső korlát"/>
     <text>
         <![CDATA[
-        Bounding the generic types is the solution to the problems seen above.
+        A <b>korlátok</b> használata a megoldás ezekre a problémákra.
         ]]>
     </text>
-    <boxed title="Why upper bound?">
+    <boxed title="Miért felső korlát?">
         <![CDATA[
-        To create an upper bound, we need a <b>base class</b> (or interface). Only the children of this base class will be allowed,
-        thus the base class will be called an <b>upper bound</b> of the possible types (the base class is "<i>above</i>" the
-        possible types in the class hierarchy).
+        Egy felső korlát létrehozásához szükségünk van egy <b>alaposztályra</b> (vagy interfészre). Csak ennek az 
+		alaposztálynak a gyermekei lesznek megengedettek típusparaméterként, ezért az alaposztályt a lehetséges típusok 
+		<b>felső korlátjának</b> fogjuk nevezni (az alaposztály "<i>fölötte</i>" van a gyerekosztályainak 
+		az osztály hierarchiában).
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        When there is an upper bound on a type parameter, objects of this type will be treated as the base class, and not
-        as <i>Object</i> (in other words, type erasure will not reduce to <i>Object</i>, but to the base class).
+        Ha van egy felső korlát egy típusparaméteren, a típus törlés nem <i>Object</i>-re, hanem az alaposztályra 
+		fog visszavezetni. A felső korlát metódusait használhatjuk a generikus osztályon belül. Értelemszerűen ha 
+		nem adunk meg felső korlátot, akkor ez magától az <i>Object</i> lesz (hasonlóan az öröklődéshez).
         ]]>
     </text>
-    <boxed title="Calculator base class">
+    <boxed title="Alap osztály a számológéphez">
         <![CDATA[
-        So all we need is a base class for the <i>Calculator</i>. Luckily there is a common base class for
-        numeric types, <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Number.html">java.lang.Number</a>.
+        Tehát csak egy alaposztályra van szükségünk a <i>Calculator</i> számára. Szerencsére van egy közös osztály a
+        számtípusokhoz, a <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Number.html">java.lang.Number</a>.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        <i>Number</i> has a useful method, <i>doubleValue</i> which returns a primitive double, the actual value of the
-        numeric variable as a real number:
+        A <i>Number</i>-nek van egy hasznos metódusa, a <i>doubleValue</i>, amely egy valós számként adja vissza a 
+		szám objektum értékét.
         ]]>
     </text>
     <code><![CDATA[
         
-<font color="gray">//Integer and Double extends Number
+<font color="gray">//Az Integer és a Double ebből a Number-ből származik:
 </font>
 <br/><font color="#999900">Integer</font> intNum = <font color="#F0E130">1</font>;
 <br/><font color="#999900">Double</font> doubleNum = <font color="#F0E130">3.2</font>;
@@ -106,8 +109,8 @@
     ]]></code>
     <text>
         <![CDATA[
-        The only thing left is to learn how to write an upper bound. The <b>extends</b> keyword is used, to indicate
-        that the generic type must be a subclass of the upper bound:
+        Már csak az van hátra, hogy megtanuljuk, hogyan kell felső korlátot írni. Az <b>extends</b> kulcsszót használjuk, 
+		hogy megadjuk a felső korlátot a típusparaméterekhez:
         ]]>
     </text>
     <code><![CDATA[
@@ -142,27 +145,27 @@
     ]]></code>
     <text>
         <![CDATA[
-        You may have noticed that the change from <i>T</i> to double in some places. Java generics is not that powerful, and you'll
-        undoubtedly come across limitations which will force you to make code a bit less generic to make it work.
+        Talán észrevetted, hogy a <i>T</i> néhány helyen <i>double</i>-re változik (visszatérési értéknél). 
+		A Java generikus kódja nem olyan erős, és sajnos vannak limitációk.
         ]]>
     </text>
-    <advanced title="Limitations">
+    <advanced title="Limitációk">
         <![CDATA[
-        Why could the return value not stay <i>T</i>? Because then we'd have to cast from double to <i>T</i>, and that would fail
-        for any <i>T</i> that isn't <i>Double</i>.
+        Miért nem maradhatott a visszatérési érték <i>T</i>? Mert akkor <i>double</i>-ról <i>T</i>-re kellene konvertálni, 
+		és ez nem sikerülne minden olyan <i>T</i> esetében, amely nem <i>Double</i>.
         <br><br>
-        Ok, so make <i>currentValue</i> also <i>T</i>, you might say. But then we could not add or subtract values from
-        that (because <i>Number</i> has only getters, but no setters, and it's abstract)!
+        Oké, akkor legyen a <i>currentValue</i> is <i>T</i> - mondhatnánk. De akkor nem tudnánk hozzáadni vagy kivonni 
+		értékeket (mert a <i>Number</i>-nek csak getterei vannak, de setterei nincsenek, és absztrakt)!
         ]]>
     </advanced>
     <text>
         <![CDATA[
-        Despite these small setbacks, the calculator now supports all numeric types. It'll return its result as doubles.
+        Ezen apró hátulütők ellenére a számológép most már minden számtípust támogat. Az eredményt valós számként adja vissza.
         ]]>
     </text>
     <code><![CDATA[
         
-<font color="gray">//For example, a float calculator
+<font color="gray">//Például egy számológép float típusra
 </font>
 <br/><font color="#999900">Calculator</font>&lt;<font color="#999900">Float</font>> floatCalc = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(<font color="#F0E130">0.5f</font>);
 <br/>floatCalc.<font color="#ADD8E6">add</font>(<font color="#F0E130">21.44f</font>);
@@ -172,16 +175,16 @@
     ]]></code>
     <text>
         <![CDATA[
-        Another benefit is that now the compiler will reject invalid types:
+        Egy másik előnye, hogy a fordító mostantól elutasítja az érvénytelen, értelmetlen típusparamétereket:
         ]]>
     </text>
     <code><![CDATA[
         
-        <font color="gray">//Compile time ERROR!</font>
+        <font color="gray">//Fordítási HIBA!</font>
 <br/><font color="#999900">Calculator</font>&lt;<font color="#999900">Boolean</font>> boolCalc = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(<font color="#E65100">false</font>);
         
     ]]></code>
-    <interactive instruction="Update the vector class from the previous chapter to use an upper bounded type parameter!">
+    <interactive instruction="Frissítsük a Vector osztályt az előző fejezetből, hogy egy felső korlátos típusparamétert használjon.!">
         <data><![CDATA[
 
 <font color="#E65100">class</font> <font color="#999900">Vector</font>&lt;<font color="#999900">T</font> ___ <font color="#999900">Number</font>> {
@@ -205,12 +208,12 @@
         <answer place="1">?</answer>
         <answer place="1">? extends Number</answer>
     </interactive>
-    <title text="Interface bounds"/>
+    <title text="Interfészek mint korlátok"/>
     <text>
         <![CDATA[
-        Interfaces can also be used as an upper bound. In this case, only classes that <b>implement</b> the given interface
-        will be allowed. Despite this, when declaring the bound, you must still use the <b>extends</b> keyword, not the <b>implements</b>
-        keyword!
+        Az interfészek is használhatók felső korlátként. Ebben az esetben csak azok az osztályok, amelyek 
+		<b>implementálják</b> az adott interfészt engedélyezettek. Ennek ellenére a korlát deklarálásakor továbbra is az 
+		<b>extends</b> kulcsszót kell használni, nem pedig a <b>implements</b> kulcsszót!
         ]]>
     </text>
     <code><![CDATA[
@@ -225,14 +228,14 @@
     ]]></code>
     <text>
         <![CDATA[
-        As you can see it's even possible to use the type parameter <i>T</i> to specify the upper bounds type arguments!
+        Mint láthatjuk, még az is lehetséges, hogy a <i>T</i> típusparamétert használjuk a felső korláton belül!
         ]]>
     </text>
-    <title text="Multiple bounds"/>
+    <title text="Több korlát"/>
     <text>
         <![CDATA[
-        It's also allowed to have multiple upper bounds, but there are limitations: among the upper bounds, only one can
-        be an actual class, the rest must be interfaces (this makes sense, since it's impossible to have multiple parent classes).
+        Az is megengedett, hogy egy típusparaméternek több felső korláta legyen. Ezek közül azonban csak egy lehet
+        tényleges osztály, a többinek interfésznek kell lennie (ennek van értelme, hiszen több szülőosztály sem lehet).
         ]]>
     </text>
     <code><![CDATA[
@@ -240,8 +243,8 @@
 <font color="#E65100">class</font> <font color="#999900">PickyClass</font>&lt;<font color="#999900">T</font> <font color="#E65100">extends</font> <font color="#999900">Thread</font> & <font color="#999900">Serializable</font> & <font color="#999900">Comparable</font>&lt;<font color="#999900">T</font>>> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Do something with serializable and comparable
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;background threads.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;T csak szerializálható, összehasonlítható 
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Thread lehet.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;*/</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>}
@@ -249,8 +252,8 @@
     ]]></code>
     <text>
         <![CDATA[
-        The <b>&</b> symbol must be used to list the upper bounds, and the class must be the first, the interfaces have to
-        follow it.
+        Az <b>&</b> szimbólumot kell használni a felső korlátok felsorolására, és az osztálynak kell az elsőnek lennie, 
+		az interfészeknek pedig követniük kell.
         ]]>
     </text>
 </resources>

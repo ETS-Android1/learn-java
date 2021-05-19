@@ -9,40 +9,40 @@
 
     <!-- Questions about introduction -->
     <question type="single_choice">
-        <text>What is a generic class?</text>
-        <answer>A class blueprint for collections.</answer>
-        <answer>A class that is for generic purposes.</answer>
-        <answer>A class that cannot be instantiated.</answer>
-        <answer>A class blueprint that can take type parameters.</answer>
+        <text>Mi az a generikus osztály?</text>
+        <answer>Egy osztály tervrajz a kollekciókhoz.</answer>
+        <answer>Egy osztály, amely általános célokra szolgál.</answer>
+        <answer>Egy osztály, amelyet nem lehet példányosítani.</answer>
+        <answer>Egy osztály tervrajz, amely típusparamétereket fogadhat.</answer>
         <correct>3</correct>
     </question>
     <question type="single_choice">
-        <text>What is another name for generic classes?</text>
-        <answer>multipurpose classes</answer>
-        <answer>templates</answer>
-        <answer>interfaces</answer>
-        <answer>abstract classes</answer>
+        <text>Mi egy másik neve a generikus osztályoknak?</text>
+        <answer>többcélú osztályok</answer>
+        <answer>sablonok</answer>
+        <answer>interfészek</answer>
+        <answer>absztrakt osztályok</answer>
         <correct>1</correct>
     </question>
     <question type="true_false">
-        <text>Java didn't have generics support in the beginning.</text>
+        <text>A Java kezdetben nem rendelkezett generikus támogatással.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>Even the first versions of Java had generics support.</text>
+        <text>Már a Java első verziói is rendelkeztek generikus támogatással.</text>
         <correct>false</correct>
     </question>
 
     <!-- Questions about basic Java generics -->
     <question type="single_choice">
-        <text>Why does the compiler allow creating objects from generic classes without specifying the type parameters?</text>
-        <answer>So that programmers who forget the types don't get exceptions.</answer>
-        <answer>To be backwards compatible with older code.</answer>
-        <answer>To allow primitives as types.</answer>
+        <text>Miért engedi a fordító az objektumok létrehozását generikus osztályokból a típusparaméterek megadása nélkül?</text>
+        <answer>Azért, hogy a típusparamétert elfelejtő programozók ne kapjanak kivételeket.</answer>
+        <answer>Azért, hogy visszafelé kompatibilis legyen a régebbi kóddal.</answer>
+        <answer>Azért, hogy a primitíveket típusparaméterként lehessen használni.</answer>
         <correct>1</correct>
     </question>
     <question type="multi_choice">
-        <text>What are good names for type parameters, by convention?</text>
+        <text>Melyek a jó nevek a típusparaméterek számára a konvenciók szerint?</text>
         <answer>T</answer>
         <answer>Type</answer>
         <answer>Element</answer>
@@ -51,156 +51,159 @@
         <correct>3</correct>
     </question>
     <question type="multi_choice">
-        <text>How can a type parameter be used in a generic class?</text>
-        <answer>As a return value.</answer>
-        <answer>As a parameter.</answer>
-        <answer>To create new objects of that type.</answer>
-        <answer>To create arrays of that type.</answer>
+        <text>Hogyan használható egy típusparaméter egy generikus osztályban?</text>
+        <answer>Visszatérési értékként.</answer>
+        <answer>Paraméterként.</answer>
+        <answer>Adott típusú új objektumok létrehozására.</answer>
+        <answer>Adott típusú tömbök létrehozásához.</answer>
         <correct>0</correct>
         <correct>1</correct>
     </question>
     <question type="true_false">
-        <text>The type parameters must be specified when creating a generic class.</text>
+        <text>A konkrét típusparamétereket egy generikus osztály írásakor kell megadni.</text>
         <correct>false</correct>
     </question>
-    <question type="single_choice">
-        <text>What happens on creating an object from a generic class without specifying the type parameters?</text>
-        <answer>All type parameters will be Object-s</answer>
-        <answer>A compile time error happens, as that is not allowed.</answer>
-        <answer>The compiler will try to guess the best type parameters.</answer>
-        <answer>A runtime exception is thrown, as that is not allowed.</answer>
-        <correct>0</correct>
-    </question>
-    <question type="true_false">
-        <text>Primitives are allowed as type arguments.</text>
-        <correct>false</correct>
-    </question>
-    <question type="true_false">
-        <text>Primitive wrappers are allowed as type arguments.</text>
+	<question type="true_false">
+        <text>A konkrét típusparamétereket egy generikus osztály példányosításakor kell megadni.</text>
         <correct>true</correct>
     </question>
     <question type="single_choice">
-        <text>How many type parameters can be specified in generic classes.</text>
-        <answer>1.</answer>
-        <answer>A maximum of 2.</answer>
-        <answer>A maximum of 3.</answer>
-        <answer>Any number of parameters.</answer>
+        <text>Mi történik egy generikus osztály példányosításakor a típusparaméterek megadása nélkül?</text>
+        <answer>Minden típusparaméter Object lesz</answer>
+        <answer>Egy fordítási idejű hiba történik, mivel ez nem megengedett.</answer>
+        <answer>A fordító megpróbálja kitalálni a legjobb típusparamétereket.</answer>
+        <answer>Egy futásidejű kivétel dobódik, mivel ez nem megengedett.</answer>
+        <correct>0</correct>
+    </question>
+    <question type="true_false">
+        <text>A primitívek típusparaméterként engedélyezettek.</text>
+        <correct>false</correct>
+    </question>
+    <question type="true_false">
+        <text>A primitívek wrapperei típusparaméterként megengedettek.</text>
+        <correct>true</correct>
+    </question>
+    <question type="single_choice">
+        <text>Hány típusparamétert lehet megadni a generikus osztályokban?</text>
+        <answer>1-et.</answer>
+        <answer>Maximum 2-t.</answer>
+        <answer>Maximálisan 3-at.</answer>
+        <answer>Bármennyit.</answer>
         <correct>3</correct>
     </question>
     <!-- lol -->
     <question type="multi_choice">
-        <text>Which of these can be generic?</text>
-        <answer>Classes.</answer>
-        <answer>Methods.</answer>
-        <answer>Packages.</answer>
-        <answer>Interfaces.</answer>
+        <text>Ezek közül melyek lehetnek generikusak?</text>
+        <answer>Osztályok.</answer>
+        <answer>Metódusok.</answer>
+        <answer>Csomagok.</answer>
+        <answer>Interfészek.</answer>
         <correct>0</correct>
         <correct>1</correct>
         <correct>3</correct>
     </question>
     <question type="single_choice">
-        <text>What is a typical use of generic methods?</text>
-        <answer>Constructors.</answer>
-        <answer>Static utility methods.</answer>
-        <answer>Generic methods are not allowed.</answer>
-        <answer>Generic getters and setters.</answer>
+        <text>Mi a generikus metódusok tipikus felhasználása?</text>
+        <answer>Konstruktorok.</answer>
+        <answer>Statikus segédmetódusok.</answer>
+        <answer>A generikus metódusok nem engedélyezettek.</answer>
         <correct>1</correct>
     </question>
     <question type="true_false">
-        <text>Methods can be generic.</text>
+        <text>Metódusok is lehetnek generikusak.</text>
         <correct>true</correct>
     </question>
 
     <!-- Questions about bounding -->
     <question type="single_choice">
-        <text>What is type erasure?</text>
-        <answer>A generic object is created without specifying the type parameters.</answer>
-        <answer>Generic objects are reduced to their upper bounds inside the generic class.</answer>
-        <answer>An upper bound on type parameters.</answer>
+        <text>Mi a típus törlődés (erózió)?</text>
+        <answer>A generikus osztályt a típusparaméterek megadása nélkül példányosítjuk.</answer>
+        <answer>A típusparaméterek a generikus osztályon belül a felső korátjukra redukálódnak.</answer>
+        <answer>A típusparaméterek felső korlátja.</answer>
         <correct>1</correct>
     </question>
     <question type="true_false">
-        <text>Type erasure always reduces to Object.</text>
+        <text>A típus törlődés mindig Object-re redukál.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>Upper bounds can influence type erasure.</text>
+        <text>A felső korlátok befolyásolhatják a típus törlődést.</text>
         <correct>true</correct>
     </question>
     <question type="single_choice">
-        <text>What is true about a bounded type parameter.</text>
-        <answer>The compiler will enforce the correct type.</answer>
-        <answer>It's only checked at runtime whether the bound condition is satisfied.</answer>
-        <answer>Only 2 bounds can be given, a class and an interface.</answer>
-        <answer>Only classes can be upper bounds.</answer>
+        <text>Mi igaz egy korlátos típusparaméterre?</text>
+        <answer>A fordító a correct típust ki fogja kényszeríteni.</answer>
+        <answer>Kizárólag futásidőben ellenőrződik, hogy a korlát teljesül-e.</answer>
+        <answer>Csak 2 korlátot lehet megadni, egy osztályt és egy interfészt.</answer>
+        <answer>Kizárólag osztályok lehetnek felső korlátok.</answer>
         <correct>0</correct>
     </question>
     <question type="single_choice">
-        <text>How many upper bounds (or bound) can a type parameter have?</text>
+        <text>Hány felső korlátja lehet egy típusparaméternek?</text>
         <answer>1</answer>
-        <answer>2</answer>
+        <answer>Egy osztály és egy interfész (2).</answer>
         <answer>5</answer>
-        <answer>Any number of bounds.</answer>
+        <answer>Bármennyi, de közülük csak egy osztály.</answer>
         <correct>3</correct>
     </question>
     <question type="true_false">
-        <text>Any number of interfaces can be specified as upper bounds.</text>
+        <text>Felső korlátként tetszőleges számú interfész adható meg.</text>
         <correct>true</correct>
     </question>
     <question type="multi_choice">
-        <text>Which of these are valid orders to specify upper bounds?</text>
-        <answer>A class.</answer>
-        <answer>A class and an interface.</answer>
-        <answer>an interface and a class.</answer>
-        <answer>An interface.</answer>
+        <text>Melyek lehetnek ezek közül felső korlátok (ebben a sorrendben)?</text>
+        <answer>Egy osztály.</answer>
+        <answer>Egy osztály és egy interfész.</answer>
+        <answer>Egy interfész és egy osztály.</answer>
+        <answer>Egy interfész.</answer>
         <correct>0</correct>
         <correct>1</correct>
         <correct>3</correct>
     </question>
     <question type="text">
-        <text>What is the base class for numeric values?</text>
+        <text>Mi a numerikus értékek alaposztálya?</text>
         <correct>Number</correct>
         <correct>java.lang.Number</correct>
     </question>
     <question type="text">
-        <text>Which keyword is used to declare upper bounds?</text>
+        <text>Melyik kulcsszóval lehet felső korlátokat megadni?</text>
         <correct>extends</correct>
     </question>
     <question type="true_false">
-        <text>Interface upper bounds are declared with the 'extends' keyword.</text>
+        <text>Az interfész felső korlátokat az "extends" kulcsszóval kell deklarálni.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>Interface upper bounds are declared with the 'implements' keyword.</text>
+        <text>Az interfész felső korlátokat az "implements" kulcsszóval kell deklarálni.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>Interfaces can't be upper bounds.</text>
+        <text>Az intefészek nem lehetnek felső korlátok.</text>
         <correct>false</correct>
     </question>
     <question type="text">
-        <text>Which symbol is used to separate multiple upper bounds on one parameter?</text>
+        <text>Melyik szimbólumot használjuk egy paraméter több felső korlátjának elanswertására?</text>
         <correct>&amp;</correct>
     </question>
 
     <!-- Questions about wildcards -->
     <question type="text">
-        <text>Which symbol is used to declare a wildcard?</text>
+        <text>Melyik szimbólumot használjuk a helyettesítő karakterek megadására?</text>
         <correct>?</correct>
     </question>
     <question type="true_false">
-        <text>Wildcards can be bounded.</text>
+        <text>A helyettesítő karaktereknek is lehet felső korlátja.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>Wildcards cannot be upper bounded.</text>
+        <text>A helyettesítő karaktereknek nem lehet felső korlátja.</text>
         <correct>false</correct>
     </question>
     <question type="single_choice">
-        <text>What is a wildcard?</text>
-        <answer>A placeholder for a type parameter.</answer>
-        <answer>A bounded type parameter.</answer>
-        <answer>A generic class which can accept any type parameter.</answer>
+        <text>Mi az a helyettesítő karakter (wildcard)?</text>
+        <answer>Egy konkrét típusparaméter helyett álló karakter.</answer>
+        <answer>Egy felső korláttal rendelkező típusparaméter.</answer>
+        <answer>Egy generikus osztály, amely bármilyen típusparamétert elfogadhat.</answer>
         <correct>0</correct>
     </question>
 

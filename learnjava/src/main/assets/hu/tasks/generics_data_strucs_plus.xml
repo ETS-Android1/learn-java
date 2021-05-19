@@ -2,67 +2,70 @@
 <resources>
     <taskdata>
         <id>302</id>
-        <name>Improved data structures</name>
+        <name>Javított adatstruktúrák</name>
     </taskdata>
-    <boxed title="Dependency">
+    <boxed title="Függőség">
         <![CDATA[
-        This task assumes you've completed the previous one, generic data structures.
+        Ez a feladat feltételezi, hogy az előző, generikus adatszerkezetekről szóló feladatot már elvégezted.
         ]]>
     </boxed>
-    <title text="Refactoring"/>
+    <title text="Átalakítás"/>
     <text>
         <![CDATA[
-        Refactoring means making significant changes in an already written codebase. Before you begin this
-        task, refactor the improved data structures to have a common base class, <i>MyCollection</i>. This class
-        should be generic.
+        A feladat első lépése az adatszerkezetek átalakítása úgy, hogy legyen egy közös alaposztály, a <i>MyCollection</i>. 
+		Ez az osztály szintén legyen generikus.
         ]]>
     </text>
-    <boxed title="MyCollection details">
+    <boxed title="MyCollection részletek">
         <![CDATA[
-        The base class should provide methods to to iterate over the elements of the collections. This can be done
-        by maintaining a reference to the current element, or storing the current index.
+        Az alaposztálynak metódusokat kell biztosítania a kollekciók elemei felett történő iterációhoz. Ez történhet
+        az aktuális elemre való hivatkozás fenntartásával, vagy az aktuális index tárolásával.
         <br><br>
-        Also make the base class have abstract <i>add</i> and <i>remove</i> methods so every collection has these operations.
+        Az alaposztály rendelkezzen továbbá absztrakt <i>add</i> és <i>remove</i> metódusokkal, ezeket majd a leszármazott 
+		kollekciókban kell megvalósítani.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        The <i>JDK</i> has interfaces for such behaviour called <b>java.util.Iterator</b> and <b>java.lang.Iterable</b>.
-        They have other, difficult to implement methods. For our purposes, a simple iterator is enough.
+        A <i>JDK</i> rendelkezik iterálásra szolgáló interfészekkel, amelyek a <b>java.util.Iterator</b> és a 
+		<b>java.lang.Iterable</b> nevet viselik. Ezeknek vannak más, nehezen implementálható részeik is. 
+		A mi céljainkhoz elég egy egyszerű, saját iterátor.
         ]]>
     </text>
-    <boxed title="Iterator implementation">
+    <boxed title="Az iterátor implementációja">
         <![CDATA[
-        When the <i>next</i> method is called but there are no more elements, a <i>NoSuchElementException</i> should be thrown.
-        Also have a <i>hasNext</i> method which can tell if there are more elements or not, and a method which can reset the
-        iterator to the beginning.
+		Kell egy <i>next</i> metódus, ami a következő elemre lép. 
+        Amikor a <i>next</i> metódus meghívásra kerül, de már nincs több elem, egy <i>NoSNoSuchElementException</i> 
+		kivételt kell dobni. Legyen továbbá egy <i>hasNext</i> metódus, amely meg tudja mondani, hogy van-e még több 
+		elem vagy nincs, és egy metódus, amely visszaállítja a iterátort az elejére.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        The reason we need this common base class and the iterator functionality is so that a utility
-        class can be created.
+		Ezek az alaposztályban legyenek megvalósítva (<i>MyCollection</i>), de szükség esetén felülírhatjuk 
+		őket a kollekciókban).
+        Azért van szükségünk erre az iterátor funkcióra, hogy a most következő segédosztály létrehozható legyen.
         ]]>
     </text>
-    <title text="Utility class"/>
+    <title text="Segédosztály"/>
     <text>
         <![CDATA[
-        Create an abstract class which has generic methods. The following methods are needed:
+        Hozz létre egy absztrakt osztályt, amely generikus metódusokkal rendelkezik. A következő metódusokra van szükség:
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li>Printing a data structure (for any type).</li>
-        <li>Summing a data structure (only for elements that are <i>Number</i> subclasses).</li>
-        <li>Minimum and maximum finder methods (only for <i>Comparable</i> elements).</li>
+        <li>Adatstruktúra kiíratása (bármilyen típusú elemek esetén).</li>
+        <li>Egy adatszerkezet eleminek összegzése (csak <i>Number</i>-ből származó elemek esetén).</li>
+        <li>Minimum és maximum kereső metódusok (csak <i>Comparable</i> elemek esetén).</li>
         </ul>
         ]]>
     </list>
     <solution>
         <text>
             <![CDATA[
-            The abstract base class:
+            Az absztrakt ősosztály, amiből a többi kollekció származik:
             ]]>
         </text>
         <code><![CDATA[
@@ -100,8 +103,8 @@
         ]]></code>
         <text>
             <![CDATA[
-            Here is the custom array list class, only showing the new method, <i>next</i>. All the other methods were
-            already implemented.
+            Íme az saját tömblista osztály, ami már fentiből származik. Csak az új <i>next</i> metódust mutatom be. 
+			Az összes többi metódus ugyanaz mint a fenti osztályban és az előző feladatban.
             ]]>
         </text>
         <code><![CDATA[
@@ -126,7 +129,8 @@
         ]]></code>
         <text>
             <![CDATA[
-            <i>MyLinkedList</i> gets exactly the same <i>next</i> method. Instead, lets look at the improved stack:
+            A <i>MyLinkedList</i> pontosan ugyanazt a <i>next</i> metódust kapja. Ehelyett nézzük meg a 
+			továbbfejlesztett veremet:
             ]]>
         </text>
         <code><![CDATA[
@@ -134,7 +138,7 @@
 <font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">MyStack</font>&lt;<font color="#999900">T</font>> <font color="#E65100">extends</font> <font color="#999900">MyCollection</font>&lt;<font color="#999900">T</font>> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Other methods and members are unchanged.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;A többi metódus változatlan.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;*/</font>
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
@@ -163,14 +167,14 @@
         ]]></code>
         <text>
             <![CDATA[
-            Now that we have the improved data structures, we can write the utility class:
+            Most, hogy megvannak a továbbfejlesztett adatszerkezetek, megírhatjuk a segédosztályt:
             ]]>
         </text>
         <code><![CDATA[
             
 <font color="#E65100">public</font> <font color="#E65100">abstract</font> <font color="#E65100">class</font> <font color="#999900">MyUtils</font> {
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//print method, accepts any collection
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//kiírató metódus
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printCollection</font>(<font color="#999900">MyCollection</font>&lt;?> collection) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;collection.<font color="#ADD8E6">resetIterator</font>(); <font color="gray">//must be done!
@@ -180,7 +184,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Sum method, accepts only numeric collection
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//összegző metódus, csak szám típusokra
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">double</font> <font color="#ADD8E6">sumCollection</font>(<font color="#999900">MyCollection</font>&lt;? <font color="#E65100">extends</font> <font color="#999900">Number</font>> collection) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;collection.<font color="#ADD8E6">resetIterator</font>(); <font color="gray">//must be done!
@@ -192,7 +196,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> sum;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Max method, only accepts comparable collections
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//maximumkereső, csak Comparable típusokra
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#E65100">static</font> &lt;<font color="#999900">T</font> <font color="#E65100">extends</font> <font color="#999900">Comparable</font>&lt;<font color="#999900">T</font>>> <font color="#999900">T</font> <font color="#ADD8E6">maximum</font>(<font color="#999900">MyCollection</font>&lt;<font color="#999900">T</font>> collection) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;collection.<font color="#ADD8E6">resetIterator</font>(); <font color="gray">//must be done!
@@ -209,7 +213,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> max;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Min method, only accepts comparable collections
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//minimumkereső, csak Comparable típusokra
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#E65100">static</font> &lt;<font color="#999900">T</font> <font color="#E65100">extends</font> <font color="#999900">Comparable</font>&lt;<font color="#999900">T</font>>> <font color="#999900">T</font> <font color="#ADD8E6">minimum</font>(<font color="#999900">MyCollection</font>&lt;<font color="#999900">T</font>> collection) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;collection.<font color="#ADD8E6">resetIterator</font>(); <font color="gray">//must be done!
@@ -230,8 +234,8 @@
         ]]></code>
         <text>
             <![CDATA[
-            As you can see, the iterator functionality provided by the base class allowed us to perform
-            these operations.
+            Amint láthatjuk, az alaposztály által biztosított iterátor funkció tette lehetővé számunkra, 
+			hogy elvégezzük a ezeket a műveleteket.
             ]]>
         </text>
     </solution>

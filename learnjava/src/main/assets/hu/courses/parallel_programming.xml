@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!-- Course: Parallel programming --><resources>
     <coursedata>
-        <id>25</id>
-        <name>Parallel programming</name>
+        <id>35</id>
+        <name>Párhuzamos programozás</name>
         <finished>true</finished>
     </coursedata>
+    <!-- The course id doesn't quite match the chapter id-s, this is because the order of courses was changed. -->
     <chapter>251</chapter>
     <chapter>252</chapter>
     <chapter>253</chapter>

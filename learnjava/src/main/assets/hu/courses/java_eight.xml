@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <!-- Course: Java 8 --><resources>
     <coursedata>
-        <id>35</id>
-        <name>Java 8</name>
+        <id>30</id>
+        <name>Java 8 újdonságok</name>
         <finished>true</finished>
     </coursedata>
+    <!-- The course id doesn't quite match the chapter id-s, this is because the order of courses was changed. -->
     <chapter>351</chapter>
     <chapter>352</chapter>
     <chapter>353</chapter>

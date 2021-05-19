@@ -60,8 +60,12 @@
         <correct>1</correct>
     </question>
     <question type="true_false">
-        <text>The type parameters must be specified when creating a generic class.</text>
+        <text>The actual type parameters must be specified when writing a generic class.</text>
         <correct>false</correct>
+    </question>
+	 <question type="true_false">
+        <text>The actual type parameters must be specified when instantiating a generic class.</text>
+        <correct>true</correct>
     </question>
     <question type="single_choice">
         <text>What happens on creating an object from a generic class without specifying the type parameters?</text>
@@ -80,7 +84,7 @@
         <correct>true</correct>
     </question>
     <question type="single_choice">
-        <text>How many type parameters can be specified in generic classes.</text>
+        <text>How many type parameters can be specified in generic classes?</text>
         <answer>1.</answer>
         <answer>A maximum of 2.</answer>
         <answer>A maximum of 3.</answer>
@@ -103,7 +107,6 @@
         <answer>Constructors.</answer>
         <answer>Static utility methods.</answer>
         <answer>Generic methods are not allowed.</answer>
-        <answer>Generic getters and setters.</answer>
         <correct>1</correct>
     </question>
     <question type="true_false">
@@ -114,8 +117,8 @@
     <!-- Questions about bounding -->
     <question type="single_choice">
         <text>What is type erasure?</text>
-        <answer>A generic object is created without specifying the type parameters.</answer>
-        <answer>Generic objects are reduced to their upper bounds inside the generic class.</answer>
+        <answer>A generic class is instantiated without specifying the type parameters.</answer>
+        <answer>Generic type parameters are reduced to their upper bounds inside the generic class.</answer>
         <answer>An upper bound on type parameters.</answer>
         <correct>1</correct>
     </question>
@@ -128,7 +131,7 @@
         <correct>true</correct>
     </question>
     <question type="single_choice">
-        <text>What is true about a bounded type parameter.</text>
+        <text>What is true about a bounded type parameter?</text>
         <answer>The compiler will enforce the correct type.</answer>
         <answer>It's only checked at runtime whether the bound condition is satisfied.</answer>
         <answer>Only 2 bounds can be given, a class and an interface.</answer>

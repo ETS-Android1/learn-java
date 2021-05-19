@@ -2,18 +2,19 @@
 <resources>
     <chapterdata>
         <id>304</id>
-        <name>Wildcards</name>
+        <name>Helyettesítő karakterek</name>
     </chapterdata>
     <text>
         <![CDATA[
-        Wildcard are used to accept generic classes with any (or bounded) type arguments.
+        A helyettesítő karaktereket (wildcard, joker) arra használjuk, hogy generikus osztályokat hozzunk létre
+		tetszőleges típusú argumentumokkal.
         ]]>
     </text>
-    <title text="Support any type"/>
+    <title text="Bármilyen típus támogatása"/>
     <text>
         <![CDATA[
-        Here is a demonstration on why such functionality is necessary. For this, I'll use the <i>Calculator</i>
-        class from the last chapter:
+        Az alábbiakban bemutatjuk, hogy miért van szükség ilyen funkcióra. Ehhez a <i>Calculatort</i> fogom használni, 
+		az előző fejezetből:
         ]]>
     </text>
     <code><![CDATA[
@@ -48,11 +49,10 @@
     ]]></code>
     <text>
         <![CDATA[
-        We can add numbers to the value of the calculator. Another reasonable function would be the ability
-        to add another <i>Calculator</i> object to it as well (the value of the calculator object).
+        A számológép értékéhez számokat adhatunk hozzá. Egy másik ésszerű funkció lenne a képesség
+        hogy egy másik <i>Calculator</i> objektumot is hozzáadjunk (azaz annak az értékét).
         <br><br>
-        It's of course possible to do it like this, but this isn't a 'generic' solution and demonstrates nothing
-        about wildcards:
+        Természetesen lehet így is csinálni, de ez nem egy genrikus megoldás:
         ]]>
     </text>
     <code><![CDATA[
@@ -65,7 +65,7 @@
     ]]></code>
     <text>
         <![CDATA[
-        Instead, we create a new method inside the class to handle this:
+        Ehelyett létrehozunk egy új metódust az osztályon belül:
         ]]>
     </text>
     <code><![CDATA[
@@ -78,10 +78,10 @@
     ]]></code>
     <text>
         <![CDATA[
-        Works, but there is a problem. Since <i>T</i> is the type of the current calculator, this method will
-        only accept calculators with the same type parameter.
+        Működik, de van egy probléma. Mivel a <i>T</i> az aktuális számológép típusparamétere, ez a módszer
+        csak az azonos típusparaméterű számológépeket fogadja el.
         <p>
-        It's however reasonable to add any type of calculator to the current one!
+        Azonban mi bármilyen típusparaméterű számológépet szeretnénk hozzáadhatunk az aktuálishoz!
         ]]>
     </text>
     <code><![CDATA[
@@ -89,20 +89,20 @@
         <font color="#999900">Calculator</font>&lt;<font color="#999900">Double</font>> calc1 = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(<font color="#F0E130">-3.2</font>);
 <br/><font color="#999900">Calculator</font>&lt;<font color="#999900">Double</font>> calc2 = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(<font color="#F0E130">1.4</font>);
 <br/>
-<br/>calc1.<font color="#ADD8E6">addCalculator</font>(calc2); <font color="gray">//works
+<br/>calc1.<font color="#ADD8E6">addCalculator</font>(calc2); <font color="gray">//működik
 </font>
 <br/>
 <br/><font color="#999900">Calculator</font>&lt;<font color="#999900">Integer</font>> calc3 = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(<font color="#F0E130">5</font>);
 <br/>
-<br/><font color="gray">//Does not work, can't add Integer calculator to Double one.
+<br/><font color="gray">//Nem működik, mert a két számológép típusparamétere eltérő!
 </font>
 <br/>calc1.<font color="#ADD8E6">addCalculator</font>(calc3);
         
     ]]></code>
     <text>
         <![CDATA[
-        This is where the wildcards come in. Instead of <i>T</i>, you can use a <b>?</b> symbol to indicate that
-        the class should be accepted with any possible type argument.
+        Itt jönnek a képbe a helyettesítő karakterek. A <i>T</i> helyett használhatunk egy <b>?</b> szimbólumot, 
+		ami jelzi, hogy  az osztályt bármely lehetséges típusú argumentummal el kell fogadni.
         ]]>
     </text>
     <code><![CDATA[
@@ -115,11 +115,11 @@
     ]]></code>
     <text>
         <![CDATA[
-        The method will now accept any calculator. There is no need to put a bound <i>(Number)</i> on this wildcard,
-        since the type is already checked when creating the calculator object.
+        A metódus mostantól bármilyen számológépet elfogad. Ehhez nem kell felső korlátként kapcsolni a <i>Number</i>-t, 
+		mivel az már a <i>Calculator</i> objektum létrehozásakor ellenőrződik.
         ]]>
     </text>
-    <interactive instruction="Update the dotProduct method from the previous chapter to use a wildcarded vector as parameter!">
+    <interactive instruction="Frissítsd a dotProduct metódust az előző fejezetből, hogy paraméterként bármilyen Vector-t használhasson!">
         <data><![CDATA[
 
 <font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">dotProduct</font>(<font color="#999900">Vector</font>&lt;___> other) <font color="#E65100">throws</font> <font color="#999900">IllegalArgumentException</font> {
@@ -132,11 +132,11 @@
         <answer place="0">? extends Number</answer>
         <default place="0">T</default>
     </interactive>
-    <title text="Simulating inheritance"/>
+    <title text="Öröklődés szimulálása"/>
     <text>
         <![CDATA[
-        By default, Java generics does not behave the way most programmers would expect, regarding inheritance. Let's
-        first see how things work without generics:
+        Alapértelmezés szerint a Java generikus kódja nem úgy viselkedik az öröklődés tekintetében, ahogyan azt a 
+		legtöbb programozó elvárná. Először nézzük meg, hogyan működnek a dolgok generikusság nélkül:
         ]]>
     </text>
     <code><![CDATA[
@@ -148,16 +148,16 @@
     ]]></code>
     <text>
         <![CDATA[
-        This method will take any object, since all of them extend <i>Object</i> and so they <b>are</b> also <i>Object</i>s
-        (remember, polymorphism).
+        Ez a metódus bármelyik objektumot elfogad, mivel ezek mindegyike az <i>Object</i>-ből származik. Így mindegyik 
+		ténylegesen <i>Object</i>-is lesz (polimorfizmus).
         ]]>
     </text>
-    <boxed title="Introduce generics">
-        <![CDATA[
-        Now make a method that does the same, but for a <i>List</i>. <i>List</i> is a generic interface, and this'll
-        introduce an undesired side effect.
-        ]]>
-    </boxed>
+    <text>
+		<![CDATA[
+        Most készítek egy metódust, amely ugyanezt teszi, de egy <i>List</i>-re. A <i>List</i> egy generikus interfész, 
+		és ez nemkívánatos mellékhatást eredményez.
+		]]>
+	</text>
     <code><![CDATA[
         
         <font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printList</font>(<font color="#999900">List</font>&lt;<font color="#999900">Object</font>> list) {
@@ -169,35 +169,36 @@
     ]]></code>
     <text>
         <![CDATA[
-        Naively, one would try to use this method with not only <i>List&lt;Object></i>, but with any lists. This, however
-        will fail:
+        Naiv módon nem csak <i>List&lt;Object></i>, hanem bármilyen listával megpróbálnánk használni ezt a metódust. 
+		Ez azonban nem fog sikerülni:
         ]]>
     </text>
     <code><![CDATA[
         
         <font color="#999900">List</font>&lt;<font color="#999900">String</font>> strings = <font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(<font color="#2E8B57"><font color="#2E8B57"><font color="#2E8B57">"Ha"</font></font></font>,<font color="#2E8B57"><font color="#2E8B57">"Ha"</font></font>,<font color="#2E8B57"><font color="#2E8B57"><font color="#2E8B57">"Ha"</font></font></font>);
-<br/><font color="gray">//Compile time error?!
+<br/><font color="gray">//Fordítási hiba?!
 </font>
 <br/><font color="#ADD8E6">printList</font>(strings);
         
     ]]></code>
     <text>
         <![CDATA[
-        The problem is that despite <i>String</i> extending <i>Object</i>, <i>List&lt;String></i> <b>DOES NOT</b> extend
-        <i>List&lt;Object></i>.
+        A probléma az, hogy annak ellenére, hogy a <i>String</i> az <i>Object</i>-ből származik, a <i>List&lt;String></i> 
+		<b>NEM</b> származik a <i>List&lt;Object></i>-ből.
         ]]>
     </text>
-    <boxed title="True in general">
+    <boxed title="Általánosságban is igaz">
         <![CDATA[
-        This effect is true for any generic class. There is no inheritance between <i>GenericClass&lt;A></i> and
-        <i>GenericClass&lt;B></i>, not even when there is a connection between <i>A</i> and <i>B</i>.
+        Ez a hatás bármely generikus osztályra igaz. Nincs öröklődés a <i>GenericClass&lt;A></i> és a 
+		<i>GenericClass&lt;B></i> között, még akkor sem, ha van kapcsolat <i>A</i> és <i>B</i> között.
         <p>
-        This is because the compiler creates separate classes from the generic class.
+        Ez azért van, mert a fordító a generikus osztálytól egymástól teljesen független osztályokat hoz létre.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        To get around this, and make the method work as expected, we have to use wildcards:
+        Ahhoz, hogy ezt megkerüljük, és a metódus az elvárásoknak megfelelően működjön, s helyettesítő karaktert 
+		kell használnunk:
         ]]>
     </text>
     <code><![CDATA[
@@ -209,35 +210,42 @@
 <br/>}
         
     ]]></code>
+	<text>
+        <![CDATA[
+        A metódus mostmár tényleg bármilyen típusú listát elfogad paraméterként.
+        ]]>
+    </text>
     <title text="Bounded wildcards"/>
     <text>
         <![CDATA[
-        Similarly to type parameters, wildcards can also be bounded. Let's say we must sum the elements of
-        a <i>List</i>.
+        A típusparaméterekhez hasonlóan a helyettesítű karakter is korlátozható. Tegyük fel, hogy összegeznünk kell a
+        egy <i>List</i> értékeit. Ha például a lista az 1-et, 3-at és a 2-t tartalmazza, akkor 6-ot kell visszaadnunk. 
+		Nem minden típusparaméterű lista esetén van azonban értelme ennek.
         <br><br>
-        Here are some ideas. These are just suggestions, they won't compile.
+        Íme néhány ötlet. Ezek csak javaslatok, nem fognak lefordulni.
         ]]>
     </text>
     <code><![CDATA[
         
         <font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">double</font> <font color="#ADD8E6">sumList</font>(<font color="#999900">List</font>&lt;?> list) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Due to type erasure, we can only use
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Object's methods here.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;A típus törlődés miatt itt csak az  
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Object metódusait használhatjuk!
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>}
 <br/>
 <br/><font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">double</font> <font color="#ADD8E6">sumList</font>(<font color="#999900">List</font>&lt;<font color="#999900">Number</font>> list) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Can use Number methods, but this will
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;only accept List&lt;Number>.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Használhatjuk a Number metódusait, de
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;ez a metódus csak List&lt;Number>-t fog elfogani!
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>}
         
     ]]></code>
     <text>
         <![CDATA[
-        To solve this, let's bound the wildcard:
+        Ahhoz, hogy csak szám típusparaméterű listákat fogadjunk el, egy felső korlátot 
+		kell rakni a helyettesítő karakterre.
         ]]>
     </text>
     <code><![CDATA[
@@ -251,7 +259,7 @@
 <br/>}
         
     ]]></code>
-    <interactive instruction="Complete this method to return the largest key of the map!">
+    <interactive instruction="Fejezd be ezt a metódust úgy, hogy a szótár legnagyobb kulcsát adja vissza!">
         <data><![CDATA[
 
 <font color="#E65100">public</font> &lt;<font color="#999900">K</font> ___ <font color="#999900">Comparable</font>&lt;<font color="#999900">K</font>>, <font color="#999900">V</font>> ___ <font color="#ADD8E6">keyMaximum</font>(<font color="#999900">Map</font>&lt;<font color="#999900">K</font>, <font color="#999900">V</font>> map) {

@@ -2,12 +2,12 @@
 <resources>
     <chapterdata>
         <id>302</id>
-        <name>Writing generic code</name>
+        <name>Generikus kód írása</name>
     </chapterdata>
 
     <text>
         <![CDATA[
-        Now let's see that generic printer, finally. Check this sample for the syntax:
+        Most pedig nézzük meg végre azt a generikus <i>Printer</i> osztályt. A szintaxist ez a kódminta mutatja:
         ]]>
     </text>
     <code><![CDATA[
@@ -33,28 +33,37 @@
     ]]></code>
     <text>
         <![CDATA[
-        The key is that <i>T</i>, between the <i>&lt;></i> symbols. That is going to define a type parameter, and this
-        type can later be used inside the class declaration. For example it's used as
+        A legfontosabb rész a <i>T</i>, a <i>&lt;></i> szimbólumok között. Ez egy <b>típusparamétert</b> fog definiálni, 
+		és ez a típus később felhasználható az osztály deklaráción belül. Például használjuk, mint:
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li>a member.</li>
-        <li>a parameter (in the constructor).</li>
-        <li>a return value (in the getter method).</li>
+        <li>Egy tagváltozó.</li>
+        <li>Egy paraméter (lásd a konstruktorban).</li>
+        <li>Visszatérési érték (lásd a getter metódusban).</li>
         </ul>
         ]]>
     </list>
-    <boxed title="Naming convention">
+    <boxed title="Elnevezési szokás">
         <![CDATA[
-        Anything that can be used as a normal identifier can also be used a type parameter name. However, convention
-        is that single, capital letters are used! For some reason, <i>T</i> and <i>E</i> is especially popular.
+        Bármi, ami normál azonosítóként használható, használható típusparaméter névként is. Azonban a konvenció az, 
+        hogy nagybetűket használjunk! Valamilyen oknál fogva a <i>T</i> és <i>E</i> különösen népszerű.
         ]]>
     </boxed>
+	<text>
+        <![CDATA[
+        <b>Nem</b> használhatjuk a típusparamétert új objektumok, vagy tömbök létrehozására! Például nem lehet 
+		olyanokat a <i>T</i> típusparaméterből, hogy:
+		<br><br>
+		<i>T t = new T();</i><br>
+		<i>T[] array = new T[5];</i>
+        ]]>
+    </text>
     <text>
         <![CDATA[
-        This class can then be constructed like this:
+        A fenti, generikus osztályból így lehet példányokat létrehozni:
         ]]>
     </text>
     <code><![CDATA[
@@ -75,23 +84,23 @@
     ]]></code>
     <text>
         <![CDATA[
-        Not much new here, we've seen how to instantiate generic classes like collections before. Except maybe the 3. statement,
-        which also works, despite the lack of a type argument.
+        Itt nincs sok újdonság, már láttuk korábban, hogyan kell generikus osztályokat létrehozni, például az adatstruktúrák 
+		kurzusban. Érdekes a 3. utasítás, ami szintén működik, annak ellenére, hogy nincs típusparaméter megadva.
         ]]>
     </text>
-    <boxed title="Without type parameter">
+    <boxed title="Típusparaméter nélkül">
         <![CDATA[
-        The reason why no type parameters are needed is backwards compatibility. Before generics, collections were written for
-        <i>Object</i>, like the <i>Printer</i> class in the previous chapter. When generics were introduced, collections were
-        rewritten.
+        Az ok, amiért típusparaméter nélkül is működik a kód, az visszafelé kompatibilitás. A generikusság előtt a 
+		Java osztályok az <i>Object</i>-et használták, mint például az előző fejezetben szereplő <i>Printer</i> osztály. 
+		A generikus kód bevezetésekor a legtöbbet átírták.
         <p>
-        By allowing declarations without type parameters, old code that uses non-generic collections will still compile.
+        A típusparaméterek nélküli deklarációk engedélyezésével a régi, nem generikus kód továbbra is lefordítható.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        This code is now <b>type safe</b>, if we try to do some invalid casting, we will get an error at compile
-        time.
+        Ez a kód most már kivétel biztos. Ha megpróbálunk valamilyen érvénytelen típuskonverziót végezni, hibát kapunk 
+		a fordításkor (nem futásidőben).
         ]]>
     </text>
     <code><![CDATA[
@@ -107,11 +116,12 @@
 <br/><font color="#DF7401">int</font> number = (<font color="#DF7401">int</font>)p1.<font color="#ADD8E6">getPrintObject</font>();
         
     ]]></code>
-    <title text="Multiple type parameters"/>
+    <title text="Több típusparaméter"/>
     <text>
         <![CDATA[
-        Any number of type parameters is allowed. This shouldn't come as a surprise, since we've seen such classes before,
-        like a <i>HashMap</i>. Here is an example, and the syntax to declare them:
+        Bármennyi típusparaméter megengedett egy osztályban. Ez nem meglepő, hiszen ilyen osztályokkal már találkoztunk 
+		korábban is, mint például a <i>HashMap</i> szótár (ahol a kulcs és az érték különböző típusú lehet). 
+		Íme egy példa, és a deklarálásukhoz szükséges szintaxis:
         ]]>
     </text>
     <code><![CDATA[
@@ -131,7 +141,13 @@
 <br/>}
         
     ]]></code>
-    <interactive instruction="Complete the declaration of this generic class!">
+	<text>
+		<![CDATA[
+        A fenti osztály egy szimpla "pár", ami két objektumot párba tud állítani. A generikusság lehetővé teszi, hogy 
+		ez a két objektum bármilyen típusú lehessen.
+        ]]>
+	</text>
+    <interactive instruction="Egészítsd ki a generikus osztályt!">
         <data><![CDATA[
 
 <font color="#E65100">class</font> <font color="#999900">Vector</font>___ {
@@ -149,11 +165,11 @@
         <answer place="1">T[]</answer>
         <answer place="2">T</answer>
     </interactive>
-    <title text="Generic methods"/>
+    <title text="Generikus metódusok"/>
     <text>
         <![CDATA[
-        Declaring generic methods is also allowed. This is because of classes that can't be instantiated, and have
-        static methods don't miss out on the generic fun (typically used for utility classes).
+        Az generikus metódusok deklarálása is megengedett. Ez az olyan osztályok miatt van így, amelyek nem példányosíthatók, 
+		mint például az absztrakt osztályok. Ezek sem maradnak ki a generikus kód előnyeiből.
         ]]>
     </text>
     <code><![CDATA[
@@ -169,42 +185,43 @@
     ]]></code>
     <text>
         <![CDATA[
-        Note that the method type parameters must be given between the modifiers and the return value. Then, these types can
-        be used as the return value or parameters of the method (but only for this method).
+        A metódus típusparamétereit a visszatérési érték előtt kell megadni. Ezután az itt megadott a típusok
+        használhatók a metódus visszatérési értékeként vagy paramétereiként (de csak ehhez a metódushoz).
         <br><br>
-        You use such a method just like any traditional one:
+        Az ilyen metódust ugyanúgy használjuk, mint bármelyik hagyományos metódust:
         ]]>
     </text>
-    <code><![CDATA[
+    <code>
+	<![CDATA[
         
         <font color="#999900">String</font> text = <font color="#2E8B57">"Hello"</font>;
 <br/><font color="#999900">Utility</font>.<font color="#ADD8E6">print</font>(text);
         
-    ]]></code>
-    <title text="Generic interfaces"/>
+    ]]>
+	</code>
+    <title text="Generikus interfészek"/>
     <text>
         <![CDATA[
-        Interfaces can also be generic. This is not surprising, as interfaces are just fully abstract classes, so it makes
-        sense for interfaces to also support generics. We've seen multiple examples:
+        Az interfészek is lehetnek generikusak. Ez nem meglepő, mivel az interfészek nem mások, mint teljesen absztrakt 
+		osztályok, így van értelme, hogy az interfészek is támogassák a generikusságot. Erre már több példát is láttunk:
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li><b>java.lang.Comparable</b>: The type parameter is the object type that will be compared.</li>
-        <li><b>java.util.concurrent.Callable</b>: The type parameter is the return value of the process.</li>
-        <li>All interfaces in the collections framework (List, Map, Set, ...)</li>
+        <li><b>java.lang.Comparable</b>: A típusparaméter az összehasonlítandó objektumok típusa.</li>
+        <li>Minden interfész a kollekciók közül (<i>List, Map, Set</i>, ...). Ezek típusparamétere a kollekcióban tárolt elemek típusa.</li>
         </ul>
         ]]>
     </list>
-    <advanced title="No primitives">
+    <advanced title="Primitívek">
         <![CDATA[
-        Primitives are not allowed as generic arguments (discussed this already in the data structures course). This
-        isn't a problem however, because the wrapper classes and autoboxing, primitives can also be used seamlessly.
-        Just make sure you use the wrapper classes when instantiating generic classes.
+        Primitívek nem engedélyezettek típusparaméterként (ezt már az adatszerkezetek kurzuson is tárgyaltuk). Ez 
+        azonban nem probléma, mert a wrapper osztályok miatt a primitívek is zökkenőmentesen "használhatók".
+        Csak ügyeljünk arra, hogy a wrapper osztályokat használjuk a generikus osztályok példányosításakor.
         ]]>
     </advanced>
-    <interactive instruction="This method is designed for Objects. Update it to use generics with type parameter E!">
+    <interactive instruction="Frissítsd ezt a metódust úgy, hogy generikus legyen, és az E típusparamétert használja!">
         <data><![CDATA[
 
 <font color="#E65100">public</font> ___ ___ <font color="#ADD8E6">hashCodeComparison</font>(___ o1, ___ o2) {
