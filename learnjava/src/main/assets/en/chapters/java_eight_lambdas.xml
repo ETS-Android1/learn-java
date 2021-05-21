@@ -151,9 +151,9 @@ make lambdas as compact as possible.
     </text>
     <code><![CDATA[
         
-<font color="gray<font color="#2E8B57">">//the compiler won'</font>t be able to make sense of 'param'
+<font color="gray">//the compiler won't be able to make sense of 'param'
 </font>
-<br/><font color="#E65100">new</font> <font color="#999900">Thread</font>(param -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello"</font>)).<font color="#ADD8E6">start</font>();
+<br/><font color="#E65100">new</font> <font color="#999900">Thread</font>(param -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello"</font>));
         
     ]]></code>
     <text>

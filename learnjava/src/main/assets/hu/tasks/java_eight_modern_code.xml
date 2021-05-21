@@ -2,42 +2,43 @@
 <resources>
     <taskdata>
         <id>351</id>
-        <name>Code modernizing</name>
+        <name>Kód modernizálás</name>
     </taskdata>
     <text>
         <![CDATA[
-        You are given 2 classes, <i>Employee</i> and <i>Company</i>. They were written prior to Java 8. Your task
-        is to write the "updated" version them, and use as much features from Java 8 as you can.
+        2 osztályt fogsz kapni, az <i>Employee</i>-t (alkalmazott) és a <i>Company</i>-t (cég). Ezek a <i>Java 8</i> 
+		előtti technológiákkal íródtak. A feladatod az lesz, hogy elkészítsd a "frissített" változatukat, 
+		amihez annyi <i>Java 8</i> funkciót, amennyit csak tudsz.
         ]]>
     </text>
-    <boxed title="Deprecated">
+    <boxed title="Elavult">
         <![CDATA[
-        Some code used by these classes is also deprecated. Make sure you don't use deprecated methods or
-        classes in your rewrite.
+        Az ezen osztályok által használt kódok egy része elavult (<i>deprecated</i>. Győződj meg róla, 
+		hogy nem használ elavult metódusokat vagy osztályokat az újraírás során.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        First, the <i>Employee</i> class:
+        Itt van az <i>Employee</i> osztály:
         ]]>
     </text>
     <code><![CDATA[
         
 <font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">Employee</font> {
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//enum for possible genders
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//enum a lehetséges nemek számára
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font> <font color="#E65100">enum</font> <font color="#999900">Gender</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;MALE, FEMALE;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//employee data
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//munkavállaló adatai
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#E65100">final</font> <font color="#999900">String</font> name;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#E65100">final</font> <font color="#999900">Gender</font> gender;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#E65100">final</font> <font color="#999900">Date</font> birthday;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//constructor
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//konstruktor
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Employee</font>(<font color="#999900">String</font> name, <font color="#999900">Gender</font> gender, <font color="#999900">Date</font> birthday) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">name</font> = name;
@@ -45,7 +46,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">birthday</font> = birthday;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//toString override
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//toString felülírás
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">toString</font>() {
@@ -57,7 +58,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> sb.<font color="#ADD8E6">toString</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//getters
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//getterek
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">getName</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> name;
@@ -75,29 +76,29 @@
     ]]></code>
     <text>
         <![CDATA[
-        You should upgrade this class to use the <b>java.time</b> package instead of the old <i>java.util.Date</i>.
-        Now for the <i>Company</i> class:
+        Ezt az osztályt úgy kell frissíteni, hogy a régi <i>java.util.Date</i> helyett a <b>java.time</b> csomagot használod.
+        Most a <i>Company</i> osztály következik:
         ]]>
     </text>
     <code><![CDATA[
         
 <font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">Company</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//current year, deprecated
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//jelenlegi év, ez elavult kód!!!
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#E65100">static</font> <font color="#E65100">final</font> <font color="#DF7401">int</font> CURRENT_YEAR = <font color="#E65100">new</font> <font color="#999900">Date</font>().<font color="#ADD8E6">getYear</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//list of employees
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//alkalmazottak listája
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#E65100">final</font> <font color="#999900">List</font>&lt;<font color="#999900">Employee</font>> employees = <font color="#E65100">new</font> <font color="#999900">LinkedList</font>&lt;>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//constructor from a list of employees
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//konstruktor az alkalmazottak listájából
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Company</font>(<font color="#999900">List</font>&lt;<font color="#999900">Employee</font>> employees) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">employees</font>.<font color="#ADD8E6">addAll</font>(employees);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//print employees
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//alkalmazottak kiírása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printEmployees</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Employee</font> e: employees) {
@@ -105,7 +106,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//get employees over 50 years old
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//50 évnél idősebb munkavállalókat kiválogatása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">List</font>&lt;<font color="#999900">Employee</font>> <font color="#ADD8E6">getSeniorEmployees</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">Employee</font>> seniors = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
@@ -120,7 +121,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> seniors;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//finds the oldest employee, returns null if there are no employees
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//megtalálja a legrégebbi alkalmazottat, null-t ad vissza, ha nincs alkalmazott
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Employee</font> <font color="#ADD8E6">findOldestEmployee</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> maxAge = <font color="#F0E130">-1</font>;
@@ -137,7 +138,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> oldest;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//gets employee names, but without duplicates
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//visszaadja az alkalmazottak nevét, de duplikációk nélkül
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Set</font>&lt;<font color="#999900">String</font>> <font color="#ADD8E6">getUniqueNames</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Set</font>&lt;<font color="#999900">String</font>> uniqueNames = <font color="#E65100">new</font> <font color="#999900">HashSet</font>&lt;>();
@@ -153,40 +154,41 @@
     ]]></code>
     <text>
         <![CDATA[
-        You should modernize the following in this class:
+        Ebben az osztályban a következőket kell korszerűsítened:
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li>Use java.time package to avoid deprecation.</li>
-        <li>Use Optional instead of possible null returns.</li>
-        <li>Use streams and lambdas where that's possible.</li>
+        <li>A <i>java.time</i> csomag használata az elavult kód elkerülése érdekében.</li>
+        <li>Az esetleges <i>null</i> visszatérés helyett használj <i>Optional</i>-t.</li>
+        <li>Használj folyamokat és lambdákat, ahol ez lehetséges.</li>
         </ul>
         ]]>
     </list>
-    <boxed title="Test">
+    <boxed title="Teszt">
         <![CDATA[
-        I prepared some code that you can use to test both the original and the modernized
-        classes. Try to make it so that the updated code gives the same result here.
+        Készítettem teszt kódot, amellyen elvégezheted az eredeti és a modernizált
+        osztályok tesztelését. Próbáld meg úgy elvégezni a feladatot, hogy a frissített kód ugyanazt 
+		az eredményt adja mint az eredeti ezeken a teszteken.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        You can of course update this, since the return values, constructors and class names will change in your
-        updated version.
+        Ezt persze néhány helyen változtatni kell a modernizált kód esetén, hiszen a visszatérési értékek 
+		változhatnak.
         ]]>
     </text>
     <code><![CDATA[
         
-<font color="gray">//make employees, warning: date constructor is deprecated
+<font color="gray">//alkalmazottak készítése, figyelmeztetés: a Date konstruktor elavult
 </font>
 <br/><font color="#999900">Employee</font> john = <font color="#E65100">new</font> <font color="#999900">Employee</font>(<font color="#2E8B57"><font color="#2E8B57">"John"</font></font>, <font color="#999900">Gender</font>.MALE, <font color="#E65100">new</font> <font color="#999900">Date</font>(<font color="#F0E130">1973</font> - <font color="#F0E130">1900,7</font>,<font color="#F0E130">13</font>));
 <br/><font color="#999900">Employee</font> jane = <font color="#E65100">new</font> <font color="#999900">Employee</font>(<font color="#2E8B57">"Jane"</font>, <font color="#999900">Gender</font>.FEMALE, <font color="#E65100">new</font> <font color="#999900">Date</font>(<font color="#F0E130">1961</font> - <font color="#F0E130">1900,2</font>,<font color="#F0E130">21</font>));
 <br/><font color="#999900">Employee</font> john2 = <font color="#E65100">new</font> <font color="#999900">Employee</font>(<font color="#2E8B57"><font color="#2E8B57">"John"</font></font>, <font color="#999900">Gender</font>.MALE, <font color="#E65100">new</font> <font color="#999900">Date</font>(<font color="#F0E130">1959</font> - <font color="#F0E130">1900,3</font>,<font color="#F0E130">1</font>));
 <br/><font color="#999900">Employee</font> donald = <font color="#E65100">new</font> <font color="#999900">Employee</font>(<font color="#2E8B57">"Donald"</font>, <font color="#999900">Gender</font>.MALE, <font color="#E65100">new</font> <font color="#999900">Date</font>(<font color="#F0E130">1992</font> - <font color="#F0E130">1900,11</font>,<font color="#F0E130">12</font>));
 <br/>
-<br/><font color="gray">//make a company
+<br/><font color="gray">//cég készítése
 </font>
 <br/><font color="#999900">Company</font> itSolutions = <font color="#E65100">new</font> <font color="#999900">Company</font>(<font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(john, jane, john2, donald));
 <br/>
@@ -197,7 +199,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">forEach</font>(e -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(e.<font color="#ADD8E6">getName</font>()));
 <br/>
 <br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Oldest employee:"</font>);
-<br/><font color="gray">//rewrite this is you are using Optional
+<br/><font color="gray">//ezt írd át ha Optional-t használsz
 </font>
 <br/><font color="#999900">Employee</font> oldest = itSolutions.<font color="#ADD8E6">findOldestEmployee</font>();
 <br/><font color="#E65100">if</font>(oldest != null) {
@@ -211,32 +213,34 @@
     ]]></code>
     <text>
         <![CDATA[
-        You may name the 2 new classes anything you like, in my solution I'll use <i>Employee8</i> and <i>Company8</i>.
+        A két modernizált osztályt akárhogy elnevezheted, én a megoldásban az <i>Employee8</i> és a <i>Company8</i> 
+		neveket használom.
         ]]>
     </text>
     <solution>
         <text>
             <![CDATA[
-            In the <i>Employee8</i> class, I replace the old <i>java.util.Date</i> class with its Java 8 equivalent, <i>java.time.LocalDate</i>.
+            A <i>Employee8</i> osztályban a régi <i>java.util.Date</i> osztályt a <i>Java 8</i> megfelelőjére, 
+			a <i>java.time.LocalDate</i> osztályra cserélem.
             ]]>
         </text>
         <code><![CDATA[
             
 <font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">Employee8</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//enum for possible genders
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//enum a lehetséges nemek számára
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font> <font color="#E65100">enum</font> <font color="#999900">Gender</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;MALE, FEMALE;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//employee data
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//alkalmazott adatai
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#E65100">final</font> <font color="#999900">String</font> name;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#E65100">final</font> <font color="#999900">Gender</font> gender;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#E65100">final</font> <font color="#999900">LocalDate</font> birthday;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//constructor
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//konstruktor
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Employee8</font>(<font color="#999900">String</font> name, <font color="#999900">Gender</font> gender, <font color="#999900">LocalDate</font> birthday) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">name</font> = name;
@@ -244,7 +248,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">birthday</font> = birthday;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//toString override
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//toString felülírás
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">toString</font>() {
@@ -255,7 +259,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> sb.<font color="#ADD8E6">toString</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//getters
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//getterek
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">getName</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> name;
@@ -273,34 +277,35 @@
         ]]></code>
         <text>
             <![CDATA[
-            In the <i>Company8</i> class, I update all 4 methods to use streams, lambdas, and <i>Optional</i>:
+            A <i>Company8</i> osztályban mind a 4 metódust frissítem, hogy folyamokat,  
+			lambdákat és <i>Optional</i>-t használjanak:
             ]]>
         </text>
         <code><![CDATA[
             
 <font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">Company8</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//current year
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//jelen év
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#E65100">static</font> <font color="#E65100">final</font> <font color="#DF7401">int</font> <font color="#999900">CURRENT_YEAR</font> = <font color="#999900">Year</font>.<font color="#ADD8E6">now</font>().<font color="#ADD8E6">getValue</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//list of employees
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//alkalmazott lista
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#E65100">final</font> <font color="#999900">List</font>&lt;<font color="#999900">Employee8</font>> employees = <font color="#E65100">new</font> <font color="#999900">LinkedList</font>&lt;>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//constructor from a list of employees
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//konstruktor az alkalmazottak listájából
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Company8</font>(<font color="#999900">List</font>&lt;<font color="#999900">Employee8</font>> employees) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">employees</font>.<font color="#ADD8E6">addAll</font>(employees);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//print employees
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//alkalmazottak kiíratása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printEmployees</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;employees.<font color="#ADD8E6">forEach</font>(<font color="#999900">System</font>.<font color="#ADD8E6">out</font>::println);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//get employees over 50 years old
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//50 évnél idősebb munkavállalókat kiválogatja
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">List</font>&lt;<font color="#999900">Employee8</font>> <font color="#ADD8E6">getSeniorEmployees</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> employees.<font color="#ADD8E6">stream</font>()
@@ -311,7 +316,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">collect</font>(<font color="#999900">Collectors</font>.<font color="#ADD8E6">toList</font>());
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//finds the oldest employee
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//megtalálja a legidősebb alkalmazottat, ha van
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Optional</font>&lt;<font color="#999900">Employee8</font>> <font color="#ADD8E6">findOldestEmployee</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">OptionalInt</font> maxAge = employees.<font color="#ADD8E6">stream</font>()
@@ -330,7 +335,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//gets employee names, but without duplicates
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//visszaadja az alkalmazottak nevét, de duplikációk nélkül
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Set</font>&lt;<font color="#999900">String</font>> <font color="#ADD8E6">getUniqueNames</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> employees.<font color="#ADD8E6">stream</font>()
@@ -342,19 +347,19 @@
         ]]></code>
         <text>
             <![CDATA[
-            And the updated test code can look something like this:
+            A frissített tesztkód pedig valahogy így nézhet ki:
             ]]>
         </text>
         <code><![CDATA[
             
-<font color="gray">//make employees
+<font color="gray">//alkalmazottak létrehozása
 </font>
 <br/><font color="#999900">Employee8</font> john = <font color="#E65100">new</font> <font color="#999900">Employee8</font>(<font color="#2E8B57"><font color="#2E8B57">"John"</font></font>, <font color="#999900">Employee8</font>.<font color="#999900">Gender</font>.MALE, <font color="#999900">LocalDate</font>.<font color="#ADD8E6">of</font>(<font color="#F0E130">1973</font>, <font color="#F0E130">7</font>, <font color="#F0E130">13</font>));
 <br/><font color="#999900">Employee8</font> jane = <font color="#E65100">new</font> <font color="#999900">Employee8</font>(<font color="#2E8B57">"Jane"</font>, <font color="#999900">Employee8</font>.<font color="#999900">Gender</font>.FEMALE, <font color="#999900">LocalDate</font>.<font color="#ADD8E6">of</font>(<font color="#F0E130">1961</font>, <font color="#F0E130">2</font>, <font color="#F0E130">21</font>));
 <br/><font color="#999900">Employee8</font> john2 = <font color="#E65100">new</font> <font color="#999900">Employee8</font>(<font color="#2E8B57"><font color="#2E8B57">"John"</font></font>, <font color="#999900">Employee8</font>.<font color="#999900">Gender</font>.MALE, <font color="#999900">LocalDate</font>.<font color="#ADD8E6">of</font>(<font color="#F0E130">1959</font>, <font color="#F0E130">3</font>, <font color="#F0E130">1</font>));
 <br/><font color="#999900">Employee8</font> donald = <font color="#E65100">new</font> <font color="#999900">Employee8</font>(<font color="#2E8B57">"Donald"</font>, <font color="#999900">Employee8</font>.<font color="#999900">Gender</font>.MALE, <font color="#999900">LocalDate</font>.<font color="#ADD8E6">of</font>(<font color="#F0E130">1992</font>, <font color="#F0E130">11</font>, <font color="#F0E130">12</font>));
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/><font color="gray">//make a company
+<br/><font color="gray">//cég létrehozása
 </font>
 <br/><font color="#999900">Company8</font> itSolutions = <font color="#E65100">new</font> <font color="#999900">Company8</font>(<font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(john, jane, john2, donald));
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;

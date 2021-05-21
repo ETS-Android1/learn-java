@@ -255,8 +255,53 @@
     </interactive>
     <text>
         <![CDATA[
- Functional interfaces are not so useful by themselves. However, in the next chapter we'll learn about a concept
+		Functional interfaces are not so useful by themselves. However, in the next chapter we'll learn about a concept
         that relies heavily on functional interfaces, and is very powerful.
+        ]]>
+    </text>
+	<title text="Anonymous classes"/>
+	<text>
+        <![CDATA[
+        Java provides a way to quickly declare and use a class. We will need this to understand the next chapter.
+		Such classes can only be used be used once, because
+        they won't have a name to reference them later (hence the expression anonymous). You'll see the syntax through the
+        examples below, but if you need more explanation, plenty is provided <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/anonymousclasses.html">here</a>.
+        ]]>
+    </text>
+	<code><![CDATA[
+        
+<font color="#E65100">class</font> <font color="#999900">GreetRunnable</font> <font color="#E65100">implements</font> <font color="#999900">Runnable</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//override the run method to do something</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello from a thread!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+	<text>
+		<![CDATA[
+		This sample shows how we could give an implementation for the interface <i>Runnable</i>, by creating a class that 
+		implements it. However, sometimes we only need this implementation once, and for such cases, we can use 
+		an anonymous class, that creates the implementation right where we need to use it:
+        ]]>
+	</text>
+    <code><![CDATA[
+        
+<font color="gray">//create this object using an anonymous runnable</font>
+<br/><font color="#999900">Thread</font> t1 = <font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> <font color="#999900">Runnable</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font> <font color="gray">//override the run method here</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello from an anonymous runnable!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>});
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        This does the same thing as the normal implementation, but we did not need to declare a full-fledged custom class. 
+		If you'll only use the implementation once, this is the preferred way. If you plan to reuse it, just write a normal class, 
+		instead of placing the anonymous declaration everywhere.
         ]]>
     </text>
 </resources>

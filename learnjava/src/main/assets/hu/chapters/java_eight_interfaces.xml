@@ -2,23 +2,23 @@
 <resources>
     <chapterdata>
         <id>352</id>
-        <name>Advanced interface techniques</name>
+        <name>Interfész bővítések</name>
     </chapterdata>
     <text>
         <![CDATA[
-        Java 8 extended the <i>interfaces</i> with several new functions.
+        A <i>Java 8</i> számos új funkcióval bővítette az <i>interfészeket</i>.
         ]]>
     </text>
-    <title text="Throwback: interfaces before Java 8"/>
+    <title text="Interfészek korábban"/>
     <text>
         <![CDATA[
-        If you're not quite sure about your knowledge of interfaces, I suggest you refresh it from the
-        chapter '<b>Abstract classes and interfaces</b>', which is in course '<b>Classes and objects</b>'
+        Ha nem vagy teljesen biztos az interfészekkel kapcsolatos ismereteidben, javaslom, hogy frissítsd fel ezeket az
+        '<b>absztrakt osztályok és interfészek</b>' című fejezetetben, amely a '<b>Osztályok</b>' című kurzusban található.
         ]]>
     </text>
     <code><![CDATA[
         
-        <font color="gray">//an interface for classes that can be printed
+        <font color="gray">//interfész a konzolra kiírható osztályok számára
 </font>
 <br/><font color="#E65100">public interface</font> <font color="#999900">Printable</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
@@ -31,28 +31,30 @@
     ]]></code>
     <text>
         <![CDATA[
-        Prior to Java 8, an interface was a class with only <b>public, abstract methods</b> (no implementation, only
-        declaration).
+        A <i>Java 8</i> előtt egy interfész egy olyan osztály volt, amely csak <b>nyilvános, absztrakt metódusokkal</b> 
+		rendelkezett (nincs implementáció, csak deklaráció). Lényegében egy teljesen absztrakt osztály volt.
         ]]>
     </text>
-    <title text="Default methods"/>
+    <title text="Alap metódus implementációk"/>
     <text>
         <![CDATA[
-        Java 8 introduced <b>default methods</b> for interfaces. These methods <b>have implementations</b>, despite
-        being in an interface. They must be marked with the <i>default</i> keyword.
+        A <i>Java 8</i> bevezette az <b>alap metódus implementációkat</b> az interfészek számára. Ezeknek a metódusoknak 
+		<b>vannak implementációik</b>, annak ellenére, hogy egy interfészen belül vannak. Ezeket a <b>default</b> 
+		kulcsszóval kell jelölni. Ezzel egy interfész már nem biztos, hogy teljesen absztrakt.
         ]]>
     </text>
-    <boxed title="Why introduce this change?">
+    <boxed title="Miért kellett ez a változás?">
         <![CDATA[
-        An interface forces the implementing class to implement its abstract methods. But with <i>default</i> methods,
-        that is no longer true, an implementing class does not have to do anything with a <i>default</i> method. So, what
-        is the point of allowing such methods?
+        Egy interfész lényege, hogy arra kényszeríti az implementáló osztályt, hogy az absztrakt metódusait implementálja. De 
+		<i>default</i> metódusokkal ez már nem igaz, az implementáló osztálynak nem kell semmit sem tennie egy <i>default</i> 
+		metódussal. Tehát, mi értelme az ilyen metódusok engedélyezésének?
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        The answer is related to adding new methods to existing interfaces! Imagine that the <i>Printable</i>
-        interface is used in a popular Java library, developed by you. You'd like to add a new method to this interface:
+        A válasz a meglévő interfészek új metódusokkal történő bővítése. Képzeljük el, hogy a <i>Printable</i>
+        interfészt egy népszerű, általad fejlesztett <i>Java</i> könyvtárban használják. Szeretnél egy új metódust 
+		hozzáadni ehhez az interfészhez:
         ]]>
     </text>
     <code><![CDATA[
@@ -72,9 +74,10 @@
     ]]></code>
     <text>
         <![CDATA[
-        This is a great addition to your interface. <i>Printable</i> objects can now be printed to any <i>PrintStream</i>, not
-        only <i>System.out</i>. However, there is a big problem! Everyone who is using your library will now get a <b>compile
-        time error</b>, because their classes <b>do not implement this new method</b>!
+        Ez egy nagyszerű kiegészítője az interfésznek. A <i>Printable</i> objektumok mostantól bármilyen <i>PrintStream</i>-be 
+		írhatók, nem csak a <i>System.out</i>-ra, azaz a konzolra. Van azonban egy nagy probléma! Mindenki, aki a 
+		könyvtáradat használja, mostantól egy <b>fordítási hibát</b> kap, mert az ő osztályaik <b>még nem implementálják 
+		ezt az új metódust</b>!
         ]]>
     </text>
     <code><![CDATA[
@@ -100,11 +103,12 @@
     ]]></code>
     <text>
         <![CDATA[
-        By making the method default, we won't break any code currently using the interface. If the default implementation
-        is not enough for someone, they are free to override this method!
+        Azzal, hogy a metódusnak alap implementációt adunk, az interfészt használó jelenlegi kód továbbra is működni fog (
+		méghozá az alap implementációt fogja használni). Ha az alapértelmezett implementáció
+        nem elég valakinek, szabadon felülírhatja ezt a metódust!
         ]]>
     </text>
-    <interactive instruction="Complete the interface!">
+    <interactive instruction="Egészítsd ki az interfészt!">
         <data><![CDATA[
             
         <font color="#E65100">public</font> ___ <font color="#999900">MyInterface</font> {
@@ -120,25 +124,25 @@
     </interactive>
     <text>
         <![CDATA[
-        Other times, we don't need to bother the implementors of the interface with certain methods. Take this
-        interface for instance:
+        Olyan is előfordulhat, hogy nem kell az interfész megvalósítóit bizonyos metódusokkal "zavarni", mert azok 
+		olyan egyszerűek. Vegyük például ezt az interfészt:
         ]]>
     </text>
     <code><![CDATA[
         
         <font color="#E65100">interface</font> <font color="#999900">Comparable</font>&lt;<font color="#999900">T</font>> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Returns 0 if they're equal, 1 if this object
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * is bigger, -1 if the other is bigger.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * 0-t ad vissza ha egyenlőek, 1-et ha a jelenlegi
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * objektum nagyobb, -1-et ha a másik nagyobb.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> <font color="#ADD8E6">compare</font>(<font color="#999900">T</font> other);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//checks if this is greater
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//ellenőrzi, hogy ez nagyobb-e
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> <font color="#ADD8E6">greaterThen</font>(<font color="#999900">T</font> other);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//checks if this is smaller
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//ellenőrzi, hogy ez kisebb-e
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> <font color="#ADD8E6">smallerThen</font>(<font color="#999900">T</font> other);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//checks if they are equal
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//ellenőrzi, hogy egyenlőek-e
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> <font color="#ADD8E6">equalsTo</font>(<font color="#999900">T</font> other);
 <br/>}
@@ -146,29 +150,29 @@
     ]]></code>
     <text>
         <![CDATA[
-        Notice that we can give implementations for the last 3 methods only using the first method, <i>compare</i>.
-        Let's do that with default methods:
+        Vegyük észre, hogy az utolsó 3 metódushoz csak az első, a <i>compare</i> metódus segítségével már tudunk alap 
+		implementációt adni. A <i>default</i> kulcsszóval ezt megtehetjük:
         ]]>
     </text>
     <code><![CDATA[
         
         <font color="#E65100">interface</font> <font color="#999900">Comparable</font>&lt;<font color="#999900">T</font>> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Returns 0 if they're equal, 1 if this object
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * is bigger, -1 if the other is bigger.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * 0-t ad vissza ha egyenlőek, 1-et ha a jelenlegi
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * objektum nagyobb, -1-et ha a másik nagyobb.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> <font color="#ADD8E6">compare</font>(<font color="#999900">T</font> other);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//checks if this is greater
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//ellenőrzi, hogy ez nagyobb-e
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">default</font> <font color="#DF7401">boolean</font> <font color="#ADD8E6">greaterThen</font>(<font color="#999900">T</font> other) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#E65100">this</font>.<font color="#ADD8E6">compare</font>(other) > <font color="#F0E130">0</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//checks if this is smaller
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//ellenőrzi, hogy ez kisebb-e
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">default</font> <font color="#DF7401">boolean</font> <font color="#ADD8E6">smallerThen</font>(<font color="#999900">T</font> other) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#E65100">this</font>.<font color="#ADD8E6">compare</font>(other) &lt; <font color="#F0E130">0</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//checks if they are equal
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//ellenőrzi, hogy egyenlőek-e
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">default</font> <font color="#DF7401">boolean</font> <font color="#ADD8E6">equalsTo</font>(<font color="#999900">T</font> other) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#E65100">this</font>.<font color="#ADD8E6">compare</font>(other) == <font color="#F0E130">0</font>;
@@ -176,7 +180,13 @@
 <br/>}
         
     ]]></code>
-    <interactive instruction="Complete the interface!">
+	<text>
+		<![CDATA[
+		Aki most megvalósítja ezt az interfészt, annak elég a lényeggel, a <i>compare</i> metódussal foglalkoznia, 
+		a többi metódushoz igénybe veheti az alap implementációt.
+		]]>
+	</text>
+    <interactive instruction="Egészítsd ki ezt az interfészt!">
         <data><![CDATA[
             
 <font color="#E65100">public</font> <font color="#E65100">interface</font> <font color="#999900">Summable</font> {
@@ -198,51 +208,58 @@
         <answer place="1">default</answer>
         <answer place="2">sum</answer>
     </interactive>
-    <title text="Static methods"/>
+    <title text="Statikus metódusok"/>
     <text>
         <![CDATA[
-        This is a very straightforward change, Java 8 allows static methods in interfaces. They behave the same as if it
-        was a static method for a class. They are great for utility methods related to the interface.
+        Ez egy nagyon egyszerű változás, a <i>Java 8</i> lehetővé teszi a statikus metódusok használatát az interfészekben. 
+		Ugyanúgy viselkednek, mintha egy osztály statikus metódusai lennének. Nagyszerűek az interfészhez kapcsolódó 
+		segédmetódusokhoz.
         ]]>
     </text>
-    <title text="Functional interfaces"/>
+    <title text="Funkcionális interfészek"/>
     <text>
         <![CDATA[
-        Java 8 introduced the concept of a <b>functional interfaces</b>. A functional interface is an interface with
-        <b>exactly one abstract method</b> (it may have other static or default methods).
+        A <i>Java 8</i> bevezette a <b>funkcionális interfészek</b> fogalmát. A funkcionális interfész olyan interfész, 
+		amely <b>pontosan egy absztrakt metódussal</b> rendelkezik (lehet más statikus vagy alapértelmezett metódusa is).
         ]]>
     </text>
-    <boxed title="Annotation">
+    <boxed title="Jelölés">
         <![CDATA[
-        The <b>@FunctionalInterface</b> annotation was added. Programmers can place this on the functional interface
-        they are writing (it is not mandatory).
+        Az <b>@FunctionalInterface</b> annotáció hozzáadásra került. A programozók ezt elhelyezhetik a funkcionális 
+		interfészen amit írnak (ez nem kötelező).
         <br>
-        Even though not necessary, it is recommended you use this annotation. If you accidentally add more then one
-        abstract methods to an interface with this annotation, the compiler will generate an error!
+        Bár nem szükséges, de ajánlott ennek az annotációnak a használata. Ha véletlenül több mint egy
+        absztrakt metódust írunk egy ezzel jelölt interfészhez, akkor a fordító hibát fog generálni!
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        For instance, here is an important functional interface from the standard library (this is a simplified version).
+        Itt van például egy fontos funkcionális interfész a szabványos könyvtárból (ez egy egyszerűsített változat):
         ]]>
     </text>
     <code><![CDATA[
         
 <font color="red">@FunctionalInterface</font>
 <br/><font color="#E65100">interface</font> <font color="#999900">Predicate</font>&lt;<font color="#999900">T</font>> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//tests the predicate on the given object
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//teszteli a predikátumot az adott objektumon
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> <font color="#ADD8E6">test</font>(<font color="#999900">T</font> t);
 <br/>}
         
     ]]></code>
-    <text>
+	 <text>
         <![CDATA[
-        The standard library contains many functional interfaces. See them in the package
-        <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html">java.util.function</a>.
+        Ez az interfész definiálja, hogy hogyan kell kinéznie egy osztálynak, ami képes valamilyen feltétel (predikátum) 
+		eldöntésére egy objektummal kapcsolatban. Látható, hogy generikus is, az objektum típusa tetszőleges lehet.
         ]]>
     </text>
-    <interactive instruction="Complete the functional interface! Let T be the type of function parameters, and S the return value.">
+    <text>
+        <![CDATA[
+        A szabványos könyvtár számos funkcionális interfészt tartalmaz. Lásd őket a 
+        <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/package-summary.html">java.util.function</a> csomagban.
+        ]]>
+    </text>
+    <interactive instruction="Egészítsd ki a funkcionális interfészt! Legyen T a függvény paramétereinek típusa, S pedig a visszatérési érték típusa.">
         <data><![CDATA[
             
 <font color="#E65100">public interface</font> <font color="#999900">BinaryFunction</font>&lt;<font color="#999900">T</font>, ___> {
@@ -255,8 +272,55 @@
     </interactive>
     <text>
         <![CDATA[
- Functional interfaces are not so useful by themselves. However, in the next chapter we'll learn about a concept
-        that relies heavily on functional interfaces, and is very powerful.
+		A funkcionális interfészek önmagukban nem annyira hasznosak. A következő fejezetben azonban megismerkedünk egy 
+		koncepcióval amely nagymértékben támaszkodik a funkcionális interfészekre, és nagyon hasznos.
+        ]]>
+    </text>
+	<title text="Anonim osztályok"/>
+	<text>
+        <![CDATA[
+        A <i>Java</i> lehetőséget biztosít egy osztály gyors deklarálására és használatára. Erre szükségünk lesz a 
+		következő fejezet megértéséhez. Az ilyen osztályokat csak egyszer lehet használni, mert
+        nem lesz nevük, hogy később hivatkozhassunk rájuk (innen az anonim kifejezés). A szintaxist a
+        alábbi példák mutatják, de ha további magyarázatra van szükséged, bőven találsz 
+		<a href="https://docs.oracle.com/javase/tutorial/java/javaOO/anonymousclasses.html">itt</a>.
+        ]]>
+    </text>
+	<code><![CDATA[
+        
+<font color="#E65100">class</font> <font color="#999900">GreetRunnable</font> <font color="#E65100">implements</font> <font color="#999900">Runnable</font> {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//felülírjuk a run metódust</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello from a thread!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>}
+        
+    ]]></code>
+	<text>
+		<![CDATA[
+		Ez a példa azt mutatja, hogyan adhatunk implementációt a <i>Runnable</i> interfészhez, egy olyan osztály 
+		létrehozásával, amelyik megvalósítja azt. Néha azonban csak egyszer van szükségünk erre az implementációra, 
+		és ilyen esetekre használhatjuk az anonim osztályt, amely pontosan ott hozza létre az implementációt, 
+		ahol szükségünk van rá:
+        ]]>
+	</text>
+    <code><![CDATA[
+        
+<font color="gray">//objektum létrehozása egy anonim Runnable segítségével</font>
+<br/><font color="#999900">Thread</font> t1 = <font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> <font color="#999900">Runnable</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font> <font color="gray">//override the run method here</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello from an anonymous runnable!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
+<br/>});
+        
+    ]]></code>
+    <text>
+        <![CDATA[
+        Ez ugyanazt teszi, mint a normál implementáció, de nem kellett egy teljes, külön osztályt deklarálnunk. 
+		Ha csak egyszer fogod használni az implementációt, akkor ez az előnyös megoldás. Ha újrafelhasználást tervezel, 
+		írj egy normál osztályt ahelyett, hogy az anonim deklarációt mindenhova elhelyeznéd.
         ]]>
     </text>
 </resources>

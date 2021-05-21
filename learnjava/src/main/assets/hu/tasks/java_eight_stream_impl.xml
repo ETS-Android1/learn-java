@@ -2,121 +2,126 @@
 <resources>
     <taskdata>
         <id>352</id>
-        <name>Stream implementation</name>
+        <name>Folyam implementáció</name>
     </taskdata>
     <text>
         <![CDATA[
-        Your task is to create a generic class that behaves like <i>java.util.stream.Stream</i>.
+        A feladatod egy olyan generikus osztály létrehozása, amely úgy viselkedik, mint a <i>java.util.stream.Stream</i>, 
+		azaz a <i>Java 8</i>-as folyam.
         ]]>
     </text>
-    <boxed title="Not like the real stream">
+    <boxed title="Más mint az igazi">
         <![CDATA[
-        The real <i>Stream</i> interface and its implementation is very complicated. In this task, you only need to create
-        a class works similarly to the original, and you won't even have to implement all stream operations.
+        A valódi <i>Stream</i> interfész és annak megvalósítása nagyon bonyolult. Ebben a feladatban csak 
+        egy, az eredetihez hasonlóan működő osztályt kell készíteni, és még csak nem is kell az összes 
+		folyam műveletet implementálnod.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        I suggest you use a collection to store the elements of your "stream". In my solution, I'll use a list.
+        Javaslom, hogy használj egy kollekciót a "folyam" elemeinek tárolására. Az én megoldásomban egy 
+		listát fogok használni.
         ]]>
     </text>
-    <title text="Conversions"/>
+    <title text="Konverziók"/>
     <text>
         <![CDATA[
-        Have a static method of your class that can convert any <i>Collection</i> into your stream. Hide the
-        constructor.
+        Legyen az osztályodnak egy statikus metódusa, amely bármilyen <i>Collection</i>-t képes átalakítani 
+		a te saját folyamoddá. Rejtsd el a konstruktort (privát), hogy csak ezzel a metódussal lehessen 
+		példányosítani.
         ]]>
     </text>
-    <boxed title="Collecting">
+    <boxed title="Begyűjtés">
         <![CDATA[
-        For converting your stream back into collections, have two methods, <i>collectToList</i> and
-        <i>collectToSet</i>. You don't have to bother writing classes similar to <i>Collectors</i>.
+        A "folyam" kollekciókká való visszaalakításához két metódusod legyen, a <i>collectToList</i> és a 
+		<i>collectToSet</i> (listává és halmazzá). Nem kell bajlódnod a <i>Collectors</i>-hoz hasonló osztályok 
+		írásával.
         ]]>
     </boxed>
-    <title text="Supported operations"/>
+    <title text="Műveletek"/>
     <text>
         <![CDATA[
-        Implement at least the following stream operations for your class:
+        Legalább a következő folyamműveleteket valósítsd meg az osztályodban:
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li>Filtering.</li>
-        <li>Mapping to a different stream.</li>
-        <li>Matching: the <i>anyMatch</i> and <i>allMatch</i> methods.</li>
-        <li>Counting.</li>
-        <li>Iterating: the <i>forEach</i> method.</li>
-        <li>Getting the first element: the <i>findFirst</i> method.</li>
+        <li>Szűrés.</li>
+        <li>Leképezés egy másik folyamra (<i>map</i>).</li>
+        <li>Feltétel ellenőrzése: az <i>anyMatch</i> és <i>allMatch</i> metódusok.</li>
+        <li>Számlálás.</li>
+        <li>Iterálás: a <i>forEach</i> metódus.</li>
+        <li>Az első elem keresése: a <i>findFirst</i> metódus.</li>
         </ul>
         ]]>
     </list>
-    <advanced title="Implement more">
+    <advanced title="Több művelet">
         <![CDATA[
-        Feel free to implement more stream operations. You can browse the original <i>Stream</i>'s
-        methods for inspiration <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html">here</a>.
+        Nyugodtan készítsd el további folyamműveleteket. Az eredeti <i>Stream</i>-et böngészheted ötletekért 
+        <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html">itt</a>.
         ]]>
     </advanced>
     <text>
         <![CDATA[
-        It's important that all your stream operations take <b>functional interfaces</b> as parameters, just like
-        the real ones. This will allow you to pass in lambda expressions. Also make sure that you can "chain" the
-        operations. You can achieve that with the return values.
+        Fontos, hogy minden folyamműveletünk <b>funkcionális interfészeket</b> fogadjon paraméterként, ahogyan a
+        valódiak. Ez lehetővé teszi a lambda kifejezések átadását. Győződj meg arról is, hogy "láncolni" tudod a
+        műveleteket. Ezt a helyes visszatérési értékekkel érheted el.
         ]]>
     </text>
-    <boxed title="Using the actual stream">
+    <boxed title="Valódi folyam használata">
         <![CDATA[
-        You can use the original <i>Stream</i> inside your implementation, but I suggest you do not, as it
-        might lead to some confusion (method names will be the same as your methods).
+        Használhatod az eredeti <i>Stream</i>-et az implementációdban, de azt javaslom, hogy ne tedd, 
+		mivel ez zavart okozhat (a metódusnevek ugyanazok lesznek, mint a te metódusaid).
         ]]>
     </boxed>
     <solution>
         <text>
             <![CDATA[
-            I created the <i>MyStream</i> class, which implements all the necessary operations:
+            Létrehoztam a <i>MyStream</i> osztályt, amely minden szükséges műveletet megvalósít:
             ]]>
         </text>
         <code><![CDATA[
             
 <font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">MyStream</font>&lt;<font color="#999900">T</font>> {
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//stores the elements of the stream
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//tárolja a folyam elemeit
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#E65100">final</font> <font color="#999900">List</font>&lt;<font color="#999900">T</font>> elements;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//static method to create streams
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//statikus metódus a folyamok létrehozására
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#E65100">static</font> &lt;<font color="#999900">T</font>> <font color="#999900">MyStream</font>&lt;<font color="#999900">T</font>> <font color="#ADD8E6">of</font>(<font color="#999900">Collection</font>&lt;<font color="#999900">T</font>> collection) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#E65100">new</font> <font color="#999900">MyStream</font>&lt;>(collection);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//private constructor
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//rejtett konstruktor
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">MyStream</font>(<font color="#999900">Collection</font>&lt;<font color="#999900">T</font>> collection) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;elements = <font color="#E65100">new</font> <font color="#999900">LinkedList</font>&lt;<font color="#999900">T</font>>(collection);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//collecting to a list
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//begyűjtés listába
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">List</font>&lt;<font color="#999900">T</font>> <font color="#ADD8E6">collectToList</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#E65100">new</font> <font color="#999900">LinkedList</font>&lt;<font color="#999900">T</font>>(elements);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//collecting to set
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//begyűjtés halmazba
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Set</font>&lt;<font color="#999900">T</font>> <font color="#ADD8E6">collectToSet</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#E65100">new</font> <font color="#999900">HashSet</font>&lt;<font color="#999900">T</font>>(elements);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//filtering
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//szűrés
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">MyStream</font>&lt;<font color="#999900">T</font>> <font color="#ADD8E6">filter</font>(<font color="#999900">Predicate</font>&lt;<font color="#999900">T</font>> predicate) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp; * Make a copy, since you can get ConcurrentModificationException
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp; * if you remove elements while iterating.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp; * Másolat készítése, mivel ConcurrentModificationException
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp; * keletkezik, ha az eredetiből távolítasz el elemeket.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">T</font>> copy = <font color="#E65100">new</font> <font color="#999900">LinkedList</font>&lt;>(elements);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//iterate over the copy and remove from original
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//iterálás a másolaton és eltávolítás az eredetiből
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">T</font> element: copy) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(!predicate.<font color="#ADD8E6">test</font>(element)) elements.<font color="#ADD8E6">remove</font>(element);
@@ -124,11 +129,11 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#E65100">this</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//mapping to another stream
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//leképezés egy másik folyamba
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> &lt;<font color="#999900">S</font>> <font color="#999900">MyStream</font>&lt;<font color="#999900">S</font>> <font color="#ADD8E6">map</font>(<font color="#999900">Function</font>&lt;<font color="#999900">T</font>,<font color="#999900">S</font>> mapper) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">S</font>> newElements = <font color="#E65100">new</font> <font color="#999900">LinkedList</font>&lt;>();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//transform all elements
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//összes átalakítása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">T</font> element: elements) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;newElements.<font color="#ADD8E6">add</font>(mapper.<font color="#ADD8E6">apply</font>(element));
@@ -136,7 +141,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#E65100">new</font> <font color="#999900">MyStream</font>&lt;>(newElements);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//anyMatch function
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//anyMatch metódus
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">boolean</font> <font color="#ADD8E6">anyMatch</font>(<font color="#999900">Predicate</font>&lt;<font color="#999900">T</font>> predicate) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">T</font> element: elements) {
@@ -145,7 +150,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return false</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//allMatch function
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//allMatch metódus
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">boolean</font> <font color="#ADD8E6">allMatch</font>(<font color="#999900">Predicate</font>&lt;<font color="#999900">T</font>> predicate) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">T</font> element: elements) {
@@ -154,13 +159,13 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return true</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//counting elements
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//számlálás
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">count</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> elements.<font color="#ADD8E6">size</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//iterating
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//iterálás
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">forEach</font>(<font color="#999900">Consumer</font>&lt;<font color="#999900">T</font>> consumer) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">T</font> element: elements) {
@@ -168,7 +173,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//getting the first element
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//első elem, ha van
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Optional</font>&lt;<font color="#999900">T</font>> <font color="#ADD8E6">findFirst</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(elements.<font color="#ADD8E6">size</font>() > <font color="#F0E130">0</font>) {

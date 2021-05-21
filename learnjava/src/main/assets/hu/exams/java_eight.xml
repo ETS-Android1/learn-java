@@ -8,11 +8,11 @@
     </examdata>
     <!-- Questions about Java versions -->
     <question type="text">
-        <text>Which annotation marks a piece of code for removal in the future?</text>
+        <text>Melyik annotáció jelöli az elavult kódot?</text>
         <correct>@Deprecated</correct>
     </question>
     <question type="single_choice">
-        <text>In which version of Java were generics added?</text>
+        <text>A Java melyik verziójában került be a generikusság?</text>
         <answer>Java 5</answer>
         <answer>Java 8</answer>
         <answer>Java 7</answer>
@@ -20,7 +20,7 @@
         <correct>0</correct>
     </question>
     <question type="single_choice">
-        <text>In which version of Java was the java.nio package added?</text>
+        <text>A Java melyik verziójában jelent meg a java.nio csomag?</text>
         <answer>Java 5</answer>
         <answer>Java 7</answer>
         <answer>Java 11</answer>
@@ -28,31 +28,31 @@
         <correct>1</correct>
     </question>
     <question type="single_choice">
-        <text>In which version of Java were lambda expressions added?</text>
-        <answer>Java has no lambda expressions.</answer>
+        <text>A Java melyik verziójában jelentek meg a lambda kifejezések?</text>
+        <answer>A Java nem támogatja a lambdákat.</answer>
         <answer>Java 11</answer>
         <answer>Java 8</answer>
         <answer>Java 7</answer>
         <correct>2</correct>
     </question>
     <question type="true_false">
-        <text>It's good practice to use deprecated classes.</text>
+        <text>Jó gyakorlat, ha elavult osztályokat használunk.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>The compiler will give an error if you use deprecated methods.</text>
+        <text>A fordító hibát ad, ha elavult metódusokat használsz.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>Deprecation is indicated in the source code with an annotation.</text>
+        <text>Az elavultságot a forráskódban egy annotáció jelzi.</text>
         <correct>true</correct>
     </question>
     <question type="multi_choice">
-        <text>What can change in a new Java version?</text>
-        <answer>New classes can be added to the standard library.</answer>
-        <answer>Code from the standard library may be deprecated.</answer>
-        <answer>Code that previously compiled can throw errors in the new version.</answer>
-        <answer>New keywords can be introduced.</answer>
+        <text>Mi változhat egy új Java verzióban?</text>
+        <answer>Új osztályok adhatók hozzá a szabványos könyvtárhoz.</answer>
+        <answer>A szabványos könyvtár egyes részei elavulttá válhatnak.</answer>
+        <answer>A korábban lefordított kód hibákat dobhat az új verzióban.</answer>
+        <answer>Új kulcsszavak kerülhetnek bevezetésre.</answer>
         <correct>0</correct>
         <correct>1</correct>
         <correct>3</correct>
@@ -60,61 +60,61 @@
 
     <!-- Questions about advanced interface techniques -->
     <question type="true_false">
-        <text>Prior to Java 8, an interface was fully abstract.</text>
+        <text>A Java 8 előtt egy interfész teljesen absztrakt volt.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>Java 8 interfaces must be fully abstract.</text>
+        <text>A Java 8 utáni interfészeknek teljesen absztraktnak kell lenniük.</text>
         <correct>false</correct>
     </question>
     <question type="multi_choice">
-        <text>Which of these can a Java 8 interface contain?</text>
-        <answer>Members.</answer>
-        <answer>Abstract methods.</answer>
-        <answer>Methods with implementation.</answer>
-        <answer>Static methods.</answer>
+        <text>Ezek közül melyiket tartalmazhatja egy Java 8 interfész?</text>
+        <answer>Adattagok.</answer>
+        <answer>Absztrakt metódusok.</answer>
+        <answer>Implementációval rendelkező metódusok.</answer>
+        <answer>Statikus metódusok.</answer>
         <correct>1</correct>
         <correct>2</correct>
         <correct>3</correct>
     </question>
     <question type="single_choice">
-        <text>Which of these can you have in Java 8 interfaces, but not in interfaces before that?</text>
-        <answer>Inner classes.</answer>
-        <answer>Abstract methods.</answer>
-        <answer>Members.</answer>
-        <answer>Static methods.</answer>
+        <text>Melyek lehetnek ezek közül a Java 8 interfészekben, de az azt megelőző interfészekben nem?</text>
+        <answer>Belső osztályok.</answer>
+        <answer>Absztrakt metódusok.</answer>
+        <answer>Adattagok.</answer>
+        <answer>Statikus metódusok.</answer>
         <correct>3</correct>
     </question>
     <question type="single_choice">
-        <text>What is a default method?</text>
-        <answer>It's another name for static methods.</answer>
-        <answer>An interface method with implementation.</answer>
-        <answer>It's another name for abstract methods.</answer>
-        <answer>An interface method without implementation.</answer>
+        <text>Mi az 'default' (alapértelmezett) módszer egy Java 8 interfészben?</text>
+        <answer>Ez egy másik neve a statikus metódusoknak.</answer>
+        <answer>Egy interfész metódus, de implementációval.</answer>
+        <answer>Ez egy másik neve az absztrakt metódusoknak.</answer>
+        <answer>Egy interfész metódus, de implementáció nélkül.</answer>
         <correct>1</correct>
     </question>
     <question type="text">
-        <text>What keyword is used to declare that an interface method has implementation?</text>
+        <text>Milyen kulcsszót használjuk annak deklarálására, hogy egy interfész metódusnak van implementációja?</text>
         <correct>default</correct>
     </question>
     <question type="text">
-        <text>Which keyword must be used to declare a method that belongs to the interface, not the object?</text>
+        <text>Melyik kulcsszót kell használni egy olyan metódus deklarálásához, amely az interfészhez, és nem az abból létrejövő objektumhoz tartozik?</text>
         <correct>static</correct>
     </question>
     <question type="single_choice">
-        <text>What is a functional interface?</text>
-        <answer>An interface with no abstract methods.</answer>
-        <answer>An interface with one default method.</answer>
-        <answer>An interface with one abstract method.</answer>
-        <answer>An interface whose methods call other functions.</answer>
+        <text>Mi a funkcionális interfész?</text>
+        <answer>Egy olyan interfész, amely nem tartalmaz absztrakt metódusokat.</answer>
+        <answer>Egy interfész egy alapértelmezett metódussal.</answer>
+        <answer>Egy interfész egy absztrakt metódussal.</answer>
+        <answer>Egy interfész, amelynek metódusai más függvényeket hívnak.</answer>
         <correct>2</correct>
     </question>
     <question type="text">
-        <text>Which annotation is used to mark functional interfaces?</text>
+        <text>Milyen mannotációt használhatunk a funkcionális interfészek jelölésére?</text>
         <correct>@FunctionalInterface</correct>
     </question>
     <question type="single_choice">
-        <text>Where are standard functional interfaces located?</text>
+        <text>Hol találhatók a szabványos könyvtár funkcionális interfészei?</text>
         <answer>java.nio</answer>
         <answer>java.util</answer>
         <answer>java.util.function</answer>
@@ -122,70 +122,70 @@
         <correct>2</correct>
     </question>
     <question type="true_false">
-        <text>The functional interface annotation must be placed above functional interfaces.</text>
+        <text>A funkcionális interfész annotációt kötelező a funkcionális interfészekre rakni.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>The compiler will generate a warning if an interfaces is marked as functional, but it isn't.</text>
+        <text>A fordító figyelmeztetést generál, ha egy interfész funkcionálisnak van jelölve, de nem az.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>The compiler will stop with an error if an interfaces is marked as functional, but it isn't.</text>
+        <text>A fordító hibaüzenettel áll le, ha egy interfész funkcionálisnak van jelölve, de nem az.</text>
         <correct>true</correct>
     </question>
     <question type="single_choice">
-        <text>Which of these can a normal interface have, but a functional one cannot?</text>
-        <answer>Static methods.</answer>
-        <answer>Members.</answer>
-        <answer>Default methods.</answer>
-        <answer>Multiple abstract methods.</answer>
+        <text>Melyik lehet egy normál interfészben, de egy funkcionális interfészben nem?</text>
+        <answer>Statikus metódusok.</answer>
+        <answer>Adattagok.</answer>
+        <answer>Alapértelmezett (implementációs) metódusok.</answer>
+        <answer>Több absztrakt metódus.</answer>
         <correct>3</correct>
     </question>
 
     <!-- Questions about lambda expressions -->
     <question type="single_choice">
-        <text>What is a lambda expression?</text>
-        <answer>The abstract method of a functional interface.</answer>
-        <answer>It is an anonymous, inline declared function.</answer>
-        <answer>A functional interface.</answer>
-        <answer>It is a function which has 1 parameter.</answer>
+        <text>Mi az a lambda kifejezés?</text>
+        <answer>Egy funkcionális interfész absztrakt metódusa.</answer>
+        <answer>Ez egy névtelen, helyben deklarált függvény.</answer>
+        <answer>Egy funkcionális interfész.</answer>
+        <answer>Ez egy olyan függvény, amelynek 1 paramétere van.</answer>
         <correct>1</correct>
     </question>
     <question type="single_choice">
-        <text>What is the correct syntax for a (general) lambda expression?</text>
-        <answer>( statements ) -&gt; parameters</answer>
-        <answer>{ parameters } -&gt; ( statements )</answer>
-        <answer>{ parameters } -&gt; { statements }</answer>
-        <answer>( parameters ) -&gt; { statements }</answer>
+        <text>Mi a correct szintaxis egy (általános) lambda kifejezéshez?</text>
+        <answer>( utasítások ) -&gt; paraméterek</answer>
+        <answer>{ paraméterek } -&gt; ( utasítások )</answer>
+        <answer>{ paraméterek } -&gt; { utasítások }</answer>
+        <answer>( paraméterek ) -&gt; { utasítások }</answer>
         <correct>3</correct>
     </question>
     <question type="multi_choice">
-        <text>Which of these are correct syntax for a lambda with ONE parameter?</text>
-        <answer>( parameter ) -&gt; { statements }</answer>
-        <answer>( statements ) -&gt; parameter</answer>
-        <answer>( statements ) -&gt; { parameter }</answer>
-        <answer>parameter -&gt; { statements }</answer>
+        <text>Melyik a correct szintaxis az EGY paraméteres lambda esetében?</text>
+        <answer>( paraméter ) -&gt; { utasítások }</answer>
+        <answer>( utasítások ) -&gt; paraméter</answer>
+        <answer>( utasítások ) -&gt; { paraméter }</answer>
+        <answer>paraméter -&gt; { utasítások }</answer>
         <correct>0</correct>
         <correct>3</correct>
     </question>
     <question type="multi_choice">
-        <text>Which of these are correct syntax for a lambda with ONE parameter and ONE statement?</text>
-        <answer>( parameter ) -&gt; { statement }</answer>
-        <answer>parameter -&gt; ( statements )</answer>
-        <answer>parameter -&gt; statement</answer>
-        <answer>parameter -&gt; { statement }</answer>
+        <text>Melyik a correct szintaxis az EGY paramétert és EGY utasítást tartalmazó lambda esetében?</text>
+        <answer>( paraméter ) -&gt; { statement }</answer>
+        <answer>paraméter -&gt; ( utasítások )</answer>
+        <answer>paraméter -&gt; statement</answer>
+        <answer>paraméter -&gt; { statement }</answer>
         <correct>0</correct>
         <correct>2</correct>
         <correct>3</correct>
     </question>
     <question type="text">
-        <text>Write a lambda expression which has no parameters, and uses println to print "Lambda" to the console.</text>
+        <text>Írj egy olyan lambda kifejezést, amelynek nincsenek paraméterei, és a println segítségével kiírja a "Lambda" szót a konzolra.</text>
         <correct>( ) -&gt; System.out.println( "Lambda" )</correct>
         <correct>( ) -&gt; { System.out.println("Lambda"); }</correct>
         <ignoreSpace/>
     </question>
     <question type="text">
-        <text>Write a lambda expression which has one int parameter called 'n' and returns 2 times 'n'. </text>
+        <text>Írj egy lambda kifejezést, amelynek egy int paramétere van 'n' névvel, és kétszer 'n'-et ad vissza. </text>
         <correct>n -&gt; n * 2</correct>
         <correct>( n ) -&gt; n * 2</correct>
         <correct>( n ) -&gt; { return[s]n * 2; }</correct>
@@ -197,7 +197,7 @@
         <ignoreSpace/>
     </question>
     <question type="text">
-        <text>Write a lambda expression which has one string parameter ('s'), and returns this with an 'x' character at the end.</text>
+        <text>Írjunk egy lambda kifejezést, amelynek egy String paramétere van ('s' névvel), és ezt egy 'x' karakterrel a végén adja vissza.</text>
         <correct>s -&gt; s + 'x'</correct>
         <correct>( s ) -&gt; s + 'x'</correct>
         <correct>( String[s]s ) -&gt; s + 'x'</correct>
@@ -213,7 +213,7 @@
         <ignoreSpace/>
     </question>
     <question type="text">
-        <text>Write a lambda which has 2 int parameters ('a' and 'b'), and returns their sum.</text>
+        <text>Írj egy lambdát, amelynek 2 int paramétere van ('a' és 'b'), és az összegüket adja vissza.</text>
         <correct>( a , b ) -&gt; a + b</correct>
         <correct>( a , b ) -&gt; { return[s]a + b; }</correct>
         <correct>( int[s]a , int[s]b ) -&gt; a + b</correct>
@@ -223,7 +223,7 @@
         <ignoreSpace/>
     </question>
     <question type="text">
-        <text>Write a lambda that has a string parameter ('s'), and returns if that string is longer then 4 characters.</text>
+        <text>Írjunk egy lambdát, amelynek van egy String paramétere ('s'), és igazat ad, ha a String hosszabb, mint 4 karakter.</text>
         <correct>s -&gt; s.length() &gt; 4</correct>
         <correct>( s ) -&gt; s.length() &gt; 4</correct>
         <correct>( String[s]s ) -&gt; s.length() &gt; 4</correct>
@@ -233,23 +233,23 @@
         <ignoreSpace/>
     </question>
     <question type="true_false">
-        <text>You can assign the '() -&gt; System.out.println("k")' lambda to a Runnable.</text>
+        <text>A '() -&gt; System.out.println("k")' lambdát értékül lehet adni egy Runnable-nek (0 paraméter, nincs visszatérési érték).</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>You can assign the '(n) -&gt; System.out.println(n)' lambda to a Runnable.</text>
+        <text>A '(n) -&gt; System.out.println(n)' lambdát értékül lehet adni egy Runnable-nek (0 paraméter, nincs visszatérési érték).</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>You can assign the '(n) -&gt; System.out.println(n)' lambda to a Consumer.</text>
+        <text>A '(n) -&gt; System.out.println(n)' lambdát értékül lehet adni egy Consumer-nek (1 paraméter, nincs visszatérési érték).</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>The Supplier functional interface takes no parameters and returns a result. You can assign the '() -&gt; 3' lambda to it.</text>
+        <text>A Supplier nem vár paramétert és egy értéket ad vissza. A '() -&gt; 3' lambda értékül adható ennek.</text>
         <correct>true</correct>
     </question>
     <question type="multi_choice">
-        <text>Select the lambdas with parameters.</text>
+        <text>answerd ki a paraméteres lambdákat!</text>
         <answer>() -&gt; 3.14</answer>
         <answer>(n) -&gt; Math.pow(n,2)</answer>
         <answer>() -&gt; System.out.print("Java")</answer>
@@ -258,57 +258,57 @@
         <correct>3</correct>
     </question>
     <question type="true_false">
-        <text>The 'i -&gt; i+2' lambda is valid.</text>
+        <text>Az 'i -&gt; i+2' lambda kifejezés szabályos.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>The 'var =&gt; var.toString()' lambda is valid.</text>
+        <text>Az 'var =&gt; var.toString()' lambda kifejezés szabályos.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>The 'v1,v2 -&gt; v1 + v2' lambda is valid.</text>
+        <text>A 'v1,v2 -&gt; v1 + v2' lambda kifejezés szabályos.</text>
         <correct>false</correct>
     </question>
     <question type="text">
-        <text>Which symbols are used to connect  the parameters and statements of a lambda?</text>
+        <text>Milyen szimbólumokat használunk a lambda paraméterek és utasítások összekapcsolására?</text>
         <correct>-&gt;</correct>
     </question>
 
     <!-- Questions about streams -->
     <question type="single_choice">
-        <text>How do you create a stream from a collection?</text>
-        <answer>With the static method 'stream' from the Collections class.</answer>
-        <answer>With the 'stream' method of the Collection interface.</answer>
-        <answer>With the static method 'createFrom' from the Stream class.</answer>
-        <answer>By passing a collection into Stream's constructor.</answer>
+        <text>Hogyan hozhatsz létre egy folyamot egy kollekcióból?</text>
+        <answer>A Collections osztály 'stream' statikus metódusával.</answer>
+        <answer>A Collection interfész 'stream' metódusával.</answer>
+        <answer>A Stream osztály 'createFrom' statikus metódusával.</answer>
+        <answer>Egy kollekció átadásával a Stream konstruktorába.</answer>
         <correct>1</correct>
     </question>
     <question type="single_choice">
-        <text>How do you create collection from a stream?</text>
-        <answer>With the static 'fromStream' method of the Collection interface.</answer>
-        <answer>Streams can't be turned into collections.</answer>
-        <answer>With the 'collect' method of the stream.</answer>
-        <answer>With the 'map' method of the stream.</answer>
+        <text>Hogyan hozhatsz létre kolleckiót egy folyamból?</text>
+        <answer>A Collection interfész statikus 'fromStream' metódusával.</answer>
+        <answer>Folyamokból nem lehet kollekciót készíteni.</answer>
+        <answer>A folyam 'collect' metódusával.</answer>
+        <answer>A folyam 'map' metódusával.</answer>
         <correct>2</correct>
     </question>
     <question type="true_false">
-        <text>There is no way to create a stream from an array, as it isn't a collection.</text>
+        <text>Nincs semmilyen közvetlen vagy közvetett mód arra, hogy egy tömbből folyamot hozzunk létre, mivel az nem kollekció.</text>
         <correct>false</correct>
     </question>
     <question type="text">
-        <text>Which method of a stream is used to select certain elements based on a condition?</text>
+        <text>A folyam melyik metódusát használjuk bizonyos elemek kianswertására egy feltétel alapján?</text>
         <correct>filter</correct>
     </question>
     <question type="text">
-        <text>Which method of a stream is used to apply a function to all elements of the stream, and create a new stream?</text>
+        <text>Egy folyam melyik metódusát használjuk arra, hogy egy függvényt alkalmazzunk a folyam összes elemére, és egy új folyamot hozzunk létre?</text>
         <correct>map</correct>
     </question>
     <question type="text">
-        <text>Which method is used to apply a Consumer to each element of a stream?</text>
+        <text>Melyik módszer fogad egy fogyasztót (Consumer), majd hajtja azt végre a folyam minden elemére?</text>
         <correct>forEach</correct>
     </question>
     <question type="multi_choice">
-        <text>Select the stream methods resulting another stream.</text>
+        <text>Válassza ki az új folyamot eredményező folyamműveleteket.</text>
         <answer>filter</answer>
         <answer>collect</answer>
         <answer>anyMatch</answer>
@@ -317,7 +317,7 @@
         <correct>3</correct>
     </question>
     <question type="multi_choice">
-        <text>Select the stream methods that result in Optional objects.</text>
+        <text>Válassza ki azokat a folyamműveleteket, amelyek Optional objektumokat eredményeznek.</text>
         <answer>allMatch</answer>
         <answer>findFirst</answer>
         <answer>count</answer>
@@ -325,7 +325,7 @@
         <correct>1</correct>
     </question>
     <question type="multi_choice">
-        <text>Select the stream methods that take a Predicate as a parameter.</text>
+        <text>Válassza ki azokat az folyamműveleteket, amelyek egy feltételt (Predicate) fogadnak el paraméterként.</text>
         <answer>anyMatch</answer>
         <answer>map</answer>
         <answer>allMatch</answer>
@@ -335,86 +335,86 @@
         <correct>3</correct>
     </question>
     <question type="true_false">
-        <text>Stream operations can be specified with lambda expressions.</text>
+        <text>A folyamműveleteket lambda kifejezésekkel fogadnak paraméterként.</text>
         <correct>true</correct>
     </question>
     <question type="single_choice">
-        <text>Why can you use lambda expressions as stream operation parameters?</text>
-        <answer>Because the parameters are functional interfaces.</answer>
-        <answer>Because Stream is an immutable class.</answer>
-        <answer>Because the parameters are interfaces.</answer>
-        <answer>Because streams were added in Java 8.</answer>
+        <text>Miért használhat lambda kifejezéseket folyamművelet paraméterekként?</text>
+        <answer>Mert a paraméterek funkcionális interfészek.</answer>
+        <answer>Mert a Stream egy nem módosítható osztály.</answer>
+        <answer>Mert a paraméterek interfészek.</answer>
+        <answer>Mert a folyamok a Java 8-ban kerültek bele.</answer>
         <correct>0</correct>
     </question>
     <question type="true_false">
-        <text>Predefined collectors are found inside the Collectors class.</text>
+        <text>Az előre definiált begyűjtők a Collectors osztályon belül találhatók.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>Predefined collectors are found in the Collection class.</text>
+        <text>Az előre definiált begyűjtők a Collection osztályon belül találhatók.</text>
         <correct>false</correct>
     </question>
 
     <!-- Questions about additional Java 8 features -->
     <question type="text">
-        <text>Which class added in Java 8 can, but not necessarily hold a value?</text>
+        <text>Melyik Java 8-ban hozzáadott osztály tud, de nem feltétlenül tartalmaz értéket?</text>
         <correct>Optional</correct>
         <correct>java.util.Optional</correct>
     </question>
     <question type="true_false">
-        <text>An Optional can hold any object.</text>
+        <text>Az Optional osztály bármilyen értéket tartalmazhat.</text>
         <correct>true</correct>
     </question>
     <question type="multi_choice">
-        <text>Which of these if true about an Optional?</text>
-        <answer>Can hold a value.</answer>
-        <answer>Can hold multiple values.</answer>
-        <answer>Can be empty.</answer>
+        <text>Melyik igaz ezek közül egy Optional-ról?</text>
+        <answer>Tarthat egy értéket.</answer>
+        <answer>Tarthat több értéket.</answer>
+        <answer>Lehet üres.</answer>
         <correct>0</correct>
         <correct>2</correct>
     </question>
     <question type="single_choice">
-        <text>When should an Optional be used?</text>
-        <answer>As a member of a class.</answer>
-        <answer>As a return value of methods that may not return a "value".</answer>
-        <answer>It's deprecated and should not be used.</answer>
+        <text>Mikor érdemes Optional-t használni?</text>
+        <answer>Az osztály tagjaként.</answer>
+        <answer>Metódusok visszatérési értékeként, amelyek nem mindig adnak vissza értéket.</answer>
+        <answer>Ez elavult, és nem szabad használni.</answer>
         <correct>1</correct>
     </question>
     <question type="text">
-        <text>Which static method can be used to create a Optional holding a value?</text>
+        <text>Melyik statikus metódus használható egy értéket tároló Optional létrehozására?</text>
         <correct>of</correct>
         <correct>Optional.of</correct>
     </question>
     <question type="text">
-        <text>Which static method can be used to create a Optional without a value?</text>
+        <text>Melyik statikus metódus használható egy érték nélküli Optional létrehozására?</text>
         <correct>empty</correct>
         <correct>Optional.empty</correct>
     </question>
     <question type="single_choice">
-        <text>What happens when extract a value from an empty Optional?</text>
-        <answer>An empty Optional is returned.</answer>
-        <answer>Null is returned.</answer>
-        <answer>An exception is thrown.</answer>
+        <text>Mi történik, ha egy üres Optional-ból kivesszük a nem létező értéket?</text>
+        <answer>Egy üres Optional-t kapunk vissza.</answer>
+        <answer>Null értéket kapunk vissza.</answer>
+        <answer>Egy kivételt dob.</answer>
         <correct>2</correct>
     </question>
     <question type="text">
-        <text>Which symbol is used to make a method reference?</text>
+        <text>Melyik szimbólumot használjuk a metódusra való hivatkozáshoz?</text>
         <correct>::</correct>
     </question>
     <question type="true_false">
-        <text>You can't create a method reference to a static method.</text>
+        <text>Nem hozhatsz létre metódushivatkozást egy statikus metódusra.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>You can't create a method reference to a method without parameters.</text>
+        <text>Paraméterek nélkül nem hozhatsz létre metódushivatkozást.</text>
         <correct>false</correct>
     </question>
     <question type="text">
-        <text>Make a method reference to the 'parseInt' method of the Integer class.</text>
+        <text>Készíts metódushivatkozást az Integer osztály 'parseInt' metódusára.</text>
         <correct>Integer::parseInt</correct>
     </question>
     <question type="text">
-        <text>You have an object called 'obj'. Make a method reference to the 'toString' method of this object.</text>
+        <text>Van egy 'obj' nevű objektumod. Készíts metódushivatkozást az objektum 'toString' metódusára.</text>
         <correct>obj::toString</correct>
     </question>
 

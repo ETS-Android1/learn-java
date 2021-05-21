@@ -2,59 +2,61 @@
 <resources>
     <chapterdata>
         <id>351</id>
-        <name>Java versions and Java 8</name>
+        <name>Java verziók</name>
     </chapterdata>
     <text>
         <![CDATA[
-        Java has undergone many changes since its release. Take a look at this version table from
-        <i>Wikipedia</i>:
+        A Java számos változáson ment keresztül a megjelenése óta. Nézd meg ezt a verzió táblázatot a
+        <i>Wikipédiáról</i>:
         ]]>
     </text>
     <image name="java_versions"/>
     <text>
         <![CDATA[
-        Here is what may change in a new release:
+        Itt van, hogy mi változhat egy új kiadásban:
         ]]>
     </text>
-    <title text="Deprecate obsolete classes"/>
+    <title text="Elavult osztályok kezelése"/>
     <text>
         <![CDATA[
-        Deprecating a method or a class means marking it for removal in a future version. In most cases,
-        a suitable replacement is given. Deprecated code can still be used, however, it's recommended to
-        use the replacement instead.
+        Egy metódus vagy osztály visszavonása (<b>deprecation</b>) azt jelenti, hogy egy későbbi verzióban majd eltávolításra
+		fog kerülni kerül. A  legtöbb esetben, egy megfelelő helyettesítő megoldás kerül megadásra. A visszavonásra ítélt 
+		kód továbbra is használható, azonban ajánlott a helyettesítő kódot használni helyette.
         ]]>
     </text>
-    <boxed title="Annotation">
+    <boxed title="Jelölés">
         <![CDATA[
-        Deprecated code is marked with the <b>@Deprecated</b> annotation. Your compiler will raise a
-        warning if you use such a method or class.
+        A elavult, visszavont kódot a <b>@Deprecated</b> megjegyzéssel jelölik. A fordító egy
+        figyelmeztetést fog adni, ha ilyen metódust vagy osztályt használsz.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        For example much of the class <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Date.html">java.util.Date</a> has been deprecated, because a better alternative
-        has been added in Java 7, called the <a href="https://docs.oracle.com/javase/8/docs/api/java/time/package-summary.html">java.time</a> package.
+        Például a <a href="https://docs.oracle.com/javase/7/docs/api/java/util/Date.html">java.util.Date</a> osztály nagy része elavult, 
+		mert egy jobb alternatíva a Java 7-ben megjelent 
+		<a href="https://docs.oracle.com/javase/8/docs/api/java/time/package-summary.html">java.time</a> csomag.
         ]]>
     </text>
-    <title text="Extend the standard library"/>
+    <title text="Az alapkönyvtár bővítése"/>
     <text>
         <![CDATA[
-        In each version, new classes, methods and sometimes even entire packages are added to the standard
-        library. These could be:
+        Minden verzióban új osztályok, metódusok, sőt néha egész csomagok kerülnek hozzá a szabványos
+        könyvtárhoz (ez az, amit minden Java programban lehet használni, a <i>JDK</i> része). Ezek a bővítések lehetnek:
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li>Better implementations of previously present code (in this case, the previous code is ofter deprecated).</li>
-        <li>Code that brings some entirely new functionality.
+        <li>A korábban meglévő kód jobb megvalósítása (ebben az esetben a korábbi kódot elavultnak tekintik).</li>
+        <li>Kód, amely teljesen új funkcionalitást hoz be.</li>
         </ul>
         ]]>
     </list>
     <text>
         <![CDATA[
-        For example, in Java 7, the package <a href="https://docs.oracle.com/javase/7/docs/api/java/nio/package-summary.html">java.nio</a>
-        package was added (the name stands for New IO).
+        Például a Java 7-ben a <a href="https://docs.oracle.com/javase/7/docs/api/java/nio/package-summary.html">java.nio</a> 
+        csomagot adtak hozzá a standard könyvtárhoz (a név a <i>'New IO</i>' rövidítése), amivel az előzőeknél 
+		könnyebben lehet fájlokat írni és olvasni.
         ]]>
     </text>
     <code><![CDATA[
@@ -68,39 +70,41 @@
     ]]></code>
     <text>
         <![CDATA[
-        Before the <i>NIO</i> package, programmers had to use readers and loops to achieve this.
+        A <i>NIO</i> csomag előtt a programozóknak ennél val hosszabb kódot kellet írniuk ugyanennek a 
+		feladatnak a megvalósításához.
         ]]>
     </text>
-    <title text="Extend the language itself"/>
+    <title text="A nyelv bővítése"/>
     <text>
         <![CDATA[
-        These are the most significant changes. New keywords and structures may be introduced, and the syntax
-        of Java can change, allowing the programmer to be more productive.
+        Ezek a legjelentősebb változások amit egy új verzó hozhat. Új kulcsszavak és struktúrák kerülhetnek bevezetésre, 
+		és a <i>Java</i> szintaxisa is megváltozhat, lehetővé téve a programozó számára, hogy produktívabb legyen.
         ]]>
     </text>
-    <boxed title="Java 5: Generics">
+    <boxed title="Java 5: Generikus kód">
         <![CDATA[
-        For instance, Java 5 introduced generics, which was a significant extension to Java.
+        Az előző kurzusban ismertetett generikus kód például a <i>Java 5</i> által behozozz újdonság volt. Ez 
+		jelentősen bővítette a nyelv képességeit és szintaxisát.
         ]]>
     </boxed>
-    <title text="Why Java 8?"/>
+    <title text="Miért a Java 8?"/>
     <text>
         <![CDATA[
-        This course is about Java 8. However, if you take a look at the version table again, you'll notice that
-        it is not at all the latest release. So, what makes it so significant that it deserves its own course?
+        Ez a kurzus a <i>Java 8</i>-ról szól. Ha azonban újra megnézed a verzió táblázatot, akkor láthatod, hogy
+        ez egyáltalán nem a legújabb kiadás. Akkor mitől olyan jelentős, hogy megérdemel egy saját kurzust?
         ]]>
     </text>
-    <boxed title="The most widely used">
+    <boxed title="Széleskörben használt">
         <![CDATA[
-        Java 8 became the most widely used version, despite the newer releases. This is partly because it offered
-        so many new things, and partly because the newer version did not, so many programmers and companies simply did not consider
-        worth their time to upgrade.
+        A <i>Java 8</i> lett a legelterjedtebb verzió, az újabb kiadások ellenére. Ez részben azért van így, mert
+        sok újdonságot kínált, részben pedig azért, mert az újabb verziók annyira nem, így sok programozó és vállalat 
+		egyszerűen nem vette figyelembe, vagy nem tartotta érdemesnek a frissítést.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        In the following chapters, we'll take a look at the most important changes of Java 8, with detailed explanations
-        and examples!
+        A következő fejezetekben a Java 8 legfontosabb változásait vesszük szemügyre, részletes magyarázatokkal 
+        és példákkal.
         ]]>
     </text>
 </resources>

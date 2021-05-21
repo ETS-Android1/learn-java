@@ -2,25 +2,27 @@
 <resources>
     <chapterdata>
         <id>353</id>
-        <name>Lambda expressions</name>
+        <name>Lambda kifejezések</name>
     </chapterdata>
     <text>
         <![CDATA[
-        Before we jump to lambda expressions, let's take another look at functional interfaces.
+        Mielőtt átugranánk a lambda kifejezésekre, vessünk még egy pillantást a funkcionális interfészekre, melyekről 
+		az előző fejezetben szó volt.
         ]]>
     </text>
-    <boxed title="Essentially a function">
+    <boxed title="Egy függvény, metódus">
         <![CDATA[
-        Notice that a functional interface represents a function, and this function is it's only
-        abstract method.
+        Vegyük észre, hogy egy funkcionális interfész egy függvényt/metódust reprezentál, és ez a függvény éppen az 
+		egyetlen absztrakt metódus lesz (a funckionális interfész definíciójából adódik, hogy ilyen mindig lesz).
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        Using such interfaces, we can <b>treat functions as variables</b>. For example, take a simple
-        functional interface, <i>Runnable</i>. We've seen this one before, when working with threads.
+        Ilyen interfészek használatával a függvényeket <b>változóként</b> kezelhetjük. Vegyünk például egy egyszerű
+        funkcionális interfészt, a <i>Runnable</i>-t, ami futtatható kódot tartalmaz a <i>run</i> metódusában.
         <br><br>
-        First things first, is it even a functional interface? Yes it is, it's only (abstract) method is <i>run</i>.
+        Ez azért lesz funkcionális, mert csak egy absztrakt metódusa van, a <i>run</i>. Amit ebbe írunk, az fog 
+		lefutni.
         ]]>
     </text>
     <code><![CDATA[
@@ -31,34 +33,36 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Java 8"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>};
-<br/><font color="gray">//we pass a 'function' in as parameter
+<br/><font color="gray">//átadunk egy 'függvényt' paraméterként ennek az objektumnak, ami majd futtatja azt
 </font>
 <br/><font color="#E65100">new</font> <font color="#999900">Thread</font>(myFunction).<font color="#ADD8E6">start</font>();
         
     ]]></code>
     <text>
         <![CDATA[
-        Well, there is nothing new in this code, we could do this prior to Java 8 as well. But this is where lambda
-        expressions come in.
+        Nos, ebben a kódban nincs semmi újdonság, ezt már a <i>Java 8</i> előtt is megtehettük. Egy anonim osztályt 
+		használtunk a <i>Runnable</i> megvalósításához. Ez az a pont, ahol a 
+		lambda kifejezések bejönnek a képbe.
         ]]>
     </text>
-    <title text="What is a lambda?"/>
+    <title text="Mi az a lambda kifejezés?"/>
     <text>
         <![CDATA[
-        A lambda expression is function, that is declared inline, in a very compact way. Here is its syntax:
+        A lambda kifejezés egy olyan függvény, amely helyben, <i>inline</i> van deklarálva, nagyon kompakt módon. 
+		Íme a szintaxisa:
         <br><br>
-        <i>(parameters) -> { statements }</i>
+        <i>(paraméterek) -> { utasítások }</i>
         ]]>
     </text>
-    <boxed title="Automatic conversion">
+    <boxed title="Automatikus konverzió">
         <![CDATA[
-        The compiler is able to turn lambdas into functional interfaces, and this is how these two concepts are
-        intertwined.
+        A fordító képes a lambdákat funkcionális interfészekké alakítani, és így ez a két fogalom szorosan 
+		összekapcsolódik.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        Let's rewrite the example above using a lambda:
+        Írjuk át a fenti példát úgy, hogy lambda kifejezést használjon.
         ]]>
     </text>
     <code><![CDATA[
@@ -69,9 +73,11 @@
     ]]></code>
     <text>
         <![CDATA[
-        The brackets are empty, as the <i>Runnable</i>'s method, <i>run</i> has no parameters. Similarly to <i>if</i>
-        structures, if you only have one statement inside the curly braces, there is no need to write them, making the lambda
-        even more compact:
+		Látható, hogy az anonim osztály helyett egy sokkal kompaktabb és tisztább szintaxisú lambda kifejezést használtunk.
+		<p>
+        A zárójelek üresek, mivel a <i>Runnable</i> metódusának, a <i>run</i>-nak nincsenek paraméterei. Hasonlóan a 
+		<i>if</i> blokkhoz, ha csak egy utasítás van a lambdában, akkor nincs szükség a szögletes zárójelek kiírására, 
+		így a fenti példa még kompaktabbá tehető:
         ]]>
     </text>
     <code><![CDATA[
@@ -82,46 +88,46 @@
     ]]></code>
     <text>
         <![CDATA[
-        And from here, it's only one more step to create a <i>Runnable</i>, pass it to a thread, and start that thread
-        using a very compact one-liner statement:
+        Innen már csak egy lépés, hogy létrehozzunk és átadjunk egy <i>Runnable</i>-t, egy nagyon rövid és lényegretörő 
+		egysoros utasítással:
         ]]>
     </text>
     <code><![CDATA[
         
-        <font color="#E65100">new</font> <font color="#999900">Thread</font>(() -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Java 8"</font>)).<font color="#ADD8E6">start</font>();
+        <font color="#E65100">new</font> <font color="#999900">Thread</font>(() -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Java 8"</font>));
         
     ]]></code>
     <text>
         <![CDATA[
-        This previously unimaginable compactness is why lambdas should be used.
+        <i>Java 8</i> előtt elképzelhetetlen volt ez a rövid és kompakt kód, amit a lambdák lehetővé tesznek.
         ]]>
     </text>
-    <title text="Lambdas with parameters"/>
+    <title text="Paraméterek lambda kifejezések"/>
     <text>
         <![CDATA[
-        Take a look at another functional interface from the standard library, <i>Consumer</i>. The abstract method of this generic
-        interface takes one parameter, does something with it, but returns no result (thus "consuming" the parameter).
+        Nézzünk meg egy másik funkcionális interfészt a szabványos könyvtárból, a <i>Consumer</i>-t. Ez a generikus
+        interfész egy paramétert vesz fel, csinál vele valamit, de nem ad vissza eredményt (tehát "elfogyasztja" a paramétert).
         ]]>
     </text>
-    <boxed title="Case of one parameter">
+    <boxed title="Egy paraméter esete">
         <![CDATA[
-        If there is exactly one parameter of a lambda expression, it's not necessary to write the
-        brackets around it:
+        Ha egy lambda kifejezésnek pontosan egy paramétere van, akkor nem szükséges kiírni a
+        zárójelet körülötte:
         <br><br>
-        <i>p -> { ... }</i>
+        <i>p -> { utasítások }</i>
         <br><br>
-        However, if there are no parameters, you <b>must</b> write the empty brackets!
+        Ha azonban nincsenek paraméterek, akkor <b>kell</b> üres zárójeleket írni!
         ]]>
     </boxed>
     <code><![CDATA[
         
         <font color="#999900">Consumer</font>&lt;<font color="#999900">String</font>> printer = s -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(s);
-<br/><font color="gray">//we can call it this way
+<br/><font color="gray">//így lehet meghívni a Consumer-t
 </font>
 <br/>printer.<font color="#ADD8E6">accept</font>(<font color="#2E8B57">"Java 8"</font>);
         
     ]]></code>
-    <interactive instruction="Correct the lambda expression which prints the sum of two numbers!">
+    <interactive instruction="Javítsd ki a lambdát úgy, hogy a két szám összegét számolja ki!">
         <data><![CDATA[
             
 (n1, n2___ -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(n1 ___ n2)
@@ -133,34 +139,35 @@
     </interactive>
     <text>
         <![CDATA[
-Notice something interesting here. It's enough to only put an identifier into the parameter list (<i>s</i>). For normal functions,
-the types of the parameters also have to be written, but for lambdas, that is not necessary (you can do it though). This is to
-make lambdas as compact as possible.
+		Vegyünk észre itt valami érdekeset. Elég, ha csak egy azonosítót teszünk a paraméterlistába (<i>s</i>). Normál függvények esetén,
+		a paraméterek típusait is ki kell írni, de lambdáknál ez nem szükséges (bár megteheted). Ez azért van, hogy
+		lambdák a lehető legtömörebbek legyenek. A fordító képes kitalálni a típusokat.
         ]]>
     </text>
-    <boxed title="Must match the parameter list!">
+    <boxed title="Paraméterlista egyezés">
         <![CDATA[
-        Be warned that the lambda you assign to a functional interface must have the same amount of parameters
-        as the abstract method of that interface! If that is not the case, a compile time error will be thrown.
+        Figyelj, hogy a funkcionális interfészhez rendelt lambdának ugyanannyi paraméterrel kell rendelkeznie, mint a
+        mint az adott interfész absztrakt metódusának! Ha ez nem így van, a rendszer fordítási hibát fog dobni.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        For instance, this is <b>invalid code</b>, as <i>Runnable</i>'s run cannot accept parameters:
+        Ez például <b>hibás kód</b>, mivel a <i>Runnable</i> metódusa, a <i>run</i> nem fogad el paramétereket:
         ]]>
     </text>
     <code><![CDATA[
         
-<font color="gray<font color="#2E8B57">">//the compiler won'</font>t be able to make sense of 'param'
+<font color="gray">//a fordító hibát ad, mert a run-nak nincs paramétere!!!
 </font>
-<br/><font color="#E65100">new</font> <font color="#999900">Thread</font>(param -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello"</font>)).<font color="#ADD8E6">start</font>();
+<br/><font color="#E65100">new</font> <font color="#999900">Thread</font>(param -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello"</font>));
         
     ]]></code>
     <text>
         <![CDATA[
-        Let's test the previous consumer. In Java 8, most <i>collections</i> (list, map, set, etc...) got a new method: <i>forEach</i>.
-        This method takes a <i>Consumer</i> as parameter, and it will invoke this <i>Consumer<i> on every element in that
-        collection.
+        Teszteljük az előzőekben látott "fogyasztót" (<i>Consumer</i>). A <i>Java 8</i>-ban a legtöbb kollekció 
+		(lista, szótár, stb...) kapott egy új metódust: <i>forEach</i>.
+        Ez a metódus paraméterként egy <i>Consumer</i>-t fogad, és ezt a <i>Consumer<i>-t hívja meg az adott 
+		kollekció minden elemére (innen a <i>forEach</i>, azaz "mindegyikre" név).
         ]]>
     </text>
     <code><![CDATA[
@@ -171,18 +178,18 @@ make lambdas as compact as possible.
     ]]></code>
     <text>
         <![CDATA[
-        This is again a demonstration of the power of lambdas, we were able to print all elements in a list
-        with a single, one-liner statement, no for loop needed.
+        Ez ismét a lambdák erejét mutatja, képesek voltunk kiírni egy lista összes elemét egy 
+        egysoros utasítással, for ciklus nélkül.
         ]]>
     </text>
-    <title text="Lambdas with return value"/>
+    <title text="Lambda kifejezések visszatérési értéke"/>
     <text>
         <![CDATA[
-        If we use a functional interface whose method has a return value, then the lambda we assign must
-        also have a return value, and it has to return the same type of object!
+        Ha olyan funkcionális interfészt használunk, amelynek metódusa visszatérési értékkel rendelkezik, akkor a lambdának, 
+		amelyet hozzárendelünk is kell, hogy legyen visszatérési értéke, és ugyanolyan típusú objektumot kell visszaadnia!
         <p>
-        Take the <i>Function</i> interface from the standard library. This generic interface has 2 type parameters,
-        and it's method takes a parameter of the first type, and "converts" it into the second type somehow.
+        Vegyük a <i>Function</i> interfészt a szabványos könyvtárból. Ennek a generikus interfésznek 2 típusparamétere van,
+        és a metódusa az első típusú paramétert fogadja, és valahogyan "átalakítja" a második típusba, amit visszaad.
         ]]>
     </text>
     <code><![CDATA[
@@ -198,9 +205,10 @@ make lambdas as compact as possible.
     ]]></code>
     <text>
         <![CDATA[
-        Here we had to write the curly braces as there are multiple statements inside the body of the lambda. However, if
-        we're willing to let go of the exception handling for the sake of compactness, then this can be written as
-        shortly as this:
+		Ez az objektum <i>String</i>-et alakít számmá (vagy <i>null</i>-lá).
+        Itt a szögletes zárójeleket meg kellett írnunk, mivel a lambdán belül több utasítás is van. Azonban, ha
+        a tömörség kedvéért hajlandóak vagyunk elengedni a kivételkezelést, akkor ez a következőképpen írható le
+        röviden:
         ]]>
     </text>
     <code><![CDATA[
@@ -210,11 +218,11 @@ make lambdas as compact as possible.
     ]]></code>
     <text>
         <![CDATA[
-        Note that in this case, we don't even have to write the <i>return</i> keyword. Whatever that single statement returns
-        will be returned by the lambda as well!
+        Vegyük észre, hogy ebben az esetben még a <i>return</i> kulcsszót sem kell leírnunk. Bármit is ad vissza ez az 
+		egyetlen utasítás a lambda is azt fogja visszaadni!
         ]]>
     </text>
-    <interactive instruction="Correct this declaration of a Predicate!">
+    <interactive instruction="Egészítsd ki predikátumot úgy, hogy negatív számokra adjon vissza igazat!">
         <data><![CDATA[
             
             <font color="#999900">Predicate</font>&lt;<font color="#999900">Double</font>> isNegative = d -> ___ &lt; ___;
