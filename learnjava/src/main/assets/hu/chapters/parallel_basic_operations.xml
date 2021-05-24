@@ -2,19 +2,21 @@
 <resources>
     <chapterdata>
         <id>253</id>
-        <name>Basic multithreading operations</name>
+        <name>Párhuzamos műveletek</name>
     </chapterdata>
     <text>
         <![CDATA[
-        In this chapter we'll learn about how a thread can be paused and stopped safely, and how can
-        we detect if a thread has finished working.
+        Ebben a fejezetben megtanuljuk, hogyan lehet egy szálat biztonságosan 
+		szüneteltetni és leállítani, és hogyan észlelhetjük, ha egy szál befejezte 
+		a munkát.
         ]]>
     </text>
-    <title text="The current thread"/>
+    <title text="A jelenlegi szál"/>
     <text>
         <![CDATA[
-        It's always possible to get a reference to the currently executing
-        thread object, like this:
+        Mindig lehetséges, hogy hivatkozást kapjunk az aktuális szál objektumra.
+		Ezzel el tudjuk értni azt a <i>Thread</i> objektumot, ami az adott kódot 
+		futtatja:
         ]]>
     </text>
     <code><![CDATA[
@@ -25,15 +27,18 @@
     ]]></code>
     <text>
         <![CDATA[
-        Calling this in the main method will print "<i>main</i>, which is the default name for the main thread.
-        Using this method we can check properties of the executing thread.
+        Ha ezt a main metódusban hívjuk meg ezt, akkor kiírja a "<i>main</i>"-t, 
+		ami a főszál alapértelmezett neve. Ezzel a módszerrel ellenőrizhetjük a 
+		végrehajtó szál tulajdonságait.
         ]]>
     </text>
-    <title text="Pausing execution"/>
+    <title text="A futtatás megállítása"/>
     <text>
         <![CDATA[
-        Usually the currently executing thread is paused, so a static pause method was added which does this. The
-        amount of <b>milliseconds</b> (1/1000 seconds) must be specified, and the thread will wait this much time.
+        Általában a jelenlegi szál szünetel (amit a <i>currentThread</i> ad vissza), 
+		ezért egy statikus szünteltető metódus (<i>sleep</i>) került hozzáadásra, 
+		amely ezt elvégzi. Az <b>ezredmásodpercek</b> mennyiségét kell megadni, 
+		és a szál ennyi időt fog várni.
         ]]>
     </text>
     <code><![CDATA[
@@ -53,11 +58,13 @@
     ]]></code>
     <text>
         <![CDATA[
-        When working with threads, we almost always has to watch out for an <b>InterruptedException</b>. This is because
-        of external reasons, sometimes threads can't wait as much as they were told to, and this exception gets thrown.
+        Amikor szálakkal dolgozunk, szinte mindig figyelnünk kell egy 
+		<b>InterruptedException</b>-re. Ennek oka, hogy külső okok miatt, 
+		néha a szálak nem tudnak annyit várni, amennyit mondtak nekik, 
+		és ez a kivétel dobásra kerül.
         ]]>
     </text>
-    <interactive instruction="Make the current thread wait one and a half seconds!">
+    <interactive instruction="Állítsd meg a jelenlegi szálat 1.5 másodpercre!">
         <data><![CDATA[
 
 <font color="#E65100">try</font> {
@@ -73,18 +80,20 @@
         <answer place="2">Exception</answer>
         <answer place="2">Throwable</answer>
     </interactive>
-    <title text="Waiting for a result: volatile"/>
-    <boxed title="Volatile variables">
+    <title text="Várakozás az eredményre: volatile"/>
+    <boxed title="Volatile (illékony) változók">
         <![CDATA[
-        Suppose we have two threads, and one updates a variable. It's possible for the other thread to still
-        see the old value (since it doesn't know about a possible update). To counter this, volatile variables
-        were introduced. Every thread sees the up to date value of a volatile variable.
+        Tegyük fel, hogy két szálunk van, és az egyik frissít egy változót. 
+		Lehetséges, hogy a másik szál továbbra is a régi értéket látja (mivel nem 
+		tud a lehetséges frissítésről). Ennek kiküszöbölésére az illékony (<i>volatile</i>) 
+		változók bevezetésre kerültek. Minden szál látja az illékony változó aktuális, 
+		legfrissebb értékét.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        Let's see a code sample where the main thread will check a volatile variable to detect if another
-        thread has stopped.
+        Lássunk egy olyan kódpéldát, ahol a főszál egy <i>volatile</i> változót 
+		ellenőriz, hogy megtudja, megállt-e egy másik szál.
         ]]>
     </text>
     <code><![CDATA[
@@ -124,20 +133,23 @@
     ]]></code>
     <text>
         <![CDATA[
-        First of all, you can see that it's easy to declare that a variable is volatile. The keyword is <b>volatile</b>. Volatility
-        of the variable <i>finished</i> ensures that the main thread will see it's updated value (which is set in the worker thread).
+        Először is, láthatjuk, hogy könnyű deklrálni az illékonyságok. A kulcsszó a 
+		<b>volatile</b>. A <i>finished</i> változó illékonysága biztosítja, hogy a 
+		főszál azonnal lássa a változó frissített értékét (amelyet a háttérszálban 
+		állítunk be, amikor az végez).
         ]]>
     </text>
-    <boxed title="Deadlock">
+    <boxed title="Holtpont">
         <![CDATA[
-        Notice that in the code sample the value is updated in the <i>finally</i> block. Even if the thread is interrupted,
-        it'll always be set to true. If this was not the case, we could get a deadlock, which means that threads wait
-        on each other indefinitely.
+        Vegyük észre, hogy a kódmintában az érték frissítése a <i>finally</i> 
+		blokkban történik. Még akkor is, ha a szál megszakad, végül mindig <i>true</i> 
+		értékre lesz állítva. Ha ez nem így lenne, akkor holtpontra kerülhetnénk, ami 
+		azt jelenti, hogy a szálak a végtelenségig egymásra várnak.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        To see a deadlock, change this part of the code in the following way:
+        Ha holtpontot szeretnél látni, változtasd meg a kód ezen részét a következő módon:
         ]]>
     </text>
     <code><![CDATA[
@@ -154,21 +166,25 @@
     ]]></code>
     <text>
         <![CDATA[
-        After this change, the code will run until you manually terminate it. Of course we could always put the
-        variable update in the <i>catch</i> block as well, but it's good practice to use <i>finally</i> in cases like this.
+        A módosítás után a kód addig fog futni, amíg manuálisan le nem állítod. 
+		Persze bármikor betehetjük a változó frissítését a <i>catch</i> blokkba is, 
+		de a jó gyakorlat, hogy ilyen esetekben a <i>finally</i>-t használjuk.
         ]]>
     </text>
-    <boxed title="Active waiting">
+    <boxed title="Aktív várakozás">
         <![CDATA[
-        Waiting with a loop is called active waiting. This is because it may seem like the thread is not doing anything, but the <i>CPU</i>
-        still repeatedly executes the loop statements.
+        A ciklusokkal való várakozást aktív várakozásnak nevezzük. Ez azért van, 
+		mert bár úgy tűnhet, hogy a szál nem csinál semmit, de a <i>CPU</i>
+        mégis ismételten végrehajtja a ciklus utasításait. Ez nem egy elegáns módja 
+		a várakozásnak, de most csak ezt ismerjük.
         ]]>
     </boxed>
-    <title text="Waiting for a result: joining"/>
+    <title text="Várakozás az eredményre: join"/>
     <text>
         <![CDATA[
-        A slightly more elegant way to wait for a thread to finish. The <i>join</i> method causes the current thread to
-        wait until the joined thread finishes.
+        A <i>join</i> egy kicsit elegánsabb módja annak, hogy megvárjuk egy szál 
+		befejezését. A <i>join</i> metódus hatására az aktuális szál
+        vár, amíg a csatlakozó szál befejezi a munkát:
         ]]>
     </text>
     <code><![CDATA[
@@ -196,34 +212,40 @@
     ]]></code>
     <text>
         <![CDATA[
-        Note that the <i>join</i> method is called on a thread object. <b>NEVER</b> call it on the
-        current thread, as that's a guaranteed deadlock.
+        Vegyük észre, hogy a <i>join</i> metódus egy szálobjektumon kerül meghívásra. 
+		<b>SEMMILYEN esetben</b> ne hívjuk meg az aktuális szálon (<i>currentThread</i>), 
+		mivel ez garantáltan holtpontra vezet.
         ]]>
     </text>
-    <boxed title="Passive waiting">
+    <boxed title="Passzív várakozás">
         <![CDATA[
-        This waiting method is considered passive waiting. It's usually preferred to active waiting,
-        since it's less <i>CPU</i> intensive.
+        Ez a várakozási módszert passzív várakozásnak nevezzük. Általában előnyben 
+		részesítik az aktív várakozással szemben, mivel kevésbé <i>CPU</i>-intenzív.
         ]]>
     </boxed>
-    <title text="Waiting for a result: wait, notify"/>
+    <title text="Várakozás az eredményre: wait és notify"/>
     <text>
         <![CDATA[
-        Java has been designed with parallelism in mind, as even the <i>Object</i> base class (so every object) has
-        methods for parallelism.
+        A Java-t a párhuzamosság jegyében tervezték, ezt mutatja, hogy még az 
+		<i>Object</i> alaposztály (ezért tehát minden objektum) is rendelkezik
+        metódusokkal a párhuzamosításhoz.
         ]]>
     </text>
     <boxed title="Monitor">
         <![CDATA[
-        Each object has a waiting queue for threads. To place the <b>current thread</b> into this queue, the objects
-        <i>wait</i> method must be called. To wake up a single thread (or all), use the objects <i>notify</i> and <i>notifyAll</i>
-        methods. Objects used like this are called <b>monitors</b> (every object can be used as a monitor).
+        Minden objektumnak van egy várakozó sora a szálak számára. Az <b>aktuális 
+		szál</b> elhelyezéséhez ebben a várólistában az objektumok
+        <i>wait</i> metódusát kell meghívni. Egyetlen szál (vagy az összes) 
+		felébresztéséhez használjuk az objektumok <i>notify</i> és <i>notifyAll</i> 
+		metódusait. Az így használt objektumokat <b>monitoroknak</b> nevezzük 
+		(minden objektum használható monitorként).
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        Let's see the previous example with this method. We could even use the thread object as a monitor, but a cleaner
-        solution is to create a separate object for this.
+        Nézzük meg az előző példát ezzel a módszerrel. Használhatnánk a 
+		szálobjektumot akár monitorként is, de egy tisztább
+        megoldás, ha külön objektumot hozunk létre erre a célra.
         ]]>
     </text>
     <code><![CDATA[
@@ -262,11 +284,11 @@
     ]]></code>
     <text>
         <![CDATA[
-        You'll notice that the method calls are in <b>synchronized</b> blocks. Ignore them for now, we'll
-        talk about them in the following chapters. It's required to avoid an <b>IllegalMonitorStateException</b>.
+        Észre fogod venni, hogy a metódushívások <b>synchronized</b> blokkokban vannak. 
+		Egyelőre ne törődj velük, majd a következő fejezetekben kerülnek sorra. Erre a <b>IllegalMonitorStateException</b> elkerülése érdekében van szükség.
         ]]>
     </text>
-    <interactive instruction="This methods halts the current thread until each of the given threads finished.">
+    <interactive instruction="Egészítsd ki úgy, hogy a metódus megállítja az aktuális szálat, amíg a megadott szálak mindegyike be nem fejezi a munkát..">
         <data><![CDATA[
 
 <font color="#E65100">public</font> <font color="#DF7401">boolean</font> <font color="#ADD8E6">joinOnAll</font>(<font color="#999900">Collection</font>&lt;<font color="#999900">Thread</font>> threads) {

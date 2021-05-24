@@ -254,7 +254,7 @@
         <correct>2</correct>
     </question>
     <question type="true_false">
-        <text>The lock of the synchronized block 'remembers' of a thread is already executing that block.</text>
+        <text>The lock of the synchronized block keeps track of the threads inside the block.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
@@ -264,7 +264,7 @@
     <question type="single_choice">
         <text>What is used as a lock when a non-static method is synchronized?</text>
         <answer>The return value of the method.</answer>
-        <answer>The parameter of the method</answer>
+        <answer>The parameter of the method.</answer>
         <answer>The object to which the method belongs to.</answer>
         <correct>2</correct>
     </question>

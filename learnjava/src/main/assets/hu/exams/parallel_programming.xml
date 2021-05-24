@@ -9,102 +9,102 @@
 
     <!-- Questions about basic parallel concepts. -->
     <question type="multi_choice">
-        <text>What is true about parallel programs?</text>
-        <answer>It's only possible to execute them under Windows OS.</answer>
-        <answer>They are sequential programs.</answer>
-        <answer>The are non-deterministic.</answer>
-        <answer>They can execute multiple processes at the same time.</answer>
+        <text>Mi igaz a párhuzamos programokról?</text>
+        <answer>Kizárólag Windows operációs rendszer alatt lehet őket futtatni.</answer>
+        <answer>Ezek szekvenciális programok.</answer>
+        <answer>Nem determinisztikusak.</answer>
+        <answer>Ezek egyszerre több feladatot is képesek végrehajtani.</answer>
         <correct>2</correct>
         <correct>3</correct>
     </question>
     <question type="single_choice">
-        <text>Which of these is another name for thread?</text>
+        <text>Ezek közül melyik egy szál másik neve?</text>
         <answer>Runnable.</answer>
-        <answer>Executor.</answer>
-        <answer>Task.</answer>
-        <answer>Non-determinism.</answer>
+        <answer>Executor (futtató).</answer>
+        <answer>Feladat.</answer>
+        <answer>Nemdeterminizmus.</answer>
         <correct>2</correct>
     </question>
     <question type="single_choice">
-        <text>Which is the opposite of parallel programming?</text>
-        <answer>Sequential.</answer>
-        <answer>Concurrent.</answer>
-        <answer>Multithreaded.</answer>
-        <answer>Non-deterministic.</answer>
+        <text>Melyik a párhuzamos programozás ellentéte?</text>
+        <answer>Szekvenciális.</answer>
+        <answer>Konkurrens.</answer>
+        <answer>Többszálas.</answer>
+        <answer>Nemdeterminisztikus.</answer>
         <correct>0</correct>
     </question>
     <question type="multi_choice">
-        <text>Which of these can influence the effectiveness of parallel applications?</text>
-        <answer>The operating system.</answer>
-        <answer>The hardware.</answer>
+        <text>Melyek befolyásolhatják a párhuzamos alkalmazások hatékonyságát?</text>
+        <answer>Az operációs rendszer.</answer>
+        <answer>A hardver, pontosabban a CPU.</answer>
         <correct>0</correct>
         <correct>1</correct>
     </question>
     <question type="true_false">
-        <text>Parallel programs are deterministic.</text>
+        <text>A párhuzamos programok általában determinisztikusak.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>Sequential programs are deterministic.</text>
+        <text>A szekvenciális programok általában determinisztikusak.</text>
         <correct>true</correct>
     </question>
     <question type="multi_choice">
-        <text>What are some advantages of parallel applications?</text>
-        <answer>Increased efficiency.</answer>
-        <answer>Easy debugging.</answer>
-        <answer>Programs will be deterministic.</answer>
-        <answer>The ability to create efficient GUI applications.</answer>
+        <text>Milyen előnyei vannak a párhuzamosságnak?</text>
+        <answer>Növelheti a hatékonyságot.</answer>
+        <answer>Egyszerű hibakeresés.</answer>
+        <answer>A programok determinisztikusak lesznek.</answer>
+        <answer>Hatékony GUI alkalmazások készítését teszi lehetővé.</answer>
         <correct>0</correct>
         <correct>3</correct>
     </question>
     <question type="multi_choice">
-        <text>What are some disadvantages of parallel programming?</text>
-        <answer>Such programs are harder to debug.</answer>
-        <answer>Non-determinism, which is beneficial.</answer>
-        <answer>Increased code complexity.</answer>
-        <answer>Nothing, there is no reason not to use it.</answer>
+        <text>Milyen hátrányai vannak a párhuzamosságnak?</text>
+        <answer>Az ilyen programokat nehezebb javítani.</answer>
+        <answer>Nemdeterminizmus jön be a rendszerbe.</answer>
+        <answer>Növekvő kód komplexitás.</answer>
+        <answer>Semmi, nincs okunk arra, hogy ne használjuk.</answer>
         <correct>0</correct>
         <correct>2</correct>
     </question>
     <question type="single_choice">
-        <text>What is non-determinism?</text>
-        <answer>Another word for parallel programming.</answer>
-        <answer>The same program may produce different outputs, even with the same input.</answer>
-        <answer>The ability to create parallel programs in Java.</answer>
-        <answer>The same program will always produce the same output, given identical input.</answer>
+        <text>Mi a nemdeterminizmus?</text>
+        <answer>Egy másik szó a párhuzamos programozásra.</answer>
+        <answer>Az azonos program különböző kimeneteket produkálhat, még azonos bemenet esetén is.</answer>
+        <answer>A párhuzamos programok készítésének lehetősége Java-ban.</answer>
+        <answer>Az azonos program mindig ugyanazt a kimenetet fogja produkálni, azonos bemenet esetén.</answer>
         <correct>1</correct>
     </question>
 
     <!-- Questions about the Thread class -->
     <question type="true_false">
-        <text>A Java thread can be started only once.</text>
+        <text>Egy Java szálat csak egyszer lehet elindítani.</text>
         <correct>true</correct>
     </question>
     <question type="text">
-        <text>Which is the base class for creating parallel processes?</text>
+        <text>Melyik a szálak alaposztálya?</text>
         <correct>Thread</correct>
         <correct>java.lang.Thread</correct>
     </question>
     <question type="text">
-        <text>Which class is used to give executable statements to a thread?</text>
+        <text>Melyik osztályt használjuk arra, hogy futtatható utasításokat adjunk egy szálnak?</text>
         <correct>Runnable</correct>
         <correct>java.lang.Runnable</correct>
         <correct>Callable</correct>
         <correct>java.util.concurrent.Callable</correct>
     </question>
     <question type="true_false">
-        <text>Thread objects start executing as soon as they're instantiated.</text>
+        <text>A szál objektumok a példányosításuk után azonnal elkezdik a végrehajtást.</text>
         <correct>false</correct>
     </question>
     <question type="single_choice">
-        <text>What is an anonymous class?</text>
-        <answer>A class with no subclasses.</answer>
-        <answer>A class that is declared in a statement, not in a standard class declaration.</answer>
-        <answer>A class which only has static methods.</answer>
+        <text>Mi az anonim osztály?</text>
+        <answer>Egy osztály, amelynek nincsenek alosztályai.</answer>
+        <answer>Egy osztály, amelyet egy utasításban deklarálunk, nem pedig egy szabványos osztálydeklarációban.</answer>
+        <answer>Egy osztály, amely csak statikus metódusokkal rendelkezik.</answer>
         <correct>1</correct>
     </question>
     <question type="multi_choice">
-        <text>Which interfaces are used to pass executable statement to threads?</text>
+        <text>Milyen interfészeket használnak a végrehajtandó utasítások szálaknak való átadására?</text>
         <answer>java.lang.Runnable</answer>
         <answer>java.io.Serializable</answer>
         <answer>java.lang.Comparable</answer>
@@ -113,27 +113,27 @@
         <correct>3</correct>
     </question>
     <question type="multi_choice">
-        <text>Which of these methods can we use to 'pass' the runnable to a thread?</text>
-        <answer>Using anonymous classes.</answer>
-        <answer>Creating and passing a list of statements.</answer>
-        <answer>Subclassing java.lang.Thread.</answer>
-        <answer>Implementing java.lang.Runnable</answer>
+        <text>Melyik módszert használhatjuk arra, hogy az utasításokat "átadjuk" egy szálnak?</text>
+        <answer>Az anonim osztályos Runnable megvalósítást.</answer>
+        <answer>Utasítások listájának létrehozása és átadása.</answer>
+        <answer>A java.lang.Thread-ből származtatás.</answer>
+        <answer>A java.lang.Runnable implementálása külön osztályban.</answer>.
         <correct>0</correct>
         <correct>2</correct>
         <correct>3</correct>
     </question>
     <question type="true_false">
-        <text>The Thread class cannot be subclassed.</text>
+        <text>A Thread osztályból nem tudunk alosztályt létrehozni.</text>
         <correct>false</correct>
     </question>
 
     <!-- Questions about basic Java parallel programming -->
     <question type="true_false">
-        <text>Pausing ongoing thread execution is allowed.</text>
+        <text>A szálak végrehajtásának szüneteltetése megengedett.</text>
         <correct>true</correct>
     </question>
     <question type="single_choice">
-        <text>Which of these exceptions must we handle when working with threads?</text>
+        <text>Melyik kivételt kell kezelnünk, amikor szálakkal dolgozunk?</text>
         <answer>ArrayIndexOutOfBoundsException</answer>
         <answer>InterruptedException</answer>
         <answer>IOException</answer>
@@ -141,28 +141,28 @@
         <correct>1</correct>
     </question>
     <question type="text">
-        <text>Which keyword is used to declare a variable which always shows its actual value in all threads?</text>
+        <text>Melyik kulcsszóval deklarálhatunk egy olyan változót, amely mindig az aktuális értékét mutatja minden szálban (illékony)?</text>
         <correct>volatile</correct>
     </question>
     <question type="single_choice">
-        <text>What is a deadlock?</text>
-        <answer>When the program terminates due to an error.</answer>
-        <answer>An infinite while loop.</answer>
-        <answer>When threads are waiting on each other an thus the program cannot continue.</answer>
-        <answer>When a thread is interrupted.</answer>
+        <text>Mi a holtpont?</text>
+        <answer>Amikor a program egy hiba miatt megszakad.</answer>
+        <answer>Egy végtelen while ciklus.</answer>
+        <answer>Amikor a szálak egymásra várnak, és így a program nem tud folytatódni.</answer>
+        <answer>Amikor egy szál megszakad.</answer>
         <correct>2</correct>
     </question>
     <question type="multi_choice">
-        <text>Which of these are passive waiting?</text>
-        <answer>Waiting with the join method.</answer>
-        <answer>Waiting with a loop.</answer>
-        <answer>Waiting with the wait method.</answer>
-        <answer>Being stuck in a deadlock.</answer>
+        <text>Melyik ezek közül a passzív várakozás?</text>
+        <answer>Várakozás a join módszerrel.</answer>
+        <answer>Várakozás egy ciklussal.</answer>
+        <answer>Várakozás a wait metódussal.</answer>
+        <answer>Holtponton ragadni.</answer>
         <correct>0</correct>
         <correct>2</correct>
     </question>
     <question type="single_choice">
-        <text>Which method is used to pause thread execution for a fixed time?</text>
+        <text>Melyik metódussal szüneteltethetjük a szálak végrehajtását egy meghatározott időre?</text>
         <answer>sleep</answer>
         <answer>pause</answer>
         <answer>halt</answer>
@@ -170,11 +170,11 @@
         <correct>0</correct>
     </question>
     <question type="true_false">
-        <text>Active waiting is preferred over passive waiting.</text>
+        <text>Az aktív várakozás előnyösebb mint a passzív várakozás.</text>
         <correct>false</correct>
     </question>
     <question type="single_choice">
-        <text>Which method is used for a thread to wait until another one is finished?</text>
+        <text>Melyik metódus várakoztat egy szálat, amíg egy másik befejeződik?</text>
         <answer>wait</answer>
         <answer>sleep</answer>
         <answer>join</answer>
@@ -182,26 +182,26 @@
         <correct>2</correct>
     </question>
     <question type="true_false">
-        <text>When we need to stop a thread, we can join it on itself.</text>
+        <text>Ha le kell állítanunk egy szálat, akkor join-olhatjuk saját magával.</text>
         <correct>false</correct>
     </question>
     <question type="single_choice">
-        <text>What is a monitor?</text>
-        <answer>Any object whose waiting queue is used with the wait and notify methods.</answer>
-        <answer>A thread subclass.</answer>
-        <answer>Any object that is used as the lock of a synchronized block.</answer>
-        <answer>An object that is used within a synchronized block.</answer>
+        <text>Mi a monitor?</text>
+        <answer>Minden olyan objektum, amelynek várólistáját a wait és notify metódusokkal használjuk.</answer>
+        <answer>Egy saját szál alosztály.</answer>
+        <answer>Minden olyan objektum, amelyet egy szinkronizált blokk zárjaként használnak.</answer>
+        <answer>Egy objektum, amelyet egy szinkronizált blokkon belül használnak.</answer>
         <correct>0</correct>
     </question>
     <question type="single_choice">
-        <text>What does the wait method do?</text>
-        <answer>Pauses the thread for a fixed amount.</answer>
-        <answer>Causes the thread to pause until it is woken u with a notify call.</answer>
-        <answer>Interrupts the thread.</answer>
+        <text>Mit csinál a 'wait' metódus?</text>
+        <answer>Megállítja a szálat egy meghatározott ideig.</answer>
+        <answer>A szál szünetet tart, amíg fel nem ébresztik egy 'notify' vagy 'notifyAll' hívással.</answer>
+        <answer>Megszakítja a szálat.</answer>
         <correct>1</correct>
     </question>
     <question type="single_choice">
-        <text>Which method is used to 'wake up' a single thread in a monitors waiting queue?</text>
+        <text>Melyik módszerrel lehet "felébreszteni" egyetlen szálat a monitorok várakozó sorában?</text>
         <answer>notify</answer>
         <answer>release</answer>
         <answer>wait</answer>
@@ -209,7 +209,7 @@
         <correct>0</correct>
     </question>
     <question type="single_choice">
-        <text>Which method is used to 'wake up' all threads in a monitors waiting queue?</text>
+        <text>Melyik módszerrel "ébresztjük fel" az összes szálat a monitorok várakozó sorában?</text>
         <answer>notify</answer>
         <answer>release</answer>
         <answer>acquire</answer>
@@ -217,67 +217,71 @@
         <correct>3</correct>
     </question>
     <question type="true_false">
-        <text>Wait and notify can only be called inside a synchronized block.</text>
+        <text>A 'wait' és a 'notify' csak szinkronizált blokkban hívható.</text>
         <correct>true</correct>
     </question>
 
     <!-- Questions about mutual exclusion -->
     <question type="single_choice">
-        <text>What is mutual exclusion?</text>
-        <answer>When a thread must wait for the result of another thread.</answer>
-        <answer>When only a limited number of threads may execute code sections.</answer>
-        <answer>When multiple threads are paused.</answer>
+        <text>Mi a kölcsönös kizárás?</text>
+        <answer>Amikor egy szálnak egy másik szál eredményére kell várnia.</answer>
+        <answer>Amikor csak korlátozott számú szál hajthat végre kódrészleteket.</answer>
+        <answer>Amikor több szál szünetel.</answer>
         <correct>1</correct>
     </question>
     <question type="true_false">
-        <text>Java has built in means for mutual exclusion.</text>
+        <text>A Java beépített eszközökkel rendelkezik a kölcsönös kizárásra.</text>
         <correct>true</correct>
     </question>
     <question type="text">
-        <text>Which keyword is used to make a code section mutually exclusive?</text>
+        <text>Melyik kulcsszóval lehet egy kódrészletet kölcsönösen kizáróvá tenni?</text>
         <correct>synchronized</correct>
     </question>
     <question type="multi_choice">
-        <text>Which of these can be synchronized?</text>
-        <answer>A block of code.</answer>
-        <answer>A class.</answer>
-        <answer>A method.</answer>
-        <answer>A member.</answer>
+        <text>Melyik szinkronizálható?</text>
+        <answer>Egy kódblokk.</answer>
+        <answer>Egy osztály.</answer>
+        <answer>Egy metódus.</answer>
+        <answer>Egy adattag.</answer>
         <correct>0</correct>
         <correct>2</correct>
     </question>
     <question type="single_choice">
-        <text>what is a critical section?</text>
-        <answer>Code that is executed by a background thread.</answer>
-        <answer>Code that has a chance of throwing InterruptedException.</answer>
-        <answer>Code that must always be accessed by a at most a fixed amount of threads.</answer>
+        <text>Mi a kritikus szakasz?</text>
+        <answer>A kód, amelyet egy háttérszál hajt végre.</answer>
+        <answer>Kód, amelyiknek van esélye InterruptedException-t dobni.</answer>
+        <answer>Kód, amelyhez mindig legfeljebb egy meghatározott számú szálnak szabad hozzáférnie.</answer>
         <correct>2</correct>
     </question>
     <question type="true_false">
-        <text>The lock of the synchronized block 'remembers' of a thread is already executing that block.</text>
+        <text>A szinkronizált blokk zárja figyeli, hogy van-e már szál a blokkon belül.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>The lock of the synchronized block can be any object or primitive.</text>
+        <text>A szinkronizált blokk zárja bármilyen objektum vagy primitív lehet.</text>
         <correct>false</correct>
     </question>
+	<question type="true_false">
+        <text>A szinkronizált blokk zárja bármilyen objektum lehet.</text>
+        <correct>true</correct>
+    </question>
     <question type="single_choice">
-        <text>What is used as a lock when a non-static method is synchronized?</text>
-        <answer>The return value of the method.</answer>
-        <answer>The parameter of the method</answer>
-        <answer>The object to which the method belongs to.</answer>
+        <text>Mit használnak zárként, amikor egy nem statikus metódus szinkronizálódik?</text>
+        <answer>A metódus visszatérési értéke.</answer>
+        <answer>A metódus paramétere.</answer>
+        <answer>Az objektum, amelyhez a metódus tartozik.</answer>
         <correct>2</correct>
     </question>
     <question type="single_choice">
-        <text>What is a semaphore?</text>
-        <answer>An object whose waiting queue is used with the wait and notify methods.</answer>
-        <answer>An object used as the lock the synchronized block.</answer>
-        <answer>An object that can perform mutual exclusion.</answer>
-        <answer>A thread subclass.</answer>
+        <text>Mi az a szemafor?</text>
+        <answer>Egy objektum, amelynek várakozó sorát a wait és notify metódusokkal használjuk.</answer>
+        <answer>Egy objektum, amelyet a szinkronizált blokk zárjaként használnak.</answer>
+        <answer>Egy objektum, amely képes kölcsönös kizárást végrehajtani.</answer>
+        <answer>Egy szál alosztály.</answer>
         <correct>2</correct>
     </question>
     <question type="multi_choice">
-        <text>Which methods are used to start and end the semaphore's critical sections?</text>
+        <text>Milyen metódusokat használjuk a szemafor kritikus szakaszainak indítására és befejezésére?</text>
         <answer>acquire</answer>
         <answer>wait</answer>
         <answer>execute</answer>
@@ -286,67 +290,67 @@
         <correct>3</correct>
     </question>
     <question type="single_choice">
-        <text>What is an atomic operation?</text>
-        <answer>An operation that is safe from any exceptions.</answer>
-        <answer>an operation that is safe to use in multithreaded environments.</answer>
-        <answer>The operation performed by a background thread.</answer>
+        <text>Mi az atomi művelet?</text>
+        <answer>Egy olyan művelet, amely mentes mindenféle kivételtől.</answer>
+        <answer>Egy művelet, amely többszálas környezetben is biztonságosan használható.</answer>
+        <answer>A művelet, amelyet egy háttérszál végez.</answer>
         <correct>1</correct>
     </question>
     <question type="text">
-        <text>Which class can be used to get a thread safe integer implementation?</text>
+        <text>Melyik osztály használható egy szálbiztos egész szám implementációhoz?</text>
         <correct>AtomicInteger</correct>
         <correct>java.util.concurrent.atomic.AtomicInteger</correct>
     </question>
 
     <!-- Questions about executor services -->
     <question type="single_choice">
-        <text>Why was a new interface introduced instead of Runnable?</text>
-        <answer>Because Runnable has no parameters.</answer>
-        <answer>Because no other methods can be called from Runnable.</answer>
-        <answer>Because runnable has no return value.</answer>
+        <text>Miért vezettek be egy új interfészt a Runnable helyett?</text>
+        <answer>Mert a Runnable-nek nincsenek paraméterei.</answer>
+        <answer>Mert a Runnable-ből nem lehet más metódusokat hívni.</answer>
+        <answer>Mert a Runnable-nek nincs visszatérési értéke.</answer>
         <correct>2</correct>
     </question>
     <question type="text">
-        <text>What is the modern alternative of the Runnable interface?</text>
+        <text>Mi a Runnable interfész modernebb alternatívája?</text>
         <correct>Callable</correct>
         <correct>java.util.concurrent.Callable</correct>
     </question>
     <question type="text">
-        <text>Which class provides methods to create executor services?</text>
+        <text>Melyik osztály biztosít metódusokat a futtató szolgáltatások (executor service) létrehozásához?</text>
         <correct>Executors</correct>
         <correct>java.util.concurrent.Executors</correct>
     </question>
     <question type="single_choice">
-        <text>Which of these is ideal if you have 100 tasks to be performed in the background?</text>
-        <answer>The Thread class.</answer>
-        <answer>A fixed thread pool.</answer>
-        <answer>A scheduled executor service.</answer>
-        <answer>A single thread executor service.</answer>
+        <text>Melyik az ideális, ha 100 azonos feladatot kell elvégezni a háttérben?</text>
+        <answer>A Thread osztály.</answer>
+        <answer>A fix szálas futtató szolgáltatás.</answer>
+        <answer>Egy ütemezett futtató szolgáltatás.</answer>
+        <answer>Egy egyszálas futtató szolgáltatás.</answer>
         <correct>1</correct>
     </question>
     <question type="true_false">
-        <text>Executor services will wait for new tasks until explicitly shut down.</text>
+        <text>A futtató szolgáltatások addig várnak az új feladatokra, amíg kifejezetten le nem kapcsolják őket.</text>
         <correct>true</correct>
     </question>
     <question type="text">
-        <text>Which class is used to hold the not yet calculated value of a background task?</text>
+        <text>Melyik osztály szolgál egy háttérfeladat enm biztos, hogy kiszámított értékének tárolására?</text>
         <correct>Future</correct>
         <correct>java.util.concurrent.Future</correct>
     </question>
     <question type="true_false">
-        <text>Using the get method of a future object will return null if the calculation is not yet complete.</text>
+        <text>A Future objektum get metódusának használata null-t ad vissza, ha a számítás még nem fejeződött be.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>Using the get method of a future object will pause the current thread if the calculation is not yet complete.</text>
+        <text>A Future objektum get metódusának használata szünetelteti a szálat, ha a számítás még nem fejeződött be.</text>
         <correct>true</correct>
     </question>
     <question type="single_choice">
-        <text>When are executors more efficient then individually creating threads?</text>
-        <answer>When the execution time of the tasks is short.</answer>
-        <answer>When the execution time of the tasks is long.</answer>
-        <answer>When many tasks are to be executed.</answer>
-        <answer>When the tasks will likely throw exceptions.</answer>
+        <text>Mikor hatékonyabbak a futtató szolgáltatások, mint a szálak egyedi létrehozása?</text>
+        <answer>Mikor a feladatok végrehajtási ideje rövid.</answer>
+        <answer>Mikor a feladatok végrehajtási ideje hosszú.</answer>
+        <answer>Mikor sok hasonló feladatot kell végrehajtani.</answer>
+        <answer>Ha a feladatok valószínűleg kivételeket fognak dobni.</answer>
         <correct>2</correct>
     </question>
 

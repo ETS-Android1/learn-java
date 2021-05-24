@@ -2,30 +2,31 @@
 <resources>
     <taskdata>
         <id>250</id>
-        <name>Array summing</name>
+        <name>Tömb összegzése párhuzamosan</name>
     </taskdata>
     <text>
         <![CDATA[
-        The task is to create a huge array and sum the elements, but with threads:
+        A feladatod egy hatalmas tömb létrehozása és az elemek összegzése, de szálakkal:
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li>Let the array have a million integers. Fill it with random numbers, but try to keep them small.</li>
-        <li>Use <b>10</b> worker threads to sum it (I recommend a <i>long</i> to store it).</li>
-        <li>Also sum the array sequentially. This'll be used to validate the result.</li>
+        <li>Legyen a tömbben egymillió egész szám. Töltsük meg véletlenszerű számokkal, ehhez használjunk 1 és 10 közti számokat.</li>
+        <li>Az összegzéshez használjunk <b>10</b> szálat (az eredmény tároláshoz egy <i>long</i>-ot ajánlok).</li>
+        <li>Az összegzés a tömbön szekvenciálisan is elvégezhető. Ezt fogjuk használni az eredmény ellenőrzésére.</li>
         </ul>
         ]]>
     </list>
-    <boxed title="Distribute equally">
+    <boxed title="Egyenletes eloszlás">
         <![CDATA[
-        Make sure each thread sums the same amount of elements, meaning 1000 of them.
+        Minden szál ugyanannyi elemet összegezzen, azaz 1000-et.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        A possible way to get random integers in a range between 0 and 10:
+        Egy lehetséges módja annak, hogy véletlenszerű egész számokat kapjunk a 0 és 10 
+		közötti tartományban:
         ]]>
     </text>
     <code><![CDATA[
@@ -35,24 +36,26 @@
     ]]></code>
     <text>
         <![CDATA[
-        Any solution can be used to create the threads, but remember, it'll be reused 10 times, so a solid choice
-        is subclassing. You can also use an executor service paired with <i>Callable</i>-s!
+        Bármilyen megoldás használható a szálak létrehozására, de ne feledjük, hogy 10 alkalommal újrafelhasználásra kerülnek, 
+		így egy jó választás a saját <i>Thread</i> alosztály készítése. Használhatsz egy 
+		futtató szolgáltatást is <i>Callable</i>-kel párosítva!
         ]]>
     </text>
-    <boxed title="Waiting">
+    <boxed title="Várakozás">
         <![CDATA[
-         You may use any method to make sure the main thread waits for the workers, I recommend joining. If you decided
-         to use executors, the <i>Future.get</i> method is the way. After waiting, get the sums from the
-         threads, and calculate the final sum.
+         Bármilyen módszerrel biztosíthatod, hogy a főszál várjon a háttérfeladatok végére, 
+		 én a <i>join</i>-os módszert ajánlom. Ha úgy döntöttél, hogy
+         futtató szolgáltatást használsz, akkor a <i>Future.get</i> módszer a megoldás. 
+		 A várakozás után az összegeket a szerezd meg szálakból, és számítsd ki a végső összeget.
         ]]>
     </boxed>
-    <title text="Measure time"/>
+    <title text="Időmérés"/>
     <text>
         <![CDATA[
-        To demonstrate the efficiency of multithreading, measure the execution time of summing the array with
-        threads. Also measure the time of the sequential summing. Finally, compare the results.
+        A többszálú feldolgozás hatékonyságának demonstrálására mérjük meg a tömb párhuzamos összegzésének végrehajtási idejét. 
+        Mérd meg a szekvenciális összegzés idejét is. Végül hasonlítsd össze az időbeli eredményeket.
         <p>
-        Here is a simple way to measure execution time:
+        Íme egy egyszerű módszer a végrehajtási idő mérésére:
         ]]>
     </text>
     <code><![CDATA[
@@ -69,13 +72,16 @@
     ]]></code>
     <text>
         <![CDATA[
-        Also compare the sums calculated, and make sure they're equal.
+        Hasonlítsd össze a párhuzamosan és szkevenciálisan kiszámított összegeket is, 
+		és győződj meg arról, hogy azok megegyeznek.
         ]]>
     </text>
     <solution>
         <text>
             <![CDATA[
-            Here is the custom thread class. It gets the original array, and the beginning and end indices.
+            Itt van az egyéni szál osztály. Megkapja az eredeti tömbre való hivatkozást, 
+			valamint a kezdő- és végpozíciókat. Ezen pozíciók alapján tudja, hogy melyik a 
+			tömbnek az a része, amit neki kell összegezni.
             ]]>
         </text>
         <code><![CDATA[
@@ -115,7 +121,7 @@
         ]]></code>
         <text>
             <![CDATA[
-            Here are some of the boring methods that we need:
+            A feladat előkészítéséhez és ellenőrzéséhez szükséges metódusok:
             ]]>
         </text>
         <code><![CDATA[
@@ -147,8 +153,7 @@
         ]]></code>
         <text>
             <![CDATA[
-            Now to the important part: the parallel summing methods. Here is one that uses the custom thread
-            defined above:
+            Most a fontos rész következik: a párhuzamos összegzési metódusok. Itt van egy, amely az előbb látott saját szálat használja.
             ]]>
         </text>
         <code><![CDATA[
@@ -189,7 +194,7 @@
         ]]></code>
         <text>
             <![CDATA[
-            Using the executors is another option:
+            Bemutatok egy olyan megoldást is, ami a futtató szolgáltatásokon alapul:
             ]]>
         </text>
         <code><![CDATA[
@@ -253,11 +258,10 @@
         ]]></code>
         <text>
             <![CDATA[
-            In the main method we create the array and do the summing twice, while measuring the time. Finally,
-            the results are compared.
+            A főmtódusban létrehozzuk a tömböt, és kétszer végezzük el az összegzést, miközben mérjük az időt. Végül,
+            az eredményeket összehasonlítjuk.
             <p>
-            Note that if you used executor services you'll also need to catch <i>ExecutionException</i> in the main
-            method.
+            Vedd figyelembe, hogy ha futtató szolgáltatásokat használtunk, akkor a <i>main</i>-ben az <i>ExecutionException</i> fogására is szükség lesz.
             ]]>
         </text>
         <code><![CDATA[
@@ -296,11 +300,11 @@
         ]]></code>
         <text>
             <![CDATA[
-            Interestingly, sequential summing is faster, at least on my computer. This may be because
-            it takes time time create and start threads, more then simply summing the numbers.
+            Érdekes módon a szekvenciális összegzés gyorsabb, legalábbis az én számítógépemen. Ennek oka lehet, hogy
+            időbe telik a szálak létrehozása és indítása, ami több időt vesz igénybe, mint a számok egyszerű összegzése.
             <p>
-            The results match, so this operation <b>CAN</b> be done in parallel, but the execution times
-            indicate that it's not optimal.
+            Az eredmények egyeznek, tehát ez a művelet párhuzamosan is elvégezhető, de a végrehajtási idők
+            azt jelzik, hogy ez nem optimális, itt inkább a szekvenciális a hatékonyabb.
             ]]>
         </text>
     </solution>

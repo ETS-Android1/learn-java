@@ -2,18 +2,20 @@
 <resources>
     <chapterdata>
         <id>254</id>
-        <name>Mutual exclusion</name>
+        <name>Kölcsönös kizárás</name>
     </chapterdata>
     <text>
         <![CDATA[
-        Mutual exclusion is a core concept of parallel programming. It means that certain parts of the code (called
-        <b>critical sections</b>) must always be accessed by only a fixed number of threads (usually one) at the same time.
+        A kölcsönös kizárás a párhuzamos programozás egyik alapkoncepciója. Ez azt 
+		jelenti, hogy a kód bizonyos részeihez (az úgynevezett <b>kritikus részekhez</b>) 
+		mindig csak meghatározott számú szál (általában egy) férhet hozzá egyszerre.
         ]]>
     </text>
     <text>
         <![CDATA[
-        I'll first show it why do we need mutual exclusion. Suppose we need to increase the value of a variable
-        from 0 to 10000, using two threads. Very simple, no?
+        Először is megmutatom, hogy miért van szükségünk kölcsönös kizárásra. Tegyük 
+		fel, hogy növelni kell egy változó értékét 0-ról 10000-re, két szál 
+		segítségével. Úgy gondolhatnánk, hogy ez egy helyes megoldás:
         ]]>
     </text>
     <code><![CDATA[
@@ -48,46 +50,55 @@
     ]]></code>
     <text>
         <![CDATA[
-        Running this code, you'll see different results, but most likely not 10000. How can this be? There was a total
-        of 10000 increments, but that is not the final value. Here is a brief explanation (let's call the two threads <i>t1</i> and <i>t2</i>):
+        Ha ezt a kódot futtatod, különböző eredményeket fogsz látni, de valószínűleg 
+		nem 10000-et. Hogyan lehetséges ez? Összesen 10000 növelés történt, de mégsem 
+		ez a végső érték. Íme egy rövid magyarázat (nevezzük a két szálat <i>t1</i>-nek 
+		és <i>t2</i>-nek):
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li><i>t1</i> and <i>t2</i> arrive at the increment at roughly the same time. Suppose that the value is currently <i>N</i>.</li>
-        <li>Both threads think 'hey, the value is <i>N</i>, so I'll increment it to <i>N+1</i>'.</li>
-        <li>As a result, we effectively 'lost' and increment. This happens multiple times.</li>
+        <li><i>t1</i> és <i>t2</i> nagyjából egy időben érkezik a növelő utasításhoz. 
+		Tegyük fel, hogy az érték jelenleg <i>N</i>.</li>
+        <li>Mindkét szál azt gondolja, hogy "az érték <i>N</i>, tehát növelem <i>N+1</i>-re".</li>
+        <li>Az eredmény az, hogy gyakorlatilag 'elveszítettünk' egy növelést. Ez 
+		többször is megtörténhez.</li>
         </ul>
         ]]>
     </list>
     <text>
         <![CDATA[
-        As you can see from the code, volatility of the counter is not enough to stop this from happening.
+        Amint a kódból látható, a számláló <i>volatile</i>-nak jelölése nem elég 
+		ahhoz, hogy ezt megakadájozzuk. A megoldás a kölcsönös kizárás lesz.
         ]]>
     </text>
-    <boxed title="When to exclude mutually">
+    <boxed title="Mikor kell kölcsönös kizárás">
         <![CDATA[
-        The previous example makes it clear that when we write a variable with multiple threads, we <b>must</b> use mutual exclusion.
-        It's also essential when collections are being modified by multiple processes.
+        Az előző példa világossá teszi, hogy amikor egy változót több szálról írunk, 
+		akkor <b>kell</b> használnunk a kölcsönös kizárást.
+        Akkor is elengedhetetlen, ha egy kollekciót több szál módosít egyidejűleg.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        Java comes with built in mutual exclusion. You can create so called <b>synchronized block</b>. It is
-        then guaranteed that only one thread can execute the statements in this block at any given time.
+        A Java beépített kölcsönös kizárással rendelkezik. Létrehozhatunk úgynevezett 
+		<b>szinkronizált blokkot</b>. Ez garantálja, hogy egy adott időpontban csak 
+		egy szál tudja végrehajtani az ebben a blokkban lévő utasításokat.
         ]]>
     </text>
-    <boxed title="Lock">
+    <boxed title="Zár">
         <![CDATA[
-        Synchronized blocks need a lock (sometimes called a <b>mutex</b>). This can be any object. To put it simply, this object is going to
-        keep count of how many threads are executing that block.
+        A szinkronizált blokkoknak szükségük van egy zárra (néha <b>mutexnek</b> 
+		nevezik). Ez lehet bármilyen objektum. Egyszerűen fogalmazva, ez az objektum 
+		számon tartja, hogy hány szál hajtja végre éppen az adott blokkot.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        It's important to use the same lock to get the synchronized block to work like expected. Let's fix the previous example
-        with a common lock that both threads will use. Replace the previous threads with these:
+        Fontos, hogy ugyanazt a zárat használjuk, hogy a szinkronizált blokk a várt 
+		módon működjön. Javítsuk ki az előző példát egy közös zárral, amelyet mindkét 
+		szál használni fog. Cseréljük ki az előző szálakat ezekre:
         ]]>
     </text>
     <code><![CDATA[
@@ -118,11 +129,12 @@
     ]]></code>
     <text>
         <![CDATA[
-        The increment statement is now a <b>critical section</b>. It's important that we do not make the whole for
-        loop a critical section, as that would make the threads to essentially behave like a sequential program.
+        Az növelési utasítás mostantól <b>kritikus szakasz</b>. Fontos, hogy ne tegyük az 
+		egész for ciklust szinkronizálttá, mert akkor a szálak lényegében úgy 
+		viselkednének, mint egy szekvenciális program.
         <p>
-        The fact that a common lock was used is essential. If, for example we'd do something like this, the result
-        would be just as incorrect as without synchronized blocks:
+        Lényeges, hogy közös zárat használtunk. Ha például valami ilyesmit csinálnánk, 
+		az eredmény ugyanolyan hibás lenne, mint szinkronizált blokkok nélkül:
         ]]>
     </text>
     <code><![CDATA[
@@ -148,14 +160,23 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>});
         
-    ]]></code>
-    <title text="Synchronized methods"/>
+    ]]>
+	</code>
+	<text>
+	    <![CDATA[
+        A hibát az okozza, hogy a szálak különböző zárakat használnak. Az egyik szál által 
+		használt zár sosem tud a másik szálról. Ezért kell közös zárat használni.
+        ]]>
+	</text>
+    <title text="Szinkronizált metódusok"/>
     <text>
         <![CDATA[
-        Methods can also be marked as synchronized. This is equivalent to putting the entire body of the method
-        into a synchronized block. The only question is, what will be used as a lock in such cases?
+        A metódusok is megjelölhetők szinkronizáltként. Ez egyenértékű azzal, hogy a 
+		metódus összes utasítását egy szinkronizált blokkba rakjuk. A kérdés csak az, 
+		hogy ilyen esetekben mit használ majd zárként?
         <p>
-        Let's refactor the previous code. Now the counter is encapsulated in this class:
+        Kicsit átírtam az előző kódot. A számlálót most elrejtettem ebbe a <i>Counter</i> 
+		osztályba, melynek a <i>increment</i> metódusát szinkronizáltnak jelöltem:
         ]]>
     </text>
     <code><![CDATA[
@@ -176,7 +197,8 @@
     ]]></code>
     <text>
         <![CDATA[
-        Now we create an object of this class, and have the threads call the <i>increment</i> method:
+        Létrehozunk egy objektumot ebből az osztályból, és a szálak meghívják a 
+		<i>increment</i> metódust:
         ]]>
     </text>
     <code><![CDATA[
@@ -211,23 +233,27 @@
     ]]></code>
     <text>
         <![CDATA[
-        It works correctly. The lock that was used, was the <b>counter object</b>. In general, it works like this:
+        Helyesen működik. A használt zár maga a <b>Counter objektum</b> volt. Általában így 
+		működik:
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li>For a non-static synchronized method, the object it belongs to will be used as a lock.</li>
-        <li>For a static synchronized method, the <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Class.html">class object</a> of the class will be used as a lock.</li>
+        <li>Egy nem statikus, szinkronizált metódus esetében a hozzá tartozó objektumot 
+		lesz zárként használva.</li>
+        <li>Egy statikus, szinkronizált metódus esetében az osztály 
+		<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Class.html">Class</a> objektuma</a> 
+		lesz zárként használva (erről nem tanultunk).</li>
         </ul>
         ]]>
     </list>
     <text>
         <![CDATA[
-        Yes, there is class called <i>Class</i> and also a class called <i>Object</i>...
+        A kölcsönös kizárás beépített módja tehát a <i>synchronized</i> kulcsszóval érhető el. 
         ]]>
     </text>
-    <interactive instruction="The method that was used in the last course is now going to be used by multiple threads. Make the necessary correction so that the list remains consistent!">
+    <interactive instruction="Az előző kurzuson használt metódust most több szálon fogjuk hívni. Végezd el a szükséges korrekciót, hogy a lista egységes maradjon!">
         <data><![CDATA[
 
 <font color="#E65100">public</font> ___ <font color="#DF7401">void</font> <font color="#ADD8E6">removeFirstLast</font>(<font color="#999900">List</font>&lt;?> list) {
@@ -238,32 +264,36 @@
         ]]></data>
         <answer place="0">synchronized</answer>
     </interactive>
-    <title text="Semaphores"/>
+    <title text="Szemafor"/>
     <text>
         <![CDATA[
-        Semaphores are special objects, you can think of them as generalized synchronized blocks.
+        A szemaforok speciális objektumok, gondolhatsz rájuk úgy, mint általánosított 
+		szinkronizált blokkokra.
         ]]>
     </text>
-    <boxed title="Let more threads in">
+    <boxed title="Több szál beengedése">
         <![CDATA[
-        While synchronized blocks can only let one thread in, a semaphore takes an integer at construction,
-        and it's going to let at most that much threads into its critical sections.
+        Míg a szinkronizált blokkok csak egy szálat engednek be egyszerre, addig a 
+		szemafor egy egész számot vesz fel létrehozáskor, és legfeljebb ennyi szálat 
+		enged be a kritikus szakaszaiba.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        Java comes with a semaphore implementation, <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Semaphore.html">java.util.concurrent.Semaphore</a>.
-        To start a critical section, use the <i>acquire</i> method, to end it, use <i>release</i>.
+        A standard könyvtár rendelkezik egy szemafor implementációval, ez a <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Semaphore.html">java.util.concurrent.Semaphore</a>.
+        Egy kritikus szakasz indításához használjuk a <i>acquire</i> metódust, befejezéséhez pedig a <i>release</i> metódust.
         <p>
-        Since I really like incrementing, let's solve the previous problem, with a semaphore this time, just as an
-        example of the mentioned methods (the counter integer is used, not the <i>Counter</i> class).
+        Oldjuk meg az előző feladatot, ezúttal egy szemaforral (A számlálóhoz most egész számot 
+		használok, nem a <i>Counter</i> osztályt). Ebben az esetben nem használom ki a szemafor 
+		teljes erejét, mert csak egy szálat engedek be a kritikus szakaszra. Ezáltal úgy működik majd, 
+		mint egy szinkronizált blokk.
         ]]>
     </text>
     <code><![CDATA[
         
         <font color="gray">/*
-<br/>This semaphore only lets one thread in,
-<br/>works much like a synchronized block.
+<br/>Ez a szemafor csak egy szálat enged be,
+<br/>mint egy sima szinkronizált blokk.
 <br/> */</font>
 <br/><font color="#999900">Semaphore</font> sema = <font color="#E65100">new</font> <font color="#999900">Semaphore</font>(<font color="#F0E130">1</font>);
 <br/>
@@ -299,44 +329,51 @@
     ]]></code>
     <text>
         <![CDATA[
-        When acquiring, we need to watch out for an <i>InterruptedException</i>. To make sure the semaphore always releases,
-        put the <i>release</i> call in the finally block!
+        Az <i>acquire</i> hívása során figyelnünk kell a <i>InterruptedException</i>-ra. 
+		Annak érdekében, hogy a szemafor mindig felszabaduljon, tegyük a <i>release</i> 
+		hívást a <i>finally</i> blokkba!
         <p>
-        Though not often, but semaphores that let more threads in are sometimes needed as well. To see an example, head over
-        to the <b>dining philosophers</b> task of this course.
+        Bár nem gyakran, de több szálat beengedő szemaforokra is szükség van néha. Egy 
+		példát láthatsz, ha átnézel a kurzus <b>étkező filozófusok</b> feladatához.
         ]]>
     </text>
-    <title text="Atomic operations"/>
+    <title text="Atomi műveletek"/>
     <text>
         <![CDATA[
-        An operation is atomic, if it completed without any chance of anything happening when the operation is running,
-        that could invalidate the operation. These operations are preferred when multithreading, since there is no chance
-        of another thread doing anything that could ruin the result until the operation completes.
+        Egy művelet akkor atomikus, ha többszálas környezetben is biztonságosan és helyesen működik. 
+		Ezeket a műveleteket előnyben részesítjük többszálú futás esetén, mivel nincs esély arra, hogy
+        hogy egy másik szál bármi olyat tegyen, ami tönkreteheti az eredményt, amíg a 
+		művelet be nem fejeződik.
         ]]>
     </text>
-    <boxed title="Increment">
+    <boxed title="Inkrementálás">
         <![CDATA[
-        As we saw in the previous examples, incrementing an integer is NOT atomic, since the two threads interfered with
-        each others increment operations.
+        Ahogy az előző példákban láttuk, egy egész szám inkrementálása (1-el növelése) 
+		NEM atomikus, mivel kölcsönös kizárás nélkül a két szál belezavart egymás 
+		inkrementálási műveleteibe, és az eredmény hibás lett.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        Atomic operations on primitives are often needed, so the <i>JDK</i> provides classes that perform these, such as
-        <a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/atomic/AtomicInteger.html">java.util.concurrent.atomic.AtomicInteger</a> and
-        <a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/atomic/AtomicBoolean.html">java.util.concurrent.atomic.AtomicBoolean</a> For these classes, each method is atomic, and thus safe for
-        a multithreading environment (not every primitive has a matching "<i>atomic</i>" class.).
+        Gyakran van szükség primitíveken végzett atomi műveletekre, ezért a <i>JDK</i> olyan osztályokat biztosít, amelyek ezeket végzik, mint például az
+        <a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/atomic/AtomicInteger.html">java.util.concurrent.atomic.AtomicInteger</a> és az
+        <a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/atomic/AtomicBoolean.html">java.util.concurrent.atomic.AtomicBoolean</a>. 
+		Ezeknél az osztályoknál minden metódus atomikus, és így biztonságosak a
+        többszálú környezetben (nem minden primitívnek van megfelelő "<i>atomic</i>" osztálya.).
         ]]>
     </text>
-    <boxed title="Make something atomic">
+    <boxed title="Atomikussá tétel">
         <![CDATA[
-        We already have the tools to make operations atomic. the synchronized keyword can be used. This guarantees that
-        only one thread can perform the operation at one time, and that there won't be interference.
+        A műveletek atomikussá tételéhez már megvannak az eszközeink. A <i>synchronized</i> 
+		kulcsszó használható. Ez garantálja, hogy egyszerre csak egy szál végezheti el a 
+		műveletet, és nem lesz interferencia.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        Let's solve the increment problem with the <i>AtomicInteger</i> class, just to see something like this as well.
+        Oldjuk meg a növelése problémát az <i>AtomicInteger</i> osztállyal, csak hogy 
+		valami ilyesmit is lássunk. Ezúttal a számláló nem egy sima <i>int</i> lesz, hanem 
+		ennek az atomi változata:
         ]]>
     </text>
     <code><![CDATA[
@@ -366,12 +403,12 @@
     ]]></code>
     <text>
         <![CDATA[
-        Very similar to the solution to the one with synchronized blocks, ony time the <i>AtomicInteger</i> class takes care of that,
-        and we can call the synchronized method <i>getAndIncrement</i>. It's also like the solution with our custom <i>Counter</i>
-        class. That was basically a simple atomic integer class with only the increment method.
+        Nagyon hasonló a szinkronizált blokkokkal való megoldáshoz, csak most az <i>AtomicInteger</i> osztály gondoskodik erről,
+        és meg tudjuk hívni a <i>getAndIncrement</i> szinkronizált metódust. Ez hasonlóan működik, mint a megoldás az egyedi <i>Counter</i>-ünkkel. 
+		Az alapvetően egy egyszerű atomi egész szám osztály volt, csak az inkrementáló metódussal.
         ]]>
     </text>
-    <interactive instruction="Create a boolean variable with atomic operations, then, in the thread, set its value to false!">
+    <interactive instruction="Hozz létre egy boolean változót atomi műveletekkel, majd a szálban állítsd az értékét false-ra!">
         <data><![CDATA[
 
 ___ condition = <font color="#E65100">new</font> <font color="#ADD8E6">___</font>(true);

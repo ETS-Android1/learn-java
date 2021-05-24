@@ -2,84 +2,94 @@
 <resources>
     <taskdata>
         <id>252</id>
-        <name>Producers and consumers</name>
+        <name>Termelők és fogyasztók</name>
     </taskdata>
     <text>
         <![CDATA[
-        This is another typical parallel programming problem. Here are the details:
+        Ez egy másik tipikus párhuzamos programozási feladat. Íme a részletek:
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li>An empty collection (<b>buffer</b>) is given, with a maximum capacity.</li>
-        <li><b>Producers</b> are threads who place elements inside the buffer.</li>
-        <li><b>Consumers</b> are threads who remove elements from the buffer.</li>
+        <li>Egy üres kollekció (<b>puffer/buffer</b>) van megadva, maximális kapacitással.</li>
+        <li><b>A termelők</b> olyan szálak, amelyek elemeket helyeznek el a pufferben.</li>
+        <li><b>A fogyasztók</b> olyan szálak, amelyek elemeket vesznek ki a pufferből.</li>
         </ul>
         ]]>
     </list>
-    <boxed title="Waiting">
+    <boxed title="Várakozás">
         <![CDATA[
-        If a producer finds the buffer full, it must wait until there is space for it's element.
-        If a consumer finds the buffer empty, it must wait until there is an element for it to take.
+        Ha egy termelő úgy találja, hogy a puffer megtelt, várnia kell, amíg van hely az elemének.
+        Ha egy fogyasztó üresnek találja a puffert, akkor várnia kell, amíg van egy elem, amit átvehet.
         ]]>
     </boxed>
-    <title text="Implementation details"/>
+    <title text="A megvalósítás részletei"/>
     <text>
         <![CDATA[
-        This task is independent of the amount of producers, consumers, and the capacity of the buffer.
-        I suggest you define them as constants or ask their value from the user.
+        Ez a feladat független a termelők és a fogyasztók mennyiségétől, valamint a puffer kapacitásától.
+        Javaslom, hogy ezeket állandóként definiáld, vagy kérd el az értéküket a felhasználótól.
         ]]>
     </text>
-    <boxed title="Producers">
+    <boxed title="Termelők">
         <![CDATA[
-        There are many ways to implement producers. They can, for example place a fixed or random
-        amount of elements in the buffer, then stop. Another option is to have them place elements
-        until explicitly told to stop.
+        A termelők megvalósításának számos módja van. Tehetnek például egy fix vagy véletlenszerű
+        mennyiségű elemet a pufferbe, majd leállnak. Egy másik lehetőség, hogy elemeket helyeznek el
+        amíg kifejezetten meg nem szólítják őket, hogy hagyják abba.
         ]]>
     </boxed>
-    <boxed title="Consumers">
+	<text>
+		<![CDATA[
+		A probléma angol neve a <i>Producer-consumer problem</i>, ahol a producer a termelő, consumer a fogyasztó. 
+		Én ennek megfelelően fogom elnevezni az osztályokat a megoldásban.
+		]]>
+	</text>
+    <boxed title="Fogyasztók">
         <![CDATA[
-        The consumer implementation depends on the producers. One thing must be guaranteed: the consumers
-        have to remove all elements from the buffer before stopping (so that no element is wasted).
-        ]]>
-    </boxed>
-    <text>
-        <![CDATA[
-        The program must terminate eventually, no consumer or producer can work indefinitely.
-        ]]>
-    </text>
-    <title text="The buffer"/>
-    <text>
-        <![CDATA[
-        The selection of the correct data structure is essential. A nice solution is a <b>queue</b>, as
-        it'll ensure that the elements waiting for the longest time will be consumed first.
-        ]]>
-    </text>
-    <boxed title="Don't reinvent the wheel">
-        <![CDATA[
-        We don't have to write a queue that has a capacity, and can block threads! One perfect choice
-        is already supplied in the <i>JDK</i>: <a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/BlockingQueue.html">BlockingQueue</a>.
+        A fogyasztók megvalósítása a termelőktől függ. Egy dolgot kell garantálni: a fogyasztók
+        minden elemet eltávolítanak a pufferből, mielőtt megállnak (így egyetlen elem sem megy "kárba").
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        When working with collections and threads it's always worth looking at what options are provided in the
-        <i>JDK</i> before trying to implement our own thread-safe collections.
+        A programnak előbb-utóbb véget kell érnie magától, egyetlen fogyasztó vagy termelő sem dolgozhat a végtelenségig.
         ]]>
     </text>
-    <advanced title="Implementing your own queue">
+    <title text="A puffer"/>
+    <text>
         <![CDATA[
-        It's also not terribly difficult to create your own blocking queue. The usage of synchronized
-        methods and the <i>wait</i> and <i>notifyAll</i> calls are recommended if you decide to go down
-        this way! It definitely adds an extra layer of challenge to this task.
+        A megfelelő adatszerkezet kiválasztása alapvető fontosságú. Egy szép megoldás a <b>sorba állítás</b>, mivel
+        ez biztosítja, hogy a leghosszabb ideig várakozó elemek fogyjanak el először. Ezt az adatstruktúrák fejezetben 
+		tanult sor kollekciókkal tudjuk modellezni (egy konkrét példáért lásd ez alatt).
+		<p>
+		Érdemes a puffernek is saját osztályt írni, ami magába foglalja a sor kollekciót.
+        ]]>
+    </text>
+    <boxed title="Már vannak megoldások">
+        <![CDATA[
+        Nem kell olyan sort írnunk, amelynek van kapacitása, és amely képes blokkolni a szálakat! Egy tökéletes választás
+        már a <i>JDK</i>-ban is megtalálható: <a href="https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/BlockingQueue.html">BlockingQueue</a>. 
+		Ez az osztály még a maximum kapacitást is támogatja!
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Amikor kollekciókkal és szálakkal dolgozunk, mindig érdemes megnézni, hogy milyen lehetőségek állnak rendelkezésre a
+        <i>JDK</i>-ban, mielőtt megpróbálnánk saját szálbiztos kollekciókat implementálni.
+        ]]>
+    </text>
+    <advanced title="Saját sor készítése">
+        <![CDATA[
+        Az sem túl bonyolult, hogy saját blokkoló várólistát hozz létre. A szinkronizált
+        metódusok, valamint a <i>wait</i> és <i>notifyAll</i> hívások használata ajánlott, ha úgy döntesz, hogy ezt az 
+		utat választod! Ez mindenképpen ad egy plusz kihívást a feladathoz.
         ]]>
     </advanced>
     <solution>
         <text>
             <![CDATA[
-            Here is the buffer class. It uses a <i>BlockingQueue</i>. I also added some printing when
-            elements are added or removed (doesn't always show the exact updating order).
+            Itt van a puffer osztály. Ez egy <i>BlockingQueue</i>-t használ. Én hozzáadtam néhány kiíró utasítást amikor
+            elemek hozzáadása vagy eltávolítása történik (nem mindig mutatja a pontos frissítési sorrendet).
             ]]>
         </text>
         <code><![CDATA[
@@ -131,8 +141,7 @@
         ]]></code>
         <text>
             <![CDATA[
-            The producer implementation. It will place elements until told to stop, with the <i>stopProducing</i>
-            method.
+            A termelő megvalósítása. Addig helyez el elemeket a pufferbe, amíg a <i>stopProducing</i> metódussal le nem állítjuk.
             ]]>
         </text>
         <code><![CDATA[
@@ -174,9 +183,9 @@
         ]]></code>
         <text>
             <![CDATA[
-            The consumer. Just like a producer, it also works until told to stop, with the <i>stopConsuming</i> method.
-            The only trick is that a consumer will not stop when there are still elements in the buffer, ensuring that
-            no element remains unused.
+            A fogyasztó. A termelőhöz hasonlóan ez is addig működik, amíg a <i>stopConsuming</i> metódussal le nem állítjuk.
+            Az egyetlen trükk az, hogy a fogyasztó addig nem áll le, amíg még vannak elemek a pufferben, így biztosítva, hogy 
+            egyetlen elem sem marad kihasználatlanul.
             ]]>
         </text>
         <code><![CDATA[
@@ -219,8 +228,8 @@
         ]]></code>
         <text>
             <![CDATA[
-            Finally, the main class. Pretty simple, just creating a some producers and consumers, and a buffer, wait
-            a bit to let them work, then shut them all down.
+            Végül a fő osztály. Elég egyszerű, csak létrehozunk néhány termelőt és fogyasztót, és egy puffert, várunk.
+            egy kicsit, hogy hagyjuk őket dolgozni, majd mindet leállítjuk.
             ]]>
         </text>
         <code><![CDATA[

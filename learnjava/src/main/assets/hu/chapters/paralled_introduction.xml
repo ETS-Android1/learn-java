@@ -2,7 +2,7 @@
 <!-- Chapter about introduction to parallel programming. --><resources>
     <chapterdata>
         <id>251</id>
-        <name>Introduction to multithreading</name>
+        <name>Bevezetés</name>
     </chapterdata>
 
     <!-- In general, not in Java? Possible dangers
@@ -10,102 +10,114 @@
 
     <text>
         <![CDATA[
-        Parallel programming is the execution of multiple processes <b>at the same time</b>. Please note that this chapter
-        will not be Java specific, more like a quick overview of the topic.
+        A párhuzamos programozás több folyamat <b>egyidejűleg</b> történő végrehajtása. Kérjük, vegye figyelembe, 
+		Ez a fejezet nem Java-specifikus lesz, inkább csak egy gyors áttekintés a 
+		témáról, ami más nyelvekre is alkalmazható.
         ]]>
     </text>
-    <boxed title="Other names">
+    <boxed title="Más elnevezések">
         <![CDATA[
-        These processes are sometimes called <b>tasks</b>, <b>jobs</b> or in Java, <b>threads</b>, hence the
-        name, multithreading. A program that is not parallel is called <b>sequential</b>.
-        <p>
-        A similar concept to parallelism is <b>concurrency</b>. Check the linked resourced below if you're interested in
-        the differences.
+        A folyamatokat, amik párhuzamosan futnak <b>feladatoknak</b>, 
+		<b>munkáknak</b>, Javában gyakran <b>szálaknak (thread)</b> nevezik.
+        A nem párhuzamos programot <b>szekvenciálisnak</b> nevezzük (eddig minden 
+		programunk ilyen volt).
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        The amount of processes we can run in parallel depends on multiple factors:
+        A párhuzamosan futtatható folyamatok száma több tényezőtől függ:
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li>The <b>operating system</b>. In the end, programs can only 'request' threads to start. The <i>OS</i> will decide
-         how many processes it actually starts, and when.</li>
-        <li>The hardware. To run processes in parallel multiple <i>CPU</i> cores are needed.</li>
+        <li>A <b>operációs rendszertől</b>. A programok végül is csak "kérhetik" a 
+		szálak indítását. Az <i>OS</i> dönt majd arról, hogy ténylegesen hány 
+		folyamatot indít el, és mikor.</li>
+        <li>A hardvertől. A folyamatok párhuzamos futtatásához több <i>CPU</i> 
+		magra van szükség.</li>
         </ul>
         ]]>
     </list>
-    <title text="Advantages"/>
+    <title text="Előnyök"/>
     <text>
         <![CDATA[
-        Creating parallel applications can lead to increased performance, since we can run multiple parts
-        of out code simultaneously.
+        A párhuzamosított alkalmazások létrehozása jobb teljesítményt eredményezhet, 
+		mivel kódunk több részét futtathatjuk egyszerre, és ezeknek nem kell a 
+		többire várnia.
         ]]>
     </text>
-    <boxed title="Creating better models">
+    <boxed title="Jobb modellek">
         <![CDATA[
-        Java (and any object oriented languages) places importance on modeling the problem as realistically as
-        possible. Classes and interfaces all serve this purpose. Now, with parallel programming we can build
-        even better models.
+        A Java (és minden objektumorientált nyelv) fontosnak tartja a probléma minél 
+		reálisabb modellezését. Az osztályok és az interfészek mind ezt a célt 
+		szolgálják. Most, a párhuzamos programozással még jobb modelleket készíthetünk 
+		(vannak a valóságban is párhuzamosan történő dolgok, ezeket modellezhetjük). 
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        For some programs, being parallel is a must. An example is applications with a <b>graphical user interface</b> (<i>GUI</i>).
-        These apps create their own windows instead of using the command line, and thus they're more user friendly.
+        Egyes programok esetében a párhuzamosság elengedhetetlen. Ilyenek például a 
+		<b>grafikus felhasználói felülettel</b> (<i>GUI</i>) rendelkező alkalmazások.
+        Ezek az alkalmazások saját ablakokat hoznak létre a parancssor használata 
+		helyett, és így sokkal felhasználóbarátabbak.
         ]]>
     </text>
-    <boxed title="Multithreading in GUI apps">
+    <boxed title="Párhuzamosság a GUI alkalmazásokban">
         <![CDATA[
-        A <i>GUI</i> app must perform long operations in parallel, on so called <b>background threads</b>. Otherwise,
-        while the long operation was underway, the user interface couldn't continue to be interactive, and the program
-        would appear to be "<i>frozen</i>".
+        Egy <i>GUI</i> alkalmazásnak a hosszú műveleteket párhuzamosan kell futtatnia, 
+		úgynevezett <b>háttérszálakon</b>. Ellenkező esetben, a hosszú művelet közben 
+		a felhasználói felület nem tudna továbbra is interaktív maradni, és a program
+        "<i>lefagyottnak</i>" tűnne.
         <p>
-        As an example, this android app uses multiple threads to load resources, so that the buttons, swipe components
-        remain reactive while loading is in progress.
+        Példaként ez az androidos alkalmazás több szálat használ az erőforrások 
+		betöltésére, így a gombok és egyéb elemek reaktívak maradnak, amíg a 
+		betöltés folyamatban van.
         ]]>
     </boxed>
-    <title text="Disadvantages"/>
+    <title text="Hátrányok"/>
     <text>
         <![CDATA[
-        Our programs have so far been <b>deterministic</b>. This means that given the same input, they'll always produce the
-        same output. Now with parallel programming, we bring <b>non-determinism</b> into the system. This is because the <i>OS</i>
-        decides which processes will it start executing, and we have no way of knowing this beforehand.
+        Eddig a programjaink <b>determinisztikusak</b> voltak. Ez azt jelenti, 
+		hogy azonos bemenet esetén mindig ugyanazt a kimenetet adták. Most a 
+		párhuzamos programozással <b>nemdeterminizmust</b> viszünk a rendszerbe. 
+		Ez azért van, mert a <i>OS</i> dönti el, hogy mely folyamatok végrehajtását 
+		kezdi el, és ezt nem tudhatjuk előre.
         ]]>
     </text>
-    <advanced title="Debugging problems">
+    <advanced title="Hibák javítása">
         <![CDATA[
-        Parallel programs are significantly harder to debug, if we encounter a problem. For this reason, it's
-        important that you really understand the previous courses before you jump into this one.
+        A párhuzamos programokat lényegesen nehezebb debugolni (javítania hibákat). 
+		Emiatt fontos, hogy valóban megértsük az előző kurzusokat, 
+		mielőtt belevágnánk ebbe.
         ]]>
     </advanced>
     <text>
         <![CDATA[
-        It's challenging (sometimes outright not possible) to split a sequential program or algorithm into parts that can be executed in parallel. It's
-        up to the programmer to decide if this extra work is worth the speedup.
+        Nagy kihívás (néha egyenesen lehetetlen) egy szekvenciális programot vagy 
+		algoritmust párhuzamosan végrehajtható részekre bontani. A programozónak kell 
+		eldöntenie, hogy ez a többletmunka megéri-e a lehetséges teljesítménynövekedést.
         ]]>
     </text>
-    <title text="Extra material"/>
+    <title text="További anyagok"/>
     <text>
         <![CDATA[
-        It's difficult to grasp what parallel programming actually is. I've gathered a few resources here which
-        can help:
+        Nehéz felfogni, hogy mi is valójában a párhuzamos programozás. 
+		Összegyűjtöttem itt néhány forrást, amelyek segíthetnek megérteni. 
+		Ezek az anyagok angol nyelvűek.
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li>A short video on parallel computing: <a href="https://www.youtube.com/watch?v=q7sgzDH1cR8">Parallel Computing Explained In 3 Minutes</a>.</li>
-        <li>A longer and more detailed video: <a href="https://www.youtube.com/watch?v=RNVIcm8-6RE">Introduction To Parallel Computing</a>.</li>
-        <li>About concurrency and parallelism: <a href="https://youtu.be/RNVIcm8-6RE?t=371">Later in the same video</a>.</li>
+        <li>Rövid videó a párhuzamosságról: <a href="https://www.youtube.com/watch?v=q7sgzDH1cR8">Parallel Computing Explained In 3 Minutes</a>.</li>
+        <li>Egy hosszabb és részletesebb videó: <a href="https://www.youtube.com/watch?v=RNVIcm8-6RE">Introduction To Parallel Computing</a>.</li>
         </ul>
         ]]>
     </list>
     <text>
         <![CDATA[
-        I did not make these resources. Credits and thanks to the authors.
+        Ezeket a videókat nem én készítettem. Köszönet a szerzőknek.
         ]]>
     </text>
 </resources>

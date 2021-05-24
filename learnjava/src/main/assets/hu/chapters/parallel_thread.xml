@@ -2,7 +2,7 @@
 <resources>
     <chapterdata>
         <id>252</id>
-        <name>The Thread class</name>
+        <name>A Thread osztály</name>
     </chapterdata>
 
     <!-- Basic classes: Thread, Runnable, ...
@@ -10,14 +10,17 @@
 
     <text>
         <![CDATA[
-        In this chapter, we'll take a look at how can we start new threads in Java.
+        Ebben a fejezetben megnézzük, hogyan indíthatunk új szálakat Javában, amik 
+		párhuzamosan futnak majd.
         ]]>
     </text>
-    <title text="The Thread class"/>
+    <title text="A Thread (szál) osztály"/>
     <text>
         <![CDATA[
-        It's no surprise that multithreading is also implemented in an object oriented way. The most important class
-        is <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Thread.html">java.lang.Thread</a>.
+        Nem meglepő, hogy a többszálú futás is objektum orientált módon van 
+		megvalósítva. A legfontosabb osztály a 
+		<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Thread.html">java.lang.Thread</a>, 
+		ami egy szálat reprezentál.
         ]]>
     </text>
     <code><![CDATA[
@@ -30,28 +33,32 @@
     ]]></code>
     <text>
         <![CDATA[
-        So what will this thread do? Well, nothing. This is obvious, since we didn't specify anything that it
-        could execute.
+        Szóval mit fog is ez a szál csinálni? Nos, semmit. Ez nyilvánvaló, mivel nem 
+		adtunk meg semmit, amit végre tudna hajtani.
         ]]>
     </text>
-    <boxed title="Thread lifecycle">
+    <boxed title="A szál életciklusa">
         <![CDATA[
-        When you instantiate the <i>Thread</i> class, no execution is started yet. After the <i>start</i> method is called,
-        the thread starts executing it's statements. This can be stopped and continued. When execution is finished the
-        thread 'dies', and can not be started again.
+        A <i>Thread</i> osztály példányosításakor a végrehajtás még nem indul el. 
+		A <i>start</i> metódus meghívása után, a szál elkezdi végrehajtani az 
+		utasításait. Ez megállítható és folytatható. A végrehajtás befejezésekor a
+        szál 'meghal', és nem indítható újra.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        To pass statements to execute to a thread, an interface is used: <a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Runnable.html">java.lang.Runnable</a>. This interface
-        only has one method, <i>run</i>, and what is inside this method will be executed by the thread.
+        A végrehajtandó utasítások átadására egy interfészt használunk: 
+		<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/Runnable.html">java.lang.Runnable</a>. 
+		Ennek az interfésznek csak egy metódusa van, a <i>run</i>, és ami ebben a 
+		metódusban van, azt a szál végre fogja hajtani.
         ]]>
     </text>
-    <title text="Passing the runnable to the thread"/>
+    <title text="Az utasítások átadása"/>
     <text>
         <![CDATA[
-        There are multiple ways to pass the runnable the the thread object. The simplest (but not the shortest) is probably implementing the runnable
-        interface in a separate class:
+        Többféleképpen is átadhatjuk a <i>Runnable</i>-t a szálobjektumnak. 
+		A legegyszerűbb (de nem a legrövidebb) valószínűleg a <i>Runnable</i> 
+		implementálása egy külön osztályban:
         ]]>
     </text>
     <code><![CDATA[
@@ -67,7 +74,8 @@
     ]]></code>
     <text>
         <![CDATA[
-        Then, we can instantiate this class, and pass it to a thread, since it's a runnable.
+        Ezután példányosíthatjuk ezt az osztályt, és átadhatjuk egy szálnak, 
+		mivel ez egy <i>Runnable</i> lesz:
         ]]>
     </text>
     <code><![CDATA[
@@ -80,21 +88,28 @@
     ]]></code>
     <text>
         <![CDATA[
-        As expected, this thread will print the greeting to the console.
+        A várakozásoknak megfelelően ez a szál kiírja az üdvözlést a konzolra.
         ]]>
     </text>
     <text>
         <![CDATA[
-        Another, more preferred way to pass the runnable is to use an anonymous class.
+        A <i>Runnable</i> átadásának másik, előnyösebb módja egy névtelen (anonim) 
+		osztály használata. Ezekről már volt szó korábban, de itt egy kis ismétlés.
         ]]>
     </text>
-    <boxed title="Anonymous classes">
+    <boxed title="Anonim osztályok">
         <![CDATA[
-        Java provides a way to quickly declare and use a class. Such classes can only be used be used once, because
-        they won't have a name to reference them later (hence the expression anonymous). You'll see the syntax through the
-        examples below, but if you need more explanation, plenty is provided <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/anonymousclasses.html">here</a>.
+        A Java lehetőséget biztosít egy osztály gyors deklarálására és használatára. 
+		Az ilyen osztályok csak egyszer használhatók, mert nem lesz nevük, hogy 
+		később hivatkozhassunk rájuk (innen az anonim kifejezés). Bőven tájékozódhatsz 
+		<a href="https://docs.oracle.com/javase/tutorial/java/javaOO/anonymousclasses.html">itt</a>.
         ]]>
     </boxed>
+	<text>
+		<![CDATA[
+        Tehát anonim módon is megadhatjuk a <i>Runnable</i>-t, ott helyben:
+        ]]>
+	</text>
     <code><![CDATA[
         
 <font color="gray">//create a thread using an anonymous runnable</font>
@@ -111,17 +126,26 @@
     ]]></code>
     <text>
         <![CDATA[
-        This does the same thing, but we did not need to declare a full-fledged custom class. If you'll only use
-        the runnable once, this is the preferred way. If you plan to reuse it, just write a normal class, instead of
-        placing the anonymous declaration everywhere.
+        Ez ugyanezt teszi mintha külön osztályban lenne, de nem kellett egy 
+		teljes értékű egyéni osztályt deklarálnunk. Ha a <i>Runnable</i>-t csak 
+		egyszer használod, ez az egyik legjobb megoldás. Ha újrafelhasználást 
+		tervezel, akkor csak írj egy normál osztályt, ahelyett, hogy az anonim 
+		deklaráció mindenhova átmásolod.
         ]]>
     </text>
-    <advanced title="Lambda expression">
+    <boxed title="Lambda kifejezés">
         <![CDATA[
-        Java 8 introduced a new way to pass the runnable, one that is even more compact, lambda expressions. This
-        will be covered in a later course, but you can take a look at the code sample to get a quick peek.
+        A <i>Java 8</i> bevezette a <i>Runnable</i> átadásának egy új, még kompaktabb 
+		módját, a lambda kifejezéseket. Ez azért lehetséges, mert a <i>Runnable</i> egy 
+		funckionális interfész, egyetlen absztrakt metódusa a <i>run</i>.
         ]]>
-    </advanced>
+    </boxed>
+	<text>
+		<![CDATA[
+        Tehát még az anonim osztály létrehozását is megspórolhatjuk ha egy lambda 
+		kifejezéssel adjuk meg a <i>Runnable</i>-t:
+        ]]>
+	</text>
     <code><![CDATA[
         
         <font color="gray">//create a thread using a lambda expression</font>
@@ -132,9 +156,10 @@
     ]]></code>
     <text>
         <![CDATA[
-        No, it's still not over. Interestingly, the <i>Thread</i> class also implements <i>Runnable</i>, but it's <i>run</i> method
-        is empty. This is why our first code sample did nothing. We can however subclass <i>Thread</i> and override the method
-        there:
+        Nem, még mindig nincs vége. Érdekes módon a <i>Thread</i> osztály is 
+		implementálja a <i>Runnable</i>-t, de a <i>run</i> metódusa üres. Ezért nem 
+		csinált semmit az első kódpéldánk. Származtathatunk azonban a 
+		<i>Thread</i>-ből, és felülírhatjuk a metódust:
         ]]>
     </text>
     <code><![CDATA[
@@ -154,7 +179,11 @@
     ]]></code>
     <text>
         <![CDATA[
-        As you can see, thread objects have names, which you can get and set with the appropriate getters and setters.
+		Ez a szál éppen 50-szer fog kiírni a konzolra. Ennek hamarosan jelentősége 
+		lesz.
+		<p>
+        Amint láthatod, a szálobjektumoknak nevük is van, amelyeket a megfelelő 
+		getterekkel és setterekkel kaphatsz és állíthatsz be.
         ]]>
     </text>
     <code><![CDATA[
@@ -165,7 +194,7 @@
 <br/>t1.<font color="#ADD8E6">start</font>();
         
     ]]></code>
-    <interactive instruction="Create the thread using an anonymous runnable!">
+    <interactive instruction="Hozz létre egy szálat anonim osztály segítségével!">
         <data><![CDATA[
 
 <font color="#999900">Thread</font> thread = <font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> <font color="#ADD8E6">___</font>() {
@@ -180,11 +209,12 @@
         <answer place="0">Runnable</answer>
         <answer place="1">run</answer>
     </interactive>
-    <title text="Demonstration"/>
+    <title text="Demonstráció"/>
     <text>
         <![CDATA[
-        All this effort, and we didn't even see a proper demonstration of parallel execution. Let's remedy this. I'll use
-        the previously created <i>GreetThread</i> class.
+        Ennyi erőfeszítés, és még csak nem is láttuk a párhuzamos végrehajtás 
+		megfelelő bemutatását. Ezt most megteszem, és használni fogom a
+        a korábban létrehozott <i>GreetThread</i> osztályt.
         ]]>
     </text>
     <code><![CDATA[
@@ -202,16 +232,21 @@
     ]]></code>
     <text>
         <![CDATA[
-        In a sequential program, you'd see thread 1 greeting us 50 times, then thread 2 doing the same. But if you run
-        this, you'll note that the greetings are mixed together, thus the threads run and print in parallel.
+        Egy szekvenciális programban az 1-es szál 50-szer üdvözölne minket, 
+		majd a 2-es szál ugyanezt tenné, miután az 1-es végzett. De ha lefuttatjuk
+        ezt, észrevehetjük, hogy az üdvözlések keverednek, így a szálak párhuzamosan 
+		futnak és írnak a konzolra.
         ]]>
     </text>
     <image name="thread_demonstration"/>
-    <boxed title="Non-determinism">
+    <boxed title="Nem determinisztikus">
         <![CDATA[
-        This example also shows that parallel programs are actually non-deterministic. Run it a few times and you'll see
-        that the exact order in which the two threads greet you varies each time. This is because the two threads "race" to
-        access the console output, and the <i>OS</i> decides, in unpredictable ways which thread can access it.
+        Ez a példa azt is mutatja, hogy a párhuzamos programok valójában nem 
+		determinisztikusak. Futtasd le néhányszor, és látni fogod, hogy
+        hogy a pontos sorrend, amelyben a két szál üdvözöl, minden alkalommal 
+		változik. Ez azért van így, mert a két szál "versenyez" a
+        a konzol kimenetéhez való hozzáférésért, és a <i>OS</i> kiszámíthatatlan 
+		módon dönti el, hogy melyik szál éppen mikor férhet hozzá.
         ]]>
     </boxed>
 </resources>

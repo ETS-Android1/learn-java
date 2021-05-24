@@ -2,38 +2,43 @@
 <resources>
     <chapterdata>
         <id>255</id>
-        <name>Executor services</name>
+        <name>Futtató szolgáltatások</name>
     </chapterdata>
     <text>
         <![CDATA[
-        Executor services are the modern alternatives for directly using the <i>Thread</i> class. To use, them
-        we'll have to take a look at a new interface.
+        Az <i>Executor</i> szolgáltatások a <i>Thread</i> osztály közvetlen használatának 
+		modern alternatívái. Használatukhoz először egy új interfészt kell megismernünk.
         ]]>
     </text>
-    <advanced title="Replacement?">
+    <advanced title="Elavultak?">
         <![CDATA[
-        The following classes and interfaces were intended to replace the old <i>Runnable</i> and <i>Thread</i> classes. The official
-        "best practice" is that you only use the new ones. However, in practice, the old classes are still often used, because people
-        have gotten used to it, and for many problems, they are still perfect.
+        A következő osztályok és interfészek a régi <i>Runnable</i> és <i>Thread</i> osztályok 
+		helyettesítésére készültek. A hivatalos "legjobb gyakorlat" az, hogy csak az 
+		újakat használd. Azonban még mindig gyakran használják a régi osztályokat, mert 
+		az emberek megszokták őket, és sok problémára még mindig tökéletesek. Éppen ezért nincsenek is 
+		elavultnak jelölve.
         ]]>
     </advanced>
-    <title text="Callable"/>
+    <title text="Callable interfész"/>
     <text>
         <![CDATA[
-        <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Callable.html">java.util.concurrent.Callable</a>
-        is the modern way of passing code to be executed in the background.
+        A <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Callable.html">java.util.concurrent.Callable</a>
+        a háttérben végrehajtandó kód átadásának modern módja.
         ]]>
     </text>
-    <boxed title="Why not Runnable?">
+    <boxed title="Miért nem a Runnable?">
         <![CDATA[
-        The most important disadvantage of <i>Runnable</i> is the lack of return value. When performing a background operation,
-        the result of that operation is often needed. With <i>Callable</i>, a generic interface, there is a way to easily
-        get the result in the original thread.
+        A <i>Runnable</i> legfontosabb hátránya a visszatérési érték hiánya. A háttérben 
+		végzett művelet végrehajtásakor gyakran szükség van a művelet eredményére. A 
+		<i>Callable</i>, egy általános interfész segítségével könnyen megoldható az eredmény 
+		visszaadása az eredeti szálba.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        Let's see an example <i>Callable</i>, which we'll use later. The important method here is <i>call</i>.
+        Lássunk egy példát a <i>Callable</i>-re, amelyet később használni fogunk. 
+		A fontos metódus itt a <i>call</i>, amelyik ugyanolyan szerepet lát el, mint a 
+		<i>run</i> a <i>Runnable</i> esetén.
         ]]>
     </text>
     <code><![CDATA[
@@ -72,33 +77,38 @@
     ]]></code>
     <text>
         <![CDATA[
-        You can see that the generic class argument of <i>Callable</i> is going to be the return type of the background
-        operation.
+        Láthatjuk, hogy a <i>Callable</i> generikus osztály típusparamétere lesz a 
+		háttérben végzett művelet visszatérési típusa.
+		<p>
+		Az is igaz továbbá, hogy a <i>Callable</i> is funckionális interfész, azaz 
+		megadható labda kifejezéssel.
         ]]>
     </text>
     <title text="Future"/>
     <text>
         <![CDATA[
-        We'll need another class to retrieve the result of the background operation. This is called
-        <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html">java.util.concurrent.Future</a>.
+        Szükségünk lesz egy másik osztályra a háttérművelet eredményének lekérdezéséhez. 
+		Ennek a neve <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Future.html">java.util.concurrent.Future</a> 
+		("jövő").
         ]]>
     </text>
-    <boxed title="Why future?">
+    <boxed title="A név oka">
         <![CDATA[
-        When you give a task (a <i>Callable</i>) to an executor service, it won't be able to instantly
-        return the result of that task (since that task needs to complete first, in the background).
+        Amikor egy feladatot (egy <i>Callable</i>-t) adunk át nem fogjuk tudni azonnal
+        megkapni a feladat eredményét (mivel a feladatnak előbb be kell fejeződnie a háttérben).
         <p>
-        What it can do, is giving you an object, that will, <b>in the future</b> hold the result. In other programming
-        languages, these are often called <b>promises</b>.
+        Az eredmény helyett egy olyan objektumot kapunk, ami <b>a jövőben</b> majd vissza fogja 
+		adni az eredményt. Más programnyelveken ezeket gyakran <b>promise</b>-nak (
+		"ígéret") nevezik.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        The <i>Future</i> class is also generic. You'll need to specify the type of the result of the background task.
-        Obviously, this must match the return type of the <i>Callable</i>.
+        A <i>Future</i> osztály szintén generikus. Meg kell adnunk a háttérfeladat eredményének 
+		típusát. Nyilvánvalóan ennek meg kell egyeznie a <i>Callable</i> visszatérési típusával.
         ]]>
     </text>
-    <interactive instruction="This callable task must count the occurrence of a letter in a string!">
+    <interactive instruction="Ennek a Callable-nek meg kell számolnia egy betű előfordulását a kapott String-ben!">
         <data><![CDATA[
 
    <font color="#E65100">class</font> <font color="#999900">LetterCounter</font> ___ <font color="#999900">Callable</font>&lt;<font color="#999900">Integer</font>> {
@@ -124,21 +134,23 @@
     <title text="Executor services"/>
     <text>
         <![CDATA[
-        An executor service is a class that can take <i>Callable</i> objects, while returning <i>Future</i>
-        objects, and then calculate the results of the callables, in the background. The base class for these
-        is <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ExecutorService.html">java.util.concurrent.ExecutorService</a>
+        Az <i>ExecutorService</i> (háttérfuttató szolgáltatás) egy olyan osztály, amely <i>Callable</i> objektumokat fogad, miközben <i>Future</i> objektumokat ad vissza, 
+		majd a háttérben kiszámítja a kapott <i>Callable</i> objektumok eredményeit. Ezeknek az alaposztálya a
+        a <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/ExecutorService.html">java.util.concurrent.ExecutorService</a>.
         ]]>
     </text>
-    <boxed title="Executors class">
+    <boxed title="Executors segédosztály">
         <![CDATA[
-        Executor services can be created with the utility class
-        <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Executors.html">Executors</a>. We'll see examples soon.
+        Az <i>ExecutorService</i>-ek egy segédosztállyal hozhatók létre. Ez lesz a 
+        <a href="https://docs.oracle.com/javase/7/docs/api/java/util/concurrent/Executors.html">Executors</a>. 
+		Erre hamarosan fogunk példákat látni.
         ]]>
     </boxed>
-    <title text="Single thread executor"/>
+    <title text="Egyszálas ExecutorService"/>
     <text>
         <![CDATA[
-        This is the simplest possible executor service. It encapsulates a single background thread.
+        Ez a lehető legegyszerűbb futtató szolgáltatás. Egyetlen háttérszálat foglal 
+		magába, és azon futtatja a kapott <i>Callable</i> objektumokat.
         ]]>
     </text>
     <code><![CDATA[
@@ -170,35 +182,38 @@
     ]]></code>
     <text>
         <![CDATA[
-        As you can see, the <i>Future.get</i> method will try to return the result of the background task.
-        If the result is not calculated yet, it halts the current thread until the result is ready.
+        Látható, hogy a szolgáltatás visszaad egy <i>Future</i> objektumot a kapott feladatho. 
+		Ennek a <i>get</i> metódusa megpróbálja visszaadni a háttérfeladat eredményét.
+        Ha az eredmény még nem került kiszámításra, akkor leállítja az aktuális szálat, amíg az elkészül.
         ]]>
     </text>
     <text>
         <![CDATA[
-        For this task, a simple <i>Thread</i> class would have been enough. The executor services
-        only start to shine when many tasks must be executed.
+        Ehhez a feladathoz egy egyszerű <i>Thread</i> osztály is elég lett volna. A futtató szolgáltatások
+        csak akkor kezdenek el igazán hasznosak lenni, amikor sok feladatot kell végrehajtani.
         ]]>
     </text>
-    <title text="Fixed thread pool"/>
+    <title text="Fix szálas ExecutorService"/>
     <text>
         <![CDATA[
-        Fixed thread pools are executor services which use a fixed number of threads to perform
-        the received tasks (the thread number is given when the service is created).
+        A fix szálas futtató szolgáltatások rögzített számú szálat használnak a végrehajtáshoz 
+        (a szálak számát a szolgáltatás létrehozásakor adjuk meg, utána nem változtatható).
         ]]>
     </text>
-    <advanced title="Counting processors">
+    <advanced title="Processzor magok számolása">
         <![CDATA[
-        As mentioned in the first chapter, the efficiency of parallel programming depends on the amount of
-        processors available. Interestingly, Java provides a way to get this number programmatically, at runtime:
+        Ahogyan az első fejezetben említettük, a párhuzamos programozás hatékonysága függ a
+        rendelkezésre álló processzor magok mennyiségétől. Érdekes módon a Java lehetőséget biztosít arra, 
+		hogy ezt a számot futásidőben megkapjuk:
         <br><br>
         <i>Runtime.getRuntime().availableProcessors()</i>
         ]]>
     </advanced>
     <text>
         <![CDATA[
-        Let's use a thread pool! The only difference is that instead of a single task, a list of tasks can be
-        passed to the pool, and it'll return a list of futures.
+        Használjunk fix szálas szolgáltatást! Az egyetlen különbség az, hogy most egy feladat helyett egy 
+		feladat listát fogok átadni a szolgáltatásnak, és az egy listát fog visszaadni a 
+		<i>Future</i> objektumokból.
         ]]>
     </text>
     <code><![CDATA[
@@ -244,26 +259,27 @@
     ]]></code>
     <text>
         <![CDATA[
-        Note that the amount of tasks exceeds the number of processors (at least on my computer), but this
-        is not a problem for the executor service.
+        Vegyük észre, hogy a feladatok száma meghaladja a processzorok számát (legalábbis az én számítógépemen), de ez a
+        nem jelent problémát a szolgáltatás számára. A programozó elől elrejtve, hatékony 
+		módon felosztja majd a feladatokat a szálak között.
         ]]>
     </text>
-    <title text="Other executors"/>
+    <title text="További ExecutorService típusok"/>
     <text>
         <![CDATA[
-        These were only the most common executor service types, however, more are provided in the <i>Executors</i> class.
-        Some especially interesting ones are:
+        Láttuk a leggyakoribb futtató szolgáltatás típusokok, azonban az <i>Executors</i> osztályban több is rendelkezésre áll.
+        Néhány különösen érdekes közülük:
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-        <li><b>Cached thread pool</b>: can automatically determine the amount of threads needed.</li>
-        <li><b>Scheduled thread pool</b>: can execute tasks after a delay, or periodically.</li>
+        <li><b>Tárazott szolgáltatás</b>: automatikusan meghatározza a szükséges szálak mennyiségét.</li>
+        <li><b>Szabályozott szolgáltatás</b>: késleltetés után vagy időszakosan tudja végrehajtani a feladatokat.</li>
         </ul>
         ]]>
     </list>
-    <interactive instruction="Suppose we have random strings in a list. Use the LetterCounter task defined above to count the occurrence of 'a' in them using an executor service!">
+    <interactive instruction="Tegyük fel, hogy véletlenszerű String-ek vannak egy listában. Használjuk a fent definiált LetterCounter feladatot, hogy egy futtató szolgáltatás segítségével megszámoljuk az 'a' előfordulását bennük!">
         <data><![CDATA[
 
 <font color="#999900">List</font>&lt;<font color="#999900">String</font>> strings = <font color="#ADD8E6">generateStrings</font>(); <font color="gray">//suppose this creates the list of strings

@@ -95,6 +95,11 @@
         examples below, but if you need more explanation, plenty is provided <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/anonymousclasses.html">here</a>.
         ]]>
     </boxed>
+	 <text>
+        <![CDATA[
+        So we can implement the runnable with an anonymous class:
+        ]]>
+    </text>
     <code><![CDATA[
         
 <font color="gray">//create a thread using an anonymous runnable</font>
@@ -116,12 +121,18 @@
         placing the anonymous declaration everywhere.
         ]]>
     </text>
-    <advanced title="Lambda expression">
+    <boxed title="Lambda expression">
         <![CDATA[
-        Java 8 introduced a new way to pass the runnable, one that is even more compact, lambda expressions. This
-        will be covered in a later course, but you can take a look at the code sample to get a quick peek.
+        Java 8 introduced a new way to pass the runnable, one that is even more 
+		compact, lambda expressions. This is possible, because the <i>Runnable</i> is 
+		actually a functional interface.
         ]]>
-    </advanced>
+    </boxed>
+	<text>
+        <![CDATA[
+        As a result, we can use a lambda to create the runnable in a very compact way:
+        ]]>
+    </text>
     <code><![CDATA[
         
         <font color="gray">//create a thread using a lambda expression</font>
