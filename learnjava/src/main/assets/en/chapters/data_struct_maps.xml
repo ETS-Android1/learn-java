@@ -128,7 +128,7 @@ Instead, let's take a look at how we can <b>iterate the pairs</b> themselves:
         
 <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"The map has the following key-value pairs:"</font>);
 <br/><font color="#E65100">for</font>(<font color="#999900">Map</font>.<font color="#999900">Entry</font>&lt;<font color="#999900">Day</font>, <font color="#999900">Boolean</font>> pair: weekendMap.<font color="#ADD8E6">entrySet</font>()) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(pair.<font color="#ADD8E6">getKey</font>() + " -> " + pair.<font color="#ADD8E6">getValue</font>());
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(pair.<font color="#ADD8E6">getKey</font>() + <font color="#2E8B57">" -> "</font> + pair.<font color="#ADD8E6">getValue</font>());
 <br/>}
         
     ]]></code>
@@ -155,7 +155,7 @@ Instead, let's take a look at how we can <b>iterate the pairs</b> themselves:
 <font color="#999900">Map</font>&lt;___,___> userData = <font color="#E65100">new</font> <font color="#999900">HashMap</font>&lt;>();
 <br/><font color="#999900">Scanner</font> scanner = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(<font color="#999900">System</font>.<font color="#ADD8E6">in</font>);
 <br/><font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;<font color="#F0E130">5</font>; i++) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"<font color="</font>#999900">Enter</font> " + (i+<font color="#F0E130">1</font>) + ". user name and age:");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"<font color="</font>#999900">Enter</font> " + (i+<font color="#F0E130">1</font>) + <font color="#2E8B57">". user name and age:"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> name = scanner.<font color="#ADD8E6">nextLine</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> age = scanner.<font color="#ADD8E6">nextInt</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;userData.<font color="#ADD8E6">___</font>(name, age);

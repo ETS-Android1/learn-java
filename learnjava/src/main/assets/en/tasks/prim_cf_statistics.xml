@@ -150,10 +150,10 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(operation.<font color="#ADD8E6">equals</font>(<font color="#2E8B57"><font color="#2E8B57">"AVG"</font></font>)) { <font color="gray">//average
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"The average is: "</font> + <font color="#ADD8E6">findAverage</font>(numbers));
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> <font color="#ADD8E6">if</font>(operation.<font color="#ADD8E6">equals</font>(<font color="#2E8B57"><font color="#2E8B57">"MAX"</font></font>)) { <font color="gray">//median
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> <font color="#ADD8E6">if</font>(operation.<font color="#ADD8E6">equals</font>(<font color="#2E8B57"><font color="#2E8B57">"MAX"</font></font>)) { <font color="gray">//maximum
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"The maximum is: "</font> + <font color="#ADD8E6">findMax</font>(numbers));
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> <font color="#ADD8E6">if</font>(operation.<font color="#ADD8E6">equals</font>(<font color="#2E8B57"><font color="#2E8B57">"MIN"</font></font>)) { <font color="gray">//median
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> <font color="#ADD8E6">if</font>(operation.<font color="#ADD8E6">equals</font>(<font color="#2E8B57"><font color="#2E8B57">"MIN"</font></font>)) { <font color="gray">//minimum
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"The minimum is: "</font> + <font color="#ADD8E6">findMin</font>(numbers));
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}  <font color="#E65100">else</font> <font color="#ADD8E6">if</font>(operation.<font color="#ADD8E6">equals</font>(<font color="#2E8B57"><font color="#2E8B57">"RANGE"</font></font>)) { <font color="gray">//range
@@ -188,7 +188,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">err</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Invalid argument: "</font> + arg);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(validated.<font color="#ADD8E6">size</font>() == <font color="#F0E130">0</font>) { <font color="gray<font color="#2E8B57">">//if there aren'</font>t any valid arguments
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(validated.<font color="#ADD8E6">size</font>() == <font color="#F0E130">0</font>) { <font color="gray<font color="#2E8B57">">//if there aren't any valid arguments</font>
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">err</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"No valid arguments found!"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">exit</font>(<font color="#F0E130">0</font>);
@@ -222,7 +222,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;numbers.<font color="#ADD8E6">add</font>(<font color="#999900">Integer</font>.<font color="#ADD8E6">parseInt</font>(line));
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">NumberFormatException</font> e) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;continue; <font color="gray<font color="#2E8B57">">//ignore the line if it'</font>s invalid
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;continue; <font color="gray<font color="#2E8B57">">//ignore the line if it's invalid</font>
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}

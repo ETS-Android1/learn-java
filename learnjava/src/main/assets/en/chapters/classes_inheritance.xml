@@ -38,7 +38,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printDogData</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Dog'</font>s name: " + name +
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Dog's name: "</font> + name +
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2E8B57">", age: "</font> + age);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
@@ -61,7 +61,7 @@
     ]]></code>
     <text>
         <![CDATA[
-        You can notice a few things here: first, the <i>protected</b> visibility is used for the members of <b>Dog</b>. This is
+        You can notice a few things here: first, the <i>protected</i> visibility is used for the members of <b>Dog</b>. This is
         done so that they can be accessed inside the <b>TrainedDog</b> class as well.
         <p>
         Secondly, the <b>super</b> keyword inside the constructor. It's used to call the constructor of the superclass, in this

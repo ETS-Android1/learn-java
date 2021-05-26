@@ -170,6 +170,7 @@
     <string name="formatted_line_break" translatable="false"><![CDATA[<br/>]]></string>
     <string name="interactive_correct">Correct!</string>
     <string name="interactive_incorrect">Something is not right yet…</string>
+    <string name="code_component_fail">Error detected in the code sample!</string>
 
     <!-- All exams completed -->
     <string name="congratulations">Congratulations!</string>

@@ -48,28 +48,28 @@
         
         <font color="#E65100">public class</font> <font color="#999900">User</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//every user objects shares this member so it 'belongs to the class'.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//minden User objektum osztozik ezen, 'az osztályhoz tartozik'.
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private static</font> <font color="#DF7401">int</font> userCounter = <font color="#F0E130">0</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//belongs to the object
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//nem statikus, ez minden objektumnak külön van
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font> email;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">User</font>(<font color="#999900">String</font> email) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">email</font> = email;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//new user created, increase counter
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//új User jött létre, számláló növelése
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;userCounter++;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//belongs to the class
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//statikus metódus, az osztályhoz tartozik
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">makeReport</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"We have "</font> + userCounter + <font color="#2E8B57">" users."</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Összesen "</font> + userCounter + <font color="#2E8B57">" felhasználó van."</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//belongs to the object
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//nem statikus, objektumokhoz tartozó metódus
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">getEmail</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> email;
@@ -159,11 +159,11 @@
         
         <font color="#E65100">public class</font> <font color="#999900">User</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//final, but isn't assigned here</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//final-al jelölt, de mégsem kap itt értéket</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private final</font> <font color="#999900">String</font> email;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">User</font>(<font color="#999900">String</font> email) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">email</font> = email; <font color="gray">//gets its final value here</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">email</font> = email; <font color="gray">//itt kap értéket</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">getEmail</font>() {
@@ -180,7 +180,7 @@
     </text>
     <code><![CDATA[
         
-<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Pi is "</font> + <font color="#999900">Math</font>.PI);
+<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"A pi értéke "</font> + <font color="#999900">Math</font>.PI);
         
     ]]></code>
     <title text="Enum-ok"/>
@@ -215,18 +215,18 @@
     <code><![CDATA[
         
 <font color="#E65100">public static</font> <font color="#999900">Day</font> <font color="#ADD8E6">nextDay</font>(<font color="#999900">Day</font> today) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//built-in enum method, returns them in order of declaration!</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//beépített enum metódus, a konstansokat a deklarálás sorrendjében adja vissza</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Day</font>[] allDays = Day.<font color="#ADD8E6">values</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Day</font> tomorrow = null;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(today == <font color="#999900">Day</font>.SUNDAY) { <font color="gray">//handle special case sunday
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(today == <font color="#999900">Day</font>.SUNDAY) { <font color="gray">//a vasárnap speciális eset, mert ez az utolsó
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#999900">Day</font>.MONDAY;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i &lt; allDays.<font color="#ADD8E6">length</font>; i++) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(today == allDays[i]) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;tomorrow = allDays[i+<font color="#F0E130">1</font>]; <font color="gray">//this would go out of bounds for sunday
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;tomorrow = allDays[i+<font color="#F0E130">1</font>]; <font color="gray">//vasárnapra ez hibás pozíció lenne
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}

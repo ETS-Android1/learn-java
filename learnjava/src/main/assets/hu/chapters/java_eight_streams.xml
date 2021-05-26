@@ -2,105 +2,116 @@
 <resources>
     <chapterdata>
         <id>354</id>
-        <name>Stream operations</name>
+        <name>Folyamok</name>
     </chapterdata>
     <text>
         <![CDATA[
-        The <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html">java.util.stream.Stream</a> interface
-        introduced in Java 8 provides new ways to work with collections and other data sources.
+        A <i>Java 8</i>-ban bevezetett 
+		<a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html">java.util.stream.Stream</a> (folyam) 
+		interfész új lehetőségeket biztosít a kollekciókkal és más adatforrásokkal való munkához.
         ]]>
     </text>
-    <boxed title="Lambdas">
+    <boxed title="Lambda kifejezések">
         <![CDATA[
-        The stream operations rely on lambda expressions (and thus, on functional interfaces) to be compact. Make sure
-        you understand these concepts before you jump into this chapter.
+        A folyam műveletek a lambda kifejezésekre (és így a funkcionális interfészekre) támaszkodnak, hogy kompaktak legyenek. 
+		Győződj meg róla, hogy megértetted ezeket a fogalmakat, mielőtt belevágsz ebbe a fejezetbe.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        The general process will be the following:
+        Általánosságban ez fog történni:
         ]]>
     </text>
     <list>
         <![CDATA[
         <ul>
-            <li>Convert the collection into a stream.</li>
-            <li>Perform operations on the stream.</li>
-            <li>Get the result of the operations, or convert the stream back to a collection.</li>
+            <li>Konvertáljuk a kollekciót egy folyammá, azaz egy <i>Stream</i> példánnyá.</li>
+            <li>Műveleteket hajtunk végre ezen a folyamon.</li>
+            <li>A műveletek eredményét kiolvassuk, vagy a módosított folyamot visszaalakítjuk kollekcióvá.</li>
         </ul>
         ]]>
     </list>
-    <title text="Convert collections to streams"/>
+	<text>
+		<![CDATA[
+        Most bemutatom az átjárást a kollekciók és a folyamok között, oda-vissza.
+        ]]>
+    </text>
+    <title text="Kollekciók folyammá alakítása"/>
     <text>
         <![CDATA[
-        We can get a stream of any collection by calling the <i>stream</i> method of the <i>Collection</i> interface. Take a
-        look at this example, where I use a list (which implements <i>Collection</i>):
+        A <i>Collection</i> interfész <i>stream</i> metódusának meghívásával bármelyik gyűjtemény folyamját megkaphatjuk. 
+		Vegyün ezt a példát, ahol egy listát használok (amely a <i>Collection</i>-t valósítja meg, ezért van <i>stream</i> 
+		metódusa):
         ]]>
     </text>
     <code><![CDATA[
-        
-        <font color="gray">//create list
+
+        <font color="gray">//lista létrehozása
 </font>
 <br/><font color="#999900">List</font>&lt;<font color="#999900">Integer</font>> numbers = <font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(<font color="#F0E130">1</font>,<font color="#F0E130">-1,3</font>,<font color="#F0E130">2,4</font>);
-<br/><font color="gray">//get a stream of this list
+<br/><font color="gray">//folyam létrehozása a listából
 </font>
 <br/><font color="#999900">Stream</font>&lt;<font color="#999900">Integer</font>> numStream = numbers.<font color="#ADD8E6">stream</font>();
-        
+
     ]]></code>
+
     <text>
         <![CDATA[
-        Note that the <i>Stream</i> interface is also generic, its type parameter must be the same as the type of the elements
-        in the source.
+        Megjegyzendő, hogy a <i>Stream</i> interfész is generikus, a típus paraméterének meg kell egyeznie a kollekcióbeli 
+		elemek típusával.
         ]]>
     </text>
-    <boxed title="Stream from arrays">
+    <boxed title="Tömbök folyammá alakítása">
         <![CDATA[
-        Arrays themselves can't be converted into streams directly, but you can use the <i>Arrays</i> utility class
-        to first convert them into collections (like in the example above).
+        Maguk a tömbök közvetlenül nem alakíthatók át folyammá, de használhatjuk az <i>Arrays</i> segédosztályt.
+        Ennek segítségével először kollekcióvá alakíthatjuk őket (mint a fenti példában), majd abból már lehet folyamot 
+		létrehozni.
         ]]>
     </boxed>
-    <title text="Convert streams to collections"/>
+    <title text="Folyamok kollekciókká alakítása"/>
     <text>
         <![CDATA[
-        To turn a stream into a collection, use the <i>collect</i> method. The parameter of this method will decide which
-        type of collection the stream will be converted into.
+        Ha egy adatfolyamból kollekciót szeretnél létrehozni, használjd a <i>collect</i> metódust. A metódus paramétere 
+		dönti el, hogy milyen kollekcióvá alakítja át a folyamot (leggyakrabban listát használunk).
         ]]>
     </text>
-    <boxed title="Collectors class">
+    <boxed title="Collectors osztály">
         <![CDATA[
-        Luckily for us, many predefined collectors are available in the <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collectors.html">java.util.stream.Collectors</a> utility
-        class. During this course, I'll only use simple collectors like <i>toList</i>, but there are more advanced ways to
-        collect a stream as well (grouping by, counting, etc...).
+        Szerencsénkre számos előre definiált "gyűjtő" (<i>collector</i>) áll rendelkezésre a 
+		<a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Collectors.html">java.util.stream.Collectors</a> 
+		segédosztályban. A kurzus során csak olyan egyszerű gyűjtőket fogok használni, mint a <i>toList</i>, de vannak 
+		ennél fejlettebbek is gyűjtésére (csoportosítás, számlálás stb...).
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        Let's extend the previous example by converting the stream back to a list, and a set.
+        Bővítsük ki az előző példát azzal, hogy a folyamot visszaalakítjuk először listává, majd halmazzá.
         ]]>
     </text>
     <code><![CDATA[
-        
-        <font color="gray">//create list
+
+        <font color="gray">//lista létrehozása
 </font>
 <br/><font color="#999900">List</font>&lt;<font color="#999900">Integer</font>> numbers = <font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(<font color="#F0E130">1</font>,<font color="#F0E130">-1,3</font>,<font color="#F0E130">2,4</font>);
-<br/><font color="gray">//get a stream of this list
+<br/><font color="gray">//folyam létrehozása a listából
 </font>
 <br/><font color="#999900">Stream</font>&lt;<font color="#999900">Integer</font>> numStream = numbers.<font color="#ADD8E6">stream</font>();
-<br/><font color="gray">//convert it back to a list (this is a new list!)
+<br/><font color="gray">//vissza alakítás listává (ez egy új lista!)
 </font>
 <br/><font color="#999900">List</font>&lt;<font color="#999900">Integer</font>> numbers2 = numStream.<font color="#ADD8E6">collect</font>(<font color="#999900">Collectors</font>.<font color="#ADD8E6">toList</font>());
-<br/><font color="gray">//convert it to a new set
+<br/><font color="gray">//halmazzá alakítás
 </font>
 <br/><font color="#999900">Set</font>&lt;<font color="#999900">Integer</font>> numSet = numStream.<font color="#ADD8E6">collect</font>(<font color="#999900">Collectors</font>.<font color="#ADD8E6">toSet</font>());
-        
+
     ]]></code>
+
     <text>
         <![CDATA[
-        The resulting list and set will have the same elements as the original list, since we've performed no operations on the
-        stream so far.
+        Az eredményül kapott lista és halmaz ugyanazokkal az elemekkel fog rendelkezni, mint az eredeti lista, mivel még nem 
+		végeztünk műveleteket a folyamon.
         ]]>
     </text>
-    <interactive instruction="Convert the list into a stream, and then back to a list!">
+    <interactive instruction="Alakítsd a listát folyammá, majd vissza listává!">
         <data><![CDATA[
            
         <font color="#999900">List</font>&lt;<font color="#999900">Character</font>> letters = ___.<font color="#ADD8E6">asList</font>(<font color="#2E8B57">'c'</font>,<font color="#2E8B57">'a'</font>,<font color="#2E8B57">'b'</font>,<font color="#2E8B57">'d'</font>);
@@ -111,22 +122,25 @@
         <answer place="1">stream</answer>
         <answer place="2">Collectors</answer>
     </interactive>
-    <title text="Stream operations"/>
+    <title text="Folyamműveletek"/>
     <text>
         <![CDATA[
-        With operations, we can modify the content of a stream, or get some property of it.
+        A folyamok által biztosított műveletekkel módosíthatjuk egy adatfolyam tartalmát, vagy kiolvashatjuk annak 
+		valamilyen tulajdonságát.
         ]]>
     </text>
-    <boxed title="One statement">
+    <boxed title="Egy utasítás">
         <![CDATA[
-        In the following examples, I'll do the conversions and the operations in one statement,
-        as that is how streams are most commonly used. I'll also don't convert the streams back to
-        collections, as it won't be necessary.
+        A következő példákban a konverziókat és a műveleteket egy utasításban végzem el,
+        mivel a folyamokat leggyakrabban így használják. A folyamokat nem konvertálom vissza a
+        kollekciókká, mivel erre most nem lesz szükség.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        I'll be using this <i>Set</i> in each sample:
+        A halmaz olyan adatstruktúra, amiben az elemeknek nincs sorrendje, és minden elem csak egyszer szerepelhet. Ez 
+		a matematikai halmaz implementációja, aminek osztálya a <i>JDK</i>-ban a <i>Set</i> kollekció. A példákat a következő 
+		halmazon fogom bemutatni:
         ]]>
     </text>
     <code><![CDATA[
@@ -139,32 +153,32 @@
 <br/>languages.<font color="#ADD8E6">add</font>(<font color="#2E8B57">"Python"</font>);
 <br/>languages.<font color="#ADD8E6">add</font>(<font color="#2E8B57">"PHP"</font>);
 <br/>languages.<font color="#ADD8E6">add</font>(<font color="#2E8B57">"Kotlin"</font>);
-<br/><font color="gray">//print all</font>
-<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Languages in the set: "</font>);
+<br/><font color="gray">//a forEach-et már ismerjük</font>
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Nyelvek a halmazban: "</font>);
 <br/>languages.<font color="#ADD8E6">forEach</font>(lang -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">print</font>(lang + <font color="#2E8B57">", "</font>));
         
     ]]></code>
     <text>
         <![CDATA[
-        The first operation is <b>filtering</b>. It allows us to select elements based on a condition. The condition is
-        given by a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html">Predicate</a> functional
-        interface, which I'll specify with a lambda.
+        Az első művelet a <b>szűrés</b> (<i>filter</i>). Ez lehetővé teszi számunkra, hogy egy feltétel alapján válasszuk 
+		ki csak azokat az elemeket, amik kielégítik a feltételt. A feltételt az korábbi fejezetben már látott 
+		<a href="https://docs.oracle.com/javase/8/docs/api/java/util/function/Predicate.html">Predicate</a> segítségével 
+		adjuk meg. Mivel ez funkcionális interfész, ezért használhatunk lambdát:
         ]]>
     </text>
     <code><![CDATA[
         
-        <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Languages which begin with 'C':"</font>);
+        <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"'C'-vel kezdődő nyelvek:"</font>);
 <br/>languages.<font color="#ADD8E6">stream</font>().<font color="#ADD8E6">filter</font>(lang -> lang.<font color="#ADD8E6">startsWith</font>(<font color="#2E8B57">"C"</font>))
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">forEach</font>(lang -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">printf</font>(lang+<font color="#2E8B57">", "</font>));
         
     ]]></code>
     <text>
         <![CDATA[
-        This time I only wanted to print the filtered elements, and for that it wasn't even needed to convert the stream
-        back to a collection.
+        Ezúttal a 'C' karakterrel kezdődő elemeket válogattam ki, majd ezekez a <i>forEach</i> segítségével kiírtam. 
         ]]>
     </text>
-    <interactive instruction="Remove letters from the list that are not 'a' or 'c'!">
+    <interactive instruction="Hozz létre egy listát, amiben az 'a' és 'c' értékek már nincsenek benne!">
         <data><![CDATA[
             
             <font color="#999900">List</font>&lt;<font color="#999900">Character</font>> letters = <font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(<font color="#2E8B57"><font color="#2E8B57">'c'</font></font>,<font color="#2E8B57"><font color="#2E8B57"><font color="#2E8B57">'a'</font></font></font>,<font color="#2E8B57">'b'</font>,<font color="#2E8B57">'d'</font>,<font color="#2E8B57"><font color="#2E8B57"><font color="#2E8B57">'a'</font></font></font>);
@@ -178,8 +192,8 @@
     </interactive>
     <text>
         <![CDATA[
-  We can also <b>count</b> the elements. This time I'm interested in how many language names start with 'Java'. This means
-        filtering first, then counting:
+		Megszámolhatjuk a folyam elemekeit. Ezúttal az érdekel, hogy hány nyelv neve kezdődik <i>'Java'</i>-val. 
+		Ez azt jelenti, hogy először szűrés kell, majd számolás:
         ]]>
     </text>
     <code><![CDATA[
@@ -187,28 +201,28 @@
 <font color="#DF7401">long</font> res = languages.<font color="#ADD8E6">stream</font>()
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">filter</font>(lang -> lang.<font color="#ADD8E6">startsWith</font>(<font color="#2E8B57">"Java"</font>))
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">count</font>();
-<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Starts with Java: "</font> + res);
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Java-val kezdődő nyelvek száma: "</font> + res);
         
     ]]></code>
     <text>
         <![CDATA[
-        There was again no need for converting back, we just needed the <i>long</i> return value of <i>count</i>.
+        Ismét nem kellett kollekcióvá alakítani a folyamot, mert csak a <i>count</i visszatérési értékére volt szükségünk.
         <br><br>
-        Next up is <b>mapping</b>. This allows change the data of the stream using a <i>Function</i> functional interface and the
-        <i>map</i> method:
+        A következő lépés a <b>leképezés</b> (<i>map</i>). Ez lehetővé teszi a folyam adatainak megváltoztatását egy 
+		<i>Function</i> funkcionális interfész segítségével (amit lambda kifejezéssel meg tudunk adni).
         ]]>
     </text>
     <code><![CDATA[
         
-              <font color="gray">//Print how long each name is: map from String to int
+              <font color="gray">//Írjuk ki a nevek hosszát, azaz String -> int leképezést végzünk
 </font>
 <br/>languages.<font color="#ADD8E6">stream</font>()
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">map</font>(lang -> lang.<font color="#ADD8E6">length</font>()) <font color="gray">//or mapToInt
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">map</font>(lang -> lang.<font color="#ADD8E6">length</font>()) <font color="gray">//mapToInt is használható most
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">forEach</font>(length -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">print</font>(length+<font color="#2E8B57">", "</font>));
         
     ]]></code>
-    <interactive instruction="Map each letter in the list to a string!">
+    <interactive instruction="Alakítsd a karakter (char) listát String listává!">
         <data><![CDATA[
             
             <font color="#999900">List</font>&lt;<font color="#999900">Character</font>> letters = <font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(<font color="#2E8B57">'c'</font>,<font color="#2E8B57"><font color="#2E8B57">'a'</font></font>,<font color="#2E8B57">'b'</font>,<font color="#2E8B57">'d'</font>,<font color="#2E8B57"><font color="#2E8B57">'a'</font></font>);
@@ -224,46 +238,47 @@
     </interactive>
     <text>
         <![CDATA[
-        It's also worth looking at the <i>anyMatch</i> function, which will check if there exists at least
-        one element in the stream fulfilling a condition (<i>Predicate</i>).
+        Érdemes megnézni az <i>anyMatch</i> metódust is, amely azt vizsgálja, hogy létezik-e legalább
+        egy elem a folyamban, amely megfelel egy feltételnek (szintén <i>Predicate</i>-el van megadva).
         ]]>
     </text>
     <code><![CDATA[
         
-        <font color="gray">//Let's see if Python is included or not
+        <font color="gray">//nézzük meg, hogy a 'Python' eleme-e a folyamnak
 </font>
 <br/><font color="#DF7401">boolean</font> includes = languages.<font color="#ADD8E6">stream</font>()
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">anyMatch</font>(lang -> lang.<font color="#ADD8E6">equals</font>(<font color="#2E8B57">"Python"</font>));
-<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Python is in the set: "</font> + includes);
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Python benne van? "</font> + includes);
         
     ]]></code>
     <text>
         <![CDATA[
-        This function also has a pair, <i>allMatch</i>, which will only return true if all elements fulfill the condition.
+        Ennek a metódusnak van egy párja is, az <i>allMatch</i>, amely csak akkor ad vissza igazat, ha minden 
+		elem teljesíti a feltételt.
         ]]>
     </text>
-    <title text="Combining the operation"/>
+    <title text="A műveletek kombinálása"/>
     <text>
         <![CDATA[
-        The real power of stream operations becomes clear when you 'chain' them together For instance,
-        we'd like to see <b>collect the length of names that begin with 'P' into a new list<b>.
+        A folyamműveletek valódi ereje akkor válik világossá, amikor "láncba fűzzük" őket. Például,
+        szeretnénk <b>begyűjteni a 'P'-vel kezdődő nevek hosszát egy új listába</b>. Ekkor egymás után kapcsoljuk a
+		szűrés, majd a számlálás műveletet, és ezek eredményét alakítjuk vissza listává:
         ]]>
     </text>
     <code><![CDATA[
         
 <font color="#999900">List</font>&lt;<font color="#999900">Integer</font>> lengths = languages.<font color="#ADD8E6">stream</font>()
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">filter</font>(lang -> lang.<font color="#ADD8E6">startsWith</font>(<font color="#2E8B57">"P"</font>)) <font color="gray">//filter to 'P' start
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">filter</font>(lang -> lang.<font color="#ADD8E6">startsWith</font>(<font color="#2E8B57">"P"</font>)) <font color="gray">//szűrés 'P' kezdetre
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">map</font>(lang -> lang.<font color="#ADD8E6">length</font>()) <font color="gray">//map to the length
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">map</font>(lang -> lang.<font color="#ADD8E6">length</font>()) <font color="gray">//átképezés hosszúságokká
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">collect</font>(<font color="#999900">Collectors</font>.<font color="#ADD8E6">toList</font>()); <font color="gray">//collect to list</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">collect</font>(<font color="#999900">Collectors</font>.<font color="#ADD8E6">toList</font>()); <font color="gray">//begyűjtés listába</font>
         
     ]]></code>
     <text>
         <![CDATA[
-        There are of course many other stream operations which I did not illustrate here, please
-        refer to the <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html">Stream's documentation</a>
-        to see all.
+        Természetesen sok más folyamművelet is létezik, amelyeket itt nem mutattam be, ezekért 
+        olvasd el a <a href="https://docs.oracle.com/javase/8/docs/api/java/util/stream/Stream.html">Stream dokumentációját</a>.
         ]]>
     </text>
 </resources>

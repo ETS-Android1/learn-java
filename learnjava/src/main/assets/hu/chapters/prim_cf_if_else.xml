@@ -24,7 +24,7 @@
         
 <font color="#DF7401">char </font>testChar = <font color="#2E8B57"><font color="#2E8B57">'a'</font></font>;
 <br/><font color="#E65100">if</font>(testChar == <font color="#2E8B57"><font color="#2E8B57">'a'</font></font>) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"The test char is a!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"A teszt karakter értéke 'a'!"</font>);
 <br/>}
         
     ]]></code>
@@ -84,9 +84,9 @@
     <interactive instruction="Egészítsd ki a programot úgy, hogy csak akkor történjen kiíratás, ha a szám 10!">
         <data><![CDATA[
 
-<font color="#DF7401">int</font> number = <font color="#ADD8E6">getNumber</font>(); <font color="gray">//suppose this returns an integer</font>
+<font color="#DF7401">int</font> number = <font color="#ADD8E6">getNumber</font>(); <font color="gray">//tegyük fel, hogy int-et ad vissza</font>
 <br/>___ (number ___ <font color="#F0E130">10</font>) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"<font color="</font>#999900">Number</font> was <font color="#F0E130">10</font>!");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"A szám értéke 10!"</font>);
 <br/>}
 
         ]]></data>
@@ -116,9 +116,9 @@
         
         <font color="#DF7401">char </font>testChar = <font color="#2E8B57">'b'</font>;
 <br/><font color="#E65100">if</font>(testChar == <font color="#2E8B57">'a'</font>) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"The char is a!"</font>);	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"A karakter értéke 'a'!"</font>);	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>}<font color="#E65100"> else </font>{
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"The char is NOT a!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"A karakter értéke NEM 'a'!"</font>);
 <br/>}
         
     ]]></code>
@@ -148,14 +148,14 @@
         
         <font color="#DF7401">double </font>d = <font color="#F0E130">3.14</font>;
 <br/><font color="#E65100">if</font>(d > <font color="#F0E130">5</font>) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Bigger then 5"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"5-nél nagyobb"</font>);
 <br/>}<font color="#E65100"> else if</font>(d > <font color="#F0E130">3</font>) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//this block is run</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Bigger then 3"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//ez a blokk fut</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"3-nál nagyobb"</font>);
 <br/>}<font color="#E65100"> else if</font>(d > <font color="#F0E130">1</font>) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Bigger then 1"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"1-nél nagyobb"</font>);
 <br/>}<font color="#E65100"> else </font>{
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Smaller then 1"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"1-nél kisebb"</font>);
 <br/>}
         
     ]]></code>
@@ -179,16 +179,16 @@
         metódus hívások lehetnek. Ezek az eszközök lehetővé teszik a komplex programok készítését.
         ]]>
     </boxed>
-    <interactive instruction="Egészítsd ki a programot úgy, hogy a 'Middle' csak akkor íródik ki, ha a szám 0.25 és 0.75 között van!">
+    <interactive instruction="Egészítsd ki a programot úgy, hogy a 'Középen' csak akkor íródik ki, ha a szám 0.25 és 0.75 között van!">
         <data><![CDATA[
 
-<font color="gray">//this double can have a value between 0 and 1
+<font color="gray">//ez a double 0 és 1 közötti értéket vehet fel
 </font>
 <br/><font color="#DF7401">double</font> real = <font color="#E65100">new</font> <font color="#999900">Random</font>().<font color="#ADD8E6">nextDouble</font>();
 <br/><font color="#E65100">if</font>(real ___ <font color="#F0E130">0.25</font> && real &lt;= ___) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"<font color="</font></font>#999900">Near</font> the middle of the interval!");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Középen"</font>);
 <br/>} ___ {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"<font color="</font></font>#999900">Near</font> the edges of the interval!");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Széleken"</font>);
 <br/>}
 
         ]]></data>
@@ -210,17 +210,17 @@
         <font color="#DF7401">int </font>grade = <font color="#ADD8E6">assignGrade</font>();
 <br/><font color="#999900">String</font> output;
 <br/><font color="#E65100">switch</font>(grade) {
-<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;case </font><font color="#F0E130">1</font>: output = <font color="#2E8B57">"You failed!"</font>;
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;case </font><font color="#F0E130">1</font>: output = <font color="#2E8B57">"Megbuktál!"</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">break</font>;
-<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;case </font><font color="#F0E130">2</font>: output = <font color="#2E8B57">"You almost failed..."</font>;
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;case </font><font color="#F0E130">2</font>: output = <font color="#2E8B57">"Majdnem megbuktál..."</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">break</font>;
-<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;case </font><font color="#F0E130">3</font>: output = <font color="#2E8B57">"Not bad, not good."</font>;
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;case </font><font color="#F0E130">3</font>: output = <font color="#2E8B57">"3-as."</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">break</font>;
-<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;case </font><font color="#F0E130">4</font>: output = <font color="#2E8B57">"Very good!"</font>;
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;case </font><font color="#F0E130">4</font>: output = <font color="#2E8B57">"4-es, nagyon jó!"</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">break</font>;
-<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;case </font><font color="#F0E130">5</font>: output = <font color="#2E8B57">"Perfect!"</font>;
+<br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;case </font><font color="#F0E130">5</font>: output = <font color="#2E8B57">"Tökéletes!"</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; 	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">break</font>;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">default</font>: output = <font color="#2E8B57">"Invalid grade!"</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">default</font>: output = <font color="#2E8B57">"Érvénytelen jegy!"</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;        <font color="#E65100">break</font>;
 <br/>}
 <br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(output);

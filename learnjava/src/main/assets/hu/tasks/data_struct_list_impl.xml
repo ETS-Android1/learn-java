@@ -65,7 +65,7 @@
 <font color="#E65100">class</font> <font color="#999900">Node</font> {
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> data;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Node</font> next; <font color="gray">//this is null at the last node
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Node</font> next; <font color="gray">//az utolsó elem esetén ez null
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Node</font>(<font color="#999900">String</font> data, <font color="#999900">Node</font> next) {
@@ -84,9 +84,8 @@
 	<title text="Tömblista tippek"/>
 	<text>
 		<![CDATA[
-		Itt arra kell figyelnek, hogy ha a tömb megtelt, és újabb elem jön, akkor egy új, nagyobb tömbött 
-		kell létrehozni. 
-		<p>
+		Itt arra kell figyelned, hogy ha a tömb megtelt, és újabb elem jön, akkor egy új, nagyobb tömbött
+		kell létrehozni.
 		Miután ez megvan, a régi, kisebb tömb elemeit be kell másolni az új tömb elejére.
 		]]>
 	</text>
@@ -100,100 +99,100 @@
             
 <font color="#E65100">public</font> class <font color="#999900">MyArrayList</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font>[] array; <font color="gray">//the internal array
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font>[] array; <font color="gray">//a belső tömb
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">int</font> size; <font color="gray">//the current size of the list (NOT the array)
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">int</font> size; <font color="gray">//a lista mérete (ez NEM a belső tömb mérete)
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//constructor which sets an initial array capacity of 15
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//konstruktor, alapból 15-ös belső tömböt csinál
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">MyArrayList</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;array = <font color="#E65100">new</font> <font color="#999900">String</font>[<font color="#F0E130">15</font>];
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Increases the array capacity. This method is only used internally.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//megnöveli a belső tömb méretét (kapacitást). Ez csak belül van használva, ezért privát.
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">void</font> <font color="#ADD8E6">increaseCapacity</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font>[] increasedArray = <font color="#E65100">new</font> <font color="#999900">String</font>[<font color="#F0E130">2</font> * array.<font color="#ADD8E6">length</font> + <font color="#F0E130">1</font>]; <font color="gray">//double capacity
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font>[] increasedArray = <font color="#E65100">new</font> <font color="#999900">String</font>[<font color="#F0E130">2</font> * array.<font color="#ADD8E6">length</font> + <font color="#F0E130">1</font>]; <font color="gray">//megduplázás
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;array.<font color="#ADD8E6">length</font>; i++) { <font color="gray">//copy elements
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;array.<font color="#ADD8E6">length</font>; i++) { <font color="gray">//elemek átmásolása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;increasedArray[i] = array[i];
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;array = increasedArray; <font color="gray">//assign new array
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;array = increasedArray; <font color="gray">//elmentjük az új tömböt
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//get the list size
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//visszaadja a lista méretét
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">size</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> size;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//add an element to the end of the array. Null is not allowed
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//egy új elem hozzáadása a lista végére
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">add</font>(<font color="#999900">String</font> element) <font color="#E65100">throws</font> <font color="#999900">NullPointerException</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(element == <font color="#E65100">null</font>) <font color="#E65100">throw new</font> <font color="#999900">NullPointerException</font>();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(size &lt; array.<font color="#ADD8E6">length</font>) { <font color="gray">//there is still more space
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(size &lt; array.<font color="#ADD8E6">length</font>) { <font color="gray">//ha még van hely a tömbben
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;array[size] = element;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;size++;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> { <font color="gray">//the array must be reallocated with more capacity
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> { <font color="gray">//már nincs hely, a kapacitást növelni kell
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ADD8E6">increaseCapacity</font>();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ADD8E6">add</font>(element); <font color="gray<font color="#2E8B57"><font color="#2E8B57">">//let'</font></font>s try adding it again
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ADD8E6">add</font>(element); <font color="gray">//most már hozzá lehet adni</font>
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//add an element to any VALID index of the array. Null is not allowed
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//új elem hozzáadása, adott érvényes pozícióra
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">add</font>(<font color="#999900">String</font> element, <font color="#DF7401">int</font> index) <font color="#E65100">throws</font> <font color="#999900">IndexOutOfBoundsException</font>, <font color="#999900">NullPointerException</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(element == <font color="#E65100">null</font>) <font color="#E65100">throw new</font> <font color="#999900">NullPointerException</font>();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(index &lt; <font color="#F0E130">0</font> || index > size-<font color="#F0E130">1</font>) { <font color="gray">//check if index is invalid
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(index &lt; <font color="#F0E130">0</font> || index > size-<font color="#F0E130">1</font>) { <font color="gray">//a pozíció érvényességének ellenőrzése
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">throw new</font> <font color="#999900">IndexOutOfBoundsException</font>(<font color="#999900">String</font>.<font color="#ADD8E6">valueOf</font>(index));
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//index is valid, we can start adding
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//érvényes, hozzá lehet adni
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(size &lt; array.<font color="#ADD8E6">length</font>) { <font color="gray">//there is still more space
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(size &lt; array.<font color="#ADD8E6">length</font>) { <font color="gray">//még van hely a tömbben
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//all elements at and after the index must be shifted right
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//minden elem a kapott pozíció után 1-el jobbra mozdul
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=size; i>=index; i--) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;array[i] = array[i-<font color="#F0E130">1</font>];
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;array[index] = element;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;size++;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> { <font color="gray">//the array must be reallocated with more capacity
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> { <font color="gray">//nincs hely, kapacitás növelés kell
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ADD8E6">increaseCapacity</font>();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ADD8E6">add</font>(element, index); <font color="gray<font color="#2E8B57"><font color="#2E8B57">">//let'</font></font>s try adding it again
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ADD8E6">add</font>(element, index); <font color="gray">//így már újra hozzá lehet adni</font>
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//replace the element at given index with the new element. Null is not allowed.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//érvényes pozícióban lévő meglévő elemet felülír egy újjal
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">replace</font>(<font color="#DF7401">int</font> index, <font color="#999900">String</font> element) <font color="#E65100">throws</font> <font color="#999900">IndexOutOfBoundsException</font>, <font color="#999900">NullPointerException</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(element == <font color="#E65100">null</font>) <font color="#E65100">throw new</font> <font color="#999900">NullPointerException</font>();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(index &lt; <font color="#F0E130">0</font> || index > size-<font color="#F0E130">1</font>) { <font color="gray">//check if index is invalid
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(index &lt; <font color="#F0E130">0</font> || index > size-<font color="#F0E130">1</font>) { <font color="gray">//pozíció érvényes-e?
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">throw new</font> <font color="#999900">IndexOutOfBoundsException</font>(<font color="#999900">String</font>.<font color="#ADD8E6">valueOf</font>(index));
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//index is valid, we can replace
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//érvényes, lehet cserélni
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;array[index] = element;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Remove the given element from the list. Returns this element.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//eltávolít egy elemet a listából
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">remove</font>(<font color="#999900">String</font> element) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;size; i++) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(array[i].<font color="#ADD8E6">equals</font>(element)) { <font color="gray">//found the element we have to remove
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(array[i].<font color="#ADD8E6">equals</font>(element)) { <font color="gray">//megvan, ezt kell eltávolítani
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> data = array[i];
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> j=i; j&lt;size; j++) { <font color="gray">//must shift elements after it left, this will also remove the element
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> j=i; j&lt;size; j++) { <font color="gray">//az utána lévők 1-el balra csúsznak (ez elvégzi a törlést is)
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;array[j] = array[j+<font color="#F0E130">1</font>];
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
@@ -204,17 +203,17 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return null</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Remove the element at the given VALID index. Returns this element.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Pozíció alapján töröl egy elemet.
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">remove</font>(<font color="#DF7401">int</font> index) <font color="#E65100">throws</font> <font color="#999900">IndexOutOfBoundsException</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(index &lt; <font color="#F0E130">0</font> || index > size-<font color="#F0E130">1</font>) { <font color="gray">//check if index is invalid
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(index &lt; <font color="#F0E130">0</font> || index > size-<font color="#F0E130">1</font>) { <font color="gray">//érvényes-e a pozíció?
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">throw new</font> <font color="#999900">IndexOutOfBoundsException</font>(<font color="#999900">String</font>.<font color="#ADD8E6">valueOf</font>(index));
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//index is valid, we can remove, by shifting elements after it left
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//érvényes, az után lévő elemeket balra kell tolni
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> data = array[index];
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=index; i&lt;size; i++) { <font color="gray">//must shift elements after it left, this will also remove the element
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=index; i&lt;size; i++) { <font color="gray">//ez el fogja távolítani a kívánt elemet
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;array[i] = array[i+<font color="#F0E130">1</font>];
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
@@ -222,22 +221,22 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> data;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Gets an element by index.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//pozíció alapján visszaad egy elemet
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">get</font>(<font color="#DF7401">int</font> index) <font color="#E65100">throws</font> <font color="#999900">IndexOutOfBoundsException</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(index &lt; <font color="#F0E130">0</font> || index > size-<font color="#F0E130">1</font>) { <font color="gray">//check if index is invalid
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(index &lt; <font color="#F0E130">0</font> || index > size-<font color="#F0E130">1</font>) { <font color="gray">//érvényes-e a pozíció?
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">throw new</font> <font color="#999900">IndexOutOfBoundsException</font>(<font color="#999900">String</font>.<font color="#ADD8E6">valueOf</font>(index));
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//index is valid, we can return it
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//érvényes, visszaadhatjuk
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> array[index];
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Remove all elements.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//kiüríti a listát
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">clear</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;size = <font color="#F0E130">0</font>; <font color="gray<font color="#2E8B57">">//Yes, it'</font>s that simple
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;size = <font color="#F0E130">0</font>; <font color="gray">//ennyire egyszerű</font>
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
@@ -253,40 +252,40 @@
             
 <font color="#E65100">public class</font> <font color="#999900">MyLinkedList</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">Node</font> head; <font color="gray">//The first node. Null if the list is empty.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">Node</font> head; <font color="gray">//az első "node". ha a lista üres, akkor ez null
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">int</font> size; <font color="gray<font color="#2E8B57">">//It'</font>s not needed to store this, but it's faster then always counting.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">int</font> size; <font color="gray">//a mérete nem kellen tárolni, de így kényelmesebb</font>
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">size</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> size;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Useful helper method that can find us a node based on it's index.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//segédmetódus, ami egy adott pozíción lévő "node"-ot megtalál (csak belső használatra).
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">Node</font> <font color="#ADD8E6">findNodeAt</font>(<font color="#DF7401">int</font> index) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(head == <font color="#E65100">null</font>) <font color="#E65100">return null</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> counter = <font color="#F0E130">0</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Node</font> node = head;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">while</font>(counter &lt; index) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;node = node.<font color="#ADD8E6">next</font>; <font color="gray">//advance
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;node = node.<font color="#ADD8E6">next</font>; <font color="gray">//előre
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;counter++;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> node;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Add an element to the end of the list. Null is not allowed
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//elem hozzáadása a lista végére
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">add</font>(<font color="#999900">String</font> element) <font color="#E65100">throws</font> <font color="#999900">NullPointerException</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(element == <font color="#E65100">null</font>) <font color="#E65100">throw new</font> <font color="#999900">NullPointerException</font>();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(head == <font color="#E65100">null</font>) { <font color="gray">//this is the first element
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(head == <font color="#E65100">null</font>) { <font color="gray">//ez az első elem lesz
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;head = <font color="#E65100">new</font> <font color="#999900">Node</font>(element, null);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> { <font color="gray">//there are elements in the list
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> { <font color="gray">//már vannak elemek a listában
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Node</font> last = <font color="#ADD8E6">findNodeAt</font>(size-<font color="#F0E130">1</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray<font color="#2E8B57">">//let'</font>s set a new node to the end
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//új "node" beállítása a végére</font>
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;last.<font color="#ADD8E6">next</font> = <font color="#E65100">new</font> <font color="#999900">Node</font>(element, null);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
@@ -294,58 +293,58 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>
-&nbsp;&nbsp;<font color="gray">//Insert an element to the specified index. Null is not allowed.
+&nbsp;&nbsp;<font color="gray">//elem beszúrása egy adott pozícióra
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">add</font>(<font color="#999900">String</font> element, <font color="#DF7401">int</font> index) <font color="#E65100">throws</font> <font color="#999900">IndexOutOfBoundsException</font>, <font color="#999900">NullPointerException</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(element == <font color="#E65100">null</font>) <font color="#E65100">throw new</font> <font color="#999900">NullPointerException</font>();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(index &lt; <font color="#F0E130">0</font> || index > size-<font color="#F0E130">1</font>) { <font color="gray">//check if index is invalid
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(index &lt; <font color="#F0E130">0</font> || index > size-<font color="#F0E130">1</font>) { <font color="gray">//érvényes-e?
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">throw</font> new <font color="#999900">IndexOutOfBoundsException</font>(<font color="#999900">String</font>.<font color="#ADD8E6">valueOf</font>(index));
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Node</font> node = <font color="#ADD8E6">findNodeAt</font>(index); <font color="gray<font color="#2E8B57">">//this is the current node, we need to '</font>move it' right
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Node</font> node = <font color="#ADD8E6">findNodeAt</font>(index); <font color="gray">//ez a jelenleg a pozíción lévő "node", jobbra csúsztatjuk</font>
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Node</font> inserted = <font color="#E65100">new</font> <font color="#999900">Node</font>(element, node); <font color="gray">//new node, points to the node that was at his position
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Node</font> inserted = <font color="#E65100">new</font> <font color="#999900">Node</font>(element, node); <font color="gray">//az új elem "node"-ja, bekerül ide
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(index == <font color="#F0E130">0</font>) { <font color="gray">//this is the first element, no previous
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(index == <font color="#F0E130">0</font>) { <font color="gray">//speciális eset, első elemről van szó
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;head = inserted;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> { <font color="gray">//we must also change the previous element
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> { <font color="gray">//nem az első, ilyenkor az előtte állót is frissíteni kell
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Node</font> previous = <font color="#ADD8E6">findNodeAt</font>(index-<font color="#F0E130">1</font>); <font color="gray">//the previous node
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Node</font> previous = <font color="#ADD8E6">findNodeAt</font>(index-<font color="#F0E130">1</font>); <font color="gray">//az előtte álló "node"
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;previous.<font color="#ADD8E6">next</font> = inserted; <font color="gray">//the previous has to point to the new node instead
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;previous.<font color="#ADD8E6">next</font> = inserted; <font color="gray">//ez most már az új node-ra mutat
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;size++;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Replace a string at the given index. Null is not allowed.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//adott pozíción lévő elem felülírása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">replace</font>(<font color="#999900">String</font> element, <font color="#DF7401">int</font> index) <font color="#E65100">throws</font> <font color="#999900">NullPointerException</font>, <font color="#999900">IndexOutOfBoundsException</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(element == <font color="#E65100">null</font>) <font color="#E65100">throw new</font> <font color="#999900">NullPointerException</font>();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(index &lt; <font color="#F0E130">0</font> || index > size-<font color="#F0E130">1</font>) { <font color="gray">//check if index is invalid
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(index &lt; <font color="#F0E130">0</font> || index > size-<font color="#F0E130">1</font>) { <font color="gray">//érvényes-e?
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">throw new</font> <font color="#999900">IndexOutOfBoundsException</font>(String.<font color="#ADD8E6">valueOf</font>(index));
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//index is valid, we can replace
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//érvényes, felülírhatjuk
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Node</font> node = <font color="#ADD8E6">findNodeAt</font>(index);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;node.<font color="#ADD8E6">data</font> = element;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Removes the given element from the list. Returns this element.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//eltávolít egy elemet a listából
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">remove</font>(<font color="#999900">String</font> element) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(head == <font color="#E65100">null</font>) <font color="#E65100">return null</font>;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(head.<font color="#ADD8E6">data</font>.<font color="#ADD8E6">equals</font>(element)) { <font color="gray">//special case where there is no previous element
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(head.<font color="#ADD8E6">data</font>.<font color="#ADD8E6">equals</font>(element)) { <font color="gray">//speciális eset, ahol nincs "előző", mert ez az első
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> data = head.<font color="#ADD8E6">data</font>;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(head.<font color="#ADD8E6">next</font> == <font color="#E65100">null</font>) { <font color="gray">//this is the only node in the list
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(head.<font color="#ADD8E6">next</font> == <font color="#E65100">null</font>) { <font color="gray">//speciális eset, ahol csak ez az egy elem van a listában
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;head = <font color="#E65100">null</font>; <font color="gray">//make the list empty
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;head = <font color="#E65100">null</font>; <font color="gray">//kiürítjük a listát
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;head = head.<font color="#ADD8E6">next</font>; <font color="gray">//make the currently second node the head
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;head = head.<font color="#ADD8E6">next</font>; <font color="gray">//speciális eset, ahol ez az első elem, de még van utána másik (az lesz az új első)
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;size--;
@@ -355,15 +354,15 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> counter = <font color="#F0E130">0</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">while</font>(node.<font color="#ADD8E6">next</font> != <font color="#E65100">null</font>) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;node = node.<font color="#ADD8E6">next</font>;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(node.<font color="#ADD8E6">data</font>.<font color="#ADD8E6">equals</font>(element)) { <font color="gray">//this is the node that must be removed
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(node.<font color="#ADD8E6">data</font>.<font color="#ADD8E6">equals</font>(element)) { <font color="gray">//ezt a node-ot kell eltávolítani
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Node</font> prev = <font color="#ADD8E6">findNodeAt</font>(counter-<font color="#F0E130">1</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(node.<font color="#ADD8E6">next</font> == null) { <font color="gray">//this is the last node
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(node.<font color="#ADD8E6">next</font> == null) { <font color="gray">//speciális eset, ez az utolsó node
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;prev.<font color="#ADD8E6">next</font> = null; <font color="gray">//make previous the last node
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;prev.<font color="#ADD8E6">next</font> = null; <font color="gray">//az utolsó előtti lesz az új utolsó
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;prev.<font color="#ADD8E6">next</font> = node.<font color="#ADD8E6">next</font>; <font color="gray">//make previous point the the node after the removed
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;prev.<font color="#ADD8E6">next</font> = node.<font color="#ADD8E6">next</font>; <font color="gray">//egyébként az előtte lévő mostmár az utána következőre mutat
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;size--;
@@ -374,69 +373,68 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return null</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Removes the element at the given index. Returns this element
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//pozíció alapján eltávolít egy elemet
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">remove</font>(<font color="#DF7401">int</font> index) <font color="#E65100">throws</font> <font color="#999900">IndexOutOfBoundsException</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(index &lt; <font color="#F0E130">0</font> || index > size-<font color="#F0E130">1</font>) { <font color="gray">//check if index is invalid
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(index &lt; <font color="#F0E130">0</font> || index > size-<font color="#F0E130">1</font>) { <font color="gray">//érvényes-e
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">throw new</font> <font color="#999900">IndexOutOfBoundsException</font>(<font color="#999900">String</font>.<font color="#ADD8E6">valueOf</font>(index));
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else if</font>(index == <font color="#F0E130">0</font>) { <font color="gray">//we need to remove the head
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else if</font>(index == <font color="#F0E130">0</font>) { <font color="gray">//speciális eset, az elsőt kell eltávolítani
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> data = head.<font color="#ADD8E6">next</font>;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(head.<font color="#ADD8E6">next</font> == <font color="#E65100">null</font>) { <font color="gray">//this is the only node in the list
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(head.<font color="#ADD8E6">next</font> == <font color="#E65100">null</font>) { <font color="gray">//speciális eset, ez az egyetlen elem
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;head = <font color="#E65100">null</font>; <font color="gray">//make the list empty
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;head = <font color="#E65100">null</font>; <font color="gray">//kiürítés
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;head = head.<font color="#ADD8E6">next</font>; <font color="gray">//make the currently second node the head
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;head = head.<font color="#ADD8E6">next</font>; <font color="gray">//a most második lesz az új első
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;size--;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> data;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Node</font> node = <font color="#ADD8E6">findNodeAt</font>(index); <font color="gray">//this node must be removed
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Node</font> node = <font color="#ADD8E6">findNodeAt</font>(index); <font color="gray">//ezt a node-ot kell törölni
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Node</font> prev = <font color="#ADD8E6">findNodeAt</font>(index-<font color="#F0E130">1</font>); <font color="gray">//the previous node
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Node</font> prev = <font color="#ADD8E6">findNodeAt</font>(index-<font color="#F0E130">1</font>); <font color="gray">//az előtte lévő node
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(node.<font color="#ADD8E6">next</font> == <font color="#E65100">null</font>) { <font color="gray">//this was the last node
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(node.<font color="#ADD8E6">next</font> == <font color="#E65100">null</font>) { <font color="gray">//speciális eset, ez az utolsó node
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;prev.<font color="#ADD8E6">next</font> = <font color="#E65100">null</font>; <font color="gray">//make previous the last node
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;prev.<font color="#ADD8E6">next</font> = <font color="#E65100">null</font>; <font color="gray">//az utolsó előtti lesz az új utolsó
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;prev.<font color="#ADD8E6">next</font> = node.<font color="#ADD8E6">next</font>; <font color="gray">//make previous point the the node after the removed
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;prev.<font color="#ADD8E6">next</font> = node.<font color="#ADD8E6">next</font>; <font color="gray">//az előtte lévő az utána következőre mutat
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;size--;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> node.<font color="#ADD8E6">data</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Get an element by index.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//pozíció alapján visszaad egy elemet
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">get</font>(<font color="#DF7401">int</font> index) <font color="#E65100">throws</font> <font color="#999900">IndexOutOfBoundsException</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(index &lt; <font color="#F0E130">0</font> || index > size-<font color="#F0E130">1</font>) { <font color="gray">//check if index is invalid
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(index &lt; <font color="#F0E130">0</font> || index > size-<font color="#F0E130">1</font>) { <font color="gray">//érvényes-e?
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">throw new</font> <font color="#999900">IndexOutOfBoundsException</font>(<font color="#999900">String</font>.<font color="#ADD8E6">valueOf</font>(index));
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#ADD8E6">findNodeAt</font>(index).<font color="#ADD8E6">data</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Remove all elements from the list.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//lista kiürítése
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">clear</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;head = <font color="#E65100">null</font>; <font color="gray<font color="#2E8B57">">//Yes, it'</font>s that simple
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;head = <font color="#E65100">null</font>; <font color="gray">//ennyire egyszerű</font>
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;size = <font color="#F0E130">0</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
 <br/><font color="gray">/*
-<br/> * This helper class is used to contain a string and a
-<br/> * reference to the next element. This class is completely
-<br/> * hidden from the outside.
+<br/> * Ez a segédosztály egy String-et (elemet) és egy hivatkozást
+<br/> * tárol, az utána következő elemre. Csak belső használatra van.
 <br/> */</font>
 <br/><font color="#E65100">class</font> <font color="#999900">Node</font> {
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> data;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Node</font> next; <font color="gray">//this is null at the last node
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Node</font> next; <font color="gray">//ha nincs következő node, akkor ez null
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Node</font>(<font color="#999900">String</font> data, <font color="#999900">Node</font> next) {

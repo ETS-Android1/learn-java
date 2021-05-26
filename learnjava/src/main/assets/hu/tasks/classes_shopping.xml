@@ -118,64 +118,64 @@
 <br/><font color="#E65100">import</font> java.<font color="#ADD8E6">util</font>.<font color="#999900">List</font>;
 <br/>
 <br/><font color="gray">/**
-<br/> * Represents a customer of the online shop.
+<br/> * Az online bolt egy vásárlóját reprezentálja.
 <br/> * @see ReturningCustomer
 <br/> */</font>
 <br/><font color="#E65100">public class</font> <font color="#999900">Customer</font> {
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** Name of the customer. */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** A vásárló neve. */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected final</font> <font color="#999900">String</font> name;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** Age of the customer. */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** A vásárló kora. */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> <font color="#DF7401">int</font> age;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * The address of the customer.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * A vásárló címe.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @see Address
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> <font color="#999900">Address</font> address;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** The orders of the customer. */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** A rendelések listája. */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected final</font> <font color="#999900">List</font>&lt;<font color="#999900">Order></font> orderHistory;
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Creates a customer object.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Egy olyan vásárlót hoz létre, akinek nincsen vásárlási előzménye.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @param name {@link #name}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @param age {@link #age}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @param address {@link #address}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @throws InvalidAgeException When the age is not positive.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @throws InvalidAgeException Ha a kor nem pozitív.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Customer</font>(<font color="#999900">String</font> name, <font color="#DF7401">int</font> age, <font color="#999900">Address</font> address) <font color="#E65100">throws</font> <font color="#999900">InvalidAgeException</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">name</font> = name;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(age &lt;= <font color="#F0E130">0</font>) <font color="#E65100">throw</font> new <font color="#999900">InvalidAgeException</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">age</font> = age;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">address</font> = address;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;orderHistory = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>(); <font color="gray">//initialize list
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;orderHistory = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>(); <font color="gray">//lista inicializálása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Register a new order in the customers history.
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @param order The order to be registered.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Egy új vásárlást helyes a vásárló előzményeibe.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @param order A vásárlás.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">addOrder</font>(<font color="#999900">Order</font> order) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;orderHistory.<font color="#ADD8E6">add</font>(order);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Calculates the total spending of the customer, using {@link #orderHistory}.
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @return The total spending.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Kiszámolja a vásárló eddigi összköltését a {@link #orderHistory} segítségével.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @return A teljes költség.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">totalSpending</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> sum = <font color="#F0E130">0</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Order</font> order: orderHistory) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum += order.<font color="#ADD8E6">totalPrice</font>(); <font color="gray">//use the total price method of order.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum += order.<font color="#ADD8E6">totalPrice</font>(); <font color="gray">//az Order osztálynak van erre metódusa
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> sum;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">// -------------------- Getters and setters -----------------------
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">// -------------------- Getterek és setterek -----------------------
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">getAge</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> age;
@@ -212,22 +212,22 @@
 <font color="#E65100">package</font> taskshop;
 <br/>
 <br/><font color="gray">/**
-<br/> * Represents a returning customer of the online shop. These users get discounts on purchases.
+<br/> * Egy visszatérő vásárló osztálya. Az ilyen vásárlók kedvezményt kapnak.
 <br/> * @see Customer
 <br/> */</font>
 <br/><font color="#E65100">public class</font> <font color="#999900">ReturningCustomer</font> <font color="#E65100">extends</font> <font color="#999900">Customer</font> {
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; *  The discount this returning customer gets. A value between 0 and 1, purchase prices
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; *  are multiplied with this.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; *  Ez a 0 és 1 közti konstans adja meg a kedvezményt, százalékban. A
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; *  vásárlások összege meg lesz szorozva vele.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private final</font> <font color="#DF7401">double</font> discount;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Creates a returning user object.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Visszatérő vásárló konstruktor.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @param discount {@link #discount}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @throws InvalidAgeException If the age is not positive.
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @throws IllegalArgumentException If the discount percentage is not between 0 and 1.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @throws InvalidAgeException Ha a kor nem pozitív.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @throws IllegalArgumentException Ha a kedvezmény konstans nem 0 és 1 között van.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">ReturningCustomer</font>(<font color="#999900">String</font> name, <font color="#DF7401">int</font> age, <font color="#999900">Address</font> address,
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> discount) <font color="#E65100">throws</font> <font color="#999900">InvalidAgeException</font>, <font color="#999900">IllegalArgumentException</font> {
@@ -239,9 +239,9 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Calculates the total spending of the returning customer, using {@link #orderHistory}.
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Takes the discount into account.
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @return The total spending.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Kiszámolja a vásárló által eddig költött összeget, a {@link #orderHistory} és
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * a kedvezmény figyelembe vételével.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @return Az eddig költött összeg.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">totalSpending</font>() {
@@ -265,7 +265,7 @@
             <font color="#E65100">package</font> taskshop;
 <br/>
 <br/><font color="gray">/**
-<br/> * Represents the invalid age problem.
+<br/> * Saját kivétel ami akkor dobódik, amikor nem megfelelő kor kerül megadásra.
 <br/> * @see Customer
 <br/> * @see ReturningCustomer
 <br/> */</font>
@@ -288,17 +288,22 @@
             <font color="#E65100">package</font> taskshop;
 <br/>
 <br/><font color="gray">/**
-<br/> * Represents an address of a customer.
+<br/> * Vásárlók lakcímét reprezentáló osztály. Ahelyett, hogy csak egy String lenne,
+<br/> * külön vettem a cím egyes részeit (irányítószám, város, utca, stb).
 <br/> * @see Customer
 <br/> */</font>
 <br/><font color="#E65100">public class</font> <font color="#999900">Address</font> {
 <br/>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** Irányítószám. */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">int</font> postalCode;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** Város. */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font> city;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** Utca. */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font> street;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** Házszám. */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">int</font> houseNumber;
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#ADD8E6">Address</font>(<font color="#DF7401">int</font> postalCode, <font color="#999900">String</font> city, <font color="#999900">String</font> street, <font color="#DF7401">int</font> houseNumber) {
@@ -308,7 +313,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">houseNumber</font> = houseNumber;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//override toString for nice string representation of address
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//hogy a cím szép String formában jelenjen meg, felülírom a toString metódust
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">toString</font>() {
@@ -328,51 +333,51 @@
             <font color="#E65100">package</font> taskshop;
 <br/>
 <br/><font color="gray">/**
-<br/> * Represents a product in the online store.
+<br/> * Egy, az online boltban vásárolható terméket reprezentál.
 <br/> * @see ProductType
 <br/> */</font>
 <br/><font color="#E65100">public class</font> <font color="#999900">Product</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** The name of the product. */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** A termék neve. */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font> name;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** The unique id of the product. */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** Egyedi azonosító. */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private final</font> <font color="#DF7401">int</font> id;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** The price of the product. Prices are given in Euros. */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** A termék ára, forintban megadva. */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">int</font> price;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** The type of the product. */</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** A termék típus (lásd a következő kódmintát). */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private final</font> <font color="#999900">ProductType</font> type;
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Creates a product object.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Létrehoz egy terméket.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @param name {@link #name}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @param type {@link #type}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @param price {@link #price}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @throws IllegalArgumentException When the price is not positive.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @throws IllegalArgumentException Ha a kapott ár negatív.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Product</font>(<font color="#999900">String</font> name, <font color="#999900">ProductType</font> type, <font color="#DF7401">int</font> price) <font color="#E65100">throws</font> <font color="#999900">IllegalArgumentException</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">name</font> = name;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">type</font> = type;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(price &lt;= <font color="#F0E130">0</font>) <font color="#E65100">throw new</font> <font color="#999900">IllegalArgumentException</font>(<font color="#2E8B57"><font color="#2E8B57">"Price must be positive"</font></font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(price &lt;= <font color="#F0E130">0</font>) <font color="#E65100">throw new</font> <font color="#999900">IllegalArgumentException</font>(<font color="#2E8B57"><font color="#2E8B57">"Az árnak pozitívnak kell lennie!"</font></font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">price</font> = price;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">id</font> = <font color="#ADD8E6">generateUniqueId</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//a helper variable for id generation.</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//statikus változó, amiből a termékek azonosítója készül.</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private static</font> <font color="#DF7401">int</font> currentProductId = <font color="#F0E130">1</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Creates an id for a newly created product object. Uses {@link #currentProductId}.
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @return The created id.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Statikus segéd metódus, ami megmondja a következő szabad azonosító számot a {@link #currentProductId} segítségével.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @return Az azonosító.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private static</font> <font color="#DF7401">int</font> <font color="#ADD8E6">generateUniqueId</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> currentProductId++; <font color="gray">//return, then increment
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> currentProductId++; <font color="gray">//visszaadja, MAJD 1-el növeli
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">// ------------------ Getters and setters. ----------------------------------
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">// ------------------ Getterek és setterek. ----------------------------------
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">getName</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> name;
@@ -387,7 +392,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">setPrice</font>(<font color="#DF7401">int</font> price) <font color="#E65100">throws</font> <font color="#999900">IllegalArgumentException</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(price &lt;= <font color="#F0E130">0</font>) <font color="#E65100">throw new</font> <font color="#999900">IllegalArgumentException</font>(<font color="#2E8B57"><font color="#2E8B57">"Price must be positive"</font></font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(price &lt;= <font color="#F0E130">0</font>) <font color="#E65100">throw new</font> <font color="#999900">IllegalArgumentException</font>(<font color="#2E8B57"><font color="#2E8B57">"Az árnak pozitívnak kell lennie!"</font></font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">price</font> = price;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
@@ -413,7 +418,7 @@
 <font color="#E65100">package</font> taskshop;
 <br/>
 <br/><font color="gray">/**
-<br/> * The possible types of products.
+<br/> * Enum a lehetséges termék típusoknak.
 <br/> * @see Product
 <br/> */</font>
 <br/><font color="#E65100">public enum</font> <font color="#999900">ProductType</font> {
@@ -430,8 +435,10 @@
         ]]></code>
         <text>
             <![CDATA[
-            A rendelések osztálya (<i>Order</i>, amelyet egy <b>HashMap</b> segítségével valósítottam meg. 
-			Ne aggódj, ha ezt nem egészen érted. A kollekciók következő kurzusban lesznek részletesen ismertetve.
+            A vásárlások osztálya (<i>Order</i>, amelyet egy <b>HashMap</b> (szótár) segítségével valósítottam meg.
+			Ne aggódj, ha ezt nem egészen érted. A kollekciók következő kurzusban lesznek részletesen ismertetve. A lényeg
+			annyi, hogy egy vásárlás során többféle terméket vásárolhatunk, és egy fajta termékből is lehet többet. Például,
+			egy vásárlás lehet ha két nadrágot, és három pólót veszünk. A szótár az ilyen termék-darabszám párokat tárolja.
             ]]>
         </text>
         <code><![CDATA[
@@ -442,36 +449,36 @@
 <br/><font color="#E65100">import</font> java.<font color="#ADD8E6">util</font>.<font color="#999900">Map</font>.<font color="#999900">Entry</font>;
 <br/>
 <br/><font color="gray">/**
-<br/> * Represents a purchase in the online shop.
+<br/> * Egy vásárlást reprezentál. A vásárlás többféle terméket tartalmazhat, többféle mennyiségben.
 <br/> */</font>
 <br/><font color="#E65100">public class</font> <font color="#999900">Order</font> {
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * A map which contains the products and their amounts.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Ez a szótár tárolja, hogy miből és mennyit vettek.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">HashMap</font>&lt;<font color="#999900">Product</font>, <font color="#999900">Integer</font>> products;
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Creates an order object.
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @param products The map of products.
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @throws IllegalArgumentException If the product map is empty, or contains invalid product amounts.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Létrehoz egy vásárlást.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @param products A termék-mennyiség párok (egy szótárban).
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @throws IllegalArgumentException Ha üres a szótár, vagy valamiből negatív mennyiség van benne.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Order</font>(<font color="#999900">HashMap</font>&lt;<font color="#999900">Product</font>, <font color="#999900">Integer</font>> products) <font color="#E65100">throws</font> <font color="#999900">IllegalArgumentException</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(products.<font color="#ADD8E6">isEmpty</font>()) <font color="#E65100">throw new</font> <font color="#999900">IllegalArgumentException</font>(<font color="#2E8B57">"No products detected"</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> amount: products.<font color="#ADD8E6">values</font>()) { <font color="gray">//iterate and check product amounts
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(products.<font color="#ADD8E6">isEmpty</font>()) <font color="#E65100">throw new</font> <font color="#999900">IllegalArgumentException</font>(<font color="#2E8B57">"Üres, nincsenek termékek!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> amount: products.<font color="#ADD8E6">values</font>()) { <font color="gray">//végigmegy a termékeken és megnézi a mennyiséget
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(amount &lt;= <font color="#F0E130">0</font>) <font color="#E65100">throw new</font> <font color="#999900">IllegalArgumentException</font>(<font color="#2E8B57">"Amount of product must be positive"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(amount &lt;= <font color="#F0E130">0</font>) <font color="#E65100">throw new</font> <font color="#999900">IllegalArgumentException</font>(<font color="#2E8B57">"A mennyiségnek pozitívnak kell lennie!"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">products</font> = products;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Calculates the total price of products in this order.
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * <font color="red">@return</font> The calculated sum.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Kiszámolja a vásárlás teljes összegét.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @return Az összeg.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">totalPrice</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> sum = <font color="#F0E130">0</font>;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Entry</font>&lt;<font color="#999900">Product</font>, <font color="#999900">Integer</font>> pair: products.<font color="#ADD8E6">entrySet</font>()) { <font color="gray">//iterate over the pairs
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Entry</font>&lt;<font color="#999900">Product</font>, <font color="#999900">Integer</font>> pair: products.<font color="#ADD8E6">entrySet</font>()) { <font color="gray">//végigmegy a párokon
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum += pair.<font color="#ADD8E6">getKey</font>().<font color="#ADD8E6">getPrice</font>() * pair.<font color="#ADD8E6">getValue</font>(); <font color="gray">//a pair holds price*amount value
 </font>
@@ -490,36 +497,36 @@
         <code><![CDATA[
             
             <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create some products</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Product</font> tv = <font color="#E65100">new</font> <font color="#999900">Product</font>(<font color="#2E8B57">"Television"</font>, <font color="#999900">ProductType</font>.TECH, <font color="#F0E130">300</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Product</font> tShirt = <font color="#E65100">new</font> <font color="#999900">Product</font>(<font color="#2E8B57">"T-shirt"</font>, <font color="#999900">ProductType</font>.CLOTHES, <font color="#F0E130">10</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//termékek létrehozása</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Product</font> tv = <font color="#E65100">new</font> <font color="#999900">Product</font>(<font color="#2E8B57">"Televízió"</font>, <font color="#999900">ProductType</font>.TECH, <font color="#F0E130">50000</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Product</font> tShirt = <font color="#E65100">new</font> <font color="#999900">Product</font>(<font color="#2E8B57">"Póló"</font>, <font color="#999900">ProductType</font>.CLOTHES, <font color="#F0E130">3000</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create a customer (the address is random)
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//egy vásárló, kitalált címmel
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Address</font> addressOfJani = <font color="#E65100">new</font> <font color="#999900">Address</font>(<font color="#F0E130">1133</font>, <font color="#2E8B57">"Budapest"</font>, <font color="#2E8B57">"Kossuth"</font>, <font color="#F0E130">23</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Customer</font> jani = <font color="#E65100">new</font> <font color="#999900">Customer</font>(<font color="#2E8B57">"Joe"</font>, <font color="#F0E130">30</font>, addressOfJani);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Jani lives at "</font> + jani.<font color="#ADD8E6">getAddress</font>());
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Customer</font> jani = <font color="#E65100">new</font> <font color="#999900">Customer</font>(<font color="#2E8B57">"János"</font>, <font color="#F0E130">30</font>, addressOfJani);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"János címe: "</font> + jani.<font color="#ADD8E6">getAddress</font>());
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create an order
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//egy rendelés létrehozása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">HashMap</font>&lt;<font color="#999900">Product</font>, <font color="#999900">Integer</font>> pairs = <font color="#E65100">new</font> <font color="#999900">HashMap</font>&lt;>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;pairs.<font color="#ADD8E6">put</font>(tv, <font color="#F0E130">1</font>); <font color="gray">//1 tv
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;pairs.<font color="#ADD8E6">put</font>(tShirt, <font color="#F0E130">3</font>); <font color="gray">//3 shirts
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;pairs.<font color="#ADD8E6">put</font>(tShirt, <font color="#F0E130">3</font>); <font color="gray">//3 póló
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Order</font> orderOfJani = <font color="#E65100">new</font> <font color="#999900">Order</font>(pairs);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//add to history
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//ezt a vásárlást hozzáadjuk az előzményeihez
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;jani.<font color="#ADD8E6">addOrder</font>(orderOfJani);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"Jani spent "</font></font> + jani.<font color="#ADD8E6">totalSpending</font>() + " (normal customer)");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"János összköltése: "</font></font> + jani.<font color="#ADD8E6">totalSpending</font>() + " (normál vásárló)");
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create jani as returning customer, 20% discount
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//most ugyanez a vásárló, de visszatérőként, 20% kedvezménnyel
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ReturningCustomer</font> janiReturning = <font color="#E65100">new</font> <font color="#999900">ReturningCustomer</font>(<font color="#2E8B57">"Jani"</font>, <font color="#F0E130">30</font>, addressOfJani, <font color="#F0E130">0.8</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;janiReturning.<font color="#ADD8E6">addOrder</font>(orderOfJani); <font color="gray">//same order
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ReturningCustomer</font> janiReturning = <font color="#E65100">new</font> <font color="#999900">ReturningCustomer</font>(<font color="#2E8B57">"János"</font>, <font color="#F0E130">30</font>, addressOfJani, <font color="#F0E130">0.8</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;janiReturning.<font color="#ADD8E6">addOrder</font>(orderOfJani); <font color="gray">//ugyanez a rendelés
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"Jani spent "</font></font> + janiReturning.<font color="#ADD8E6">totalSpending</font>() + " (returning customer)");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"Jani összköltése "</font></font> + janiReturning.<font color="#ADD8E6">totalSpending</font>() + " (visszatérő vásárló)");
 <br/>}
             
         ]]></code>

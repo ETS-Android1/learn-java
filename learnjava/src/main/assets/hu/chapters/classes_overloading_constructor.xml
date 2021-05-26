@@ -42,11 +42,11 @@
     <code><![CDATA[
         
         <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Arithmetic</font> a = <font color="#E65100">new</font> <font color="#999900">Arithmetic</font>(); <font color="gray">//create the object
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Arithmetic</font> a = <font color="#E65100">new</font> <font color="#999900">Arithmetic</font>(); <font color="gray">//objektum létrehozása
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(a.<font color="#ADD8E6">add</font>(<font color="#F0E130">1</font>, <font color="#F0E130">3</font>)); <font color="gray">//uses the integer add method
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(a.<font color="#ADD8E6">add</font>(<font color="#F0E130">1</font>, <font color="#F0E130">3</font>)); <font color="gray">//az int-es metódus használata
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(a.<font color="#ADD8E6">add</font>(<font color="#F0E130">3.14</font>, <font color="#F0E130">1.22</font>)); <font color="gray">//uses the double add method
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(a.<font color="#ADD8E6">add</font>(<font color="#F0E130">3.14</font>, <font color="#F0E130">1.22</font>)); <font color="gray">//a double-s metódus használata
 </font>
 <br/>}
         
@@ -68,16 +68,13 @@
     </text>
     <interactive instruction="Egészítsd ki a metódus deklarációját úgy, hogy az overload-olja a másik metódust!">
         <data><![CDATA[
-
 <font color="#DF7401">void</font> <font color="#ADD8E6">setProperties</font>(<font color="#DF7401">int</font> id) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">id</font> = id;
 <br/>}
-<br/>
 <br/><font color="#DF7401">void</font> <font color="#ADD8E6">___</font>(<font color="#DF7401">int</font> id, <font color="#999900">String</font> activityName) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">id</font> = id;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">activityName</font> = activityName;
 <br/>}
-
         ]]></data>
         <answer place="0">setProperties</answer>
     </interactive>
@@ -110,26 +107,26 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> age;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; Constructor with 2 parameters, sets the values of both members.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; 2 paraméteres konstruktor, mindkét tag értékét beállítja.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Animal</font>(<font color="#999900">String</font> species, <font color="#DF7401">int</font> age) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//the this keyword is used to reference members
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//a this kulcsszóval hivatkozunk a tagokra
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">species</font> = species;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">age</font> = age;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Constructor with 1 parameter, defaults the value of
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;'age' to 0.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;1 paraméteres konstruktor, ami az életkort
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;megadó 'age' tagot 0-ra rakja.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;*/</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Animal</font>(<font color="#999900">String</font> species) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">species</font> = species;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> <font color="#ADD8E6">printData</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Species: "</font> + species +
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2E8B57">", age: "</font> + age);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Faj: "</font> + species +
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2E8B57">", életkor: "</font> + age);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>}
@@ -144,15 +141,15 @@
     <code><![CDATA[
         
         <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Animal</font> parrot = <font color="#E65100">new</font> <font color="#999900">Animal</font>(<font color="#2E8B57">"Parrot"</font>, <font color="#F0E130">21</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Animal</font> parrot = <font color="#E65100">new</font> <font color="#999900">Animal</font>(<font color="#2E8B57">"Papagáj"</font>, <font color="#F0E130">21</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;parrot.<font color="#ADD8E6">printData</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Animal</font> bear = <font color="#E65100">new</font> <font color="#999900">Animal</font>(<font color="#2E8B57">"Bear"</font>); <font color="gray">//age is defaulted to 0
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Animal</font> bear = <font color="#E65100">new</font> <font color="#999900">Animal</font>(<font color="#2E8B57">"Medve"</font>); <font color="gray">//az életkor 0-ra áll be
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;bear.<font color="#ADD8E6">printData</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;This is not allowed now! See the next section for the reason.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Ilyet most nem lehet. Ennek okáért lásd a következő részt.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;Animal animal = new Animal();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;*/</font>
@@ -213,9 +210,8 @@
         ]]>
     </text>
     <code><![CDATA[
-        
          <font color="gray">/*
-<br/> Represents a rational number (numerator/denominator).
+<br/> Egy racionális számot reprezentál (számláló: numerator / nevező: denominator).
 <br/> */</font>
 <br/><font color="#E65100">public class</font> <font color="#999900">Rational</font> {
 <br/>
@@ -229,7 +225,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;This constructor basically creates an 'integer'.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Ez a konstruktor lényegében egész számot hoz létre (nevező = 1).
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;*/</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Rational</font>(<font color="#DF7401">int</font> numerator) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">numerator</font> = numerator;
@@ -237,17 +233,16 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; Returns the value of the rational as a double.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; Valós számként adja vissza az értéket.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">asDouble</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray<font color="#2E8B57">">//needed because '</font>integer division'
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//erre az 'egész osztás' miatt van szükség
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> dNumerator = numerator;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> dNumerator/denominator;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
-        
     ]]></code>
     <text>
         <![CDATA[
@@ -258,11 +253,11 @@
     <code><![CDATA[
         
 <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Rational</font> r1 = <font color="#E65100">new</font> <font color="#999900">Rational</font>(<font color="#F0E130">3</font>, <font color="#F0E130">4</font>); <font color="gray">//represents 3/4
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Rational</font> r1 = <font color="#E65100">new</font> <font color="#999900">Rational</font>(<font color="#F0E130">3</font>, <font color="#F0E130">4</font>); <font color="gray">//a 3/4-nek felel meg
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(r1.<font color="#ADD8E6">asDouble</font>()); <font color="gray">//will print 0.75
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(r1.<font color="#ADD8E6">asDouble</font>()); <font color="gray">//0.75 fog kiíródni
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;r1.<font color="#ADD8E6">numerator</font> = <font color="#F0E130">2</font>; <font color="gray">//can also change member values
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;r1.<font color="#ADD8E6">numerator</font> = <font color="#F0E130">2</font>; <font color="gray">//meg lehet változtatni a tagok értéket
 </font>
 <br/>}
         
@@ -285,13 +280,13 @@
     </text>
     <code><![CDATA[
         
-        <font color="#999900">Rational</font> r1 = <font color="#E65100">new</font> <font color="#999900">Rational</font>(<font color="#F0E130">3</font>, <font color="#F0E130">4</font>); <font color="gray">//represents 3/4
+        <font color="#999900">Rational</font> r1 = <font color="#E65100">new</font> <font color="#999900">Rational</font>(<font color="#F0E130">3</font>, <font color="#F0E130">4</font>); <font color="gray">//a 3/4-nek felel meg
 </font>
-<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(r1.<font color="#ADD8E6">asDouble</font>()); <font color="gray">//will print 0.75
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(r1.<font color="#ADD8E6">asDouble</font>()); <font color="gray">//0.75 fog kiíródni
 </font>
 <br/>
 <br/>r1.<font color="#ADD8E6">denominator</font> = <font color="#F0E130">0</font>;
-<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(r1.<font color="#ADD8E6">asDouble</font>()); <font color="gray">//problem, division by 0</font>
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(r1.<font color="#ADD8E6">asDouble</font>()); <font color="gray">//0-val osztás, ami gond!</font>
         
     ]]></code>
     <text>
@@ -303,7 +298,7 @@
     <code><![CDATA[
         
 <font color="gray">/*
-<br/> Represents a rational number (numerator/denominator).
+<br/> Egy racionális számot reprezentál (számláló: numerator / nevező: denominator).
 <br/> */</font>
 <br/><font color="#E65100">public class</font> <font color="#999900">Rational</font> {
 <br/>
@@ -317,7 +312,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;This constructor basically creates an 'integer'.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Ez a konstruktor lényegében egész számot hoz létre (nevező = 1).
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;*/</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Rational</font>(<font color="#DF7401">int</font> numerator) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">numerator</font> = numerator;
@@ -325,38 +320,38 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; Returns the value of the rational as a double.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; Valós számként adja vissza az értéket.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">asDouble</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray<font color="#2E8B57">">//needed because '</font>integer division'
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//erre az 'egész osztás' miatt van szükség
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> dNumerator = numerator;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> dNumerator/denominator;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//getter for the numerator
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//getter a számlálónak
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">getNumerator</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> numerator;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//setter for the numerator
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//setter a számlálónak
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">setNumerator</font>(<font color="#DF7401">int</font> numerator) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">numerator</font> = numerator;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//getter for the denominator
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//getter a nevezőnek
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">getDenominator</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> denominator;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//setter for the denominator
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//setter a nevezőnek
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">setDenominator</font>(<font color="#DF7401">int</font> denominator) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(denominator == <font color="#F0E130">0</font>) { <font color="gray">//0 is not allowed, set to 1 instead
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(denominator == <font color="#F0E130">0</font>) { <font color="gray">//ha 0-t kap, akkor inkább 1-re állítja
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;this.<font color="#ADD8E6">denominator</font> = <font color="#F0E130">1</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> {
@@ -390,14 +385,14 @@
     </text>
     <code><![CDATA[
         
-        <font color="#999900">Rational</font> r1 = <font color="#E65100">new</font> <font color="#999900">Rational</font>(<font color="#F0E130">3</font>, <font color="#F0E130">4</font>); <font color="gray">//represents 3/4
+        <font color="#999900">Rational</font> r1 = <font color="#E65100">new</font> <font color="#999900">Rational</font>(<font color="#F0E130">3</font>, <font color="#F0E130">4</font>); <font color="gray">//a 3/4-nek felel meg
 </font>
-<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(r1.<font color="#ADD8E6">asDouble</font>()); <font color="gray">//will print 0.75
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(r1.<font color="#ADD8E6">asDouble</font>()); <font color="gray">//0.75 fog kiíródni
 </font>
 <br/>
-<br/>r1.<font color="#ADD8E6">setDenominator</font>(<font color="#F0E130">0</font>); <font color="gray">//will be set to 1 instead
+<br/>r1.<font color="#ADD8E6">setDenominator</font>(<font color="#F0E130">0</font>); <font color="gray">//0 helyett 1-re fog átállni
 </font>
-<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(r1.<font color="#ADD8E6">asDouble</font>()); <font color="gray">//no problem, will print 3.0</font>
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(r1.<font color="#ADD8E6">asDouble</font>()); <font color="gray">//nem lesz gond, 3.0-t fog kiírni</font>
         
     ]]></code>
     <text>

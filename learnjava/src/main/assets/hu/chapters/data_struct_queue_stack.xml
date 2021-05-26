@@ -48,24 +48,24 @@
     </text>
     <code><![CDATA[
         
-<font color="gray">//Wow, LinkedList implements Queue</font>
+<font color="gray">//A LinkedList éppen megvalósítja ezt az interfészt</font>
 <br/><font color="#999900">Queue</font>&lt;<font color="#999900">Integer</font>> queue = <font color="#E65100">new</font> <font color="#999900">LinkedList</font>&lt;>();
 <br/>
-<br/><font color="gray">//Typical queue method: add element to the back.</font>
+<br/><font color="gray">//tipikus sor művelet: elem hozzáadása a végéhez.</font>
 <br/>queue.<font color="#ADD8E6">add</font>(<font color="#F0E130">1</font>);
 <br/>queue.<font color="#ADD8E6">add</font>(<font color="#F0E130">2</font>);
 <br/>queue.<font color="#ADD8E6">add</font>(<font color="#F0E130">3</font>);
 <br/>
-<br/><font color="gray">//Returns the element at the front, but DOES NOT remove it.
+<br/><font color="gray">//visszaadja az elöl lévő elemet, de nem veszi ki "kukucskálás"
 </font>
 <br/>queue.<font color="#ADD8E6">element</font>();
-<br/><font color="gray">//Same as queue.element().
+<br/><font color="gray">//ugyanaz mint a queue.element().
 </font>
 <br/>queue.<font color="#ADD8E6">peek</font>();
 <br/>
 <br/><font color="gray">/*
-<br/> * Typical queue method: remove elements from the front
-<br/> * (also returns it).
+<br/> * tipikus sor művelet: elemek kivétele a sor elejéről
+<br/> * a kukucskálással ellentétben ez eltávolítja az elemet
 <br/> */</font>
 <br/>queue.<font color="#ADD8E6">remove</font>();
 <br/>queue.<font color="#ADD8E6">remove</font>();
@@ -86,13 +86,13 @@
 <br/><font color="#999900">Scanner</font> scanner = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(<font color="#999900">System</font>.<font color="#ADD8E6">in</font>);
 <br/><font color="#999900">String</font> input = scanner.<font color="#ADD8E6">nextLine</font>();
 <br/><font color="#E65100">while</font>(!input.<font color="#ADD8E6">equals</font>(<font color="#2E8B57">"stop"</font>)) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;inputQueue.<font color="#ADD8E6">___</font>(input); <font color="gray">//enqueue input
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;inputQueue.<font color="#ADD8E6">___</font>(input); <font color="gray">//input sorba állítása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;input = scanner.<font color="#ADD8E6">nextLine</font>();
 <br/>}
 <br/>scanner.<font color="#ADD8E6">close</font>();
 <br/><font color="#E65100">while</font>(!___.<font color="#ADD8E6">isEmpty</font>()) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(inputQueue.<font color="#ADD8E6">remove</font>()); <font color="gray">//dequeue an print
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(inputQueue.<font color="#ADD8E6">remove</font>()); <font color="gray">//kivétel a sorból és kiíratás
 </font>
 <br/>}
 
@@ -124,25 +124,25 @@
         
 <font color="#999900">Deque</font>&lt;<font color="#999900">Integer</font>> queue = <font color="#E65100">new</font> <font color="#999900">ArrayDeque</font>&lt;>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/><font color="gray">//Elements can be added at both ends.
+<br/><font color="gray">//az elején és a végén is adhatunk hozzá elemet
 </font>
 <br/>queue.<font color="#ADD8E6">addFirst</font>(<font color="#F0E130">1</font>);
 <br/>queue.<font color="#ADD8E6">addLast</font>(<font color="#F0E130">2</font>);
 <br/>queue.<font color="#ADD8E6">addFirst</font>(<font color="#F0E130">4</font>);
-<br/>queue.<font color="#ADD8E6">add</font>(<font color="#F0E130">3</font>); <font color="gray">//same as addFirst
+<br/>queue.<font color="#ADD8E6">add</font>(<font color="#F0E130">3</font>); <font color="gray">//ugyanaz mint az addFirst
 </font>
 <br/>queue.<font color="#ADD8E6">addLast</font>(<font color="#F0E130">-5</font>);
 <br/>
-<br/><font color="gray">//We can check the last and first elements without removing them.
+<br/><font color="gray">//az első és utolsó elemek kukucskálása
 </font>
 <br/>queue.<font color="#ADD8E6">peekFirst</font>();
 <br/>queue.<font color="#ADD8E6">peekLast</font>();
 <br/>
-<br/><font color="gray">//Elements can be removed from both sides.
+<br/><font color="gray">//mindkét végről tudunk eltávolítani
 </font>
 <br/>queue.<font color="#ADD8E6">removeFirst</font>();
 <br/>queue.<font color="#ADD8E6">removeLast</font>();
-<br/>queue.<font color="#ADD8E6">remove</font>(); <font color="gray">//same as removeLast</font>
+<br/>queue.<font color="#ADD8E6">remove</font>(); <font color="gray">//ugyanaz mint a removeLast</font>
         
     ]]></code>
     <title text="Verem"/>
@@ -181,22 +181,22 @@
     <code><![CDATA[
         
 <font color="#E65100">public static</font> <font color="#999900">String</font> <font color="#ADD8E6">reverseString</font>(<font color="#999900">String</font> text) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Any Deque implementation can also be used
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//bármelyik Deque implementációt használhatnánk
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Stack</font>&lt;<font color="#999900">Character</font>> stack = <font color="#E65100">new</font> <font color="#999900">Stack</font>&lt;>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">char</font> c: text.<font color="#ADD8E6">toCharArray</font>()) { <font color="gray">//push in every character
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">char</font> c: text.<font color="#ADD8E6">toCharArray</font>()) { <font color="gray">//minden karakter verembe rakása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;stack.<font color="#ADD8E6">push</font>(c);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">char</font>[] reversedArray = <font color="#E65100">new</font> <font color="#DF7401">char</font>[text.<font color="#ADD8E6">length</font>()];
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;text.<font color="#ADD8E6">length</font>(); i++) { <font color="gray">//lets pop out every character
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;text.<font color="#ADD8E6">length</font>(); i++) { <font color="gray">//karakterek kivétele a veremből
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;reversedArray[i] = stack.<font color="#ADD8E6">pop</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//String has a char array constructor
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//a String-nek van karakter tömbös konstruktora
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return new</font> <font color="#999900">String</font>(reversedArray);
 <br/>}

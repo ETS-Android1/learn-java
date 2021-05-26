@@ -104,7 +104,7 @@
         <data><![CDATA[
 
 ___ (<font color="#DF7401">int</font> i = <font color="#F0E130">0</font>; i &lt; ___; i++) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Some code here...
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//További kód ide...
 </font>
 <br/>}
 
@@ -125,8 +125,8 @@ ___ (<font color="#DF7401">int</font> i = <font color="#F0E130">0</font>; i &lt;
         
 <font color="#999900">String</font> text = <font color="#2E8B57">"aabbbaaXaaaaaba"</font>;
 <font color="#DF7401">
-<br/>int </font>i = <font color="#F0E130">0</font>; <font color="gray">//iterator</font>
-<br/><font color="#E65100">while</font>(i&lt;text.<font color="#ADD8E6">length</font>() && text.<font color="#ADD8E6">charAt</font>(i)!=<font color="#2E8B57">'X'</font>) {
+<br/>int </font>i = <font color="#F0E130">0</font>; <font color="gray">//iterátor változó létrehozása külön</font>
+<br/><font color="#E65100">while</font>(i&lt;text.<font color="#ADD8E6">length</font>() && text.<font color="#ADD8E6">charAt</font>(i) != <font color="#2E8B57">'X'</font>) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">print</font>(text.<font color="#ADD8E6">charAt</font>(i));
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;i++;
 <br/>}
@@ -158,7 +158,7 @@ ___ (<font color="#DF7401">int</font> i = <font color="#F0E130">0</font>; i &lt;
 
 <font color="#999900">String</font> text = <font color="#2E8B57">"a1b2c3d4e5f6"</font>;
 <br/>___ (text.<font color="#ADD8E6">length</font>() > ___) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//this cuts the last character off!
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//ez levágja az utolsó karaktert!
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;text = text.<font color="#ADD8E6">substring</font>(<font color="#F0E130">0</font>, text.<font color="#ADD8E6">length</font>() - <font color="#F0E130">1</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(text);
@@ -205,7 +205,7 @@ ___ (<font color="#DF7401">int</font> i = <font color="#F0E130">0</font>; i &lt;
         
 <font color="#999900">String</font> text = <font color="#2E8B57">"aabbbaaXaaaaaba"</font>;
 <font color="#DF7401">
-<br/>int </font>i = <font color="#F0E130">0</font>; <font color="gray">//iterator
+<br/>int </font>i = <font color="#F0E130">0</font>; <font color="gray">//iterátor
 </font>
 <br/><font color="#E65100">while</font>(i &lt; text.<font color="#ADD8E6">length</font>()) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(text.<font color="#ADD8E6">charAt</font>(i) == <font color="#2E8B57">'X'</font>) {
@@ -265,10 +265,10 @@ ___ (<font color="#DF7401">int</font> i = <font color="#F0E130">0</font>; i &lt;
 
 <font color="#999900">String</font> data = <font color="#2E8B57">"aaabbabaXabXaabQab"</font>;
 <br/><font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i &lt; data.<font color="#ADD8E6">length</font>(); ___) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(data.<font color="#ADD8E6">charAt</font>(i) == <font color="#2E8B57">'X'</font>) { <font color="gray">//X, skip but don't stop</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(data.<font color="#ADD8E6">charAt</font>(i) == <font color="#2E8B57">'X'</font>) { <font color="gray">//X, átugrás de nem megállás</font>
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;___;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> <font color="#E65100">if</font>(data.<font color="#ADD8E6">charAt</font>(i) == <font color="#2E8B57">'Q'</font>) { <font color="gray">//Q, stop
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> <font color="#E65100">if</font>(data.<font color="#ADD8E6">charAt</font>(i) == <font color="#2E8B57">'Q'</font>) { <font color="gray">//Q, megállás
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;___;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}

@@ -72,21 +72,21 @@
             
 <font color="#E65100">public</font> <font color="#E65100">abstract</font> <font color="#E65100">class</font> <font color="#999900">MyCollection</font>&lt;<font color="#999900">T</font>> {
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//used by the iteration
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//ezt az iteráció, azaz bejárás használja
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> <font color="#DF7401">int</font> currentIndex;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//the iterator method
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//a bejáró metódus, ezt a leszármazottaknak kell megvalósítani
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#E65100">abstract</font> <font color="#999900">T</font> <font color="#ADD8E6">next</font>() <font color="#E65100">throws</font> <font color="#999900">NoSuchElementException</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//helper method which can detect if we're at the end
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//segéd metódus, ami megmondja, hogy a bejárás (iteráció) végén vagyunk-e
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">boolean</font> <font color="#ADD8E6">hasNext</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(currentIndex == <font color="#ADD8E6">size</font>()) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> false;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return false</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> true;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return true</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">resetIterator</font>() {
@@ -112,15 +112,15 @@
 <font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">MyArrayList</font>&lt;<font color="#999900">T</font>> <font color="#E65100">extends</font> <font color="#999900">MyCollection</font>&lt;<font color="#999900">T</font>> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Other methods and members are the same as in the previous task.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;A többi metódus pontosan megegyezik az előző feladatban látottakkal.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;*/</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">T</font> <font color="#ADD8E6">next</font>() <font color="#E65100">throws</font> <font color="#999900">NoSuchElementException</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//check if we can get next
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//nézzük meg, hogy van-e következő
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(!<font color="#ADD8E6">hasNext</font>()) <font color="#E65100">throw</font> <font color="#E65100">new</font> <font color="#999900">NoSuchElementException</font>();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//next element exists
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//van következő
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#ADD8E6">get</font>(currentIndex++);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
@@ -143,10 +143,10 @@
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">T</font> <font color="#ADD8E6">next</font>() <font color="#E65100">throws</font> <font color="#999900">NoSuchElementException</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//check if we can get next
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//nézzük meg, hogy van-e következő
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(!<font color="#ADD8E6">hasNext</font>()) <font color="#E65100">throw</font> <font color="#E65100">new</font> <font color="#999900">NoSuchElementException</font>();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//next element exists
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//van következő
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> list.<font color="#ADD8E6">get</font>(currentIndex++);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
@@ -158,7 +158,7 @@
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">T</font> <font color="#ADD8E6">remove</font>(<font color="#999900">T</font> element) <font color="#E65100">throws</font> <font color="#999900">UnsupportedOperationException</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//we don't allow removing by element with a stack
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//elem szerinti eltávolítás nem megengedett a veremnél
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">throw</font> <font color="#E65100">new</font> <font color="#999900">UnsupportedOperationException</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
@@ -177,7 +177,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//kiírató metódus
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printCollection</font>(<font color="#999900">MyCollection</font>&lt;?> collection) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;collection.<font color="#ADD8E6">resetIterator</font>(); <font color="gray">//must be done!
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;collection.<font color="#ADD8E6">resetIterator</font>(); <font color="gray">//meg kel tenni, hogy az elejéről induljon
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">while</font>(collection.<font color="#ADD8E6">hasNext</font>()) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(collection.<font color="#ADD8E6">next</font>().<font color="#ADD8E6">toString</font>());
@@ -187,7 +187,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//összegző metódus, csak szám típusokra
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#E65100">static</font> <font color="#DF7401">double</font> <font color="#ADD8E6">sumCollection</font>(<font color="#999900">MyCollection</font>&lt;? <font color="#E65100">extends</font> <font color="#999900">Number</font>> collection) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;collection.<font color="#ADD8E6">resetIterator</font>(); <font color="gray">//must be done!
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;collection.<font color="#ADD8E6">resetIterator</font>(); <font color="gray">//meg kel tenni, hogy az elejéről induljon
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> sum = <font color="#F0E130">0</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">while</font>(collection.<font color="#ADD8E6">hasNext</font>()) {
@@ -199,13 +199,13 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//maximumkereső, csak Comparable típusokra
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#E65100">static</font> &lt;<font color="#999900">T</font> <font color="#E65100">extends</font> <font color="#999900">Comparable</font>&lt;<font color="#999900">T</font>>> <font color="#999900">T</font> <font color="#ADD8E6">maximum</font>(<font color="#999900">MyCollection</font>&lt;<font color="#999900">T</font>> collection) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;collection.<font color="#ADD8E6">resetIterator</font>(); <font color="gray">//must be done!
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;collection.<font color="#ADD8E6">resetIterator</font>(); <font color="gray">//meg kel tenni, hogy az elejéről induljon
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">T</font> max = collection.<font color="#ADD8E6">next</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">while</font>(collection.<font color="#ADD8E6">hasNext</font>()) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">T</font> element = collection.<font color="#ADD8E6">next</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> compare = element.<font color="#ADD8E6">compareTo</font>(max);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(compare >= <font color="#F0E130">1</font>) { <font color="gray">//we found a new max
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(compare >= <font color="#F0E130">1</font>) { <font color="gray">//új maximumot találtunk
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;max = element;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
@@ -213,16 +213,16 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> max;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//minimumkereső, csak Comparable típusokra
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//minimum kereső, csak Comparable típusokra
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#E65100">static</font> &lt;<font color="#999900">T</font> <font color="#E65100">extends</font> <font color="#999900">Comparable</font>&lt;<font color="#999900">T</font>>> <font color="#999900">T</font> <font color="#ADD8E6">minimum</font>(<font color="#999900">MyCollection</font>&lt;<font color="#999900">T</font>> collection) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;collection.<font color="#ADD8E6">resetIterator</font>(); <font color="gray">//must be done!
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;collection.<font color="#ADD8E6">resetIterator</font>(); <font color="gray">//meg kel tenni, hogy az elejéről induljon
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">T</font> min = collection.<font color="#ADD8E6">next</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">while</font>(collection.<font color="#ADD8E6">hasNext</font>()) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">T</font> element = collection.<font color="#ADD8E6">next</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> compare = element.<font color="#ADD8E6">compareTo</font>(min);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(compare &lt;= <font color="#F0E130">-1</font>) { <font color="gray">//we found a new min
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(compare &lt;= <font color="#F0E130">-1</font>) { <font color="gray">//új minimumot találtunk
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;min = element;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}

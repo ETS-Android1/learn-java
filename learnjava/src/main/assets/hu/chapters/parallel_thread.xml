@@ -25,9 +25,9 @@
     </text>
     <code><![CDATA[
         
-        <font color="gray">//create a thread</font>
+        <font color="gray">//szál létrehozása</font>
 <br/><font color="#999900">Thread</font> t1 = <font color="#E65100">new</font> <font color="#999900">Thread</font>();	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/><font color="gray">//start this thread</font>
+<br/><font color="gray">//elindítás</font>
 <br/>t1.<font color="#ADD8E6">start</font>();
         
     ]]></code>
@@ -64,10 +64,10 @@
     <code><![CDATA[
         
 <font color="#E65100">class</font> <font color="#999900">GreetRunnable</font> <font color="#E65100">implements</font> <font color="#999900">Runnable</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//override the run method to do something</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//a run metódus felülírása, ezt fogja futtatni a szál</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello from a thread!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello egy szálból!"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
         
@@ -80,9 +80,9 @@
     </text>
     <code><![CDATA[
         
-<font color="gray">//create a thread using the runnable</font>
+<font color="gray">//szál létrehozása a fenti Runnable-ből</font>
 <br/><font color="#999900">Thread</font> t1 = <font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> <font color="#999900">GreetRunnable</font>());	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/><font color="gray">//start the thread</font>
+<br/><font color="gray">//elindítás</font>
 <br/>t1.<font color="#ADD8E6">start</font>();
         
     ]]></code>
@@ -112,14 +112,14 @@
 	</text>
     <code><![CDATA[
         
-<font color="gray">//create a thread using an anonymous runnable</font>
+<font color="gray">//anonim Runnable segítségével hozunk létre szálat</font>
 <br/><font color="#999900">Thread</font> t1 = <font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> <font color="#999900">Runnable</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font> <font color="gray">//override the run method here</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font> <font color="gray">//run metódus felülírása</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello from an anonymous runnable!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello egy anonim Runnable-ből!"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>});	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/><font color="gray">//start the thread
+<br/><font color="gray">//szál indítása
 </font>
 <br/>t1.<font color="#ADD8E6">start</font>();
         
@@ -148,9 +148,9 @@
 	</text>
     <code><![CDATA[
         
-        <font color="gray">//create a thread using a lambda expression</font>
-<br/><font color="#999900">Thread</font> t1 = <font color="#E65100">new</font> <font color="#999900">Thread</font>(() -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello from a lambda!"</font>));
-<br/><font color="gray">//start the thread</font>
+        <font color="gray">//szál létrehozása lambda kifejezéssel</font>
+<br/><font color="#999900">Thread</font> t1 = <font color="#E65100">new</font> <font color="#999900">Thread</font>(() -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello egy lambdából!"</font>));
+<br/><font color="gray">//elindítás</font>
 <br/>t1.<font color="#ADD8E6">start</font>();
         
     ]]></code>
@@ -167,11 +167,11 @@
 <font color="#E65100">class</font> <font color="#999900">GreetThread</font> <font color="#E65100">extends</font> <font color="#999900">Thread</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> name = <font color="#ADD8E6">getName</font>(); <font color="gray">//get the thread's name
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> name = <font color="#ADD8E6">getName</font>(); <font color="gray">//a szál nevének megszerzése
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;<font color="#F0E130">50</font>; i++) { <font color="gray">//greet us 50 times
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;<font color="#F0E130">50</font>; i++) { <font color="gray">//50 üdvözlés kiírása
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello, I'm "</font> + name);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Helló, a nevem "</font> + name);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
@@ -189,7 +189,7 @@
     <code><![CDATA[
         
  <font color="#999900">GreetThread</font> t1 = <font color="#E65100">new</font>  <font color="#999900">GreetThread</font>();
-<br/>t1.<font color="#ADD8E6">setName</font>(<font color="#2E8B57">"Thread 1"</font>); <font color="gray">//set the thread's name
+<br/>t1.<font color="#ADD8E6">setName</font>(<font color="#2E8B57">"Thread 1"</font>); <font color="gray">//állítsuk be a szálak nevét
 </font>
 <br/>t1.<font color="#ADD8E6">start</font>();
         
@@ -200,7 +200,7 @@
 <font color="#999900">Thread</font> thread = <font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> <font color="#ADD8E6">___</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">___</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//do some long calculation here...
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//valami hosszú számolás elvégzése...
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>});
@@ -219,13 +219,13 @@
     </text>
     <code><![CDATA[
         
-<font color="gray">//create 2 threads, with different names</font>
+<font color="gray">//két különböző nevű szál létrehozása</font>
 <br/><font color="#999900">GreetThread</font> t1 = <font color="#E65100">new</font> <font color="#999900">GreetThread</font>();
 <br/>t1.<font color="#ADD8E6">setName</font>(<font color="#2E8B57">"Thread 1"</font>);
 <br/><font color="#999900">GreetThread</font> t2 = <font color="#E65100">new</font> <font color="#999900">GreetThread</font>();
 <br/>t2.<font color="#ADD8E6">setName</font>(<font color="#2E8B57">"Thread 2"</font>);
 <br/>
-<br/><font color="gray">//start both</font>
+<br/><font color="gray">//mindkettőt elindítjuk</font>
 <br/>t1.<font color="#ADD8E6">start</font>();
 <br/>t2.<font color="#ADD8E6">start</font>();
         

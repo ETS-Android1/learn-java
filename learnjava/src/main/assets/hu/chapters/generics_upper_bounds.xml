@@ -25,13 +25,13 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;Hogyan adjuk hozzá a paramétert az aktuális értékhez?!
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;Csak az Object metóduait használhatjuk:
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;toString(), hashCode()
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;toString(), hashCode(), ...
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> currentValue;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">T</font> <font color="#ADD8E6">subtract</font>(<font color="#999900">T</font> number) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//how to subtract the parameter from the current value?!
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//hogyan vonjunk ki az értékből?!
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> currentValue;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
@@ -124,14 +124,14 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">add</font>(<font color="#999900">T</font> number) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//we have access to Number methods too, not only Object methods!
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//itt már a Number metódusaihoz is van hozzáférésünk!
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;currentValue += number.<font color="#ADD8E6">doubleValue</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> currentValue;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">subtract</font>(<font color="#999900">T</font> number) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//we have access to Number methods too, not only Object methods!
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//itt már a Number metódusaihoz is van hozzáférésünk!
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;currentValue += number.<font color="#ADD8E6">doubleValue</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> currentValue;
@@ -170,7 +170,7 @@
 <br/><font color="#999900">Calculator</font>&lt;<font color="#999900">Float</font>> floatCalc = <font color="#E65100">new</font> <font color="#999900">Calculator</font>&lt;>(<font color="#F0E130">0.5f</font>);
 <br/>floatCalc.<font color="#ADD8E6">add</font>(<font color="#F0E130">21.44f</font>);
 <br/>floatCalc.<font color="#ADD8E6">subtract</font>(<font color="#F0E130">1.23f</font>);
-<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Final result: "</font> + floatCalc.<font color="#ADD8E6">getValue</font>());
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Eredmény: "</font> + floatCalc.<font color="#ADD8E6">getValue</font>());
         
     ]]></code>
     <text>
@@ -220,7 +220,7 @@
         
         <font color="#E65100">class</font> <font color="#999900">MustCompare</font>&lt;<font color="#999900">T</font> <font color="#E65100">extends</font> <font color="#999900">Comparable</font>&lt;<font color="#999900">T</font>>> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Comparing intensifies here...
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Összehasonlítás elvégzése itt...
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>}
@@ -244,7 +244,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;T csak szerializálható, összehasonlítható 
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Thread lehet.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;Thread objektum lehet lehet: ezek összes metódusához hozzáférünk.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;*/</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>}

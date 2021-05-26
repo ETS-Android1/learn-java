@@ -1,11 +1,13 @@
 package com.gaspar.learnjava;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +28,9 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
+/**
+ * An activity that displays all components of one chapter.
+ */
 public class ChapterActivity extends ThemedActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     /**
@@ -43,10 +48,17 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
      */
     private InterstitialAd interstitialAd;
 
+    /**
+     * Stores if the chapter was "confirmed" by the user scrolling to the bottom. In these cases the
+     * confirm method ({@link Chapter#markChapterAsCompleted(Context)} will not be called again.
+     */
+    private boolean confirmedWithScrolling;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chapter);
+        confirmedWithScrolling = false;
         if(getIntent().getExtras() == null) { //should not happen
             LogUtils.logError("Incorrect behaviour: No extras passed!");
             finish();
@@ -88,6 +100,17 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        //make it so that when the bottom of the chapter is reached (in the scroll view), it acts like pressing the completed button
+        final ScrollView scrollView = findViewById(R.id.chapterComponentsLayout);
+        scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
+            if(!scrollView.canScrollVertically(1) && !confirmedWithScrolling) {
+                //can't scroll down, so we are at the bottom
+                confirmedWithScrolling = true;
+                LogUtils.log("Chapter confirmed with scroll to bottom!");
+                passedChapter.markChapterAsCompleted(this); //mark as completed
+            }
+        });
     }
 
     /**
@@ -96,14 +119,17 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
     public void settingsOnClick(View v) {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
-
     }
 
     /**
-     * Called when the uses confirms reading the chapter.
+     * Called when the uses confirms reading the chapter. Marks this chapter as completed, and closes
+     * the activity. If the {@link #passedExam} was given to this activity, then it is returned in the
+     * result intent.
      */
     public void chapterConfirmedOnClick(View v) {
-        passedChapter.markChapterAsCompleted(ChapterActivity.this); //update database, check is all chapters are confirmed
+        if(!confirmedWithScrolling) {
+            passedChapter.markChapterAsCompleted(ChapterActivity.this); //update database, check if all chapters are confirmed
+        }
         Intent result = new Intent();
         result.putExtra(Chapter.CHAPTER_PREFERENCE_STRING, passedChapter); //return the chapter object
         if(passedExam != null) { //return the exam object, if it was passed
@@ -121,6 +147,15 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
+            //set the result to completed, IF the end was reached with scrolling
+            if(confirmedWithScrolling) {
+                Intent result = new Intent();
+                result.putExtra(Chapter.CHAPTER_PREFERENCE_STRING, passedChapter); //return the chapter object
+                if(passedExam != null) { //return the exam object, if it was passed
+                    result.putExtra(Exam.EXAM_PREFERENCE_STRING, passedExam);
+                }
+                setResult(Activity.RESULT_OK, result);
+            }
             //show ad with some possibility
             if(interstitialAd != null && LearnJavaAds.rollForAd()) interstitialAd.show(this);
             super.onBackPressed();

@@ -49,40 +49,40 @@
             
 <font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">MyLinkedList</font>&lt;<font color="#999900">T</font>> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">Node</font>&lt;<font color="#999900">T</font>> head; <font color="gray">//The first node. Null if the list is empty.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">Node</font>&lt;<font color="#999900">T</font>> head; <font color="gray">//az első elem node-ja, vagy null, ha a lista üres
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">int</font> size; <font color="gray">//It's not needed to store this, but it's faster then always counting.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">int</font> size; <font color="gray">//nem kell eltárolni, de így kényelmesebb
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">size</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> size;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Useful helper method that can find us a node based on its index.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//segédmetódus, ami index alapján megtalálja az ott lévő node-ot
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">Node</font>&lt;<font color="#999900">T</font>> <font color="#ADD8E6">findNodeAt</font>(<font color="#DF7401">int</font> index) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(head == null) <font color="#E65100">return</font> null;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> counter = <font color="#F0E130">0</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Node</font>&lt;<font color="#999900">T</font>> node = head;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">while</font>(counter &lt; index) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;node = node.<font color="#ADD8E6">next</font>; <font color="gray">//advance
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;node = node.<font color="#ADD8E6">next</font>; <font color="gray">//előre
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;counter++;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> node;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Add an element to the end of the list. Null is not allowed
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//elem hozzáadása a lista végére
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">add</font>(<font color="#999900">T</font> element) <font color="#E65100">throws</font> <font color="#999900">NullPointerException</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(element == null) <font color="#E65100">throw</font> <font color="#E65100">new</font> <font color="#999900">NullPointerException</font>();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(head == null) { <font color="gray">//this is the first element
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(head == null) { <font color="gray">//ez az első elem
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;head = <font color="#E65100">new</font> <font color="#999900">Node</font>&lt;<font color="#999900">T</font>>(element, null);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> { <font color="gray">//there are elements in the list
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> { <font color="gray">//vannak még elemek a listában
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Node</font>&lt;<font color="#999900">T</font>> last = <font color="#ADD8E6">findNodeAt</font>(size-<font color="#F0E130">1</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray<font color="#2E8B57">">//let'</font>s set a new node to the end
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//új node beállítása a végére</font>
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;last.<font color="#ADD8E6">next</font> = <font color="#E65100">new</font> <font color="#999900">Node</font>&lt;<font color="#999900">T</font>>(element, null);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
@@ -104,7 +104,7 @@
 <font color="#E65100">class</font> <font color="#999900">Node</font>&lt;<font color="#999900">T</font>> {
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">T</font> data;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Node</font>&lt;<font color="#999900">T</font>> next; <font color="gray">//this is null at the last node
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Node</font>&lt;<font color="#999900">T</font>> next; <font color="gray">//utolsó node esetén ez null lesz
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Node</font>(<font color="#999900">T</font> data, <font color="#999900">Node</font>&lt;<font color="#999900">T</font>> next) {
@@ -124,41 +124,41 @@
             
             <font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">MyArrayList</font>&lt;<font color="#999900">T</font>> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">Object</font>[] array; <font color="gray">//the internal array
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">Object</font>[] array; <font color="gray">//a belső tömb, Object-et használ
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">int</font> size; <font color="gray">//the current size of the list (NOT the array)
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">int</font> size; <font color="gray">//a lista mérete (NEM a tömb mérete)
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//constructor which sets an initial array capacity of 15
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//alap konstruktor, 15-ös kapacitást állít be
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">MyArrayList</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;array = <font color="#E65100">new</font> <font color="#999900">Object</font>[<font color="#F0E130">15</font>];
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Increases the array capacity. This method is only used internally.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//kapacitás növelő metódus, ami új belső tömböt vesz fel
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">void</font> <font color="#ADD8E6">increaseCapacity</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Object</font>[] increasedArray = <font color="#E65100">new</font> <font color="#999900">Object</font>[<font color="#F0E130">2</font> * array.<font color="#ADD8E6">length</font> + <font color="#F0E130">1</font>]; <font color="gray">//double capacity
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Object</font>[] increasedArray = <font color="#E65100">new</font> <font color="#999900">Object</font>[<font color="#F0E130">2</font> * array.<font color="#ADD8E6">length</font> + <font color="#F0E130">1</font>]; <font color="gray">//megduplázás
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;array.<font color="#ADD8E6">length</font>; i++) { <font color="gray">//copy elements
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;array.<font color="#ADD8E6">length</font>; i++) { <font color="gray">//elemek átmásolása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;increasedArray[i] = array[i];
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;array = increasedArray; <font color="gray">//assign new array
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;array = increasedArray; <font color="gray">//új tömb mentése
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Gets an element by index.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//egy elem index szerinti megszerzése
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@SuppressWarnings</font>(<font color="#2E8B57">"unchecked"</font>)
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">T</font> <font color="#ADD8E6">get</font>(<font color="#DF7401">int</font> index) <font color="#E65100">throws</font> <font color="#999900">IndexOutOfBoundsException</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(index &lt; <font color="#F0E130">0</font> || index > size-<font color="#F0E130">1</font>) { <font color="gray">//check if index is invalid
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(index &lt; <font color="#F0E130">0</font> || index > size-<font color="#F0E130">1</font>) { <font color="gray">//érvényes-e?
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">throw</font> <font color="#E65100">new</font> <font color="#999900">IndexOutOfBoundsException</font>(<font color="#999900">String</font>.<font color="#ADD8E6">valueOf</font>(index));
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//index is valid, we can return it
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//érvényes, visszaadhatjuk
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> (<font color="#999900">T</font>)array[index]; <font color="gray">//Notice the cast
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> (<font color="#999900">T</font>)array[index]; <font color="gray">//figyelem, itt konvertálás van
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
@@ -190,31 +190,31 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;list = <font color="#E65100">new</font> <font color="#999900">MyLinkedList</font>&lt;<font color="#999900">T</font>>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//add the element to the back of the list.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//elem hozzáadása a veremhez
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">push</font>(<font color="#999900">T</font> element) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;list.<font color="#ADD8E6">add</font>(element);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//remove the element at the back of the list.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/elem kivétele a veremből
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">T</font> <font color="#ADD8E6">pop</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> list.<font color="#ADD8E6">remove</font>(list.<font color="#ADD8E6">size</font>()<font color="#F0E130">-1</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//peek the element at the back of the list.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//a verem tetején lévő elem kukucskálása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">T</font> <font color="#ADD8E6">peek</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> list.<font color="#ADD8E6">get</font>(list.<font color="#ADD8E6">size</font>()<font color="#F0E130">-1</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//clear the stack
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//verem kiürítése
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">clear</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;list.<font color="#ADD8E6">clear</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//size of the stack
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//a verem mérete
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">size</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> list.<font color="#ADD8E6">size</font>();

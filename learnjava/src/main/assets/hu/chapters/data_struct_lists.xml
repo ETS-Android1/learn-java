@@ -45,35 +45,35 @@
     <code><![CDATA[
         
         <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> reading =  <font color="#E65100">true</font>; <font color="gray">//create the variables needed
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> reading =  <font color="#E65100">true</font>; <font color="gray">//változók létrehozása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> counter = <font color="#F0E130">0</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> input =  <font color="#E65100">null</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Scanner</font> scanner = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(<font color="#999900">System</font>.<font color="#ADD8E6">in</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray<font color="#2E8B57">">//don'</font>t have to worry about how big the internal array is
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//nem kell foglalkoznunk a listán belüli tömbbel</font>
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;<font color="#999900">Integer</font>> numbers = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">while</font>(reading) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">print</font>(<font color="#2E8B57">"Enter the "</font> + counter + ". number or 'q<font color="#2E8B57">' to stop: "</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">print</font>(<font color="#2E8B57">"Add meg a "</font> + counter + <font color="#2E8B57">". számot, vagy 'q'-t a megálláshoz: "</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;input = scanner.<font color="#ADD8E6">next</font>(); <font color="gray">//save number
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;input = scanner.<font color="#ADD8E6">next</font>(); <font color="gray">//szám mentése
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;numbers.<font color="#ADD8E6">add</font>(Integer.<font color="#ADD8E6">parseInt</font>(input)); <font color="gray">//add it to the end of the list
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;numbers.<font color="#ADD8E6">add</font>(Integer.<font color="#ADD8E6">parseInt</font>(input)); <font color="gray">//adjuk a lista végéhez
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">NumberFormatException</font> e) { <font color="gray<font color="#2E8B57">">//not a number, maybe '</font>q'?
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">NumberFormatException</font> e) { <font color="gray">//not a number, maybe 'q'?</font>
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(<font color="#2E8B57">"q"</font>.<font color="#ADD8E6">equals</font>(input)) reading =  <font color="#E65100">false</font>; <font color="gray<font color="#2E8B57">">//'</font>q' was entered, stop
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(<font color="#2E8B57">"q"</font>.<font color="#ADD8E6">equals</font>(input)) reading =  <font color="#E65100">false</font>; <font color="gray">//'q' was entered, stop</font>
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> sum = <font color="#F0E130">0</font>; <font color="gray">//sum the numbers
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> sum = <font color="#F0E130">0</font>; <font color="gray">//összegzés
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i: numbers) { <font color="gray">//not that the for-each loop works with lists too!
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i: numbers) { <font color="gray">//a for-each ciklus is működik listákra
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum += i;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Sum is "</font> + sum);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Az összeg"</font> + sum);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;scanner.<font color="#ADD8E6">close</font>();
 <br/>}
         
@@ -145,45 +145,45 @@
     </text>
     <code><![CDATA[
         
-<font color="gray">//create an empty list for doubles
+<font color="gray">//lista létrehozása double értékeknek
 </font>
 <br/><font color="#999900">LinkedList</font>&lt;<font color="#999900">Double</font>> nums = <font color="#E65100">new</font> <font color="#999900">LinkedList</font>&lt;>();
-<br/>nums.<font color="#ADD8E6">size</font>(); <font color="gray">//get the amount of element in the list
+<br/>nums.<font color="#ADD8E6">size</font>(); <font color="gray">//visszaadja a listában lévő elemek számát
 </font>
 <br/>
-<br/><font color="gray">//add and remove elements
+<br/><font color="gray">//hozzáadás és eltávolítás
 </font>
 <br/>nums.<font color="#ADD8E6">add</font>(<font color="#F0E130">1.2</font>);
 <br/>nums.<font color="#ADD8E6">add</font>(<font color="#F0E130">-11.3</font>);
 <br/>nums.<font color="#ADD8E6">add</font>(<font color="#999900">Math</font>.PI);
-<br/>nums.<font color="#ADD8E6">remove</font>(<font color="#F0E130">-11.3</font>); <font color="gray">//removes -11.3 from the list
+<br/>nums.<font color="#ADD8E6">remove</font>(<font color="#F0E130">-11.3</font>); <font color="gray">//a -11.3-at eltávolítja
 </font>
-<br/>nums.<font color="#ADD8E6">remove</font>(<font color="#F0E130">1</font>); <font color="gray">//removes the element at index 1.
+<br/>nums.<font color="#ADD8E6">remove</font>(<font color="#F0E130">1</font>); <font color="gray">//az 1-es pozíción lévő elem eltávolítása
 </font>
 <br/>
-<br/><font color="gray">//you can quickly create a list from elements this way:
+<br/><font color="gray">//gyorsan létrehozhatunk egy listát így:
 </font>
 <br/><font color="#999900">List</font>&lt;<font color="#999900">Double</font>> otherList = <font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(<font color="#F0E130">2.3</font>, <font color="#F0E130">-1.32</font>);
 <br/>
-<br/><font color="gray">//you can add other collections to a list, using the addAll method:
+<br/><font color="gray">//egész kollekciókat lehet hozzáadni:
 </font>
 <br/>nums.<font color="#ADD8E6">addAll</font>(otherList);
 <br/>
-<br/><font color="gray">//get elements by indices
+<br/><font color="gray">//elemek elkérése adott pozíciókról
 </font>
 <br/>nums.<font color="#ADD8E6">get</font>(<font color="#F0E130">0</font>);
-<br/><font color="gray">//linked list also supports getting first/last element
+<br/><font color="gray">//láncolt listánál az első és utolsó elem is lekérhető
 </font>
 <br/>nums.<font color="#ADD8E6">getFirst</font>();
 <br/>nums.<font color="#ADD8E6">getLast</font>();
 <br>
-<br><font color="gray">//inject an elemet at index 1</font>
+<br><font color="gray">//elem beszúrása az 1-es pozícióra</font>
 <br/>nums.<font color="#ADD8E6">set</font>(<font color="#F0E130">1</font>, <font color="#F0E130">3.2</font>);
 <br/>
-<br/>nums.<font color="#ADD8E6">clear</font>(); <font color="gray">//remove all elements
+<br/>nums.<font color="#ADD8E6">clear</font>(); <font color="gray">//lista kiürítése
 </font>
 <br/>
-<br/><font color="gray">//check if an element is in the list, returns a boolean
+<br/><font color="gray">//megnézi, hogy egy adott elem benne van-e a listában
 </font>
 <br/>nums.<font color="#ADD8E6">contains</font>(<font color="#999900">Math</font>.PI);
         

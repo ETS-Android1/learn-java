@@ -403,7 +403,8 @@
         <text>
             <![CDATA[
             The order class, implemented with a <b>HashMap</b>. Don't worry if you don't quite get this. Maps will be
-            covered in the next course.
+            covered in the next course. The basis idea is that an order can have different products and each product can
+            be included multiple times. For example, an order can be buying 2 T-shirts and 3 trousers.
             ]]>
         </text>
         <code><![CDATA[
@@ -439,7 +440,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; * Calculates the total price of products in this order.
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * <font color="red">@return</font> The calculated sum.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp; * @return The calculated sum.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">totalPrice</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> sum = <font color="#F0E130">0</font>;

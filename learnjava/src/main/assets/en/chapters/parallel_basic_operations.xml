@@ -251,7 +251,7 @@
 <br/><font color="#E65100">try</font> { <font color="gray">//wait can also be interrupted
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">synchronized</font> (monitor) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;monitor.<font color="#ADD8E6">wait</font>(); <font color="gray">//notify the waiting main thread
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;monitor.<font color="#ADD8E6">wait</font>(); <font color="gray">//wait for the worker thread to call notify
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>} <font color="#E65100">catch</font> (<font color="#999900">InterruptedException</font> e) {

@@ -73,7 +73,7 @@
     <code><![CDATA[
         
         <font color="#DF7401">long </font>big = <font color="#999900">Integer</font>.<font color="#999900">MAX_VALUE</font> * <font color="#F0E130">2</font>;
-        <br/><font color="#DF7401">long</font> l1 = <font color="#F0E130">141828414</font>9L;
+        <br/><font color="#DF7401">long</font> l1 = <font color="#F0E130">1418284149</font>L;
         
     ]]></code>
     <text>
@@ -114,9 +114,8 @@
     </text>
     <code><![CDATA[
         
-        <font color="#DF7401">double </font>d1 = <font color="#F0E130">3.65</font>;
-<font color="#DF7401">
-<br/><font color="#2E8B57">double</font> d2 = <font color="#F0E130">-21.941743242</font>;
+<font color="#DF7401">double </font>d1 = <font color="#F0E130">3.65</font>;
+<br/><font color="#DF7401">double</font> d2 = <font color="#F0E130">-21.941743242</font>;
 <br/><font color="gray">//Don't need to write 423.0, but we can</font>
 <br/><font color="#DF7401">double</font> d3 = <font color="#F0E130">423</font>;
 <br/>
@@ -204,7 +203,7 @@
     </list>
     <code><![CDATA[
         
-        <font color="#DF7401">boolean </font>a = true, b = false;
+        <font color="#DF7401">boolean </font>a = <font color="#E65100">true</font>, b = <font color="#E65100">false</font>;
 <font color="#DF7401">
 <br/>boolean </font>c = a && b; <font color="gray">//false
 </font>
@@ -216,7 +215,7 @@
     <interactive instruction="Enter a boolean operator which makes the value of 'c' true!">
         <data><![CDATA[
             
-<font color="#DF7401">boolean</font> a = false, b = true;
+<font color="#DF7401">boolean</font> a = <font color="#E65100">false</font>, b = <font color="#E65100">true</font>;
 <br/><font color="#DF7401">boolean</font> c = a ___ b;
             
         ]]></data>
@@ -236,7 +235,7 @@
     </text>
     <code><![CDATA[
         
-        <font color="#DF7401">char </font>c1 = '\u0011';
+        <font color="#DF7401">char </font>c1 = <font color="#2E8B57">'\u0011'</font>;
 <font color="#DF7401">
 <br/>char </font>c2 = <font color="#2E8B57">'A'</font>;
 <font color="#DF7401">

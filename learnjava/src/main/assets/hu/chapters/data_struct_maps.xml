@@ -12,7 +12,7 @@
     </text>
     <text>
         <![CDATA[
-        A a <i>map</i>-re gondolkodhatunk úgy, mint egy tömbre, de nem feltétlenül egész számokkal indexelve. Ehelyett
+        A szótárra gondolkodhatunk úgy, mint egy tömbre, de nem feltétlenül egész számokkal indexelve. Ehelyett
         a <b>kulcsok</b> az indexek, amelyek bármilyen típusúak lehetnek, mivel a <i>JDK</i>-s szótár implementációk 
 		is generikusak.
         ]]>
@@ -73,15 +73,15 @@
     </text>
     <code><![CDATA[
         
-        <font color="gray">//create map</font>
+        <font color="gray">//szótár létrehozása</font>
 <br/><font color="#999900">Map</font>&lt;<font color="#999900">Day</font>,<font color="#999900">Boolean</font>> weekendMap = <font color="#E65100">new</font> <font color="#999900">HashMap</font>&lt;>();
 <br/>
-<br/><font color="gray">//fill it with key-value pairs</font>
+<br/><font color="gray">//megtöltjük kulcs érték párokkal</font>
 <br/><font color="#E65100">for</font>(<font color="#999900">Day</font> day: <font color="#999900">Day</font>.<font color="#ADD8E6">values</font>()) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(day == <font color="#999900">Day</font>.SATURDAY || day == <font color="#999900">Day</font>.SUNDAY) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;weekendMap.<font color="#ADD8E6">put</font>(day, <font color="#E65100">true</font>); <font color="gray">//on weekend</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;weekendMap.<font color="#ADD8E6">put</font>(day, <font color="#E65100">true</font>); <font color="gray">//hétvége</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;weekendMap.<font color="#ADD8E6">put</font>(day, <font color="#E65100">false</font>); <font color="gray">//not on weekend</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;weekendMap.<font color="#ADD8E6">put</font>(day, <font color="#E65100">false</font>); <font color="gray">//hétköznap</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
         
@@ -94,8 +94,8 @@
     </text>
     <code><![CDATA[
         
-           <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Monday is on weekend: "</font> + weekendMap.<font color="#ADD8E6">get</font>(<font color="#999900">Day</font>.MONDAY));
-<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Saturday is on weekend: "</font> + weekendMap.<font color="#ADD8E6">get</font>(<font color="#999900">Day</font>.SATURDAY));
+           <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"A hétfő hétvégére esik: "</font> + weekendMap.<font color="#ADD8E6">get</font>(<font color="#999900">Day</font>.MONDAY));
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"A szombat hétvégére esik: "</font> + weekendMap.<font color="#ADD8E6">get</font>(<font color="#999900">Day</font>.SATURDAY));
         
     ]]></code>
     <title text="A szótár bejárása"/>
@@ -110,7 +110,7 @@
     </text>
     <code><![CDATA[
         
-        <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"The map has the following days as keys:"</font>);
+        <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"A szótárban lévő kulcsok:"</font>);
 <br/><font color="#E65100">for</font>(<font color="#999900">Day</font> key: weekendMap.<font color="#ADD8E6">keySet</font>()) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(key.<font color="#ADD8E6">toString</font>());
 <br/>}
@@ -127,9 +127,9 @@
     </text>
     <code><![CDATA[
         
-<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"The map has the following key-value pairs:"</font>);
+<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"A szótárban lévő párok:"</font>);
 <br/><font color="#E65100">for</font>(<font color="#999900">Map</font>.<font color="#999900">Entry</font>&lt;<font color="#999900">Day</font>, <font color="#999900">Boolean</font>> pair: weekendMap.<font color="#ADD8E6">entrySet</font>()) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(pair.<font color="#ADD8E6">getKey</font>() + " -> " + pair.<font color="#ADD8E6">getValue</font>());
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(pair.<font color="#ADD8E6">getKey</font>() + <font color="#2E8B57">" -> "</font> + pair.<font color="#ADD8E6">getValue</font>());
 <br/>}
         
     ]]></code>
@@ -160,7 +160,7 @@
 <font color="#999900">Map</font>&lt;___,___> userData = <font color="#E65100">new</font> <font color="#999900">HashMap</font>&lt;>();
 <br/><font color="#999900">Scanner</font> scanner = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(<font color="#999900">System</font>.<font color="#ADD8E6">in</font>);
 <br/><font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;<font color="#F0E130">5</font>; i++) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"<font color="</font>#999900">Enter</font> " + (i+<font color="#F0E130">1</font>) + ". user name and age:");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"<font color="</font>#999900">Add meg a</font> " + (i+<font color="#F0E130">1</font>) + <font color="#2E8B57">". nevet és kort:"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> name = scanner.<font color="#ADD8E6">nextLine</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> age = scanner.<font color="#ADD8E6">nextInt</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;userData.<font color="#ADD8E6">___</font>(name, age);

@@ -56,11 +56,14 @@
         <![CDATA[
         We <b>cannot</b> use the type parameter to create objects or arrays! Things like this are not allowed, for 
 		a type parameter <i>T</i>:
-		<br><br>
-		<i>T t = new T();</i><br>
-		<i>T[] array = new T[5];</i>
         ]]>
     </text>
+    <code>
+        <![CDATA[
+        <font color="#999900">T</font> t = <font color="#E65100">new</font> <font color="#999900">T</font>();<br>
+		<font color="#999900">T</font>[] array = <font color="#E65100">new</font> <font color="#999900">T</font>[<font color="#F0E130">5</font>];
+        ]]>
+    </code>
     <text>
         <![CDATA[
         This class can then be constructed like this:

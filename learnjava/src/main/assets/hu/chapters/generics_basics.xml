@@ -56,11 +56,14 @@
         <![CDATA[
         <b>Nem</b> használhatjuk a típusparamétert új objektumok, vagy tömbök létrehozására! Például nem lehet 
 		olyanokat a <i>T</i> típusparaméterből, hogy:
-		<br><br>
-		<i>T t = new T();</i><br>
-		<i>T[] array = new T[5];</i>
         ]]>
     </text>
+    <code>
+        <![CDATA[
+        <font color="#999900">T</font> t = <font color="#E65100">new</font> <font color="#999900">T</font>();<br>
+		<font color="#999900">T</font>[] array = <font color="#E65100">new</font> <font color="#999900">T</font>[<font color="#F0E130">5</font>];
+        ]]>
+    </code>
     <text>
         <![CDATA[
         A fenti, generikus osztályból így lehet példányokat létrehozni:
@@ -68,16 +71,16 @@
     </text>
     <code><![CDATA[
         
-        <font color="gray">//A printer for strings
+        <font color="gray">//Printer String-eknek
 </font>
 <br/><font color="#999900">Printer</font>&lt;<font color="#999900">String</font>> p1 = <font color="#E65100">new</font> <font color="#999900">Printer</font>&lt;>(<font color="#2E8B57">"text"</font>);
-<br/><font color="gray">//A printer for doubles
+<br/><font color="gray">//Printer valós számoknak
 </font>
 <br/><font color="#999900">Printer</font>&lt;<font color="#999900">Double</font>> p2 = <font color="#E65100">new</font> <font color="#999900">Printer</font>&lt;>(<font color="#F0E130">3.14</font>);
-<br/><font color="gray">//Printer for objects, will generate warnings
+<br/><font color="gray">//Printer Object számára, ez figyelmeztetést ad
 </font>
 <br/><font color="#999900">Printer</font> p3 = <font color="#E65100">new</font> <font color="#999900">Printer</font>(<font color="#E65100">new</font> <font color="#999900">Object</font>());
-<br/><font color="gray">//Proper way for object printer
+<br/><font color="gray">//ez a helyes mód Object típusra
 </font>
 <br/><font color="#999900">Printer</font>&lt;<font color="#999900">Object</font>> p4 = <font color="#E65100">new</font> <font color="#999900">Printer</font>&lt;>(<font color="#E65100">new</font> <font color="#999900">Object</font>());
         
@@ -105,13 +108,13 @@
     </text>
     <code><![CDATA[
         
-        <font color="gray">//A printer for strings
+        <font color="gray">//Printer String-eknek
 </font>
 <br/><font color="#999900">Printer</font>&lt;<font color="#999900">String</font>> p1 = <font color="#E65100">new</font> <font color="#999900">Printer</font>&lt;>(<font color="#2E8B57">"text"</font>);
-<br/><font color="gray">//compile time ERROR!!!
+<br/><font color="gray">//fordítás idejű hiba!!!
 </font>
 <br/><font color="#DF7401">int</font> number = p1.<font color="#ADD8E6">getPrintObject</font>();
-<br/><font color="gray">//also compile time ERROR!!!
+<br/><font color="gray">//fordítás idejű hiba!!!
 </font>
 <br/><font color="#DF7401">int</font> number = (<font color="#DF7401">int</font>)p1.<font color="#ADD8E6">getPrintObject</font>();
         
@@ -136,7 +139,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">s</font> = s;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//other methods here...
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//további metódusok...
 </font>
 <br/>}
         

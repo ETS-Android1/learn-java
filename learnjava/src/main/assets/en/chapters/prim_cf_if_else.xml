@@ -72,7 +72,7 @@
 
 <font color="#DF7401">int</font> number = <font color="#ADD8E6">getNumber</font>(); <font color="gray">//suppose this returns an integer</font>
 <br/>___ (number ___ <font color="#F0E130">10</font>) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"<font color="</font>#999900">Number</font> was <font color="#F0E130">10</font>!");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Number was 10!"</font>);
 <br/>}
 
         ]]></data>
@@ -166,9 +166,9 @@
 </font>
 <br/><font color="#DF7401">double</font> real = <font color="#E65100">new</font> <font color="#999900">Random</font>().<font color="#ADD8E6">nextDouble</font>();
 <br/><font color="#E65100">if</font>(real ___ <font color="#F0E130">0.25</font> && real &lt;= ___) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"<font color="</font></font>#999900">Near</font> the middle of the interval!");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Middle"</font>);
 <br/>} ___ {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"<font color="</font></font>#999900">Near</font> the edges of the interval!");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"On the edges"</font>);
 <br/>}
 
         ]]></data>

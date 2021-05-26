@@ -9,7 +9,8 @@
         <![CDATA[
         Ennek az alkalmazásnak a célja, hogy megtanítsa a <b>Java programnyelv</b>
         alapjait. A tananyag elérhető magyar nyelven, de a programozás nyelve az angol, 
-		ezért a kódminták angolul vannak. A megértésükhöz a legminimálisabb angol tudás is elég.
+		ezért a kódminták angolul vannak (viszont magyar megjegyzésekkel vannak ellátva).
+		A megértésükhöz minimális angol tudás is elég.
         ]]>
     </text>
     <boxed title="Gyakorlás">

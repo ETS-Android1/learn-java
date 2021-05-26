@@ -204,7 +204,7 @@
     <code><![CDATA[
         
 <font color="#999900">List</font>&lt;<font color="#999900">PrimeTask</font>> tasks = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
-<br/><font color="gray<font color="#2E8B57">">//Let'</font>s check primality between 2 and 20
+<br/><font color="gray<font color="#2E8B57">">//Let's check primality between 2 and 20</font>
 </font>
 <br/><font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">2</font>; i&lt;=<font color="#F0E130">20</font>; i++) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;tasks.<font color="#ADD8E6">add</font>(<font color="#E65100">new</font> <font color="#999900">PrimeTask</font>(i));

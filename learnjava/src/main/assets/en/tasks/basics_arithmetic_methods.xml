@@ -145,10 +145,10 @@
             <code><![CDATA[
                 
                 <font color="gray">/*
-<br/>Subtracts the second parameter from the first one and returns
+<br/>Divides the first parameter with the second and returns
 <br/>the result. If the second parameter is 0, it returns 0.
 <br/> */</font>
-<br/><font color="#E65100">static</font><font color="#DF7401"> int </font><font color="#ADD8E6">subtract</font>(<font color="#DF7401">int </font>n1,<font color="#DF7401"> int </font>n2) {
+<br/><font color="#E65100">static</font><font color="#DF7401"> int </font><font color="#ADD8E6">divide</font>(<font color="#DF7401">int </font>n1,<font color="#DF7401"> int </font>n2) {
 <br/><font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>divRes = <font color="#F0E130">0</font>;
 <br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;try </font>{
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;divRes = n1 / n2;

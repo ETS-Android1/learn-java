@@ -43,7 +43,7 @@
     </text>
     <code><![CDATA[
         
-        <font color="gray">//Callable, that checks if a number is prime or not.
+        <font color="gray">//Callable, ami számok prímségét ellenőrzi.
 </font>
 <br/><font color="#E65100">class</font> <font color="#999900">PrimeTask</font> <font color="#E65100">implements</font> <font color="#999900">Callable</font>&lt;<font color="#999900">Boolean</font>> {
 <br/>
@@ -53,21 +53,21 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">number</font> = number;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Note that this is an inefficient primality test!
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//ez nagyon nem hatékony prím teszt!
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Boolean</font> <font color="#ADD8E6">call</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=number-<font color="#F0E130">1</font>; i><font color="#F0E130">1</font>; i--) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(<font color="#ADD8E6">divisibleBy</font>(i)) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return false</font>; <font color="gray">//Found divisor, not a prime
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return false</font>; <font color="gray">//van osztó, ezért nem prím
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return true</font>; <font color="gray">//No divisor found
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return true</font>; <font color="gray">//nincs osztó
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Checks if the number is divisible by given divisor.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//oszthatóságot ellenőrző metódus
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">boolean</font> <font color="#ADD8E6">divisibleBy</font>(<font color="#DF7401">int</font> divisor) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> (number % divisor) == <font color="#F0E130">0</font>;
@@ -120,7 +120,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> ___ <font color="#ADD8E6">call</font>() <font color="#E65100">throws</font> <font color="#999900">Exception</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Cool one liner solution
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//egy utasításos megoldás
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#999900">Collections</font>.<font color="#ADD8E6">frequency</font>(<font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(text.<font color="#ADD8E6">toCharArray</font>()), letter);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
@@ -155,26 +155,26 @@
     </text>
     <code><![CDATA[
         
- <font color="gray">//Create a task that we want to do in parallel
+ <font color="gray">//feladat létrehozása
 </font>
 <br/><font color="#999900">PrimeTask</font> task = <font color="#E65100">new</font> <font color="#999900">PrimeTask</font>(<font color="#F0E130">78</font>);
 <br/>
-<br/><font color="gray">//Create an executor service
+<br/><font color="gray">//futtató szolgáltatás létrehozása
 </font>
 <br/><font color="#999900">ExecutorService</font> service = <font color="#999900">Executors</font>.<font color="#ADD8E6">newSingleThreadExecutor</font>();
 <br/>
-<br/><font color="gray">//Pass the task to the service, get a Future
+<br/><font color="gray">//átadjuk a feladatok, visszakapunk egy Future-t
 </font>
 <br/><font color="#999900">Future</font>&lt;<font color="#999900">Boolean</font>> result = service.<font color="#ADD8E6">submit</font>(task);
 <br/>
-<br/><font color="#E65100">try</font> { <font color="gray">//Wait for result, then print it
+<br/><font color="#E65100">try</font> { <font color="gray">//ezzel megvárjuk az eredményt
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> isPrime = result.<font color="#ADD8E6">get</font>();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"78 is a prime: "</font> + isPrime);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"78 prím? "</font> + isPrime);
 <br/>} <font color="#E65100">catch</font>(<font color="#999900">Exception</font> e) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">err</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Failed to execute task!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">err</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Nem sikerült a futtatás!"</font>);
 <br/>} <font color="#E65100">finally</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//An executor service must explicitly be shut down
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//a futtató szolgáltatást le kell állítani
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;service.<font color="#ADD8E6">shutdown</font>();
 <br/>}
@@ -219,39 +219,39 @@
     <code><![CDATA[
         
 <font color="#999900">List</font>&lt;<font color="#999900">PrimeTask</font>> tasks = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
-<br/><font color="gray<font color="#2E8B57">">//Let'</font>s check primality between 2 and 20
+<br/><font color="gray<font color="#2E8B57">">//1 és 20 közti számokat ellenőrző feladatok</font>
 </font>
 <br/><font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">2</font>; i&lt;=<font color="#F0E130">20</font>; i++) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;tasks.<font color="#ADD8E6">add</font>(<font color="#E65100">new</font> <font color="#999900">PrimeTask</font>(i));
 <br/>}
 <br/>
-<br/><font color="gray">//Create a thread pool, based on processor count
+<br/><font color="gray">//fix szálas futtató, a processzor magok száma alapján
 </font>
 <br/><font color="#DF7401">int</font> procCount = <font color="#999900">Runtime</font>.<font color="#ADD8E6">getRuntime</font>().<font color="#ADD8E6">availableProcessors</font>();
 <br/><font color="#999900">ExecutorService</font> pool = <font color="#999900">Executors</font>.<font color="#ADD8E6">newFixedThreadPool</font>(procCount);
 <br/>
 <br/><font color="#E65100">try</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Pass all tasks in, get a Future list
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//minden feladatok átadunk, egy listányi Future jön vissza
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">Future</font>&lt;<font color="#999900">Boolean</font>>> futures = pool.<font color="#ADD8E6">invokeAll</font>(tasks);
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Wait for all tasks to finish
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//várunk az összes befejezésére
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;futures.<font color="#ADD8E6">size</font>(); i++) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Get task and future
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//várakozás az egyes feladatokra
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Future</font>&lt;<font color="#999900">Boolean</font>> result = futures.<font color="#ADD8E6">get</font>(i);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">PrimeTask</font> task = tasks.<font color="#ADD8E6">get</font>(i);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Get the boolean result of calculation
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//az eredmény kiolvasása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> isPrime = result.<font color="#ADD8E6">get</font>();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(task.<font color="#ADD8E6">number</font> + <font color="#2E8B57">" is a prime: "</font> + isPrime);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(task.<font color="#ADD8E6">number</font> + <font color="#2E8B57">" egy prím? "</font> + isPrime);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>} <font color="#E65100">catch</font> (<font color="#999900">Exception</font> e) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">err</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Failed to execute!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">err</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Nem sikerült a futtatás!"</font>);
 <br/>} <font color="#E65100">finally</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Shut the pool down
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//a futtató szolgáltatás leállítása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;pool.<font color="#ADD8E6">shutdown</font>();
 <br/>}
@@ -282,16 +282,16 @@
     <interactive instruction="Tegyük fel, hogy véletlenszerű String-ek vannak egy listában. Használjuk a fent definiált LetterCounter feladatot, hogy egy futtató szolgáltatás segítségével megszámoljuk az 'a' előfordulását bennük!">
         <data><![CDATA[
 
-<font color="#999900">List</font>&lt;<font color="#999900">String</font>> strings = <font color="#ADD8E6">generateStrings</font>(); <font color="gray">//suppose this creates the list of strings
+<font color="#999900">List</font>&lt;<font color="#999900">String</font>> strings = <font color="#ADD8E6">generateStrings</font>(); <font color="gray">//tegyük fel, hogy létrehozza a String-eket
 </font>
 <br/><font color="#999900">List</font>&lt;___> tasks = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
-<br/><font color="#E65100">for</font>(<font color="#999900">String</font> text: strings) { <font color="gray">//create tasks
+<br/><font color="#E65100">for</font>(<font color="#999900">String</font> text: strings) { <font color="gray">//feladatok létrehozása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;tasks.<font color="#ADD8E6">add</font>(<font color="#E65100">new</font> <font color="#999900">LetterCounter</font>(text, ___));
 <br/>}
 <br/><font color="#999900">ExecutorService</font> pool = ___.<font color="#ADD8E6">newFixedThreadPool</font>(<font color="#F0E130">5</font>);
 <br/><font color="#999900">List</font>&lt;<font color="#999900">Future</font>&lt;<font color="#999900">Integer</font>>> futures = pool.<font color="#ADD8E6">invokeAll</font>(tasks);
-<br/><font color="gray">//Do something with the results here...
+<br/><font color="gray">//eredmény feldolgozása...
 </font>
 <br/>pool.<font color="#ADD8E6">shutdown</font>();
 

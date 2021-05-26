@@ -160,6 +160,7 @@
     <string name="interactive_reset">Visszaállítás</string>
     <string name="interactive_correct">Helyes!</string>
     <string name="interactive_incorrect">Valami nem stimmel…</string>
+    <string name="code_component_fail">Hiba a kódmintában!</string>
 
     <!-- All exams completed -->
     <string name="congratulations">Gratulálok!</string>

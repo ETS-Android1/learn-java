@@ -52,7 +52,7 @@
     <code><![CDATA[
         
         <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//usage of the line break character
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//usage of line break
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Line 1\nLine 2"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;

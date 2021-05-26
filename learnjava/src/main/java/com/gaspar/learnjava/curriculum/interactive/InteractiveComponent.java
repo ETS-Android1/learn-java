@@ -224,12 +224,18 @@ public final class InteractiveComponent extends Component {
             LogUtils.logError("Warning: interactive sample has no code!");
             return (int)codeArea.getContext().getResources().getDimension(R.dimen.code_text_size);
         }
-        View child = codeArea.getChildAt(0);
-        if(child instanceof TextView) {
-            return  (int)((TextView) child).getTextSize();
-        } else { //an edit text
-            final EditText inputField = child.findViewById(R.id.inputField);
-            return (int)inputField.getTextSize();
+        try {
+            View child = codeArea.getChildAt(0);
+            if(child instanceof TextView) {
+                return  (int)((TextView) child).getTextSize();
+            } else { //an edit text
+                final EditText inputField = child.findViewById(R.id.inputField);
+                return (int)inputField.getTextSize();
+            }
+        } catch (Exception e) {
+            Snackbar.make(codeArea, R.string.code_component_fail, Snackbar.LENGTH_SHORT).show();
+            LogUtils.logError("Exception while getting font size!", e);
+            return (int)codeArea.getContext().getResources().getDimension(R.dimen.code_text_size);
         }
     }
 

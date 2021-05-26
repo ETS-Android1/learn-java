@@ -67,7 +67,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;list = <font color="#E65100">new</font> <font color="#999900">MyLinkedList</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray<font color="#2E8B57">">//add to the '</font>beginning' of the queue
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//add to the 'beginning' of the queue</font>
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">enque</font>(<font color="#999900">String</font> element) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(list.<font color="#ADD8E6">size</font>() > <font color="#F0E130">0</font>) {

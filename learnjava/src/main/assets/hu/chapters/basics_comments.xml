@@ -20,7 +20,7 @@
     </text>
     <code><![CDATA[
         
-<font color="#999900">String</font> date; <font color="gray">//the date is in YYYY:MM:DD format</font>
+<font color="#999900">String</font> date; <font color="gray">//a dátum YYYY:MM:DD formájú</font>
         
     ]]></code>
     <text>
@@ -32,7 +32,7 @@
     </text>
     <code><![CDATA[
         
-<font color="gray<font color="#2E8B57">">//The input isn'</font>t validated here!</font>
+<font color="gray">//a bemenetet itt még nem ellenőriztük</font>
 <br/><font color="#999900">String</font> userInput = <font color="#ADD8E6">getUserInput</font>();
 <br><br>
 ...
@@ -52,8 +52,8 @@
         <data><![CDATA[
 
 <font color="#DF7401">int</font> num = <font color="#F0E130">0</font>;
-<br/>num = num + <font color="#F0E130">1</font>; ___ <font color="gray">increase by one</font>
-<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(num); ___ <font color="gray">print value</font>
+<br/>num = num + <font color="#F0E130">1</font>; ___ <font color="gray">1-el növelés</font>
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(num); ___ <font color="gray">kiíratás</font>
 
         ]]></data>
         <answer place="0">//</answer>
@@ -68,9 +68,9 @@
     </text>
     <code><![CDATA[
         
-<font color="gray">//Numeric input is expected. Not validated here,
+<font color="gray">//Számértéket várunk, itt még nincs ellenőrizve,
 </font>
-<br/><font color="gray">// call validate method before using!
+<br/><font color="gray">//meg kell hívni a validate metódust mielőtt használjuk!
 </font>
 <br/><font color="#999900">String</font> userInput = <font color="#ADD8E6">getUserInput</font>();
         
@@ -88,8 +88,8 @@
         
 <font color="gray">
 /*<br>
-Numeric input is expected from the user, but it isn't validated here,<br>
-so make sure to call validate method before using!<br>
+Számértéket várunk, itt még nincs ellenőrizve,<br>
+meg kell hívni a validate metódust mielőtt használjuk!<br>
 */</font>
 <br/><font color="#999900">String</font> userInput = <font color="#ADD8E6">getUserInput</font>();
         
@@ -97,8 +97,8 @@ so make sure to call validate method before using!<br>
     <interactive instruction="Egészítsd ki a többsoros kommentet!">
         <data><![CDATA[
             
-___ <font color="gray">The first line of this long, multi-lined comment.
-<br/><font color="gray">The second line of this long, multi-lined comment.</font> ___
+___ <font color="gray">A hosszú komment első sora.
+<br/><font color="gray">A hosszú komment második sora.</font> ___
             
         ]]></data>
         <answer place="0">/*</answer>
@@ -114,7 +114,7 @@ ___ <font color="gray">The first line of this long, multi-lined comment.
     </text>
     <code><![CDATA[
         
-        <font color="gray">//TODO: finish writing this method!</font>
+        <font color="gray">//TODO: metódus befejezése!</font>
 <br/><font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">validate</font>(<font color="#999900">String</font> userInput) {
 <br/>
 <br/>}
@@ -133,7 +133,7 @@ ___ <font color="gray">The first line of this long, multi-lined comment.
     </text>
     <code><![CDATA[
         
-        <font color="#DF7401">int </font>x = <font color="#F0E130">5</font>; <font color="gray">//An integer variable named x, with value 5.</font>
+        <font color="#DF7401">int </font>x = <font color="#F0E130">5</font>; <font color="gray">//Egy x nevű egész szám változó, amelynek értéke 5.</font>
         
     ]]></code>
     <text>

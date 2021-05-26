@@ -42,7 +42,8 @@
         <![CDATA[
         Nos, ebben a kódban nincs semmi újdonság, ezt már a <i>Java 8</i> előtt is megtehettük. Egy anonim osztályt 
 		használtunk a <i>Runnable</i> megvalósításához. Ez az a pont, ahol a 
-		lambda kifejezések bejönnek a képbe.
+		lambda kifejezések bejönnek a képbe. Azzla, hogy micsoda a <i>Thread</i> egyenlőre ne foglalkozz, erre egy későbbi kurzusban
+		kerül sor. Egyenlőre elég annyi, hogy elfogad egy <i>Runnable</i>-t.
         ]]>
     </text>
     <title text="Mi az a lambda kifejezés?"/>

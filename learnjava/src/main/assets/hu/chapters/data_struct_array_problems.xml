@@ -20,33 +20,33 @@
     <code><![CDATA[
         
         <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> reading = <font color="#E65100">true</font>; <font color="gray">//create the variables needed
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">boolean</font> reading = <font color="#E65100">true</font>; <font color="gray">//szükséges változók létrehozása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> counter = <font color="#F0E130">0</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> input = <font color="#E65100">null</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Scanner</font> scanner = <font color="#E65100">new</font> <font color="#999900">Scanner</font>(System.<font color="#ADD8E6">in</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font>[] numbers = <font color="#E65100">new</font> <font color="#DF7401">int</font>[<font color="#F0E130">5</font>]; <font color="gray">//how big should the array be?!
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font>[] numbers = <font color="#E65100">new</font> <font color="#DF7401">int</font>[<font color="#F0E130">5</font>]; <font color="gray">//mekkora legyen a tömb?!
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">while</font>(reading) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">print</font>(<font color="#2E8B57">"Enter the "</font> + counter + ". number or 'q<font color="#2E8B57">' to stop: "</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">print</font>(<font color="#2E8B57">"Add meg a "</font> + counter + <font color="#2E8B57">". számot, vagy 'q'-t a megálláshoz: "</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">try</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;input = scanner.<font color="#ADD8E6">next</font>(); <font color="gray">//save number
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;input = scanner.<font color="#ADD8E6">next</font>(); <font color="gray">//szám elmentése
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;numbers[counter++] = <font color="#999900">Integer</font>.<font color="#ADD8E6">parseInt</font>(input);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">NumberFormatException</font> e) { <font color="gray<font color="#2E8B57">">//not a number, maybe '</font>q'?
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">catch</font>(<font color="#999900">NumberFormatException</font> e) { <font color="gray">//nem szám, talán 'q'?</font>
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(<font color="#2E8B57">"q"</font>.<font color="#ADD8E6">equals</font>(input)) reading = false; <font color="gray<font color="#2E8B57">">//'</font>q' was entered, stop
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(<font color="#2E8B57">"q"</font>.<font color="#ADD8E6">equals</font>(input)) reading = <font color="#E65100">false</font>; <font color="gray">//'q' lett megadva, megállás</font>
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> sum = <font color="#F0E130">0</font>; <font color="gray">//sum the numbers
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> sum = <font color="#F0E130">0</font>; <font color="gray">//összeadás
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i: numbers) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum += i;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Sum is "</font> + sum);	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Az összeg "</font> + sum);	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;scanner.<font color="#ADD8E6">close</font>();
 <br/>}
         
@@ -120,7 +120,7 @@
     </text>
     <code><![CDATA[
         
-        <font color="gray">//A list of strings, empty for now</font>
+        <font color="gray">//String-ek listája, egyenlőre üres</font>
 <br/><font color="#999900">ArrayList</font>&lt;<font color="#999900">String</font>> strings = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
         
     ]]></code>

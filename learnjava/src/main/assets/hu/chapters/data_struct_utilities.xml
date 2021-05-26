@@ -33,10 +33,10 @@
     </text>
     <code><![CDATA[
         
-<font color="gray">//create a list using the asList utility method</font>
+<font color="gray">//asList segédmetódus használata</font>
 <br/><font color="#999900">List</font>&lt;<font color="#999900">Integer</font>> numbers = <font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(<font color="#F0E130">0</font>, <font color="#F0E130">1</font>, <font color="#F0E130">2</font>, <font color="#F0E130">3</font>);
 <br/>
-<br/><font color="gray">//create list of 10 character a-s, using nCopies.</font>
+<br/><font color="gray">//nCopies használata, gyorsan hoz létre olyan listát, aminek minden eleme azonos.</font>
 <br/><font color="#999900">List</font>&lt;<font color="#999900">Character</font>> chars = <font color="#999900">Collections</font>.<font color="#ADD8E6">nCopies</font>(<font color="#F0E130">10</font>, <font color="#2E8B57">'a'</font>);
         
     ]]></code>
@@ -53,7 +53,7 @@
     </text>
     <code><![CDATA[
         
-<font color="gray">//replace all elements with 0-s</font>
+<font color="gray">//minden elem átírása 0-ra</font>
 <br/><font color="#999900">Collections</font>.<font color="#ADD8E6">fill</font>(numbers, <font color="#F0E130">0</font>);
         
     ]]></code>
@@ -64,9 +64,9 @@
     </text>
     <code><![CDATA[
         
-<font color="gray">//count 0-s in the list</font>
+<font color="gray">//0-k megszámolása</font>
 <br/><font color="#DF7401">int</font> count = <font color="#999900">Collections</font>.<font color="#ADD8E6">frequency</font>(numbers, <font color="#F0E130">0</font>);
-<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"0-s in the list: "</font> + count);
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"0-k száma a listában: "</font> + count);
         
     ]]></code>
     <text>
@@ -77,10 +77,10 @@
     </text>
     <code><![CDATA[
         
-<font color="gray">//reverse the order of the elements</font>
+<font color="gray">//sorrend megfordítása</font>
 <br/><font color="#999900">Collections</font>.<font color="#ADD8E6">reverse</font>(numbers);
 <br/>
-<br/><font color="gray">//rearrange the elements in a random order</font>
+<br/><font color="gray">//elemek összekeverése véletlenszerűen</font>
 <br/><font color="#999900">Collections</font>.<font color="#ADD8E6">shuffle</font>(numbers);
         
     ]]></code>
@@ -95,7 +95,7 @@
 <font color="#DF7401">int</font> max = <font color="#999900">Collections</font>.<font color="#ADD8E6">max</font>(numbers);
 <br/><font color="#DF7401">int</font> min = <font color="#999900">Collections</font>.<font color="#ADD8E6">min</font>(numbers);
 <br/>
-<br/><font color="gray">//sort the elements in ascending order</font>
+<br/><font color="gray">//növekvő sorrendbe rendezés</font>
 <br/><font color="#999900">Collections</font>.<font color="#ADD8E6">sort</font>(numbers);
         
     ]]></code>
@@ -124,7 +124,7 @@
         <font color="#E65100">public class</font> <font color="#999900">Person</font> <font color="#E65100">implements</font> <font color="#999900">Comparable</font>&lt;<font color="#999900">Person</font>> {
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> name;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">int</font> age; <font color="gray">//this will be used to compare
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">int</font> age; <font color="gray">//ez alapján fogunk összehasonlítani
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Person</font>(<font color="#999900">String</font> name, <font color="#DF7401">int</font> age) {
@@ -165,7 +165,7 @@
 <br/>);
 <br/>
 <br/><font color="#999900">Person</font> oldest = <font color="#999900">Collections</font>.<font color="#ADD8E6">max</font>(people);
-<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"The oldest person is "</font> + oldest.<font color="#ADD8E6">name</font>);
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"A legidősebb személy "</font> + oldest.<font color="#ADD8E6">name</font>);
         
     ]]></code>
     <interactive instruction="Egészítsd ki a metódust úgy, hogy a lista minimumát és maximumát eltávolítja!">

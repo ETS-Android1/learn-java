@@ -22,8 +22,8 @@
     </text>
     <code><![CDATA[
         
-        <font color="#DF7401">int</font>[] numbers; <font color="gray">//declaration</font>
-<br/>numbers = <font color="#E65100">new</font> <font color="#DF7401">int</font>[<font color="#F0E130">100</font>]; <font color="gray">//initialization</font>
+        <font color="#DF7401">int</font>[] numbers; <font color="gray">//deklaráció</font>
+<br/>numbers = <font color="#E65100">new</font> <font color="#DF7401">int</font>[<font color="#F0E130">100</font>]; <font color="gray">//inicializálás</font>
         
     ]]></code>
     <text>
@@ -75,10 +75,10 @@
     </text>
     <code><![CDATA[
         
- <font color="gray">//an array of 4 booleans</font>
+ <font color="gray">//4 boolean tömbje</font>
 <br/><font color="#DF7401">boolean</font>[] logicals = {<font color="#E65100">false</font>, <font color="#E65100">true</font>, <font color="#E65100">false</font>, <font color="#E65100">false</font>};
-<br/><font color="gray">//an array of 3 strings</font>
-<br/><font color="#999900">String</font>[] words = {<font color="#2E8B57">"Fast"</font>, <font color="#2E8B57">"Array"</font>, <font color="#2E8B57">"Initialization"</font>};
+<br/><font color="gray">//3 String tömbje</font>
+<br/><font color="#999900">String</font>[] words = {<font color="#2E8B57">"Gyors"</font>, <font color="#2E8B57">"Tömb"</font>, <font color="#2E8B57">"Inicializálás"</font>};
         
     ]]></code>
     <text>
@@ -91,8 +91,8 @@
     </text>
     <code><![CDATA[
         
-        <font color="gray">//INVALID CODE!	&nbsp;&nbsp;&nbsp;&nbsp;</font>
-<br/><font color="#DF7401">int</font>[] integers = {<font color="#F0E130">1,2</font>,<font color="#F0E130">3</font>,<font color="#2E8B57">"four"</font>};
+        <font color="gray">//HIBÁS KÓD!	&nbsp;&nbsp;&nbsp;&nbsp;</font>
+<br/><font color="#DF7401">int</font>[] integers = {<font color="#F0E130">1,2</font>,<font color="#F0E130">3</font>,<font color="#2E8B57">"négy"</font>};
         
     ]]></code>
     <interactive instruction="Deklarálj egy tömböt, ami az ABC első három betűjét tartalmazza!">
@@ -122,12 +122,12 @@ ___[] letters = { <font color="#2E8B57">'a'</font>, ___, <font color="#2E8B57">'
     </boxed>
     <code><![CDATA[
         
-        <font color="gray">//array of 3 doubles</font>
+        <font color="gray">//3 double tömbje</font>
 <br/><font color="#DF7401">double</font>[] reals = <font color="#E65100">new</font> <font color="#DF7401">double</font>[<font color="#F0E130">3</font>];
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/><font color="gray">/**
-<br/> * Values are now 0 for all 3
-<br/> * doubles in the array.
+<br/> * Jelenleg mindhárom double
+<br/> * értéke 0 (alapérték).
 <br/> */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>reals[<font color="#F0E130">0</font>] = <font color="#F0E130">3.14</font>;
@@ -135,8 +135,8 @@ ___[] letters = { <font color="#2E8B57">'a'</font>, ___, <font color="#2E8B57">'
 <br/>reals[<font color="#F0E130">2</font>] = <font color="#F0E130">5.5</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/><font color="gray">/**
-<br/> * We assigned our own values
-<br/> * for the elements.
+<br/> * Saját értékeket adtunk a számoknak,
+<br/> * felülírva az alapértéket.
 <br/>*/</font>
         
     ]]></code>
@@ -147,23 +147,23 @@ ___[] letters = { <font color="#2E8B57">'a'</font>, ___, <font color="#2E8B57">'
     </text>
     <code><![CDATA[
         
-        <font color="gray">//array of 4 strings
+        <font color="gray">//4 String tömbje
 </font>
 <br/><font color="#999900">String</font>[] words = <font color="#E65100">new</font> <font color="#999900">String</font>[<font color="#F0E130">4</font>];
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/><font color="gray">/**
-<br/> * Values are now null for all
-<br/> * elements. We should initialize:
+<br/> * Az értékek most minden
+<br/> * elem esetén null-ok. Inicializálni kell:
 <br/>*/</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>words[<font color="#F0E130">0</font>] = <font color="#2E8B57">"Cat"</font>;
-<br/>words[<font color="#F0E130">1</font>] = <font color="#2E8B57">"Car"</font>;
+<br/>words[<font color="#F0E130">0</font>] = <font color="#2E8B57">"Macska"</font>;
+<br/>words[<font color="#F0E130">1</font>] = <font color="#2E8B57">"Autó"</font>;
 <br/>words[<font color="#F0E130">2</font>] = <font color="#2E8B57">"Java"</font>;
-<br/>words[<font color="#F0E130">3</font>] = <font color="#2E8B57">"Programming"</font>;
+<br/>words[<font color="#F0E130">3</font>] = <font color="#2E8B57">"Programozás"</font>;
 <br/>
 <br/><font color="gray">/**
-<br/> * Now we can safely do something
-<br/> * with the words!
+<br/> * Most már biztonságos műveleteket
+<br/> * végezni a tömb elemein!
 <br/> */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">print</font>(words[<font color="#F0E130">2</font>] + <font color="#2E8B57">" "</font> + words[<font color="#F0E130">3</font>]);
@@ -177,7 +177,7 @@ ___[] letters = { <font color="#2E8B57">'a'</font>, ___, <font color="#2E8B57">'
     <code><![CDATA[
         
         <font color="#DF7401">char</font>[] chars = <font color="#E65100">new</font> <font color="#DF7401">char</font>[<font color="#F0E130">50</font>];
-<br/><font color="gray">//charAmount will be 50	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/><font color="gray">//charAmount 50 lesz &nbsp;&nbsp;&nbsp;&nbsp;
 </font>
 <br/><font color="#DF7401">int</font> charAmount = chars.<font color="#ADD8E6">length</font>;
         
@@ -193,10 +193,10 @@ ___[] letters = { <font color="#2E8B57">'a'</font>, ___, <font color="#2E8B57">'
     </text>
     <code><![CDATA[
         
-        <font color="gray">//indices are from 0 to 9!</font>
+        <font color="gray">//a pozíciók 0 és 9 közt vannak!</font>
 <br/><font color="#DF7401">int</font>[] nums = <font color="#E65100">new</font> <font color="#DF7401">int</font>[<font color="#F0E130">10</font>];
 <br/>
-<br/><font color="gray">//there is no element with index 10!</font>
+<br/><font color="gray">//nincs 10-es pozíciójú elem!</font>
 <br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(nums[<font color="#F0E130">10</font>]);
         
     ]]></code>
@@ -214,7 +214,7 @@ ___[] letters = { <font color="#2E8B57">'a'</font>, ___, <font color="#2E8B57">'
         
 <font color="#999900">String</font>[] words = <font color="#E65100">new</font> <font color="#999900">String</font>[<font color="#F0E130">6</font>];
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/><font color="gray">//words[0] is null here!</font>
+<br/><font color="gray">//a words[0] itt még null, mert nem inicializáltuk!</font>
 <br/><font color="#DF7401">int</font> charNum = words[<font color="#F0E130">0</font>].<font color="#ADD8E6">length</font>();
         
     ]]></code>
@@ -230,8 +230,8 @@ ___[] letters = { <font color="#2E8B57">'a'</font>, ___, <font color="#2E8B57">'
         <data><![CDATA[
 
 <font color="#DF7401">double</font>[] reals = <font color="#E65100">new</font> <font color="#DF7401">double</font>[<font color="#F0E130">20</font>];
-<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"<font color="</font></font>#999900">First</font>: " + reals[___]);
-<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"<font color="</font></font>#999900">Last</font>: " + reals[___]);
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"<font color="</font></font>#999900">Első: "</font> + reals[___]);
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"<font color="</font></font>#999900">Utolsó: "</font> + reals[___]);
 
         ]]></data>
         <answer place="0">0</answer>

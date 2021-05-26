@@ -101,35 +101,35 @@
 <br/><font color="#E65100">public class</font> <font color="#999900">Main</font> {
 <br/>
 <br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;public static</font><font color="#DF7401"> void </font><font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//call the first 3 methods
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//első 3 metódus hívása, lásd őket lent
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>subRes = <font color="#ADD8E6">subtract</font>(<font color="#F0E130">-2145</font>, <font color="#F0E130">45231</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>mulRes = <font color="#ADD8E6">multiply</font>(<font color="#F0E130">31</font>, <font color="#F0E130">-8713</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>divRes = <font color="#ADD8E6">divide</font>(<font color="#F0E130">16</font>, <font color="#F0E130">4</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//call the add and print method
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//a 4., összeadó és kinyomtató metódus hívása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ADD8E6">addAndPrint</font>(subRes, mulRes, divRes);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">// Subtracts the second parameter from the first one and returns the result.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//kivonja a második paramétert az elsőből, majd visszaadja az eredményt
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font> <font color="#DF7401">int</font> <font color="#ADD8E6">subtract</font>(<font color="#DF7401">int </font>n1,<font color="#DF7401"> int </font>n2) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;return </font>n1 - n2;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">// Multiplies the parameters and returns the result.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//össze szorozza a paramétereket és visszaadja az eredményt
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font><font color="#DF7401"> int </font><font color="#ADD8E6">multiply</font>(<font color="#DF7401">int </font>n1,<font color="#DF7401"> int </font>n2) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;return </font>n1 * n2;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">// Divides the parameters and returns the result.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//osztja az első paramétert a másodikkal és visszaadja az eredményt
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font><font color="#DF7401"> int </font><font color="#ADD8E6">divide</font>(<font color="#DF7401">int </font>n1,<font color="#DF7401"> int </font>n2) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;return </font>n1 / n2;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">// Sums the parameters and prints the result.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//összeadja a paramétereket és visszaadja az eredményt
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font><font color="#DF7401"> void </font><font color="#ADD8E6">addAndPrint</font>(<font color="#DF7401">int </font>n1,<font color="#DF7401"> int </font>n2,<font color="#DF7401"> int </font>n3) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>additionResult = n1 + n2 + n3;
@@ -147,15 +147,15 @@
             <code><![CDATA[
                 
                 <font color="gray">/*
-<br/>Subtracts the second parameter from the first one and returns
-<br/>the result. If the second parameter is 0, it returns 0.
+<br/>Osztja az első paramétert a másodikkal és visszaadja az eredményt.
+<br/>Ha a 2. paraméter 0, akkor 0-t ad vissza.
 <br/> */</font>
-<br/><font color="#E65100">static</font><font color="#DF7401"> int </font><font color="#ADD8E6">subtract</font>(<font color="#DF7401">int </font>n1,<font color="#DF7401"> int </font>n2) {
+<br/><font color="#E65100">static</font><font color="#DF7401"> int </font><font color="#ADD8E6">divides</font>(<font color="#DF7401">int </font>n1,<font color="#DF7401"> int </font>n2) {
 <br/><font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>divRes = <font color="#F0E130">0</font>;
 <br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;try </font>{
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;divRes = n1 / n2;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}<font color="#E65100"> catch </font>(<font color="#999900">ArithmeticException</font> e) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"An exception occurred!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Kivétel történt!"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/><font color="#E65100">	&nbsp;&nbsp;&nbsp;&nbsp;return </font>divRes;
 <br/>}

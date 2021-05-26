@@ -14,6 +14,7 @@
         <![CDATA[
         Ha nem vagy teljesen biztos az interfészekkel kapcsolatos ismereteidben, javaslom, hogy frissítsd fel ezeket az
         '<b>absztrakt osztályok és interfészek</b>' című fejezetetben, amely a '<b>Osztályok</b>' című kurzusban található.
+        Az itt látható interfészt is onnan emeltem át:
         ]]>
     </text>
     <code><![CDATA[
@@ -22,9 +23,9 @@
 </font>
 <br/><font color="#E65100">public interface</font> <font color="#999900">Printable</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> <font color="#ADD8E6">print</font>(); <font color="gray">//prints the object to the console</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> <font color="#ADD8E6">print</font>(); <font color="gray">//kiírja az objektumot a konzolra</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> <font color="#ADD8E6">printedLines</font>(); <font color="gray">//returns how many lines the printed object uses</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> <font color="#ADD8E6">printedLines</font>(); <font color="gray">//megadja a kiíráshoz szükséges sorok számát</font>
 <br/>
 <br/>}
         
@@ -60,13 +61,13 @@
     <code><![CDATA[
         
 <font color="#E65100">public</font> <font color="#E65100">interface</font> <font color="#999900">Printable</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//prints the object to the console
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//kiírja az objektumot a konzolra
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> <font color="#ADD8E6">print</font>();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//returns the number of lines used for printing
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//megadja a kiíráshoz szükséges sorok számát
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> <font color="#ADD8E6">printedLines</font>();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//new method: print to any PrintStream
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//új metódus: kiírás bármilyen PrintStream-re, nem csak konzolra
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> <font color="#ADD8E6">print</font>(java.<font color="#ADD8E6">io</font>.<font color="#999900">PrintStream</font> stream);
 <br/>}
@@ -83,18 +84,18 @@
     <code><![CDATA[
         
         <font color="#E65100">public</font> <font color="#E65100">interface</font> <font color="#999900">Printable</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//prints the object
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//kiírja az objektumot a konzolra
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> <font color="#ADD8E6">print</font>();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//returns the number of lines used for printing
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//megadja a kiíráshoz szükséges sorok számát
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> <font color="#ADD8E6">printedLines</font>();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//new method: print to any PrintStream
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//új metódus: kiírás bármilyen PrintStream-re, nem csak konzolra
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">default</font> <font color="#DF7401">void</font> <font color="#ADD8E6">print</font>(java.<font color="#ADD8E6">io</font>.<font color="#999900">PrintStream</font> stream) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/*
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp; * Without a better alternative, we will use
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp; * toString to print the object to the stream.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp; * Mivel nincs jobb alternatívánk, ezért az
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp; * Object toString metódusát használjuk.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;stream.<font color="#ADD8E6">print</font>(<font color="#E65100">this</font>.<font color="#ADD8E6">toString</font>());
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
@@ -114,7 +115,7 @@
         <font color="#E65100">public</font> ___ <font color="#999900">MyInterface</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> <font color="#ADD8E6">abstractMethod</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;___ <font color="#DF7401">void</font> <font color="#ADD8E6">methodWithImplementation</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"<font color="</font>#999900">Implementation</font>");
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"<font color="</font>#999900">Implementáció</font>");
 }
 <br/>}
             
@@ -190,13 +191,13 @@
         <data><![CDATA[
             
 <font color="#E65100">public</font> <font color="#E65100">interface</font> <font color="#999900">Summable</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//performs the summing
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//elvégzi az összeadást
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;___ <font color="#ADD8E6">sum</font>();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//gets the size
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//megadja az elemszámot
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> <font color="#ADD8E6">size</font>();
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//calculates average
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//átlagot számol
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;___ <font color="#DF7401">double</font> <font color="#ADD8E6">average</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> <font color="#ADD8E6">___</font>() / <font color="#ADD8E6">size</font>();
@@ -292,7 +293,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//felülírjuk a run metódust</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello from a thread!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello innen bentről"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
         
@@ -309,9 +310,9 @@
         
 <font color="gray">//objektum létrehozása egy anonim Runnable segítségével</font>
 <br/><font color="#999900">Thread</font> t1 = <font color="#E65100">new</font> <font color="#999900">Thread</font>(<font color="#E65100">new</font> <font color="#999900">Runnable</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font> <font color="gray">//override the run method here</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font> <font color="gray">//felülírjuk a run metódust</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">run</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello from an anonymous runnable!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Hello egy anonim osztályból!"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>});
         

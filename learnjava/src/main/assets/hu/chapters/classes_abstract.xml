@@ -94,7 +94,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> <font color="#999900">String</font> processor;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> <font color="#DF7401">int</font> ram; <font color="gray">//in gigabytes
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> <font color="#DF7401">int</font> ram; <font color="gray">//gigabájtban számolva
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">protected</font> <font color="#999900">Computer</font>(<font color="#999900">String</font> processor, <font color="#DF7401">int</font> ram) {
@@ -120,17 +120,17 @@
 <font color="#E65100">public class</font> <font color="#999900">PC</font> <font color="#E65100">extends</font> <font color="#999900">Computer</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">PC</font>(<font color="#999900">String</font> processor, <font color="#DF7401">int</font> ram) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>(processor, ram); <font color="gray">//call superclass constructor
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>(processor, ram); <font color="gray">//ősosztály konstruktorának hívása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//implement the abstract method of the superclass
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//az ősosztály absztrakt metódusának implementálása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printProperties</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>("This is a PC.\n" +
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2E8B57">"Processor: "</font> + processor + "\n" +
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2E8B57">"RAM amount: "</font> + ram + <font color="#2E8B57">" GB"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Ez egy PC.\n"</font> +
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2E8B57">"Processzor: "</font> + processor + "\n" +
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2E8B57">"RAM mennyiség: "</font> + ram + <font color="#2E8B57">" GB"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
         
@@ -139,23 +139,23 @@
         
         <font color="#E65100">public class</font> <font color="#999900">Laptop</font> <font color="#E65100">extends</font> <font color="#999900">Computer</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">int</font> accumulatorTime; <font color="gray">//in minutes
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">int</font> accumulatorTime; <font color="gray">//percekben mérve
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Laptop</font>(<font color="#999900">String</font> processor, <font color="#DF7401">int</font> ram, <font color="#DF7401">int</font> accumulatorTime) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>(processor, ram); <font color="gray">//call superclass constructor
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>(processor, ram); <font color="gray">//ősosztály konstruktorának hívása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">accumulatorTime</font> = accumulatorTime;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//implement the abstract method of the superclass
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//az ősosztály absztrakt metódusának implementálása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printProperties</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>("This is a laptop.\n" +
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2E8B57">"Processor: "</font> + processor + "\n" +
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2E8B57">"RAM amount: "</font> + ram + " GB\n" +
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2E8B57">"It can operate for "</font> + accumulatorTime + <font color="#2E8B57">" minutes if fully charged."</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Ez egy laptop.\n"</font> +
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2E8B57">"Processzor: "</font> + processor + "\n" +
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2E8B57">"RAM mennyiség: "</font> + ram + " GB\n" +
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2E8B57">"Akummulátor élettartama "</font> + accumulatorTime + <font color="#2E8B57">" perc."</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
         
@@ -177,13 +177,13 @@
     </text>
     <code><![CDATA[
         
-        <font color="gray">//an interface for classes that can be printed
+        <font color="gray">//egy interfész konzolra írható objektumoknak
 </font>
 <br/><font color="#E65100">public interface</font> <font color="#999900">Printable</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> <font color="#ADD8E6">print</font>(); <font color="gray">//prints the object</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">void</font> <font color="#ADD8E6">print</font>(); <font color="gray">//kiírja az objektumot</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> <font color="#ADD8E6">printedLines</font>(); <font color="gray">//returns how many lines the printed object uses</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> <font color="#ADD8E6">printedLines</font>(); <font color="gray">//megadja a kiíráshoz használt sorok számát</font>
 <br/>
 <br/>}
         
@@ -226,20 +226,20 @@
     </text>
     <code><![CDATA[
         
-        <font color="gray">//a class that stores an array of strings</font>
+        <font color="gray">//egy String tömböt tároló osztály, megvalósítja az interfészt</font>
 <br/><font color="#E65100">class</font> <font color="#999900">Data</font> <font color="#E65100">implements</font> <font color="#999900">Printable</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font>[] strings;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">print</font>() { <font color="gray">//prints all strings, each to 1 line</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">print</font>() { <font color="gray">//minden String 1 sorba kerül</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">String</font> s: strings) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(s);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">printedLines</font>() { <font color="gray">//returns the number of strings</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">printedLines</font>() { <font color="gray">//sorok száma = String-ek száma</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> strings.<font color="#ADD8E6">length</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
@@ -271,13 +271,13 @@
 <font color="#E65100">public</font> <font color="#E65100">class</font> <font color="#999900">TextFile</font> ___ <font color="#999900">File</font> ___ <font color="#999900">Readable</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">___</font>(<font color="#999900">String</font> data) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//implementation
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//implementáció...
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">readAll</font>(<font color="#999900">String</font>[] data) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//implementation
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//implementáció...
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}

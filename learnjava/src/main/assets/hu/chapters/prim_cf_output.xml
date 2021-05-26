@@ -53,15 +53,15 @@
     <code><![CDATA[
         
         <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//usage of the line break character
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//sortörés karakter használata
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Line 1\nLine 2"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Sor 1\nSor 2"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//this just prints a line break
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//ez csak egy új sort kezd
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//usage of the tab character
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//tabulátor karakter használata
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Tab1\tTab2"</font>);
 <br/>}
@@ -89,14 +89,14 @@
     <code><![CDATA[
         
 <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) <font color="#E65100">throws</font> <font color="#999900">Exception</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create the PrintWriter
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//PrintWriter létrehozása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">PrintWriter</font> pw = <font color="#E65100">new</font> <font color="#999900">PrintWriter</font>(<font color="#2E8B57">"output.txt"</font>, <font color="#2E8B57">"UTF-8"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//print something to file
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//írjunk valamit bele a fájlba
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;pw.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"This is a line"</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;pw.<font color="#ADD8E6">print</font>(<font color="#2E8B57">"Here is another line"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;pw.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Ez egy sor"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;pw.<font color="#ADD8E6">print</font>(<font color="#2E8B57">"Itt egy újabb sor"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;pw.<font color="#ADD8E6">close</font>();
 <br/>}
@@ -134,13 +134,13 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">File</font> file = <font color="#E65100">new</font> <font color="#999900">File</font>(<font color="#2E8B57">"output.txt"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">FileOutputStream</font> fos = <font color="#E65100">new</font> <font color="#999900">FileOutputStream</font>(file, <font color="#E65100">true</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//this PrintWriter will append	&nbsp;&nbsp;&nbsp;&nbsp;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//ez a PrintWriter már hozzáírni fog	&nbsp;&nbsp;&nbsp;&nbsp;
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">PrintWriter</font> pw = <font color="#E65100">new</font> <font color="#999900">PrintWriter</font>(fos);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//print something to file
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//írjunk valamit a fájl végére
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;pw.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Line printed!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;pw.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Sor a fájl végére!"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;pw.<font color="#ADD8E6">close</font>();
 <br/>}
@@ -157,12 +157,12 @@
     <interactive instruction="Egészítsük ki a programot úgy, hogy az 'results.txt' nevű fájlba írja a tömb értékeit!">
         <data><![CDATA[
             
-<font color="#999900">String</font>[] lines = <font color="#ADD8E6">calculate</font>(); <font color="gray">//suppose this works
+<font color="#999900">String</font>[] lines = <font color="#ADD8E6">calculate</font>(); <font color="gray">//tegyük fel hogy ez visszaadja a tömböt
 </font>
 <br/><font color="#999900">File</font> file = <font color="#E65100">new</font> <font color="#999900">File</font>(___);
 <br/><font color="#999900">FileOutputStream</font> stream = <font color="#E65100">new</font> <font color="#999900">FileOutputStream</font>(file);
 <br/>___ writer = <font color="#E65100">new</font> <font color="#ADD8E6">___</font>(stream);
-<br/><font color="#ADD8E6">___</font>(<font color="#999900">String</font> line: lines) { <font color="gray">//iterate lines
+<br/><font color="#ADD8E6">___</font>(<font color="#999900">String</font> line: lines) { <font color="gray">//sorok iterálása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;writer.<font color="#ADD8E6">println</font>(line);
 <br/>}
@@ -185,11 +185,11 @@
         
         <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) <font color="#E65100">throws</font> <font color="#999900">Exception</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create the lines
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//sorok létrehozása, lásd a metódust alul
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;<font color="#999900">String</font>> lines = <font color="#ADD8E6">createLines</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create path object
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Path (útvonal) objektum létrehozása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Path</font> filePath = <font color="#999900">Paths</font>.<font color="#ADD8E6">get</font>(<font color="#2E8B57">"output.txt"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
@@ -197,19 +197,19 @@
 <br/>}
 <br/>
 <br/><font color="gray">/*
-<br/>This method creates our lines,
-<br/>placed in a list.
+<br/>Ez a metódus alkotja meg a listát,
+<br/>ami a sorokat tartalmazza.
 <br/>*/</font>
 <br/><font color="#E65100">static</font> <font color="#999900">ArrayList</font>&lt;String> <font color="#ADD8E6">createLines</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//construct list
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//lista létrehozása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;<font color="#999900">String</font>> l = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//add some lines
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//sorok hozzáadása
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;l.<font color="#ADD8E6">add</font>(<font color="#2E8B57">"line 1"</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;l.<font color="#ADD8E6">add</font>(<font color="#2E8B57">"line 2"</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;l.<font color="#ADD8E6">add</font>(<font color="#2E8B57">"line 3"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;l.<font color="#ADD8E6">add</font>(<font color="#2E8B57">"sor 1"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;l.<font color="#ADD8E6">add</font>(<font color="#2E8B57">"sor 2"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;l.<font color="#ADD8E6">add</font>(<font color="#2E8B57">"sor 3"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> l;
 <br/>}
@@ -225,34 +225,34 @@
         
         <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) <font color="#E65100">throws</font> <font color="#999900">Exception</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create the lines
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//sorok létrehozása, lásd a metódust alul
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;<font color="#999900">String</font>> lines = <font color="#ADD8E6">createLines</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create path object
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Path (útvonal) objektum létrehozása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Path</font> filePath = <font color="#999900">Paths</font>.<font color="#ADD8E6">get</font>(<font color="#2E8B57">"output.txt"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//this will now append
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//ez már hozzáírni fog
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Files</font>.<font color="#ADD8E6">write</font>(filePath, lines, <font color="#999900">StandardCharsets</font>.<font color="#999900">UTF_<font color="#F0E130">8</font></font>,
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">StandardOpenOption</font>.<font color="#999900">APPEND</font>);
 <br/>}
 <br/>
 <br/><font color="gray">/*
-<br/>This method creates our lines,
-<br/>placed in a list.
+<br/>Ez a metódus alkotja meg a listát,
+<br/>ami a sorokat tartalmazza.
 <br/>*/</font>
 <br/><font color="#E65100">static</font> <font color="#999900">ArrayList</font>&lt;String> <font color="#ADD8E6">createLines</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//construct list
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//lista létrehozása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;String> l = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//add some lines
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//sorok hozzáadása
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;l.<font color="#ADD8E6">add</font>(<font color="#2E8B57">"line 1"</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;l.<font color="#ADD8E6">add</font>(<font color="#2E8B57">"line 2"</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;l.<font color="#ADD8E6">add</font>(<font color="#2E8B57">"line 3"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;l.<font color="#ADD8E6">add</font>(<font color="#2E8B57">"sor 1"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;l.<font color="#ADD8E6">add</font>(<font color="#2E8B57">"sor 2"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;l.<font color="#ADD8E6">add</font>(<font color="#2E8B57">"sor 3"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> l;
 <br/>}

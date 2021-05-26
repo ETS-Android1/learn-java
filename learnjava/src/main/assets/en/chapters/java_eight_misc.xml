@@ -2,24 +2,24 @@
 <resources>
     <chapterdata>
         <id>355</id>
-        <name>További Java 8 lehetőségek</name>
+        <name>Egyéb Java 8 funkciók</name>
     </chapterdata>
     <text>
         <![CDATA[
-        Ez a rövid fejezet olyan <i>Java 8</i> funkcióknak szól, amelyek túl kicsik ahhoz, hogy saját fejezetet kapjanak.
+        This short chapter is for new features that are too small to get a chapter of their own.
         ]]>
     </text>
-    <title text="Az Optional osztály"/>
+    <title text="Optional class"/>
     <text>
         <![CDATA[
-        A <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html">java.util.Optional</a> osztály a 
-		olyan osztály, amely vagy tartalmaz vagy nem tartalmaz értéket (innen az 'opcionális' név).
+        The <a href="https://docs.oracle.com/javase/8/docs/api/java/util/Optional.html">java.util.Optional</a> class is
+        a wrapper that may or may not contain a value.
         ]]>
     </text>
-    <boxed title="Null visszatérési érték">
+    <boxed title="Methods with null return">
         <![CDATA[
-        Tegyük fel, hogy van egy metódusunk, amely egy objektumot ad vissza néhány paraméter alapján (lásd az alábbi példát). 
-		Ha azt szeretnénk jelezni, hogy nem adható vissza objektum, a bevett gyakorlat az volt, hogy <i>null</i>-t adtunk vissza:
+        Let's say we have a method which returns an object based on some parameters (see example below). If we wanted to
+        indicate that no object can be returned, a common practice was to return null.
         ]]>
     </boxed>
     <code><![CDATA[
@@ -49,9 +49,8 @@
     ]]></code>
     <text>
         <![CDATA[
-        A <i>Optional</i> lényege, hogy világossá tegyük, hogy ez a metódus nem biztos, hogy megtalálja a tanuló nevét! 
-		Ahelyett, hogy <i>null</i>-t adnánk vissza ilyen esetben, ezt egy <i>Optional<String></i> visszaadásával fogjuk 
-		egyértelművé tenni.
+        The idea of <i>Optional</i> is to make it very clear that this method may not find a student name! Instead of
+        returning null, we'll clarify this by returning an <i>Optional<String></i>.
         ]]>
     </text>
     <code><![CDATA[
@@ -70,9 +69,9 @@
     ]]></code>
     <text>
         <![CDATA[
-        Vegyük észre, hogy a <i>Optional</i> objektumokat a <i>of</i> és <i>empty</i> statikus metódusokkal hozzuk létre. 
-		Az elsőt arra használjuk, hogy egy <i>Optional</i> objektumot hozzunk létre, amelyben érték van. Az <i>empty</i> pedig 
-		egy üres <i>Optional</i>-t hoz létre. Most pedig nézzük meg, hogyan értelmezzük a metódus eredményét:
+        Note that we create <i>Optional</i> objects with the <i>of</i> and <i>empty</i> static methods. The first one is used to
+        create an <i>Optional</i> with a value, and the second creates an empty one. Now let's see how to interpret the
+        result of the method:
         ]]>
     </text>
     <code><![CDATA[
@@ -100,23 +99,21 @@
     ]]></code>
     <text>
         <![CDATA[
-        A legfontosabb metódus itt az <i>isPresent</i>, amely meghatározza, hogy a <i>Optional</i> rendelkezik-e értékkel. 
-		Ha ez igazat ad vissza, akkor nyugodtan használhatjuk a <i>get</i>-et az érték kinyerésére. Ha azonban a <i>get</i>-t 
-		egy üres <i>Optional</i>-ra hívjuk meg készüljünk fel egy <b>NoSouchElementException</b> bekövetkezésére.
+        The key method here is <i>isPresent</i> which will determine if the <i>Optional</i> holds a value. If this returns
+        true, it's safe to use <i>get</i> to extract the value. However, if you call <i>get</i> on an empty <i>Optional</i>,
+        prepare for a <b>NoSuchElementException</b>.
         ]]>
     </text>
-    <title text="Optional és a folyamok"/>
+    <title text="Optional and streams"/>
     <text>
         <![CDATA[
-        Az <i>Optional</i> az előző fejezetben látott <i>Java 8</i> folyamokba is be van integrálva. A folyamműveletek, 
-		amelyek nem mindig adnak vissza értéket, a <i>Optional</i>-t használják. Például van egy <i>findFist</i> metódus, 
-		ami az első elemet adja vissza. Azonban ilyen nem mindig van (üres kollekció, vagy nincs sorrend definiálva), ekkor 
-		üres <i>Optional</i> jön vissza.
+        <i>Optional</i> is integrated into the Java 8 streams, seen in the previous chapter. The stream operations that
+        don't always return a value use <i>Optional</i>.
         ]]>
     </text>
     <code><![CDATA[
         
-        <font color="#999900">List</font>&lt;<font color="#999900">String</font>> names = <font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(<font color="#2E8B57">"John"</font>, "Jane", <font color="#2E8B57">"Tom"</font>);
+        <font color="#999900">List</font>&lt;<font color="#999900">String</font>> names = <font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(<font color="#2E8B57">"John"</font>, <font color="#2E8B57">"Jane"</font>, <font color="#2E8B57">"Tom"</font>);
 <br/><font color="gray">//get the first element of the stream
 </font>
 <br/><font color="#999900">Optional</font>&lt;<font color="#999900">String</font>> nameOpt = names.<font color="#ADD8E6">stream</font>().<font color="#ADD8E6">findFirst</font>();
@@ -129,14 +126,14 @@
     ]]></code>
     <text>
         <![CDATA[
-        Ha nem akarunk bajlódni a <i>Optional</i>-al, és akkor is <i>String</i>-et szeretnénk kapni, ha a folyam üres, 
-		akkor használhatjuk az <i>Optional</i> ügyes <i>orElse</i> metódusát. Ez visszaadja az opcionális értékét ha van neki, 
-		különben egy "alapértelmezett" értéket ad vissza (a paramétert).
+        If we do not wan't to bother with the <i>Optional</i>, and get a string even if the stream is empty, we can use
+        the clever <i>orElse</i> method of the <i>Optional</i>. This will get the value if it's present, otherwise it'll
+        get a "default" value (the parameter).
         ]]>
     </text>
     <code><![CDATA[
         
-        <font color="#999900">List</font>&lt;<font color="#999900">String</font>> names = <font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(<font color="#2E8B57">"John"</font>, "Jane", <font color="#2E8B57">"Tom"</font>);
+        <font color="#999900">List</font>&lt;<font color="#999900">String</font>> names = <font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(<font color="#2E8B57">"John"</font>, <font color="#2E8B57">"Jane"</font>, <font color="#2E8B57">"Tom"</font>);
 <br/><font color="#999900">String</font> firstName = names.<font color="#ADD8E6">stream</font>()
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">findFirst</font>()
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">orElse</font>(<font color="#2E8B57">"Empty stream"</font>);
@@ -145,29 +142,28 @@
     ]]></code>
     <text>
         <![CDATA[
-        Ezekben a példákban a <i>Optional</i> mindig visszatérési értékként lett használva, azonban az is lehetséges, hogy
-        nem szükséges paraméterek jelölésére használjuk.
+        In these examples, <i>Optional</i> was always used as a return value, however, it's also possible
+        to use it to mark non-necessary parameters as well.
         ]]>
     </text>
-    <advanced title="Rossz szokás?">
+    <advanced title="Bad practice?">
         <![CDATA[
-        Egyes programozók szerint az <i>Optional</i>-t csak visszatérési értékként szabad használni, paraméterként, vagy 
-		tagként	nem. Erről egy hosszas <i>Stackoverflow</i> vitát találhatsz
-        <a href="https://stackoverflow.com/questions/31922866/why-should-java-8s-optional-not-be-used-in-arguments">itt</a>.
+        Some programmers argue that <i>Optional</i> should only be used as a return value, and not as a parameter
+        or a member. You can find a lengthy <i>Stackoverflow</i> discussion about it
+        <a href="https://stackoverflow.com/questions/31922866/why-should-java-8s-optional-not-be-used-in-arguments">here</a>.
         ]]>
     </advanced>
-    <title text="Metódus hivatkozások"/>
+    <title text="Method references"/>
     <text>
         <![CDATA[
-        A metódus hivatkozások segítségével a lambda kifejezéseket bizonyos esetekben még kompaktabbá tehetjük. Itt van például 
-		ez a kódminta, ahol lambdát használok:
+        Method references are used to make lambda expressions even shorter. Consider this example:
         ]]>
     </text>
     <code><![CDATA[
         
         <font color="gray">//the same name list again
 </font>
-<br/><font color="#999900">List</font>&lt;<font color="#999900">String</font>> names = <font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(<font color="#2E8B57">"John"</font>, "Jane", <font color="#2E8B57">"Tom"</font>);
+<br/><font color="#999900">List</font>&lt;<font color="#999900">String</font>> names = <font color="#999900">Arrays</font>.<font color="#ADD8E6">asList</font>(<font color="#2E8B57">"John"</font>, <font color="#2E8B57">"Jane"</font>, <font color="#2E8B57">"Tom"</font>);
 <br/><font color="gray">//print all elements
 </font>
 <br/>names.<font color="#ADD8E6">forEach</font>(name -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(name));
@@ -175,8 +171,8 @@
     ]]></code>
     <text>
         <![CDATA[
-        Ehelyett hivatkozhatunk a <i>System.out</i> objektum <i>println</i> metódusára. Ehhez az új <b>::</b> szintaxist 
-		kell használni:
+        Instead of this, we can reference the <i>println</i> method of the object <i>System.out</i>. To do this,
+        new syntax is added, <b>::</b>
         ]]>
     </text>
     <code><![CDATA[
@@ -187,27 +183,24 @@
     ]]></code>
     <text>
         <![CDATA[
-        Fontos, hogy ehhez a hivatkozott metódusnak megfelelő paraméterlistával kell rendelkeznie! Ebben az esetben működik, 
-		mivel a <i>forEach</i>nél egy <i>Consumer<String></i>-re van szükség, a <i>println</i> metódus pedig épp egy 
-		<i>String</i>-et "fogyaszt el".
+        Note that for this to work, the referenced method must have the correct signature! In this case it works, since the
+        <i>forEach</i> here needs a <i>Consumer<String></i>, and the <i>println</i> method consumes a string.
         ]]>
     </text>
-    <boxed title="Szintaxis">
+    <boxed title="Syntax">
         <![CDATA[
-        Ha van egy <i>obj</i> nevű, <i>A</i> típusú objektumunk, és van egy <i>someMethod</i> metódusa, akkor a hivatkozás 
-		rá a következő:
+        If we have an object <i>obj</i> with type <i>A</i> and it has a method <i>someMethod</i>, then the reference for it is
         <br><br>
         <i>obj::someMethod</i>
         <br><br>
-        Ha ennek az <i>A</i> osztálynak van egy <i>staticMethod</i> statikus metódusa, akkor a típusát kell használni a 
-		hivatkozás elkészítéséhez:
+        If this object has a static method <i>staticMethod</i>, then the type must be used to make a reference:
         <br><br>
         <i>A::staticMethod</i>.
         ]]>
     </boxed>
     <text>
         <![CDATA[
-        Lássunk egy másik példát, ezúttal egy statikus metódushivatkozásra:
+        Let's see an other example, this time for a static method reference:
         ]]>
     </text>
     <code><![CDATA[
@@ -222,8 +215,8 @@
     ]]></code>
     <text>
         <![CDATA[
-        Ebben az esetben a <i>map</i> (leképezés) ,etódus olyasmit várt, ami képes egy <i>int</i>-et <i>String</i>-re 
-		konvertálni. Mi megadtuk a <i>String.valueOf</i> statikus metódust, amely pontosan ezt teszi.
+        In this case, the <i>map</i> method expected something that can convert an <i>int</i> to <i>String</i>. We
+        provided the static method <i>String.valueOf</i> which does exactly that.
         ]]>
     </text>
 </resources>

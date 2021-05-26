@@ -31,7 +31,7 @@ In the above example we created a variable to store dates as text. Dates, howeve
     </text>
     <code><![CDATA[
         
-<font color="gray<font color="#2E8B57">">//The input isn'</font>t validated here!</font>
+<font color="gray">//The input isn't validated here!</font>
 <br/><font color="#999900">String</font> userInput = <font color="#ADD8E6">getUserInput</font>();
 <br><br>
 ...

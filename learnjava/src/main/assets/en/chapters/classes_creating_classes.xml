@@ -309,7 +309,7 @@
         reflects this.
         ]]>
     </text>
-	<title text="Null"/>
+	<title text="The null"/>
 	<text>
 		<![CDATA[
         <i>null</i> is the default value of all objects. It is important that you initialize all objects, otherwise 
@@ -317,6 +317,14 @@
 		a <i>NullPointerException</i> will be thrown! 
         ]]>
 	</text>
+    <code>
+        <![CDATA[
+         <font color="gray">//object created, but not initialized, so it is null</font>
+         <br/><font color="#999900">String</font> text;
+         <br/><font color="gray">//trying to call a method of a null object results in NullPointerException</font>
+         <br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(text.<font color="#ADD8E6">length</font>());
+        ]]>
+    </code>
 
     <!-- mention OOP and concepts: details in chapter 152, 153
     class: blueprint, object: can be built using blueprint

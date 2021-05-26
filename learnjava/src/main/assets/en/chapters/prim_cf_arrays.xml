@@ -226,8 +226,8 @@ ___[] letters = { <font color="#2E8B57">'a'</font>, ___, <font color="#2E8B57">'
         <data><![CDATA[
 
 <font color="#DF7401">double</font>[] reals = <font color="#E65100">new</font> <font color="#DF7401">double</font>[<font color="#F0E130">20</font>];
-<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"<font color="</font></font>#999900">First</font>: " + reals[___]);
-<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"<font color="</font></font>#999900">Last</font>: " + reals[___]);
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"<font color="</font></font>#999900">First: "</font> + reals[___]);
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"<font color="</font></font>#999900">Last: "</font> + reals[___]);
 
         ]]></data>
         <answer place="0">0</answer>
@@ -253,8 +253,8 @@ ___[] letters = { <font color="#2E8B57">'a'</font>, ___, <font color="#2E8B57">'
 <font color="#DF7401">int</font>[] posNums = <font color="#E65100">new</font> <font color="#DF7401">int</font>[<font color="#F0E130">100</font>];
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/><font color="gray">/**
-<br/> * There are only 0-s in the
-<br/> * array here.
+<br/> * Egyenlőre a tömb
+<br/> * minden eleme 0.
 <br/> */</font>
 <br/>
 <br/><font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;posNums.<font color="#ADD8E6">length</font>; i++) {
@@ -262,8 +262,8 @@ ___[] letters = { <font color="#2E8B57">'a'</font>, ___, <font color="#2E8B57">'
 <br/>}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/><font color="gray">/**
-<br/> * Now the array stores the
-<br/> * numbers from 1 to 100.
+<br/> * Most már a tömb fel van
+<br/> * töltve 1-től 100-ig.
 <br/>*/</font>
         
     ]]></code>
@@ -290,8 +290,8 @@ ___[] letters = { <font color="#2E8B57">'a'</font>, ___, <font color="#2E8B57">'
         <font color="#999900">String</font>[] textData = <font color="#E65100">new</font> <font color="#999900">String</font>[<font color="#F0E130">50</font>];
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/><font color="gray">/**
-<br/> * Suppose that we initialize the
-<br/> * values here!
+<br/> * Tegyük fel, hogy ez metódus
+<br/> * inicializálja az értékeket!
 <br/> */</font>
 <br/><font color="#ADD8E6">initValues</font>(textData);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
@@ -343,13 +343,13 @@ ___[] letters = { <font color="#2E8B57">'a'</font>, ___, <font color="#2E8B57">'
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;{<font color="#F0E130">3</font>, <font color="#F0E130">7</font>, <font color="#F0E130">2</font>},
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;{<font color="#F0E130">2</font>, <font color="#F0E130">-1</font>, <font color="#F0E130">1</font>}
 <br/>};
-<br/><font color="gray">//this outer loop iterates all rows</font>
+<br/><font color="gray">//külső ciklus: a sorokon megy végig</font>
 <br/><font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;matrix.<font color="#ADD8E6">length</font>; i++) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//this inner loop iterates inside a row	&nbsp;&nbsp;&nbsp;&nbsp;</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//belső ciklus: az adott sor elemein megy végig	&nbsp;&nbsp;&nbsp;&nbsp;</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> j=<font color="#F0E130">0</font>; j&lt;matrix[i].<font color="#ADD8E6">length</font>; j++) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">print</font>(matrix[i][j] + <font color="#2E8B57">" "</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(); <font color="gray">//line break
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(); <font color="gray">//sortörés
 </font>
 <br/>}
         

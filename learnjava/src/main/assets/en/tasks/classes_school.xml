@@ -317,14 +317,14 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/** Two students will be considered equal if they have the same name and age. */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">boolean</font> <font color="#ADD8E6">equals</font>(<font color="#999900">Object</font> obj) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(this == obj) <font color="#E65100">return</font> true;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(obj == null) <font color="#E65100">return</font> false;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(this == obj) <font color="#E65100">return true</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(obj == null) <font color="#E65100">return false</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(obj <font color="#E65100">instanceof</font> <font color="#999900">Student</font>) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Student</font> s = (<font color="#999900">Student</font>)obj; <font color="gray">//safe
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> s.<font color="#ADD8E6">age</font> == age && s.<font color="#ADD8E6">name</font>.<font color="#ADD8E6">equals</font>(name);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> false;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return false</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">/**
@@ -445,14 +445,14 @@
 <br/>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">boolean</font> <font color="#ADD8E6">equals</font>(<font color="#999900">Object</font> obj) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font> (<font color="#E65100">this</font> == obj) <font color="#E65100">return</font> true;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font> (obj == null) <font color="#E65100">return</font> false;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font> (<font color="#E65100">this</font> == obj) <font color="#E65100">return true</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font> (obj == null) <font color="#E65100">return false</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(obj <font color="#E65100">instanceof</font> <font color="#999900">SchoolClass</font>) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">SchoolClass</font> sc = (<font color="#999900">SchoolClass</font>)obj;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> students.<font color="#ADD8E6">equals</font>(sc.<font color="#ADD8E6">students</font>); <font color="gray">//list have implemented equals
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> false;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return false</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
             

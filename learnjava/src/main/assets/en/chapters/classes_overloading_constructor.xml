@@ -74,7 +74,6 @@
 <font color="#DF7401">void</font> <font color="#ADD8E6">setProperties</font>(<font color="#DF7401">int</font> id) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">id</font> = id;
 <br/>}
-<br/>
 <br/><font color="#DF7401">void</font> <font color="#ADD8E6">___</font>(<font color="#DF7401">int</font> id, <font color="#999900">String</font> activityName) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">id</font> = id;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">activityName</font> = activityName;
@@ -242,7 +241,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; Returns the value of the rational as a double.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">asDouble</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray<font color="#2E8B57">">//needed because '</font>integer division'
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//needed because 'integer division'
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> dNumerator = numerator;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
@@ -329,7 +328,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; Returns the value of the rational as a double.
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp; */</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">asDouble</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray<font color="#2E8B57">">//needed because '</font>integer division'
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//needed because 'integer division'
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">double</font> dNumerator = numerator;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;

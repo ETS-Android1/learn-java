@@ -232,7 +232,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;number = scanner.<font color="#ADD8E6">___</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(number + <font color="#2E8B57">" was entered..."</font>);
 <br/>}
-<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"<font color="</font>#999900">Stopping</font>.");
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Stopping."</font>);
 <br/>scanner.<font color="#ADD8E6">close</font>();
 
         ]]></data>

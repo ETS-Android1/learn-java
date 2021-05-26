@@ -166,7 +166,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;ARRAY_SIZE; i+=THREAD_LOAD) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create a new thread and give it the indices
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">SumThread</font> thread = <font color="#E65100">new</font> <font color="#999900">SumThread</font>(numbers, i, i+T<font color="#999900">HREAD_LOAD</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">SumThread</font> thread = <font color="#E65100">new</font> <font color="#999900">SumThread</font>(numbers, i, i + THREAD_LOAD);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;threads[i/THREAD_LOAD] = thread;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;thread.<font color="#ADD8E6">start</font>(); <font color="gray">//start it
 </font>
@@ -229,7 +229,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;ARRAY_SIZE; i+=THREAD_LOAD) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create a new callable and give it the indices
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">SumCallable</font> task = <font color="#E65100">new</font> <font color="#999900">SumCallable</font>(numbers, i, i+T<font color="#999900">HREAD_LOAD</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">SumCallable</font> task = <font color="#E65100">new</font> <font color="#999900">SumCallable</font>(numbers, i, i + THREAD_LOAD);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;tasks.<font color="#ADD8E6">add</font>(task);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
@@ -290,7 +290,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"Parallel result: "</font></font> + parSum);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Sequential time: "</font> + seqTime + <font color="#2E8B57"><font color="#2E8B57">" milliseconds"</font></font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"Parallel result: "</font></font> + parTime + <font color="#2E8B57"><font color="#2E8B57">" milliseconds"</font></font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"Parallel time: "</font></font> + parTime + <font color="#2E8B57"><font color="#2E8B57">" milliseconds"</font></font>);
 <br/>}
             
         ]]></code>

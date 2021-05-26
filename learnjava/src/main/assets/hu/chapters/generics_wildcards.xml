@@ -28,14 +28,14 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">add</font>(<font color="#999900">T</font> number) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//we have access to Number methods too, not only Object methods!
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">////itt már a Number metódusaihoz is van hozzáférésünk!
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;currentValue += number.<font color="#ADD8E6">doubleValue</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> currentValue;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">subtract</font>(<font color="#999900">T</font> number) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//we have access to Number methods too, not only Object methods!
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">////itt már a Number metódusaihoz is van hozzáférésünk!
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;currentValue += number.<font color="#ADD8E6">doubleValue</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> currentValue;
@@ -123,7 +123,7 @@
         <data><![CDATA[
 
 <font color="#E65100">public</font> <font color="#DF7401">double</font> <font color="#ADD8E6">dotProduct</font>(<font color="#999900">Vector</font>&lt;___> other) <font color="#E65100">throws</font> <font color="#999900">IllegalArgumentException</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//The body is the same.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//a metódus törzs ugyanaz marad.
 </font>
 <br/>}
 
@@ -222,7 +222,7 @@
         egy <i>List</i> értékeit. Ha például a lista az 1-et, 3-at és a 2-t tartalmazza, akkor 6-ot kell visszaadnunk. 
 		Nem minden típusparaméterű lista esetén van azonban értelme ennek.
         <br><br>
-        Íme néhány ötlet. Ezek csak javaslatok, nem fognak lefordulni.
+        Íme néhány ötlet. Ezek csak javaslatok, még egyik sem a tökéletes megoldás.
         ]]>
     </text>
     <code><![CDATA[

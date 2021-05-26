@@ -101,7 +101,7 @@
         
         <font color="#999900">Printer</font> p = <font color="#E65100">new</font> <font color="#999900">Printer</font>(<font color="#2E8B57">"text"</font>);
 <br/>p.<font color="#ADD8E6">print</font>();
-<br/><font color="gray">//Must cast return value to string</font>
+<br/><font color="gray">//muszály explicit módon konvertálni, ez veszélyes lehet</font>
 <br/><font color="#999900">String</font> text = (<font color="#999900">String</font>)p.<font color="#ADD8E6">getPrintObject</font>();
         
     ]]></code>
@@ -114,9 +114,9 @@
     <code><![CDATA[
         
         <font color="gray">/**
-<br/> * Later in the code...
-<br/> * We forgot the original type, and used
-<br/> * integer accidentally.
+<br/> * Később ugyanabban a programban...
+<br/> * elfelejtettük az eredeti típust, és
+<br/> * egész számra próbálunk konvertálni.
 <br/> */</font>
 <br/><font color="#DF7401">int</font> number = (<font color="#DF7401">int</font>)p.<font color="#ADD8E6">getPrintObject</font>();
         

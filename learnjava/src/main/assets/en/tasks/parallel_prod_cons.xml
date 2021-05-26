@@ -183,7 +183,7 @@
             
 <font color="#E65100">public class</font> <font color="#999900">Consumer</font> <font color="#E65100">extends</font> <font color="#999900">Thread</font> {
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">Buffer</font> buffer; <font color="gray">//Will place elements here
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">Buffer</font> buffer; <font color="gray">//Will remove elements from here
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">AtomicBoolean</font> ongoing;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;

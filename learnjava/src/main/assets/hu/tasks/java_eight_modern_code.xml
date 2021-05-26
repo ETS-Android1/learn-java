@@ -50,10 +50,10 @@
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">toString</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">StringBuilder</font> sb = <font color="#E65100">new</font> <font color="#999900">StringBuilder</font>(<font color="#2E8B57">"Employee data:\n"</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sb.<font color="#ADD8E6">append</font>(<font color="#2E8B57">"Name: "</font> + name + <font color="#2E8B57">"\n"</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sb.<font color="#ADD8E6">append</font>(<font color="#2E8B57">"Gender: "</font> + gender.<font color="#ADD8E6">toString</font>() + <font color="#2E8B57">"\n"</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sb.<font color="#ADD8E6">append</font>(<font color="#2E8B57">"Birthday: "</font> + birthday.<font color="#ADD8E6">toLocaleString</font>() + <font color="#2E8B57">"\n"</font>); <font color="gray">//deprecated!
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">StringBuilder</font> sb = <font color="#E65100">new</font> <font color="#999900">StringBuilder</font>(<font color="#2E8B57">"Adatok:\n"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sb.<font color="#ADD8E6">append</font>(<font color="#2E8B57">"Név: "</font> + name + <font color="#2E8B57">"\n"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sb.<font color="#ADD8E6">append</font>(<font color="#2E8B57">"Nem: "</font> + gender.<font color="#ADD8E6">toString</font>() + <font color="#2E8B57">"\n"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sb.<font color="#ADD8E6">append</font>(<font color="#2E8B57">"Születésnap: "</font> + birthday.<font color="#ADD8E6">toLocaleString</font>() + <font color="#2E8B57">"\n"</font>); <font color="gray">//elavult!
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> sb.<font color="#ADD8E6">toString</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
@@ -111,7 +111,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">List</font>&lt;<font color="#999900">Employee</font>> <font color="#ADD8E6">getSeniorEmployees</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">Employee</font>> seniors = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Employee</font> e: employees) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//deprecated
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//elavult!
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> age = CURRENT_YEAR - e.<font color="#ADD8E6">getBirthday</font>().<font color="#ADD8E6">getYear</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(age > <font color="#F0E130">50</font>) {
@@ -127,7 +127,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> maxAge = <font color="#F0E130">-1</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Employee</font> oldest = <font color="#E65100">null</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Employee</font> e: employees) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//deprecated
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//elavult!
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font> age = CURRENT_YEAR - e.<font color="#ADD8E6">getBirthday</font>().<font color="#ADD8E6">getYear</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(age > maxAge) {
@@ -143,7 +143,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Set</font>&lt;<font color="#999900">String</font>> <font color="#ADD8E6">getUniqueNames</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Set</font>&lt;<font color="#999900">String</font>> uniqueNames = <font color="#E65100">new</font> <font color="#999900">HashSet</font>&lt;>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Employee</font> e: employees) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//the set will not allow duplicates
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//a halmaz nem fogja az ismétlődést megengedni
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;uniqueNames.<font color="#ADD8E6">add</font>(e.<font color="#ADD8E6">getName</font>());
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
@@ -194,11 +194,11 @@
 <br/>
 <br/>itSolutions.<font color="#ADD8E6">printEmployees</font>();
 <br/>
-<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Senior employees:"</font>);
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Idős alkalmazottak:"</font>);
 <br/>itSolutions.<font color="#ADD8E6">getSeniorEmployees</font>()
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">forEach</font>(e -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(e.<font color="#ADD8E6">getName</font>()));
 <br/>
-<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Oldest employee:"</font>);
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Legidősebb alkalmazott:"</font>);
 <br/><font color="gray">//ezt írd át ha Optional-t használsz
 </font>
 <br/><font color="#999900">Employee</font> oldest = itSolutions.<font color="#ADD8E6">findOldestEmployee</font>();
@@ -206,7 +206,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(oldest.<font color="#ADD8E6">toString</font>());
 <br/>}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Unique names:"</font>);
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Egyedi nevek:"</font>);
 <br/>itSolutions.<font color="#ADD8E6">getUniqueNames</font>()
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">forEach</font>(<font color="#999900">System</font>.<font color="#ADD8E6">out</font>::println);
         
@@ -252,10 +252,10 @@
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">toString</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">StringBuilder</font> sb = <font color="#E65100">new</font> <font color="#999900">StringBuilder</font>(<font color="#2E8B57">"Employee data:\n"</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sb.<font color="#ADD8E6">append</font>(<font color="#2E8B57">"Name: "</font> + name + <font color="#2E8B57">"\n"</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sb.<font color="#ADD8E6">append</font>(<font color="#2E8B57">"Gender: "</font> + gender.<font color="#ADD8E6">toString</font>() + <font color="#2E8B57">"\n"</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sb.<font color="#ADD8E6">append</font>(<font color="#2E8B57">"Birthday: "</font> + birthday.<font color="#ADD8E6">toString</font>() + <font color="#2E8B57">"\n"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">StringBuilder</font> sb = <font color="#E65100">new</font> <font color="#999900">StringBuilder</font>(<font color="#2E8B57">"Adatok:\n"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sb.<font color="#ADD8E6">append</font>(<font color="#2E8B57">"Név: "</font> + name + <font color="#2E8B57">"\n"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sb.<font color="#ADD8E6">append</font>(<font color="#2E8B57">"Nem: "</font> + gender.<font color="#ADD8E6">toString</font>() + <font color="#2E8B57">"\n"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sb.<font color="#ADD8E6">append</font>(<font color="#2E8B57">"Születésnap: "</font> + birthday.<font color="#ADD8E6">toString</font>() + <font color="#2E8B57">"\n"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> sb.<font color="#ADD8E6">toString</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
@@ -320,7 +320,7 @@
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">Optional</font>&lt;<font color="#999900">Employee8</font>> <font color="#ADD8E6">findOldestEmployee</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">OptionalInt</font> maxAge = employees.<font color="#ADD8E6">stream</font>()
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">mapToInt</font>(e -> CURRENT_YEAR - e.<font color="#ADD8E6">getBirthday</font>().<font color="#ADD8E6">getYear</font>()) <font color="gray">//map to age
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">mapToInt</font>(e -> CURRENT_YEAR - e.<font color="#ADD8E6">getBirthday</font>().<font color="#ADD8E6">getYear</font>()) <font color="gray">//leképezés a korra
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">max</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(maxAge.<font color="#ADD8E6">isPresent</font>()) {
@@ -365,17 +365,17 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>itSolutions.<font color="#ADD8E6">printEmployees</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Senior employees:"</font>);
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Idős alkalmazottak:"</font>);
 <br/>itSolutions.<font color="#ADD8E6">getSeniorEmployees</font>()
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;   .<font color="#ADD8E6">forEach</font>(e -> <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(e.<font color="#ADD8E6">getName</font>()));
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Oldest employee:"</font>);
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Legidősebb alkalmazott:"</font>);
 <br/><font color="#999900">Optional</font>&lt;<font color="#999900">Employee8</font>> oldest = itSolutions.<font color="#ADD8E6">findOldestEmployee</font>();
 <br/><font color="#E65100">if</font>(oldest.<font color="#ADD8E6">isPresent</font>()) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(oldest.<font color="#ADD8E6">get</font>().<font color="#ADD8E6">toString</font>());
 <br/>}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Unique names:"</font>);
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Egyedi nevek:"</font>);
 <br/>itSolutions.<font color="#ADD8E6">getUniqueNames</font>()
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;.<font color="#ADD8E6">forEach</font>(<font color="#999900">System</font>.<font color="#ADD8E6">out</font>::println);
             

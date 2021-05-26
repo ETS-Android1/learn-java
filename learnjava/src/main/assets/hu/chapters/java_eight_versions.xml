@@ -64,7 +64,7 @@
         <font color="#E65100">try</font> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">String</font>> lines = <font color="#999900">Files</font>.<font color="#ADD8E6">readAllLines</font>(<font color="#999900">Paths</font>.<font color="#ADD8E6">get</font>(<font color="#2E8B57">"myfile.txt"</font>));
 <br/>} <font color="#E65100">catch</font>(<font color="#999900">IOException</font> e) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">err</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"<font color="</font>#999900">Failed to read from file!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">err</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"<font color="</font>#999900">Nem sikerült beolvasni!"</font>);
 <br/>}
         
     ]]></code>

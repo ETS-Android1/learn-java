@@ -58,12 +58,12 @@
             
 <font color="#E65100">package</font> task_queue_stack;
 <br/>
-<br/><font color="#E65100">import</font> task_lists.MyLinkedList; <font color="gray">//import the list implementation
+<br/><font color="#E65100">import</font> task_lists.MyLinkedList; <font color="gray">//importáljuk a listát az előző feladatból
 </font>
 <br/>
 <br/><font color="#E65100">public class</font> <font color="#999900">MyQueue</font> {
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//the internal list
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//a belső lista
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">MyLinkedList</font> list;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
@@ -71,38 +71,38 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;list = <font color="#E65100">new</font> <font color="#999900">MyLinkedList</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray<font color="#2E8B57">">//add to the '</font>beginning' of the queue
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//hozzáadás a sor elejére</font>
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">enque</font>(<font color="#999900">String</font> element) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(list.<font color="#ADD8E6">size</font>() > <font color="#F0E130">0</font>) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;list.<font color="#ADD8E6">add</font>(element, <font color="#F0E130">0</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> { <font color="gray">//the internal list is empty
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;} <font color="#E65100">else</font> { <font color="gray">//a belső lista üres
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;list.<font color="#ADD8E6">add</font>(element);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//remove from the other side of the queue
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//eltávolítás a sor végéről
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">deque</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(list.<font color="#ADD8E6">size</font>() == <font color="#F0E130">0</font>) <font color="#E65100">return null</font>;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> list.<font color="#ADD8E6">remove</font>(list.<font color="#ADD8E6">size</font>()<font color="#F0E130">-1</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> list.<font color="#ADD8E6">remove</font>(list.<font color="#ADD8E6">size</font>()-<font color="#F0E130">1</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//peek the element that can be removed
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//a következőnek eltávolított elem kukucskálása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">peek</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(list.<font color="#ADD8E6">size</font>() == <font color="#F0E130">0</font>) <font color="#E65100">return null</font>;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> list.<font color="#ADD8E6">get</font>(list.<font color="#ADD8E6">size</font>()<font color="#F0E130">-1</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> list.<font color="#ADD8E6">get</font>(list.<font color="#ADD8E6">size</font>()-<font color="#F0E130">1</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//clear the queue
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//a sor kiürítése
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">clear</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;list.<font color="#ADD8E6">clear</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//size of the queue
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//a sor mérete
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">size</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> list.<font color="#ADD8E6">size</font>();
@@ -131,31 +131,31 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;list = <font color="#E65100">new</font> <font color="#999900">MyLinkedList</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//add the element to the back of the list.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//hozzáadás a veremhez, azaz a belső lista végéhez
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">push</font>(<font color="#999900">String</font> element) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;list.<font color="#ADD8E6">add</font>(element);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//remove the element at the back of the list.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//kivétel a veremből, azaz a belső lista végéről
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">pop</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> list.<font color="#ADD8E6">remove</font>(list.<font color="#ADD8E6">size</font>()<font color="#F0E130">-1</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//peek the element at the back of the list.
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//a verem tetején lévő elem megkukucskálása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">String</font> <font color="#ADD8E6">peek</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> list.<font color="#ADD8E6">get</font>(list.<font color="#ADD8E6">size</font>()<font color="#F0E130">-1</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//clear the stack
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//verem ürítése
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">clear</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;list.<font color="#ADD8E6">clear</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//size of the stack
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//verem mérete
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">int</font> <font color="#ADD8E6">size</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> list.<font color="#ADD8E6">size</font>();

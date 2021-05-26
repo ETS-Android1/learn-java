@@ -62,11 +62,11 @@
         
 <font color="#DF7401">long</font> start = <font color="#999900">System</font>.<font color="#ADD8E6">currentTimeMillis</font>();
 <br/>
-<br/><font color="gray">//write code here that needs to be measured</font>
+<br/><font color="gray">//ide kell írni a kódot, aminek a futásideje meg lesz mérve</font>
 <br/>
 <br/><font color="#DF7401">long</font> end = <font color="#999900">System</font>.<font color="#ADD8E6">currentTimeMillis</font>();
 <br/>
-<br/><font color="gray">//this will be in milliseconds</font>
+<br/><font color="gray">//ezredmásodpercben lesz</font>
 <br/><font color="#DF7401">long</font> executionTime = end - start;
         
     ]]></code>
@@ -88,13 +88,13 @@
             
 <font color="#E65100">public class</font> <font color="#999900">SumThread</font> <font color="#E65100">extends</font> <font color="#999900">Thread</font> {
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//Storing the sum here, only set after execution.</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//tartalmazza a kiszámolt összeget, miután a szál befejezte a munkát</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#DF7401">long</font> sum;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//The array which is summed. This is cut from the original array.</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//az összegzendő tömb (ez egy hivatkozás a külső tömbre)</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private final</font> <font color="#DF7401">int</font>[] numbers;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//the indices where we begin and end the summing</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//ezek az pozíciók azok, ahol a tömb összegzése kezdődik és befejeződik</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private final</font> <font color="#DF7401">int</font> beginIndex;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private final</font> <font color="#DF7401">int</font> endIndex;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
@@ -111,7 +111,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//this must be called AFTER execution is done
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//visszaadja az eredményt (csak akkor lesz helyes, ha a szál már befejezte a munkát)
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">long</font> <font color="#ADD8E6">getSum</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> sum;
@@ -126,11 +126,11 @@
         </text>
         <code><![CDATA[
             
-<font color="gray">//constants</font>
+<font color="gray">//konstansok</font>
 <br/><font color="#E65100">private static</font> <font color="#E65100">final</font> <font color="#DF7401">int</font> ARRAY_SIZE = <font color="#F0E130">1000000</font>;
 <br/><font color="#E65100">private static</font> <font color="#E65100">final</font> <font color="#DF7401">int</font> THREAD_AMOUNT = <font color="#F0E130">10</font>;
 <br/>
-<br/><font color="gray">//method that creates an array of the given size
+<br/><font color="gray">//metódus ami létrehozza a tömböt
 </font>
 <br/><font color="#E65100">private static</font> <font color="#DF7401">int</font>[] <font color="#ADD8E6">createArray</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font>[] numbers = <font color="#E65100">new</font> <font color="#DF7401">int</font>[ARRAY_SIZE];
@@ -140,7 +140,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">return</font> numbers;
 <br/>}
 <br/>
-<br/><font color="gray">//the method that does the summing sequentially
+<br/><font color="gray">//ez a metódus szekvenciálisan végzi el az összegzést
 </font>
 <br/><font color="#E65100">private static</font> <font color="#DF7401">long</font> <font color="#ADD8E6">sumSequential</font>(<font color="#DF7401">int</font>[] numbers) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> sum = <font color="#F0E130">0</font>;
@@ -158,31 +158,31 @@
         </text>
         <code><![CDATA[
             
-        <font color="gray">//the method that does the summing in parallel.
+        <font color="gray">//párhuzamosan összegző metódus
 </font>
 <br/><font color="#E65100">private static</font> <font color="#DF7401">long</font> <font color="#ADD8E6">sumParallel</font>(<font color="#DF7401">int</font>[] numbers) <font color="#E65100">throws</font> <font color="#999900">InterruptedException</font> {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//storing threads here to join on them later
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//tárolja a szálakat, mert így lehet join-olni rájuk
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">SumThread</font>[] threads = <font color="#E65100">new</font> <font color="#999900">SumThread</font>[THREAD_AMOUNT];
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">final</font> <font color="#DF7401">int</font> THREAD_LOAD = ARRAY_SIZE / THREAD_AMOUNT;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//note that we increase iterator by 1000
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//figyelem, az iterátor változó 1000-el nő minden lépésben!
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;ARRAY_SIZE; i+=THREAD_LOAD) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create a new thread and give it the indices
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//szál létrehozása, ami megkapja a pozíciók egy 1000-es intervallumát és a tömböt
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">SumThread</font> thread = <font color="#E65100">new</font> <font color="#999900">SumThread</font>(numbers, i, i+T<font color="#999900">HREAD_LOAD</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">SumThread</font> thread = <font color="#E65100">new</font> <font color="#999900">SumThread</font>(numbers, i, i + THREAD_LOAD);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;threads[i/THREAD_LOAD] = thread;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;thread.<font color="#ADD8E6">start</font>(); <font color="gray">//start it
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;thread.<font color="#ADD8E6">start</font>(); <font color="gray">//indítás
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//now we must wait for all threads to finish
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//most meg kell várni, hogy mindegyik szál végezzen: join
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">SumThread</font> thread: threads) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;thread.<font color="#ADD8E6">join</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//every thread finished, let's do the final summing
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//mindegyik végzett, összegezzük az eredményeiket
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> sum = <font color="#F0E130">0</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">SumThread</font> thread: threads) {
@@ -199,7 +199,7 @@
         </text>
         <code><![CDATA[
             
-<font color="gray">//custom callable, very similar to the SumThread class</font>
+<font color="gray">//saját Callable, ami nagyon hasonló a SumThread osztályhoz</font>
 <br/><font color="#E65100">static class</font> <font color="#999900">SumCallable</font> <font color="#E65100">implements</font> <font color="#999900">Callable</font>&lt;<font color="#999900">Long</font>> {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private final</font> <font color="#DF7401">int</font>[] numbers;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private final</font> <font color="#DF7401">int</font> beginIndex;
@@ -221,31 +221,31 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/><font color="gray">//the method that does the summing in parallel.
+<br/><font color="gray">//ez a metódus futtató szolgáltatásokat használva összegez
 </font>
 <br/><font color="#E65100">private static</font> <font color="#DF7401">long</font> <font color="#ADD8E6">sumParallel</font>(<font color="#DF7401">int</font>[] numbers) <font color="#E65100">throws</font> ExecutionException, InterruptedException {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create the tasks
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//feladatok létrehozása
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">SumCallable</font>> tasks = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">final</font> <font color="#DF7401">int</font> THREAD_LOAD = ARRAY_SIZE / THREAD_AMOUNT;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//note that we increase iterator by 1000
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//figyelem, az iterátor változó 1000-el nő minden lépésben!
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#DF7401">int</font> i=<font color="#F0E130">0</font>; i&lt;ARRAY_SIZE; i+=THREAD_LOAD) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create a new callable and give it the indices
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//feladat létrehozása, ami megkapja a pozíciókat ésa tömböt
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">SumCallable</font> task = <font color="#E65100">new</font> <font color="#999900">SumCallable</font>(numbers, i, i+T<font color="#999900">HREAD_LOAD</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">SumCallable</font> task = <font color="#E65100">new</font> <font color="#999900">SumCallable</font>(numbers, i, i + THREAD_LOAD);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;tasks.<font color="#ADD8E6">add</font>(task);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create the thread pool
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//fix szálas futtató szolgáltatás
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ExecutorService</font> pool = <font color="#999900">Executors</font>.<font color="#ADD8E6">newFixedThreadPool</font>(THREAD_AMOUNT);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//give all tasks to the pool, and get futures back
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//átadjuk az összes feladatok, amire egy listányi Future jön vissza
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">List</font>&lt;<font color="#999900">Future</font>&lt;<font color="#999900">Long</font>>> futures = pool.<font color="#ADD8E6">invokeAll</font>(tasks);
 <br/>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> sum = <font color="#F0E130">0</font>; <font color="gray">//wait for tasks to finish, and do the summing
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> sum = <font color="#F0E130">0</font>; <font color="gray">//get metódusokkal várunk a befejezésre, és összeadjuk az eredményeket
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Future</font>&lt;<font color="#999900">Long</font>> future: futures) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;sum += future.<font color="#ADD8E6">get</font>();
@@ -269,14 +269,14 @@
 <font color="#E65100">public</font> static <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(String[] args) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">int</font>[] numbers = <font color="#ADD8E6">createArray</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//calculate and measure sequential method
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//számoljuk ki szekvenciálisan
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> start = <font color="#999900">System</font>.<font color="#ADD8E6">currentTimeMillis</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> seqSum = <font color="#ADD8E6">sumSequential</font>(numbers);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> end = <font color="#999900">System</font>.<font color="#ADD8E6">currentTimeMillis</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> seqTime = end - start;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//calculate and measure the parallel method
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//számoljuk ki párhuzamosan
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;start = <font color="#999900">System</font>.<font color="#ADD8E6">currentTimeMillis</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> parSum = <font color="#F0E130">0</font>;
@@ -288,13 +288,13 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;end = <font color="#999900">System</font>.<font color="#ADD8E6">currentTimeMillis</font>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">long</font> parTime = end - start;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//compare the results:
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//eredmények összehasonlítása:
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Sequential result: "</font> + seqSum);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"Parallel result: "</font></font> + parSum);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Szekvenciális eredmény: "</font> + seqSum);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"Párhuzamos eredmény: "</font></font> + parSum);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Sequential time: "</font> + seqTime + <font color="#2E8B57"><font color="#2E8B57">" milliseconds"</font></font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"Parallel result: "</font></font> + parTime + <font color="#2E8B57"><font color="#2E8B57">" milliseconds"</font></font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Szekvenciális idő: "</font> + seqTime + <font color="#2E8B57"><font color="#2E8B57">" ezredmásodperc"</font></font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"Párhuzamos idő: "</font></font> + parTime + <font color="#2E8B57"><font color="#2E8B57">" ezredmásodperc"</font></font>);
 <br/>}
             
         ]]></code>

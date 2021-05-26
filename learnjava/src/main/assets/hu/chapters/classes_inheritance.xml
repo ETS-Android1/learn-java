@@ -39,8 +39,8 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printDogData</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Dog'</font>s name: " + name +
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2E8B57">", age: "</font> + age);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Kutya neve: "</font> + name +
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#2E8B57">", életkora: "</font> + age);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
         
@@ -52,7 +52,7 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font> skill;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">TrainedDog</font>(<font color="#999900">String</font> name, <font color="#DF7401">int</font> age, <font color="#999900">String</font> skill) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>(name, age); <font color="gray">//call the constructor of super class, Dog
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>(name, age); <font color="gray">//meghívjuk a Dog ősosztály konstruktorát
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">skill</font> = skill;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
@@ -62,7 +62,7 @@
     ]]></code>
     <text>
         <![CDATA[
-        Itt észrevehetünk néhány dolgot: először is, <i>védett</b> láthatóságot használunk a <i>Dog</i> adattagjaira. Ez azért van, hogy 
+        Itt észrevehetünk néhány dolgot: először is, <i>védett</i> láthatóságot használunk a <i>Dog</i> adattagjaira. Ez azért van, hogy
         a <i>TrainedDog</i> osztályon belül is elérhetők legyenek.
         <p>
         Másodszor, a <b>super</b> kulcsszó a konstruktoron belül. Ezt arra használjuk, hogy meghívjuk a szülő osztály konstruktorát, ebben a
@@ -83,11 +83,11 @@
     <code><![CDATA[
         
         <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create a trained dog object
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//képzett kutya objektum
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">TrainedDog</font> t1 = <font color="#E65100">new</font> <font color="#999900">TrainedDog</font>(<font color="#2E8B57">"Edgar"</font>, 10, <font color="#2E8B57">"Guide dog"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">TrainedDog</font> t1 = <font color="#E65100">new</font> <font color="#999900">TrainedDog</font>(<font color="#2E8B57">"Edgar"</font>, 10, <font color="#2E8B57">"Vakvezető kutya"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//TrainedDog inherited this method from Dog!</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//ezt a metódust megörökölte a Dog osztálytól!</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;t1.<font color="#ADD8E6">printDogData</font>();
 <br/>}
         
@@ -95,7 +95,7 @@
     <text>
         <![CDATA[
         Amint láthatjuk, használhatjuk a <i>printDogData</i> metódust a <i>TrainedDog</i> objektumunkkal, annak ellenére, hogy nem deklaráltuk azt az
-        osztályban! A metódust a szuperosztályától (<i>Dog</i> örökölte.
+        osztályban! A metódust a szuperosztályától (<i>Dog</i>) örökölte.
         <p>
         Van azonban egy apró probléma: vegyük észre, hogy a kódminta futtatásakor csak a kutya neve és kora jelenik meg, 
         a képesség nem! Ennek az az oka, hogy a <i>Dog</i> osztály metódusa nem tud erről a tagról, mivel az alosztályban lett deklarálva.
@@ -116,15 +116,15 @@
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">private</font> <font color="#999900">String</font> skill;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#999900">TrainedDog</font>(<font color="#999900">String</font> name, <font color="#DF7401">int</font> age, <font color="#999900">String</font> skill) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>(name, age); <font color="gray">//call the constructor of super class, Dog
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>(name, age); <font color="gray">//meghívjuk a Dog ősosztály konstruktorát
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">this</font>.<font color="#ADD8E6">skill</font> = skill;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="red">@Override</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">public</font> <font color="#DF7401">void</font> <font color="#ADD8E6">printDogData</font>() {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>.<font color="#ADD8E6">printDogData</font>(); <font color="gray">//will print the name and age</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Skill: "</font> + skill);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">super</font>.<font color="#ADD8E6">printDogData</font>(); <font color="gray">//ez majd kiírja a nevet és a kort</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Képesítés: "</font> + skill);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
         
@@ -143,7 +143,7 @@
         Az annotációk az <b>@</b> szimbólummal kezdődnek, és extra információkat szolgáltatnak a kódról,
         a programozónak és a fordító programnak.
         <p>
-        Ha például az <i>@Override</i> annotációt tesszük be egy metódus elé, és egy elírás miatt rossz nevet adunk meg a metódusnak, 
+        Ha például az <font color="red">@Override</font> annotációt tesszük be egy metódus elé, és egy elírás miatt rossz nevet adunk meg a metódusnak,
 		a program figyelmeztetni fog minket, hogy a szuperosztály nem rendelkezik ilyen metódussal (mivel felülírni csak a szülő osztályban 
 		létező metódust lehet).
         ]]>
@@ -211,18 +211,18 @@
     <code><![CDATA[
         
         <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create a trained dog object
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//képzett kutya objektum létrehozása
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">TrainedDog</font> t1 = <font color="#E65100">new</font> <font color="#999900">TrainedDog</font>(<font color="#2E8B57">"Rex"</font>, 10, <font color="#2E8B57">"Police dog"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">TrainedDog</font> t1 = <font color="#E65100">new</font> <font color="#999900">TrainedDog</font>(<font color="#2E8B57">"Rex"</font>, 10, <font color="#2E8B57">"Rendőrkutya"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(t1 <font color="#E65100">instanceof</font> <font color="#999900">TrainedDog</font>) { <font color="gray">//this will be true, no surprise there
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(t1 <font color="#E65100">instanceof</font> <font color="#999900">TrainedDog</font>) { <font color="gray">//nem meglepő módon ez igaz lesz
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"t1 is a TrainedDog object!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"t1 egy képzett kutya!"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(t1 <font color="#E65100">instanceof</font> <font color="#999900">Dog</font>) { <font color="gray">//due to polymorphism, this will also be true!
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">if</font>(t1 <font color="#E65100">instanceof</font> <font color="#999900">Dog</font>) { <font color="gray">//ez szintén igaz lesz, a polimorfizmus miatt!
 </font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"t1 is also a Dog object!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"t1 egy kutya!"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
         
@@ -236,14 +236,14 @@
     <code><![CDATA[
         
         <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//create dog objects, some of them are trained dogs</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//kutya objektumok létrehozása, némelyik képzett</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Dog</font> d1 = <font color="#E65100">new</font> <font color="#999900">Dog</font>(<font color="#2E8B57">"Bernard"</font>, <font color="#F0E130">5</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">TrainedDog</font> t1 = <font color="#E65100">new</font> <font color="#999900">TrainedDog</font>(<font color="#2E8B57">"Maya"</font>, 10, <font color="#2E8B57">"Drug sniffer dog"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">TrainedDog</font> t1 = <font color="#E65100">new</font> <font color="#999900">TrainedDog</font>(<font color="#2E8B57">"Maya"</font>, 10, <font color="#2E8B57">"Drogkereső kutya"</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">Dog</font> d2 = <font color="#E65100">new</font> <font color="#999900">Dog</font>(<font color="#2E8B57">"Lassie"</font>, <font color="#F0E130">3</font>);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">ArrayList</font>&lt;Dog> dogList = <font color="#E65100">new</font> <font color="#999900">ArrayList</font>&lt;>();
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;dogList.<font color="#ADD8E6">add</font>(d1);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;dogList.<font color="#ADD8E6">add</font>(t1); <font color="gray">//the trained dog can also be added!</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;dogList.<font color="#ADD8E6">add</font>(t1); <font color="gray">//a képzett kutyát is hozzá lehet adni!</font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;dogList.<font color="#ADD8E6">add</font>(d2);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">for</font>(<font color="#999900">Dog</font> dog: dogList) {
@@ -288,8 +288,8 @@
     </text>
     <code><![CDATA[
         
-        <font color="gray">//upcast a TrainedDog object to a Dog</font>
-<br/><font color="#999900">Dog</font> dog = (<font color="#999900">Dog</font>)new <font color="#999900">TrainedDog</font>(<font color="#2E8B57">"Manni"</font>,5, <font color="#2E8B57">"Therapy dog"</font>);
+        <font color="gray">//TrainedDog upcast-olása Dog-ra (felfelé alakítás)</font>
+<br/><font color="#999900">Dog</font> dog = (<font color="#999900">Dog</font>)new <font color="#999900">TrainedDog</font>(<font color="#2E8B57">"Manni"</font>,5, <font color="#2E8B57">"Terápiás kutya"</font>);
         
     ]]></code>
     <text>
@@ -300,8 +300,8 @@
     </text>
     <code><![CDATA[
         
-        <font color="gray">//upcast a TrainedDog object to a Dog</font>
-<br/><font color="#999900">Dog</font> dog = new <font color="#999900">TrainedDog</font>(<font color="#2E8B57">"Manni"</font>,5, <font color="#2E8B57">"Therapy dog"</font>);
+        <font color="gray">//implicit upcast, nem kell jelölnünk</font>
+<br/><font color="#999900">Dog</font> dog = new <font color="#999900">TrainedDog</font>(<font color="#2E8B57">"Manni"</font>,5, <font color="#2E8B57">"Terápiás kutya"</font>);
         
     ]]></code>
     <text>
@@ -314,10 +314,10 @@
     </text>
     <code><![CDATA[
         
-        <font color="gray">//'dog' is actually a TrainedDog, it's safe to downcast</font>
-<br/><font color="#999900">Dog</font> dog = new <font color="#999900">TrainedDog</font>(<font color="#2E8B57">"Manni"</font>,5, <font color="#2E8B57">"Therapy dog"</font>);
+        <font color="gray">//'dog' valóban egy TrainedDog objektum, a downcast biztonságos</font>
+<br/><font color="#999900">Dog</font> dog = new <font color="#999900">TrainedDog</font>(<font color="#2E8B57">"Manni"</font>,5, <font color="#2E8B57">"Terápiás kutya"</font>);
 <br/>
-<br/><font color="#999900">TrainedDog</font> td = (<font color="#999900">TrainedDog</font>)dog; <font color="gray">//no exception</font>
+<br/><font color="#999900">TrainedDog</font> td = (<font color="#999900">TrainedDog</font>)dog; <font color="gray">//nem lesz kivétel</font>
         
     ]]></code>
     <text>
@@ -327,10 +327,10 @@
     </text>
     <code><![CDATA[
         
-<font color="gray">//'dog' is NOT a TrainedDog, downcast will fail!</font>
+<font color="gray">//'dog' most NEM képzett kutya, a downcast nem fog működni!</font>
 <br/><font color="#999900">Dog</font> dog = <font color="#E65100">new</font> <font color="#999900">Dog</font>(<font color="#2E8B57">"Sisi"</font>, <font color="#F0E130">7</font>);
 <br/>
-<br/><font color="#999900">TrainedDog</font> td = (<font color="#999900">TrainedDog</font>)dog; <font color="gray">//ClassCastException</font>
+<br/><font color="#999900">TrainedDog</font> td = (<font color="#999900">TrainedDog</font>)dog; <font color="gray">//ClassCastException keletkezik</font>
         
     ]]></code>
     <text>
@@ -341,11 +341,11 @@
     </text>
     <code><![CDATA[
         
-        <font color="gray">//'dog' is NOT a TrainedDog, downcast will fail!</font>
+        <font color="gray">//'dog' most NEM képzett kutya, a downcast nem fog működni!</font>
 <br/><font color="#999900">Dog</font> dog = <font color="#E65100">new</font> <font color="#999900">Dog</font>(<font color="#2E8B57">"Sisi"</font>, <font color="#F0E130">7</font>);
 <br/>
-<br/><font color="#E65100">if</font>(dog <font color="#E65100">instanceof</font> <font color="#999900">TrainedDog</font>) { <font color="gray">//false</font>
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">TrainedDog</font> td = (<font color="#999900">TrainedDog</font>)dog; <font color="gray">//not executed, no exception</font>
+<br/><font color="#E65100">if</font>(dog <font color="#E65100">instanceof</font> <font color="#999900">TrainedDog</font>) { <font color="gray">//hamis lesz</font>
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">TrainedDog</font> td = (<font color="#999900">TrainedDog</font>)dog; <font color="gray">//nem fut, ezért kivétel sem lesz</font>
 <br/>}
         
     ]]></code>

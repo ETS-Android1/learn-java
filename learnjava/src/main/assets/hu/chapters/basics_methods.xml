@@ -106,7 +106,7 @@
         <data><![CDATA[
             
 <font color="#E65100">static</font> ___ <font color="#ADD8E6">stringConsumer</font>(___ text) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//do something with string here...
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="gray">//itt lehet valamit tenni a String-el...
 </font>
 <br/>}
 
@@ -169,7 +169,7 @@
         
 <font color="#E65100">static</font> <font color="#DF7401">int</font> <font color="#ADD8E6">method1</font>() {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;     <font color="#E65100">static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">method2</font>() {
-<br/>   	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;       <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"I'</font>m an invalid method!");
+<br/>   	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;       <font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Érvénytelen metódus vagyok!"</font>);
 <br/>      	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
         
@@ -215,8 +215,8 @@
     <code><![CDATA[
         
         <font color="#E65100">public static</font><font color="#DF7401"> void </font><font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
-<br/><font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>result = <font color="#ADD8E6">add</font>(<font color="#F0E130">7,8</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>("7+<font color="#F0E130">8</font> is " + result);
+<br/><font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>result = <font color="#ADD8E6">add</font>(<font color="#F0E130">7</font>,<font color="#F0E130">8</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"7 + 8 értéke "</font> + result);
 <br/>}
 <br/>
         
@@ -271,8 +271,8 @@
     <code><![CDATA[
         
         <font color="#E65100">public static</font><font color="#DF7401"> void </font><font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
-<br/><font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>result = <font color="#ADD8E6">add</font>(<font color="#F0E130">7,8</font>);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>("7+<font color="#F0E130">8</font> is " + result);
+<br/><font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>result = <font color="#ADD8E6">add</font>(<font color="#F0E130">7</font>,<font color="#F0E130">8</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"7 + 8 eredménye "</font> + result);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#ADD8E6">greetMe</font>(<font color="#2E8B57">"Tom"</font>);
 <br/>}

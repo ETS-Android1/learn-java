@@ -125,7 +125,7 @@ ___ (<font color="#DF7401">int</font> i = <font color="#F0E130">0</font>; i &lt;
 <font color="#999900">String</font> text = <font color="#2E8B57">"aabbbaaXaaaaaba"</font>;
 <font color="#DF7401">
 <br/>int </font>i = <font color="#F0E130">0</font>; <font color="gray">//iterator</font>
-<br/><font color="#E65100">while</font>(i&lt;text.<font color="#ADD8E6">length</font>() && text.<font color="#ADD8E6">charAt</font>(i)!=<font color="#2E8B57">'X'</font>) {
+<br/><font color="#E65100">while</font>(i&lt;text.<font color="#ADD8E6">length</font>() && text.<font color="#ADD8E6">charAt</font>(i) != <font color="#2E8B57">'X'</font>) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">print</font>(text.<font color="#ADD8E6">charAt</font>(i));
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;i++;
 <br/>}

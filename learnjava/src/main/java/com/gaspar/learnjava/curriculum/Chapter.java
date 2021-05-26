@@ -156,7 +156,7 @@ public class Chapter implements Serializable {
                     }
                 }
             }
-            if(courseOfChapter == null) throw new RuntimeException("Resource integrity error!");
+            if(courseOfChapter == null) throw new RuntimeException("Resource integrity error: chapter without course!");
             ExamStatus eStatus = LearnJavaDatabase.getInstance(context).getExamDao()
                     .queryExamStatus(courseOfChapter.getExam().getId());
             if(eStatus.getStatus() != Status.LOCKED) return; //if already completed/unlocked the no need to check

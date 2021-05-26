@@ -104,9 +104,9 @@
     <code><![CDATA[
         
 <font color="#E65100">public static</font> <font color="#DF7401"> void </font><font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> text = <font color="#2E8B57">"This is my initial value"</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">String</font> text = <font color="#2E8B57">"Ez az alap érték"</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(text);
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text = <font color="#2E8B57">"This is my updated value"</font>;
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text = <font color="#2E8B57">"Ez a frissített érték"</font>;
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(text);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
         
