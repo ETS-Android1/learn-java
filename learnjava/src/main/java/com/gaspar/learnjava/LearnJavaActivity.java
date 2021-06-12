@@ -22,7 +22,6 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import androidx.annotation.AnyThread;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
@@ -278,12 +277,12 @@ public class LearnJavaActivity extends ThemedActivity
      * will be called from background, after the curriculum is initialized. If the activity is just
      * resumed, then it will be called from the main thread.
      */
-    @AnyThread
     private void showStartContinueComponent() {
         //retrieve the id from preferences
         SharedPreferences preferences = getSharedPreferences(APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
         boolean started = preferences.contains(ACTIVE_CHAPTER_ID_PREFERENCE);
         int startedChapterId = preferences.getInt(ACTIVE_CHAPTER_ID_PREFERENCE, -1);
+        if(startedChapterId == -1) started = false;
         //start async task to find the name of this chapter (this will display the result)
         new InitStarterViewTask(started ? startedChapterId : -1, started).execute(this);
     }
@@ -309,7 +308,7 @@ public class LearnJavaActivity extends ThemedActivity
      */
     public void continueLearningOnClick(View view) {
         if(startedChapter == null) return;
-        //offer the guid if needed
+        //offer the guide if needed
         Runnable runIfNoGuide = () -> {
             //this is not an updatable activity, so view is null. exam and extra exam view are also null
             Chapter.startChapterActivity(this, startedChapter, null, null, null);

@@ -10,6 +10,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -32,7 +33,8 @@ public class GuideActivity extends ThemedActivity implements NavigationView.OnNa
     /**
      * The constant used to find if the user read the guide in the preferences.
      */
-    private static final String GUIDE_READ_PREFERENCE = "guide_read_pref";
+    @VisibleForTesting
+    public static final String GUIDE_READ_PREFERENCE = "guide_read_pref";
 
     /**
      * Used at component loading.
@@ -52,7 +54,7 @@ public class GuideActivity extends ThemedActivity implements NavigationView.OnNa
     private void setUpUI() {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_guide_root);
         NavigationView navigationView = findViewById(R.id.nav_view);
         toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -73,7 +75,7 @@ public class GuideActivity extends ThemedActivity implements NavigationView.OnNa
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_guide_root);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {

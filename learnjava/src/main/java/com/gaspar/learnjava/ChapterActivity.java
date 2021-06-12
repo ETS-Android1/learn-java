@@ -91,9 +91,10 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
     private void setUpUI(Chapter receivedChapter) {
         new FillChapterActivityTask(receivedChapter).execute(this); //show component views
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbarChapter);
+        if(passedChapter != null) toolbar.setTitle(passedChapter.getName());
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_chapter_root);
         NavigationView navigationView = findViewById(R.id.nav_view);
         toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -143,7 +144,7 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_chapter_root);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {

@@ -100,7 +100,7 @@
     </text>
     <image name="java_platform_structure"/>
     <text>Ezen a képen a WORA elv működése látható.</text>
-    <title text="From source code to execution"/>
+    <title text="A forráskód futtatása"/>
     <text>
         <![CDATA[
         Nézzük meg mi történik, ha befejeztük a programozást, és szeretnénk futtatni a kódunkat:
@@ -124,7 +124,7 @@
     <title text="A Java programnyelv"/>
     <text>
         <![CDATA[
-        Végül lássuk magát a Java programozási nyelvet, ami napjaink egyik legelterjettebb nyelve.
+        Végül lássuk magát a Java programozási nyelvet, ami napjaink egyik legelterjedtebb nyelve.
         ]]>
     </text>
     <text>

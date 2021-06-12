@@ -132,7 +132,6 @@ public class CourseParser {
 
     /**
      * Parses a chapter from xml, using the chapter ID.
-     *
      * @param chapterID The Id of the chapter (this is not the resource id!)
      * @param parseComponents Indicates if the components need to be parsed or not.
      * @return The parsed chapter object.
@@ -163,7 +162,7 @@ public class CourseParser {
         } else {
             throw new IOException("Failed to open chapter assets!");
         }
-        if(parsedChapter == null) throw new RuntimeException("Internal error: chapter not found!");
+        if(parsedChapter == null) throw new RuntimeException("Internal error: chapter not found, id: " + chapterID);
         return parsedChapter;
     }
 
