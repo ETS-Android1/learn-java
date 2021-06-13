@@ -20,6 +20,7 @@ import org.junit.runner.RunWith;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -32,7 +33,9 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static com.gaspar.learnjava.AndroidTestUtils.modifySharedPreferenceValue;
 
-//test LearnJavaActivity
+/**
+ * Instrumentation tests for {@link LearnJavaActivity}, the startup activity.
+ */
 @RunWith(AndroidJUnit4ClassRunner.class)
 public class LearnJavaActivityTest {
 
@@ -41,38 +44,6 @@ public class LearnJavaActivityTest {
 
     @Rule //this rule stores the test name
     public TestName testName = new TestName();
-
-    //custom idle resource which checks for loading completion
-    class LoadingIdlingResource implements IdlingResource {
-        private ResourceCallback resourceCallback;
-        private boolean isIdle;
-
-        @Override
-        public String getName() {
-            return LoadingIdlingResource.class.getName();
-        }
-
-        @Override
-        public boolean isIdleNow() {
-            if (isIdle) return true;
-            //only idle if one of the views is already visible
-            rule.getScenario().onActivity(activity -> {
-                View started = activity.findViewById(R.id.startedView);
-                View notStarted = activity.findViewById(R.id.notStartedView);
-                isIdle = (started != null && notStarted != null) && (started.isShown() || notStarted.isShown());
-            });
-            if (isIdle) { //important to call this if idle
-                resourceCallback.onTransitionToIdle();
-            }
-            return isIdle;
-        }
-
-        @Override
-        public void registerIdleTransitionCallback(
-                ResourceCallback resourceCallback) {
-            this.resourceCallback = resourceCallback;
-        }
-    }
 
     //these methods don't want to wait for the loading to complete, for various reasons
     public static final List<String> methodsThatDontNeedWait = Collections.singletonList("testLoadingVisible");
@@ -84,7 +55,20 @@ public class LearnJavaActivityTest {
         //except for: the methods that do not want this
         if(!methodsThatDontNeedWait.contains(testName.getMethodName())) {
             //will wait until loading is complete
-            loadingIdleResource = new LoadingIdlingResource();
+            Predicate<ActivityScenarioRule<?>> loadingPredicate = new Predicate<ActivityScenarioRule<?>>() {
+                private boolean isIdle;
+                @Override
+                public boolean test(ActivityScenarioRule<?> rule) {
+                    rule.getScenario().onActivity(activity -> {
+                        View startedView = activity.findViewById(R.id.startedView);
+                        View notStartedView = activity.findViewById(R.id.notStartedView);
+                        isIdle = startedView.getVisibility() == View.VISIBLE || notStartedView.getVisibility() == View.VISIBLE;
+                    });
+                    return isIdle;
+                }
+
+            };
+            loadingIdleResource = new AndroidTestUtils.LoadingIdlingResource(loadingPredicate, rule);
             IdlingRegistry.getInstance().register(loadingIdleResource);
         }
     }

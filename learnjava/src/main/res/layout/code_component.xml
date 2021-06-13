@@ -7,7 +7,8 @@
     android:background="@drawable/code_component_background"
     android:orientation="vertical"
     android:layout_margin="@dimen/small_margin"
-    android:elevation="@dimen/elevation">
+    android:elevation="@dimen/elevation"
+    android:id="@+id/codeComponent">
 
     <TextView
         android:layout_width="match_parent"
@@ -38,7 +39,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin"
         android:layout_marginEnd="@dimen/margin"
-        android:padding="@dimen/padding">
+        android:padding="@dimen/padding"
+        android:id="@+id/codeComponentButtonRow">
 
         <ImageButton
             android:id="@+id/copyButton"
@@ -48,7 +50,8 @@
             android:src="@drawable/copy_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:tag="@string/code"/>
 
         <ImageButton
             android:id="@+id/zoomInButton"
@@ -59,7 +62,8 @@
             android:src="@drawable/zoom_in_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:tag="@string/code"/>
 
         <ImageButton
             android:id="@+id/zoomOutButton"
@@ -70,7 +74,8 @@
             android:src="@drawable/zoom_out_icon"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/zoomInButton"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:tag="@string/code"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

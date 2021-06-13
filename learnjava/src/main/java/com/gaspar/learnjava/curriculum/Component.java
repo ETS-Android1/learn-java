@@ -100,7 +100,7 @@ public class Component implements Serializable {
         View componentView = null;
         LayoutInflater inflater = LayoutInflater.from(context);
         switch (type) {
-            case ComponentType.ADVANCED: //advanced info
+            case ComponentType.ADVANCED: //advanced info, view is a LinearLayout
                 componentView = inflater.inflate(R.layout.advanced_component, parent, false);
                 TextView titleView = componentView.findViewById(R.id.title);
                 titleView.setText(context.getString(R.string.advanced).concat(": ")
@@ -114,7 +114,7 @@ public class Component implements Serializable {
                     advancedArea.setTextColor(color);
                 }
                 break;
-            case ComponentType.CODE: //code example
+            case ComponentType.CODE: //code example, its view is a LinearLayout
                 componentView = inflater.inflate(R.layout.code_component, parent, false);
                 TextView codeArea = componentView.findViewById(R.id.codeArea); //add formatted code
                 codeArea.setText(Html.fromHtml(data, Html.FROM_HTML_MODE_COMPACT));
@@ -122,13 +122,13 @@ public class Component implements Serializable {
                 copyButton.setOnClickListener(view -> copyOnClick(codeArea, context));
                 initZoomButtons(componentView); //set up zoom buttons
                 break;
-            case ComponentType.TEXT: //standard text component
+            case ComponentType.TEXT: //standard text component, view is a TextView
                 componentView = inflater.inflate(R.layout.text_component, parent, false);
                 TextView textComponent = (TextView) componentView;
                 textComponent.setMovementMethod(LinkMovementMethod.getInstance()); //allow links
                 textComponent.setText(Html.fromHtml(data, Html.FROM_HTML_MODE_COMPACT));
                 break;
-            case ComponentType.BOXED:
+            case ComponentType.BOXED: //boxed, view is a LinearLayout
                 componentView = inflater.inflate(R.layout.boxed_component, parent, false);
                 TextView boxedTitleView = componentView.findViewById(R.id.title);
                 boxedTitleView.setText(title == null ? "" : title); //set title
@@ -136,18 +136,18 @@ public class Component implements Serializable {
                 boxedArea.setMovementMethod(LinkMovementMethod.getInstance()); //allow links
                 boxedArea.setText(Html.fromHtml(data, Html.FROM_HTML_MODE_COMPACT));
                 break;
-            case ComponentType.LIST:
+            case ComponentType.LIST: //list, this is also a TextView
                 componentView = inflater.inflate(R.layout.text_component, parent, false);
                 TextView listComponent = (TextView) componentView;
                 listComponent.setMovementMethod(LinkMovementMethod.getInstance()); //allow links
                 listComponent.setText(Html.fromHtml(data, Html.FROM_HTML_MODE_COMPACT, null, new ListTagHandler()));
                 break;
-            case ComponentType.IMAGE:
+            case ComponentType.IMAGE: //image, view is an ImageView
                 componentView = inflater.inflate(R.layout.image_component, parent, false);
                 ImageView imageView = componentView.findViewById(R.id.imageView);
                 imageView.setImageDrawable(RawParser.parseImage(data, context)); //image name is stored in data
                 break;
-            case ComponentType.TITLE:
+            case ComponentType.TITLE: //tile, view is a RelativeLayout
                 componentView = inflater.inflate(R.layout.title_component, parent, false);
                 ((TextView)componentView.findViewById(R.id.title)).setText(title);
                 break;

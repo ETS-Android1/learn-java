@@ -49,6 +49,7 @@ public class FillChapterActivityTask extends AsyncTask<ChapterActivity, Void, Fi
             for(Component component: result.parsedChapter.getComponents()) { //inflate and add component views
                 componentsLayout.addView(component.createComponentView(result.activity, componentsLayout));
             }
+            result.activity.setPassedChapter(result.parsedChapter); //set the parsed chapter to activity
             View confirmView = View.inflate(result.activity, R.layout.confirm_chapter, componentsLayout);
             Button confirmButton = confirmView.findViewById(R.id.confirmButton);
             confirmButton.setOnClickListener(result.activity::chapterConfirmedOnClick);

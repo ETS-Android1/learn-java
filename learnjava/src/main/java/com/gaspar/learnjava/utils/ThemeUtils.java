@@ -9,6 +9,7 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.StyleRes;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -172,7 +173,8 @@ public abstract class ThemeUtils {
      * Constant in the preferences, which is used to find out if the
      * dark theme prompt needs to be shown.
      */
-    private static final String SHOW_DARK_THEME_PROMPT = "show_dark_theme_prompt";
+    @VisibleForTesting
+    public static final String SHOW_DARK_THEME_PROMPT = "show_dark_theme_prompt";
 
     /**
      * Shows a dialog to the user which informs them that a dark mode is available.
@@ -184,8 +186,9 @@ public abstract class ThemeUtils {
             preferences.edit().putBoolean(SHOW_DARK_THEME_PROMPT, true).apply();
             return;
         }
-
         if(!preferences.contains(SHOW_DARK_THEME_PROMPT)) {
+            //save that it was shown
+            preferences.edit().putBoolean(SHOW_DARK_THEME_PROMPT, true).apply();
             //never been shown before, show it now
             new MaterialAlertDialogBuilder(activity, ThemeUtils.getThemedDialogStyle())
                     .setTitle(R.string.dark_theme_title)
@@ -199,8 +202,6 @@ public abstract class ThemeUtils {
                     .setNegativeButton(R.string.dark_theme_denied, (dialog, which) -> dialog.dismiss())
                     .create()
                     .show();
-            //save that it was shown
-            preferences.edit().putBoolean(SHOW_DARK_THEME_PROMPT, true).apply();
         }
         //otherwise the prompt was already shown
     }

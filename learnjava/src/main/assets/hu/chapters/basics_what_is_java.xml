@@ -8,7 +8,8 @@
     <title text="A Java telepítése"/>
     <text>
         <![CDATA[
-        Mielőtt programozni kezdhetnél, fel kell telepítened a Java-t fejlesztői verzióját.
+        Mielőtt programozni kezdhetnél, fel kell telepítened a Java-t fejlesztői verzióját. Ennek <b>Java Development Kit (JDK)</b>
+        a neve.
         ]]>
     </text>
     <list>
@@ -22,10 +23,11 @@
     </list>
     <boxed title="JAVA_HOME környezeti változó">
         <![CDATA[
-        Az <i>IDE</i> programodnak szüksége lesz a <i>JAVA_HOME</i> környezeti változóra. Ha nem idegen számodra
+        Érdemes beállítani a <i>JAVA_HOME</i> környezeti változót. Ha nem idegen számodra
         egy környezeti változó beállítása, akkor állítsd be ezt a <i>Java</i> telepítési könyvtár mappájára.
         Egyébként <a href="https://www.wikihow.com/Set-Java-Home">itt</a> találsz egy teljes útmutatót (angol
-        szöveggel, de a képeken minden látszik).
+        szöveggel, de a képeken minden jól látszik). Ugyan az Eclipse-nek nem lesz erre szüksége, de a későbbiekben
+        mégis jól jöhet.
         ]]>
     </boxed>
     <text>
@@ -34,6 +36,12 @@
         az <i>Eclipse</i> telepítését fogom bemutatni, de más <i>IDE</i>-t is használhatsz.
        ]]>
     </text>
+    <advanced title="JDK vs JRE">
+        <![CDATA[
+        Lehetséges, hogy a gépeden már telepítve volt a <i>Java</i>. Ez azonban csak a <b>Java Runtime Environment (JRE)</b> volt, ami tud futtatni
+        <i>Java</i> programokat, de nem tudunk vele programozni. Az új programok készítéséhez a <b>Java Development Kit-re (JDK)</b> lesz szükség. Ez az, amit az előbb telepítettél.
+        ]]>
+    </advanced>
     <title text="Az Eclipse telepítése"/>
     <text>
         <![CDATA[
@@ -41,6 +49,64 @@
         válasz ki az operációs rendszerednek megfelelő verziót. Ezután futtasd kapott telepítőt.
         ]]>
     </text>
+    <boxed title="Személyre szabás">
+        <![CDATA[
+        Az <i>Eclipse</i> és más <i>IDE</i>-k a testreszabási lehetőségek széles skáláját támogatják. Beállíthatod a témát, amely magában foglalja a sötét témákat is,
+        a betűméretet és a betűtípust, és így tovább. Ez meghaladja e fejezet kereteit, de néhány <i>Google</i>-kereséssel megtalálhatod, amire szükséged van.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        Az <i>Eclipse</i> első futtatásakor a program kéri, hogy válassz ki egy <b>munkakönyvtárat (workspace)</b>. Ez egy olyan mappa, ahol a <b>projektjeid</b>
+        lesznek tárolva. Bármilyen mappát kiválaszthatsz, de a legjobb, ha egy új, üres mappát hozol létre erre a célra.
+        ]]>
+    </text>
+    <text>
+        <![CDATA[
+        Miután az <i>Eclipse</i> elindult, meg kell mondanod neki, hogy hol keresse a <i>JDK</i>-t, amelyet az imént telepítettél. Ehhez meg kell nyitni a
+        <b>Installed JREs</b> ablakot, amit a következő menüpontok segítségével érhetsz el:
+        <br><br>
+        <b>Windows > Preferences > Java > Installed JREs</b>
+        ]]>
+    </text>
+    <image name="installed_jre_window"/>
+    <text>
+        <![CDATA[
+        Az <i>Eclipse</i> egyes verziói automatikusan megtalálják a telepített <i>JDK</i> és <i>JRE</i> mappákat, mások nem. Ha a Java telepítve volt
+        korábban, akkor a <i>JRE</i> is itt lesz felsorolva, mint a fenti képen. Ha <b>nem látod</b>
+        itt az éppen telepített <i>JDK</i>-t, kattints a <b>search</b> gombra, és manuálisan add hozzá azt a könyvtárat, ahová telepítetted. Miután ez megvan,
+        a lista valahogy így néz majd ki:
+        ]]>
+    </text>
+    <image name="installed_jre_jdk_window"/>
+    <text>
+        <![CDATA[
+        Mint látható, az újonnan telepített <i>JDK</i> hozzá lett adva, és ki van választva. Most kattints az <b>apply and close</b> gombra, és máris készen 
+		állsz a programozásra <i>Eclipse</i>-ben!
+        ]]>
+    </text>
+	<title text="Az Eclipse és a magyar billentyűzet"/>
+	<text>
+		<![CDATA[
+		Az <i>Eclipse</i> alap billentyű kiosztása és a magyar billentyűzet közt kisebb konfliktus van. Alaphelyzetben sajnos nem tudsz 
+		majd <b>{</b> szimbólumot írni, amire pedig nagy szükség van. Ezt a problémát a <b>Keys</b> ablak megnyitásával orvosolhatod:
+		<br><br>
+		<b>Windows > Preferences > General > Keys</b>
+        ]]>
+	</text>
+	<image name="eclipse_keys_window"/>
+	<text>
+		<![CDATA[
+		Az itt felsorolt parancsok közt keresd meg a <b>Skip All Breakpoints</b> nevűt, mert ez az ami a nehézséget okozza. A fenti sávba 
+		írva kereshetsz is. Amikor megvan, válaszd ki, és nyomj az <b>unbind command</b> gombra. Ha ez megvan, akkor <b>apply and close</b> 
+		és már tudod is írni a <b>{</b> karaktert.
+		]]>
+	</text>
+	<text>
+		<![CDATA[
+		A fenti képen már az <i>Eclipse</i> egyik sötét témája látszik, aminek ajánlom a használatát.
+		]]>
+	</text>
     <title text="Mi is az a Java?"/>
     <text>
         <![CDATA[
@@ -49,9 +115,11 @@
         ]]>
     </text>
     <boxed title="Nem csak egy programozási nyelv">
+		<![CDATA[
         Figyeld meg, hogy a Java több mint egy programozási nyelv. Egy egész szoftverfejlesztési platformról
         van szó. Ez olyannyira igaz, hogy több másik programozási nyelv létezik, amik erre a platformra
         épülnek (pl: Kotlin, Groovy).
+		]]>
     </boxed>
     <text>
         <![CDATA[

@@ -8,7 +8,8 @@
     <title text="Installing Java"/>
     <text>
         <![CDATA[
-        Before you can do anything, you need to install Java's development version. Here is how you can do it:
+        Before you can do anything, you need to install Java's development version. This is called <b>Java Development Kit (JDK)</b>.
+        Here is how you can do it:
         ]]>
     </text>
     <list>
@@ -22,20 +23,63 @@
     </list>
     <boxed title="JAVA_HOME environmental variable">
         <![CDATA[
-        Your IDE will look for Java based on the value of <i>JAVA_HOME</i>. If you are familiar with environmental variables, then simply
+        It's worth setting the value of the <i>JAVA_HOME</i> environmental variable. If you are familiar with environmental variables, then simply
         set <i>JAVA_HOME</i> to the folder of your JDK install directory. If you need a full tutorial, follow
-        <a href="https://www.wikihow.com/Set-Java-Home">this</a> wikiHow link.
+        <a href="https://www.wikihow.com/Set-Java-Home">this</a> wikiHow link. Although Eclipse will not directly use it, it can come in
+        handy in the future.
         ]]>
     </boxed>
     <text>
         Everything is ready to install an IDE now! In this case, I'll use Eclipse IDE, but feel free to use
         another IDE, if you have other preferences.
     </text>
+    <advanced title="JDK vs JRE">
+        <![CDATA[
+        It is possible that your computer already has Java installed. What you currently have is the <b>Java Runtime Environment (JRE)</b>, which can
+        run Java programs, but we cannot create new ones with it. To code in Java, we need the <b>Java Development Kit (JDK)</b>. This is what you just installed.
+        ]]>
+    </advanced>
     <title text="Install Eclipse"/>
     <text>
         <![CDATA[
         Navigate to the <a href="https://www.eclipse.org/downloads/">official Eclipse download page</a> on your computer, then select the correct
         download for your operating system. Then unpack and run the installer! Installing other IDE's is a very similar process.
+        ]]>
+    </text>
+    <boxed title="Customization">
+        <![CDATA[
+        Eclipse, and other <i>IDE</i>-s support a wide range of customisation options. You can set the theme, which includes dark themes,
+        the font size and type, and so on. This is beyond the range of this chapter, but with a few <i>Google</i> searches, you can find what you need.
+        ]]>
+    </boxed>
+    <text>
+        <![CDATA[
+        When you run <i>Eclipse</i> for the first time, it will ask you to select a <b>workspace</b> location. This is a folder, where your <b>projects</b>
+        will be saved to. You can select any folder, but it's best you create a new, empty folder.
+        ]]>
+    </text>
+    <text>
+        <![CDATA[
+        Once <i>Eclipse</i> has started up, you need to tell it where to look for the <i>JDK</i>, which you just installed. For this you need to open the
+        <b>Installed JREs</b> window, which you can do so following these menus:
+        <br><br>
+        <b>Windows > Preferences > Java > Installed JREs</b>
+        ]]>
+    </text>
+    <image name="installed_jre_window"/>
+    <text>
+        <![CDATA[
+        Some versions of <i>Eclipse</i> will automatically find your installed <i>JDK</i> and <i>JRE</i> folders, others do not. If you had Java installed
+        previously, you'll see a <i>JRE</i> listed here as well, like in the image above. If you <b>do not see</b>
+        the <i>JDK</i> you just installed here, click the <b>search</b> button, and manually add the directory, in which you installed it to. After doing this,
+        it might look like this:
+        ]]>
+    </text>
+    <image name="installed_jre_jdk_window"/>
+    <text>
+        <![CDATA[
+        As you can see, the newly installed <i>JDK</i> has been added, and it is selected. Now click <b>apply and close</b>, and you are ready to create
+        projects in <i>Eclipse</i>!
         ]]>
     </text>
     <title text="What exactly is Java?"/>

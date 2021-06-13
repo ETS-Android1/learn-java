@@ -34,7 +34,8 @@ import com.google.android.material.snackbar.Snackbar;
 public class ChapterActivity extends ThemedActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     /**
-     * The chapter that was passed with the intent. It has no components.
+     * The chapter that was passed with the intent. It has no components when extracted from the intent (because the
+     * loading happens here). AFTER the loading is finished, this chapter will have its components.
      */
     private Chapter passedChapter;
 
@@ -213,5 +214,13 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
                         Snackbar.LENGTH_LONG).show();
             }
         }
+    }
+
+    public Chapter getPassedChapter() {
+        return passedChapter;
+    }
+
+    public void setPassedChapter(Chapter passedChapter) {
+        this.passedChapter = passedChapter;
     }
 }
