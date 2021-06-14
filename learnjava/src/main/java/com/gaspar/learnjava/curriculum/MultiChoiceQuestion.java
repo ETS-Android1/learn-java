@@ -70,11 +70,11 @@ public class MultiChoiceQuestion extends Question implements Serializable {
     @Override
     public View createQuestionView(Context context, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        questionView = inflater.inflate(R.layout.multi_choice_question, parent, false);
+        questionView = inflater.inflate(R.layout.question_multi_choice, parent, false);
         ((TextView)questionView.findViewById(R.id.questionTextView)).setText(text);
         LinearLayout answersLayout = questionView.findViewById(R.id.answersLayout);
         for(int i=0; i<answers.size(); i++) {
-            View answerView = inflater.inflate(R.layout.multi_choice_answer, answersLayout, false);
+            View answerView = inflater.inflate(R.layout.answer_multi_choice, answersLayout, false);
             CheckBox cb = answerView.findViewById(R.id.answer);
             cb.setText(answers.get(i));
             final int fixedI = i;

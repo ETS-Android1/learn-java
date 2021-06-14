@@ -15,7 +15,6 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
@@ -51,7 +50,7 @@ public class ExamActivity extends ThemedActivity {
     @Override
     public void onCreate(Bundle savedState) {
         super.onCreate(savedState);
-        setContentView(R.layout.exam);
+        setContentView(R.layout.activity_exam);
         examFinished = false;
         if(getIntent().getExtras() == null) { //should not happen
             LogUtils.logError("Incorrect behaviour: No extras passed!");
@@ -72,7 +71,7 @@ public class ExamActivity extends ThemedActivity {
 
     private void setUpUI() {
         new LoadExamQuestionsTask(exam.getId()).execute(this); //this will update the exam variable
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -155,7 +154,7 @@ public class ExamActivity extends ThemedActivity {
     @Nullable
     private View inflateUnansweredWarningView(int unansweredQuestions) {
         if(unansweredQuestions == 0) return null;
-        View warningView = View.inflate(ExamActivity.this, R.layout.unanswered_question_warning, null);
+        View warningView = View.inflate(ExamActivity.this, R.layout.view_unanswered_question_warning, null);
         String text;
         if(unansweredQuestions == 1) {
             text = ExamActivity.this.getString(R.string.unanswered_question);

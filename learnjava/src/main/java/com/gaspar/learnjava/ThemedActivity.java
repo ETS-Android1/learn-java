@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
+import com.gaspar.learnjava.utils.LogUtils;
 import com.gaspar.learnjava.utils.ThemeUtils;
 
 /**
@@ -29,6 +30,11 @@ public class ThemedActivity extends AppCompatActivity {
      * Component of the drawer. Needed for toolbar recoloring.
      */
     protected ActionBarDrawerToggle toggle;
+
+    /**
+     * Toolbar of the activity, needed for recoloring.
+     */
+    protected Toolbar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,7 +67,6 @@ public class ThemedActivity extends AppCompatActivity {
      * programmatically.
      */
     private void recolorToolbar() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
         if(toolbar != null) {
             toolbar.setBackgroundColor(ContextCompat.getColor(this, ThemeUtils.getPrimaryColor()));
             toolbar.setTitleTextColor(ContextCompat.getColor(this, ThemeUtils.getTextColor()));
@@ -76,6 +81,8 @@ public class ThemedActivity extends AppCompatActivity {
                 Drawable arrow = toolbar.getNavigationIcon();
                 if(arrow != null) arrow.setTint(ContextCompat.getColor(this, ThemeUtils.getTextColor()));
             }
+        } else {
+            LogUtils.logError("Toolbar was null, and could not be recolored!");
         }
     }
 }

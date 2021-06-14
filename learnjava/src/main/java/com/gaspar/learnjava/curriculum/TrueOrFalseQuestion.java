@@ -69,7 +69,7 @@ public class TrueOrFalseQuestion extends Question implements Serializable {
     @Override
     public View createQuestionView(Context context, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        questionView = inflater.inflate(R.layout.true_false_question, parent, false);
+        questionView = inflater.inflate(R.layout.question_true_false, parent, false);
         ((TextView)questionView.findViewById(R.id.questionTextView)).setText(text);
 
         tickAnimation = AnimationUtils.loadAnimation(context, R.anim.tick);

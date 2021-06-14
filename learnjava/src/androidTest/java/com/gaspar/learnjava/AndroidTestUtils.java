@@ -3,12 +3,18 @@ package com.gaspar.learnjava;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.IdlingResource;
+import androidx.test.espresso.matcher.BoundedMatcher;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
+
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
 
 import java.util.function.Predicate;
 
@@ -118,6 +124,53 @@ public abstract class AndroidTestUtils {
                 ResourceCallback resourceCallback) {
             this.resourceCallback = resourceCallback;
         }
+    }
+
+    /**
+     * Original source from Espresso library, modified to handle spanned fields.
+     * Returns a matcher that matches a descendant of {@link TextView} that is
+     * displaying the string.
+     * @param text The string the text view is expected to hold. No exact match needed, only substring.
+     */
+    public static Matcher<View> withSpannableText(@NonNull final String text) {
+        return new BoundedMatcher<View, TextView>(TextView.class) {
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("with spannable string: ");
+                description.appendText(" value: ");
+                description.appendText(text);
+            }
+            @Override
+            public boolean matchesSafely(TextView textView) {
+                return textView.getText().toString().contains(text);
+            }
+        };
+    }
+
+    /**
+     * Custom matcher that matches text views with a given font size. Size is in pixels.
+     * @param expectedSize The expected size, in pixels.
+     * @return The matcher.
+     */
+    public static Matcher<View> withFontSize(final int expectedSize) {
+        return new BoundedMatcher<View, View>(View.class) {
+
+            @Override
+            public boolean matchesSafely(View target) {
+                if (!(target instanceof TextView)) {
+                    return false;
+                }
+                TextView targetEditText = (TextView) target;
+                System.out.println("Actual text size in pixels: " + (int)targetEditText.getTextSize());
+                return targetEditText.getTextSize() == expectedSize;
+            }
+
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("with fontSize: ");
+                description.appendValue(expectedSize);
+            }
+        };
     }
 }
 

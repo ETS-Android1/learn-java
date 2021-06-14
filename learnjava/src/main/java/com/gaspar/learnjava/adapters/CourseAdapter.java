@@ -50,7 +50,7 @@ public class CourseAdapter extends ArrayAdapter<Course> {
      * @param courses List of courses.
      */
     public CourseAdapter(CoursesActivity activity, @Size(min=1) List<Course> courses) {
-        super(activity, R.layout.course_selector_view, courses);
+        super(activity, R.layout.selector_course, courses);
         this.activity = activity;
         clickAnimation = AnimationUtils.loadAnimation(activity, R.anim.click);
     }
@@ -62,7 +62,7 @@ public class CourseAdapter extends ArrayAdapter<Course> {
         Course course = getItem(position);
         if(convertView == null) { //first time
             LayoutInflater inflater = LayoutInflater.from(activity);
-            convertView = inflater.inflate(R.layout.course_selector_view, parent, false);
+            convertView = inflater.inflate(R.layout.selector_course, parent, false);
             viewHolder = new CourseViewHolder();
             viewHolder.courseNameView = convertView.findViewById(R.id.courseNameView); //cache views
             viewHolder.statusIcon = convertView.findViewById(R.id.statusIconView);
@@ -124,14 +124,14 @@ public class CourseAdapter extends ArrayAdapter<Course> {
         LayoutInflater inflater = LayoutInflater.from(activity);
         viewHolder.chaptersView.removeAllViews(); //remove previous chapters
         for(Chapter chapter: course.getChapters()) { //add all chapters
-            View chapterView = inflater.inflate(R.layout.chapter_selector_view, viewHolder.chaptersView, false);
+            View chapterView = inflater.inflate(R.layout.selector_chapter, viewHolder.chaptersView, false);
             chapter.queryAndDisplayStatus(chapterView.findViewById(R.id.chapterStatusIcon), activity); //query and show status
             viewHolder.chaptersView.addView(chapterView);
             setUpChapterView(chapterView, chapter, course.getExam(), viewHolder.examView);
         }
         viewHolder.tasksView.removeAllViews(); //remove previous tasks
         for(Task task: course.getTasks()) { //add all tasks
-            View taskView = inflater.inflate(R.layout.task_selector_view, viewHolder.tasksView, false);
+            View taskView = inflater.inflate(R.layout.selector_task, viewHolder.tasksView, false);
             task.queryAndDisplayStatus(taskView.findViewById(R.id.taskStatusIcon), activity);
             viewHolder.tasksView.addView(taskView);
             setUpTaskView(taskView, task);

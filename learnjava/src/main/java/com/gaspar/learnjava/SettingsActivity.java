@@ -12,7 +12,6 @@ import android.widget.RadioGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringDef;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -58,7 +57,7 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
     @Override
     public void onCreate(Bundle savedState) {
         super.onCreate(savedState);
-        setContentView(R.layout.settings);
+        setContentView(R.layout.activity_settings);
         prefs = getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
         setUpUI();
     }
@@ -68,7 +67,7 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
      * so they are consistent with the current settings.
      */
     private void setUpUI() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);

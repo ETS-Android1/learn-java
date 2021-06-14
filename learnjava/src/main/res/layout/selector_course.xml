@@ -50,7 +50,7 @@
 
         <include
             android:id="@+id/separator0"
-            layout="@layout/separator_line"
+            layout="@layout/view_separator_line"
             android:layout_width="match_parent"
             android:layout_height="@dimen/separator_height" />
 
@@ -64,7 +64,7 @@
 
         <include
             android:id="@+id/separator1"
-            layout="@layout/separator_line"
+            layout="@layout/view_separator_line"
             android:layout_width="match_parent"
             android:layout_height="@dimen/separator_height" />
 
@@ -79,13 +79,13 @@
 
         <include
             android:id="@+id/include"
-            layout="@layout/separator_line"
+            layout="@layout/view_separator_line"
             android:layout_width="match_parent"
             android:layout_height="@dimen/separator_height" />
 
         <!-- Exam selector is added here -->
         <include
-            layout="@layout/exam_selector_view"
+            layout="@layout/selector_exam"
             android:id="@+id/examSelector"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>

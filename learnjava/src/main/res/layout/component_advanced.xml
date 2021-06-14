@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:background="@drawable/advanced_area_background"
     android:layout_margin="@dimen/small_margin"
-    android:elevation="@dimen/elevation">
+    android:elevation="@dimen/elevation"
+    android:id="@+id/advancedComponent">
 
     <TextView
         android:id="@+id/title"

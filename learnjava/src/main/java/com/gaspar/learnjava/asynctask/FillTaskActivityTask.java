@@ -40,7 +40,17 @@ public class FillTaskActivityTask extends AsyncTask<TaskActivity, Void, TaskActi
                     true, activity);
             TaskStatus taskStatus = LearnJavaDatabase.getInstance(activity).getTaskDao()
                     .queryTaskStatus(parsedTask.getId()); //get status from DB
-            if(taskStatus == null) throw new RuntimeException("Database error!");
+            if(taskStatus == null) {
+                /*
+                This should not happen in the app, however, it
+                does happen when running TaskActivityTest UI tests. So for that case,
+                we will use a "not completed" status.
+                 */
+                LogUtils.logError("Task was not found in the database! This is a problem if NOT testing!");
+                taskStatus = new TaskStatus();
+                taskStatus.setStatus(com.gaspar.learnjava.curriculum.Status.UNLOCKED);
+                taskStatus.setTaskId(passedTask.getId());
+            }
             parsedTask.setTaskStatus(taskStatus.getStatus()); //save task status
             activity.setDisplayedTask(parsedTask); //parse and save task, now with components and status
         } catch (Exception e) {

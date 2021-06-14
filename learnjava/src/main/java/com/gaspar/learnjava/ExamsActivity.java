@@ -9,7 +9,6 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -39,7 +38,7 @@ public class ExamsActivity extends ThemedActivity implements NavigationView.OnNa
     @Override
     public void onCreate(Bundle savedState) {
         super.onCreate(savedState);
-        setContentView(R.layout.exams);
+        setContentView(R.layout.activity_exams);
         setUpUI();
     }
 
@@ -64,7 +63,7 @@ public class ExamsActivity extends ThemedActivity implements NavigationView.OnNa
     private void setUpUI() {
         new FillExamsActivityTask().execute(this); //add exam selectors
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);

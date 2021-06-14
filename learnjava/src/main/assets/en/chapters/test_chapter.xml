@@ -7,13 +7,13 @@
     </chapterdata>
     <text>
         <![CDATA[
-		This is a test text element. It can have <b>formatting</b>.
+		Text element 1.
         ]]>
     </text>
     <title text="Title element"/>
     <text>
         <![CDATA[
-		Another text <font color="blue">element</font>.
+		Text element 2.
         ]]>
     </text>
     <code><![CDATA[    
@@ -21,7 +21,7 @@
     ]]></code>
     <text>
         <![CDATA[
-		Another text element.
+		Text element 3.
         ]]>
     </text>
     <interactive instruction="Interactive code sample test!">
@@ -37,7 +37,7 @@
     </interactive>
     <text>
         <![CDATA[
-        Text element
+        Text element 4.
         ]]>
     </text>
     <advanced title="Advanced element">
@@ -47,7 +47,7 @@
     </advanced>
 	<text>
         <![CDATA[
-        Text element.
+        Text element 5.
         ]]>
     </text>
 	<boxed title="Boxed element">
@@ -57,7 +57,7 @@
 	</boxed>
     <text>
         <![CDATA[
-        Text element.
+        Text element 6.
         ]]>
     </text>
     <image name="map"/>

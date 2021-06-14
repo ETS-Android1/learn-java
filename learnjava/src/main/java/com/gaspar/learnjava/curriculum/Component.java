@@ -28,6 +28,7 @@ import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -101,7 +102,7 @@ public class Component implements Serializable {
         LayoutInflater inflater = LayoutInflater.from(context);
         switch (type) {
             case ComponentType.ADVANCED: //advanced info, view is a LinearLayout
-                componentView = inflater.inflate(R.layout.advanced_component, parent, false);
+                componentView = inflater.inflate(R.layout.component_advanced, parent, false);
                 TextView titleView = componentView.findViewById(R.id.title);
                 titleView.setText(context.getString(R.string.advanced).concat(": ")
                         .concat(title == null ? "" : title)); //set title
@@ -115,7 +116,7 @@ public class Component implements Serializable {
                 }
                 break;
             case ComponentType.CODE: //code example, its view is a LinearLayout
-                componentView = inflater.inflate(R.layout.code_component, parent, false);
+                componentView = inflater.inflate(R.layout.component_code, parent, false);
                 TextView codeArea = componentView.findViewById(R.id.codeArea); //add formatted code
                 codeArea.setText(Html.fromHtml(data, Html.FROM_HTML_MODE_COMPACT));
                 ImageButton copyButton = componentView.findViewById(R.id.copyButton); //set up copy button
@@ -123,13 +124,13 @@ public class Component implements Serializable {
                 initZoomButtons(componentView); //set up zoom buttons
                 break;
             case ComponentType.TEXT: //standard text component, view is a TextView
-                componentView = inflater.inflate(R.layout.text_component, parent, false);
+                componentView = inflater.inflate(R.layout.component_text, parent, false);
                 TextView textComponent = (TextView) componentView;
                 textComponent.setMovementMethod(LinkMovementMethod.getInstance()); //allow links
                 textComponent.setText(Html.fromHtml(data, Html.FROM_HTML_MODE_COMPACT));
                 break;
             case ComponentType.BOXED: //boxed, view is a LinearLayout
-                componentView = inflater.inflate(R.layout.boxed_component, parent, false);
+                componentView = inflater.inflate(R.layout.component_boxed, parent, false);
                 TextView boxedTitleView = componentView.findViewById(R.id.title);
                 boxedTitleView.setText(title == null ? "" : title); //set title
                 TextView boxedArea = componentView.findViewById(R.id.boxedArea);
@@ -137,18 +138,18 @@ public class Component implements Serializable {
                 boxedArea.setText(Html.fromHtml(data, Html.FROM_HTML_MODE_COMPACT));
                 break;
             case ComponentType.LIST: //list, this is also a TextView
-                componentView = inflater.inflate(R.layout.text_component, parent, false);
+                componentView = inflater.inflate(R.layout.component_text, parent, false);
                 TextView listComponent = (TextView) componentView;
                 listComponent.setMovementMethod(LinkMovementMethod.getInstance()); //allow links
                 listComponent.setText(Html.fromHtml(data, Html.FROM_HTML_MODE_COMPACT, null, new ListTagHandler()));
                 break;
             case ComponentType.IMAGE: //image, view is an ImageView
-                componentView = inflater.inflate(R.layout.image_component, parent, false);
+                componentView = inflater.inflate(R.layout.component_image, parent, false);
                 ImageView imageView = componentView.findViewById(R.id.imageView);
                 imageView.setImageDrawable(RawParser.parseImage(data, context)); //image name is stored in data
                 break;
             case ComponentType.TITLE: //tile, view is a RelativeLayout
-                componentView = inflater.inflate(R.layout.title_component, parent, false);
+                componentView = inflater.inflate(R.layout.component_title, parent, false);
                 ((TextView)componentView.findViewById(R.id.title)).setText(title);
                 break;
         }
@@ -226,17 +227,17 @@ public class Component implements Serializable {
     /**
      * The amount of font size (in pixels) that the zoom buttons increase/decrease.
      */
-    protected static final int ZOOM_SIZE_CHANGE = 10;
+    @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
+    public static final int ZOOM_SIZE_CHANGE = 10;
 
     /**
-     * Adds listeners to the zoom in and zoom out button of code sample component. Also works for interactive component.
+     * Adds listeners to the zoom in and zoom out button of code sample component.
      * @param codeSampleView The code sample view.
      */
     @UiThread
     public void initZoomButtons(@NonNull View codeSampleView) {
         final ImageButton zoomIn = codeSampleView.findViewById(R.id.zoomInButton);
         final ImageButton zoomOut = codeSampleView.findViewById(R.id.zoomOutButton);
-        final int minFontSize = (int)codeSampleView.getContext().getResources().getDimension(R.dimen.code_text_size);
         final TextView codeArea = codeSampleView.findViewById(R.id.codeArea);
         //using value animator for smooth font size change
         zoomIn.setOnClickListener(view -> {
@@ -266,7 +267,7 @@ public class Component implements Serializable {
         zoomOut.setOnClickListener(view -> {
             int currentSize = (int)codeArea.getTextSize();
             int newSize = currentSize - ZOOM_SIZE_CHANGE;
-            if(newSize < minFontSize) return;
+            if(newSize <= 0) return;
             final ValueAnimator animator = ValueAnimator.ofInt(currentSize, newSize);
             animator.setDuration(AnimationUtils.DURATION);
             //disable zoom buttons while ongoing

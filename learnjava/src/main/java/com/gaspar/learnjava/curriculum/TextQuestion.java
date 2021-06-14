@@ -95,7 +95,7 @@ public class TextQuestion extends Question implements Serializable {
     @Override
     public View createQuestionView(Context context, ViewGroup parent) {
         final LayoutInflater inflater = LayoutInflater.from(context);
-        questionView = inflater.inflate(R.layout.text_question, parent, false);
+        questionView = inflater.inflate(R.layout.question_text, parent, false);
         ((TextView)questionView.findViewById(R.id.questionTextView)).setText(text);
         //this wont be visible on start
         //replace important space markers with actual space

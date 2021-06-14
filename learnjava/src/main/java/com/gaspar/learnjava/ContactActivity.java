@@ -10,7 +10,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 
 /**
  * This activity displays information about helping me improve the app. Allows quick email contact.
@@ -20,8 +19,8 @@ public class ContactActivity extends ThemedActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.contact);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        setContentView(R.layout.activity_contact);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         //load contact options to linear layout

@@ -75,11 +75,11 @@ public class SingleChoiceQuestion extends Question implements Serializable {
     @Override
     public View createQuestionView(Context context, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        questionView = inflater.inflate(R.layout.single_choice_question, parent, false);
+        questionView = inflater.inflate(R.layout.question_single_choice, parent, false);
         ((TextView)questionView.findViewById(R.id.questionTextView)).setText(text); //set question text
         RadioGroup answersGroup = questionView.findViewById(R.id.answersLayout);
         for(int i=0; i<answers.size(); i++) { //add answer radio buttons
-            View inflatedAnswer = inflater.inflate(R.layout.single_choice_answer, answersGroup, false);
+            View inflatedAnswer = inflater.inflate(R.layout.answer_single_choice, answersGroup, false);
             RadioButton answerButton = inflatedAnswer.findViewById(R.id.answer);
             answerButton.setText(answers.get(i));
             answerButton.setId(View.generateViewId());

@@ -40,7 +40,7 @@ public class ShowCongratulationTask extends AsyncTask<CoursesActivity, Void, Sho
         }
         if(counter == result.examStatuses.size()) { //all exams completed
             AlertDialog.Builder builder = new AlertDialog.Builder(result.activity, ThemeUtils.getThemedDialogStyle());
-            View congratulationsView = View.inflate(result.activity, R.layout.congratulation_prompt, null);
+            View congratulationsView = View.inflate(result.activity, R.layout.view_congratulation_prompt, null);
             builder.setView(congratulationsView);
 
             AlertDialog dialog = builder.create();

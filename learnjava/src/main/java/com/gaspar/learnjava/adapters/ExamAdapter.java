@@ -24,7 +24,7 @@ public class ExamAdapter extends ArrayAdapter<Course> {
     private final AppCompatActivity activity;
 
     public ExamAdapter(AppCompatActivity activity, @Size(min=1) List<Course> courses) {
-        super(activity, R.layout.named_exam_selector_view, courses);
+        super(activity, R.layout.selector_named_exam, courses);
         this.activity = activity;
     }
 
@@ -35,7 +35,7 @@ public class ExamAdapter extends ArrayAdapter<Course> {
         Course course = getItem(position);
         if(convertView == null) {
             LayoutInflater inflater = LayoutInflater.from(activity);
-            convertView = inflater.inflate(R.layout.named_exam_selector_view, parent, false);
+            convertView = inflater.inflate(R.layout.selector_named_exam, parent, false);
             holder = new ExamViewHolder();
             holder.examNameView = convertView.findViewById(R.id.examNameView);
             holder.examView = convertView;

@@ -24,7 +24,7 @@
 
         <!-- The interactive code sample is displayed here (line by line) -->
         <LinearLayout
-            android:id="@+id/codeArea"
+            android:id="@+id/codeAreaInteractive"
             android:padding="@dimen/padding"
             android:orientation="vertical"
             android:layout_width="wrap_content"
@@ -66,7 +66,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/zoomInButton"
+            android:id="@+id/zoomInButtonInteractive"
             android:layout_width="@dimen/icon_size"
             android:layout_height="@dimen/icon_size"
             android:backgroundTint="?android:colorPrimary"
@@ -77,14 +77,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/zoomOutButton"
+            android:id="@+id/zoomOutButtonInteractive"
             android:layout_marginStart="@dimen/margin"
             android:layout_width="@dimen/icon_size"
             android:layout_height="@dimen/icon_size"
             android:contentDescription="@string/zoom_out"
             android:src="@drawable/zoom_out_icon"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/zoomInButton"
+            app:layout_constraintStart_toEndOf="@id/zoomInButtonInteractive"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,7 +24,6 @@ import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -97,7 +96,7 @@ public class LearnJavaActivity extends ThemedActivity
         GuideActivity.initializeGuideReadPreference(this);
         //check if it's debug or release, and set flag accordingly
         DEBUG = getResources().getBoolean(R.bool.is_debug);
-        setContentView(R.layout.learn_java);
+        setContentView(R.layout.activity_learn_java);
         LearnJavaDatabase.DB_EXECUTOR.execute(() -> { //initialize necessary variables, database
             try { //parse course objects
                 CoursesActivity.setParsedCourses(CourseParser.getInstance().parseCourses(this));
@@ -139,7 +138,7 @@ public class LearnJavaActivity extends ThemedActivity
     }
 
     private void setUpUI() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -257,8 +256,8 @@ public class LearnJavaActivity extends ThemedActivity
     }
 
     @Override //cancel ongoing animation here
-    protected void onPause() {
-        super.onPause();
+    protected void onStop() {
+        super.onStop();
         final View prompt = findViewById(R.id.showMenuView);
         prompt.clearAnimation();
         //show loading indicator again, in case the last opened chapter changes.

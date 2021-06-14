@@ -10,7 +10,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <include
-        layout="@layout/separator_line"
+        layout="@layout/view_separator_line"
         android:layout_width="match_parent"
         android:layout_height="@dimen/separator_height" />
 
@@ -34,7 +34,7 @@
         android:text="@string/next_planned_course" />
 
     <include
-        layout="@layout/separator_line"
+        layout="@layout/view_separator_line"
         android:layout_width="match_parent"
         android:layout_height="@dimen/separator_height" />
 

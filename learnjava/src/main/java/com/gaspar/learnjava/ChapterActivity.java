@@ -7,12 +7,10 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ScrollView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -20,6 +18,7 @@ import com.gaspar.learnjava.asynctask.FillChapterActivityTask;
 import com.gaspar.learnjava.curriculum.Chapter;
 import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.utils.DrawerUtils;
+import com.gaspar.learnjava.utils.InteractiveScrollView;
 import com.gaspar.learnjava.utils.LearnJavaBluetooth;
 import com.gaspar.learnjava.utils.LogUtils;
 import com.google.android.gms.ads.AdRequest;
@@ -58,7 +57,7 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.chapter);
+        setContentView(R.layout.activity_chapter);
         confirmedWithScrolling = false;
         if(getIntent().getExtras() == null) { //should not happen
             LogUtils.logError("Incorrect behaviour: No extras passed!");
@@ -92,7 +91,7 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
     private void setUpUI(Chapter receivedChapter) {
         new FillChapterActivityTask(receivedChapter).execute(this); //show component views
 
-        Toolbar toolbar = findViewById(R.id.toolbarChapter);
+        toolbar = findViewById(R.id.toolbarChapter);
         if(passedChapter != null) toolbar.setTitle(passedChapter.getName());
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout_chapter_root);
@@ -104,10 +103,9 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         //make it so that when the bottom of the chapter is reached (in the scroll view), it acts like pressing the completed button
-        final ScrollView scrollView = findViewById(R.id.chapterComponentsLayout);
-        scrollView.getViewTreeObserver().addOnScrollChangedListener(() -> {
-            if(!scrollView.canScrollVertically(1) && !confirmedWithScrolling) {
-                //can't scroll down, so we are at the bottom
+        final InteractiveScrollView scrollView = findViewById(R.id.chapterComponentsLayout);
+        scrollView.setOnBottomReachedListener(() -> {
+            if(!confirmedWithScrolling) {
                 confirmedWithScrolling = true;
                 LogUtils.log("Chapter confirmed with scroll to bottom!");
                 passedChapter.markChapterAsCompleted(this); //mark as completed

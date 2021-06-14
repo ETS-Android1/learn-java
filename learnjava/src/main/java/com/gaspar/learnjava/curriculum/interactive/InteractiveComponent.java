@@ -73,6 +73,7 @@ public final class InteractiveComponent extends Component {
      * The instructions given to the user.
      */
     private final String instruction;
+
     /**
      * The list of spaces where the user can enter code.
      */
@@ -98,18 +99,18 @@ public final class InteractiveComponent extends Component {
         final String EMPTY_SPACE_MARKER = context.getString(R.string.empty_space_marker);
         final String FORMATTED_LINE_BREAK = context.getString(R.string.formatted_line_break);
 
-        View interactiveView = inflater.inflate(R.layout.interactive_component, parent, false);
+        View interactiveView = inflater.inflate(R.layout.component_interactive, parent, false);
         ((TextView)interactiveView.findViewById(R.id.instruction_view)).setText(instruction);
         //split data into lines
         String[] dataLines = data.split(FORMATTED_LINE_BREAK);
-        LinearLayout codeArea = interactiveView.findViewById(R.id.codeArea);
+        LinearLayout codeArea = interactiveView.findViewById(R.id.codeAreaInteractive);
         int emptySpaceCounter = 0;
         EditText lastEditText = null; //last edit text will get special ime action (done)
         for(String dataLine: dataLines) { //split each line to constant texts (and implicitly, empty spaces)
             dataLine = dataLine.replace("\n", ""); //remove line break from the end...
             String[] separatedData = dataLine.split(EMPTY_SPACE_MARKER);
             //create layout for this line
-            LinearLayout lineLayout = (LinearLayout)inflater.inflate(R.layout.interactive_line, codeArea, false);
+            LinearLayout lineLayout = (LinearLayout)inflater.inflate(R.layout.view_interactive_line, codeArea, false);
             for(int i=0; i<separatedData.length; i++) {
                 if(!"".equals(separatedData[i])) { //only if there is actual text
                     TextView codeView = new TextView(context);
@@ -142,7 +143,7 @@ public final class InteractiveComponent extends Component {
      * @return The {@link EditText} of the view. This is used to set IME actions later.
      */
     private EditText addEmptySpaceView(int place, LinearLayout parent, final LayoutInflater inflater, @NonNull final Context context) {
-        View emptySpaceView = inflater.inflate(R.layout.empty_space_view, parent, false);
+        View emptySpaceView = inflater.inflate(R.layout.view_empty_space, parent, false);
         //bind to EmptySpace object, and add to line
         final EmptySpace emptySpace = emptySpaces.get(place);
         emptySpace.bindView(emptySpaceView);
@@ -163,10 +164,10 @@ public final class InteractiveComponent extends Component {
      */
     @Override
     public void initZoomButtons(@NonNull View codeSampleView) {
-        ImageButton zoomIn = codeSampleView.findViewById(R.id.zoomInButton);
-        ImageButton zoomOut = codeSampleView.findViewById(R.id.zoomOutButton);
+        ImageButton zoomIn = codeSampleView.findViewById(R.id.zoomInButtonInteractive);
+        ImageButton zoomOut = codeSampleView.findViewById(R.id.zoomOutButtonInteractive);
         final int minFontSize = (int)codeSampleView.getContext().getResources().getDimension(R.dimen.code_text_size);
-        final LinearLayout codeArea = codeSampleView.findViewById(R.id.codeArea);
+        final LinearLayout codeArea = codeSampleView.findViewById(R.id.codeAreaInteractive);
         zoomIn.setOnClickListener(v -> {
             int currentSize = getCurrentFontSize(codeArea);
             final ValueAnimator animator = ValueAnimator.ofInt(currentSize, currentSize + ZOOM_SIZE_CHANGE);

@@ -5,8 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".CoursesActivity">
+    android:fitsSystemWindows="true">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
@@ -36,11 +35,12 @@
                         android:id="@+id/settings_icon"
                         android:layout_width="@dimen/icon_size"
                         android:layout_height="@dimen/icon_size"
-                        android:onClick="settingsOnClick"
                         android:layout_centerInParent="true"
-                        android:contentDescription="@string/action_settings"
                         android:layout_gravity="end"
                         android:layout_marginEnd="@dimen/margin"
+                        android:contentDescription="@string/action_settings"
+                        android:elevation="0dp"
+                        android:onClick="settingsOnClick"
                         android:src="@drawable/settings_icon" />
 
                 </RelativeLayout>
@@ -51,63 +51,42 @@
 
         <!-- Actual content of the activity -->
         <RelativeLayout
-            android:id="@+id/coursesRoot"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="visible"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <!-- When the background task finished this is showing -->
-           <LinearLayout
-               android:id="@+id/coursesLayout"
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               android:layout_alignParentTop="true"
-               android:visibility="gone"
-               tools:visibility="visible"
-               android:layout_marginTop="@dimen/margin"
-               android:gravity="center"
-               android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/tasksActivityLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_alignParentTop="true"
+                android:visibility="gone"
+                tools:visibility="visible">
 
-               <RelativeLayout
-                   android:id="@+id/adContainer"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"
-                   android:layout_marginStart="@dimen/margin"
-                   android:layout_marginEnd="@dimen/margin"
-                   android:gravity="center">
+                <RelativeLayout
+                    android:id="@+id/adContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin"
+                    android:layout_marginEnd="@dimen/margin"
+                    android:gravity="center">
 
-                   <TextView
-                       android:id="@+id/adStatusLabel"
-                       android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       android:layout_centerInParent="true"
-                       android:text="@string/loading_ad"/>
-               </RelativeLayout>
+                    <TextView
+                        android:id="@+id/adStatusLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:text="@string/loading_ad"/>
+                </RelativeLayout>
 
-               <ListView
-                   android:id="@+id/courseSelectors"
-                   android:layout_width="match_parent"
-                   android:layout_height="match_parent" />
-
-           </LinearLayout>
-
-            <!-- Drop down all floating button. -->
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/dropDownAllIcon"
-                android:contentDescription="@string/drop_down_all"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_margin="@dimen/margin"
-                android:src="@drawable/dropdown_icon"
-                app:borderWidth="0dp"
-                app:backgroundTint="?colorPrimaryDark"
-                app:tint="?learnJavaTextColor"
-                app:rippleColor="@android:color/white"
-                app:fabSize="normal"/>
+                <ListView
+                    android:id="@+id/taskSelectors"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/margin" />
+            </LinearLayout>
 
             <!-- Loading indicator -->
             <ProgressBar
@@ -118,7 +97,7 @@
                 android:layout_centerInParent="true"
                 android:indeterminate="true"
                 android:visibility="visible"
-                tools:visibility="gone"/>
+                tools:visibility="gone" />
         </RelativeLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
@@ -129,7 +108,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header"
+        app:headerLayout="@layout/view_nav_header"
         app:menu="@menu/learn_java_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

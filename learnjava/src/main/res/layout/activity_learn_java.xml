@@ -55,7 +55,7 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:activity=".LearnJavaActivity"
-            tools:showIn="@layout/learn_java">
+            tools:showIn="@layout/activity_learn_java">
 
             <LinearLayout
                 android:id="@+id/showMenuView"
@@ -210,7 +210,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header"
+        app:headerLayout="@layout/view_nav_header"
         app:menu="@menu/learn_java_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

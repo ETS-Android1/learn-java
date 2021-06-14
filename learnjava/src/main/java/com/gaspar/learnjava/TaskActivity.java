@@ -14,7 +14,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -33,10 +32,14 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 
 /**
- * Activity that shows a task.
+ * Activity that shows a task. The user can see the solution here as well, with the buttons on the bottom of the
+ * activity.
  */
 public class TaskActivity extends ThemedActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    /**
+     * Stores the loading completed with success, or not.
+     */
     public volatile boolean successfulLoad;
 
     /**
@@ -53,7 +56,7 @@ public class TaskActivity extends ThemedActivity implements NavigationView.OnNav
     @Override
     public void onCreate(Bundle savedState) {
         super.onCreate(savedState);
-        setContentView(R.layout.task);
+        setContentView(R.layout.activity_task);
         if(getIntent().getExtras() == null) { //should not happen
             LogUtils.logError("Incorrect behaviour: No extras passed!");
             finish();
@@ -82,9 +85,9 @@ public class TaskActivity extends ThemedActivity implements NavigationView.OnNav
     private void setUpUI(Task passedTask) {
         new FillTaskActivityTask(passedTask).execute(this); //load task components, handles checkbox status
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbarTask);
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_task_root);
         NavigationView navigationView = findViewById(R.id.nav_view);
         toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -181,7 +184,7 @@ public class TaskActivity extends ThemedActivity implements NavigationView.OnNav
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_task_root);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {

@@ -13,7 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -44,7 +43,7 @@ public class GuideActivity extends ThemedActivity implements NavigationView.OnNa
     @Override
     public void onCreate(Bundle savedState) {
         super.onCreate(savedState);
-        setContentView(R.layout.guide);
+        setContentView(R.layout.activity_guide);
         setUpUI();
         //the guide was opened, save this information
         final SharedPreferences preferences = getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
@@ -52,7 +51,7 @@ public class GuideActivity extends ThemedActivity implements NavigationView.OnNa
     }
 
     private void setUpUI() {
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout_guide_root);
         NavigationView navigationView = findViewById(R.id.nav_view);

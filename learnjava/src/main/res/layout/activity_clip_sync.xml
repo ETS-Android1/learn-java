@@ -223,7 +223,7 @@ android:fitsSystemWindows="true">
 
                 <include
                     android:id="@+id/testCodeSample"
-                    layout="@layout/code_component"/>
+                    layout="@layout/component_code"/>
 
             </LinearLayout>
 
@@ -248,7 +248,7 @@ android:fitsSystemWindows="true">
     android:layout_height="match_parent"
     android:layout_gravity="start"
     android:fitsSystemWindows="true"
-    app:headerLayout="@layout/nav_header"
+    app:headerLayout="@layout/view_nav_header"
     app:menu="@menu/learn_java_drawer" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

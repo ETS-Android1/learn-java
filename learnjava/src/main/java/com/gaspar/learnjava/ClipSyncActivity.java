@@ -24,7 +24,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
@@ -126,7 +125,7 @@ public class ClipSyncActivity extends ThemedActivity
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.clip_sync);
+        setContentView(R.layout.activity_clip_sync);
         prefs = getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
         // Register for broadcasts when a device is discovered.
         IntentFilter filter1 = new IntentFilter(BluetoothDevice.ACTION_FOUND);
@@ -176,7 +175,7 @@ public class ClipSyncActivity extends ThemedActivity
         component.initZoomButtons(codeView); //zoom functionality
         codeView.setOnClickListener(v -> Component.copyOnClick(codeArea, this)); //copy functionality
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);

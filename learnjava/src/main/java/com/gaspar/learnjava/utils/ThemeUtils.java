@@ -176,10 +176,16 @@ public abstract class ThemeUtils {
     @VisibleForTesting
     public static final String SHOW_DARK_THEME_PROMPT = "show_dark_theme_prompt";
 
+    @VisibleForTesting
+    public static boolean showDarkThemeDialog = true;
+
     /**
      * Shows a dialog to the user which informs them that a dark mode is available.
      */
     public static void showDarkThemePromptIfNeeded(@NonNull final AppCompatActivity activity) {
+        if(!showDarkThemeDialog) { //eases some tests
+            return;
+        }
         final SharedPreferences preferences = activity.getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
         if(isDarkTheme()) {
             //the user already switched to dark theme!

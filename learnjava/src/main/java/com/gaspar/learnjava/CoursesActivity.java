@@ -14,7 +14,6 @@ import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -81,7 +80,7 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
     @Override
     public void onCreate(Bundle savedState) {
         super.onCreate(savedState);
-        setContentView(R.layout.courses);
+        setContentView(R.layout.activity_courses);
         //true if auto slide open is DISABLED, false otherwise
         dropDown = !SettingsActivity.autoSlideOpenEnabled(this);
         setUpUI();
@@ -109,7 +108,7 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
     private void setUpUI() {
         new FillCourseActivityTask().execute(this); //fill list view.
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);

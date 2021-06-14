@@ -90,7 +90,7 @@ public class TaskAdapter extends ArrayAdapter<Course> {
     private void addTasksToCourse(final Course course, ViewGroup tasksLayout) {
         tasksLayout.removeAllViews();
         for(Task task: course.getTasks()) {
-            View taskSelectorView = View.inflate(activity, R.layout.task_selector_view, null);
+            View taskSelectorView = View.inflate(activity, R.layout.selector_task, null);
             taskSelectorView.setOnClickListener(view -> {
                 view.startAnimation(clickAnimation);
                 taskSelectorOnClick(course, task, view);
