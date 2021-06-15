@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
@@ -28,6 +29,8 @@ import com.gaspar.learnjava.utils.LogUtils;
 import com.gaspar.learnjava.utils.ThemeUtils;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import java.util.List;
+
 import cn.iwgang.countdownview.CountdownView;
 
 /**
@@ -35,6 +38,20 @@ import cn.iwgang.countdownview.CountdownView;
  * drawer menu.
  */
 public class ExamActivity extends ThemedActivity {
+
+    /**
+     * This flag can be used to disable the dialog that pops up when the user attempts to finish
+     * the exam. Tests for individual questions do not answer the other questions,
+     * and with this flag the unnecessary warning dialog can be bypassed. SHOULD ONLY BE USED WHILE TESTING!
+     */
+    @VisibleForTesting
+    public static boolean disableConfirmFinishWarning;
+
+    /**
+     * For testing it is important to know the view id of each question view, so they can be individually
+     * referenced. This is assigned in {@link LoadExamQuestionsTask}.
+     */
+    public List<Integer> questionViewIds;
 
     /**
      * Used when loading the questions.
@@ -71,7 +88,7 @@ public class ExamActivity extends ThemedActivity {
 
     private void setUpUI() {
         new LoadExamQuestionsTask(exam.getId()).execute(this); //this will update the exam variable
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbarExam);
         setSupportActionBar(toolbar);
         if(getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -88,6 +105,9 @@ public class ExamActivity extends ThemedActivity {
         return true;
     }
 
+    /**
+     * Flag that indicates if the exam was finished.
+     */
     private boolean examFinished;
 
     @Override
@@ -100,7 +120,8 @@ public class ExamActivity extends ThemedActivity {
             builder.setMessage(R.string.confirm_abandon_exam);
             builder.setIcon(R.drawable.warning_icon);
             builder.setPositiveButton(R.string.ok, ((dialogInterface, i) -> {
-                finishExam(findViewById(R.id.finishExamButton)); //finishes, updates database
+                //finishes, updates database
+                finishExam(findViewById(R.id.finishExamButton), true); //this is a force close
                 onBackPressed(); // instantly closes
             }));
             builder.setNegativeButton(R.string.cancel, (dialogInterface, i) -> dialogInterface.dismiss());
@@ -114,33 +135,47 @@ public class ExamActivity extends ThemedActivity {
      */
     public void finishExamOnClick(View view) {
        if(!examFinished) {
-           int unansweredQuestions = 0;
-           for(Question question: exam.getQuestions()) { //count unanswered questions
-               if(!question.isAnswered()) unansweredQuestions++;
-           }
-           MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, ThemeUtils.getThemedDialogStyle());
-           builder.setTitle(R.string.confirm_finish_exam);
-           builder.setIcon(R.drawable.warning_icon);
-           builder.setView(inflateUnansweredWarningView(unansweredQuestions)); //warn about unanswered
-           builder.setPositiveButton(R.string.ok, ((dialogInterface, i) -> finishExam((Button)view)));
-           builder.setNegativeButton(R.string.cancel, (dialogInterface, i) -> dialogInterface.dismiss());
-           builder.create().show();
+          if(!disableConfirmFinishWarning) {
+              int unansweredQuestions = 0;
+              for(Question question: exam.getQuestions()) { //count unanswered questions
+                  if(!question.isAnswered()) unansweredQuestions++;
+              }
+              MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, ThemeUtils.getThemedDialogStyle());
+              builder.setTitle(R.string.confirm_finish_exam);
+              builder.setIcon(R.drawable.warning_icon);
+              builder.setView(inflateUnansweredWarningView(unansweredQuestions)); //warn about unanswered
+              builder.setPositiveButton(R.string.ok, ((dialogInterface, i) -> finishExam((Button)view, false))); //this is not a force close
+              builder.setNegativeButton(R.string.cancel, (dialogInterface, i) -> dialogInterface.dismiss());
+              builder.create().show();
+          } else {
+              //the confirm dialog is now disabled, most likely for testing
+              finishExam((Button)view, false);
+          }
        } else {
            onBackPressed();
        }
     }
 
-    private void finishExam(Button finishButton) {
+    /**
+     * Marks this exam as finished. Updates the database.
+     * @param finishButton The button that closes the exam.
+     * @param forceClose If the exam is force closed then the user does not care about the result,
+     *                   and the activity can simply be closed without updating the UI.
+     */
+    private void finishExam(Button finishButton, boolean forceClose) {
         examFinished = true;
-        ((CountdownView)findViewById(R.id.countdownView)).pause(); //stop countdown
-        finishButton.setText(R.string.close_exam);
+        //stop countdown
+        ((CountdownView)findViewById(R.id.countdownView)).pause();
+        //ui update, only if not force closed
+        if(!forceClose) finishButton.setText(R.string.close_exam);
         int correct = 0;
         for(Question question: exam.getQuestions()) {
             question.lockQuestion();
-            question.showCorrectAnswer();
+            //ui update, only if not force closed
+            if(!forceClose) question.showCorrectAnswer();
             if(question.isCorrect()) correct++;
         }
-        displayAndUpdateExamResult(correct); //show exam result
+        displayAndUpdateExamResult(correct, forceClose); //show exam result and update database
         Intent resultIntent = new Intent();
         resultIntent.putExtra(Exam.EXAM_PREFERENCE_STRING, exam);
         setResult(Activity.RESULT_OK, resultIntent); //save result intent
@@ -166,18 +201,16 @@ public class ExamActivity extends ThemedActivity {
     }
 
     /**
-     * <p>
-     *     Displays the result to the user. Updates the database with new top score and completed status (if necessary).
-     *     If the result is fail, a notification gets posted that will display when the exam is ready to be started again.
-     * </p>
-     * <p>
-     *     There is a reason why correctQuestions is double!!! To perform double division.
-     * </p>
-     *
+     * Displays the result to the user. Updates the status of the exam in the database.
+     * If the result is fail, a notification gets posted that will display when the exam is ready to be started again.
+     * There is a reason why correctQuestions is double!!! To perform double division.
      * @param correctQuestions The amount of questions correctly answered (points).
+     * @param forceClosed If it was a force close, then there is no need to show anything on the UI.
+     *                    Database updates must still happen.
      */
-    private void displayAndUpdateExamResult(double correctQuestions) {
-        LearnJavaDatabase.DB_EXECUTOR.execute(() -> { //first launch the top score updating
+    private void displayAndUpdateExamResult(double correctQuestions, boolean forceClosed) {
+        LearnJavaDatabase.DB_EXECUTOR.execute(() -> {
+            //first launch the top score updating
             int prevScore = LearnJavaDatabase.getInstance(this).getExamDao().queryTopScore(exam.getId());
             if(correctQuestions > prevScore) { //this works for NEVER_STARTED as well, as its value is -1
                 LearnJavaDatabase.getInstance(this).getExamDao()
@@ -185,12 +218,10 @@ public class ExamActivity extends ThemedActivity {
             }
         });
         double percentageAsDouble = 100 * (correctQuestions/exam.getQuestionAmount());
-        int percentage =Double.valueOf(percentageAsDouble).intValue();
-        findViewById(R.id.remainingTimeLayout).setVisibility(View.GONE);
-        View resultLayout = findViewById(R.id.examResultLayout);
-        if (percentage >= Exam.getMinimumPassPercentage(this)) { //pass
-            resultLayout.setBackgroundResource(R.drawable.correct_answer_background);
-            ((TextView)resultLayout.findViewById(R.id.examResultText)).setText(R.string.exam_passed);
+        int percentage = Double.valueOf(percentageAsDouble).intValue();
+        int minPercentage = Exam.getMinimumPassPercentage(this);
+        if(percentage >= minPercentage) {
+            //update database with pass
             LearnJavaDatabase.DB_EXECUTOR.execute(() -> {
                 LearnJavaDatabase.getInstance(ExamActivity.this) //set this exam completed
                         .getExamDao().updateExamCompletionStatus(exam.getId(), Status.COMPLETED);
@@ -199,16 +230,28 @@ public class ExamActivity extends ThemedActivity {
                     LearnJavaDatabase.getInstance(this).getCourseDao().updateCourseStatus(nextCourse.getId(), Status.UNLOCKED);
                 }
             });
-        } else { //fail
-            resultLayout.setBackgroundResource(R.drawable.incorrect_background);
-            ((TextView)resultLayout.findViewById(R.id.examResultText)).setText(R.string.exam_failed);
+        } else {
+            //fail, no need to update database, but post notification
             ExamNotificationReceiver.postExamNotification(exam, this); //post the notification that shows on cool down.
         }
-        int iCorrectQuestions = Double.valueOf(correctQuestions).intValue();
-        String pointsText = iCorrectQuestions + "/" + exam.getQuestions().size() + " " + getString(R.string.points);
-        ((TextView)resultLayout.findViewById(R.id.examScoreText)).setText(pointsText);
-        ((TextView)resultLayout.findViewById(R.id.examPercentageText)).setText(String.valueOf(percentage).concat("%"));
-        resultLayout.setVisibility(View.VISIBLE);
+        if(!forceClosed) { //UI updates, if this was not a force close
+            findViewById(R.id.remainingTimeLayout).setVisibility(View.GONE);
+            View resultLayout = findViewById(R.id.examResultLayout);
+            if (percentage >= minPercentage) { //pass
+                resultLayout.setBackgroundResource(R.drawable.correct_answer_background);
+                ((TextView)resultLayout.findViewById(R.id.examResultText)).setText(R.string.exam_passed);
+
+            } else { //fail
+                resultLayout.setBackgroundResource(R.drawable.incorrect_background);
+                ((TextView)resultLayout.findViewById(R.id.examResultText)).setText(R.string.exam_failed);
+
+            }
+            int iCorrectQuestions = Double.valueOf(correctQuestions).intValue();
+            String pointsText = iCorrectQuestions + "/" + exam.getQuestions().size() + " " + getString(R.string.points);
+            ((TextView)resultLayout.findViewById(R.id.examScoreText)).setText(pointsText);
+            ((TextView)resultLayout.findViewById(R.id.examPercentageText)).setText(String.valueOf(percentage).concat("%"));
+            resultLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     /**
@@ -218,7 +261,7 @@ public class ExamActivity extends ThemedActivity {
     public void onExamTimeExpired(CountdownView countdownView) {
         countdownView.pause();
         if(notificationVisible) showExamNotification(false); //update notification if it's active
-        finishExam(findViewById(R.id.finishExamButton)); //exam will be locked and corrected
+        finishExam(findViewById(R.id.finishExamButton), false); //exam will be locked and corrected
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, ThemeUtils.getThemedDialogStyle());
         builder.setMessage(R.string.exam_time_expired);
         builder.setIcon(R.drawable.problem_icon);
@@ -267,7 +310,6 @@ public class ExamActivity extends ThemedActivity {
 
     /**
      * Posts the ongoing exam warning. (called when the user leaves to the activity while the exam is not yet finished)
-     *
      * @param ongoing True if the exam is still active, false if it finished while the user was in another activity.
      */
     private void showExamNotification(boolean ongoing) {
@@ -327,11 +369,21 @@ public class ExamActivity extends ThemedActivity {
         this.loadSuccessful = loadSuccessful;
     }
 
+    public boolean isExamFinished() { return examFinished; }
+
     public void setExam(Exam exam) {
         this.exam = exam;
     }
 
     public Exam getExam() {
         return exam;
+    }
+
+    public void setQuestionViewIds(List<Integer> questionViewIds) {
+        this.questionViewIds = questionViewIds;
+    }
+
+    public List<Integer> getQuestionViewIds() {
+        return questionViewIds;
     }
 }

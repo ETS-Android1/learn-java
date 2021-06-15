@@ -65,7 +65,11 @@ public class FillTaskActivityTask extends AsyncTask<TaskActivity, Void, TaskActi
         if(activity.successfulLoad) {
             if(activity.getDisplayedTask().getDescriptionComponents() == null ||
             activity.getDisplayedTask().getSolutionComponents() == null) return; //should not happen
-
+            //make loading invisible
+            activity.findViewById(R.id.taskProgressBar).setVisibility(View.GONE);
+            //make components visible visible
+            View componentsScroll = activity.findViewById(R.id.taskScroller);
+            componentsScroll.setVisibility(View.VISIBLE);
             LinearLayout componentsLayout = activity.findViewById(R.id.taskComponents);
             for(Component component: activity.getDisplayedTask().getDescriptionComponents()) {
                 componentsLayout.addView(component.createComponentView(activity, componentsLayout)); //add component views
@@ -85,6 +89,9 @@ public class FillTaskActivityTask extends AsyncTask<TaskActivity, Void, TaskActi
             //ask about dark theme
             ThemeUtils.showDarkThemePromptIfNeeded(activity);
         } else {
+            //make loading invisible
+            activity.findViewById(R.id.taskProgressBar).setVisibility(View.GONE);
+            //show error
             FillCourseActivityTask.showFailDialog(activity, activity.getString(R.string.tasks));
         }
     }

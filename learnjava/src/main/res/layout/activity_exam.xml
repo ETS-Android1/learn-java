@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:activity=".ExamActivity">
+    tools:activity=".ExamActivity"
+    android:id="@+id/exam_root">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -12,7 +13,7 @@
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/toolbarExam"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?android:colorPrimary"

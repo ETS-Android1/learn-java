@@ -20,7 +20,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * Represents an entity which stores data about the status of a course.
+ * Represents the course_status table and can be used to update the rows in this table.
+ * @see CourseDao
  */
 @Entity(tableName = "course_status")
 public class CourseStatus {
@@ -46,6 +47,11 @@ public class CourseStatus {
 
     public CourseStatus() {}
 
+    /**
+     * Create an object which describes a course.
+     * @param courseId Id of the course.
+     * @param status Status of the course.
+     */
     @Ignore
     public CourseStatus(int courseId, @Status int status) {
         this.courseId = courseId;
@@ -78,7 +84,6 @@ public class CourseStatus {
      * Initiates course counting. When it detects that a new course has been added, the congratulations
      * dialog will show again regardless if the user checked the don't show again checkbox. Also handles if the
      * new course should be unlocked or not (see {@link #newCourseDetected(SharedPreferences, Context)}).
-     *
      * @param xmlCourseCount Count of courses detected on application start (from XML).
      */
     @WorkerThread
@@ -129,6 +134,9 @@ public class CourseStatus {
         LearnJavaDatabase.getInstance(context).getCourseDao().addCourseStatus(cs);
     }
 
+    /**
+     * Increases course count.
+     */
     public static void incrementCourseCount() {
         courseCount.incrementAndGet();
     }

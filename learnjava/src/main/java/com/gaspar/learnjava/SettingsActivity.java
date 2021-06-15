@@ -67,7 +67,7 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
      * so they are consistent with the current settings.
      */
     private void setUpUI() {
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbarExam);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);

@@ -81,7 +81,6 @@ public class ExamNotificationReceiver extends BroadcastReceiver {
     /**
      * Registers an exam notification. Called when the user has failed the exam. This will create
      * it's own background thread, no need to call it inside one.
-     *
      * @param failedExam The exam that failed. The id of this is used.
      */
     @UiThread
@@ -96,7 +95,7 @@ public class ExamNotificationReceiver extends BroadcastReceiver {
                     return;
                 }
             }
-            String examName = "";
+            String examName = "UNKNOWN"; //it will stay unknown for test exam for example
             for(Course course: CoursesActivity.getParsedCourses()) {
                 if(course.getExam().equals(failedExam)) { //found course of the exam
                     examName = course.getCourseName();

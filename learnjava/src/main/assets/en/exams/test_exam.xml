@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!-- Test exam used for UI testing. Never loaded in the actual application. Not translated. -->
+<resources>
+    <examdata>
+        <id>100000</id>
+        <questionAmount>8</questionAmount>
+        <timeLimit>10</timeLimit>
+        <finished>true</finished>
+    </examdata>
+    <question type="text">
+        <text>text_no_ignore_case_no_ignore_space</text>
+        <correct>hello</correct>
+    </question>
+    <question type="text">
+        <text>text_ignore_case_no_ignore_space</text>
+        <correct>hello</correct>
+        <ignoreCase/>
+    </question>
+    <question type="text">
+        <text>text_no_ignore_case_ignore_space</text>
+        <correct>hello 1[s]world</correct> <!-- space between 1 and world is forced, but between hello and 1 it is optional -->
+        <ignoreSpace/>
+    </question>
+    <question type="text">
+        <text>text_ignore_case_ignore_space</text>
+        <correct>hello 1[s]world</correct> <!-- space between 1 and world is forced, but between hello and 1 it is optional -->
+        <ignoreSpace/>
+        <ignoreCase/>
+    </question>
+    <question type="single_choice">
+        <text>question_single_choice</text>
+        <answer>single_choice_answer_1</answer>
+        <answer>single_choice_answer_2</answer> <!-- correct -->
+        <answer>single_choice_answer_3</answer>
+        <correct>1</correct> <!-- Indexes from 0! -->
+    </question>
+    <question type="multi_choice">
+        <text>question_multi_choice</text>
+        <answer>answer_multi_choice_1</answer> <!-- correct -->
+        <answer>answer_multi_choice_2</answer>
+        <answer>answer_multi_choice_3</answer> <!-- correct -->
+        <answer>answer_multi_choice_4</answer>
+        <correct>0</correct> <!-- Indexes from 0! -->
+        <correct>2</correct>
+    </question>
+    <question type="true_false">
+        <text>question_true_false_correct_true</text>
+        <correct>true</correct>
+    </question>
+    <question type="true_false">
+        <text>question_true_false_correct_false</text>
+        <correct>false</correct>
+    </question>
+</resources>

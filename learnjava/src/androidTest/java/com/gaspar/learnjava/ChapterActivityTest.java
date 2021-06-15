@@ -17,7 +17,11 @@ import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 
 import com.gaspar.learnjava.curriculum.Chapter;
 import com.gaspar.learnjava.curriculum.Component;
+import com.gaspar.learnjava.curriculum.Status;
+import com.gaspar.learnjava.database.ChapterStatus;
+import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.parsers.CourseParser;
+import com.gaspar.learnjava.utils.InteractiveScrollView;
 import com.gaspar.learnjava.utils.ThemeUtils;
 
 import org.hamcrest.Matcher;
@@ -71,6 +75,16 @@ public class ChapterActivityTest {
         }
         //put the test chapter into the intent
         startIntent.putExtra(Chapter.CHAPTER_PREFERENCE_STRING, testChapter);
+
+        /*
+        Before we can test this, the test chapter needs to be in the the database. Normally
+        this is handled on app launch, but here the LearnJavaActivity is bypassed, and ChapterActivity
+        is started directly. So need to add the test chapter to the database manually.
+         */
+        if(LearnJavaDatabase.getInstance(context).getChapterDao().queryChapterStatus(TEST_CHAPTER_ID) == null) {
+            ChapterStatus testStatus = new ChapterStatus(TEST_CHAPTER_ID, Status.UNLOCKED);
+            LearnJavaDatabase.getInstance(context).getChapterDao().addChapterStatus(testStatus);
+        }
     }
 
     //this rule opens the chapter activity before each test (with the correct intent, defined above)
@@ -239,6 +253,46 @@ public class ChapterActivityTest {
         onView(withSpannableText("Boxed element")).check(matches(isDisplayed()));
         rule.getScenario().onActivity(activity ->
                 Assert.assertEquals(Component.ComponentType.BOXED, activity.getPassedChapter().getComponents().get(9).getType()));
+    }
+
+    //test that scrolling to the bottom completes the course
+    @Test
+    public void testChapterCompletionWithScroll() throws InterruptedException {
+        rule.getScenario().onActivity(activity -> {
+            InteractiveScrollView scrollView = activity.findViewById(R.id.chapterComponentsLayout);
+            scrollView.smoothScrollTo(0, scrollView.getHeight());
+        });
+        //allow time for database to update
+        Thread.sleep(1500);
+        //query status
+        ChapterStatus status = LearnJavaDatabase.getInstance(ApplicationProvider.getApplicationContext())
+                .getChapterDao().queryChapterStatus(TEST_CHAPTER_ID);
+        Assert.assertNotNull(status);
+        Assert.assertEquals(Status.COMPLETED, status.getStatus());
+        //change status back from completed, for other tests
+        status = new ChapterStatus(TEST_CHAPTER_ID, Status.UNLOCKED);
+        LearnJavaDatabase.getInstance(ApplicationProvider.getApplicationContext())
+                .getChapterDao().updateChapterStatus(status);
+    }
+
+    //test that clicking the button completes the course
+    @Test
+    public void testChapterCompletionWithClick() throws InterruptedException {
+        //scroll to the button (this wont trigger the completion by scroll, since it does not go completely to the bottom)
+        onView(withId(R.id.chapterConfirmButton)).perform(scrollTo());
+        //this closes the activity
+        onView(withId(R.id.chapterConfirmButton)).perform(click());
+        //allow time for database to update
+        Thread.sleep(1500);
+        //query status
+        ChapterStatus status = LearnJavaDatabase.getInstance(ApplicationProvider.getApplicationContext())
+                .getChapterDao().queryChapterStatus(TEST_CHAPTER_ID);
+        Assert.assertNotNull(status);
+        Assert.assertEquals(Status.COMPLETED, status.getStatus());
+        //change status back from completed, for other tests
+        status = new ChapterStatus(TEST_CHAPTER_ID, Status.UNLOCKED);
+        LearnJavaDatabase.getInstance(ApplicationProvider.getApplicationContext())
+                .getChapterDao().updateChapterStatus(status);
     }
 
     /* I can't get these test to work. Dialog does not show up, test hangs

@@ -20,7 +20,6 @@ import com.gaspar.learnjava.database.LearnJavaDatabase;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -246,5 +245,10 @@ public class Exam implements Serializable {
 
     public boolean isFinished() {
         return finished;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+        this.questionAmount = questions.size();
     }
 }

@@ -138,7 +138,7 @@ public class LearnJavaActivity extends ThemedActivity
     }
 
     private void setUpUI() {
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbarExam);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -163,6 +163,7 @@ public class LearnJavaActivity extends ThemedActivity
         List<Drawable> drawables = RawParser.parseCodeImages(this);
         for(Drawable codeImage: drawables) { //create and add all image views
             ImageView iw = new ImageView(this);
+            iw.setId(View.generateViewId());
             iw.setVisibility(View.GONE);
             iw.setBackground(codeImage);
             iw.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -200,9 +201,9 @@ public class LearnJavaActivity extends ThemedActivity
         backgroundLayout.getChildAt(visibleCodeIndex).setVisibility(View.VISIBLE);
 
         SharedPreferences prefs = getSharedPreferences(APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
-       if(!prefs.contains(SHOW_SWIPE)) { //on first start show swiping function
-           prefs.edit().putBoolean(SHOW_SWIPE, false).apply();
-           animateTouchIcon();
+        if(!prefs.contains(SHOW_SWIPE)) { //on first start show swiping function
+            prefs.edit().putBoolean(SHOW_SWIPE, false).apply();
+            animateTouchIcon();
         }
     }
 

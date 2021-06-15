@@ -133,7 +133,7 @@
 </font>
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#E65100">static</font><font color="#DF7401"> void </font><font color="#ADD8E6">addAndPrint</font>(<font color="#DF7401">int </font>n1,<font color="#DF7401"> int </font>n2,<font color="#DF7401"> int </font>n3) {
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#DF7401">	&nbsp;&nbsp;&nbsp;&nbsp;int </font>additionResult = n1 + n2 + n3;
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"The result is "</font> + additionResult);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Az eredmény: "</font> + additionResult);
 <br/>	&nbsp;&nbsp;&nbsp;&nbsp;}
 <br/>}
                 

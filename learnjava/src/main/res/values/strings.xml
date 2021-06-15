@@ -68,11 +68,13 @@
     <string name="clip_sync_disabled">ClipSync disabled!</string>
     <string name="clip_sync_test">Test syncing</string>
     <string name="clip_sync_test_description">You can test if the syncing works using this dummy code sample:</string>
-    <string name="dummy_code_sample" translatable="false"><![CDATA[
-     <font color="#E65100">public static</font> <font color="#DF7401">void</font> main(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.out.println(\"ClipSync!\");
+    <string name="dummy_code_sample" translatable="false">
+        <![CDATA[
+     <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"ClipSync!"</font>);
 <br/>}
-    ]]></string>
+        ]]>
+    </string>
     <string name="clip_sync_bluetooth_try_again">Bluetooth is on! Please try again now.</string>
     <string name="clip_sync_success">Synced with other device!</string>
     <string name="clip_sync_fail">ClipSync failed: time out.</string>
@@ -86,6 +88,7 @@
     <string name="clip_sync_location">Bluetooth usage requires location permission. Please allow it!</string>
     <string name="clip_sync_location_denied">Can\'t use bluetooth without permission!</string>
     <string name="scanning_device">Scanning device </string>
+    <string name="clip_sync_open_on_computer">You should open this link on your computer! Do you want to open it here anyways?</string>
 
     <!-- Notification data -->
     <string name="notification_channel_name" translatable="false">LearnJava notification channel</string>
@@ -158,7 +161,7 @@
     <string name="copy_successful">Code copied to clipboard</string>
     <string name="copy_failed">Failed to copy code</string>
     <string name="advanced">ADVANCED</string>
-    <string name="confirm_chapter">Confirm chapter</string>
+    <string name="close_chapter">Close chapter</string>
     <string name="image_component_desc">Image component</string>
     <string name="zoom_in">Zoom in</string>
     <string name="zoom_out">Zoom out</string>

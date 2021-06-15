@@ -2,12 +2,15 @@ package com.gaspar.learnjava;
 
 import android.view.View;
 
+import androidx.test.core.app.ApplicationProvider;
 import androidx.test.espresso.IdlingRegistry;
 import androidx.test.espresso.IdlingResource;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 import androidx.test.platform.app.InstrumentationRegistry;
+
+import com.gaspar.learnjava.parsers.RawParser;
 
 import junit.framework.AssertionFailedError;
 
@@ -24,8 +27,11 @@ import java.util.function.Predicate;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.swipeLeft;
+import static androidx.test.espresso.action.ViewActions.swipeRight;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.RootMatchers.isDialog;
+import static androidx.test.espresso.matcher.ViewMatchers.hasChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
@@ -95,8 +101,8 @@ public class LearnJavaActivityTest {
     @Test
     public void testIsTitleCorrect() {
         //is toolbar shown?
-        onView(withId(R.id.toolbar)).check(matches(isDisplayed()));
-        onView(withId(R.id.toolbar)).check(matches(hasDescendant(withText(R.string.app_name))));
+        onView(withId(R.id.toolbarExam)).check(matches(isDisplayed()));
+        onView(withId(R.id.toolbarExam)).check(matches(hasDescendant(withText(R.string.app_name))));
     }
 
     @Test
@@ -185,5 +191,34 @@ public class LearnJavaActivityTest {
         onView(withId(AndroidTestUtils.DialogButtonId.NEGATIVE.getId())).perform(click()); //press no
         //chapter should be displayed
         onView(withId(R.id.drawer_layout_chapter_root)).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testAllImagesAddedToBackground() {
+        int amount = RawParser.parseCodeImages(ApplicationProvider.getApplicationContext()).size();
+        onView(withId(R.id.backgroundImagesLayout)).check(matches(hasChildCount(amount)));
+    }
+
+
+    @Test
+    public void testSwipeRightOnImage() throws InterruptedException {
+        onView(withId(R.id.backgroundImagesLayout)).perform(swipeRight());
+        //the swipe animations take time to complete
+        Thread.sleep(1000);
+        /*
+        I found no way to programmatically validate that the background update happens,
+        but if you look at the app while the test is ongoing, you can clearly see it works.
+         */
+    }
+
+    @Test
+    public void testSwipeLeftOnImage() throws InterruptedException {
+        onView(withId(R.id.backgroundImagesLayout)).perform(swipeLeft());
+        //the swipe animations take time to complete
+        Thread.sleep(1000);
+        /*
+        I found no way to programmatically validate that the background update happens,
+        but if you look at the app while the test is ongoing, you can clearly see it works.
+         */
     }
 }

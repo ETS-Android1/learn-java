@@ -108,7 +108,7 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
     private void setUpUI() {
         new FillCourseActivityTask().execute(this); //fill list view.
 
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbarExam);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);

@@ -173,11 +173,11 @@ public class ClipSyncActivity extends ThemedActivity
         String data = getString(R.string.dummy_code_sample);
         codeArea.setText(Html.fromHtml(data, Html.FROM_HTML_MODE_COMPACT));
         component.initZoomButtons(codeView); //zoom functionality
-        codeView.setOnClickListener(v -> Component.copyOnClick(codeArea, this)); //copy functionality
+        codeView.findViewById(R.id.copyButton).setOnClickListener(v -> Component.copyOnClick(codeArea, this)); //copy functionality
 
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbarClipSync);
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_clip_sync_root);
         NavigationView navigationView = findViewById(R.id.nav_view);
         toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -187,12 +187,20 @@ public class ClipSyncActivity extends ThemedActivity
     }
 
     /**
-     * Called when the user taps the download link. Opens the page.
+     * Called when the user taps the download link. Warns the user that this should be opened
+     * on their computer.
      */
     public void downloadButtonOnClick(@NonNull View view) {
-        Intent i = new Intent(Intent.ACTION_VIEW);
-        i.setData(Uri.parse(getString(R.string.download_link)));
-        startActivity(i);
+        new MaterialAlertDialogBuilder(this, ThemeUtils.getThemedDialogStyle())
+                .setTitle(R.string.get_started)
+                .setMessage(R.string.clip_sync_open_on_computer)
+                .setPositiveButton(R.string.yes, (dialogInterface, _i) -> {
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(getString(R.string.download_link)));
+                    startActivity(i);
+                })
+                .setNegativeButton(R.string.no, (dialogInterface, i) -> dialogInterface.dismiss())
+                .show();
     }
 
     /**
@@ -274,7 +282,7 @@ public class ClipSyncActivity extends ThemedActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_clip_sync_root);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -380,7 +388,7 @@ public class ClipSyncActivity extends ThemedActivity
 
     /**
      * Displays a dialog that indicates everything is find with bluetooth clip sync. This is called
-     * when the user selectes bluetooth clip sync (and every permission is granted).
+     * when the user selects bluetooth clip sync (and every permission is granted).
      */
     public void saveBluetoothClipSync() {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, ThemeUtils.getThemedDialogStyle());

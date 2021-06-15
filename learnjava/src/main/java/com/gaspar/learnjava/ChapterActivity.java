@@ -108,6 +108,7 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
             if(!confirmedWithScrolling) {
                 confirmedWithScrolling = true;
                 LogUtils.log("Chapter confirmed with scroll to bottom!");
+                //System.out.println("Chapter confirmed with scroll to bottom!");
                 passedChapter.markChapterAsCompleted(this); //mark as completed
             }
         });

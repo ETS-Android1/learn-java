@@ -68,7 +68,7 @@ public class TasksActivity extends ThemedActivity implements NavigationView.OnNa
     private void setUpUI() {
         loadTasks(); //load tasks
 
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbarExam);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);

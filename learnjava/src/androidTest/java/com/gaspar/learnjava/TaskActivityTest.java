@@ -72,9 +72,7 @@ public class TaskActivityTest {
         is started directly. So need to add the test task to the database manually.
          */
         if(LearnJavaDatabase.getInstance(context).getTaskDao().queryTaskStatus(TEST_TASK_ID) == null) {
-            TaskStatus testTaskStatus = new TaskStatus();
-            testTaskStatus.setTaskId(TEST_TASK_ID);
-            testTaskStatus.setStatus(Status.UNLOCKED);
+            TaskStatus testTaskStatus = new TaskStatus(TEST_TASK_ID, Status.UNLOCKED);
             LearnJavaDatabase.getInstance(context).getTaskDao().addTaskStatus(testTaskStatus);
         }
     }
@@ -168,9 +166,7 @@ public class TaskActivityTest {
         TaskStatus taskStatus = LearnJavaDatabase.getInstance(context).getTaskDao().queryTaskStatus(TEST_TASK_ID);
         Assert.assertEquals(Status.COMPLETED, taskStatus.getStatus());
         //move task back to unlocked status, other tests may need this
-        TaskStatus testTaskStatus = new TaskStatus();
-        testTaskStatus.setTaskId(TEST_TASK_ID);
-        testTaskStatus.setStatus(Status.UNLOCKED);
+        TaskStatus testTaskStatus = new TaskStatus(TEST_TASK_ID, Status.UNLOCKED);
         LearnJavaDatabase.getInstance(ApplicationProvider.getApplicationContext()).getTaskDao().updateTaskStatus(testTaskStatus);
     }
 

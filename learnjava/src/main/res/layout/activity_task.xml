@@ -68,6 +68,8 @@ android:fitsSystemWindows="true">
             <!-- scroll view of the task components -->
             <ScrollView
                 android:id="@+id/taskScroller"
+                android:visibility="gone"
+                tools:visibility="visible"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true">
@@ -94,6 +96,14 @@ android:fitsSystemWindows="true">
                     android:layout_height="wrap_content"
                     android:orientation="vertical" />
             </ScrollView>
+
+            <!-- loading indicator -->
+            <ProgressBar
+                android:id="@+id/taskProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:indeterminate="true"/>
         </RelativeLayout>
 
         <!-- Hide and show solution prompts -->

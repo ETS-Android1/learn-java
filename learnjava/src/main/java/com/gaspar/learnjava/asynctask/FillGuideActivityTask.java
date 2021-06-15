@@ -45,7 +45,7 @@ public class FillGuideActivityTask extends AsyncTask<GuideActivity, Void, FillGu
                 componentsLayout.addView(component.createComponentView(result.activity, componentsLayout));
             }
             final LayoutInflater inflater = LayoutInflater.from(result.activity);
-            View closeButton = inflater.inflate(R.layout.view_close_buide_button, componentsLayout, false);
+            View closeButton = inflater.inflate(R.layout.view_close_guide_button, componentsLayout, false);
             closeButton.setOnClickListener(result.activity::closeButtonOnClick);
             componentsLayout.addView(closeButton);
         } else {

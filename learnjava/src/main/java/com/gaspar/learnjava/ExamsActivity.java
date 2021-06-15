@@ -63,7 +63,7 @@ public class ExamsActivity extends ThemedActivity implements NavigationView.OnNa
     private void setUpUI() {
         new FillExamsActivityTask().execute(this); //add exam selectors
 
-        toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbarExam);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);

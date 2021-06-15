@@ -192,10 +192,12 @@ public class TextQuestion extends Question implements Serializable {
         if(isCorrect()) {
             ((ImageView)questionView.findViewById(R.id.questionIcon)).setImageResource(R.drawable.tick_icon);
             answerDisplayer.setBackgroundResource(R.drawable.correct_answer_background);
+            answerDisplayer.setTag(R.drawable.correct_answer_background); //tag is used in testing
         } else {
             if(!isAnswered()) answerDisplayer.setText(context.getString(R.string.no_answer_given));
             ((ImageView)questionView.findViewById(R.id.questionIcon)).setImageResource(R.drawable.problem_icon);
             answerDisplayer.setBackgroundResource(R.drawable.incorrect_background);
+            answerDisplayer.setTag(R.drawable.incorrect_background); //tag is used in testing
             questionView.findViewById(R.id.solutionDisplayerLayout).setVisibility(View.VISIBLE);
         }
     }

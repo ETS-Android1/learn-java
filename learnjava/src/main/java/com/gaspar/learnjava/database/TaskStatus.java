@@ -8,21 +8,34 @@ import androidx.room.PrimaryKey;
 import com.gaspar.learnjava.curriculum.Status;
 
 /**
- * Represents the table where task statuses are stored.
+ * Represents the table where task statuses are stored and can be used to
+ * modify this table.
+ * @see TaskDao
  */
 @Entity(tableName = "task_status")
 public class TaskStatus {
 
+    /**
+     * Id of the task.
+     */
     @PrimaryKey
     @ColumnInfo(name = "task_id")
     private int taskId;
 
+    /**
+     * Status of the task.
+     */
     @ColumnInfo(name = "status")
     @Status
     private int status;
 
     public TaskStatus() {}
 
+    /**
+     * Create an object which describes a task.
+     * @param taskId Id of the task.
+     * @param status Status of the task.
+     */
     @Ignore
     public TaskStatus(int taskId, @Status int status) {
         this.taskId = taskId;

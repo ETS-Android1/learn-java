@@ -8,10 +8,15 @@ import com.gaspar.learnjava.curriculum.Status;
 
 /**
  * Operations for querying and manipulating course data.
+ * @see CourseStatus
  */
 @Dao
 public interface CourseDao {
 
+    /**
+     * Add a new course to the database.
+     * @param courseStatus The object that describes the course.
+     */
     @Insert
     void addCourseStatus(CourseStatus courseStatus);
 
@@ -19,7 +24,9 @@ public interface CourseDao {
     void updateCourseStatus(int courseId, @Status int newStatus);
 
     /**
-     * Query the status using the course id.
+     * Query the status of a course using the course id.
+     * @param courseId The id.
+     * @return Object that describes the course, or null if none was found with the id.
      */
     @Query("SELECT * FROM course_status WHERE course_id == :courseId")
     CourseStatus queryCourseStatus(int courseId);
@@ -29,6 +36,9 @@ public interface CourseDao {
     int countCourses();
     */
 
+    /**
+     * Clears the course table in the database.
+     */
     @Query("DELETE FROM course_status")
     void deleteRecords();
 }

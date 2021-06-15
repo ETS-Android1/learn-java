@@ -8,21 +8,29 @@ import androidx.room.PrimaryKey;
 import com.gaspar.learnjava.curriculum.Status;
 
 /**
- * Represents the table that stores information about the exams.
+ * Represents the table that stores information about the exams, and can be used to
+ * modify this table.
+ * @see ExamDao
  */
 @Entity(tableName = "exam_status")
 public class ExamStatus {
 
+    /**
+     * Id of the exam.
+     */
     @PrimaryKey
     @ColumnInfo(name = "exam_id")
     private int examId;
 
+    /**
+     * Status of the exam.
+     */
     @ColumnInfo(name = "status")
     @Status
     private int status;
 
     /**
-     * Stores the last time the exam was started using Epoch time. If this exam was never started
+     * Stores the last time the exam was started as a UNIX timestamp. If this exam was never started
      * then {@value com.gaspar.learnjava.curriculum.Exam#EXAM_NEVER_STARTED} is stored.
      */
     @ColumnInfo(name = "last_started")
@@ -37,6 +45,15 @@ public class ExamStatus {
 
     ExamStatus() {}
 
+    /**
+     * Create an exam status object which describes an exam.
+     * @param examId Id of the exam.
+     * @param status Status of the exam.
+     * @param lastStarted When the exam was last started. If this exam was never started
+     * then {@value com.gaspar.learnjava.curriculum.Exam#EXAM_NEVER_STARTED} should be used.
+     * @param topScore Top score reached in the exam. If this exam was never started
+     * then {@value com.gaspar.learnjava.curriculum.Exam#EXAM_NEVER_STARTED} should be used.
+     */
     @Ignore
     public ExamStatus(int examId, @Status int status, long lastStarted, int topScore) {
         this.examId = examId;

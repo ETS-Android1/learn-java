@@ -79,7 +79,8 @@
     <string name="clip_sync_misc_error">Nem találtam a segéd alkalmazást! Ellenőrizd, hogy elindítottad a számítógépeden, kiválaszottad a Bluetooth módot, és zöld pipát mutat!</string>
     <string name="clip_sync_location">Ez az engedély szükséges a Bluetooth-os adatküldéshez! Kérlek engedélyezd.</string>
     <string name="clip_sync_location_denied">Enélkül az engedély nélkül nem lehet használni a Bluetooth-os módot!</string>
-    <string name="scanning_device">Eszköt szkennelése</string>
+    <string name="scanning_device">Eszköz szkennelése</string>
+    <string name="clip_sync_open_on_computer">Ezt a linket a számítógépeden nyisd meg! Meg akarod nyitni itt is?</string>
 
     <!-- Notification data -->
     <string name="notification_exam_ready">Egy vizsga készen áll</string>
@@ -150,7 +151,7 @@
     <string name="copy_successful">Kimásolva a vágólapra!</string>
     <string name="copy_failed">Nem sikerült kimásolni!</string>
     <string name="advanced">NEHEZEBB RÉSZ</string>
-    <string name="confirm_chapter">Fejezet befejezése</string>
+    <string name="close_chapter">Fejezet befejezése</string>
     <string name="image_component_desc">Kép</string>
     <string name="zoom_in">Zoomolás</string>
     <string name="zoom_out">Kizoomolás</string>

@@ -64,12 +64,24 @@ public abstract class LearnJavaDatabase extends RoomDatabase {
         return instance;
     }
 
+    /**
+     * @return An object which is used to modify the course table.
+     */
     public abstract CourseDao getCourseDao();
 
+    /**
+     * @return An object which is used to modify the chapter table.
+     */
     public abstract ChapterDao getChapterDao();
 
+    /**
+     * @return An object which is used to modify the task table.
+     */
     public abstract TaskDao getTaskDao();
 
+    /**
+     * @return An object which is used to modify the exam table.
+     */
     public abstract ExamDao getExamDao();
 
     /**
