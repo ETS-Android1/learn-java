@@ -23,32 +23,30 @@ import java.util.regex.Pattern;
 /**
  * Represents a question with text answers.
  * If the ignoreCase tag is present, then the question is not case sensitive.
- <p>
- *  Text question XML structure:
- *   {@code
- *   <resources>
- *           <question type="text">
- *           <text>*text of the question*</text>
- *           <correct>*An accepted answer*</correct>
- *           ...
- *           <correct>*Another accepted answer*</correct>
- *           <ignoreSpace/> (optional)
- *           <ignoreCase/> (optional)
- *    </question>
- *  </resources>
- *  }
- *  </p>
- *  <p>
- *      <h2>ignoreSpace tag</h2>
- *      If this tag is present, then spaces at certain positions are ignored. The positions where the user
- *      is allowed to place any number of spaces are marked with a space in the correct answer. For example:
- *      <br><br>
- *      {@code <correct>int[s]x = 5;</correct>}
- *      <br><br>
- *      In this case the user can place as many spaces between x, =, and 5 as they want. Some spaces in the answer
- *      can be made mandatory using {@link #DO_NOT_IGNORE_SPACE} ([s]). In the example above, the user must write
- *      a space between int and x.
- *  </p>
+ * <p>
+ * Text question XML structure:
+ * <pre>
+ * {@code
+ * <question type="text">
+ *      <text>*text of the question*</text>
+ *      <correct>*An accepted answer*</correct>
+ *      ...
+ *      <correct>*Another accepted answer*</correct>
+ *      <ignoreSpace/> (optional)
+ *      <ignoreCase/> (optional)
+ * </question>
+ * }
+ * </pre>
+ * <p>
+ * <h2>ignoreSpace tag</h2>
+ * If this tag is present, then spaces at certain positions are ignored. The positions where the user
+ * is allowed to place any number of spaces are marked with a space in the correct answer. For example:
+ * <br><br>
+ * {@code <correct>int[s]x = 5;</correct>}
+ * <br><br>
+ * In this case the user can place as many spaces between x, =, and 5 as they want. Some spaces in the answer
+ * can be made mandatory using {@link #DO_NOT_IGNORE_SPACE} ([s]). In the example above, the user must write
+ * a space between int and x.
  */
 public class TextQuestion extends Question implements Serializable {
 
@@ -81,6 +79,14 @@ public class TextQuestion extends Question implements Serializable {
      */
     private final boolean ignoreCase;
 
+    /**
+     * Creates a text question object.
+     * @param text Text of the question.
+     * @param correctAnswers Accepted answers.
+     * @param ignoreSpace If the question ignores space differences, except where it is important.
+     * @param ignoreCase If the question ignores case differences.
+     * @throws RuntimeException If the question is invalid.
+     */
     public TextQuestion(String text, List<String> correctAnswers, boolean ignoreSpace, boolean ignoreCase) {
         super(QuestionType.TEXT, text);
         if(!ignoreSpace && correctAnswers.stream().anyMatch(answer -> answer.contains(DO_NOT_IGNORE_SPACE))) {
@@ -92,6 +98,9 @@ public class TextQuestion extends Question implements Serializable {
         enteredAnswer = "";
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public View createQuestionView(Context context, ViewGroup parent) {
         final LayoutInflater inflater = LayoutInflater.from(context);
@@ -129,6 +138,9 @@ public class TextQuestion extends Question implements Serializable {
         questionView.findViewById(R.id.questionSep2).setBackgroundColor(accent);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isAnswered() {
         return !enteredAnswer.equals("");
@@ -202,6 +214,9 @@ public class TextQuestion extends Question implements Serializable {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void lockQuestion() {
         questionView.findViewById(R.id.answerEditText).setEnabled(false);

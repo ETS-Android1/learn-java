@@ -183,7 +183,6 @@ public class ExamActivity extends ThemedActivity {
 
     /**
      * Creates the unanswered questions warning view.
-     *
      * @param unansweredQuestions The number of unanswered questions.
      */
     @Nullable

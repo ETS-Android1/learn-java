@@ -26,6 +26,7 @@ import org.hamcrest.Matcher;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
@@ -40,6 +41,7 @@ import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.RootMatchers.isDialog;
+import static androidx.test.espresso.matcher.ViewMatchers.hasChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withEffectiveVisibility;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -133,8 +135,9 @@ public class ExamActivityTest {
             rule.getScenario().onActivity(activity -> questionViewIds = activity.getQuestionViewIds());
         } else {
             ExamActivity.disableConfirmFinishWarning = false;
-            questionViewIds = null;
         }
+        //get question view IDs
+        rule.getScenario().onActivity(activity -> questionViewIds = activity.getQuestionViewIds());
     }
 
     @After
@@ -145,6 +148,12 @@ public class ExamActivityTest {
     @Test
     public void testExamActivityVisible() {
         onView(withId(R.id.exam_root)).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testAllQuestionsAdded() {
+        int questionAmount = testExamParsed.getQuestionAmount();
+        onView(withId(R.id.questionsLayout)).check(matches(hasChildCount(questionAmount)));
     }
 
     @Test
@@ -389,5 +398,184 @@ public class ExamActivityTest {
         onView(allOf(withId(R.id.answerDisplayerTextView), withParent(questionViewMatcher))).check(matches(withTagValue(is(R.drawable.incorrect_background))));
         //correct solution displayed: not using 'isDisplayed' because it is possible that it wont scroll that far down and it wont be displayed, despite being there
         onView(allOf(withId(R.id.possibleSolutionTextView), withParent(withParent(questionViewMatcher)))).check(matches(withEffectiveVisibility(ViewMatchers.Visibility.VISIBLE)));
+    }
+
+    //single choice question: correct
+    @Test
+    public void testQuestionSingleChoiceCorrect() {
+        //index of this question
+        int index = 4;
+        //matches the question view
+        final Matcher<View> questionViewMatcher = withId(questionViewIds.get(index));
+        //does question type match?
+        Assert.assertEquals(Question.QuestionType.SINGLE_CHOICE, testExamParsed.getQuestions().get(index).getType());
+        //scroll there and fill the answer
+        onView(questionViewMatcher).perform(scrollTo());
+        //click the correct answer
+        final Matcher<View> answerLayoutMatcher = allOf(withId(R.id.answersLayout), withParent(questionViewMatcher));
+        onView(AndroidTestUtils.nthChildOf(answerLayoutMatcher, 1)).perform(click());
+        //finish exam (there wont be confirm dialog, disabled for these tests)
+        onView(withId(R.id.finishExamButton)).perform(click());
+        //check from the question icon
+        onView(allOf(withId(R.id.questionIcon), withParent(withParent(questionViewMatcher)))).check(matches(withTagValue(is(R.drawable.tick_icon))));
+    }
+
+    //single choice question: incorrect
+    @Test
+    public void testQuestionSingleChoiceIncorrect() {
+        //index of this question
+        int index = 4;
+        //matches the question view
+        final Matcher<View> questionViewMatcher = withId(questionViewIds.get(index));
+        //does question type match?
+        Assert.assertEquals(Question.QuestionType.SINGLE_CHOICE, testExamParsed.getQuestions().get(index).getType());
+        //scroll there and fill the answer
+        onView(questionViewMatcher).perform(scrollTo());
+        //click an incorrect answer
+        final Matcher<View> answerLayoutMatcher = allOf(withId(R.id.answersLayout), withParent(questionViewMatcher));
+        onView(AndroidTestUtils.nthChildOf(answerLayoutMatcher, 0)).perform(click());
+        //finish exam (there wont be confirm dialog, disabled for these tests)
+        onView(withId(R.id.finishExamButton)).perform(click());
+        //check from the question icon
+        onView(allOf(withId(R.id.questionIcon), withParent(withParent(questionViewMatcher)))).check(matches(withTagValue(is(R.drawable.problem_icon))));
+    }
+
+    //multi choice question: correct
+    @Test
+    public void testQuestionMultiChoiceCorrect() {
+        //index of this question
+        int index = 5;
+        //matches the question view
+        final Matcher<View> questionViewMatcher = withId(questionViewIds.get(index));
+        //does question type match?
+        Assert.assertEquals(Question.QuestionType.MULTI_CHOICE, testExamParsed.getQuestions().get(index).getType());
+        //scroll there and fill the answer
+        onView(questionViewMatcher).perform(scrollTo());
+        //click the correct answer, there are 2 of them
+        final Matcher<View> answerLayoutMatcher = allOf(withId(R.id.answersLayout), withParent(questionViewMatcher));
+        onView(AndroidTestUtils.nthChildOf(answerLayoutMatcher, 0)).perform(click());
+        onView(AndroidTestUtils.nthChildOf(answerLayoutMatcher, 2)).perform(click());
+        //finish exam (there wont be confirm dialog, disabled for these tests)
+        onView(withId(R.id.finishExamButton)).perform(click());
+        //check from the question icon
+        onView(allOf(withId(R.id.questionIcon), withParent(withParent(questionViewMatcher)))).check(matches(withTagValue(is(R.drawable.tick_icon))));
+    }
+
+    //multi choice question: incorrect
+    @Test
+    public void testQuestionMultiChoiceIncorrect() {
+        //index of this question
+        int index = 5;
+        //matches the question view
+        final Matcher<View> questionViewMatcher = withId(questionViewIds.get(index));
+        //does question type match?
+        Assert.assertEquals(Question.QuestionType.MULTI_CHOICE, testExamParsed.getQuestions().get(index).getType());
+        //scroll there and fill the answer
+        onView(questionViewMatcher).perform(scrollTo());
+        //click some answers, NOT ALL of them are correct.
+        final Matcher<View> answerLayoutMatcher = allOf(withId(R.id.answersLayout), withParent(questionViewMatcher));
+        onView(AndroidTestUtils.nthChildOf(answerLayoutMatcher, 0)).perform(click());
+        onView(AndroidTestUtils.nthChildOf(answerLayoutMatcher, 1)).perform(click());
+        //finish exam (there wont be confirm dialog, disabled for these tests)
+        onView(withId(R.id.finishExamButton)).perform(click());
+        //check from the question icon
+        onView(allOf(withId(R.id.questionIcon), withParent(withParent(questionViewMatcher)))).check(matches(withTagValue(is(R.drawable.problem_icon))));
+    }
+
+    @Test
+    public void testQuestionTrueFalseCorrect() {
+        //index of this question
+        int index = 6;
+        //matches the question view
+        final Matcher<View> questionViewMatcher = withId(questionViewIds.get(index));
+        //does question type match?
+        Assert.assertEquals(Question.QuestionType.TRUE_OR_FALSE, testExamParsed.getQuestions().get(index).getType());
+        //scroll there and fill the answer
+        onView(questionViewMatcher).perform(scrollTo());
+        //click the correct, which is true
+        onView(allOf(withId(R.id.trueTextView), withParent(withParent(questionViewMatcher)))).perform(click());
+        //finish exam (there wont be confirm dialog, disabled for these tests)
+        onView(withId(R.id.finishExamButton)).perform(click());
+        //check from the question icon
+        onView(allOf(withId(R.id.questionIcon), withParent(withParent(questionViewMatcher)))).check(matches(withTagValue(is(R.drawable.tick_icon))));
+    }
+
+    @Test
+    public void testQuestionTrueFalseIncorrect() {
+        //index of this question
+        int index = 6;
+        //matches the question view
+        final Matcher<View> questionViewMatcher = withId(questionViewIds.get(index));
+        //does question type match?
+        Assert.assertEquals(Question.QuestionType.TRUE_OR_FALSE, testExamParsed.getQuestions().get(index).getType());
+        //scroll there and fill the answer
+        onView(questionViewMatcher).perform(scrollTo());
+        //click the incorrect, which is false
+        onView(allOf(withId(R.id.falseTextView), withParent(withParent(questionViewMatcher)))).perform(click());
+        //finish exam (there wont be confirm dialog, disabled for these tests)
+        onView(withId(R.id.finishExamButton)).perform(click());
+        //check from the question icon
+        onView(allOf(withId(R.id.questionIcon), withParent(withParent(questionViewMatcher)))).check(matches(withTagValue(is(R.drawable.problem_icon))));
+    }
+
+    //fills all the correct answers and check the result
+    @Test
+    public void testCompletelyCorrectExam() {
+        //answer text answers (4 of them)
+        Matcher<View> questionViewMatcher = withId(questionViewIds.get(0));
+        onView(questionViewMatcher).perform(scrollTo());
+        onView(allOf(withId(R.id.answerEditText), withParent(questionViewMatcher))).perform(typeText("hello"));
+        questionViewMatcher = withId(questionViewIds.get(1));
+        onView(questionViewMatcher).perform(scrollTo());
+        onView(allOf(withId(R.id.answerEditText), withParent(questionViewMatcher))).perform(typeText("hElLo"));
+        questionViewMatcher = withId(questionViewIds.get(2));
+        onView(questionViewMatcher).perform(scrollTo());
+        onView(allOf(withId(R.id.answerEditText), withParent(questionViewMatcher))).perform(typeText("hello1 world"));
+        questionViewMatcher = withId(questionViewIds.get(3));
+        onView(questionViewMatcher).perform(scrollTo());
+        onView(allOf(withId(R.id.answerEditText), withParent(questionViewMatcher))).perform(typeText("hEllO1 WorLd"));
+        //answer single choice
+        questionViewMatcher = withId(questionViewIds.get(4));
+        onView(questionViewMatcher).perform(scrollTo());
+        Matcher<View> answerLayoutMatcher = allOf(withId(R.id.answersLayout), withParent(questionViewMatcher));
+        onView(AndroidTestUtils.nthChildOf(answerLayoutMatcher, 1)).perform(click());
+        //answer multi choice
+        questionViewMatcher = withId(questionViewIds.get(5));
+        onView(questionViewMatcher).perform(scrollTo());
+        answerLayoutMatcher = allOf(withId(R.id.answersLayout), withParent(questionViewMatcher));
+        onView(AndroidTestUtils.nthChildOf(answerLayoutMatcher, 0)).perform(click());
+        onView(AndroidTestUtils.nthChildOf(answerLayoutMatcher, 2)).perform(click());
+        //answer true false
+        questionViewMatcher = withId(questionViewIds.get(6));
+        onView(questionViewMatcher).perform(scrollTo());
+        onView(allOf(withId(R.id.trueTextView), withParent(withParent(questionViewMatcher)))).perform(click());
+        //finish exam and accept confirm dialog
+        onView(withId(R.id.finishExamButton)).perform(click());
+        onView(withText(R.string.confirm_finish_exam)).inRoot(isDialog()).check(matches(isDisplayed()));
+        onView(withId(AndroidTestUtils.DialogButtonId.POSITIVE.getId())).perform(click());
+        //exam is evaluated
+        int nQuestions = testExamParsed.getQuestionAmount();
+        String pointsText = nQuestions + "/" + nQuestions + " " + ApplicationProvider.getApplicationContext().getString(R.string.points);
+        onView(withText(pointsText)).check(matches(isDisplayed()));
+    }
+
+    /*
+    Lets the exam time run out (minimum exam time is 1 minutes).
+    This test is ignored by default as it is really slow, but it passes.
+     */
+    @Test
+    @Ignore("Takes very long, but it passes.")
+    public void testExamTimeExpire() throws InterruptedException {
+        //wait for loading
+        InstrumentationRegistry.getInstrumentation().waitForIdleSync();
+        //wait for time expire: sadly the minimum time is 1 minute
+        Thread.sleep(61000);
+        //info dialog
+        onView(withText(R.string.exam_time_expired)).inRoot(isDialog()).check(matches(isDisplayed()));
+        onView(withId(AndroidTestUtils.DialogButtonId.POSITIVE.getId())).perform(click());
+        //exam should be evaluated
+        int nQuestions = testExamParsed.getQuestionAmount();
+        String pointsText = 0 + "/" + nQuestions + " " + ApplicationProvider.getApplicationContext().getString(R.string.points);
+        onView(withText(pointsText)).check(matches(isDisplayed()));
     }
 }

@@ -19,22 +19,19 @@ import java.util.List;
 
 /**
  * Represents a single choice question.
- *
  * <p>
- *  Example for single choice question XML structure:
- *  {@code
- *  <resources>
- *          <question type="single_choice">
- *          <text>*text of the question*</text>
- *          <answer>*an answer*</answer>
- *          ...
- *          <answer>*an answer*</answer>
- *          <correct>*index of correct answer*</correct>
- *     </question>
- *  </resources>
- *  }
- * </p>
- *
+ * Example for single choice question XML structure:
+ * <pre>
+ * {@code
+ * <question type="single_choice">
+ *      <text>*text of the question*</text>
+ *      <answer>*an answer*</answer>
+ *      ...
+ *      <answer>*an answer*</answer>
+ *      <correct>*index of correct answer*</correct>
+ * </question>
+ * }
+ * </pre>
  * @see Question
  */
 public class SingleChoiceQuestion extends Question implements Serializable {
@@ -42,15 +39,15 @@ public class SingleChoiceQuestion extends Question implements Serializable {
     /**
      * Answers of the question.
      */
-    private List<String> answers;
+    private final List<String> answers;
 
     /**
-     * Index of the correct answer.
+     * Index of the correct answer, 0 based.
      */
     private final int correctAnswerIndex;
 
     /**
-     * Constant that indicated that no answer has been selected.
+     * Constant that indicates that no answer has been selected.
      */
     private static final int NO_ANSWER_SELECTED = -1;
 
@@ -59,6 +56,12 @@ public class SingleChoiceQuestion extends Question implements Serializable {
      */
     private int selectedAnswerIndex;
 
+    /**
+     * Creates a single choice question object.
+     * @param text Text of the question.
+     * @param answers List of possible answers.
+     * @param correctAnswerIndex The index of the current answer, 0 based.
+     */
     public SingleChoiceQuestion(String text, List<String> answers, int correctAnswerIndex) {
         super(QuestionType.SINGLE_CHOICE, text);
         this.answers = answers;
@@ -67,10 +70,7 @@ public class SingleChoiceQuestion extends Question implements Serializable {
     }
 
     /**
-     * Creates a question view specially for single choice questions.
-     *
-     * @param parent The view group this question view will be added. This method DOES NOT add the
-     *               inflated view.
+     * {@inheritDoc}
      */
     @Override
     public View createQuestionView(Context context, ViewGroup parent) {
@@ -91,7 +91,7 @@ public class SingleChoiceQuestion extends Question implements Serializable {
         }
         if(ThemeUtils.isDarkTheme()) {
             recolorSeparator(questionView, context);
-            questionView.setBackground(context.getDrawable(R.drawable.question_background_dark));
+            questionView.setBackground(ContextCompat.getDrawable(context, R.drawable.question_background_dark));
         }
         return questionView;
     }
@@ -104,11 +104,17 @@ public class SingleChoiceQuestion extends Question implements Serializable {
         questionView.findViewById(R.id.questionSep1).setBackgroundColor(accent);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isAnswered() {
         return selectedAnswerIndex != NO_ANSWER_SELECTED;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isCorrect() {
         return selectedAnswerIndex == correctAnswerIndex;
@@ -130,8 +136,10 @@ public class SingleChoiceQuestion extends Question implements Serializable {
         if(isAnswered()) { //question as been answered
             if(isCorrect()) { //answered correctly
                 iconView.setImageResource(R.drawable.tick_icon);
+                iconView.setTag(R.drawable.tick_icon);
             } else { //incorrect
                 iconView.setImageResource(R.drawable.problem_icon);
+                iconView.setTag(R.drawable.problem_icon);
                 //mark incorrect answer with red
                 RadioButton wrongButton = (RadioButton)answersLayout.getChildAt(selectedAnswerIndex);
                 wrongButton.setBackgroundResource(R.drawable.incorrect_background);
@@ -143,6 +151,9 @@ public class SingleChoiceQuestion extends Question implements Serializable {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void lockQuestion() {
         RadioGroup answersLayout = questionView.findViewById(R.id.answersLayout);

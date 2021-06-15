@@ -3,8 +3,8 @@
 <resources>
     <examdata>
         <id>100000</id>
-        <questionAmount>8</questionAmount>
-        <timeLimit>10</timeLimit>
+        <questionAmount>7</questionAmount>
+        <timeLimit>1</timeLimit>
         <finished>true</finished>
     </examdata>
     <question type="text">
@@ -44,11 +44,7 @@
         <correct>2</correct>
     </question>
     <question type="true_false">
-        <text>question_true_false_correct_true</text>
+        <text>question_true_false</text>
         <correct>true</correct>
-    </question>
-    <question type="true_false">
-        <text>question_true_false_correct_false</text>
-        <correct>false</correct>
     </question>
 </resources>

@@ -21,41 +21,46 @@ import java.util.Set;
 
 /**
  * Represents a multi choice question.
- *
- *  <p>
- *  Example for multi choice question XML structure:
- *   {@code
- *   <resources>
- *           <question type="multi_choice">
- *           <text>*text of the question*</text>
- *           <answer>*an answer*</answer>
- *           ...
- *           <answer>*an answer*</answer>
- *           <correct>*index of correct answer*</correct>
- *           ...
- *           <correct>*index of another correct answer*</correct>
- *    </question>
- *  </resources>
- *  }
- *  </p>
+ * <p>
+ * Example for multi choice question XML structure:
+ * <pre>
+ * {@code
+ * <question type="multi_choice">
+ *      <text>*text of the question*</text>
+ *      <answer>*an answer*</answer>
+ *      ...
+ *      <answer>*an answer*</answer>
+ *      <correct>*index of correct answer*</correct>
+ *      ...
+ *      <correct>*index of another correct answer*</correct>
+ * </question>
+ * }
+ * </pre>
  */
 public class MultiChoiceQuestion extends Question implements Serializable {
 
     /**
      * Answers to this question.
      */
-    private List<String> answers;
+    private final List<String> answers;
 
     /**
-     * Indices of the correct answer.
+     * Indices of the correct answers.
      */
-    private Set<Integer> correctAnswerIndices;
+    private final Set<Integer> correctAnswerIndices;
 
     /**
      * Indices of the selected answers. Initially empty.
      */
-    private Set<Integer> selectedAnswerIndices;
+    private final Set<Integer> selectedAnswerIndices;
 
+    /**
+     * Creates a multi choice question object.
+     * @param text Text of the question.
+     * @param answers Possible answers to this question.
+     * @param correctAnswerIndices Indices of the correct answers.
+     * @throws IllegalArgumentException If the question is invalid, for example no correct answers.
+     */
     public MultiChoiceQuestion(String text, List<String> answers, Set<Integer> correctAnswerIndices)
         throws IllegalArgumentException {
         super(QuestionType.MULTI_CHOICE, text);
@@ -67,6 +72,9 @@ public class MultiChoiceQuestion extends Question implements Serializable {
         selectedAnswerIndices = new HashSet<>();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public View createQuestionView(Context context, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -89,7 +97,7 @@ public class MultiChoiceQuestion extends Question implements Serializable {
         }
         if(ThemeUtils.isDarkTheme()) {
             recolorSeparators(questionView, context);
-            questionView.setBackground(context.getDrawable(R.drawable.question_background_dark));
+            questionView.setBackground(ContextCompat.getDrawable(context, R.drawable.question_background_dark));
         }
         return questionView;
     }
@@ -103,20 +111,35 @@ public class MultiChoiceQuestion extends Question implements Serializable {
         questionView.findViewById(R.id.questionSep2).setBackgroundColor(accent);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isAnswered() {
         return !selectedAnswerIndices.isEmpty();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isCorrect() {
         return selectedAnswerIndices.equals(correctAnswerIndices);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showCorrectAnswer() {
-        ((ImageView)questionView.findViewById(R.id.questionIcon)).setImageResource(
-                isCorrect() ? R.drawable.tick_icon : R.drawable.problem_icon);
+        ImageView questionIcon = questionView.findViewById(R.id.questionIcon);
+        if(isCorrect()) {
+            questionIcon.setImageResource(R.drawable.tick_icon);
+            questionIcon.setTag(R.drawable.tick_icon);
+        } else {
+            questionIcon.setImageResource(R.drawable.problem_icon);
+            questionIcon.setTag(R.drawable.problem_icon);
+        }
         LinearLayout answersLayout = questionView.findViewById(R.id.answersLayout);
         for(int i=0; i<answersLayout.getChildCount(); i++) {
             if(correctAnswerIndices.contains(i)) { //mark the correct answers with green
@@ -135,6 +158,9 @@ public class MultiChoiceQuestion extends Question implements Serializable {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void lockQuestion() {
         LinearLayout answersLayout = questionView.findViewById(R.id.answersLayout);

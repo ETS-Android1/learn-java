@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.IdRes;
@@ -15,6 +16,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
 
 import java.util.function.Predicate;
 
@@ -131,6 +133,7 @@ public abstract class AndroidTestUtils {
      * Returns a matcher that matches a descendant of {@link TextView} that is
      * displaying the string.
      * @param text The string the text view is expected to hold. No exact match needed, only substring.
+     * @see <a href="https://stackoverflow.com/a/30364342/4925616">Source: stackoverflow answer</a>
      */
     public static Matcher<View> withSpannableText(@NonNull final String text) {
         return new BoundedMatcher<View, TextView>(TextView.class) {
@@ -151,6 +154,7 @@ public abstract class AndroidTestUtils {
      * Custom matcher that matches text views with a given font size. Size is in pixels.
      * @param expectedSize The expected size, in pixels.
      * @return The matcher.
+     * @see <a href="https://stackoverflow.com/a/50840903/4925616">Source: stackoverflow answer</a>
      */
     public static Matcher<View> withFontSize(final int expectedSize) {
         return new BoundedMatcher<View, View>(View.class) {
@@ -169,6 +173,33 @@ public abstract class AndroidTestUtils {
             public void describeTo(Description description) {
                 description.appendText("with fontSize: ");
                 description.appendValue(expectedSize);
+            }
+        };
+    }
+
+    /**
+     * Creates a matcher that can find a child view by index.
+     * @param parentMatcher The matcher for the parent view, in which to look for the child view.
+     * @param childPosition The index of the child.
+     * @return A matcher for the selected child view.
+     * @see <a href="https://stackoverflow.com/a/35899479/4925616">Source: stackoverflow answer</a>
+     */
+    public static Matcher<View> nthChildOf(final Matcher<View> parentMatcher, final int childPosition) {
+        return new TypeSafeMatcher<View>() {
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("position " + childPosition + " of parent ");
+                parentMatcher.describeTo(description);
+            }
+
+            @Override
+            public boolean matchesSafely(View view) {
+                if (!(view.getParent() instanceof ViewGroup)) return false;
+                ViewGroup parent = (ViewGroup) view.getParent();
+
+                return parentMatcher.matches(parent)
+                        && parent.getChildCount() > childPosition
+                        && parent.getChildAt(childPosition).equals(view);
             }
         };
     }

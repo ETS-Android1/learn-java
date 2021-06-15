@@ -9,22 +9,17 @@ import androidx.annotation.IntDef;
 import java.io.Serializable;
 
 /**
- * <p>
- *   Represents an exam question. Exam questions can have the following types:
- *    <ul>
+ * Represents an exam question. Exam questions can have the following types:
+ * <ul>
  *         <li>Single choice (single_choice, {@value SINGLE_CHOICE_TAG})</li>
  *         <li>Multi choice (multi_choice, {@value MULTI_CHOICE_TAG})</li>
  *         <li>True of false (true_or_false, {@value TRUE_FALSE_TAG})</li>
  *         <li>Text (text, {@value TEXT_TAG})</li>
- *    </ul>
- *   Each type has it's own subclass.
- * </p>
- *
- *  <p>
- *      Questions are stored in XML, in the exam XML files, inside question tags. To see the XML
- *      structure for each type of questions, see the subclasses' documentations.
- *  </p>
- *
+ * </ul>
+ * Each type has it's own subclass.
+ * <p>
+ * Questions are stored in XML, in the exam XML files, inside question tags. To see the XML
+ * structure for each type of questions, see the subclasses' documentations.
  * @see SingleChoiceQuestion
  * @see MultiChoiceQuestion
  * @see TrueOrFalseQuestion
@@ -75,9 +70,8 @@ public abstract class Question implements Serializable {
     }
 
     /**
-     * Creates a view that displays this question and the possible answers. Selecting answers
+     * Creates a view that displays this question and the possible answers. Selecting or typing answers
      * using the view will modify the Question object. This method should assign {@link #questionView}.
-     *
      * @param parent The view group this question view will be added. This method DOES NOT add the
      *               inflated view.
      * @return The created view.
@@ -85,17 +79,17 @@ public abstract class Question implements Serializable {
     public abstract View createQuestionView(Context context, ViewGroup parent);
 
     /**
-     * @return True only if the user has selected an answer.
+     * @return True only if the user has selected or typed an answer.
      */
     public abstract boolean isAnswered();
 
     /**
-     * @return True only if the correct answer has been selected.
+     * @return True only if the correct answer has been selected or typed.
      */
     public abstract boolean isCorrect();
 
     /**
-     * Uses {@link #questionView} to show if the selected answer was correct or not.
+     * Uses {@link #questionView} to show if the selected answer (or answers) was/were correct or not.
      */
     public abstract void showCorrectAnswer();
 
@@ -112,7 +106,6 @@ public abstract class Question implements Serializable {
 
     /**
      * Converts strings to question type constants.
-     *
      * @param typeString The string that will be converted.
      * @return The question type, or null if no type was found for the string.
      */

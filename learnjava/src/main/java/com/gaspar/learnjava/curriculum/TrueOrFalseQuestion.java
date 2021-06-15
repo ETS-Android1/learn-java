@@ -19,25 +19,23 @@ import java.io.Serializable;
 
 /**
  * Represents a true of false question.
- *
  * <p>
- *  Example for a true-or-false question XML structure:
- *  {@code
- *  <resources>
- *         <question type="true_false">
- *         <text>*text of the question*</text>
- *         <correct>true OR false</correct>
- *     </question>
- *  </resources>
- *  }
- *  </p>
+ * Example for a true-or-false question XML structure:
+ * <pre>
+ * {@code
+ * <question type="true_false">
+ *     <text>*text of the question*</text>
+ *     <correct>true OR false</correct>
+ * </question>
+ * }
+ * </pre>
  */
 public class TrueOrFalseQuestion extends Question implements Serializable {
 
     /**
      * Stores if the answer is true or not.
      */
-    private boolean trueAnswer;
+    private final boolean trueAnswer;
 
     /**
      * Constants for storing the selected value.
@@ -55,6 +53,11 @@ public class TrueOrFalseQuestion extends Question implements Serializable {
     @SelectedValues
     private int selectedValue;
 
+    /**
+     * Creates a true-false question object.
+     * @param text The text of the question.
+     * @param trueAnswer If the answer is true.
+     */
     public TrueOrFalseQuestion(String text, boolean trueAnswer) {
         super(QuestionType.TRUE_OR_FALSE, text);
         this.trueAnswer = trueAnswer;
@@ -66,6 +69,9 @@ public class TrueOrFalseQuestion extends Question implements Serializable {
      */
     private Animation tickAnimation;
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public View createQuestionView(Context context, ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(context);
@@ -91,16 +97,22 @@ public class TrueOrFalseQuestion extends Question implements Serializable {
             int black = ContextCompat.getColor(context, android.R.color.black);
             trueTextView.setTextColor(black);
             falseTextView.setTextColor(black);
-            questionView.setBackground(context.getDrawable(R.drawable.question_background_dark));
+            questionView.setBackground(ContextCompat.getDrawable(context, R.drawable.question_background_dark));
         }
         return questionView;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isAnswered() {
         return selectedValue != SelectedValues.NOT_SELECTED;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isCorrect() {
         if(trueAnswer) {
@@ -110,6 +122,9 @@ public class TrueOrFalseQuestion extends Question implements Serializable {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showCorrectAnswer() {
         TextView trueTextView = questionView.findViewById(R.id.trueTextView);
@@ -119,9 +134,18 @@ public class TrueOrFalseQuestion extends Question implements Serializable {
             (trueAnswer ? falseTextView : trueTextView).setBackgroundResource(R.drawable.incorrect_background);
         }
         ImageView icon = questionView.findViewById(R.id.questionIcon);
-        icon.setImageResource(isCorrect() ? R.drawable.tick_icon : R.drawable.problem_icon);
+        if (isCorrect()) {
+            icon.setImageResource(R.drawable.tick_icon);
+            icon.setTag(R.drawable.tick_icon);
+        } else {
+            icon.setImageResource(R.drawable.problem_icon);
+            icon.setTag(R.drawable.problem_icon);
+        }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void lockQuestion() {
         TextView trueTextView = questionView.findViewById(R.id.trueTextView);
