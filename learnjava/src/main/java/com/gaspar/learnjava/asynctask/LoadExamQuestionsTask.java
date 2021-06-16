@@ -11,7 +11,7 @@ import com.gaspar.learnjava.ExamActivity;
 import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.SettingsActivity;
 import com.gaspar.learnjava.curriculum.Exam;
-import com.gaspar.learnjava.curriculum.Question;
+import com.gaspar.learnjava.curriculum.questions.Question;
 import com.gaspar.learnjava.parsers.ExamParser;
 import com.gaspar.learnjava.utils.LogUtils;
 

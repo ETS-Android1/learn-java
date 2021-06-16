@@ -1,4 +1,4 @@
-package com.gaspar.learnjava.curriculum;
+package com.gaspar.learnjava.curriculum.questions;
 
 import android.content.Context;
 import android.view.LayoutInflater;

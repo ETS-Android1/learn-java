@@ -150,7 +150,7 @@
     <string name="copy_content">Másolás</string>
     <string name="copy_successful">Kimásolva a vágólapra!</string>
     <string name="copy_failed">Nem sikerült kimásolni!</string>
-    <string name="advanced">NEHEZEBB RÉSZ</string>
+    <string name="advanced">NEHÉZ:</string>
     <string name="close_chapter">Fejezet befejezése</string>
     <string name="image_component_desc">Kép</string>
     <string name="zoom_in">Zoomolás</string>

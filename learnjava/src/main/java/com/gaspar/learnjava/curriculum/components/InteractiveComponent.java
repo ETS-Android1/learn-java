@@ -1,4 +1,4 @@
-package com.gaspar.learnjava.curriculum.interactive;
+package com.gaspar.learnjava.curriculum.components;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -8,7 +8,6 @@ import android.text.Html;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -16,10 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.gaspar.learnjava.R;
-import com.gaspar.learnjava.curriculum.Component;
 import com.gaspar.learnjava.utils.AnimationUtils;
 import com.gaspar.learnjava.utils.LogUtils;
 import com.google.android.material.snackbar.Snackbar;
@@ -27,90 +25,104 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.List;
 
 /**
- * This is the class for an interactive_component code component that can be placed inside chapters or tasks.
- * The interactive_component components consist of constant code and "empty spaces", where the user can enter
+ * This is the class for an interactive {@link CodeComponent} that can be placed inside chapters or tasks.
+ * The interactive components consist of constant code and "empty spaces" ({@link EmptySpace}), where the user can enter
  * short code samples. Each space can have multiple correct answers.
  * <p>
  * A UI for checking if the answers are correct is provided. The user can also request for
- * the correct answers to be filled.
+ * the correct answers to be filled. Unlike normal code component, this one does not support copy and ClipSync.
  * <p>
  * An example of the XML syntax of this component (in real examples, the text will be formatted):
- * <code>
- *     <interactive instruction="Complete the variable declaration!">
- *         <data>
- *             String text ___ "hello" ___
- *         </data>
- *         <answer place="0">=</answer>
- *         <answer place="1">;</answer>
- *         <default place="0">*first edit text will be filled with this*</default> (optional)
- *     </interactive>
- * </code>
+ * <pre>
+ * {@code
+ * <interactive instruction="Complete the variable declaration!">
+ *     <data>
+ *        String text ___ "hello" ___
+ *     </data>
+ *     <answer place="0">=</answer>
+ *     <answer place="1">;</answer>
+ *     <default place="0">*first edit text will be filled with this*</default> (optional)
+ * </interactive>
+ * }
+ * </pre>
+ * <p>
  * It's also possible to have empty spaces require other answers to be present to be acceptable:
- * <code>
- *      <interactive instruction="Complete the sample so that the variables final value is 8!">
- *         <data>
- *         <![CDATA[
- *              <font color="#DF7401">int</font> num = ___;
- *              <br/>num = num ___ 5;
- *         ]]>
- *         </data>
- *         <answer place="0" group="add" required_places="1">3</answer>
- *         <answer place="0" group="subtract" required_places="1">13</answer>
- *         <answer place="0" group="div" required_places="1">40</answer>
- *         <answer place="1" group="add" required_places="0">+</answer>
- *         <answer place="1" group="subtract" required_places="0">-</answer>
- *         <answer place="1" group="div" required_places="0">/</answer>
- *     </interactive>
- * </code>
+ * <pre>
+ * {@code
+ * <interactive instruction="Complete the sample so that the variables final value is 8!">
+ *     <data>
+ *     <![CDATA[
+ *         <font color="#DF7401">int</font> num = ___;
+ *         <br/>num = num ___ 5;
+ *     ]]>
+ *     </data>
+ *     <answer place="0" group="add" required_places="1">3</answer>
+ *     <answer place="0" group="subtract" required_places="1">13</answer>
+ *     <answer place="0" group="div" required_places="1">40</answer>
+ *     <answer place="1" group="add" required_places="0">+</answer>
+ *     <answer place="1" group="subtract" required_places="0">-</answer>
+ *     <answer place="1" group="div" required_places="0">/</answer>
+ * </interactive>
+ * }
+ * </pre>
  * Multiple required places are to be separated with a comma.
  * <p>
  * Each empty space can have a default answer as well. This must be placed into the DEFAULT
  * tag after the answer tags.
  */
-public final class InteractiveComponent extends Component {
+public final class InteractiveComponent extends CodeComponent {
+
+    /**
+     * This string marks the location of empty spaces ({@link EmptySpace}) in the formatted
+     * code, which is {@link #data}.
+     */
+    private static final String EMPTY_SPACE_MARKER = "___";
+
+    /**
+     * This string marks the line break in the formatted code, which is {@link #data}.
+     */
+    private static final String FORMATTED_LINE_BREAK = "<br/>";
 
     /**
      * The instructions given to the user.
      */
+    @NonNull
     private final String instruction;
 
     /**
      * The list of spaces where the user can enter code.
      */
+    @NonNull
     private final List<EmptySpace> emptySpaces;
 
-    public InteractiveComponent(String instruction, String data, List<EmptySpace> emptySpaces) {
+    /**
+     * Constructor for interactive component.
+     * @param instruction The instructor displayed to the user.
+     * @param data Data, which is formatted code, with empty space markers.
+     * @param emptySpaces A list of empty spaces, these define which answers are acceptable.
+     */
+    public InteractiveComponent(@NonNull String instruction, @NonNull String data, @NonNull List<EmptySpace> emptySpaces) {
         super(ComponentType.INTERACTIVE, data);
         this.emptySpaces = emptySpaces;
         this.instruction = instruction;
     }
 
     /**
-     * Creates the interactive_component view, using the formatted data, and the empty spaces. Binds an
-     * EditText to each empty space.
-     * @param context Context.
-     * @param parent The view group this question view will be added. This method DOES NOT add the
-     *               inflated view.
-     * @return The created view ready to be added.
+     * Creates the most important part of the interactive code sample, the combination of static code and
+     * {@link EmptySpace}-es.
+     * @param codeAreaInteractive The parent, in which all code and empty space objects are placed.
      */
-    @Override
-    public View createComponentView(@NonNull final AppCompatActivity context, ViewGroup parent) {
-        final LayoutInflater inflater = LayoutInflater.from(context);
-        final String EMPTY_SPACE_MARKER = context.getString(R.string.empty_space_marker);
-        final String FORMATTED_LINE_BREAK = context.getString(R.string.formatted_line_break);
-
-        View interactiveView = inflater.inflate(R.layout.component_interactive, parent, false);
-        ((TextView)interactiveView.findViewById(R.id.instruction_view)).setText(instruction);
-        //split data into lines
+    public void fillInteractiveCodeArea(@NonNull final LinearLayout codeAreaInteractive) {
         String[] dataLines = data.split(FORMATTED_LINE_BREAK);
-        LinearLayout codeArea = interactiveView.findViewById(R.id.codeAreaInteractive);
+        final Context context = codeAreaInteractive.getContext();
+        final LayoutInflater inflater = LayoutInflater.from(context);
         int emptySpaceCounter = 0;
         EditText lastEditText = null; //last edit text will get special ime action (done)
         for(String dataLine: dataLines) { //split each line to constant texts (and implicitly, empty spaces)
             dataLine = dataLine.replace("\n", ""); //remove line break from the end...
             String[] separatedData = dataLine.split(EMPTY_SPACE_MARKER);
             //create layout for this line
-            LinearLayout lineLayout = (LinearLayout)inflater.inflate(R.layout.view_interactive_line, codeArea, false);
+            LinearLayout lineLayout = (LinearLayout)inflater.inflate(R.layout.view_interactive_line, codeAreaInteractive, false);
             for(int i=0; i<separatedData.length; i++) {
                 if(!"".equals(separatedData[i])) { //only if there is actual text
                     TextView codeView = new TextView(context);
@@ -122,15 +134,9 @@ public final class InteractiveComponent extends Component {
                     lastEditText = addEmptySpaceView(emptySpaceCounter++, lineLayout, inflater, context);
                 }
             }
-            codeArea.addView(lineLayout);
+            codeAreaInteractive.addView(lineLayout);
         }
         if(lastEditText!=null) lastEditText.setImeOptions(EditorInfo.IME_ACTION_DONE);
-
-        //set button listeners
-        initZoomButtons(interactiveView);
-        interactiveView.findViewById(R.id.resetButton).setOnClickListener(v -> reset(context));
-        interactiveView.findViewById(R.id.checkButton).setOnClickListener(v -> checkSolution(context, interactiveView));
-        return interactiveView;
     }
 
     /**
@@ -159,17 +165,16 @@ public final class InteractiveComponent extends Component {
 
     /**
      * Sets the zoom button listeners. This is more complex then the superclass method, as
-     * there is more then just a text view now.
-     * @param codeSampleView The code sample view.
+     * there is more then just a text view now. All parameters can be found in {@link InteractiveComponentHolder}.
+     * @param zoomIn The zoom in button.
+     * @param zoomOut The zoom out button.
+     * @param codeAreaInteractive The view which displays code. Unlike in the superclass method, this is
+     *                            not just a simple text view.
      */
-    @Override
-    public void initZoomButtons(@NonNull View codeSampleView) {
-        ImageButton zoomIn = codeSampleView.findViewById(R.id.zoomInButtonInteractive);
-        ImageButton zoomOut = codeSampleView.findViewById(R.id.zoomOutButtonInteractive);
-        final int minFontSize = (int)codeSampleView.getContext().getResources().getDimension(R.dimen.code_text_size);
-        final LinearLayout codeArea = codeSampleView.findViewById(R.id.codeAreaInteractive);
+    public void initZoomButtons(@NonNull ImageButton zoomIn, @NonNull ImageButton zoomOut, @NonNull LinearLayout codeAreaInteractive) {
+        final int minFontSize = (int)codeAreaInteractive.getContext().getResources().getDimension(R.dimen.code_text_size);
         zoomIn.setOnClickListener(v -> {
-            int currentSize = getCurrentFontSize(codeArea);
+            int currentSize = getCurrentFontSize(codeAreaInteractive);
             final ValueAnimator animator = ValueAnimator.ofInt(currentSize, currentSize + ZOOM_SIZE_CHANGE);
             animator.setDuration(AnimationUtils.DURATION);
             //disable zoom buttons while ongoing
@@ -189,11 +194,11 @@ public final class InteractiveComponent extends Component {
                 }
             });
             //update text size
-            animator.addUpdateListener(pAnimator -> updateTextSizes(codeArea, (int)pAnimator.getAnimatedValue()));
+            animator.addUpdateListener(pAnimator -> updateTextSizes(codeAreaInteractive, (int)pAnimator.getAnimatedValue()));
             animator.start();
         });
         zoomOut.setOnClickListener(v -> {
-            int currentSize = getCurrentFontSize(codeArea);
+            int currentSize = getCurrentFontSize(codeAreaInteractive);
             int newSize = currentSize - ZOOM_SIZE_CHANGE;
             if(newSize < minFontSize) return;
             final ValueAnimator animator = ValueAnimator.ofInt(currentSize, currentSize - ZOOM_SIZE_CHANGE);
@@ -215,11 +220,16 @@ public final class InteractiveComponent extends Component {
                 }
             });
             //update text size
-            animator.addUpdateListener(pAnimator -> updateTextSizes(codeArea, (int)pAnimator.getAnimatedValue()));
+            animator.addUpdateListener(pAnimator -> updateTextSizes(codeAreaInteractive, (int)pAnimator.getAnimatedValue()));
             animator.start();
         });
     }
 
+    /**
+     * Finds the font size of the currently displayed code.
+     * @param codeArea The area in which code is displayed.
+     * @return The font size.
+     */
     private int getCurrentFontSize(@NonNull final LinearLayout codeArea) {
         if(codeArea.getChildCount() == 0) {
             LogUtils.logError("Warning: interactive sample has no code!");
@@ -240,6 +250,11 @@ public final class InteractiveComponent extends Component {
         }
     }
 
+    /**
+     * Updates all view's font size property inside the code area.
+     * @param codeArea The code area.
+     * @param newSize The new font size.
+     */
     private void updateTextSizes(@NonNull final LinearLayout codeArea, int newSize) {
         for(int i=0; i<codeArea.getChildCount(); i++) { //iterate all, change font size everywhere
             final LinearLayout lineLayout = (LinearLayout) codeArea.getChildAt(i);
@@ -258,8 +273,10 @@ public final class InteractiveComponent extends Component {
     /**
      * Iterates all empty spaces and decides if the answer there is correct or not. If yes, recolors
      * it to green. If not, colors it red. Locks the edit texts.
+     * @param context Context.
+     * @param view A view in the hierarchy used to display {@link Snackbar}.
      */
-    private void checkSolution(@NonNull final Context context, @NonNull final View view) {
+    public void checkSolution(@NonNull final Context context, @NonNull final View view) {
         boolean allCorrect = true;
         for(EmptySpace emptySpace: emptySpaces) {
             boolean correctAnswer = emptySpace.checkSolution(context, emptySpaces);
@@ -268,12 +285,74 @@ public final class InteractiveComponent extends Component {
         Snackbar.make(view, allCorrect ? R.string.interactive_correct : R.string.interactive_incorrect, Snackbar.LENGTH_SHORT)
             .show();
     }
+    
     /**
      * Empties all edit texts and removes coloring.
+     * @param context Context.
      */
-    private void reset(@NonNull final Context context) {
+    public void reset(@NonNull final Context context) {
         for(EmptySpace emptySpace: emptySpaces) {
             emptySpace.resetEmptySpace(context);
         }
+    }
+
+    /**
+     * @return The instruction of the interactive sample.
+     */
+    @NonNull
+    public String getInstruction() {
+        return instruction;
+    }
+
+    /**
+     * A {@link RecyclerView.ViewHolder} implementation for this component, that is used by
+     * {@link com.gaspar.learnjava.adapters.ComponentAdapter}.
+     */
+    public static class InteractiveComponentHolder extends RecyclerView.ViewHolder {
+
+        /**
+         * A text view which display the instruction.
+         */
+        public TextView instructionTextView;
+
+        /**
+         * The view that displays the formatted interactive code.
+         */
+        public LinearLayout codeAreaInteractive;
+
+        /**
+         * Zoom in button.
+         */
+        public ImageButton zoomIn;
+
+        /**
+         * Zoom out button.
+         */
+        public ImageButton zoomOut;
+
+        /**
+         * Button that resets the progress.
+         */
+        public ImageButton resetButton;
+
+        /**
+         * Button that checks if the solution is correct.
+         */
+        public ImageButton checkButton;
+
+        /**
+         * Creates a view holder for a {@link InteractiveComponent}.
+         * @param componentView This is expected to be inflated from R.layout.component_interactive.
+         */
+        public InteractiveComponentHolder(View componentView) {
+            super(componentView);
+            instructionTextView = componentView.findViewById(R.id.instruction_view);
+            codeAreaInteractive = componentView.findViewById(R.id.codeAreaInteractive);
+            zoomIn = componentView.findViewById(R.id.zoomInButtonInteractive);
+            zoomOut = componentView.findViewById(R.id.zoomOutButtonInteractive);
+            resetButton = componentView.findViewById(R.id.resetButton);
+            checkButton = componentView.findViewById(R.id.checkButton);
+        }
+
     }
 }

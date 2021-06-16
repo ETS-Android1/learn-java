@@ -1,29 +1,10 @@
 package com.gaspar.learnjava.utils;
 
-/*
- * Copyright (C) 2016 Matthias Stevens for InThePocket.mobi
- * Copyright (C) 2013-2015 Juha Kuitunen
- * Copyright (C) 2007 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 import android.text.Editable;
 import android.text.Html;
 import android.text.Spanned;
 import android.text.style.BulletSpan;
 import android.text.style.LeadingMarginSpan;
-import android.util.Log;
 
 import org.xml.sax.XMLReader;
 
@@ -32,20 +13,7 @@ import java.util.Stack;
 
 /**
  * Implements support for ordered ({@code <ol>}) and unordered ({@code <ul>}) lists in to Android TextView.
- * <p>
- * This can be used as follows:<br/>
- * {@code textView.setText(Html.fromHtml("<ul><li>item 1</li><li>item 2</li></ul>", null, new HtmlListTagHandler()));}</p>
- * <p>
- * Implementation based on code by Juha Kuitunen (https://bitbucket.org/Kuitsi/android-textview-html-list),
- * released under Apache License v2.0. Refactored & improved by Matthias Stevens (InThePocket.mobi).</p>
- * <p>
- * <b>Known issues:</b><ul>
- *     <li>The indentation on nested {@code <ul>}s isn't quite right (TODO fix this)</li>
- *     <li>the {@code start} attribute of {@code <ol>} is not supported. Doing so is tricky because
- *     {@link Html.TagHandler#handleTag(boolean, String, Editable, XMLReader)} does not expose tag attributes.
- *     The only way to do it would be to use reflection to access the attribute information kept by the XMLReader
- *     (see: http://stackoverflow.com/a/24534689/1084488).</li>
- * </ul></p>
+ * @see <a href="https://stackoverflow.com/a/17365740/4925616">Source: stackoverflow question</a>
  */
 public class ListTagHandler implements Html.TagHandler {
 
@@ -104,10 +72,6 @@ public class ListTagHandler implements Html.TagHandler {
             {   // handle </li>
                 lists.peek().closeItem(output, lists.size());
             }
-        }
-        else
-        {
-            LogUtils.logError("Found an unsupported tag " + tag);
         }
     }
 

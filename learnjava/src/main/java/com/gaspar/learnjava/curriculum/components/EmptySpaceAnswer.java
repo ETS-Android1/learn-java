@@ -1,4 +1,4 @@
-package com.gaspar.learnjava.curriculum.interactive;
+package com.gaspar.learnjava.curriculum.components;
 
 import androidx.annotation.NonNull;
 

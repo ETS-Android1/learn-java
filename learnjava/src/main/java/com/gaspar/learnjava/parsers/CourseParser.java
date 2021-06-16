@@ -3,19 +3,26 @@ package com.gaspar.learnjava.parsers;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.content.res.XmlResourceParser;
+import android.graphics.drawable.Drawable;
 
 import androidx.annotation.CheckResult;
 import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
 
 import com.gaspar.learnjava.curriculum.Chapter;
-import com.gaspar.learnjava.curriculum.Component;
 import com.gaspar.learnjava.curriculum.Course;
 import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.curriculum.Task;
-import com.gaspar.learnjava.curriculum.interactive.EmptySpace;
-import com.gaspar.learnjava.curriculum.interactive.EmptySpaceAnswer;
-import com.gaspar.learnjava.curriculum.interactive.InteractiveComponent;
+import com.gaspar.learnjava.curriculum.components.AdvancedComponent;
+import com.gaspar.learnjava.curriculum.components.BoxedComponent;
+import com.gaspar.learnjava.curriculum.components.CodeComponent;
+import com.gaspar.learnjava.curriculum.components.Component;
+import com.gaspar.learnjava.curriculum.components.EmptySpace;
+import com.gaspar.learnjava.curriculum.components.EmptySpaceAnswer;
+import com.gaspar.learnjava.curriculum.components.ImageComponent;
+import com.gaspar.learnjava.curriculum.components.InteractiveComponent;
+import com.gaspar.learnjava.curriculum.components.TextComponent;
+import com.gaspar.learnjava.curriculum.components.TitleComponent;
 import com.gaspar.learnjava.utils.LocalizationUtils;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -154,7 +161,7 @@ public class CourseParser {
                     XmlPullParser parser = factory.newPullParser();
                     try(final InputStream is = manager.open(chapterPath)) { //open file
                         parser.setInput(is, "UTF-8"); //set input stream to XML parser
-                        parsedChapter = parseChapterData(parser, parseComponents);
+                        parsedChapter = parseChapterData(parser, parseComponents, context);
                     }
                     break; //no need to continue searching chapters
                 }
@@ -194,16 +201,16 @@ public class CourseParser {
 
     /**
      * Parses the components from a chapter XML file.
-     *
      * @param parser XML parses pointed to the chapter file.
      * @param parseComponents Determines or the components will be parsed, or only general information,
      *                        such as id and chapter name.
+     * @param context Context.
      * @return The parsed {@link Chapter} object.
      * @throws XmlPullParserException If problem arises during XML parsing.
      * @throws IOException If problem arises during XML parsing.
      * @throws RuntimeException If the chapter file is incorrect, such as no id or name.
      */
-    public Chapter parseChapterData(@NonNull XmlPullParser parser, boolean parseComponents)
+    public Chapter parseChapterData(@NonNull XmlPullParser parser, boolean parseComponents, @NonNull final Context context)
         throws RuntimeException, XmlPullParserException, IOException {
         int chapterId = NO_ID_FOUND;
         String chapterName = null;
@@ -220,30 +227,25 @@ public class CourseParser {
                         break; //no need to go further if we don't need components
                     }
                 } else if(tagName.equalsIgnoreCase(TagName.TEXT) && parseComponents) {
-                    components.add(new Component(Component.ComponentType.TEXT, parser.nextText()));
+                    components.add(new TextComponent(parser.nextText(), false));
                 } else if(tagName.equalsIgnoreCase(TagName.CODE) && parseComponents) {
-                    components.add(new Component(Component.ComponentType.CODE, parser.nextText()));
+                    components.add(new CodeComponent(parser.nextText()));
                 } else if(tagName.equalsIgnoreCase(TagName.ADVANCED) && parseComponents) {
                     String title = parser.getAttributeValue(null, TagName.TITLE);
-                    Component c = new Component(Component.ComponentType.ADVANCED, parser.nextText());
-                    c.setTitle(title);
-                    components.add(c);
+                    components.add(new AdvancedComponent(parser.nextText(), title));
                 } else if(tagName.equalsIgnoreCase(TagName.BOXED) && parseComponents) {
                     String title = parser.getAttributeValue(null, TagName.TITLE);
-                    Component c = new Component(Component.ComponentType.BOXED, parser.nextText());
-                    c.setTitle(title);
-                    components.add(c);
+                    components.add(new BoxedComponent(parser.nextText(), title));
                 } else if(tagName.equalsIgnoreCase(TagName.LIST) && parseComponents) {
-                    components.add(new Component(Component.ComponentType.LIST, parser.nextText()));
+                    components.add(new TextComponent(parser.nextText(), true));
                 } else if(tagName.equalsIgnoreCase(TagName.IMAGE) && parseComponents) {
                     String imageName = parser.getAttributeValue(null, TagName.NAME);
-                    Component c = new Component(Component.ComponentType.IMAGE, imageName);
-                    components.add(c);
+                    //need to parse the image drawable as well
+                    Drawable imageDrawable = RawParser.parseImage(imageName, context);
+                    components.add(new ImageComponent(imageName, imageDrawable));
                 } else if(tagName.equalsIgnoreCase(TagName.TITLE) && parseComponents) {
                     String title = parser.getAttributeValue(null, TagName.TEXT);
-                    Component component = new Component(Component.ComponentType.TITLE, "");  //data not important
-                    component.setTitle(title);
-                    components.add(component);
+                    components.add(new TitleComponent(title));
                 } else if(tagName.equalsIgnoreCase(TagName.INTERACTIVE) && parseComponents) {
                     components.add(parseInteractiveComponent(parser));
                 }
@@ -311,7 +313,7 @@ public class CourseParser {
             final XmlPullParser parser = factory.newPullParser();
             parser.setInput(is, "UTF-8");
             //using chapter parser method for this
-            components = parseChapterData(parser, true).getComponents();
+            components = parseChapterData(parser, true, context).getComponents();
         }
         if(components == null) throw new RuntimeException("Failed to load guide!");
         return components;

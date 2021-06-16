@@ -3,13 +3,13 @@ package com.gaspar.learnjava.asynctask;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
 
 import androidx.annotation.Size;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.TaskActivity;
-import com.gaspar.learnjava.curriculum.Component;
+import com.gaspar.learnjava.adapters.ComponentAdapter;
 import com.gaspar.learnjava.curriculum.Task;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.database.TaskStatus;
@@ -65,26 +65,31 @@ public class FillTaskActivityTask extends AsyncTask<TaskActivity, Void, TaskActi
         if(activity.successfulLoad) {
             if(activity.getDisplayedTask().getDescriptionComponents() == null ||
             activity.getDisplayedTask().getSolutionComponents() == null) return; //should not happen
-            //make loading invisible
-            activity.findViewById(R.id.taskProgressBar).setVisibility(View.GONE);
-            //make components visible visible
-            View componentsScroll = activity.findViewById(R.id.taskScroller);
-            componentsScroll.setVisibility(View.VISIBLE);
-            LinearLayout componentsLayout = activity.findViewById(R.id.taskComponents);
-            for(Component component: activity.getDisplayedTask().getDescriptionComponents()) {
-                componentsLayout.addView(component.createComponentView(activity, componentsLayout)); //add component views
-            }
-            LinearLayout solutionComponentsView = activity.findViewById(R.id.solutionComponents);
-            for(Component component: activity.getDisplayedTask().getSolutionComponents()) {
-                View componentView = component.createComponentView(activity, solutionComponentsView);
-                solutionComponentsView.addView(componentView); //add solution views
-            }
+
+            //set up recycler view of components
+            RecyclerView componentsView = activity.findViewById(R.id.taskComponents);
+            //create adapter from components
+            ComponentAdapter adapter = new ComponentAdapter(activity.getDisplayedTask().getDescriptionComponents(), activity);
+            //attach adapter
+            componentsView.setAdapter(adapter);
+            //set up recycler view of components
+
+            RecyclerView solutionView = activity.findViewById(R.id.solutionComponents);
+            //create adapter from components
+            ComponentAdapter solutionAdapter = new ComponentAdapter(activity.getDisplayedTask().getSolutionComponents(), activity);
+            //attach adapter
+            solutionView.setAdapter(solutionAdapter);
+
             CheckBox completedCheckBox = activity.findViewById(R.id.taskCompletedCheckBox);
             boolean taskCompleted = (activity.getDisplayedTask().getTaskStatus() ==
                     com.gaspar.learnjava.curriculum.Status.COMPLETED);
             completedCheckBox.setChecked(taskCompleted); //show checked if task is completed
             completedCheckBox.setOnCheckedChangeListener((compoundButton, isChecked) ->
                     activity.updateTaskStatus(isChecked, activity.getDisplayedTask().getId()));
+
+            //hide loading, show recycler
+            activity.findViewById(R.id.loadingIndicator).setVisibility(View.GONE);
+            componentsView.setVisibility(View.VISIBLE);
 
             //ask about dark theme
             ThemeUtils.showDarkThemePromptIfNeeded(activity);

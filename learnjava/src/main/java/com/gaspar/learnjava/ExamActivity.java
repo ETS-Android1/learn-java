@@ -22,7 +22,7 @@ import androidx.core.content.ContextCompat;
 import com.gaspar.learnjava.asynctask.LoadExamQuestionsTask;
 import com.gaspar.learnjava.curriculum.Course;
 import com.gaspar.learnjava.curriculum.Exam;
-import com.gaspar.learnjava.curriculum.Question;
+import com.gaspar.learnjava.curriculum.questions.Question;
 import com.gaspar.learnjava.curriculum.Status;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.utils.LogUtils;

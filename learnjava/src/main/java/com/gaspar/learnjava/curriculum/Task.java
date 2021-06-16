@@ -13,6 +13,7 @@ import com.gaspar.learnjava.CoursesActivity;
 import com.gaspar.learnjava.TaskActivity;
 import com.gaspar.learnjava.UpdatableActivity;
 import com.gaspar.learnjava.asynctask.TaskStatusDisplayerTask;
+import com.gaspar.learnjava.curriculum.components.Component;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.database.TaskStatus;
 

@@ -16,7 +16,7 @@ import androidx.test.uiautomator.UiDevice;
 
 import com.gaspar.learnjava.asynctask.LoadExamQuestionsTask;
 import com.gaspar.learnjava.curriculum.Exam;
-import com.gaspar.learnjava.curriculum.Question;
+import com.gaspar.learnjava.curriculum.questions.Question;
 import com.gaspar.learnjava.curriculum.Status;
 import com.gaspar.learnjava.database.ExamStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
@@ -57,7 +57,7 @@ import static org.hamcrest.Matchers.not;
  * test exam is used, which can be found where the normal exams are, with the name test_exam.xml.
  * This exam can never be loaded by the actual application.
  * <p>
- * Besides the exam activity, {@link com.gaspar.learnjava.curriculum.Question}-s are also tested here,
+ * Besides the exam activity, {@link Question}-s are also tested here,
  * as the test exam contains at least one of each question type.
  */
 @RunWith(AndroidJUnit4ClassRunner.class)

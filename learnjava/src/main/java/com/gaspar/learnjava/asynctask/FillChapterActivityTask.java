@@ -1,19 +1,23 @@
 package com.gaspar.learnjava.asynctask;
 
 import android.os.AsyncTask;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
+import android.view.ViewGroup;
 
 import androidx.annotation.Size;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.gaspar.learnjava.ChapterActivity;
 import com.gaspar.learnjava.R;
+import com.gaspar.learnjava.adapters.ComponentAdapter;
 import com.gaspar.learnjava.curriculum.Chapter;
-import com.gaspar.learnjava.curriculum.Component;
 import com.gaspar.learnjava.parsers.CourseParser;
 import com.gaspar.learnjava.utils.LogUtils;
 import com.gaspar.learnjava.utils.ThemeUtils;
+
+import java.util.function.BiConsumer;
+import java.util.function.Function;
 
 /**
  * Parses the chapter components from XML, then shows them in the list view of the activity.
@@ -45,16 +49,26 @@ public class FillChapterActivityTask extends AsyncTask<ChapterActivity, Void, Fi
     @Override
     protected void onPostExecute(Result result) {
         if(result.success) {
-            LinearLayout componentsLayout = result.activity.findViewById(R.id.chapterComponents);
-            for(Component component: result.parsedChapter.getComponents()) { //inflate and add component views
-                componentsLayout.addView(component.createComponentView(result.activity, componentsLayout));
-            }
             result.activity.setPassedChapter(result.parsedChapter); //set the parsed chapter to activity
-            View confirmView = View.inflate(result.activity, R.layout.view_close_chapter, componentsLayout);
-            Button confirmButton = confirmView.findViewById(R.id.chapterConfirmButton);
-            confirmButton.setOnClickListener(result.activity::chapterConfirmedOnClick);
+            //set up recycler view of components
+            RecyclerView componentsView = result.activity.findViewById(R.id.chapterComponents);
+            //define the footer view for adapter
+            Function<ViewGroup, RecyclerView.ViewHolder> footerHolderGenerator = (parent) -> {
+                View footerView = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_close_chapter, parent, false);
+                return new ChapterActivity.ChapterFooterHolder(footerView);
+            };
+            BiConsumer<RecyclerView.ViewHolder, Integer> footerHolderBinder = (holder, position) -> {
+                ChapterActivity.ChapterFooterHolder footerHolder = (ChapterActivity.ChapterFooterHolder)holder;
+                footerHolder.closeButton.setOnClickListener(v -> result.activity.chapterConfirmedOnClick(v));
+            };
+            //create adapter from components
+            ComponentAdapter adapter = new ComponentAdapter(result.parsedChapter.getComponents(), result.activity,
+                    footerHolderGenerator, footerHolderBinder);
+            //attach adapter
+            componentsView.setAdapter(adapter);
+            //hide loading, show recycler
             result.activity.findViewById(R.id.loadingIndicator).setVisibility(View.GONE);
-            result.activity.findViewById(R.id.chapterComponentsLayout).setVisibility(View.VISIBLE);
+            componentsView.setVisibility(View.VISIBLE);
             //ask about dark theme
             ThemeUtils.showDarkThemePromptIfNeeded(result.activity);
         } else {

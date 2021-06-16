@@ -14,6 +14,7 @@ import com.gaspar.learnjava.LearnJavaActivity;
 import com.gaspar.learnjava.SettingsActivity;
 import com.gaspar.learnjava.UpdatableActivity;
 import com.gaspar.learnjava.asynctask.ExamStatusDisplayerTask;
+import com.gaspar.learnjava.curriculum.questions.Question;
 import com.gaspar.learnjava.database.ExamStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 

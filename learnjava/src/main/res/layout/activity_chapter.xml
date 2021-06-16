@@ -57,19 +57,15 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <!-- When the background task finished this is showing -->
-            <com.gaspar.learnjava.utils.InteractiveScrollView
-                android:id="@+id/chapterComponentsLayout"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/chapterComponents"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:fastScrollEnabled="false"
                 android:layout_centerInParent="true"
                 android:visibility="gone"
-                tools:visibility="visible">
-                <LinearLayout
-                    android:id="@+id/chapterComponents"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"/>
-            </com.gaspar.learnjava.utils.InteractiveScrollView>
+                tools:visibility="visible"/>
 
             <!-- Loading indicator -->
             <ProgressBar

@@ -1,4 +1,4 @@
-package com.gaspar.learnjava.curriculum.interactive;
+package com.gaspar.learnjava.curriculum.components;
 
 import android.content.Context;
 import android.view.View;

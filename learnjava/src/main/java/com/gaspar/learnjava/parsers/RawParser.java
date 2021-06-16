@@ -23,7 +23,6 @@ public abstract class RawParser {
 
     /**
      * Parses an image by name.
-     *
      * @param imageName The name of the image in the raw folder.
      * @return The drawable of the image.
      */

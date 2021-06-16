@@ -17,6 +17,7 @@ import android.os.Parcelable;
 import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.IntDef;
@@ -29,7 +30,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.gaspar.learnjava.curriculum.Component;
+import com.gaspar.learnjava.curriculum.components.CodeComponent;
 import com.gaspar.learnjava.utils.DrawerUtils;
 import com.gaspar.learnjava.utils.LearnJavaBluetooth;
 import com.gaspar.learnjava.utils.ThemeUtils;
@@ -167,13 +168,15 @@ public class ClipSyncActivity extends ThemedActivity
                 statusDisplayer.setText(getString(R.string.clip_sync_mode_not_selected));
         }
         //set the code sample
-        final Component component = new Component(Component.ComponentType.CODE, null); //we can access component methods with this
+        String data = getString(R.string.dummy_code_sample);
+        final CodeComponent component = new CodeComponent(data); //we can access component methods with this
         final View codeView = findViewById(R.id.testCodeSample);
         final TextView codeArea = codeView.findViewById(R.id.codeArea);
-        String data = getString(R.string.dummy_code_sample);
         codeArea.setText(Html.fromHtml(data, Html.FROM_HTML_MODE_COMPACT));
-        component.initZoomButtons(codeView); //zoom functionality
-        codeView.findViewById(R.id.copyButton).setOnClickListener(v -> Component.copyOnClick(codeArea, this)); //copy functionality
+        ImageButton zoomIn = codeView.findViewById(R.id.zoomInButton);
+        ImageButton zoomOut = codeView.findViewById(R.id.zoomOutButton);
+        component.initZoomButtons(zoomIn, zoomOut, codeArea); //zoom functionality
+        codeView.findViewById(R.id.copyButton).setOnClickListener(v -> component.copyOnClick(codeArea, this)); //copy functionality
 
         toolbar = findViewById(R.id.toolbarClipSync);
         setSupportActionBar(toolbar);

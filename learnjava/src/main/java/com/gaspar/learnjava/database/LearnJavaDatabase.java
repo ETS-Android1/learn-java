@@ -119,7 +119,7 @@ public abstract class LearnJavaDatabase extends RoomDatabase {
                 try(final InputStream is = manager.open(chapterPath)) { //open chapter XML as input stream
                     final XmlPullParser parser = factory.newPullParser();
                     parser.setInput(is, "UTF-8");
-                    final Chapter chapter = CourseParser.getInstance().parseChapterData(parser, false); //parse this chapter
+                    final Chapter chapter = CourseParser.getInstance().parseChapterData(parser, false, context); //parse this chapter
                     Chapter.validateChapterStatus(chapter.getId(), context); //validate
                 }
             }
@@ -130,7 +130,7 @@ public abstract class LearnJavaDatabase extends RoomDatabase {
                 try(final InputStream is = manager.open(taskPath)) { //open task XML as input stream
                     final XmlPullParser parser = factory.newPullParser();
                     parser.setInput(is, "UTF-8");
-                    final Task task = TaskParser.getInstance().parseTaskData(parser, false); //parse this chapter
+                    final Task task = TaskParser.getInstance().parseTaskData(parser, false, context); //parse this chapter
                     Task.validateTaskStatus(task.getId(), context); //validate
                 }
             }

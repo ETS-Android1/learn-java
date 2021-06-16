@@ -7,18 +7,19 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.gaspar.learnjava.asynctask.FillChapterActivityTask;
 import com.gaspar.learnjava.curriculum.Chapter;
 import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.utils.DrawerUtils;
-import com.gaspar.learnjava.utils.InteractiveScrollView;
 import com.gaspar.learnjava.utils.LearnJavaBluetooth;
 import com.gaspar.learnjava.utils.LogUtils;
 import com.google.android.gms.ads.AdRequest;
@@ -102,14 +103,20 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        //make it so that when the bottom of the chapter is reached (in the scroll view), it acts like pressing the completed button
-        final InteractiveScrollView scrollView = findViewById(R.id.chapterComponentsLayout);
-        scrollView.setOnBottomReachedListener(() -> {
-            if(!confirmedWithScrolling) {
-                confirmedWithScrolling = true;
-                LogUtils.log("Chapter confirmed with scroll to bottom!");
-                //System.out.println("Chapter confirmed with scroll to bottom!");
-                passedChapter.markChapterAsCompleted(this); //mark as completed
+        //make it so that when the bottom of the chapter is reached (in the recycler view), it acts like pressing the completed button
+        final RecyclerView componentsView = findViewById(R.id.chapterComponents);
+        componentsView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (!recyclerView.canScrollVertically(1)) {
+                    if(!confirmedWithScrolling) {
+                        confirmedWithScrolling = true;
+                        LogUtils.log("Chapter confirmed with scroll to bottom!");
+                        //System.out.println("Chapter confirmed with scroll to bottom!");
+                        passedChapter.markChapterAsCompleted(ChapterActivity.this); //mark as completed
+                    }
+                }
             }
         });
     }
@@ -184,10 +191,10 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
                 LearnJavaBluetooth.getInstance().turnOnBluetooth();
 
                 //show the user that he should try again now
-                Snackbar.make(findViewById(R.id.chapterComponentsLayout), getString(R.string.clip_sync_bluetooth_try_again),
+                Snackbar.make(findViewById(R.id.chapterComponents), getString(R.string.clip_sync_bluetooth_try_again),
                         Snackbar.LENGTH_LONG).show();
             } else { //complain
-                Snackbar.make(findViewById(R.id.chapterComponentsLayout), getString(R.string.clip_sync_bluetooth_cancelled),
+                Snackbar.make(findViewById(R.id.chapterComponents), getString(R.string.clip_sync_bluetooth_cancelled),
                         Snackbar.LENGTH_LONG).show();
             }
         }
@@ -206,10 +213,10 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
         if(requestCode == ClipSyncActivity.REQUEST_ALLOW_LOCATION) {
             //the user denied location permission
             if(grantResults.length==0 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
-                Snackbar.make(findViewById(R.id.chapterComponentsLayout), getString(R.string.clip_sync_location_denied),
+                Snackbar.make(findViewById(R.id.chapterComponents), getString(R.string.clip_sync_location_denied),
                         Snackbar.LENGTH_LONG).show();
             } else { //granted, ask to try again now
-                Snackbar.make(findViewById(R.id.chapterComponentsLayout), getString(R.string.clip_sync_bluetooth_try_again),
+                Snackbar.make(findViewById(R.id.chapterComponents), getString(R.string.clip_sync_bluetooth_try_again),
                         Snackbar.LENGTH_LONG).show();
             }
         }
@@ -221,5 +228,27 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
 
     public void setPassedChapter(Chapter passedChapter) {
         this.passedChapter = passedChapter;
+    }
+
+    /**
+     * Used by the recycler view in the {@link ChapterActivity}, to insert a button to the end of the
+     * recycler.
+     */
+    public static class ChapterFooterHolder extends RecyclerView.ViewHolder {
+
+        /**
+         * This button closes the activity.
+         */
+        public Button closeButton;
+
+        /**
+         * Create a holder.
+         * @param view This is expected to be inflated from R.layout.view_close_chapter
+         */
+        public ChapterFooterHolder(View view) {
+            super(view);
+            closeButton = view.findViewById(R.id.chapterConfirmButton);
+        }
+
     }
 }

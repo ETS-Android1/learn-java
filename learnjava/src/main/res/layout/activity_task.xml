@@ -65,37 +65,26 @@ android:fitsSystemWindows="true">
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <!-- scroll view of the task components -->
-            <ScrollView
-                android:id="@+id/taskScroller"
-                android:visibility="gone"
-                tools:visibility="visible"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/taskComponents"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_centerInParent="true">
-
-                <LinearLayout
-                    android:id="@+id/taskComponents"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" />
-            </ScrollView>
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:fastScrollEnabled="false"
+                android:layout_centerInParent="true"
+                android:visibility="gone"
+                tools:visibility="visible"/>
 
             <!-- scroll view of the task solution components -->
-            <ScrollView
-                android:id="@+id/solutionScroller"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/solutionComponents"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:fastScrollEnabled="false"
+                android:layout_centerInParent="true"
                 android:visibility="gone"
-                android:layout_centerInParent="true">
-
-                <!-- solution components added here -->
-                <LinearLayout
-                    android:id="@+id/solutionComponents"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" />
-            </ScrollView>
+                tools:visibility="visible"/>
 
             <!-- loading indicator -->
             <ProgressBar

@@ -9,11 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
 
 import com.gaspar.learnjava.curriculum.Exam;
-import com.gaspar.learnjava.curriculum.MultiChoiceQuestion;
-import com.gaspar.learnjava.curriculum.Question;
-import com.gaspar.learnjava.curriculum.SingleChoiceQuestion;
-import com.gaspar.learnjava.curriculum.TextQuestion;
-import com.gaspar.learnjava.curriculum.TrueOrFalseQuestion;
+import com.gaspar.learnjava.curriculum.questions.MultiChoiceQuestion;
+import com.gaspar.learnjava.curriculum.questions.Question;
+import com.gaspar.learnjava.curriculum.questions.SingleChoiceQuestion;
+import com.gaspar.learnjava.curriculum.questions.TextQuestion;
+import com.gaspar.learnjava.curriculum.questions.TrueOrFalseQuestion;
 import com.gaspar.learnjava.utils.LocalizationUtils;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -27,9 +27,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static com.gaspar.learnjava.curriculum.Question.QuestionType.MULTI_CHOICE;
-import static com.gaspar.learnjava.curriculum.Question.QuestionType.SINGLE_CHOICE;
-import static com.gaspar.learnjava.curriculum.Question.QuestionType.TRUE_OR_FALSE;
+import static com.gaspar.learnjava.curriculum.questions.Question.QuestionType.MULTI_CHOICE;
+import static com.gaspar.learnjava.curriculum.questions.Question.QuestionType.SINGLE_CHOICE;
+import static com.gaspar.learnjava.curriculum.questions.Question.QuestionType.TRUE_OR_FALSE;
 
 /**
  * Parses {@link Exam} and {@link Question} objects from XML files.

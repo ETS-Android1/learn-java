@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -10,25 +10,48 @@
     android:id="@+id/advancedComponent">
 
     <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
+        android:id="@+id/advancedDisplayer"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:text="@string/advanced"
+        android:text="@string/advanced"
         android:layout_gravity="start"
-        android:textSize="@dimen/big_text_size"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/separator_height"
-        android:background="@android:color/black"/>
+        android:textSize="@dimen/big_text_size"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/small_margin" />
 
     <TextView
+        android:id="@+id/title"
+        tools:text="Title of advanced component"
+        android:layout_toEndOf="@id/advancedDisplayer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/code_text_size"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="@dimen/small_margin"/>
+
+    <View
+        android:id="@+id/advancedSeparator"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/separator_height"
+        android:background="@android:color/black"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/title"/>
+
+    <TextView
+        android:layout_margin="@dimen/small_margin"
         android:id="@+id/advancedArea"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="Advanced info here..."
         android:textSize="@dimen/medium_text_size"
         tools:layout_height="100dp"
-        android:textColorLink="?android:windowBackground"/>
+        android:textColorLink="?android:windowBackground"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/advancedSeparator"/>
 
-</LinearLayout>
+</RelativeLayout>

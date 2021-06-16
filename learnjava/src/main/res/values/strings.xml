@@ -160,7 +160,7 @@
     <string name="copy_content">Copy content</string>
     <string name="copy_successful">Code copied to clipboard</string>
     <string name="copy_failed">Failed to copy code</string>
-    <string name="advanced">ADVANCED</string>
+    <string name="advanced">ADVANCED:</string>
     <string name="close_chapter">Close chapter</string>
     <string name="image_component_desc">Image component</string>
     <string name="zoom_in">Zoom in</string>

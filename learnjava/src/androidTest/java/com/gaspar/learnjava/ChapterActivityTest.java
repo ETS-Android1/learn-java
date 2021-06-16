@@ -16,7 +16,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 
 import com.gaspar.learnjava.curriculum.Chapter;
-import com.gaspar.learnjava.curriculum.Component;
+import com.gaspar.learnjava.curriculum.components.Component;
 import com.gaspar.learnjava.curriculum.Status;
 import com.gaspar.learnjava.database.ChapterStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;

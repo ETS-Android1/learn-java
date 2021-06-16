@@ -113,8 +113,8 @@ public class TaskActivity extends ThemedActivity implements NavigationView.OnNav
     //view holders
     private ImageView iconView;
     private TextView promptText;
-    private View taskScroller;
-    private View solutionScroller;
+    private View taskComponentsView;
+    private View solutionComponentsView;
 
     /**
      * Click animation for the hide/show layout
@@ -132,11 +132,11 @@ public class TaskActivity extends ThemedActivity implements NavigationView.OnNav
         view.startAnimation(clickAnimation);
         if(iconView == null) iconView = view.findViewById(R.id.hideShowSolutionIcon);
         if(promptText == null) promptText = view.findViewById(R.id.hideShowSolutionText);
-        if(solutionScroller == null) solutionScroller = findViewById(R.id.solutionScroller);
-        if(taskScroller == null) taskScroller = findViewById(R.id.taskScroller);
+        if(solutionComponentsView == null) solutionComponentsView = findViewById(R.id.solutionComponents);
+        if(taskComponentsView == null) taskComponentsView = findViewById(R.id.taskComponents);
         if(solutionShowing) {
-            AnimationUtils.slideOutHorizontal(solutionScroller, AnimationUtils.Direction.RIGHT, this);
-            AnimationUtils.slideInHorizontal(taskScroller, AnimationUtils.Direction.LEFT, this);
+            AnimationUtils.slideOutHorizontal(solutionComponentsView, AnimationUtils.Direction.RIGHT, this);
+            AnimationUtils.slideInHorizontal(taskComponentsView, AnimationUtils.Direction.LEFT, this);
             promptText.setText(R.string.show_solution);
             final Animation rotateAnimation = new RotateAnimation(180.0f, 0.0f,
                     RotateAnimation.RELATIVE_TO_SELF, 0.5f,
@@ -146,8 +146,8 @@ public class TaskActivity extends ThemedActivity implements NavigationView.OnNav
             rotateAnimation.setRepeatCount(0);
             iconView.startAnimation(rotateAnimation);
         } else { //make solution appear
-            AnimationUtils.slideOutHorizontal(taskScroller, AnimationUtils.Direction.LEFT, this);
-            AnimationUtils.slideInHorizontal(solutionScroller, AnimationUtils.Direction.RIGHT, this);
+            AnimationUtils.slideOutHorizontal(taskComponentsView, AnimationUtils.Direction.LEFT, this);
+            AnimationUtils.slideInHorizontal(solutionComponentsView, AnimationUtils.Direction.RIGHT, this);
             promptText.setText(R.string.hide_solution);
             final Animation rotateAnimation = new RotateAnimation(0.0f, 180.0f,
                     RotateAnimation.RELATIVE_TO_SELF, 0.5f,
