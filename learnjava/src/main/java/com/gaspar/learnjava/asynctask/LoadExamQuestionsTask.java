@@ -2,22 +2,20 @@ package com.gaspar.learnjava.asynctask;
 
 import android.os.AsyncTask;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import androidx.annotation.Size;
 import androidx.annotation.VisibleForTesting;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.gaspar.learnjava.ExamActivity;
 import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.SettingsActivity;
+import com.gaspar.learnjava.adapters.QuestionAdapter;
 import com.gaspar.learnjava.curriculum.Exam;
-import com.gaspar.learnjava.curriculum.questions.Question;
 import com.gaspar.learnjava.parsers.ExamParser;
 import com.gaspar.learnjava.utils.LogUtils;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 
 import cn.iwgang.countdownview.CountdownView;
@@ -73,19 +71,11 @@ public class LoadExamQuestionsTask extends AsyncTask<ExamActivity, Void, ExamAct
             CountdownView countdownView = activity.findViewById(R.id.countdownView);
             countdownView.setOnCountdownEndListener(activity::onExamTimeExpired); //add countdown listeners
             countdownView.setOnCountdownIntervalListener(1000, activity::onExamTimeTicked);
-            LinearLayout questionsLayout = activity.findViewById(R.id.questionsLayout);
 
-            List<Integer> idList = new ArrayList<>(activity.getExam().getQuestionAmount());
-
-            for(Question question: activity.getExam().getQuestions()) { //inflate and add question views
-                View questionView = question.createQuestionView(activity, questionsLayout);
-                int id = View.generateViewId();
-                questionView.setId(id); //unique id is used in testing!
-                idList.add(id);
-                questionsLayout.addView(questionView);
-            }
-            //save id list
-            activity.setQuestionViewIds(idList);
+            //set up recycler view
+            RecyclerView questionsLayout = activity.findViewById(R.id.questionsLayout);
+            QuestionAdapter adapter = new QuestionAdapter(activity.getExam().getQuestions(), activity);
+            questionsLayout.setAdapter(adapter);
 
             activity.findViewById(R.id.loadingIndicator).setVisibility(View.GONE); //hide loading
             activity.findViewById(R.id.examActivityContent).setVisibility(View.VISIBLE); //show questions

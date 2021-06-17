@@ -1,8 +1,7 @@
 package com.gaspar.learnjava.curriculum.questions;
 
-import android.content.Context;
-import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.annotation.IntDef;
 
@@ -31,19 +30,26 @@ public abstract class Question implements Serializable {
      * Type of the question.
      */
     @QuestionType
-    private int type;
+    private final int type;
 
     /**
      * Question text.
      */
-    protected String text;
+    protected final String text;
 
     /**
-     * The view that displays this question. This isn't created when the question is, only later,
-     * when the exam activity is loaded.
+     * Stores if this questions was locked and if it should display the answer. When the
+     * {@link com.gaspar.learnjava.adapters.QuestionAdapter} sees this flag as true, it will
+     * show the corrected version of a question. The exact meaning of showing corrected is
+     * implemented in the subclasses, for example {@link MultiChoiceQuestion#showCorrectAnswer(ImageView, LinearLayout)}.
      */
-    View questionView;
+    protected boolean displayAnswer;
 
+    /**
+     * Constructor for subclasses.
+     * @param type Type of the question.
+     * @param text Text of the question.
+     */
     Question(@QuestionType int type, String text) {
         this.type = type;
         this.text = text;
@@ -61,6 +67,7 @@ public abstract class Question implements Serializable {
         int TEXT = 3;
     }
 
+    @QuestionType
     public int getType() {
         return type;
     }
@@ -68,15 +75,6 @@ public abstract class Question implements Serializable {
     public String getText() {
         return text;
     }
-
-    /**
-     * Creates a view that displays this question and the possible answers. Selecting or typing answers
-     * using the view will modify the Question object. This method should assign {@link #questionView}.
-     * @param parent The view group this question view will be added. This method DOES NOT add the
-     *               inflated view.
-     * @return The created view.
-     */
-    public abstract View createQuestionView(Context context, ViewGroup parent);
 
     /**
      * @return True only if the user has selected or typed an answer.
@@ -87,16 +85,6 @@ public abstract class Question implements Serializable {
      * @return True only if the correct answer has been selected or typed.
      */
     public abstract boolean isCorrect();
-
-    /**
-     * Uses {@link #questionView} to show if the selected answer (or answers) was/were correct or not.
-     */
-    public abstract void showCorrectAnswer();
-
-    /**
-     * Locks the view of this question so the user can't change the selected answer anymore.
-     */
-    public abstract void lockQuestion();
 
     /**
      * Constants for the question type tags.
@@ -124,5 +112,20 @@ public abstract class Question implements Serializable {
         } catch (Exception e) {
             return -1;
         }
+    }
+
+    /**
+     * @return If this question should display it's answer.
+     */
+    public boolean isDisplayAnswer() {
+        return displayAnswer;
+    }
+
+    /**
+     * Set if this question should be locked and display its answer.
+     * @param displayAnswer True if it should display answer.
+     */
+    public void setDisplayAnswer(boolean displayAnswer) {
+        this.displayAnswer = displayAnswer;
     }
 }

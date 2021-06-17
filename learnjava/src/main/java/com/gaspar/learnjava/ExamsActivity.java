@@ -63,9 +63,9 @@ public class ExamsActivity extends ThemedActivity implements NavigationView.OnNa
     private void setUpUI() {
         new FillExamsActivityTask().execute(this); //add exam selectors
 
-        toolbar = findViewById(R.id.toolbarExam);
+        toolbar = findViewById(R.id.toolbarExams);
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_exams_root);
         NavigationView navigationView = findViewById(R.id.nav_view);
         toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -105,7 +105,7 @@ public class ExamsActivity extends ThemedActivity implements NavigationView.OnNa
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_exams_root);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -115,7 +115,7 @@ public class ExamsActivity extends ThemedActivity implements NavigationView.OnNa
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        DrawerUtils.handleDrawerOnClick(this, item);
+        DrawerUtils.handleDrawerOnClick(this, item, R.id.drawer_layout_exams_root);
         return true;
     }
 

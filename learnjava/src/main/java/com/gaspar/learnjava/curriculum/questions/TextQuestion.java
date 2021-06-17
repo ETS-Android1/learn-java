@@ -1,17 +1,16 @@
 package com.gaspar.learnjava.curriculum.questions;
 
 import android.content.Context;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.utils.ThemeUtils;
@@ -102,46 +101,6 @@ public class TextQuestion extends Question implements Serializable {
      * {@inheritDoc}
      */
     @Override
-    public View createQuestionView(Context context, ViewGroup parent) {
-        final LayoutInflater inflater = LayoutInflater.from(context);
-        questionView = inflater.inflate(R.layout.question_text, parent, false);
-        ((TextView)questionView.findViewById(R.id.questionTextView)).setText(text);
-        //this wont be visible on start
-        //replace important space markers with actual space
-        String correctText = correctAnswers.get(0);
-        correctText = correctText.replace("[s]", " ");
-        ((TextView)questionView.findViewById(R.id.possibleSolutionTextView)).setText(correctText);
-        EditText answerEditText = questionView.findViewById(R.id.answerEditText);
-        answerEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                enteredAnswer = charSequence.toString().trim();
-            }
-            @Override
-            public void afterTextChanged(Editable editable) { }
-        });
-        if(ThemeUtils.isDarkTheme()) {
-            recolorSeparators(questionView, context);
-            questionView.setBackground(ContextCompat.getDrawable(context, R.drawable.question_background_dark));
-        }
-        return questionView;
-    }
-
-    /**
-     * Sets a better color for separator lines, only if in dark mode.
-     */
-    private void recolorSeparators(View questionView, final Context context) {
-        int accent = ContextCompat.getColor(context, R.color.colorAccent_Dark);
-        questionView.findViewById(R.id.questionSep1).setBackgroundColor(accent);
-        questionView.findViewById(R.id.questionSep2).setBackgroundColor(accent);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public boolean isAnswered() {
         return !enteredAnswer.equals("");
     }
@@ -187,38 +146,109 @@ public class TextQuestion extends Question implements Serializable {
     /**
      * Displays the result. If the answer is correct, then highlights it with green. If it is incorrect, then
      * highlights it with red and reveals the 'correct answer' part of the question.
+     * @param holder An object which caches all the views required.
      */
-    @Override
     @UiThread
-    public void showCorrectAnswer() {
-        EditText answerEditText = questionView.findViewById(R.id.answerEditText);
-        //using this extra text view is the only way I found to show correct color...
-        TextView answerDisplayer = questionView.findViewById(R.id.answerDisplayerTextView);
-        final Context context = questionView.getContext();
+    public void showCorrectAnswer(@NonNull final TextQuestionHolder holder) {
+        //format the correct answer to be displayable, and display it
+        String correctText = correctAnswers.get(0);
+        correctText = correctText.replace("[s]", " ");
+        TextView possibleSolutionView = holder.possibleSolutionLayout.findViewById(R.id.possibleSolutionTextView);
+        possibleSolutionView.setText(correctText);
+
+        final Context context = holder.answerEditText.getContext();
         if(ThemeUtils.isDarkTheme()) { //recolor text on dark theme for better visibility
-            answerDisplayer.setTextColor(ContextCompat.getColor(context, android.R.color.black));
+            holder.answerDisplayer.setTextColor(ContextCompat.getColor(context, android.R.color.black));
         }
-        answerDisplayer.setText(answerEditText.getText());
-        answerDisplayer.setVisibility(View.VISIBLE);
-        answerEditText.setVisibility(View.GONE);
+        holder.answerDisplayer.setText(holder.answerEditText.getText());
+        holder.answerDisplayer.setVisibility(View.VISIBLE);
+        holder.answerEditText.setVisibility(View.GONE);
         if(isCorrect()) {
-            ((ImageView)questionView.findViewById(R.id.questionIcon)).setImageResource(R.drawable.tick_icon);
-            answerDisplayer.setBackgroundResource(R.drawable.correct_answer_background);
-            answerDisplayer.setTag(R.drawable.correct_answer_background); //tag is used in testing
+            holder.questionIcon.setImageResource(R.drawable.tick_icon);
+            holder.answerDisplayer.setBackgroundResource(R.drawable.correct_answer_background);
+            holder.answerDisplayer.setTag(R.drawable.correct_answer_background); //tag is used in testing
         } else {
-            if(!isAnswered()) answerDisplayer.setText(context.getString(R.string.no_answer_given));
-            ((ImageView)questionView.findViewById(R.id.questionIcon)).setImageResource(R.drawable.problem_icon);
-            answerDisplayer.setBackgroundResource(R.drawable.incorrect_background);
-            answerDisplayer.setTag(R.drawable.incorrect_background); //tag is used in testing
-            questionView.findViewById(R.id.solutionDisplayerLayout).setVisibility(View.VISIBLE);
+            if(!isAnswered()) holder.answerDisplayer.setText(context.getString(R.string.no_answer_given));
+            holder.questionIcon.setImageResource(R.drawable.problem_icon);
+            holder.answerDisplayer.setBackgroundResource(R.drawable.incorrect_background);
+            holder.answerDisplayer.setTag(R.drawable.incorrect_background); //tag is used in testing
+            holder.possibleSolutionLayout.setVisibility(View.VISIBLE);
         }
     }
 
     /**
-     * {@inheritDoc}
+     * Disables the answer edit text.
+     * @param answerEditText The edit text.
      */
-    @Override
-    public void lockQuestion() {
-        questionView.findViewById(R.id.answerEditText).setEnabled(false);
+    public void lockQuestion(@NonNull final EditText answerEditText) {
+        answerEditText.setEnabled(false);
+    }
+
+    /**
+     * Updates the answer that this text question is saving.
+     * @param enteredAnswer The new answer.
+     */
+    public void setEnteredAnswer(String enteredAnswer) {
+        this.enteredAnswer = enteredAnswer;
+    }
+
+    /**
+     * @return The answer that the user entered.
+     */
+    public String getEnteredAnswer() {
+        return enteredAnswer;
+    }
+
+    /**
+     * A {@link RecyclerView.ViewHolder} implementation for {@link TextQuestion}. Used in
+     * {@link com.gaspar.learnjava.adapters.QuestionAdapter}.
+     */
+    public static class TextQuestionHolder extends RecyclerView.ViewHolder {
+
+        /**
+         * Icon of the question.
+         */
+        public ImageView questionIcon;
+
+        /**
+         * Displays the text of the question.
+         */
+        public TextView questionTextView;
+
+        /**
+         * The user types in this to enter answer.
+         */
+        public EditText answerEditText;
+
+        /**
+         * Helper text view.
+         */
+        public TextView answerDisplayer;
+
+        /**
+         * Displays a correct solution.
+         */
+        public LinearLayout possibleSolutionLayout;
+
+        /**
+         * Creates a view holder.
+         *
+         * @param view This is expected to be inflated from R.layout.question_text.
+         */
+        public TextQuestionHolder(View view) {
+            super(view);
+            questionTextView = view.findViewById(R.id.questionTextView);
+            questionIcon = view.findViewById(R.id.questionIcon);
+            answerEditText = view.findViewById(R.id.answerEditText);
+            answerDisplayer = view.findViewById(R.id.answerDisplayerTextView);
+            possibleSolutionLayout = view.findViewById(R.id.solutionDisplayerLayout);
+            //can't change theme in exams, so this can be done once, here
+            if (ThemeUtils.isDarkTheme()) {
+                int accent = ContextCompat.getColor(view.getContext(), R.color.colorPrimaryDark_Dark);
+                view.findViewById(R.id.questionSep1).setBackgroundColor(accent);
+                view.findViewById(R.id.questionSep2).setBackgroundColor(accent);
+                view.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.question_background_dark));
+            }
+        }
     }
 }

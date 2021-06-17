@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import java.util.Objects;
+
 /**
  * This activity displays information about helping me improve the app. Allows quick email contact.
  */
@@ -20,8 +22,9 @@ public class ContactActivity extends ThemedActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
-        toolbar = findViewById(R.id.toolbarExam);
+        toolbar = findViewById(R.id.toolbarContact);
         setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         //load contact options to linear layout
         String[] contactMeWhen = getResources().getStringArray(R.array.contact_me_when);

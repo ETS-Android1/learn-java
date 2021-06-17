@@ -226,8 +226,8 @@ ___[] letters = { <font color="#2E8B57">'a'</font>, ___, <font color="#2E8B57">'
         <data><![CDATA[
 
 <font color="#DF7401">double</font>[] reals = <font color="#E65100">new</font> <font color="#DF7401">double</font>[<font color="#F0E130">20</font>];
-<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"<font color="</font></font>#999900">First: "</font> + reals[___]);
-<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57"><font color="#2E8B57">"<font color="</font></font>#999900">Last: "</font> + reals[___]);
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"First: "</font> + reals[___]);
+<br/><font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"Last: "</font> + reals[___]);
 
         ]]></data>
         <answer place="0">0</answer>

@@ -3,6 +3,7 @@ package com.gaspar.learnjava.utils;
 import android.content.Intent;
 import android.view.MenuItem;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -27,8 +28,9 @@ public abstract class DrawerUtils {
      * Starts an activity depending on which menu item was pressed in the drawer.
      * @param activity The current activity.
      * @param item The pressed menu item.
+     * @param drawerLayoutId The resource id of the drawer layout. This differs in activities.
      */
-    public static void handleDrawerOnClick(@NonNull final AppCompatActivity activity, @NonNull final MenuItem item) {
+    public static void handleDrawerOnClick(@NonNull final AppCompatActivity activity, @NonNull final MenuItem item, @IdRes int drawerLayoutId) {
         int id = item.getItemId(); // Handle navigation view item clicks here.
         Intent intent = null;
         if (id == R.id.nav_courses) {
@@ -44,7 +46,7 @@ public abstract class DrawerUtils {
         } else if (id == R.id.nav_clipsync) {
             intent = new Intent(activity, ClipSyncActivity.class);
         }
-        DrawerLayout drawer = activity.findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = activity.findViewById(drawerLayoutId);
         drawer.closeDrawer(GravityCompat.START);
         if(intent == null) return;
         activity.startActivity(intent); //start selected activity

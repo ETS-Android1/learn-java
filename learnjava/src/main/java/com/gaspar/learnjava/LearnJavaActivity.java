@@ -140,7 +140,7 @@ public class LearnJavaActivity extends ThemedActivity
     private void setUpUI() {
         toolbar = findViewById(R.id.toolbarExam);
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_learn_java_root);
         NavigationView navigationView = findViewById(R.id.nav_view);
         toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -343,7 +343,7 @@ public class LearnJavaActivity extends ThemedActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_learn_java_root);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -353,7 +353,7 @@ public class LearnJavaActivity extends ThemedActivity
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        DrawerUtils.handleDrawerOnClick(this, item);
+        DrawerUtils.handleDrawerOnClick(this, item, R.id.drawer_layout_learn_java_root);
         return true;
     }
 

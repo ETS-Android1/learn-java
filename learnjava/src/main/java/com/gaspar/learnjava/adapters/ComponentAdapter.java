@@ -24,6 +24,7 @@ import com.gaspar.learnjava.utils.ListTagHandler;
 import com.gaspar.learnjava.utils.ThemeUtils;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
@@ -89,6 +90,8 @@ public class ComponentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
      * Creates an adapter from a list of {@link Component}s. This will use a footer view at the bottom.
      * @param components The list of components.
      * @param activity An activity in which this adapter displays its contents.
+     * @param footerViewHolderGenerator Used by the footer view to get the recycler view which belong to it. Basically a version of {@link #createViewHolder(ViewGroup, int)}.
+     * @param footerViewHolderBinder Used by the footer view to bind its data to the view. Basically a version of {@link #bindViewHolder(RecyclerView.ViewHolder, int)}.
      */
     public ComponentAdapter(@NonNull List<Component> components,
                             @NonNull AppCompatActivity activity,
@@ -143,7 +146,7 @@ public class ComponentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 holder = new TitleComponent.TitleComponentHolder(view);
                 break;
             default: //footer
-                holder = footerViewHolderGenerator.apply(parent);
+                holder = Objects.requireNonNull(footerViewHolderGenerator).apply(parent);
         }
         return holder;
     }
@@ -197,17 +200,7 @@ public class ComponentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             case Component.ComponentType.INTERACTIVE:
                 InteractiveComponent.InteractiveComponentHolder interactiveHolder = (InteractiveComponent.InteractiveComponentHolder)holder;
                 InteractiveComponent interactiveComponent = (InteractiveComponent) components.get(position);
-                //set text
-                interactiveHolder.instructionTextView.setText(interactiveComponent.getInstruction());
-                //set interactive code area
-                if(interactiveHolder.codeAreaInteractive.getChildCount() == 0) {
-                    //not initialized, so fill it
-                    interactiveComponent.fillInteractiveCodeArea(interactiveHolder.codeAreaInteractive);
-                }
-                //initialize buttons
-                interactiveComponent.initZoomButtons(interactiveHolder.zoomIn, interactiveHolder.zoomOut, interactiveHolder.codeAreaInteractive);
-                interactiveHolder.resetButton.setOnClickListener(v -> interactiveComponent.reset(activity));
-                interactiveHolder.checkButton.setOnClickListener(v -> interactiveComponent.checkSolution(activity, interactiveHolder.codeAreaInteractive));
+                displayInteractiveComponent(interactiveHolder, interactiveComponent);
                 break;
             case Component.ComponentType.TEXT:
                 TextComponent.TextComponentHolder textHolder = (TextComponent.TextComponentHolder)holder;
@@ -226,7 +219,30 @@ public class ComponentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 titleHolder.titleTextView.setText(titleComponent.getTitle());
                 break;
             default: //footer
-                footerViewHolderBinder.accept(holder, position);
+                Objects.requireNonNull(footerViewHolderBinder).accept(holder, position);
+        }
+    }
+
+    /**
+     * Sets up an interactive component view using it's object and the cached views in the holder.
+     * @param interactiveHolder The view holder.
+     * @param interactiveComponent The interactive component.
+     */
+    private void displayInteractiveComponent(@NonNull final InteractiveComponent.InteractiveComponentHolder interactiveHolder, @NonNull InteractiveComponent interactiveComponent) {
+        //set text
+        interactiveHolder.instructionTextView.setText(interactiveComponent.getInstruction());
+        //set interactive code area (this creates empty space views, and binds the to the empty space objects)
+        interactiveComponent.fillInteractiveCodeArea(interactiveHolder.codeAreaInteractive);
+        //initialize buttons
+        interactiveComponent.initZoomButtons(interactiveHolder.zoomIn, interactiveHolder.zoomOut, interactiveHolder.codeAreaInteractive);
+        interactiveHolder.resetButton.setOnClickListener(v -> interactiveComponent.reset(activity));
+        //this check was triggered by a click
+        interactiveHolder.checkButton.setOnClickListener(v -> interactiveComponent.checkAndDisplaySolution(activity, interactiveHolder.codeAreaInteractive, true));
+        //restore saved answers into the empty spaces
+        interactiveComponent.restoreSavedSolution();
+        //check if this interactive component should display solution
+        if(interactiveComponent.isDisplaySolution()) {
+            interactiveComponent.checkAndDisplaySolution(interactiveHolder.codeAreaInteractive.getContext(), null, false);
         }
     }
 

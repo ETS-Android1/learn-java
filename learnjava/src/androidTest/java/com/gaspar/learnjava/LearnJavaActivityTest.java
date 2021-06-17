@@ -86,7 +86,7 @@ public class LearnJavaActivityTest {
 
     @Test
     public void testActivityInView() {
-        onView(withId(R.id.drawer_layout)).check(matches(isDisplayed()));
+        onView(withId(R.id.drawer_layout_learn_java_root)).check(matches(isDisplayed()));
     }
 
     @Test

@@ -330,7 +330,7 @@
         <correct>false</correct>
     </question>
     <question type="single_choice">
-        <text>Melyik egy konstans correct elnevezése, Java-s szokások szerint?</text>
+        <text>Melyik egy konstans helyes elnevezése, Java-s szokások szerint?</text>
         <answer>SpeedOfLight</answer>
         <answer>SPEED_OF_LIGHT</answer>
         <answer>speedoflight</answer>

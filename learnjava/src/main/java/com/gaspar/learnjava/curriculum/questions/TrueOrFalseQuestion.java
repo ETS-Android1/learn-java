@@ -1,16 +1,13 @@
 package com.gaspar.learnjava.curriculum.questions;
 
-import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.IntDef;
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.utils.ThemeUtils;
@@ -41,7 +38,7 @@ public class TrueOrFalseQuestion extends Question implements Serializable {
      * Constants for storing the selected value.
      */
     @IntDef({SelectedValues.FALSE, SelectedValues.TRUE, SelectedValues.NOT_SELECTED})
-    @interface SelectedValues {
+    public @interface SelectedValues {
         int TRUE = 1;
         int FALSE = 0;
         int NOT_SELECTED = -1;
@@ -65,44 +62,6 @@ public class TrueOrFalseQuestion extends Question implements Serializable {
     }
 
     /**
-     * Played when selecting an answer.
-     */
-    private Animation tickAnimation;
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public View createQuestionView(Context context, ViewGroup parent) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        questionView = inflater.inflate(R.layout.question_true_false, parent, false);
-        ((TextView)questionView.findViewById(R.id.questionTextView)).setText(text);
-
-        tickAnimation = AnimationUtils.loadAnimation(context, R.anim.tick);
-        TextView trueTextView = questionView.findViewById(R.id.trueTextView);
-        TextView falseTextView = questionView.findViewById(R.id.falseTextView);
-        trueTextView.setOnClickListener((view) -> {
-            selectedValue = SelectedValues.TRUE;
-            trueTextView.setBackgroundResource(R.drawable.selected_background);
-            falseTextView.setBackgroundResource(R.drawable.unselected_background);
-            trueTextView.startAnimation(tickAnimation);
-        });
-        falseTextView.setOnClickListener((view) -> {
-            selectedValue = SelectedValues.FALSE;
-            falseTextView.startAnimation(tickAnimation);
-            falseTextView.setBackgroundResource(R.drawable.selected_background);
-            trueTextView.setBackgroundResource(R.drawable.unselected_background);
-        });
-        if(ThemeUtils.isDarkTheme()) { //additional styling on dark theme
-            int black = ContextCompat.getColor(context, android.R.color.black);
-            trueTextView.setTextColor(black);
-            falseTextView.setTextColor(black);
-            questionView.setBackground(ContextCompat.getDrawable(context, R.drawable.question_background_dark));
-        }
-        return questionView;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Override
@@ -123,34 +82,95 @@ public class TrueOrFalseQuestion extends Question implements Serializable {
     }
 
     /**
-     * {@inheritDoc}
+     * Highlights the correct answer and marks incorrect answer with red.
+     * @param trueTextView Text view that displays TRUE.
+     * @param falseTextView Text view that displays FALSE.
+     * @param questionIcon Icon of the question.
      */
-    @Override
-    public void showCorrectAnswer() {
-        TextView trueTextView = questionView.findViewById(R.id.trueTextView);
-        TextView falseTextView = questionView.findViewById(R.id.falseTextView);
+    public void showCorrectAnswer(@NonNull final TextView trueTextView, @NonNull final TextView falseTextView, @NonNull ImageView questionIcon) {
         (trueAnswer ? trueTextView : falseTextView).setBackgroundResource(R.drawable.correct_answer_background);
         if(!isCorrect() && isAnswered()) { //user marked the wrong answer
             (trueAnswer ? falseTextView : trueTextView).setBackgroundResource(R.drawable.incorrect_background);
         }
-        ImageView icon = questionView.findViewById(R.id.questionIcon);
         if (isCorrect()) {
-            icon.setImageResource(R.drawable.tick_icon);
-            icon.setTag(R.drawable.tick_icon);
+            questionIcon.setImageResource(R.drawable.tick_icon);
+            questionIcon.setTag(R.drawable.tick_icon);
         } else {
-            icon.setImageResource(R.drawable.problem_icon);
-            icon.setTag(R.drawable.problem_icon);
+            questionIcon.setImageResource(R.drawable.problem_icon);
+            questionIcon.setTag(R.drawable.problem_icon);
         }
     }
 
     /**
-     * {@inheritDoc}
+     * Locks the question so the answer can't be changed anymore.
+     * @param trueTextView Text view that displays TRUE.
+     * @param falseTextView Text view that displays FALSE.
      */
-    @Override
-    public void lockQuestion() {
-        TextView trueTextView = questionView.findViewById(R.id.trueTextView);
-        TextView falseTextView = questionView.findViewById(R.id.falseTextView);
+    public void lockQuestion(@NonNull final TextView trueTextView, @NonNull final TextView falseTextView) {
         trueTextView.setEnabled(false);
         falseTextView.setEnabled(false);
+    }
+
+    /**
+     * Updates the selected value of the true false question.
+     * @param selectedValue The selected value, one of {@link SelectedValues} constants.
+     */
+    public void setSelectedValue(@SelectedValues int selectedValue) {
+        this.selectedValue = selectedValue;
+    }
+
+    /**
+     * @return The selected value, one of {@link SelectedValues}.
+     */
+    @SelectedValues
+    public int getSelectedValue() {
+        return selectedValue;
+    }
+
+    /**
+     * A {@link RecyclerView.ViewHolder} implementation for {@link TrueOrFalseQuestion}. Used in
+     * {@link com.gaspar.learnjava.adapters.QuestionAdapter}.
+     */
+    public static class TrueFalseHolder extends RecyclerView.ViewHolder {
+
+        /**
+         * Icon of the question.
+         */
+        public ImageView questionIcon;
+
+        /**
+         * Displays the text of the question.
+         */
+        public TextView questionTextView;
+
+        /**
+         * Text view that displays TRUE.
+         */
+        public TextView trueTextView;
+
+        /**
+         * Text view that displays FALSE.
+         */
+        public TextView falseTextView;
+
+        /**
+         * Creates a view holder.
+         * @param view This is expected to be inflated from R.layout.question_true_false.
+         */
+        public TrueFalseHolder(View view) {
+            super(view);
+            questionTextView = view.findViewById(R.id.questionTextView);
+            questionIcon = view.findViewById(R.id.questionIcon);
+            trueTextView = view.findViewById(R.id.trueTextView);
+            falseTextView = view.findViewById(R.id.falseTextView);
+            //can't change theme in exams, so this can be done once, here
+            if(ThemeUtils.isDarkTheme()) { //additional styling on dark theme
+                int black = ContextCompat.getColor(view.getContext(), android.R.color.black);
+                trueTextView.setTextColor(black);
+                falseTextView.setTextColor(black);
+                view.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.question_background_dark));
+            }
+        }
+
     }
 }

@@ -143,11 +143,11 @@
         <correct>1</correct>
     </question>
     <question type="true_false">
-        <text>Ha van egy 'sel' nevű boolean, akkor a correct módja a tagadásának a '!sel'.</text>
+        <text>Ha van egy 'sel' nevű boolean, akkor a helyes módja a tagadásának a '!sel'.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>Ha van egy 'sel' nevű boolean, akkor a correct módja a tagadásának a '!=sel'.</text>
+        <text>Ha van egy 'sel' nevű boolean, akkor a korrekt módja a tagadásának a '!=sel'.</text>
         <correct>false</correct>
     </question>
     <question type="text">
@@ -230,7 +230,7 @@
         <correct>3</correct>
     </question>
     <question type="single_choice">
-        <text>Mi a correct a ciklus megállási feltételével kapcsolatban?</text>
+        <text>Mi igaz a ciklus megállási feltételével kapcsolatban?</text>
         <answer>Ez soha nem engedi meg a végtelen ciklusokat.</answer>
         <answer>Amikor ez a feltétel hamis lesz, a ciklus leáll.</answer>
         <answer>Amikor ez a feltétel igazzá válik, a ciklus leáll.</answer>
@@ -313,7 +313,7 @@
 
     <!-- Questions for arrays -->
     <question type="single_choice">
-        <text>Melyik a correct állítás egy integer tömb deklarálására?</text>
+        <text>Melyik a helyes állítás egy integer tömb deklarálására?</text>
         <answer>int[] data = new int[];</answer>
         <answer>String[] data = new String[5];</answer>
         <answer>int[] data = new int[10];</answer>
@@ -321,7 +321,7 @@
         <correct>2</correct>
     </question>
     <question type="single_choice">
-        <text>Melyik a correct állítás egy 20 hosszúságú String tömb deklarálására?</text>
+        <text>Melyik az igaz állítás egy 20 hosszúságú String tömb deklarálására?</text>
         <answer>int[] texts = new int[20];</answer>
         <answer>String[] texts = new String[5];</answer>
         <answer>String[20] texts = new String[];</answer>

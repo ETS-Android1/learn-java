@@ -1,15 +1,15 @@
 package com.gaspar.learnjava.curriculum.questions;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.utils.ThemeUtils;
@@ -70,38 +70,18 @@ public class SingleChoiceQuestion extends Question implements Serializable {
     }
 
     /**
-     * {@inheritDoc}
+     * Loads the individual answer views into the answer layout.
+     * @param answersLayout The answer layout.
      */
-    @Override
-    public View createQuestionView(Context context, ViewGroup parent) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        questionView = inflater.inflate(R.layout.question_single_choice, parent, false);
-        ((TextView)questionView.findViewById(R.id.questionTextView)).setText(text); //set question text
-        RadioGroup answersGroup = questionView.findViewById(R.id.answersLayout);
+    public void fillAnswersLayout(@NonNull final RadioGroup answersLayout) {
+        answersLayout.removeAllViews();
+        final LayoutInflater inflater = LayoutInflater.from(answersLayout.getContext());
         for(int i=0; i<answers.size(); i++) { //add answer radio buttons
-            View inflatedAnswer = inflater.inflate(R.layout.answer_single_choice, answersGroup, false);
-            RadioButton answerButton = inflatedAnswer.findViewById(R.id.answer);
-            answerButton.setText(answers.get(i));
-            answerButton.setId(View.generateViewId());
-            final int fixedI = i;
-            answerButton.setOnCheckedChangeListener((compoundButton, isChecked) -> {
-                if(isChecked) selectedAnswerIndex = fixedI;
-            });
-            answersGroup.addView(answerButton, i);
+            RadioButton answer = (RadioButton) inflater.inflate(R.layout.answer_single_choice, answersLayout, false);
+            answer.setText(answers.get(i));
+            answer.setId(View.generateViewId());
+            answersLayout.addView(answer, i);
         }
-        if(ThemeUtils.isDarkTheme()) {
-            recolorSeparator(questionView, context);
-            questionView.setBackground(ContextCompat.getDrawable(context, R.drawable.question_background_dark));
-        }
-        return questionView;
-    }
-
-    /**
-     * Sets a better color for separator lines, only if in dark mode.
-     */
-    private void recolorSeparator(View questionView, final Context context) {
-        int accent = ContextCompat.getColor(context, R.color.colorAccent_Dark);
-        questionView.findViewById(R.id.questionSep1).setBackgroundColor(accent);
     }
 
     /**
@@ -121,13 +101,27 @@ public class SingleChoiceQuestion extends Question implements Serializable {
     }
 
     /**
-     * Highlights the correct answer in the question view with green. If the user has selected an
-     * incorrect answer, that will be highlighted with red.
+     * @return The index of the currently selected answer.
      */
-    @Override
-    public void showCorrectAnswer() {
-        ImageView iconView = questionView.findViewById(R.id.questionIcon);
-        RadioGroup answersLayout = questionView.findViewById(R.id.answersLayout);
+    public int getSelectedAnswerIndex() {
+        return selectedAnswerIndex;
+    }
+
+    /**
+     * Updates the saved selected answer.
+     * @param selectedAnswerIndex The new answer index.
+     */
+    public void setSelectedAnswerIndex(int selectedAnswerIndex) {
+        this.selectedAnswerIndex = selectedAnswerIndex;
+    }
+
+    /**
+     * Updates the view of this question to show the correct answer, and mark the user's answer
+     * with red, if it was incorrect.
+     * @param questionIcon The icon of the question.
+     * @param answersLayout The layout where the answer views are.
+     */
+    public void showCorrectAnswer(@NonNull final ImageView questionIcon, @NonNull final RadioGroup answersLayout) {
         //correct answer marked regardless on answer
         RadioButton correctButton = (RadioButton) answersLayout.getChildAt(correctAnswerIndex);
         correctButton.setBackgroundResource(R.drawable.correct_answer_background);
@@ -135,11 +129,11 @@ public class SingleChoiceQuestion extends Question implements Serializable {
         correctButton.setButtonTintList(ContextCompat.getColorStateList(correctButton.getContext(), R.color.black_color_list));
         if(isAnswered()) { //question as been answered
             if(isCorrect()) { //answered correctly
-                iconView.setImageResource(R.drawable.tick_icon);
-                iconView.setTag(R.drawable.tick_icon);
+                questionIcon.setImageResource(R.drawable.tick_icon);
+                questionIcon.setTag(R.drawable.tick_icon);
             } else { //incorrect
-                iconView.setImageResource(R.drawable.problem_icon);
-                iconView.setTag(R.drawable.problem_icon);
+                questionIcon.setImageResource(R.drawable.problem_icon);
+                questionIcon.setTag(R.drawable.problem_icon);
                 //mark incorrect answer with red
                 RadioButton wrongButton = (RadioButton)answersLayout.getChildAt(selectedAnswerIndex);
                 wrongButton.setBackgroundResource(R.drawable.incorrect_background);
@@ -147,18 +141,57 @@ public class SingleChoiceQuestion extends Question implements Serializable {
                 wrongButton.setButtonTintList(ContextCompat.getColorStateList(correctButton.getContext(), R.color.black_color_list));
             }
         } else { //question has not been answered
-            iconView.setImageResource(R.drawable.problem_icon);
+            questionIcon.setImageResource(R.drawable.problem_icon);
         }
     }
 
     /**
-     * {@inheritDoc}
+     * Disables all answer checkboxes.
+     * @param answersLayout The layout where the answer views are.
      */
-    @Override
-    public void lockQuestion() {
-        RadioGroup answersLayout = questionView.findViewById(R.id.answersLayout);
+    public void lockQuestion(@NonNull final RadioGroup answersLayout) {
         for(int i=0; i<answersLayout.getChildCount(); i++) {
             answersLayout.getChildAt(i).setEnabled(false);
         }
+    }
+
+    /**
+     * A {@link RecyclerView.ViewHolder} implementation for {@link SingleChoiceQuestion}. Used in
+     * {@link com.gaspar.learnjava.adapters.QuestionAdapter}.
+     */
+    public static class SingleChoiceHolder extends RecyclerView.ViewHolder {
+
+        /**
+         * Icon of the question.
+         */
+        public ImageView questionIcon;
+
+        /**
+         * Displays the text of the question.
+         */
+        public TextView questionTextView;
+
+        /**
+         * Displays the answers of the question.
+         */
+        public RadioGroup answersLayout;
+
+        /**
+         * Creates a view holder.
+         * @param view This is expected to be inflated from R.layout.question_single_choice.
+         */
+        public SingleChoiceHolder(View view) {
+            super(view);
+            questionTextView = view.findViewById(R.id.questionTextView);
+            answersLayout = view.findViewById(R.id.answersLayout);
+            questionIcon = view.findViewById(R.id.questionIcon);
+            //in dark theme some extra formatting is needed
+            if(ThemeUtils.isDarkTheme()) {
+                int accent = ContextCompat.getColor(view.getContext(), R.color.colorPrimaryDark_Dark);
+                view.findViewById(R.id.questionSep1).setBackgroundColor(accent);
+                view.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.question_background_dark));
+            }
+        }
+
     }
 }

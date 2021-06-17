@@ -152,7 +152,7 @@
         <correct>1</correct>
     </question>
     <question type="single_choice">
-        <text>Mi a correct szintaxis egy (általános) lambda kifejezéshez?</text>
+        <text>Mi a korrekt szintaxis egy (általános) lambda kifejezéshez?</text>
         <answer>( utasítások ) -&gt; paraméterek</answer>
         <answer>{ paraméterek } -&gt; ( utasítások )</answer>
         <answer>{ paraméterek } -&gt; { utasítások }</answer>
@@ -160,7 +160,7 @@
         <correct>3</correct>
     </question>
     <question type="multi_choice">
-        <text>Melyik a correct szintaxis az EGY paraméteres lambda esetében?</text>
+        <text>Melyik a helyes szintaxis az EGY paraméteres lambda esetében?</text>
         <answer>( paraméter ) -&gt; { utasítások }</answer>
         <answer>( utasítások ) -&gt; paraméter</answer>
         <answer>( utasítások ) -&gt; { paraméter }</answer>
@@ -169,7 +169,7 @@
         <correct>3</correct>
     </question>
     <question type="multi_choice">
-        <text>Melyik a correct szintaxis az EGY paramétert és EGY utasítást tartalmazó lambda esetében?</text>
+        <text>Melyik a helyes szintaxis az EGY paramétert és EGY utasítást tartalmazó lambda esetében?</text>
         <answer>( paraméter ) -&gt; { statement }</answer>
         <answer>paraméter -&gt; ( utasítások )</answer>
         <answer>paraméter -&gt; statement</answer>

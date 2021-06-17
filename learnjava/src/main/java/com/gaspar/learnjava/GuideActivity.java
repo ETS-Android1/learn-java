@@ -84,7 +84,7 @@ public class GuideActivity extends ThemedActivity implements NavigationView.OnNa
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        DrawerUtils.handleDrawerOnClick(this, item);
+        DrawerUtils.handleDrawerOnClick(this, item, R.id.drawer_layout_guide_root);
         return true;
     }
 

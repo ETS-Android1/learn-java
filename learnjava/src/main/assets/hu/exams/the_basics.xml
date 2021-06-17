@@ -249,11 +249,11 @@
         <correct>System.out.println("ABC");</correct>
     </question>
     <question type="true_false">
-        <text>A 'System.out.println(Hello, world!);' utasítás correct.</text>
+        <text>A 'System.out.println(Hello, world!);' utasítás helyes.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>A 'System.out.println("Hello, world!");' utasítás correct.</text>
+        <text>A 'System.out.println("Hello, world!");' utasítás helyes.</text>
         <correct>true</correct>
     </question>
     <question type="single_choice">
@@ -282,7 +282,7 @@
         <correct>false</correct>
     </question>
     <question type="text">
-        <text>Valami nem correct a 'String text "my message";' deklarációban. Írd le a correct utasítást, a név és az érték változtatása nélkül!</text>
+        <text>Valami nem stimmel a 'String text "my message";' deklarációban. Írd le a helyes utasítást, a név és az érték változtatása nélkül!</text>
         <correct>String[s]text = "my[s]message";</correct>
         <ignoreSpace/>
     </question>
@@ -323,7 +323,7 @@
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>A 'String i1 = "i_1", i2 = "i_2";' utasítás correct.</text>
+        <text>A 'String i1 = "i_1", i2 = "i_2";' utasítás helyes.</text>
         <correct>true</correct>
     </question>
     <question type="multi_choice">
@@ -440,15 +440,15 @@
         <correct>2</correct>
     </question>
     <question type="true_false">
-        <text>Tegyük fel, hogy a 'compute' metódus visszatérési típusa 'int'. Ekkor az 'int x = compute();' utasítás correct.</text>
+        <text>Tegyük fel, hogy a 'compute' metódus visszatérési típusa 'int'. Ekkor az 'int x = compute();' utasítás helyes.</text>
         <correct>true</correct>
     </question>
     <question type="true_false">
-        <text>Tegyük fel, hogy a 'compute' metódus visszatérési típusa 'int'. Ekkor az 'String x = compute();' utasítás correct.</text>
+        <text>Tegyük fel, hogy a 'compute' metódus visszatérési típusa 'int'. Ekkor az 'String x = compute();' utasítás helyes.</text>
         <correct>false</correct>
     </question>
     <question type="true_false">
-        <text>Tegyük fel, hogy az 'executeTask' metódusnak nincs visszatérési értéke. Ekkor az 'int x = executeTask();' utasítás correct.</text>
+        <text>Tegyük fel, hogy az 'executeTask' metódusnak nincs visszatérési értéke. Ekkor az 'int x = executeTask();' utasítás helyes.</text>
         <correct>false</correct>
     </question>
 

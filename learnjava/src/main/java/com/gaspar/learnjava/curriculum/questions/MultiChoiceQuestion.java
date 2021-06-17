@@ -1,15 +1,15 @@
 package com.gaspar.learnjava.curriculum.questions;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.utils.ThemeUtils;
@@ -73,42 +73,17 @@ public class MultiChoiceQuestion extends Question implements Serializable {
     }
 
     /**
-     * {@inheritDoc}
+     * Loads the individual answer views into the answer layout.
+     * @param answersLayout The answer layout.
      */
-    @Override
-    public View createQuestionView(Context context, ViewGroup parent) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        questionView = inflater.inflate(R.layout.question_multi_choice, parent, false);
-        ((TextView)questionView.findViewById(R.id.questionTextView)).setText(text);
-        LinearLayout answersLayout = questionView.findViewById(R.id.answersLayout);
+    public void fillAnswersLayout(@NonNull final LinearLayout answersLayout) {
+        answersLayout.removeAllViews();
+        final LayoutInflater inflater = LayoutInflater.from(answersLayout.getContext());
         for(int i=0; i<answers.size(); i++) {
-            View answerView = inflater.inflate(R.layout.answer_multi_choice, answersLayout, false);
-            CheckBox cb = answerView.findViewById(R.id.answer);
-            cb.setText(answers.get(i));
-            final int fixedI = i;
-            cb.setOnCheckedChangeListener((compoundButton,isChecked) -> {
-                if(isChecked) { //remove or add to set depending on checked state
-                    selectedAnswerIndices.add(fixedI);
-                } else {
-                    selectedAnswerIndices.remove(fixedI);
-                }
-            });
-            answersLayout.addView(answerView);
+            CheckBox answer = (CheckBox) inflater.inflate(R.layout.answer_multi_choice, answersLayout, false);
+            answer.setText(answers.get(i));
+            answersLayout.addView(answer);
         }
-        if(ThemeUtils.isDarkTheme()) {
-            recolorSeparators(questionView, context);
-            questionView.setBackground(ContextCompat.getDrawable(context, R.drawable.question_background_dark));
-        }
-        return questionView;
-    }
-
-    /**
-     * Sets a better color for separator lines, only if in dark mode.
-     */
-    private void recolorSeparators(View questionView, final Context context) {
-        int accent = ContextCompat.getColor(context, R.color.colorAccent_Dark);
-        questionView.findViewById(R.id.questionSep1).setBackgroundColor(accent);
-        questionView.findViewById(R.id.questionSep2).setBackgroundColor(accent);
     }
 
     /**
@@ -128,11 +103,19 @@ public class MultiChoiceQuestion extends Question implements Serializable {
     }
 
     /**
-     * {@inheritDoc}
+     * @return A list of indices, of the currently selected answers.
      */
-    @Override
-    public void showCorrectAnswer() {
-        ImageView questionIcon = questionView.findViewById(R.id.questionIcon);
+    public Set<Integer> getSelectedAnswerIndices() {
+        return selectedAnswerIndices;
+    }
+
+    /**
+     * Updates the view of this question to show the correct answer, and mark the user's answer
+     * with red, if it was incorrect.
+     * @param questionIcon The icon of the question.
+     * @param answersLayout The layout where the answer views are.
+     */
+    public void showCorrectAnswer(@NonNull final ImageView questionIcon, @NonNull final LinearLayout answersLayout) {
         if(isCorrect()) {
             questionIcon.setImageResource(R.drawable.tick_icon);
             questionIcon.setTag(R.drawable.tick_icon);
@@ -140,7 +123,6 @@ public class MultiChoiceQuestion extends Question implements Serializable {
             questionIcon.setImageResource(R.drawable.problem_icon);
             questionIcon.setTag(R.drawable.problem_icon);
         }
-        LinearLayout answersLayout = questionView.findViewById(R.id.answersLayout);
         for(int i=0; i<answersLayout.getChildCount(); i++) {
             if(correctAnswerIndices.contains(i)) { //mark the correct answers with green
                 CheckBox checkBox = (CheckBox)answersLayout.getChildAt(i);
@@ -159,13 +141,53 @@ public class MultiChoiceQuestion extends Question implements Serializable {
     }
 
     /**
-     * {@inheritDoc}
+     * Disables all answer checkboxes.
+     * @param answersLayout The layout where the answer views are.
      */
-    @Override
-    public void lockQuestion() {
-        LinearLayout answersLayout = questionView.findViewById(R.id.answersLayout);
+    public void lockQuestion(@NonNull final LinearLayout answersLayout) {
         for(int i=0; i<answersLayout.getChildCount(); i++) {
             answersLayout.getChildAt(i).setEnabled(false);
         }
+    }
+
+    /**
+     * A {@link RecyclerView.ViewHolder} implementation for {@link MultiChoiceQuestion}. Used in
+     * {@link com.gaspar.learnjava.adapters.QuestionAdapter}.
+     */
+    public static class MultiChoiceHolder extends RecyclerView.ViewHolder {
+
+        /**
+         * Icon of the question.
+         */
+        public ImageView questionIcon;
+
+        /**
+         * Displays the text of the question.
+         */
+        public TextView questionTextView;
+
+        /**
+         * Displays the answers of the question.
+         */
+        public LinearLayout answersLayout;
+
+        /**
+         * Creates a view holder.
+         * @param view This is expected to be inflated from R.layout.question_multi_choice.
+         */
+        public MultiChoiceHolder(View view) {
+            super(view);
+            questionTextView = view.findViewById(R.id.questionTextView);
+            answersLayout = view.findViewById(R.id.answersLayout);
+            questionIcon = view.findViewById(R.id.questionIcon);
+            //can't change theme in exams, so this can be done once, here
+            if(ThemeUtils.isDarkTheme()) {
+                int accent = ContextCompat.getColor(view.getContext(), R.color.colorPrimaryDark_Dark);
+                view.findViewById(R.id.questionSep1).setBackgroundColor(accent);
+                view.findViewById(R.id.questionSep2).setBackgroundColor(accent);
+                view.setBackground(ContextCompat.getDrawable(view.getContext(), R.drawable.question_background_dark));
+            }
+        }
+
     }
 }

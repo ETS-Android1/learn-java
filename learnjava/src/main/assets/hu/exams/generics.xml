@@ -132,7 +132,7 @@
     </question>
     <question type="single_choice">
         <text>Mi igaz egy korlátos típusparaméterre?</text>
-        <answer>A fordító a correct típust ki fogja kényszeríteni.</answer>
+        <answer>A fordító a helyes típust ki fogja kényszeríteni.</answer>
         <answer>Kizárólag futásidőben ellenőrződik, hogy a korlát teljesül-e.</answer>
         <answer>Csak 2 korlátot lehet megadni, egy osztályt és egy interfészt.</answer>
         <answer>Kizárólag osztályok lehetnek felső korlátok.</answer>

@@ -68,9 +68,9 @@ public class TasksActivity extends ThemedActivity implements NavigationView.OnNa
     private void setUpUI() {
         loadTasks(); //load tasks
 
-        toolbar = findViewById(R.id.toolbarExam);
+        toolbar = findViewById(R.id.toolbarTasks);
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_tasks_root);
         NavigationView navigationView = findViewById(R.id.nav_view);
         toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -133,7 +133,7 @@ public class TasksActivity extends ThemedActivity implements NavigationView.OnNa
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_tasks_root);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -143,7 +143,7 @@ public class TasksActivity extends ThemedActivity implements NavigationView.OnNa
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        DrawerUtils.handleDrawerOnClick(this, item);
+        DrawerUtils.handleDrawerOnClick(this, item, R.id.drawer_layout_tasks_root);
         return true;
     }
 

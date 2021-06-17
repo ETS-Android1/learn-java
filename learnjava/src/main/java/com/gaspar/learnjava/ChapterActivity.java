@@ -172,7 +172,7 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        DrawerUtils.handleDrawerOnClick(this, item);
+        DrawerUtils.handleDrawerOnClick(this, item, R.id.drawer_layout_chapter_root);
         return true;
     }
 

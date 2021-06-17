@@ -4,7 +4,9 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.text.Editable;
 import android.text.Html;
+import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gaspar.learnjava.R;
@@ -23,6 +26,7 @@ import com.gaspar.learnjava.utils.LogUtils;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * This is the class for an interactive {@link CodeComponent} that can be placed inside chapters or tasks.
@@ -96,6 +100,17 @@ public final class InteractiveComponent extends CodeComponent {
     private final List<EmptySpace> emptySpaces;
 
     /**
+     * An array of strings with exactly the same size as {@link #emptySpaces}. Contains a saved answer
+     * for each empty space, typed in by the user.
+     */
+    private final String[] savedAnswers;
+
+    /**
+     * This flag stores if the interactive component should display its solution.
+     */
+    private boolean displaySolution;
+
+    /**
      * Constructor for interactive component.
      * @param instruction The instructor displayed to the user.
      * @param data Data, which is formatted code, with empty space markers.
@@ -105,14 +120,24 @@ public final class InteractiveComponent extends CodeComponent {
         super(ComponentType.INTERACTIVE, data);
         this.emptySpaces = emptySpaces;
         this.instruction = instruction;
+        savedAnswers = new String[emptySpaces.size()];
+        //initialize saved answers, with default values, or empty string
+        for(int i = 0; i < emptySpaces.size(); i++) {
+            EmptySpace emptySpace = emptySpaces.get(i);
+            Optional<String> defaultAnswer = emptySpace.getDefaultText();
+            savedAnswers[i] = defaultAnswer.orElse("");
+        }
+        //by default, the solution is not displays
+        displaySolution = false;
     }
 
     /**
      * Creates the most important part of the interactive code sample, the combination of static code and
-     * {@link EmptySpace}-es.
+     * {@link EmptySpace}es.
      * @param codeAreaInteractive The parent, in which all code and empty space objects are placed.
      */
     public void fillInteractiveCodeArea(@NonNull final LinearLayout codeAreaInteractive) {
+        codeAreaInteractive.removeAllViews();
         String[] dataLines = data.split(FORMATTED_LINE_BREAK);
         final Context context = codeAreaInteractive.getContext();
         final LayoutInflater inflater = LayoutInflater.from(context);
@@ -157,6 +182,18 @@ public final class InteractiveComponent extends CodeComponent {
         EditText input = emptySpaceView.findViewById(R.id.inputField); //there is a new last edit text
         input.setImeOptions(EditorInfo.IME_ACTION_NEXT);
         emptySpaceView.findViewById(R.id.showSolutionButton).setOnClickListener(v -> emptySpace.showSolution(context));
+
+        //add listener to the edit text, which updates the saved solution
+        input.addTextChangedListener(new TextWatcher() {
+            @Override public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                savedAnswers[place] = charSequence.toString();
+            }
+
+            @Override public void afterTextChanged(Editable editable) { }
+        });
 
         //show default text if there is one
         emptySpace.getDefaultText().ifPresent(input::setText);
@@ -274,16 +311,25 @@ public final class InteractiveComponent extends CodeComponent {
      * Iterates all empty spaces and decides if the answer there is correct or not. If yes, recolors
      * it to green. If not, colors it red. Locks the edit texts.
      * @param context Context.
-     * @param view A view in the hierarchy used to display {@link Snackbar}.
+     * @param view A view in the hierarchy used to display {@link Snackbar}. In case of fromClick being false, this can be null.
+     * @param fromClick Determines if the solution is shown because the user clicked the check button,
+     *                  or it was simply reloaded by the {@link RecyclerView}. In case of reload, the
+     *                  {@link Snackbar} won't appear. Use true if this check was triggered by a click.
      */
-    public void checkSolution(@NonNull final Context context, @NonNull final View view) {
+    public void checkAndDisplaySolution(@NonNull final Context context, @Nullable final View view, boolean fromClick) {
+        //this component is marked to display solution (this is used by recycler when reloading)
+        displaySolution = true;
+        //check
         boolean allCorrect = true;
         for(EmptySpace emptySpace: emptySpaces) {
-            boolean correctAnswer = emptySpace.checkSolution(context, emptySpaces);
+            boolean correctAnswer = emptySpace.checkAndDisplaySolution(context, emptySpaces);
             if(!correctAnswer) allCorrect = false;
         }
-        Snackbar.make(view, allCorrect ? R.string.interactive_correct : R.string.interactive_incorrect, Snackbar.LENGTH_SHORT)
-            .show();
+        if(fromClick && view != null) {
+            //this check was triggered by a click
+            Snackbar.make(view, allCorrect ? R.string.interactive_correct : R.string.interactive_incorrect, Snackbar.LENGTH_SHORT)
+                    .show();
+        }
     }
     
     /**
@@ -294,6 +340,20 @@ public final class InteractiveComponent extends CodeComponent {
         for(EmptySpace emptySpace: emptySpaces) {
             emptySpace.resetEmptySpace(context);
         }
+        //the user can start again and the solution should not be displayed
+        displaySolution = false;
+    }
+
+    /**
+     * Looks at {@link #savedAnswers} and fills in the empty spaces where necessary, according to the
+     * saved answers. It is assumed that the empty space views are already created by the time this
+     * method is called.
+     */
+    public void restoreSavedSolution() {
+        for(int i = 0; i < emptySpaces.size(); i++) {
+            EmptySpace emptySpace = emptySpaces.get(i);
+            emptySpace.setTextInEmptySpace(savedAnswers[i]);
+        }
     }
 
     /**
@@ -302,6 +362,13 @@ public final class InteractiveComponent extends CodeComponent {
     @NonNull
     public String getInstruction() {
         return instruction;
+    }
+
+    /**
+     * @return If this interactive component should display solution.
+     */
+    public boolean isDisplaySolution() {
+        return displaySolution;
     }
 
     /**

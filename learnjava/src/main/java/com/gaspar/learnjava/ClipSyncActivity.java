@@ -295,7 +295,7 @@ public class ClipSyncActivity extends ThemedActivity
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        DrawerUtils.handleDrawerOnClick(this, item);
+        DrawerUtils.handleDrawerOnClick(this, item, R.id.drawer_layout_clip_sync_root);
         return true;
     }
 

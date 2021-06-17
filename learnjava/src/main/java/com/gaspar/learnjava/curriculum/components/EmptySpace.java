@@ -22,14 +22,17 @@ public class EmptySpace {
      * The "index" of this empty space, starts from 0. It's use to later bind the EmptySpace objects and their views.
      */
     private final int place;
+
     /**
      * Contains the answers accepted by this empty space.
      */
     private final List<EmptySpaceAnswer> answers;
+
     /**
      * The view of this empty space. This is bound later, is created from "empty_space_view.xml".
      */
     private View emptySpaceView;
+
     /**
      * The optional default text. If it's present than this will be shown by default, not an empty EditText.
      */
@@ -50,18 +53,34 @@ public class EmptySpace {
     public List<EmptySpaceAnswer> getAnswers() {
         return answers;
     }
+
     /**
      * Called when the view for this empty space is being created.
      */
     void bindView(final View view) {
         this.emptySpaceView = view;
     }
-    /** Returns the text that is currently in the edit text of this empty space */
-    String getTextInEmptySpace() {
+
+    /**
+     *  Returns the text that is currently in the edit text of this empty space
+     */
+    public String getTextInEmptySpace() {
         final EditText input = emptySpaceView.findViewById(R.id.inputField);
         return input.getText().toString();
     }
-    /** checks if the edit text has an acceptable answer. Takes the compatibility with other answers into account. */
+
+    /**
+     * Updates what this empty space displays.
+     * @param text The new text.
+     */
+    public void setTextInEmptySpace(@NonNull String text) {
+        final EditText input = emptySpaceView.findViewById(R.id.inputField);
+        input.setText(text);
+    }
+
+    /**
+     * checks if the edit text has an acceptable answer. Takes the compatibility with other answers into account.
+     */
     private boolean isCorrect(@NonNull final List<EmptySpace> emptySpaces) {
         final EditText input = emptySpaceView.findViewById(R.id.inputField);
         for(EmptySpaceAnswer answer: answers) {
@@ -71,8 +90,12 @@ public class EmptySpace {
         }
         return false;
     }
-    /** checks if the entered answer is correct (also disables input) */
-    boolean checkSolution(@NonNull final Context context, @NonNull final List<EmptySpace> emptySpaces) {
+
+    /**
+     * Checks if the entered answer is correct (also disables input). Correct answers receive a green
+     * background, incorrect ones get a red one, and a help icon.
+     */
+    boolean checkAndDisplaySolution(@NonNull final Context context, @NonNull final List<EmptySpace> emptySpaces) {
         if(emptySpaceView == null) throw new RuntimeException("View not bound!");
         final EditText inputField = emptySpaceView.findViewById(R.id.inputField);
         inputField.setEnabled(false);
@@ -87,7 +110,9 @@ public class EmptySpace {
             return false;
         }
     }
-    /** clears text and colored background (also enables it) */
+    /**
+     * clears text and colored background (also enables it)
+     */
     void resetEmptySpace(@NonNull final Context context) {
         if(emptySpaceView == null) throw new RuntimeException("View not bound!");
         final EditText inputField = emptySpaceView.findViewById(R.id.inputField);
@@ -98,20 +123,36 @@ public class EmptySpace {
         inputField.setEnabled(true);
         emptySpaceView.findViewById(R.id.showSolutionButton).setVisibility(View.GONE);
     }
-    /** shows correct solution (the first one) */
+
+    /**
+     * Shows correct solution (the first one). The background is changed to green, since after this,
+     * it is guaranteed that a correct solution is visible.
+     */
     void showSolution(@NonNull final Context context) {
-        resetEmptySpace(context);
+        //resetEmptySpace(context); -> instead, it should keep
         final EditText inputField = emptySpaceView.findViewById(R.id.inputField);
         inputField.setText(answers.get(0).toString());
+        inputField.setBackgroundResource(R.drawable.correct_answer_background);
+        emptySpaceView.findViewById(R.id.showSolutionButton).setVisibility(View.GONE);
     }
-    /** appends a correct answer to this empty space's answer list */
+
+    /**
+     * appends a correct answer to this empty space's answer list
+     */
     private void addAnswer(EmptySpaceAnswer answer) {
         answers.add(answer);
     }
-    /** set the default text */
+
+    /**
+     *  set the default text
+     */
     private void setDefaultText(String defaultText) {
         this.defaultText = Optional.of(defaultText);
     }
+
+    /**
+     * @return Optional of the default text.
+     */
     Optional<String> getDefaultText() {
         return defaultText;
     }

@@ -18,18 +18,17 @@ import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.gaspar.learnjava.asynctask.LoadExamQuestionsTask;
 import com.gaspar.learnjava.curriculum.Course;
 import com.gaspar.learnjava.curriculum.Exam;
-import com.gaspar.learnjava.curriculum.questions.Question;
 import com.gaspar.learnjava.curriculum.Status;
+import com.gaspar.learnjava.curriculum.questions.Question;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.utils.LogUtils;
 import com.gaspar.learnjava.utils.ThemeUtils;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-
-import java.util.List;
 
 import cn.iwgang.countdownview.CountdownView;
 
@@ -46,12 +45,6 @@ public class ExamActivity extends ThemedActivity {
      */
     @VisibleForTesting
     public static boolean disableConfirmFinishWarning;
-
-    /**
-     * For testing it is important to know the view id of each question view, so they can be individually
-     * referenced. This is assigned in {@link LoadExamQuestionsTask}.
-     */
-    public List<Integer> questionViewIds;
 
     /**
      * Used when loading the questions.
@@ -157,7 +150,8 @@ public class ExamActivity extends ThemedActivity {
     }
 
     /**
-     * Marks this exam as finished. Updates the database.
+     * Marks this exam as finished. Updates the database. All question views are locked and evaluated.
+     * The correct answers are displayed and the incorrect ones are marked with red.
      * @param finishButton The button that closes the exam.
      * @param forceClose If the exam is force closed then the user does not care about the result,
      *                   and the activity can simply be closed without updating the UI.
@@ -169,11 +163,15 @@ public class ExamActivity extends ThemedActivity {
         //ui update, only if not force closed
         if(!forceClose) finishButton.setText(R.string.close_exam);
         int correct = 0;
+        final RecyclerView questionsView = findViewById(R.id.questionsLayout);
+        int i = 0;
         for(Question question: exam.getQuestions()) {
-            question.lockQuestion();
-            //ui update, only if not force closed
-            if(!forceClose) question.showCorrectAnswer();
+            //the adapter will take care of the rest, it will appear locked and displaying an answer
+            question.setDisplayAnswer(true);
+            questionsView.getAdapter().notifyItemChanged(i);
+            //check if it was correct
             if(question.isCorrect()) correct++;
+            i++;
         }
         displayAndUpdateExamResult(correct, forceClose); //show exam result and update database
         Intent resultIntent = new Intent();
@@ -376,13 +374,5 @@ public class ExamActivity extends ThemedActivity {
 
     public Exam getExam() {
         return exam;
-    }
-
-    public void setQuestionViewIds(List<Integer> questionViewIds) {
-        this.questionViewIds = questionViewIds;
-    }
-
-    public List<Integer> getQuestionViewIds() {
-        return questionViewIds;
     }
 }

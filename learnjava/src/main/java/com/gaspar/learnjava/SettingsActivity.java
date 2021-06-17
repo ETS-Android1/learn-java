@@ -67,9 +67,9 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
      * so they are consistent with the current settings.
      */
     private void setUpUI() {
-        toolbar = findViewById(R.id.toolbarExam);
+        toolbar = findViewById(R.id.toolbarSettings);
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_settings_root);
         NavigationView navigationView = findViewById(R.id.nav_view);
         toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -196,7 +196,7 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout_settings_root);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -206,7 +206,7 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        DrawerUtils.handleDrawerOnClick(this, item);
+        DrawerUtils.handleDrawerOnClick(this, item, R.id.drawer_layout_settings_root);
         return true;
     }
 

@@ -74,17 +74,14 @@ public class Exam implements Serializable {
     /**
      * Id of the exam.
      */
-    private int id;
+    private final int id;
 
     /**
+     * The number of displayed questions. Initially all questions are parsed, but only this much
+     * randomly selected ones will be displayed in the {@link com.gaspar.learnjava.ExamActivity}.
      * <p>
-     *     The number of displayed questions. Initially all questions are parsed, but only this much
-     *     randomly selected ones will be displayed in the {@link com.gaspar.learnjava.ExamActivity}.
-     * </p>
-     * <p>
-     *     Since each question is worth 1 point, this is also the amount of the maximum score that can be
-     *     reached on this exam.
-     * </p>
+     * Since each question is worth 1 point, this is also the amount of the maximum score that can be
+     * reached on this exam.
      */
     private int questionAmount;
 
