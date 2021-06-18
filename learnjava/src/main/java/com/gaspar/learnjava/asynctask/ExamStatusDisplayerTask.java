@@ -1,7 +1,6 @@
 package com.gaspar.learnjava.asynctask;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -23,14 +22,29 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import cn.iwgang.countdownview.CountdownView;
 
-public class ExamStatusDisplayerTask extends AsyncTask<Object, Void, ExamStatusDisplayerTask.Result> {
+/**
+ * Queries the status of an exam from the database then displays it.
+ */
+public class ExamStatusDisplayerTask extends LjAsyncTask<ExamStatusDisplayerTask.Result> {
 
+    /**
+     * The exam.
+     */
     private final Exam exam;
 
+    /**
+     * Creates an exam status query task.
+     * @param exam The exam.
+     */
     public ExamStatusDisplayerTask(Exam exam) {
         this.exam = exam;
     }
 
+    /**
+     * Performs the query in the background.
+     * @param objects The first one is expected to be a {@link View}m the second should be an {@link AppCompatActivity}.
+     * @return The result.
+     */
     @Override
     protected Result doInBackground(@Size(2) Object... objects) {
         View examView = (View)objects[0];
@@ -38,7 +52,7 @@ public class ExamStatusDisplayerTask extends AsyncTask<Object, Void, ExamStatusD
 
         while(Chapter.chapterStatusUpdatePending) { //if needed, wait until chapter is updated
             try {
-                Thread.sleep(5);
+                Thread.sleep(5); //busy waiting, but could not come up with anything that is not very complicated
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -74,6 +88,10 @@ public class ExamStatusDisplayerTask extends AsyncTask<Object, Void, ExamStatusD
         return new Result(activity, examView, status, secondsRemaining, onCoolDown, queriedExamStatus.getTopScore());
     }
 
+    /**
+     * The queried status is displayed to the given {@link View}.
+     * @param result The result of the task, any type.
+     */
     @Override
     protected void onPostExecute(Result result) {
         final Button takeExamButton = result.examView.findViewById(R.id.takeExamButton);
@@ -123,6 +141,10 @@ public class ExamStatusDisplayerTask extends AsyncTask<Object, Void, ExamStatusD
         });
     }
 
+    /**
+     * Hides components in an exam view.
+     * @param examView Exam view.
+     */
     private void hideExamComponents(View examView) {
         examView.setOnClickListener(null);
         examView.findViewById(R.id.unlockedLayout).setVisibility(View.GONE);
@@ -132,13 +154,21 @@ public class ExamStatusDisplayerTask extends AsyncTask<Object, Void, ExamStatusD
         examView.findViewById(R.id.unfinishedLayout).setVisibility(View.GONE);
     }
 
-    //adds a shake animation. to not collapse the course view
+    /**
+     * Adds an animation to the {@link View} where the status is displayed.
+     * @param context Context.
+     * @param examViewPart Exam view.
+     */
     private void addShakeOnClick(Context context, View examViewPart) {
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.shake);
         examViewPart.setOnClickListener(v -> examViewPart.startAnimation(animation));
     }
 
-    //adds a dialog that notifies about unfinished exams on click
+    /**
+     * Adds a dialog that notifies about unfinished exams on click.
+     * @param activity Activity of the exam.
+     * @param examView Exam view.
+     */
     private void addDialogOnClick(AppCompatActivity activity, View examView) {
         examView.setOnClickListener(v -> {
             MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(activity, ThemeUtils.getThemedDialogStyle());
@@ -149,6 +179,9 @@ public class ExamStatusDisplayerTask extends AsyncTask<Object, Void, ExamStatusD
         });
     }
 
+    /**
+     * Stores the result of an exam status query task.
+     */
     public static class Result {
         public AppCompatActivity activity;
         public View examView;

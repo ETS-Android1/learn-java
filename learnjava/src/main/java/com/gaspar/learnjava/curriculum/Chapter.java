@@ -16,6 +16,7 @@ import com.gaspar.learnjava.CoursesActivity;
 import com.gaspar.learnjava.LearnJavaActivity;
 import com.gaspar.learnjava.UpdatableActivity;
 import com.gaspar.learnjava.asynctask.ChapterStatusDisplayerTask;
+import com.gaspar.learnjava.asynctask.LearnJavaExecutor;
 import com.gaspar.learnjava.curriculum.components.Component;
 import com.gaspar.learnjava.database.ChapterStatus;
 import com.gaspar.learnjava.database.ExamStatus;
@@ -135,7 +136,7 @@ public class Chapter implements Serializable {
     @UiThread
     public void markChapterAsCompleted(Context context) {
         chapterStatusUpdatePending = true; //start a chapter status update
-        LearnJavaDatabase.DB_EXECUTOR.execute(() -> {
+        LearnJavaExecutor.getInstance().executeOnBackgroundThread(() -> {
             ChapterStatus newStatus = new ChapterStatus(id,
                     com.gaspar.learnjava.curriculum.Status.COMPLETED);
             LearnJavaDatabase.getInstance(context).getChapterDao().updateChapterStatus(newStatus);

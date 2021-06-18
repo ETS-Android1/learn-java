@@ -28,6 +28,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.gaspar.learnjava.asynctask.InitStarterViewTask;
+import com.gaspar.learnjava.asynctask.LearnJavaExecutor;
 import com.gaspar.learnjava.curriculum.Chapter;
 import com.gaspar.learnjava.database.CourseStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
@@ -97,7 +98,7 @@ public class LearnJavaActivity extends ThemedActivity
         //check if it's debug or release, and set flag accordingly
         DEBUG = getResources().getBoolean(R.bool.is_debug);
         setContentView(R.layout.activity_learn_java);
-        LearnJavaDatabase.DB_EXECUTOR.execute(() -> { //initialize necessary variables, database
+        LearnJavaExecutor.getInstance().executeOnBackgroundThread(() -> { //initialize necessary variables, database
             try { //parse course objects
                 CoursesActivity.setParsedCourses(CourseParser.getInstance().parseCourses(this));
             } catch (Exception e) {

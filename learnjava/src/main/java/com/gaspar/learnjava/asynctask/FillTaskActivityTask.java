@@ -1,6 +1,5 @@
 package com.gaspar.learnjava.asynctask;
 
-import android.os.AsyncTask;
 import android.view.View;
 import android.widget.CheckBox;
 
@@ -18,22 +17,32 @@ import com.gaspar.learnjava.utils.LogUtils;
 import com.gaspar.learnjava.utils.ThemeUtils;
 
 /**
- * Loads the task components into a task activity.
+ * Loads a tasks {@link com.gaspar.learnjava.curriculum.components.Component} from XML, then
+ * displays them inside a {@link TaskActivity}.
  */
-public class FillTaskActivityTask extends AsyncTask<TaskActivity, Void, TaskActivity> {
+public class FillTaskActivityTask extends LjAsyncTask<TaskActivity> {
 
     /**
      * This task was passed to the activity. It has no components.
      */
     private final Task passedTask;
 
+    /**
+     * Creates a task component parser job.
+     * @param passedTask The task.
+     */
     public FillTaskActivityTask(Task passedTask) {
         this.passedTask = passedTask;
     }
 
+    /**
+     * Parses components from XML in the background.
+     * @param objects Expected to be a {@link TaskActivity}.
+     * @return The result.
+     */
     @Override
-    protected TaskActivity doInBackground(@Size(1) TaskActivity... taskActivities) {
-        TaskActivity activity = taskActivities[0];
+    protected TaskActivity doInBackground(@Size(1) Object... objects) {
+        TaskActivity activity = (TaskActivity) objects[0];
         activity.successfulLoad = true;
         try {
             Task parsedTask = TaskParser.getInstance().parseTask(passedTask.getId(),
@@ -60,6 +69,10 @@ public class FillTaskActivityTask extends AsyncTask<TaskActivity, Void, TaskActi
         return activity;
     }
 
+    /**
+     * Sets up the {@link RecyclerView} from the parsed components.
+     * @param activity The activity.
+     */
     @Override
     protected void onPostExecute(TaskActivity activity) {
         if(activity.successfulLoad) {
@@ -97,7 +110,7 @@ public class FillTaskActivityTask extends AsyncTask<TaskActivity, Void, TaskActi
             //make loading invisible
             activity.findViewById(R.id.taskProgressBar).setVisibility(View.GONE);
             //show error
-            FillCourseActivityTask.showFailDialog(activity, activity.getString(R.string.tasks));
+            LogUtils.showLoadingFailDialog(activity, activity.getString(R.string.tasks));
         }
     }
 }

@@ -14,6 +14,7 @@ import com.gaspar.learnjava.LearnJavaActivity;
 import com.gaspar.learnjava.SettingsActivity;
 import com.gaspar.learnjava.UpdatableActivity;
 import com.gaspar.learnjava.asynctask.ExamStatusDisplayerTask;
+import com.gaspar.learnjava.asynctask.LearnJavaExecutor;
 import com.gaspar.learnjava.curriculum.questions.Question;
 import com.gaspar.learnjava.database.ExamStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
@@ -168,7 +169,7 @@ public class Exam implements Serializable {
      * @param exam The exam that must be started.
      */
     public static void startExamActivity(ExamStatusDisplayerTask.Result result, Exam exam) {
-        LearnJavaDatabase.DB_EXECUTOR.execute(() -> { //register current epoch in database
+        LearnJavaExecutor.getInstance().executeOnBackgroundThread(() -> { //register current epoch in database
             LearnJavaDatabase.getInstance(result.activity).getExamDao()
                     .updateExamLastStarted(exam.getId(), System.currentTimeMillis());
         });

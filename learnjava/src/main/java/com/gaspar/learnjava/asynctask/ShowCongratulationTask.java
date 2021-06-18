@@ -3,7 +3,6 @@ package com.gaspar.learnjava.asynctask;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.view.View;
 import android.widget.CheckBox;
 
@@ -19,16 +18,25 @@ import java.util.List;
 
 /**
  * A background task that queries the exam statuses from the database, and displays a prompt in the
- * activity if necessary.
+ * activity if the user passed all of them. Called from {@link CoursesActivity}.
  */
-public class ShowCongratulationTask extends AsyncTask<CoursesActivity, Void, ShowCongratulationTask.Result> {
+public class ShowCongratulationTask extends LjAsyncTask<ShowCongratulationTask.Result> {
 
+    /**
+     * Performs the query from the database.
+     * @param objects Expected to be a {@link CoursesActivity}.
+     * @return The result.
+     */
     @Override
-    protected Result doInBackground(@Size(1) CoursesActivity... coursesActivities) {
-        CoursesActivity activity = coursesActivities[0];
+    protected Result doInBackground(@Size(1) Object... objects) {
+        CoursesActivity activity = (CoursesActivity) objects[0];
         return new Result(LearnJavaDatabase.getInstance(activity).getExamDao().getAllExamStatus(), activity);
     }
 
+    /**
+     * Displays the dialog if all exams were completed.
+     * @param result The result of the task.
+     */
     @Override
     protected void onPostExecute(Result result) {
         super.onPostExecute(result);
@@ -53,6 +61,9 @@ public class ShowCongratulationTask extends AsyncTask<CoursesActivity, Void, Sho
         }
     }
 
+    /**
+     * Helper class that stores the result of an {@link ShowCongratulationTask}.
+     */
     static class Result {
         private final List<Integer> examStatuses;
         private final CoursesActivity activity;

@@ -3,7 +3,6 @@ package com.gaspar.learnjava.asynctask;
 import android.content.Context;
 import android.net.DhcpInfo;
 import android.net.wifi.WifiManager;
-import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.view.View;
 
@@ -27,9 +26,9 @@ import java.nio.charset.StandardCharsets;
  * <p>
  * When the exchange stops, the user is notified according to the result.
  * <p>
- * KNOWN PROBLEMS: This does not work for some reason if the device running the app is also the mobile hotspot.
+ * <b>KNOWN PROBLEMS</b>: This does not work for some reason if the device running the app is also the mobile hotspot.
  */
-public class NetworkExchangeTask extends AsyncTask<AppCompatActivity, Void, BluetoothExchangeTask.Result> {
+public class NetworkExchangeTask extends LjAsyncTask<BluetoothExchangeTask.Result> {
 
     /**
      * The server sends this back to the app after receiving a message.
@@ -61,11 +60,18 @@ public class NetworkExchangeTask extends AsyncTask<AppCompatActivity, Void, Blue
      */
     private boolean timedOut;
 
+    /**
+     * Creates a network exchange task.
+     * @param data The data the must be sent.
+     */
     public NetworkExchangeTask(@NonNull String data) {
         this.data = data;
         timedOut = false;
     }
 
+    /**
+     * Sets up a timer which cancels the task on timeout.
+     */
     @Override
     protected void onPreExecute() {
         //start timeout
@@ -74,7 +80,7 @@ public class NetworkExchangeTask extends AsyncTask<AppCompatActivity, Void, Blue
 
             public void onFinish() {
                 // stop async task if not in progress
-                if (NetworkExchangeTask.this.getStatus() == Status.RUNNING) {
+                if (NetworkExchangeTask.this.isRunning()) {
                     socket.close();
                     timedOut = true;
                 }
@@ -83,6 +89,12 @@ public class NetworkExchangeTask extends AsyncTask<AppCompatActivity, Void, Blue
         timer.start();
     }
 
+    /**
+     * Finds the IP broadcast address on the current network. The app will send the data there.
+     * @param context Context.
+     * @return The broadcast address.
+     * @throws IOException If this address could not be accessed.
+     */
     InetAddress getBroadcastAddress(@NonNull final Context context) throws IOException {
         WifiManager wifi = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         if(wifi == null) {
@@ -101,9 +113,14 @@ public class NetworkExchangeTask extends AsyncTask<AppCompatActivity, Void, Blue
         return InetAddress.getByAddress(quads);
     }
 
+    /**
+     * Performs the network calls on the background. Waits until response, or timeout.
+     * @param objects Expected to be {@link AppCompatActivity}.
+     * @return The result.
+     */
     @Override
-    protected BluetoothExchangeTask.Result doInBackground(@Size(1) AppCompatActivity... activities) {
-        final AppCompatActivity activity = activities[0];
+    protected BluetoothExchangeTask.Result doInBackground(@Size(1) Object... objects) {
+        final AppCompatActivity activity = (AppCompatActivity) objects[0];
         activity.runOnUiThread(() -> { //indicate loading
             final View loadingIndicator = activity.findViewById(R.id.loadingIndicator); //show loading icon
             if(loadingIndicator != null) loadingIndicator.setVisibility(View.VISIBLE);
@@ -142,6 +159,10 @@ public class NetworkExchangeTask extends AsyncTask<AppCompatActivity, Void, Blue
         }
     }
 
+    /**
+     * Shows the result of the task ot the user.
+     * @param result The result of the task.
+     */
     @Override
     protected void onPostExecute(BluetoothExchangeTask.Result result) {
         String message;

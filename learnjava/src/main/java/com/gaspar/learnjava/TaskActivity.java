@@ -18,6 +18,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.gaspar.learnjava.asynctask.FillTaskActivityTask;
+import com.gaspar.learnjava.asynctask.LearnJavaExecutor;
 import com.gaspar.learnjava.curriculum.Task;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.database.TaskStatus;
@@ -174,7 +175,7 @@ public class TaskActivity extends ThemedActivity implements NavigationView.OnNav
      */
     @UiThread
     public void updateTaskStatus(boolean completed, int taskId) {
-        LearnJavaDatabase.DB_EXECUTOR.execute(() -> {
+        LearnJavaExecutor.getInstance().executeOnBackgroundThread(() -> {
             int status = completed ? com.gaspar.learnjava.curriculum.Status.COMPLETED
                     : com.gaspar.learnjava.curriculum.Status.UNLOCKED;
             TaskStatus newStatus = new TaskStatus(taskId, status);

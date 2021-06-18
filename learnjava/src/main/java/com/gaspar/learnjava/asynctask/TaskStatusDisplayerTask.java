@@ -1,7 +1,6 @@
 package com.gaspar.learnjava.asynctask;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -15,20 +14,27 @@ import com.gaspar.learnjava.database.TaskStatus;
 
 /**
  * Queries and sets the status of a {@link com.gaspar.learnjava.curriculum.Task}. Shows the
- * result using the given image view.
+ * result using the given {@link ImageView}.
  */
-public class TaskStatusDisplayerTask extends AsyncTask<Object, Void, CourseStatusDisplayerTask.Result> {
+public class TaskStatusDisplayerTask extends LjAsyncTask<CourseStatusDisplayerTask.Result> {
 
+    /**
+     * The task.
+     */
     private final Task task;
 
+    /**
+     * Creates a task status query job.
+     * @param task The task.
+     */
     public TaskStatusDisplayerTask(Task task) {
         this.task = task;
     }
 
     /**
-     * Queries the status un the background.
-     * @param objects The first must be the status icon. The second must be a context object.
-     *                The third CAN optionally be view which will be auto opened, if needed.
+     * Queries the status on the background.
+     * @param objects The first must be the status icon {@link ImageView}. The second must be a {@link Context} object.
+     *                The third CAN optionally be a {@link View} which will be auto opened, if needed.
      * @return Result object.
      */
     @Override
@@ -49,6 +55,10 @@ public class TaskStatusDisplayerTask extends AsyncTask<Object, Void, CourseStatu
         return new CourseStatusDisplayerTask.Result(imageView, autoOpenView, status);
     }
 
+    /**
+     * Displays the queried status on the UI.
+     * @param result The result of the task.
+     */
     @Override
     protected void onPostExecute(CourseStatusDisplayerTask.Result result) {
         if(result.status == com.gaspar.learnjava.curriculum.Status.COMPLETED) {

@@ -28,12 +28,10 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * A singleton class representing the app database. All methods of this class should only
- * be used in background threads (for example with {@link #DB_EXECUTOR}.
+ * be used in background threads.
  */
 @Database(entities = {CourseStatus.class, ChapterStatus.class, TaskStatus.class, ExamStatus.class},
         version = 1, exportSchema = false)
@@ -44,12 +42,6 @@ public abstract class LearnJavaDatabase extends RoomDatabase {
      * The only database instance.
      */
     private static LearnJavaDatabase instance;
-
-    /**
-     * Used to execute queries (and other long operations) in the background. It awaits while
-     * for operations while the application is running.
-     */
-    public static final ExecutorService DB_EXECUTOR = Executors.newSingleThreadExecutor();
 
     /**
      * Retrieves the database instance. If it does not exist yet, then it will be created.

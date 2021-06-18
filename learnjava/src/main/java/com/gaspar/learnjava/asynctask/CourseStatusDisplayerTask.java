@@ -1,6 +1,5 @@
 package com.gaspar.learnjava.asynctask;
 
-import android.os.AsyncTask;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -16,10 +15,12 @@ import com.gaspar.learnjava.utils.LogUtils;
 import com.gaspar.learnjava.utils.ThemeUtils;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import java.util.Objects;
+
 /**
  * Queries and displays the status of a course. This depends on if it's unlocked or not, and if it's finished or not.
  */
-public class CourseStatusDisplayerTask extends AsyncTask<Object, Void, CourseStatusDisplayerTask.Result> {
+public class CourseStatusDisplayerTask extends LjAsyncTask<CourseStatusDisplayerTask.Result> {
 
     /**
      * The course.
@@ -27,7 +28,7 @@ public class CourseStatusDisplayerTask extends AsyncTask<Object, Void, CourseSta
     private final Course course;
 
     /**
-     * Optional, this will be called when the task end, IN ADDITION TO displaying course status.
+     * Optionally, if this is not null, then this will be called when the task end, IN ADDITION TO displaying course status.
      */
     private final Runnable callAtEnd;
 
@@ -53,8 +54,8 @@ public class CourseStatusDisplayerTask extends AsyncTask<Object, Void, CourseSta
 
     /**
      * Performs the status query in the background.
-     * @param objects First must be the status icon. Second must be the activity. Third CAN optionally be
-     *                the view that is auto opened if needed.
+     * @param objects First must be the status icon {@link ImageView}. Second must be an {@link AppCompatActivity}.
+     *                Third CAN optionally be the {@link View} that is auto opened if needed.
      * @return Result of the query, with the status and other objects.
      */
     @Override
@@ -75,6 +76,10 @@ public class CourseStatusDisplayerTask extends AsyncTask<Object, Void, CourseSta
         return new Result(activity, imageView, autoOpenView, status);
     }
 
+    /**
+     * Updates the {@link ImageView} to display the icon according to the status queried.
+     * @param result The result of the task, any type.
+     */
     @Override
     protected void onPostExecute(Result result) {
         switch (result.status) { //set icon according to queried status
@@ -100,7 +105,7 @@ public class CourseStatusDisplayerTask extends AsyncTask<Object, Void, CourseSta
                 LogUtils.logError("Incorrect behavior: NOT_QUERIED status");
         }
         //automatically open non-locked courses
-        boolean autoSlideOpen = SettingsActivity.autoSlideOpenEnabled(result.activity);
+        boolean autoSlideOpen = SettingsActivity.autoSlideOpenEnabled(Objects.requireNonNull(result.activity));
         if(autoSlideOpen && result.autoOpenView != null &&
                 result.status != com.gaspar.learnjava.curriculum.Status.LOCKED &&
                 result.status != com.gaspar.learnjava.curriculum.Status.NOT_QUERIED) {
@@ -131,7 +136,7 @@ public class CourseStatusDisplayerTask extends AsyncTask<Object, Void, CourseSta
 
     /**
      * This utility class stores the result of the background operation, and can store
-     * some extra objects as well. This is reused in other classes as well.
+     * some extra objects as well. This is reused in other {@link LjAsyncTask} classes.
      */
     public static class Result {
 

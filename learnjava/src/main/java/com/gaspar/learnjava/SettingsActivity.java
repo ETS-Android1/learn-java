@@ -15,6 +15,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.gaspar.learnjava.asynctask.LearnJavaExecutor;
 import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.utils.DrawerUtils;
@@ -184,7 +185,7 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
         builder.setPositiveButton(R.string.ok, (dialogInterface, i) -> {
             //deletes the contents of the database, and then re-validates it, filling it with default values.
             dialogInterface.dismiss();
-            LearnJavaDatabase.DB_EXECUTOR.execute(() -> {
+            LearnJavaExecutor.getInstance().executeOnBackgroundThread(() -> {
                 LearnJavaDatabase.resetDatabase(SettingsActivity.this);
                 LearnJavaDatabase.validateDatabase(SettingsActivity.this);
             });

@@ -66,7 +66,8 @@ public class FillGuideActivityTask extends AsyncTask<GuideActivity, Void, FillGu
             result.activity.findViewById(R.id.loadingIndicator).setVisibility(View.GONE);
             componentsView.setVisibility(View.VISIBLE);
         } else {
-            FillCourseActivityTask.showFailDialog(result.activity, result.activity.getString(R.string.guide));
+            result.activity.findViewById(R.id.loadingIndicator).setVisibility(View.GONE);
+            LogUtils.showLoadingFailDialog(result.activity, result.activity.getString(R.string.guide));
         }
     }
 

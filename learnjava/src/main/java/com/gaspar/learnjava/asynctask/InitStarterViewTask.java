@@ -1,7 +1,6 @@
 package com.gaspar.learnjava.asynctask;
 
 import android.content.Context;
-import android.os.AsyncTask;
 import android.view.View;
 import android.widget.Button;
 
@@ -21,11 +20,11 @@ import com.gaspar.learnjava.utils.LogUtils;
 import com.google.android.material.snackbar.Snackbar;
 
 /**
- * Finds the name of a single chapter from it's id. This was the chapter that the user
- * last started. Special result is displayed if no chapter was started yet.
- * Sets the view in the main menu on completion.
+ * Finds the name of a single chapter from it's id. This is the chapter that is next for the user in
+ * the curriculum. Special result is displayed if no chapter was started yet.
+ * Sets the view in the main menu in {@link LearnJavaActivity} on completion.
  */
-public class InitStarterViewTask extends AsyncTask<Object, Void, LearnJavaActivity> {
+public class InitStarterViewTask extends LjAsyncTask<LearnJavaActivity> {
 
     /**
      * Constant that indicates no chapter was started.
@@ -49,6 +48,11 @@ public class InitStarterViewTask extends AsyncTask<Object, Void, LearnJavaActivi
      */
     private boolean showOpenDrawerForExamPrompt;
 
+    /**
+     * Creates an init started view task.
+     * @param chapterId The id of the chapter.
+     * @param started If the curriculum was started.
+     */
     public InitStarterViewTask(int chapterId, boolean started) {
         this.started = started;
         if(started) {
@@ -58,6 +62,12 @@ public class InitStarterViewTask extends AsyncTask<Object, Void, LearnJavaActivi
         }
     }
 
+    /**
+     * Queries the status of the last started chapter to determine if it was completed or not. If yes,
+     * finds the next chapter in the curriculum.
+     * @param objects Expected to be {@link LearnJavaActivity}.
+     * @return The result.
+     */
     @Override
     protected LearnJavaActivity doInBackground(@Size(1) Object... objects) {
         LearnJavaActivity activity = (LearnJavaActivity) objects[0];
@@ -87,6 +97,10 @@ public class InitStarterViewTask extends AsyncTask<Object, Void, LearnJavaActivi
         return activity;
     }
 
+    /**
+     * Displays the result in the main menu.
+     * @param activity The activity.
+     */
     @Override
     protected void onPostExecute(LearnJavaActivity activity) {
         Button button = activity.findViewById(R.id.continueLearningButton);
@@ -114,6 +128,13 @@ public class InitStarterViewTask extends AsyncTask<Object, Void, LearnJavaActivi
         }
     }
 
+    /**
+     * Finds the next chapter id, from a given one, if there is such.
+     * @param currentChapterId The current id.
+     * @param context Context.
+     * @return The next id. This may be the same as the current one, which indicates that the user
+     * can not progress further and some other action must be taken.
+     */
     @WorkerThread
     private int nextDisplayableChapterId(int currentChapterId, Context context) {
         try {

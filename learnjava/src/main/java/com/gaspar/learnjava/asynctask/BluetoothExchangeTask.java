@@ -1,7 +1,6 @@
 package com.gaspar.learnjava.asynctask;
 
 import android.bluetooth.BluetoothSocket;
-import android.os.AsyncTask;
 import android.os.CountDownTimer;
 import android.view.View;
 
@@ -26,7 +25,7 @@ import java.nio.charset.StandardCharsets;
  * <p>
  * This task assumes the user selected Bluetooth mode for clip sync and that the adapter is turned on.
  */
-public class BluetoothExchangeTask extends AsyncTask<AppCompatActivity, Void, BluetoothExchangeTask.Result> {
+public class BluetoothExchangeTask extends LjAsyncTask<BluetoothExchangeTask.Result> {
 
     /**
      * Determines how long the async task will attempt to exchange data. After this the task
@@ -60,6 +59,9 @@ public class BluetoothExchangeTask extends AsyncTask<AppCompatActivity, Void, Bl
         timedOut = false;
     }
 
+    /**
+     * Sets up a timer which cancels the task on timeout.
+     */
     @Override
     protected void onPreExecute() {
         //start timeout countdown
@@ -68,7 +70,7 @@ public class BluetoothExchangeTask extends AsyncTask<AppCompatActivity, Void, Bl
 
             public void onFinish() {
                 // stop async task if in progress
-                if (BluetoothExchangeTask.this.getStatus() == Status.RUNNING) {
+                if (BluetoothExchangeTask.this.isRunning()) {
                     try {
                         socket.close();
                     } catch (IOException ignored) {
@@ -82,9 +84,14 @@ public class BluetoothExchangeTask extends AsyncTask<AppCompatActivity, Void, Bl
         timer.start();
     }
 
+    /**
+     * Performs the bluetooth exchange on a background thread.
+     * @param objects This is expected to be an {@link AppCompatActivity}.
+     * @return The result of the background operation.
+     */
     @Override
-    protected BluetoothExchangeTask.Result doInBackground(@Size(1) AppCompatActivity... activities) {
-        final AppCompatActivity activity = activities[0];
+    protected BluetoothExchangeTask.Result doInBackground(@Size(1) Object... objects) {
+        final AppCompatActivity activity = (AppCompatActivity) objects[0];
         activity.runOnUiThread(()-> { //cant do i pre execute, as we don't have activity reference there
             final View loadingIndicator = activity.findViewById(R.id.loadingIndicator); //show loading icon
             if(loadingIndicator != null) loadingIndicator.setVisibility(View.VISIBLE);

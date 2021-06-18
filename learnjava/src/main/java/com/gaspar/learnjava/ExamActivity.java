@@ -20,6 +20,7 @@ import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.gaspar.learnjava.asynctask.LearnJavaExecutor;
 import com.gaspar.learnjava.asynctask.LoadExamQuestionsTask;
 import com.gaspar.learnjava.curriculum.Course;
 import com.gaspar.learnjava.curriculum.Exam;
@@ -29,6 +30,8 @@ import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.utils.LogUtils;
 import com.gaspar.learnjava.utils.ThemeUtils;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
+import java.util.Objects;
 
 import cn.iwgang.countdownview.CountdownView;
 
@@ -168,7 +171,7 @@ public class ExamActivity extends ThemedActivity {
         for(Question question: exam.getQuestions()) {
             //the adapter will take care of the rest, it will appear locked and displaying an answer
             question.setDisplayAnswer(true);
-            questionsView.getAdapter().notifyItemChanged(i);
+            Objects.requireNonNull(questionsView.getAdapter()).notifyItemChanged(i);
             //check if it was correct
             if(question.isCorrect()) correct++;
             i++;
@@ -206,7 +209,7 @@ public class ExamActivity extends ThemedActivity {
      *                    Database updates must still happen.
      */
     private void displayAndUpdateExamResult(double correctQuestions, boolean forceClosed) {
-        LearnJavaDatabase.DB_EXECUTOR.execute(() -> {
+        LearnJavaExecutor.getInstance().executeOnBackgroundThread(() -> {
             //first launch the top score updating
             int prevScore = LearnJavaDatabase.getInstance(this).getExamDao().queryTopScore(exam.getId());
             if(correctQuestions > prevScore) { //this works for NEVER_STARTED as well, as its value is -1
@@ -219,7 +222,7 @@ public class ExamActivity extends ThemedActivity {
         int minPercentage = Exam.getMinimumPassPercentage(this);
         if(percentage >= minPercentage) {
             //update database with pass
-            LearnJavaDatabase.DB_EXECUTOR.execute(() -> {
+            LearnJavaExecutor.getInstance().executeOnBackgroundThread(() -> {
                 LearnJavaDatabase.getInstance(ExamActivity.this) //set this exam completed
                         .getExamDao().updateExamCompletionStatus(exam.getId(), Status.COMPLETED);
                 Course nextCourse = Course.findNextCourse(exam.getId());
@@ -366,6 +369,7 @@ public class ExamActivity extends ThemedActivity {
         this.loadSuccessful = loadSuccessful;
     }
 
+    @SuppressWarnings("unused") //might be used later
     public boolean isExamFinished() { return examFinished; }
 
     public void setExam(Exam exam) {

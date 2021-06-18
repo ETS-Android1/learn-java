@@ -1,6 +1,5 @@
 package com.gaspar.learnjava.asynctask;
 
-import android.os.AsyncTask;
 import android.view.View;
 
 import androidx.annotation.Size;
@@ -21,10 +20,10 @@ import java.util.Random;
 import cn.iwgang.countdownview.CountdownView;
 
 /**
- * Loads the questions for an exam, and randomly selects the ones that will be included in the exam.
- * On completion it hides the progress indicator and shows the questions.
+ * Loads the {@link com.gaspar.learnjava.curriculum.questions.Question}s for an exam inside an {@link ExamActivity},
+ * and randomly selects the ones that will be included in the exam. On completion it hides the progress indicator and shows the questions.
  */
-public class LoadExamQuestionsTask extends AsyncTask<ExamActivity, Void, ExamActivity> {
+public class LoadExamQuestionsTask extends LjAsyncTask<ExamActivity> {
 
     /**
      * This flag determines if the questions will be shuffled to a random order. For testing this
@@ -38,13 +37,22 @@ public class LoadExamQuestionsTask extends AsyncTask<ExamActivity, Void, ExamAct
      */
     private final int examId;
 
+    /**
+     * Creates an exam loading task.
+     * @param examId The exam id.
+     */
     public LoadExamQuestionsTask(int examId) {
         this.examId = examId;
     }
 
+    /**
+     * Performs the question parsing in the background.
+     * @param objects Expected to be an {@link ExamActivity}.
+     * @return The result.
+     */
     @Override
-    protected ExamActivity doInBackground(@Size(1) ExamActivity... examActivities) {
-        ExamActivity activity = examActivities[0];
+    protected ExamActivity doInBackground(@Size(1) Object... objects) {
+        ExamActivity activity = (ExamActivity) objects[0];
         activity.setLoadSuccessful(true);
         try {
             Exam parsedExam = ExamParser.getInstance().parseExam(examId, true, activity);
@@ -65,6 +73,10 @@ public class LoadExamQuestionsTask extends AsyncTask<ExamActivity, Void, ExamAct
         return activity;
     }
 
+    /**
+     * Sets up the {@link RecyclerView} that displays the questions.
+     * @param activity The activity.
+     */
     @Override
     protected void onPostExecute(ExamActivity activity) {
         if(activity.isLoadSuccessful()) {
@@ -87,7 +99,7 @@ public class LoadExamQuestionsTask extends AsyncTask<ExamActivity, Void, ExamAct
             }
         } else {
             activity.findViewById(R.id.loadingIndicator).setVisibility(View.GONE); //hide loading
-            FillCourseActivityTask.showFailDialog(activity, activity.getString(R.string.exam));
+            LogUtils.showLoadingFailDialog(activity, activity.getString(R.string.exam));
         }
     }
 }

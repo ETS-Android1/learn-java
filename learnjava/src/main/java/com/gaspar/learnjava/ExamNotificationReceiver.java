@@ -13,6 +13,7 @@ import androidx.annotation.UiThread;
 import androidx.core.app.NotificationCompat;
 import androidx.core.content.ContextCompat;
 
+import com.gaspar.learnjava.asynctask.LearnJavaExecutor;
 import com.gaspar.learnjava.curriculum.Course;
 import com.gaspar.learnjava.curriculum.Exam;
 import com.gaspar.learnjava.database.ExamStatus;
@@ -86,7 +87,7 @@ public class ExamNotificationReceiver extends BroadcastReceiver {
     @UiThread
     static void postExamNotification(Exam failedExam, Context context) {
         if(!SettingsActivity.examNotificationsEnabled(context)) return; //do nothing if notifications are disabled
-        LearnJavaDatabase.DB_EXECUTOR.execute(() -> {
+        LearnJavaExecutor.getInstance().executeOnBackgroundThread(() -> {
             if(CoursesActivity.coursesNotParsed()) {
                 try {
                     CoursesActivity.getParsedCourses().addAll(CourseParser.getInstance().parseCourses(context));
