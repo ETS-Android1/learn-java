@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
@@ -50,11 +52,6 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
      */
     private static List<Course> PARSED_COURSES = new ArrayList<>();
 
-    //these constants are used to determine what kind of activity finished.
-    public static final int CHAPTER_REQUEST_CODE = 23;
-    public static final int TASK_REQUEST_CODE = 24;
-    public static final int EXAM_REQUEST_CODE = 25;
-
     /**
      * View that displays ads in this activity.
      */
@@ -77,6 +74,21 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
      */
     private boolean dropDown;
 
+    /**
+     * This object can launch a {@link ChapterActivity}.
+     */
+    private ActivityResultLauncher<Intent> chapterActivityLauncher;
+
+    /**
+     * This object can launch a {@link TaskActivity}.
+     */
+    private ActivityResultLauncher<Intent> taskActivityLauncher;
+
+    /**
+     * This object can launch an {@link ExamActivity}.
+     */
+    private ActivityResultLauncher<Intent> examActivityLauncher;
+
     @Override
     public void onCreate(Bundle savedState) {
         super.onCreate(savedState);
@@ -84,6 +96,53 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
         //true if auto slide open is DISABLED, false otherwise
         dropDown = !SettingsActivity.autoSlideOpenEnabled(this);
         setUpUI();
+        //define what should happen when a chapter activity is finished
+        chapterActivityLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if(result.getResultCode() == Activity.RESULT_OK) {
+                        if(updateViews.length == 0) return; //should not happen
+                        ImageView icon = updateViews[0].findViewById(R.id.chapterStatusIcon);
+                        Intent data = result.getData();
+                        Chapter chapter = (Chapter) data.getExtras().getSerializable(Chapter.CHAPTER_PREFERENCE_STRING);
+                        if(chapter == null) return;
+                        chapter.queryAndDisplayStatus(icon, CoursesActivity.this);
+                        if(!data.getExtras().containsKey(Exam.EXAM_PREFERENCE_STRING)) return; //no exam, stop updating
+                        Exam exam = (Exam)data.getExtras().getSerializable(Exam.EXAM_PREFERENCE_STRING);
+                        if(updateViews.length > 1 && exam != null) { // exam view and exam object found, update them
+                            exam.queryAndDisplayStatus(updateViews[1], CoursesActivity.this);
+                        }
+                    }
+                }
+        );
+        //define what should happen when a task activity is finished
+        taskActivityLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if(result.getResultCode() == Activity.RESULT_OK) {
+                        if(updateViews.length == 0) return; //should not happen
+                        Intent data = result.getData();
+                        ImageView taskIcon = updateViews[0].findViewById(R.id.taskStatusIcon);
+                        Task task = (Task)data.getExtras().getSerializable(Task.TASK_PREFERENCE_STRING);
+                        if(task == null) return;
+                        task.queryAndDisplayStatus(taskIcon, CoursesActivity.this);
+                    }
+                }
+        );
+        //define what should happen when an exam activity is finished
+        examActivityLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if(result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        if(updateViews.length == 0) return; //should not happen
+                        Exam examData = (Exam)data.getExtras().getSerializable(Exam.EXAM_PREFERENCE_STRING);
+                        if(examData == null) return;
+                        examData.queryAndDisplayStatus(updateViews[0], CoursesActivity.this); //update view will be the exam view
+                        updateNextCourseDisplay(examData.getId()); //if there is a next course, and it's unlocked, update it
+                    }
+                }
+        );
     }
 
     @Override
@@ -105,6 +164,9 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
         showCongratulationPrompt();
     }
 
+    /**
+     * Initialize activity UI.
+     */
     private void setUpUI() {
         new FillCourseActivityTask().execute(this); //fill list view.
 
@@ -237,45 +299,30 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
     }
 
     /**
-     * Updates the {@link #updateViews}, so the selectors are updated to reflect possible changes. Exam or course unlocked,
-     * for example.
+     * @return This object can launch a {@link ChapterActivity}.
      */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode != Activity.RESULT_OK) return;
-        if(data.getExtras() == null) return;
-        switch (requestCode) {
-            case CHAPTER_REQUEST_CODE: //a chapter activity just finished
-                if(updateViews.length == 0) return; //should not happen
-                ImageView icon = updateViews[0].findViewById(R.id.chapterStatusIcon);
-                Chapter chapter = (Chapter) data.getExtras().getSerializable(Chapter.CHAPTER_PREFERENCE_STRING);
-                if(chapter == null) return;
-                chapter.queryAndDisplayStatus(icon, CoursesActivity.this);
-                if(!data.getExtras().containsKey(Exam.EXAM_PREFERENCE_STRING)) return; //no exam, stop updating
-                Exam exam = (Exam)data.getExtras().getSerializable(Exam.EXAM_PREFERENCE_STRING);
-                if(updateViews.length > 1 && exam != null) { // exam view and exam object found, update them
-                    exam.queryAndDisplayStatus(updateViews[1], CoursesActivity.this);
-                }
-                break;
-            case TASK_REQUEST_CODE: //task activity finished
-                if(updateViews.length == 0) return; //should not happen
-                ImageView taskIcon = updateViews[0].findViewById(R.id.taskStatusIcon);
-                Task task = (Task)data.getExtras().getSerializable(Task.TASK_PREFERENCE_STRING);
-                if(task == null) return;
-                task.queryAndDisplayStatus(taskIcon, CoursesActivity.this);
-                break;
-            case EXAM_REQUEST_CODE:
-                if(updateViews.length == 0) return; //should not happen
-                Exam examData = (Exam)data.getExtras().getSerializable(Exam.EXAM_PREFERENCE_STRING);
-                if(examData == null) return;
-                examData.queryAndDisplayStatus(updateViews[0], CoursesActivity.this); //update view will be the exam view
-                updateNextCourseDisplay(examData.getId()); //if there is a next course, and it's unlocked, update it
-                break;
-        }
+    public ActivityResultLauncher<Intent> getChapterActivityLauncher() {
+        return chapterActivityLauncher;
     }
 
-    //helper method, called when an exam finishes and the user returns to the course activity
+    /**
+     * @return This object can launch a {@link TaskActivity}.
+     */
+    public ActivityResultLauncher<Intent> getTaskActivityLauncher() {
+        return taskActivityLauncher;
+    }
+
+    /**
+     * @return This object can launch an {@link ExamActivity}.
+     */
+    public ActivityResultLauncher<Intent> getExamActivityLauncher() {
+        return examActivityLauncher;
+    }
+
+    /**
+     * Helper method, called when an exam finishes and the user returns to the course activity
+     * @param currentExamId The id of the exam that finished.
+     */
     private void updateNextCourseDisplay(int currentExamId) {
         int i;
         for(i=0; i<PARSED_COURSES.size(); i++) {
@@ -332,21 +379,30 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
         new ShowCongratulationTask().execute(this);
     }
 
+    /**
+     * @return A list of courses known to the application.
+     */
     public static synchronized List<Course> getParsedCourses() {
         return PARSED_COURSES;
     }
 
+    /**
+     * Set a new course list.
+     * @param parsedCourses The new course list.
+     */
     public static synchronized void setParsedCourses(List<Course> parsedCourses) {
         PARSED_COURSES = parsedCourses;
     }
 
+    /**
+     * @return True only if the courses have not yet been parsed from XML.
+     */
     public static boolean coursesNotParsed() {
         return PARSED_COURSES.isEmpty();
     }
 
     /**
      * The views that will be updated when the ongoing activity finished.
-     *
      * @see UpdatableActivity
      */
     private View[] updateViews;

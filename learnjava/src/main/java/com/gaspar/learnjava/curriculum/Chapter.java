@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.UiThread;
 import androidx.annotation.WorkerThread;
@@ -28,29 +30,29 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * Represents a chapter in the curriculum. A Chapter is a sub component of a course,
+ * and it consists of any number of text, code or advanced information components.
  * <p>
- *   Represents a chapter in the curriculum. A Chapter is a sub component of a course,
- *   and it consists of any number of text, code or advanced information components.
- * </p>
- *
- * <p>
- *   Chapters are stored in XML, in the following format: chapter_id.xml
- * </p>
- *
+ * Chapters are stored in XML, in the assets folder.
+ * <pre>
  * {@code
- * <resources>
- *  *     <chapterdata>
- *  *         <id>*id here*</id>
- *  *         <name>*chapter name here*</name>
- *  *     </chapterdata>
- *  *     <text>*text component*</text>
- *  *     <code>*code component*</code>
- *  *     <advanced>*advanced information component*</advanced>
- *  </resources>
+ * <chapterdata>
+ *    <id>*id here*</id>
+ *    <name>*chapter name here*</name>
+ * </chapterdata>
+ * <text>*text component*</text>
+ * <code>*code component*</code>
+ * <advanced>*advanced information component*</advanced>
+ * and other components...
  * }
+ * </pre>
+ * @see Component
  */
 public class Chapter implements Serializable {
 
+    /**
+     * This string identifies the passed chapter in a {@link ChapterActivity}.
+     */
     public static final String CHAPTER_PREFERENCE_STRING = "passed_chapter";
 
     /**
@@ -82,6 +84,12 @@ public class Chapter implements Serializable {
     @Status
     private volatile int status;
 
+    /**
+     * Creates a chapter object.
+     * @param id The id.
+     * @param name The name.
+     * @param components The list of {@link Component}s.
+     */
     public Chapter(int id, String name, List<Component> components) {
         this.id = id;
         this.name = name;
@@ -109,13 +117,19 @@ public class Chapter implements Serializable {
     }
 
     /**
-     * Starts a chapter activity for result for result. It will pass the chapter and the status icon
+     * Starts a chapter activity for result. It will pass the chapter and the status icon
      * of this chapter. Exam data and view are also needed, as a completed chapter may unlock the exam in its course,
      * if it was the last uncompleted chapter.
-     *
+     * @param fromActivity Activity from where the chapter is started.
+     * @param launcher An object that can launch a {@link ChapterActivity} and is prepared to handle the result. This can be null. If it
+     *                 is null, that means that we don't care for the result, and can be safely ignored.
+     * @param chapter The chapter which is started.
      * @param updateView The view that will be updated when the started activity finishes.
+     * @param exam Optionally, an exam object that belongs to this chapter.
+     * @param extraExamView Optionally, an exam view that may need to be modified if the user closes the chapter.
      */
-    public static void startChapterActivity(AppCompatActivity fromActivity, Chapter chapter, @Nullable View updateView,
+    public static void startChapterActivity(@NonNull AppCompatActivity fromActivity, @Nullable ActivityResultLauncher<Intent> launcher,
+                                            @Nullable Chapter chapter, @Nullable View updateView,
                                             @Nullable Exam exam, @Nullable View extraExamView) {
         SharedPreferences prefs = fromActivity.
                 getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE); //save started chapter
@@ -126,12 +140,19 @@ public class Chapter implements Serializable {
         if(fromActivity instanceof UpdatableActivity) {
             ((UpdatableActivity)fromActivity).setUpdateViews(updateView, extraExamView); //save update view, also pass exam view
         }
-        fromActivity.startActivityForResult(intent, CoursesActivity.CHAPTER_REQUEST_CODE); //start with chapters code
+        if(launcher != null) {
+            //care about result
+            launcher.launch(intent);
+        } else {
+            //we dont care for result, a simple start activity will do.
+            fromActivity.startActivity(intent);
+        }
     }
 
     /**
      * Updates a chapter in the database to have the {@link Status#COMPLETED} status. After updating
      * it checks if all the chapters in the course have been confirmed, and if so it unlocks the exam of the course.
+     * @param context Context.
      */
     @UiThread
     public void markChapterAsCompleted(Context context) {
@@ -184,6 +205,12 @@ public class Chapter implements Serializable {
         });
     }
 
+    /**
+     * Checks if a chapter belongs to a given course.
+     * @param chapterId The id of the chapter.
+     * @param course The course.
+     * @return True if the chapter belongs to the course.
+     */
     private boolean inThisCourse(int chapterId, Course course) {
         for(Chapter chapter: course.getChapters()) {
             if(chapter.getId() == chapterId) return true;

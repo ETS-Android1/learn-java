@@ -6,8 +6,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -19,10 +20,14 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.material.navigation.NavigationView;
 
 /**
- * Activity that displays all exams.
+ * Activity that displays all exams in a list, and the user can start the ones that they have
+ * unlocked and available.
  */
 public class ExamsActivity extends ThemedActivity implements NavigationView.OnNavigationItemSelectedListener, UpdatableActivity {
 
+    /**
+     * Indicates if the exams have successfully loaded.
+     */
     public volatile boolean successfulLoad;
 
     /**
@@ -35,11 +40,28 @@ public class ExamsActivity extends ThemedActivity implements NavigationView.OnNa
      */
     private AdView adView;
 
+    /**
+     * Can start {@link ExamActivity}es and handle their result.
+     */
+    private ActivityResultLauncher<Intent> examActivityLauncher;
+
     @Override
     public void onCreate(Bundle savedState) {
         super.onCreate(savedState);
         setContentView(R.layout.activity_exams);
         setUpUI();
+        examActivityLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if(result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        if(data == null) return;
+                        Exam exam = (Exam) data.getSerializableExtra(Exam.EXAM_PREFERENCE_STRING);
+                        if(exam == null) return;
+                        exam.queryAndDisplayStatus(updateView, ExamsActivity.this); //update view is exam view now
+                    }
+                }
+        );
     }
 
     @Override
@@ -60,6 +82,9 @@ public class ExamsActivity extends ThemedActivity implements NavigationView.OnNa
         if(adView != null) adView.resume();
     }
 
+    /**
+     * Initializes the activity's user interface.
+     */
     private void setUpUI() {
         new FillExamsActivityTask().execute(this); //add exam selectors
 
@@ -78,20 +103,6 @@ public class ExamsActivity extends ThemedActivity implements NavigationView.OnNa
             adView = LearnJavaAds.loadBannerAd(adId, findViewById(R.id.adContainer));
         } else {
             findViewById(R.id.adContainer).setVisibility(View.GONE);
-        }
-    }
-
-    /**
-     * Reload the exam view of the previously finished exam to reflect possible changes.
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode != Activity.RESULT_OK || data == null) return;
-        if(requestCode == CoursesActivity.EXAM_REQUEST_CODE) { //only care about exam requests
-            Exam exam = (Exam) data.getSerializableExtra(Exam.EXAM_PREFERENCE_STRING);
-            if(exam == null) return;
-            exam.queryAndDisplayStatus(updateView, ExamsActivity.this); //update view is exam view now
         }
     }
 
@@ -122,5 +133,12 @@ public class ExamsActivity extends ThemedActivity implements NavigationView.OnNa
     @Override
     public void setUpdateViews(View... updateViews) {
         this.updateView = updateViews[0];
+    }
+
+    /**
+     * @return An object that can start {@link ExamActivity}es and handle their result.
+     */
+    public ActivityResultLauncher<Intent> getExamActivityLauncher() {
+        return examActivityLauncher;
     }
 }

@@ -17,7 +17,7 @@
         ]]>
     </text>
     <code><![CDATA[    
-<font color="#999900">String</font> date; <font color="gray">//the date is in YYYY:MM:DD format</font>    
+<font color="#999900">String</font> date; <font color="gray">//test</font>
     ]]></code>
     <text>
         <![CDATA[

@@ -5,11 +5,12 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.gaspar.learnjava.CoursesActivity;
 import com.gaspar.learnjava.TaskActivity;
 import com.gaspar.learnjava.UpdatableActivity;
 import com.gaspar.learnjava.asynctask.TaskStatusDisplayerTask;
@@ -21,44 +22,42 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * Represents a more advanced task (belongs to a course) in the curriculum. Task have a description,
+ * which consists of any number of text, code and advanced information components.
  * <p>
- *  Represents a more advanced task (belongs to a course) in the curriculum. Task have a description,
- *  which consists of any number of text, code and advanced information components.
- * </p>
+ * Tasks also have a {@code <solution>} tag that contains the task solution, using additional
+ * component tags.
  * <p>
- *   Tasks also have a {@code <solution>} tag that contains the task solution, using additional
- *   component tags.
- * </p>
- *
- * <p>
- *   Tasks are stored in XML, in the following format: task_id.xml
- * </p>
- *
+ * Tasks are stored in XML in the assets folder.
+ * <pre>
  * {@code
- *  <resources>
- *  *     <taskdata>
- *  *         <id>*id of task here*</id>
- *  *         <name>*name of the task*</name>
- *  *     </taskdata>
- *  *     <text>, <code> and <advanced> components...
- *  *     ...
- *  *     <solution>
- *  *         <text>, <code>, etc. tags ...
- *  *     </solution>
- *  * </resources>
+ * <taskdata>
+ *    <id>*id of task here*</id>
+ *    <name>*name of the task*</name>
+ * </taskdata>
+ * ...
+ * component tags here...
+ * ...
+ * <solution>
+ *    ...
+ *    component tags here...
+ *    ...
+ * </solution>
  * }
+ * </pre>
+ * @see Component
  */
 public class Task implements Serializable {
 
     /**
      * Id of the task.
      */
-    private int id;
+    private final int id;
 
     /**
      * Name of the task.
      */
-    private String name;
+    private final String name;
 
     /**
      * Displayable components of the task description.
@@ -79,6 +78,13 @@ public class Task implements Serializable {
     @Status
     private int taskStatus;
 
+    /**
+     * Creates a task with components.
+     * @param id The id.
+     * @param name The name.
+     * @param descriptionComponents The list of {@link Component}s that make up the task.
+     * @param solutionComponents The list of {@link Component}s that make up the task's solution.
+     */
     public Task(int id, String name, @Nullable List<Component> descriptionComponents,
                 @Nullable List<Component> solutionComponents) {
         this.id = id;
@@ -91,6 +97,8 @@ public class Task implements Serializable {
     /**
      * Creates a task object that has no components. This can be used when only the name and ID is
      * important.
+     * @param id The id.
+     * @param name The name.
      */
     public Task(int id, String name) {
         this.id = id;
@@ -106,23 +114,32 @@ public class Task implements Serializable {
         new TaskStatusDisplayerTask(this).execute(imageView, context);
     }
 
+    /**
+     * This string identifies the task passed to a {@link TaskActivity}.
+     */
     public static final String TASK_PREFERENCE_STRING = "passed_task";
 
     /**
-     * Starts a task activity for the given task.
-     *
+     * Starts a task activity where the given task will be displayed.
      * @param fromActivity The activity that will launch the task activity.
+     * @param launcher An object which can start a {@link TaskActivity} and handle the result. This can be null,
+     *                 which means that we dont care about the result.
      * @param task The task that will be shown (this task does not need to have parsed
      *             components).
      * @param updateView The view that will be updated when the started activity finishes.
      */
-    public static void startTaskActivity(AppCompatActivity fromActivity, Task task, View updateView) {
+    public static void startTaskActivity(@NonNull AppCompatActivity fromActivity, @Nullable ActivityResultLauncher<Intent> launcher, Task task, View updateView) {
         Intent intent = new Intent(fromActivity, TaskActivity.class);
         intent.putExtra(TASK_PREFERENCE_STRING, task);
         if(fromActivity instanceof UpdatableActivity) {
             ((UpdatableActivity)fromActivity).setUpdateViews(updateView); //save update view
         }
-        fromActivity.startActivityForResult(intent, CoursesActivity.TASK_REQUEST_CODE); //start with task code
+        if(launcher != null) {
+            launcher.launch(intent);
+        } else {
+            //we dont care about the result
+            fromActivity.startActivity(intent);
+        }
     }
 
     /**

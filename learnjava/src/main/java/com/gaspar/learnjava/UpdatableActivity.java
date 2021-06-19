@@ -13,6 +13,10 @@ import android.view.View;
  */
 public interface UpdatableActivity {
 
+    /**
+     * Registers {@link View}s as update views. These are going to be modified in the future.
+     * @param updateView The views.
+     */
     void setUpdateViews(View... updateView);
 
 }

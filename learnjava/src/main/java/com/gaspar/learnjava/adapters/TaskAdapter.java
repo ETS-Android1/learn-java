@@ -17,6 +17,7 @@ import androidx.annotation.Size;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gaspar.learnjava.R;
+import com.gaspar.learnjava.TasksActivity;
 import com.gaspar.learnjava.curriculum.Course;
 import com.gaspar.learnjava.curriculum.Status;
 import com.gaspar.learnjava.curriculum.Task;
@@ -34,7 +35,7 @@ public class TaskAdapter extends ArrayAdapter<Course> {
     /**
      * Activity in which the adapter displays.
      */
-    private final AppCompatActivity activity;
+    private final TasksActivity activity;
 
     /**
      * Alpha animation applied to task selectors on click.
@@ -46,7 +47,7 @@ public class TaskAdapter extends ArrayAdapter<Course> {
      * @param activity Activity in which it will appear.
      * @param courses List of courses (each course will be queried for tasks).
      */
-    public TaskAdapter(AppCompatActivity activity, @Size(min=1) List<Course> courses) {
+    public TaskAdapter(@NonNull TasksActivity activity, @Size(min=1) List<Course> courses) {
         super(activity, R.layout.tasks_of_course, courses);
         this.activity = activity;
         clickAnimation = AnimationUtils.loadAnimation(activity, R.anim.click);
@@ -83,7 +84,6 @@ public class TaskAdapter extends ArrayAdapter<Course> {
 
     /**
      * Adds 'task_selector_view' layouts to the linear layout.
-     *
      * @param course The course to which these tasks belong to.
      * @param tasksLayout The layout the views will be added to.
      */
@@ -107,9 +107,14 @@ public class TaskAdapter extends ArrayAdapter<Course> {
      */
     private void taskSelectorOnClick(final Course course, final Task task, View taskView) {
         if(course.getStatus() == Status.NOT_QUERIED || course.getStatus() == Status.LOCKED) return;
-        Task.startTaskActivity(activity, task, taskView);
+        Task.startTaskActivity(activity, activity.getTaskActivityLauncher(), task, taskView);
     }
 
+    /**
+     * Creates a dialog which informs the user why can they not start locked tasks.
+     * @param activity The activity of the dialog.
+     * @return The {@link MaterialAlertDialogBuilder}, ready to be shown.
+     */
     @NonNull
     @CheckResult
     public static MaterialAlertDialogBuilder buildDialog(@NonNull final AppCompatActivity activity) {

@@ -5,23 +5,23 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.espresso.IdlingRegistry;
 import androidx.test.espresso.IdlingResource;
+import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 
 import com.gaspar.learnjava.curriculum.Chapter;
-import com.gaspar.learnjava.curriculum.components.Component;
 import com.gaspar.learnjava.curriculum.Status;
+import com.gaspar.learnjava.curriculum.components.CodeComponent;
+import com.gaspar.learnjava.curriculum.components.Component;
 import com.gaspar.learnjava.database.ChapterStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.parsers.CourseParser;
-import com.gaspar.learnjava.utils.InteractiveScrollView;
 import com.gaspar.learnjava.utils.ThemeUtils;
 
 import org.hamcrest.Matcher;
@@ -37,15 +37,17 @@ import java.util.function.Predicate;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static com.gaspar.learnjava.AndroidTestUtils.LoadingIdlingResource;
 import static com.gaspar.learnjava.AndroidTestUtils.withFontSize;
+import static com.gaspar.learnjava.AndroidTestUtils.withRecyclerView;
 import static com.gaspar.learnjava.AndroidTestUtils.withSpannableText;
+import static org.hamcrest.Matchers.allOf;
 
 /**
  * Instrumental tests for {@link ChapterActivity}. These use a test chapter, which is found where the
@@ -105,8 +107,8 @@ public class ChapterActivityTest {
             @Override
             public boolean test(ActivityScenarioRule<?> rule) {
                 rule.getScenario().onActivity(activity -> {
-                   View chapterComponentsView = activity.findViewById(R.id.chapterComponentsLayout);
-                   isIdle = chapterComponentsView.getVisibility() == View.VISIBLE;
+                   View loadingView = activity.findViewById(R.id.loadingIndicator);
+                   isIdle = loadingView.getVisibility() == View.GONE;
                 });
                 return isIdle;
             }
@@ -131,7 +133,7 @@ public class ChapterActivityTest {
 
     @Test
     public void testChapterComponentsVisible() {
-        onView(withId(R.id.chapterComponentsLayout)).check(matches(isDisplayed()));
+        onView(withId(R.id.chapterComponents)).check(matches(isDisplayed()));
     }
 
     @Test
@@ -145,16 +147,16 @@ public class ChapterActivityTest {
         rule.getScenario().onActivity(activity -> {
             //this chapter now has components, the loading completed
             Chapter parsedChapter = activity.getPassedChapter();
-            ViewGroup componentsView = activity.findViewById(R.id.chapterComponents);
+            RecyclerView componentsView = activity.findViewById(R.id.chapterComponents);
             //the +1 is needed, since the layout contains one extra view: the "confirm" view, with the confirm button
-            Assert.assertEquals(parsedChapter.getComponents().size() + 1, componentsView.getChildCount());
+            Assert.assertEquals(parsedChapter.getComponents().size() + 1, componentsView.getAdapter().getItemCount());
         });
     }
 
     @Test
     public void testTextComponent() {
-        final Matcher<View> textViewMatcher = withSpannableText("Text element 1.");
-        onView(textViewMatcher).perform(scrollTo());
+        onView(withId(R.id.chapterComponents)).perform(RecyclerViewActions.scrollToPosition(0));
+        final Matcher<View> textViewMatcher = withRecyclerView(R.id.chapterComponents).atPosition(0);
         onView(textViewMatcher).check(matches(isDisplayed()));
         //is the corresponding component a text component?
         rule.getScenario().onActivity(activity ->
@@ -163,8 +165,8 @@ public class ChapterActivityTest {
 
     @Test
     public void testTitleComponent() {
-        final Matcher<View> titleViewMatcher = withSpannableText("Title element");
-        onView(titleViewMatcher).perform(scrollTo());
+        onView(withId(R.id.chapterComponents)).perform(RecyclerViewActions.scrollToPosition(1));
+        final Matcher<View> titleViewMatcher = withRecyclerView(R.id.chapterComponents).atPosition(1);
         onView(titleViewMatcher).check(matches(isDisplayed()));
         //is the corresponding component a text component?
         rule.getScenario().onActivity(activity ->
@@ -173,71 +175,78 @@ public class ChapterActivityTest {
 
     @Test
     public void testCodeComponent() {
-        onView(withId(R.id.codeComponent)).perform(scrollTo());
-        onView(withId(R.id.codeComponent)).check(matches(isDisplayed()));
+        onView(withId(R.id.chapterComponents)).perform(RecyclerViewActions.scrollToPosition(3));
+        final Matcher<View> codeViewMatcher = withRecyclerView(R.id.chapterComponents).atPosition(3);
+        onView(codeViewMatcher).check(matches(isDisplayed()));
         rule.getScenario().onActivity(activity ->
                 Assert.assertEquals(Component.ComponentType.CODE, activity.getPassedChapter().getComponents().get(3).getType()));
     }
 
     @Test
     public void testCodeComponentZoomIn() {
-        final Matcher<View> zoomInMatcher = withId(R.id.zoomInButton);
-        onView(zoomInMatcher).perform(scrollTo());
+        onView(withId(R.id.chapterComponents)).perform(RecyclerViewActions.scrollToPosition(3));
+        final Matcher<View> codeViewMatcher = withRecyclerView(R.id.chapterComponents).atPosition(3);
+        final Matcher<View> zoomInMatcher = allOf(withId(R.id.zoomInButton), withParent(withParent(codeViewMatcher)));
         onView(zoomInMatcher).check(matches(isDisplayed()));
         //default size?
-        onView(withId(R.id.codeArea)).check(matches(isDisplayed()));
+        final Matcher<View> codeAreaMatcher = allOf(withId(R.id.codeArea), withParent(withParent(codeViewMatcher)));
+        onView(codeAreaMatcher).check(matches(isDisplayed()));
         int defSize = (int)Math.ceil(ApplicationProvider.getApplicationContext().getResources().getDimension(R.dimen.code_text_size));
-        onView(withId(R.id.codeArea)).check(matches(withFontSize(defSize)));
+        onView(codeAreaMatcher).check(matches(withFontSize(defSize)));
         //press zoom in button
         onView(zoomInMatcher).perform(click());
         //font size increased?
-        onView(withId(R.id.codeArea)).check(matches(withFontSize(defSize + Component.ZOOM_SIZE_CHANGE)));
+        onView(codeAreaMatcher).check(matches(withFontSize(defSize + CodeComponent.ZOOM_SIZE_CHANGE)));
     }
 
     @Test
     public void testCodeComponentZoomOut() {
-        final Matcher<View> zoomOutMatcher = withId(R.id.zoomOutButton);
-        onView(zoomOutMatcher).perform(scrollTo());
+        onView(withId(R.id.chapterComponents)).perform(RecyclerViewActions.scrollToPosition(3));
+        final Matcher<View> codeViewMatcher = withRecyclerView(R.id.chapterComponents).atPosition(3);
+        final Matcher<View> zoomOutMatcher = allOf(withId(R.id.zoomOutButton), withParent(withParent(codeViewMatcher)));
         onView(zoomOutMatcher).check(matches(isDisplayed()));
         //default size?
-        onView(withId(R.id.codeArea)).check(matches(isDisplayed()));
+        final Matcher<View> codeAreaMatcher = allOf(withId(R.id.codeArea), withParent(withParent(codeViewMatcher)));
+        onView(codeAreaMatcher).check(matches(isDisplayed()));
         int defSize = (int)Math.ceil(ApplicationProvider.getApplicationContext().getResources().getDimension(R.dimen.code_text_size));
-        onView(withId(R.id.codeArea)).check(matches(withFontSize(defSize)));
-        //press zoom out button
+        onView(codeAreaMatcher).check(matches(withFontSize(defSize)));
+        //press zoom in button
         onView(zoomOutMatcher).perform(click());
-        //font size decreased?
-        onView(withId(R.id.codeArea)).check(matches(withFontSize(defSize - Component.ZOOM_SIZE_CHANGE)));
+        //font size increased?
+        onView(codeAreaMatcher).check(matches(withFontSize(defSize - CodeComponent.ZOOM_SIZE_CHANGE)));
     }
 
     @Test
-    public void testCodeComponentCopyButton() {
+    public void testCodeComponentCopyButton() throws InterruptedException {
         //clip sync should be disabled here
-        final Matcher<View> copyButtonMatcher = withId(R.id.copyButton);
-        onView(copyButtonMatcher).perform(scrollTo());
+        onView(withId(R.id.chapterComponents)).perform(RecyclerViewActions.scrollToPosition(3));
+        final Matcher<View> codeViewMatcher = withRecyclerView(R.id.chapterComponents).atPosition(3);
+        final Matcher<View> copyButtonMatcher = allOf(withId(R.id.copyButton), withParent(withParent(codeViewMatcher)));
         onView(copyButtonMatcher).check(matches(isDisplayed()));
         //press
         onView(copyButtonMatcher).perform(click());
         //snackbar?
         onView(withId(com.google.android.material.R.id.snackbar_text)).check(matches(withText(R.string.copy_successful)));
         rule.getScenario().onActivity(activity -> {
-            View codeComponent = activity.findViewById(R.id.codeComponent);
-            TextView codeArea = codeComponent.findViewById(R.id.codeArea);
-            String code = codeArea.getText().toString();
+            String code = "String date; //test";
             //is this in the clipboard?
             final ClipboardManager manager = (ClipboardManager)activity.getSystemService(AppCompatActivity.CLIPBOARD_SERVICE);
             ClipData clipboardContent = manager.getPrimaryClip();
             Assert.assertNotNull(clipboardContent);
             ClipData.Item item = clipboardContent.getItemAt(0);
             Assert.assertNotNull(item);
-            String clipboardText = item.getText().toString();
+            String clipboardText = item.getText().toString().trim();
             Assert.assertEquals(code, clipboardText);
         });
+        //wait for action on UI thread to finish
+        Thread.sleep(1000);
     }
 
     @Test
     public void testAdvancedComponent() { //index: 7
-        onView(withId(R.id.advancedComponent)).perform(scrollTo());
-        onView(withId(R.id.advancedComponent)).check(matches(isDisplayed()));
+        onView(withId(R.id.chapterComponents)).perform(RecyclerViewActions.scrollToPosition(7));
+        final Matcher<View> advancedViewMatcher = withRecyclerView(R.id.chapterComponents).atPosition(7);
+        onView(advancedViewMatcher).check(matches(isDisplayed()));
         //title correct?
         onView(withSpannableText("Advanced element")).check(matches(isDisplayed()));
         rule.getScenario().onActivity(activity ->
@@ -247,8 +256,9 @@ public class ChapterActivityTest {
 
     @Test
     public void testBoxedComponent() { //index: 9
-        onView(withId(R.id.boxedComponent)).perform(scrollTo());
-        onView(withId(R.id.boxedComponent)).check(matches(isDisplayed()));
+        onView(withId(R.id.chapterComponents)).perform(RecyclerViewActions.scrollToPosition(9));
+        final Matcher<View> boxedViewMatcher = withRecyclerView(R.id.chapterComponents).atPosition(9);
+        onView(boxedViewMatcher).check(matches(isDisplayed()));
         //title?
         onView(withSpannableText("Boxed element")).check(matches(isDisplayed()));
         rule.getScenario().onActivity(activity ->
@@ -259,8 +269,8 @@ public class ChapterActivityTest {
     @Test
     public void testChapterCompletionWithScroll() throws InterruptedException {
         rule.getScenario().onActivity(activity -> {
-            InteractiveScrollView scrollView = activity.findViewById(R.id.chapterComponentsLayout);
-            scrollView.smoothScrollTo(0, scrollView.getHeight());
+            RecyclerView recyclerView = activity.findViewById(R.id.chapterComponents);
+            recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
         });
         //allow time for database to update
         Thread.sleep(1500);
@@ -279,7 +289,8 @@ public class ChapterActivityTest {
     @Test
     public void testChapterCompletionWithClick() throws InterruptedException {
         //scroll to the button (this wont trigger the completion by scroll, since it does not go completely to the bottom)
-        onView(withId(R.id.chapterConfirmButton)).perform(scrollTo());
+        onView(withId(R.id.chapterComponents)).perform(RecyclerViewActions.scrollToPosition(12));
+        Thread.sleep(500);
         //this closes the activity
         onView(withId(R.id.chapterConfirmButton)).perform(click());
         //allow time for database to update

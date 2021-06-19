@@ -16,8 +16,8 @@ import androidx.test.uiautomator.UiDevice;
 
 import com.gaspar.learnjava.asynctask.LoadExamQuestionsTask;
 import com.gaspar.learnjava.curriculum.Exam;
-import com.gaspar.learnjava.curriculum.questions.Question;
 import com.gaspar.learnjava.curriculum.Status;
+import com.gaspar.learnjava.curriculum.questions.Question;
 import com.gaspar.learnjava.database.ExamStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.parsers.ExamParser;
@@ -32,14 +32,13 @@ import org.junit.Test;
 import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
 
-import java.util.List;
 import java.util.function.Predicate;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.contrib.RecyclerViewActions.scrollToPosition;
 import static androidx.test.espresso.matcher.RootMatchers.isDialog;
 import static androidx.test.espresso.matcher.ViewMatchers.hasChildCount;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -48,6 +47,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withTagValue;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static com.gaspar.learnjava.AndroidTestUtils.withRecyclerView;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
@@ -130,14 +130,7 @@ public class ExamActivityTest {
         loadingIdleResource = new AndroidTestUtils.LoadingIdlingResource(loadingPredicate, rule);
         IdlingRegistry.getInstance().register(loadingIdleResource);
         //disable the confirm dialog for the individual question tests
-        if(testName.getMethodName().startsWith("testQuestion")) {
-            ExamActivity.disableConfirmFinishWarning = true;
-            rule.getScenario().onActivity(activity -> questionViewIds = activity.getQuestionViewIds());
-        } else {
-            ExamActivity.disableConfirmFinishWarning = false;
-        }
-        //get question view IDs
-        rule.getScenario().onActivity(activity -> questionViewIds = activity.getQuestionViewIds());
+        ExamActivity.disableConfirmFinishWarning = testName.getMethodName().startsWith("testQuestion");
     }
 
     @After
@@ -237,20 +230,17 @@ public class ExamActivityTest {
     --------------------------------------------------------------------------------------------------------------
      */
 
-    //question view id's extracted from the activity
-    public List<Integer> questionViewIds;
-
     //text question with no modifiers: correct answer
     @Test
     public void testQuestionTextNoIgnoreSpaceNoIgnoreCaseCorrect() {
         //index of this question
         int index = 0;
         //matches the question view
-        final Matcher<View> questionViewMatcher = withId(questionViewIds.get(index));
+        onView(withId(R.id.chapterComponents)).perform(scrollToPosition(index));
+        final Matcher<View> questionViewMatcher = withRecyclerView(R.id.questionsLayout).atPosition(index);
         //does question type match?
         Assert.assertEquals(Question.QuestionType.TEXT, testExamParsed.getQuestions().get(index).getType());
         //scroll there and fill the answer
-        onView(questionViewMatcher).perform(scrollTo());
         onView(allOf(withId(R.id.answerEditText), withParent(questionViewMatcher))).perform(typeText("hello"));
         //finish exam (there wont be confirm dialog, disabled for these tests)
         onView(withId(R.id.finishExamButton)).perform(click());
@@ -265,11 +255,11 @@ public class ExamActivityTest {
         //index of this question
         int index = 0;
         //matches the question view
-        final Matcher<View> questionViewMatcher = withId(questionViewIds.get(index));
+        onView(withId(R.id.chapterComponents)).perform(scrollToPosition(index));
+        final Matcher<View> questionViewMatcher = withRecyclerView(R.id.questionsLayout).atPosition(index);
         //does question type match?
         Assert.assertEquals(Question.QuestionType.TEXT, testExamParsed.getQuestions().get(index).getType());
         //scroll there and fill the answer
-        onView(questionViewMatcher).perform(scrollTo());
         onView(allOf(withId(R.id.answerEditText), withParent(questionViewMatcher))).perform(typeText("not hello"));
         //finish exam (there wont be confirm dialog, disabled for these tests)
         onView(withId(R.id.finishExamButton)).perform(click());
@@ -286,11 +276,11 @@ public class ExamActivityTest {
         //index of this question
         int index = 1;
         //matches the question view
-        final Matcher<View> questionViewMatcher = withId(questionViewIds.get(index));
+        onView(withId(R.id.chapterComponents)).perform(scrollToPosition(index));
+        final Matcher<View> questionViewMatcher = withRecyclerView(R.id.questionsLayout).atPosition(index);
         //does question type match?
         Assert.assertEquals(Question.QuestionType.TEXT, testExamParsed.getQuestions().get(index).getType());
         //scroll there and fill the answer
-        onView(questionViewMatcher).perform(scrollTo());
         onView(allOf(withId(R.id.answerEditText), withParent(questionViewMatcher))).perform(typeText("HeLlO")); //correct since ignore case
         //finish exam (there wont be confirm dialog, disabled for these tests)
         onView(withId(R.id.finishExamButton)).perform(click());
@@ -305,11 +295,11 @@ public class ExamActivityTest {
         //index of this question
         int index = 1;
         //matches the question view
-        final Matcher<View> questionViewMatcher = withId(questionViewIds.get(index));
+        onView(withId(R.id.chapterComponents)).perform(scrollToPosition(index));
+        final Matcher<View> questionViewMatcher = withRecyclerView(R.id.questionsLayout).atPosition(index);
         //does question type match?
         Assert.assertEquals(Question.QuestionType.TEXT, testExamParsed.getQuestions().get(index).getType());
         //scroll there and fill the answer
-        onView(questionViewMatcher).perform(scrollTo());
         onView(allOf(withId(R.id.answerEditText), withParent(questionViewMatcher))).perform(typeText("not hello"));
         //finish exam (there wont be confirm dialog, disabled for these tests)
         onView(withId(R.id.finishExamButton)).perform(click());
@@ -326,11 +316,11 @@ public class ExamActivityTest {
         //index of this question
         int index = 2;
         //matches the question view
-        final Matcher<View> questionViewMatcher = withId(questionViewIds.get(index));
+        onView(withId(R.id.chapterComponents)).perform(scrollToPosition(index));
+        final Matcher<View> questionViewMatcher = withRecyclerView(R.id.questionsLayout).atPosition(index);
         //does question type match?
         Assert.assertEquals(Question.QuestionType.TEXT, testExamParsed.getQuestions().get(index).getType());
         //scroll there and fill the answer
-        onView(questionViewMatcher).perform(scrollTo());
         onView(allOf(withId(R.id.answerEditText), withParent(questionViewMatcher))).perform(typeText("hello1 world")); //correct since ignore space
         //finish exam (there wont be confirm dialog, disabled for these tests)
         onView(withId(R.id.finishExamButton)).perform(click());
@@ -345,11 +335,11 @@ public class ExamActivityTest {
         //index of this question
         int index = 2;
         //matches the question view
-        final Matcher<View> questionViewMatcher = withId(questionViewIds.get(index));
+        onView(withId(R.id.chapterComponents)).perform(scrollToPosition(index));
+        final Matcher<View> questionViewMatcher = withRecyclerView(R.id.questionsLayout).atPosition(index);
         //does question type match?
         Assert.assertEquals(Question.QuestionType.TEXT, testExamParsed.getQuestions().get(index).getType());
         //scroll there and fill the answer
-        onView(questionViewMatcher).perform(scrollTo());
         onView(allOf(withId(R.id.answerEditText), withParent(questionViewMatcher))).perform(typeText("hello 1world")); //dont respect mandatory space between 1 and world, incorrect
         //finish exam (there wont be confirm dialog, disabled for these tests)
         onView(withId(R.id.finishExamButton)).perform(click());
@@ -366,11 +356,11 @@ public class ExamActivityTest {
         //index of this question
         int index = 3;
         //matches the question view
-        final Matcher<View> questionViewMatcher = withId(questionViewIds.get(index));
+        onView(withId(R.id.chapterComponents)).perform(scrollToPosition(index));
+        final Matcher<View> questionViewMatcher = withRecyclerView(R.id.questionsLayout).atPosition(index);
         //does question type match?
         Assert.assertEquals(Question.QuestionType.TEXT, testExamParsed.getQuestions().get(index).getType());
         //scroll there and fill the answer
-        onView(questionViewMatcher).perform(scrollTo());
         onView(allOf(withId(R.id.answerEditText), withParent(questionViewMatcher))).perform(typeText("hElLo1 wOrLd")); //correct since ignore case and space
         //finish exam (there wont be confirm dialog, disabled for these tests)
         onView(withId(R.id.finishExamButton)).perform(click());
@@ -385,11 +375,11 @@ public class ExamActivityTest {
         //index of this question
         int index = 3;
         //matches the question view
-        final Matcher<View> questionViewMatcher = withId(questionViewIds.get(index));
+        onView(withId(R.id.chapterComponents)).perform(scrollToPosition(index));
+        final Matcher<View> questionViewMatcher = withRecyclerView(R.id.questionsLayout).atPosition(index);
         //does question type match?
         Assert.assertEquals(Question.QuestionType.TEXT, testExamParsed.getQuestions().get(index).getType());
         //scroll there and fill the answer
-        onView(questionViewMatcher).perform(scrollTo());
         onView(allOf(withId(R.id.answerEditText), withParent(questionViewMatcher))).perform(typeText("hElLo 1worLD")); //dont respect mandatory space between 1 and world, incorrect
         //finish exam (there wont be confirm dialog, disabled for these tests)
         onView(withId(R.id.finishExamButton)).perform(click());
@@ -406,11 +396,11 @@ public class ExamActivityTest {
         //index of this question
         int index = 4;
         //matches the question view
-        final Matcher<View> questionViewMatcher = withId(questionViewIds.get(index));
+        onView(withId(R.id.chapterComponents)).perform(scrollToPosition(index));
+        final Matcher<View> questionViewMatcher = withRecyclerView(R.id.questionsLayout).atPosition(index);
         //does question type match?
         Assert.assertEquals(Question.QuestionType.SINGLE_CHOICE, testExamParsed.getQuestions().get(index).getType());
         //scroll there and fill the answer
-        onView(questionViewMatcher).perform(scrollTo());
         //click the correct answer
         final Matcher<View> answerLayoutMatcher = allOf(withId(R.id.answersLayout), withParent(questionViewMatcher));
         onView(AndroidTestUtils.nthChildOf(answerLayoutMatcher, 1)).perform(click());
@@ -426,11 +416,11 @@ public class ExamActivityTest {
         //index of this question
         int index = 4;
         //matches the question view
-        final Matcher<View> questionViewMatcher = withId(questionViewIds.get(index));
+        onView(withId(R.id.chapterComponents)).perform(scrollToPosition(index));
+        final Matcher<View> questionViewMatcher = withRecyclerView(R.id.questionsLayout).atPosition(index);
         //does question type match?
         Assert.assertEquals(Question.QuestionType.SINGLE_CHOICE, testExamParsed.getQuestions().get(index).getType());
         //scroll there and fill the answer
-        onView(questionViewMatcher).perform(scrollTo());
         //click an incorrect answer
         final Matcher<View> answerLayoutMatcher = allOf(withId(R.id.answersLayout), withParent(questionViewMatcher));
         onView(AndroidTestUtils.nthChildOf(answerLayoutMatcher, 0)).perform(click());
@@ -446,11 +436,11 @@ public class ExamActivityTest {
         //index of this question
         int index = 5;
         //matches the question view
-        final Matcher<View> questionViewMatcher = withId(questionViewIds.get(index));
+        onView(withId(R.id.chapterComponents)).perform(scrollToPosition(index));
+        final Matcher<View> questionViewMatcher = withRecyclerView(R.id.questionsLayout).atPosition(index);
         //does question type match?
         Assert.assertEquals(Question.QuestionType.MULTI_CHOICE, testExamParsed.getQuestions().get(index).getType());
         //scroll there and fill the answer
-        onView(questionViewMatcher).perform(scrollTo());
         //click the correct answer, there are 2 of them
         final Matcher<View> answerLayoutMatcher = allOf(withId(R.id.answersLayout), withParent(questionViewMatcher));
         onView(AndroidTestUtils.nthChildOf(answerLayoutMatcher, 0)).perform(click());
@@ -467,11 +457,11 @@ public class ExamActivityTest {
         //index of this question
         int index = 5;
         //matches the question view
-        final Matcher<View> questionViewMatcher = withId(questionViewIds.get(index));
+        onView(withId(R.id.chapterComponents)).perform(scrollToPosition(index));
+        final Matcher<View> questionViewMatcher = withRecyclerView(R.id.questionsLayout).atPosition(index);
         //does question type match?
         Assert.assertEquals(Question.QuestionType.MULTI_CHOICE, testExamParsed.getQuestions().get(index).getType());
         //scroll there and fill the answer
-        onView(questionViewMatcher).perform(scrollTo());
         //click some answers, NOT ALL of them are correct.
         final Matcher<View> answerLayoutMatcher = allOf(withId(R.id.answersLayout), withParent(questionViewMatcher));
         onView(AndroidTestUtils.nthChildOf(answerLayoutMatcher, 0)).perform(click());
@@ -487,11 +477,11 @@ public class ExamActivityTest {
         //index of this question
         int index = 6;
         //matches the question view
-        final Matcher<View> questionViewMatcher = withId(questionViewIds.get(index));
+        onView(withId(R.id.chapterComponents)).perform(scrollToPosition(index));
+        final Matcher<View> questionViewMatcher = withRecyclerView(R.id.questionsLayout).atPosition(index);
         //does question type match?
         Assert.assertEquals(Question.QuestionType.TRUE_OR_FALSE, testExamParsed.getQuestions().get(index).getType());
         //scroll there and fill the answer
-        onView(questionViewMatcher).perform(scrollTo());
         //click the correct, which is true
         onView(allOf(withId(R.id.trueTextView), withParent(withParent(questionViewMatcher)))).perform(click());
         //finish exam (there wont be confirm dialog, disabled for these tests)
@@ -505,11 +495,11 @@ public class ExamActivityTest {
         //index of this question
         int index = 6;
         //matches the question view
-        final Matcher<View> questionViewMatcher = withId(questionViewIds.get(index));
+        onView(withId(R.id.chapterComponents)).perform(scrollToPosition(index));
+        final Matcher<View> questionViewMatcher = withRecyclerView(R.id.questionsLayout).atPosition(index);
         //does question type match?
         Assert.assertEquals(Question.QuestionType.TRUE_OR_FALSE, testExamParsed.getQuestions().get(index).getType());
         //scroll there and fill the answer
-        onView(questionViewMatcher).perform(scrollTo());
         //click the incorrect, which is false
         onView(allOf(withId(R.id.falseTextView), withParent(withParent(questionViewMatcher)))).perform(click());
         //finish exam (there wont be confirm dialog, disabled for these tests)
@@ -521,38 +511,47 @@ public class ExamActivityTest {
     //fills all the correct answers and check the result
     @Test
     public void testCompletelyCorrectExam() {
+        int index = 0;
         //answer text answers (4 of them)
-        Matcher<View> questionViewMatcher = withId(questionViewIds.get(0));
-        onView(questionViewMatcher).perform(scrollTo());
+        onView(withId(R.id.questionsLayout)).perform(scrollToPosition(index));
+        Matcher<View> questionViewMatcher = withRecyclerView(R.id.questionsLayout).atPosition(index++);
         onView(allOf(withId(R.id.answerEditText), withParent(questionViewMatcher))).perform(typeText("hello"));
-        questionViewMatcher = withId(questionViewIds.get(1));
-        onView(questionViewMatcher).perform(scrollTo());
+
+        onView(withId(R.id.questionsLayout)).perform(scrollToPosition(index));
+        questionViewMatcher = withRecyclerView(R.id.questionsLayout).atPosition(index++);
         onView(allOf(withId(R.id.answerEditText), withParent(questionViewMatcher))).perform(typeText("hElLo"));
-        questionViewMatcher = withId(questionViewIds.get(2));
-        onView(questionViewMatcher).perform(scrollTo());
+
+        onView(withId(R.id.questionsLayout)).perform(scrollToPosition(index));
+        questionViewMatcher = withRecyclerView(R.id.questionsLayout).atPosition(index++);
         onView(allOf(withId(R.id.answerEditText), withParent(questionViewMatcher))).perform(typeText("hello1 world"));
-        questionViewMatcher = withId(questionViewIds.get(3));
-        onView(questionViewMatcher).perform(scrollTo());
+
+        onView(withId(R.id.questionsLayout)).perform(scrollToPosition(index));
+        questionViewMatcher = withRecyclerView(R.id.questionsLayout).atPosition(index++);
         onView(allOf(withId(R.id.answerEditText), withParent(questionViewMatcher))).perform(typeText("hEllO1 WorLd"));
+
         //answer single choice
-        questionViewMatcher = withId(questionViewIds.get(4));
-        onView(questionViewMatcher).perform(scrollTo());
+        onView(withId(R.id.questionsLayout)).perform(scrollToPosition(index));
+        questionViewMatcher = withRecyclerView(R.id.questionsLayout).atPosition(index++);
         Matcher<View> answerLayoutMatcher = allOf(withId(R.id.answersLayout), withParent(questionViewMatcher));
         onView(AndroidTestUtils.nthChildOf(answerLayoutMatcher, 1)).perform(click());
+
         //answer multi choice
-        questionViewMatcher = withId(questionViewIds.get(5));
-        onView(questionViewMatcher).perform(scrollTo());
+        onView(withId(R.id.questionsLayout)).perform(scrollToPosition(index));
+        questionViewMatcher = withRecyclerView(R.id.questionsLayout).atPosition(index++);
         answerLayoutMatcher = allOf(withId(R.id.answersLayout), withParent(questionViewMatcher));
         onView(AndroidTestUtils.nthChildOf(answerLayoutMatcher, 0)).perform(click());
         onView(AndroidTestUtils.nthChildOf(answerLayoutMatcher, 2)).perform(click());
+
         //answer true false
-        questionViewMatcher = withId(questionViewIds.get(6));
-        onView(questionViewMatcher).perform(scrollTo());
+        onView(withId(R.id.questionsLayout)).perform(scrollToPosition(index));
+        questionViewMatcher = withRecyclerView(R.id.questionsLayout).atPosition(index);
         onView(allOf(withId(R.id.trueTextView), withParent(withParent(questionViewMatcher)))).perform(click());
+
         //finish exam and accept confirm dialog
         onView(withId(R.id.finishExamButton)).perform(click());
         onView(withText(R.string.confirm_finish_exam)).inRoot(isDialog()).check(matches(isDisplayed()));
         onView(withId(AndroidTestUtils.DialogButtonId.POSITIVE.getId())).perform(click());
+
         //exam is evaluated
         int nQuestions = testExamParsed.getQuestionAmount();
         String pointsText = nQuestions + "/" + nQuestions + " " + ApplicationProvider.getApplicationContext().getString(R.string.points);

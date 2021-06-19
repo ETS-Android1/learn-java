@@ -140,14 +140,15 @@ public class CourseAdapter extends ArrayAdapter<Course> {
     }
 
     /**
-     * Sets the text, listeners and the status icon of a chapter view. See {@link Chapter#startChapterActivity(AppCompatActivity, Chapter, View, Exam, View)}
+     * Sets the text, listeners and the status icon of a chapter view. See
+     * {@link Chapter#startChapterActivity(AppCompatActivity, androidx.activity.result.ActivityResultLauncher, Chapter, View, Exam, View)}
      * for explanation on why exam components are needed.
      */
     private void setUpChapterView(final View chapterView, @NonNull Chapter chapter, @Nullable Exam exam, final View extraExamView) {
         TextView chapterNameView = chapterView.findViewById(R.id.chapterNameView);
         chapterNameView.setText(chapter.getName());
         chapterView.setOnClickListener(view -> { //redirect to chapter activity
-            Chapter.startChapterActivity(activity, chapter, chapterView, exam, extraExamView);
+            Chapter.startChapterActivity(activity, activity.getChapterActivityLauncher(), chapter, chapterView, exam, extraExamView);
             view.startAnimation(clickAnimation);
         });
     }
@@ -159,7 +160,7 @@ public class CourseAdapter extends ArrayAdapter<Course> {
         TextView taskNameView = taskView.findViewById(R.id.taskNameView);
         taskNameView.setText(task.getName());
         taskView.setOnClickListener(view -> { //redirect to task activity if not locked.
-            Task.startTaskActivity(activity, task, taskView);
+            Task.startTaskActivity(activity, activity.getTaskActivityLauncher(), task, taskView);
             view.startAnimation(clickAnimation);
         });
     }

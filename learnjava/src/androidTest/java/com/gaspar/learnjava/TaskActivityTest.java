@@ -95,8 +95,8 @@ public class TaskActivityTest {
             @Override
             public boolean test(ActivityScenarioRule<?> rule) {
                 rule.getScenario().onActivity(activity -> {
-                    View chapterComponentsView = activity.findViewById(R.id.taskComponents);
-                    isIdle = chapterComponentsView.getVisibility() == View.VISIBLE;
+                    View loadingView = activity.findViewById(R.id.taskProgressBar);
+                    isIdle = loadingView.getVisibility() == View.GONE;
                 });
                 return isIdle;
             }

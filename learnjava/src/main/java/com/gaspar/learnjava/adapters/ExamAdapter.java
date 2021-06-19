@@ -9,21 +9,29 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.Size;
-import androidx.appcompat.app.AppCompatActivity;
 
+import com.gaspar.learnjava.ExamsActivity;
 import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.curriculum.Course;
 
 import java.util.List;
 
 /**
- * Creates a named exam view for each course in the list.
+ * Creates a named exam view for each exam available in the application.
  */
 public class ExamAdapter extends ArrayAdapter<Course> {
 
-    private final AppCompatActivity activity;
+    /**
+     * The activity in which the adapter displays views.
+     */
+    private final ExamsActivity activity;
 
-    public ExamAdapter(AppCompatActivity activity, @Size(min=1) List<Course> courses) {
+    /**
+     * Creates an exam adapter.
+     * @param activity The activity of the adapter.
+     * @param courses The list of courses (for each course there is exactly one exam with the same name).
+     */
+    public ExamAdapter(@NonNull ExamsActivity activity, @Size(min=1) List<Course> courses) {
         super(activity, R.layout.selector_named_exam, courses);
         this.activity = activity;
     }

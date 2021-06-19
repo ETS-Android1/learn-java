@@ -312,7 +312,7 @@ public class LearnJavaActivity extends ThemedActivity
         //offer the guide if needed
         Runnable runIfNoGuide = () -> {
             //this is not an updatable activity, so view is null. exam and extra exam view are also null
-            Chapter.startChapterActivity(this, startedChapter, null, null, null);
+            Chapter.startChapterActivity(this, null, startedChapter, null, null, null);
         };
         GuideActivity.displayGuideNotReadDialogIfNeeded(this, runIfNoGuide);
     }

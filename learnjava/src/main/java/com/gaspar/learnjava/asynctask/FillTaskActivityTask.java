@@ -101,7 +101,7 @@ public class FillTaskActivityTask extends LjAsyncTask<TaskActivity> {
                     activity.updateTaskStatus(isChecked, activity.getDisplayedTask().getId()));
 
             //hide loading, show recycler
-            activity.findViewById(R.id.loadingIndicator).setVisibility(View.GONE);
+            activity.findViewById(R.id.taskProgressBar).setVisibility(View.GONE);
             componentsView.setVisibility(View.VISIBLE);
 
             //ask about dark theme

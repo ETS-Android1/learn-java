@@ -171,6 +171,7 @@ public class ComponentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
                 //special formatting for dark mode
                 if(ThemeUtils.isDarkTheme()) {
                     int color = ContextCompat.getColor(activity, android.R.color.black);
+                    advancedHolder.advancedTextView.setTextColor(color);
                     advancedHolder.titleTextView.setTextColor(color);
                     advancedHolder.contentTextView.setTextColor(color);
                 }

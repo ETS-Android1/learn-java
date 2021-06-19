@@ -129,6 +129,15 @@ public abstract class AndroidTestUtils {
     }
 
     /**
+     * @param id View id of a {@link androidx.recyclerview.widget.RecyclerView}.
+     * @return A {@link RecyclerViewMatcher} that matcher the {@link androidx.recyclerview.widget.RecyclerView}
+     * with the given id.
+     */
+    public static RecyclerViewMatcher withRecyclerView(@IdRes int id) {
+        return new RecyclerViewMatcher(id);
+    }
+
+    /**
      * Original source from Espresso library, modified to handle spanned fields.
      * Returns a matcher that matches a descendant of {@link TextView} that is
      * displaying the string.

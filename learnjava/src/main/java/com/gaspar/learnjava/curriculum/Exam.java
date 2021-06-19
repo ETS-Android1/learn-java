@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.View;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gaspar.learnjava.CoursesActivity;
 import com.gaspar.learnjava.ExamActivity;
+import com.gaspar.learnjava.ExamsActivity;
 import com.gaspar.learnjava.LearnJavaActivity;
 import com.gaspar.learnjava.SettingsActivity;
 import com.gaspar.learnjava.UpdatableActivity;
@@ -18,6 +20,7 @@ import com.gaspar.learnjava.asynctask.LearnJavaExecutor;
 import com.gaspar.learnjava.curriculum.questions.Question;
 import com.gaspar.learnjava.database.ExamStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
+import com.gaspar.learnjava.utils.LogUtils;
 
 import java.io.Serializable;
 import java.util.List;
@@ -25,29 +28,24 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * Represents an exam in the curriculum. Exams can have any number of questions. Exams can be finished or
+ * unfinished. An unfinished courses exam should be unfinished. Unfinished exams show to the user that they
+ * are unfinished, and they can't be started.
  * <p>
- *     Represents an exam in the curriculum. Exams can have any number of questions. Exams can be finished or
- *     unfinished. An unfinished courses exam should be unfinished. Unfinished exams show to the user that they
- *     are unfinished, and they can't be started.
- * </p>
- *
- * <p>
- *     Exams are stored in XML, in the following format: exam_id.xml
- * </p>
- *
+ * Exams are stored in XML, in the assets folder.
+ * <pre>
  * {@code
- *  <resources>
- *  *     <examdata>
- *  *         <id>*id here*</id>
- *            <questionAmount>*number of displayed questions</questionAmount>
- *            <timeLimit>*exam time limit in minutes*</timeLimit>
- *            <finished>true</finished>
- *  *     </examdata>
- *  *     <question>*question data*</question>
- *  *     ...
- *  *     <question>*question data*</question>
- *  </resources>
+ * <examdata>
+ *    <id>*id here*</id>
+ *    <questionAmount>*number of displayed questions</questionAmount>
+ *    <timeLimit>*exam time limit in minutes*</timeLimit>
+ *    <finished>true</finished>
+ * </examdata>
+ * <question>*question data*</question>
+ *     ...
+ * <question>*question data*</question>
  * }
+ * </pre>
  */
 public class Exam implements Serializable {
 
@@ -127,7 +125,6 @@ public class Exam implements Serializable {
 
     /**
      * Queries the status and last started time of an exam from the database, on a background thread.
-     *
      * @param examView The view (inflated exam_selector_view) where the result of the query is shown.
      */
     public void queryAndDisplayStatus(View examView, AppCompatActivity activity) {
@@ -164,8 +161,8 @@ public class Exam implements Serializable {
     }
 
     /**
-     * Starts an exam activity. This is called from {@link ExamStatusDisplayerTask}.
-     * @param result The result of the exam display task.
+     * Starts an exam activity. This is called from {@link ExamStatusDisplayerTask}, after it has finshed.
+     * @param result The result of the exam display task, which ran in the background.
      * @param exam The exam that must be started.
      */
     public static void startExamActivity(ExamStatusDisplayerTask.Result result, Exam exam) {
@@ -178,7 +175,16 @@ public class Exam implements Serializable {
         if(result.activity instanceof UpdatableActivity) {
             ((UpdatableActivity)result.activity).setUpdateViews(result.examView); //save update view
         }
-        result.activity.startActivityForResult(intent, CoursesActivity.EXAM_REQUEST_CODE);
+        //there are 2 activities from where an exam can be launched
+        if(result.activity instanceof CoursesActivity) {
+            ActivityResultLauncher<Intent> launcher = ((CoursesActivity)result.activity).getExamActivityLauncher();
+            launcher.launch(intent);
+        } else if(result.activity instanceof ExamsActivity) {
+            ActivityResultLauncher<Intent> launcher = ((ExamsActivity)result.activity).getExamActivityLauncher();
+            launcher.launch(intent);
+        } else {
+            LogUtils.logError("Exam launched from an unknown activity: " + result.activity.getClass().getSimpleName());
+        }
     }
 
     @Override
@@ -218,6 +224,11 @@ public class Exam implements Serializable {
         return timeLimit;
     }
 
+    /**
+     * Gets the percentage required to pass an exam from the applications {@link SharedPreferences}.
+     * @param context Context.
+     * @return The percentage, as an integer.
+     */
     public static int getMinimumPassPercentage(Context context) {
         if(minimumPassPercentage == 0) {
             final SharedPreferences prefs = context.getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);

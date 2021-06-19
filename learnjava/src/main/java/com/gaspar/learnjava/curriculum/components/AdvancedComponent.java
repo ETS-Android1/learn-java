@@ -54,6 +54,11 @@ public class AdvancedComponent extends Component {
     public static class AdvancedComponentHolder extends RecyclerView.ViewHolder {
 
         /**
+         * Just shows "advanced".
+         */
+        public TextView advancedTextView;
+
+        /**
          * Text view which displays the title.
          */
         public TextView titleTextView;
@@ -71,6 +76,7 @@ public class AdvancedComponent extends Component {
             super(componentView);
             titleTextView = componentView.findViewById(R.id.title);
             contentTextView = componentView.findViewById(R.id.advancedArea);
+            advancedTextView = componentView.findViewById(R.id.advancedDisplayer);
             contentTextView.setMovementMethod(LinkMovementMethod.getInstance()); //allow links
         }
 

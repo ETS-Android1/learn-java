@@ -7,8 +7,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -24,10 +25,15 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.material.navigation.NavigationView;
 
 /**
- * Activity where all tasks are displayed.
+ * Activity where all tasks are displayed in list, and the user is allowed to open the ones they unlocked.
+ * @see CoursesActivity
+ * @see ExamsActivity
  */
 public class TasksActivity extends ThemedActivity implements NavigationView.OnNavigationItemSelectedListener, UpdatableActivity {
 
+    /**
+     * Stores if the tasks have loaded successfully.
+     */
     public boolean successfulLoad;
 
     /**
@@ -40,11 +46,29 @@ public class TasksActivity extends ThemedActivity implements NavigationView.OnNa
      */
     private AdView adView;
 
+    /**
+     * An object which can start {@link TaskActivity}es and is prepared to handle the result.
+     */
+    private ActivityResultLauncher<Intent> taskActivityLauncher;
+
     @Override
     public void onCreate(Bundle savedState) {
         super.onCreate(savedState);
         setContentView(R.layout.activity_tasks);
         setUpUI();
+        //handle results of task activities
+        taskActivityLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if(result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        if(data == null) return;
+                        Task task = (Task)data.getSerializableExtra(Task.TASK_PREFERENCE_STRING);
+                        if(task == null) return;
+                        task.queryAndDisplayStatus(updateView.findViewById(R.id.taskStatusIcon), TasksActivity.this);
+                    }
+                }
+        );
     }
 
     @Override
@@ -65,6 +89,9 @@ public class TasksActivity extends ThemedActivity implements NavigationView.OnNa
         if(adView != null) adView.resume();
     }
 
+    /**
+     * Initialized the activity's user interface.
+     */
     private void setUpUI() {
         loadTasks(); //load tasks
 
@@ -110,20 +137,6 @@ public class TasksActivity extends ThemedActivity implements NavigationView.OnNa
     }
 
     /**
-     * Updates the status icon of the task that's activity was finished.
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode != Activity.RESULT_OK || data == null) return;
-        if(requestCode == CoursesActivity.TASK_REQUEST_CODE) { //only care about task results
-            Task task = (Task)data.getSerializableExtra(Task.TASK_PREFERENCE_STRING);
-            if(task == null) return;
-            task.queryAndDisplayStatus(updateView.findViewById(R.id.taskStatusIcon), TasksActivity.this);
-        }
-    }
-
-    /**
      * Settings button (in the toolbar) click handler.
      */
     public void settingsOnClick(View v) {
@@ -150,5 +163,12 @@ public class TasksActivity extends ThemedActivity implements NavigationView.OnNa
     @Override
     public void setUpdateViews(View... updateViews) {
         this.updateView = updateViews[0];
+    }
+
+    /**
+     * @return An object that can start {@link TaskActivity}es and handle the result.
+     */
+    public ActivityResultLauncher<Intent> getTaskActivityLauncher() {
+        return taskActivityLauncher;
     }
 }
