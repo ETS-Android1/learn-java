@@ -16,6 +16,7 @@ import com.gaspar.learnjava.ExamsActivity;
 import com.gaspar.learnjava.GuideActivity;
 import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.TasksActivity;
+import com.gaspar.learnjava.playground.PlaygroundActivity;
 
 /**
  * This class contains utility methods related to the drawer menu on the
@@ -45,6 +46,10 @@ public abstract class DrawerUtils {
             intent = new Intent(activity, ContactActivity.class);
         } else if (id == R.id.nav_clipsync) {
             intent = new Intent(activity, ClipSyncActivity.class);
+        } else if(id == R.id.nav_playground) {
+            intent = new Intent(activity, PlaygroundActivity.class);
+        } else {
+            LogUtils.logError("Unknown id on drawer click: " + id);
         }
         DrawerLayout drawer = activity.findViewById(drawerLayoutId);
         drawer.closeDrawer(GravityCompat.START);

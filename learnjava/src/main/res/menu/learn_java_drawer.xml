@@ -38,9 +38,13 @@
                 android:icon="@drawable/info_icon"
                 android:title="@string/guide"/>
             <item
+                android:id="@+id/nav_playground"
+                android:icon="@drawable/playground_icon"
+                android:title="@string/playground"/>
+            <item
                 android:id="@+id/nav_clipsync"
                 android:icon="@drawable/copy_icon"
-                android:title="ClipSync"/>
+                android:title="@string/clip_sync"/>
     </group>
 
     <group

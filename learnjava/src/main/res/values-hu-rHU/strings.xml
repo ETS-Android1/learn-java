@@ -192,4 +192,10 @@
     <string name="dark_theme_system">
         Észrevettem, hogy a rendszer sötét témára van állítva. Szeretnéd az alkalmazást is sötét módba rakni?
     </string>
+
+    <!-- Playground -->
+    <string name="playground">Játszótér</string>
+    <string name="playground_input">Bemenet</string>
+    <string name="playground_code">Kód</string>
+    <string name="playground_output">Kimenet</string>
 </resources>

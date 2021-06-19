@@ -204,4 +204,10 @@
     <string name="dark_theme_system">
         The system dark mode seems to be on. Do you want to turn on the application\'s dark mode as well?
     </string>
+
+    <!-- Playground -->
+    <string name="playground">Playground</string>
+    <string name="playground_input">Input</string>
+    <string name="playground_code">Code</string>
+    <string name="playground_output">Output</string>
 </resources>

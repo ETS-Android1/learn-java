@@ -37,7 +37,6 @@ public class ContactActivity extends ThemedActivity {
 
     /**
      * Creates a text view from a string.
-     *
      * @param text The text it will contain.
      * @return The created view.
      */
@@ -60,5 +59,15 @@ public class ContactActivity extends ThemedActivity {
                 + getString(R.string.my_email)));
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.default_email_subject));
         startActivity(Intent.createChooser(emailIntent, getString(R.string.email_chooser)));
+    }
+
+    /**
+     * Called when the back button is clicked on the toolbar.
+     * @return True.
+     */
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }
