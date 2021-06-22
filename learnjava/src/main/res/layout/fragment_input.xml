@@ -1,13 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".playground.InputFragment">
 
     <TextView
+        android:id="@+id/inputInfoTextView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Input fragment" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:text="@string/playground_input_info"
+        android:layout_margin="@dimen/margin"
+        android:textSize="@dimen/small_text_size"/>
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/inputInfoTextView"
+        android:layout_margin="@dimen/margin"
+        android:background="@drawable/code_component_background">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:padding="@dimen/padding"
+            android:fillViewport="true">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:ignore="ScrollViewSize"
+                android:fillViewport="true">
+
+                <EditText
+                    android:id="@+id/playgroundInputArea"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textMultiLine|textNoSuggestions"
+                    android:background="@drawable/code_area_background"
+                    android:hint="@string/playground_input_hint"
+                    android:gravity="start|top"
+                    android:padding="@dimen/padding"
+                    android:textColor="@color/code_text_color"
+                    android:textSize="@dimen/code_text_size"
+                    android:importantForAutofill="no"/>
+
+            </HorizontalScrollView>
+
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/inputZoomInButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/zoom_in_icon"
+                android:contentDescription="@string/zoom_in"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginBottom="@dimen/margin"/>
+
+            <ImageButton
+                android:id="@+id/inputZoomOutButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/zoom_out_icon"
+                android:contentDescription="@string/zoom_out"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginBottom="@dimen/margin"/>
+
+            <ImageButton
+                android:id="@+id/inputDeleteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/icon_delete"
+                android:contentDescription="@string/playground_input_delete"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginBottom="@dimen/margin"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

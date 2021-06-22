@@ -1,5 +1,8 @@
 package com.gaspar.learnjava.formatter;
 
+import androidx.annotation.NonNull;
+
+import java.util.Objects;
 import java.util.regex.Matcher;
 
 /**
@@ -11,11 +14,12 @@ import java.util.regex.Matcher;
 public class Formatter {
 
     /**
-     * Performs the content formatting.
+     * Performs the content formatting, coloring the Java code to be more readable. Includes the functionality
+     * of {@link #formatWhitespaces(String)}. The result can be safely fed into {@link android.text.Html#fromHtml(String, int)}.
      * @param content The unformatted code.
      * @return The formatted code, as a string.
      */
-    public String formatContent(String content) {
+    public String formatContent(@NonNull String content) {
         content = " " + content; //this space is necessary
         //Replace < with its HTML symbol. Must be called first, as otherwise it would match generated tags
         String res = content.replaceAll("<", "&lt;");
@@ -38,8 +42,7 @@ public class Formatter {
         //find comments and color them
         res = RegexConstants.COMMENT_REGEX.matcher(res).replaceAll("<font color=\"" + FormatColor.COMMENT_COLOR + "\">$1</font>");
         //replace tabs and line breaks with their HTML tags
-        res = res.replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;").
-                replaceAll("(\r\n|\n)", "$1<br/>");
+        res = formatWhitespaces(res);
 
         res = clean(res); //clean formatting from where it is not needed.
         res = res.substring(1); //remove space that was added for regex-es
@@ -51,18 +54,19 @@ public class Formatter {
      * @param formattedContent The content where everything is formatted, even where it should not be.
      * @return The content where it's only formatted where it is necessary.
      */
-    private String clean(String formattedContent) {
+    private String clean(@NonNull String formattedContent) {
         //Now there maybe are cases where words inside comments were formatted (primitve names, class names, ect).
         Matcher commentMatcher = RegexConstants.COMMENT_REGEX.matcher(formattedContent);
         while(commentMatcher.find()) {
             String comment = commentMatcher.group(); //this is the comment the matcher found
-            //System.out.println("Comment: " + comment);
+            //an explicit, new string is required here
             String cleanedComment = new String(comment);
             //remove formatting from each word inside the comment
             final Matcher formattedInsideCommentMatcher = RegexConstants.FORMATTED_REGEX.matcher(comment);
             while(formattedInsideCommentMatcher.find()) {
                 String before = formattedInsideCommentMatcher.group(1);
                 String word = formattedInsideCommentMatcher.group(2);
+                Objects.requireNonNull(word);
                 String after = formattedInsideCommentMatcher.group(3);
                 //System.out.println("Formatted inside comment: " + (before+word+after));
                 cleanedComment = cleanedComment.replaceAll(before+word+after, word); //remove formatting
@@ -79,6 +83,7 @@ public class Formatter {
             while(formattedInsideLiteralMatcher.find()) { //find all formatted words inside the literal
                 String before = formattedInsideLiteralMatcher.group(1);
                 String word = formattedInsideLiteralMatcher.group(2);
+                Objects.requireNonNull(word);
                 String after = formattedInsideLiteralMatcher.group(3);
                 //System.out.println("Formatted inside literal: " + (before+word+after));
                 cleanedLiteral = cleanedLiteral.replaceAll(before+word+after, word); //remove formatting
@@ -86,5 +91,16 @@ public class Formatter {
             formattedContent = formattedContent.replace(literal, cleanedLiteral); //finally, replace the literal with the cleaned version
         }
         return formattedContent;
+    }
+
+    /**
+     * Formats the string by replacing {@code \n} with {@code <br/>} and so on. Only replaces whitespace
+     * characters.
+     * @param content The content to be formatted.
+     * @return The formatted string.
+     */
+    public String formatWhitespaces(@NonNull String content) {
+        return content.replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;").
+                replaceAll("(\r\n|\n)", "$1<br/>");
     }
 }

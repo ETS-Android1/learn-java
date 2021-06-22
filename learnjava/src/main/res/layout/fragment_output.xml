@@ -1,13 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".playground.OutputFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Output fragment" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/playground_stdout_info"
+            android:textSize="@dimen/small_text_size"
+            android:layout_margin="@dimen/margin"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin"
+            android:padding="@dimen/padding"
+            android:background="@drawable/code_component_background">
+
+            <HorizontalScrollView
+                android:id="@+id/playgroundStdoutScroll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:fillViewport="true">
+
+                <TextView
+                    android:id="@+id/playgroundStdout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/playground_stdout_hint"
+                    android:textSize="@dimen/small_text_size"
+                    android:textColor="@color/code_text_color"
+                    android:background="@drawable/code_area_background"
+                    android:padding="@dimen/padding" />
+
+            </HorizontalScrollView>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/margin"
+                android:layout_below="@id/playgroundStdoutScroll">
+
+                <ImageButton
+                    android:id="@+id/stdoutZoomIn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:foreground="?selectableItemBackground"
+                    app:srcCompat="@drawable/zoom_in_icon"
+                    android:contentDescription="@string/zoom_in"
+                    android:layout_marginEnd="@dimen/margin"/>
+
+                <ImageButton
+                    android:id="@+id/stdoutZoomOut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:foreground="?selectableItemBackground"
+                    app:srcCompat="@drawable/zoom_out_icon"
+                    android:contentDescription="@string/zoom_out" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/playground_stderr_info"
+            android:textSize="@dimen/small_text_size"
+            android:layout_margin="@dimen/margin"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin"
+            android:padding="@dimen/padding"
+            android:background="@drawable/code_component_background">
+
+            <HorizontalScrollView
+                android:id="@+id/playgroundStderrScroll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:fillViewport="true">
+
+                <TextView
+                    android:id="@+id/playgroundStderr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/playground_stderr_hint"
+                    android:textSize="@dimen/small_text_size"
+                    android:textColor="@android:color/holo_red_light"
+                    android:background="@drawable/code_area_background"
+                    android:padding="@dimen/padding" />
+
+            </HorizontalScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/margin"
+                android:layout_below="@id/playgroundStderrScroll">
+
+                <ImageButton
+                    android:id="@+id/stderrZoomIn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:foreground="?selectableItemBackground"
+                    app:srcCompat="@drawable/zoom_in_icon"
+                    android:contentDescription="@string/zoom_in"
+                    android:layout_marginEnd="@dimen/margin"/>
+
+                <ImageButton
+                    android:id="@+id/stderrZoomOut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:foreground="?selectableItemBackground"
+                    app:srcCompat="@drawable/zoom_out_icon"
+                    android:contentDescription="@string/zoom_out" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/playground_exception_info"
+            android:textSize="@dimen/small_text_size"
+            android:layout_margin="@dimen/margin"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin"
+            android:padding="@dimen/padding"
+            android:background="@drawable/advanced_area_background">
+
+            <HorizontalScrollView
+                android:id="@+id/playgroundExceptionScroll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:fillViewport="true">
+
+                <TextView
+                    android:id="@+id/playgroundException"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/playground_exception_hint"
+                    android:textSize="@dimen/small_text_size"
+                    android:textColor="@android:color/holo_red_light"
+                    android:background="@drawable/code_area_background"
+                    android:padding="@dimen/padding" />
+
+            </HorizontalScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/margin"
+                android:layout_below="@id/playgroundExceptionScroll">
+
+                <ImageButton
+                    android:id="@+id/exceptionZoomIn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:foreground="?selectableItemBackground"
+                    app:srcCompat="@drawable/zoom_in_icon"
+                    android:contentDescription="@string/zoom_in"
+                    android:layout_marginEnd="@dimen/margin"
+                    app:tint="@android:color/black"
+                    app:backgroundTint="@android:color/holo_red_light"/>
+
+                <ImageButton
+                    android:id="@+id/exceptionZoomOut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:foreground="?selectableItemBackground"
+                    app:srcCompat="@drawable/zoom_out_icon"
+                    android:contentDescription="@string/zoom_out"
+                    app:tint="@android:color/black"
+                    app:backgroundTint="@android:color/holo_red_light"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>

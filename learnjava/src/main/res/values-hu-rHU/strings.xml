@@ -213,5 +213,14 @@
     <string name="playground_too_many_files">Túl sok fájl! Kérlek először törölj ki egy meglévőt.</string>
     <string name="playground_delete_main">A Main.java nem törölhető! Vissza akarod állítani az eredeti formájára?</string>
     <string name="playground_delete_normal_file">Biztos, hogy ki akarod törölni ezt a forrásfájlt?</string>
+    <string name="playground_input_info">Minden, amit ide írsz el lesz küldve a standard bemenetre (System.in), az itt megadott sorrendben.</string>
+    <string name="playground_input_hint">Írd ide a bemenetet…</string>
+    <string name="playground_input_delete">Minden bemenet törlése</string>
+    <string name="playground_stdout_info">Minden, amit a programod a standard kimenetre (System.out) ír itt jelenik meg.</string>
+    <string name="playground_stdout_hint">A System.out üres</string>
+    <string name="playground_stderr_info">Minden, amit a programod a standard hiba kimenetre (System.err) ír itt jelenik meg.</string>
+    <string name="playground_stderr_hint">A System.err üres</string>
+    <string name="playground_exception_info">A programod által okozott kivételek és hibák ide íródnak.</string>
+    <string name="playground_exception_hint">Nincsenek kivételek</string>
 
 </resources>

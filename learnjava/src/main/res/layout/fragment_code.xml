@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             tools:text="FileName.java"
             android:textSize="@dimen/big_text_size"
-            android:layout_margin="@dimen/margin"
+            android:layout_marginStart="@dimen/margin"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true" />
@@ -73,7 +73,8 @@
             android:layout_alignParentEnd="true"
             android:layout_below="@id/sep1"
             android:layout_above="@id/fileDisplayerButtonBar"
-            android:fillViewport="true">
+            android:fillViewport="true"
+            android:padding="@dimen/padding">
 
             <HorizontalScrollView
                 android:layout_width="match_parent"
@@ -113,7 +114,8 @@
                 android:foreground="?selectableItemBackground"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginBottom="@dimen/margin"
                 android:contentDescription="@string/zoom_in"
                 app:srcCompat="@drawable/zoom_in_icon"/>
 
@@ -122,7 +124,8 @@
                 android:foreground="?selectableItemBackground"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginBottom="@dimen/margin"
                 android:contentDescription="@string/zoom_out"
                 app:srcCompat="@drawable/zoom_out_icon"/>
 
@@ -131,7 +134,8 @@
                 android:foreground="?selectableItemBackground"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginBottom="@dimen/margin"
                 android:contentDescription="@string/playground_delete_file"
                 app:srcCompat="@drawable/icon_delete"/>
 
@@ -141,7 +145,8 @@
                 android:foreground="?selectableItemBackground"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin"
+                android:layout_marginStart="@dimen/margin"
+                android:layout_marginBottom="@dimen/margin"
                 android:contentDescription="@string/clip_sync"
                 app:srcCompat="@drawable/copy_icon"/>
 

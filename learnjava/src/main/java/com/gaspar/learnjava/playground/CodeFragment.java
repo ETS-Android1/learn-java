@@ -321,12 +321,13 @@ public class CodeFragment extends Fragment {
     }
 
     /**
-     * Called when the zoom in button is clicked, increases code area text size.
+     * Called when the zoom in button is clicked, increases code area text size. This is static so other
+     * fragments can access it too.
      * @param zoomInButton The zoom in button.
      * @param zoomOutButton The zoom out button.
      * @param codeArea The edit text whose text size changes.
      */
-    private void playgroundZoomInOnClick(@NonNull final View zoomInButton, @NonNull final View zoomOutButton, @NonNull final EditText codeArea) {
+    public static void playgroundZoomInOnClick(@NonNull final View zoomInButton, @NonNull final View zoomOutButton, @NonNull final TextView codeArea) {
         int currentSize = (int)codeArea.getTextSize();
         final ValueAnimator animator = ValueAnimator.ofInt(currentSize, currentSize + ZOOM_SIZE_CHANGE);
         animator.setDuration(AnimationUtils.DURATION);
@@ -352,12 +353,13 @@ public class CodeFragment extends Fragment {
     }
 
     /**
-     * Called when the zoom out button is clicked, decreases code area text size.
+     * Called when the zoom out button is clicked, decreases code area text size. This is static so other
+     * fragments can access it too.
      * @param zoomInButton The zoom in button.
      * @param zoomOutButton The zoom out button.
      * @param codeArea The edit text whose text size changes.
      */
-    private void playgroundZoomOutOnClick(@NonNull final View zoomInButton, @NonNull final View zoomOutButton, @NonNull final EditText codeArea) {
+    public static void playgroundZoomOutOnClick(@NonNull final View zoomInButton, @NonNull final View zoomOutButton, @NonNull final TextView codeArea) {
         int currentSize = (int)codeArea.getTextSize();
         int newSize = currentSize - ZOOM_SIZE_CHANGE;
         if(newSize <= 0) return;
@@ -453,6 +455,13 @@ public class CodeFragment extends Fragment {
         CodeComponent codeComponent = new CodeComponent(""); //actual data is not important here
         //call method, rest is handled by parent activity
         codeComponent.copyOnClick(codeArea, playgroundActivity);
+    }
+
+    /**
+     * @return The {@link PlaygroundFile}s stored by this code fragment.
+     */
+    public List<PlaygroundFile> getPlaygroundFiles() {
+        return playgroundFiles;
     }
 
     /**

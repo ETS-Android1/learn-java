@@ -13,6 +13,9 @@ import androidx.room.PrimaryKey;
  * <p>
  * This is not an actual file represented on the Android file system, just a way to group the user's
  * code in the playground.
+ * <p>
+ * Aside from being used in database transactions, this class is also used in {@link com.gaspar.learnjava.playground.CodeFragment}
+ * and as a model to serialize and deserialize JSON.
  * @see PlaygroundFileDao
  */
 @Entity(tableName = "playground_files")
@@ -68,5 +71,15 @@ public class PlaygroundFile {
 
     public void setContent(@NonNull String content) {
         this.content = content;
+    }
+
+    /**
+     * This method is only overridden for logging purposes.
+     * @return The file name.
+     */
+    @Override
+    @NonNull
+    public String toString() {
+        return fileName;
     }
 }

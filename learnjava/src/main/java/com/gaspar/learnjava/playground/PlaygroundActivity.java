@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.gaspar.learnjava.ClipSyncActivity;
@@ -17,7 +18,9 @@ import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.SettingsActivity;
 import com.gaspar.learnjava.ThemedActivity;
 import com.gaspar.learnjava.curriculum.components.CodeHostingActivity;
+import com.gaspar.learnjava.database.PlaygroundFile;
 import com.gaspar.learnjava.utils.LearnJavaBluetooth;
+import com.gaspar.learnjava.utils.LogUtils;
 import com.gaspar.learnjava.utils.ThemeUtils;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -25,6 +28,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -112,6 +116,8 @@ public class PlaygroundActivity extends ThemedActivity implements CodeHostingAct
         }).attach();
         //start on code tab
         viewPager.setCurrentItem(PlaygroundTab.TAB_CODE);
+        //disables scrolling. TABS CAN STILL BE USED
+        viewPager.setUserInputEnabled(false);
         //hide loading and show views
         findViewById(R.id.loadingIndicator).setVisibility(View.GONE);
         tabLayout.setVisibility(View.VISIBLE);
@@ -168,7 +174,50 @@ public class PlaygroundActivity extends ThemedActivity implements CodeHostingAct
      * @param fab The floating action button.
      */
     private void onRunClicked(@NonNull View fab) {
-        //TODO
+        LogUtils.log("Sending program to run:");
+        InputFragment inputFragment = getInputFragment();
+        String input;
+        if(inputFragment != null) {
+            input = inputFragment.getInput();
+        } else {
+            input = "";
+            LogUtils.logError("Input fragment was null, sending empty input!");
+        }
+        LogUtils.log("With input:\n" + input);
+        CodeFragment codeFragment = getCodeFragment();
+        List<PlaygroundFile> playgroundFiles;
+        if(codeFragment != null) {
+           playgroundFiles = codeFragment.getPlaygroundFiles();
+        } else {
+            LogUtils.logError("Code fragment was null, returning!");
+            return;
+        }
+        LogUtils.log("With playground files: " + playgroundFiles.toString());
+        //TODO: create JSON, call REST API
+    }
+
+    /**
+     * @return The {@link InputFragment} displayed in this activity.
+     */
+    @Nullable
+    private InputFragment getInputFragment() {
+        return (InputFragment)getSupportFragmentManager().findFragmentByTag("f" + PlaygroundTab.TAB_INPUT);
+    }
+
+    /**
+     * @return The {@link CodeFragment} displayed in this activity.
+     */
+    @Nullable
+    private CodeFragment getCodeFragment() {
+        return (CodeFragment)getSupportFragmentManager().findFragmentByTag("f" + PlaygroundTab.TAB_CODE);
+    }
+
+    /**
+     * @return The {@link OutputFragment} displayed in this activity.
+     */
+    @Nullable
+    private OutputFragment getOutputFragment() {
+        return (OutputFragment)getSupportFragmentManager().findFragmentByTag("f" + PlaygroundTab.TAB_OUTPUT);
     }
 
     /**
