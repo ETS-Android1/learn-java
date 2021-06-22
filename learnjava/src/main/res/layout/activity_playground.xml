@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:id="@+id/playground_root"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -46,6 +47,7 @@
 
     <!-- Actual content of the activity -->
     <RelativeLayout
+        android:id="@+id/playground_content_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".playground.PlaygroundActivity"
@@ -58,7 +60,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"/>
+            android:layout_alignParentTop="true"
+            tools:visibility="visible"
+            android:visibility="gone"/>
 
         <!-- Everything else is managed with fragments by this view pager. -->
         <androidx.viewpager2.widget.ViewPager2
@@ -68,7 +72,35 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_below="@id/playgroundTabLayout"/>
+            android:layout_below="@id/playgroundTabLayout"
+            tools:visibility="visible"
+            android:visibility="gone"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/playgroundRunButton"
+            android:contentDescription="@string/playground_run"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="@dimen/margin"
+            app:srcCompat="@drawable/icon_run"
+            app:borderWidth="0dp"
+            app:backgroundTint="?colorAccent"
+            app:tint="@android:color/black"
+            app:rippleColor="@android:color/white"
+            app:fabSize="normal"
+            tools:visibility="visible"
+            android:visibility="gone"/>
+
+        <ProgressBar
+            android:id="@+id/loadingIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="visible"
+            android:layout_centerInParent="true"/>
 
     </RelativeLayout>
 

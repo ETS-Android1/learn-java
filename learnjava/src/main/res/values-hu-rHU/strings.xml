@@ -198,4 +198,20 @@
     <string name="playground_input">Bemenet</string>
     <string name="playground_code">Kód</string>
     <string name="playground_output">Kimenet</string>
+    <string name="playground_unavailable">Játszótér nem elérhető</string>
+    <string name="playground_unavailable_info">
+        A játszótér most nem elérhető. Használhatsz helyette egy valódi fejlesztőkörnyezetet.
+    </string>
+    <string name="playground_file_select">Fájl választása</string>
+    <string name="playground_new_file">Új létrehozása…</string>
+    <string name="playground_delete_file">Fájl törlése</string>
+    <string name="playground_run">Futtatás</string>
+    <string name="playground_create_file_description">Add meg a fájl nevet!</string>
+    <string name="playground_create_file_incorrect">Kérlek használj az elnevezési szokásoknak megfelelő nevet (az első betű nagy, csak betűk)!</string>
+    <string name="playground_create_file_hint">fájl név</string>
+    <string name="playground_code_area_hint">Írj ide kódot</string>
+    <string name="playground_too_many_files">Túl sok fájl! Kérlek először törölj ki egy meglévőt.</string>
+    <string name="playground_delete_main">A Main.java nem törölhető! Vissza akarod állítani az eredeti formájára?</string>
+    <string name="playground_delete_normal_file">Biztos, hogy ki akarod törölni ezt a forrásfájlt?</string>
+
 </resources>

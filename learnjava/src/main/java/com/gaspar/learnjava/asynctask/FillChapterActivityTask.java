@@ -77,7 +77,7 @@ public class FillChapterActivityTask extends LjAsyncTask<FillChapterActivityTask
                 footerHolder.closeButton.setOnClickListener(v -> result.activity.chapterConfirmedOnClick(v));
             };
             //create adapter from components
-            ComponentAdapter adapter = new ComponentAdapter(result.parsedChapter.getComponents(), result.activity,
+            ComponentAdapter<ChapterActivity> adapter = new ComponentAdapter<>(result.parsedChapter.getComponents(), result.activity,
                     footerHolderGenerator, footerHolderBinder);
             //attach adapter
             componentsView.setAdapter(adapter);

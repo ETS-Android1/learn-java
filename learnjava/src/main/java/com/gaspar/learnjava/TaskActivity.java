@@ -11,6 +11,8 @@ import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -20,6 +22,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.gaspar.learnjava.asynctask.FillTaskActivityTask;
 import com.gaspar.learnjava.asynctask.LearnJavaExecutor;
 import com.gaspar.learnjava.curriculum.Task;
+import com.gaspar.learnjava.curriculum.components.CodeHostingActivity;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.database.TaskStatus;
 import com.gaspar.learnjava.utils.AnimationUtils;
@@ -36,7 +39,7 @@ import com.google.android.material.snackbar.Snackbar;
  * Activity that shows a task. The user can see the solution here as well, with the buttons on the bottom of the
  * activity.
  */
-public class TaskActivity extends ThemedActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class TaskActivity extends ThemedActivity implements NavigationView.OnNavigationItemSelectedListener, CodeHostingActivity {
 
     /**
      * Stores the loading completed with success, or not.
@@ -53,6 +56,11 @@ public class TaskActivity extends ThemedActivity implements NavigationView.OnNav
      * Ad object that is used to display interstitial (full screen) ad on activity close.
      */
     private InterstitialAd interstitialAd;
+
+    /**
+     * This object can start bluetooth enable requests, and is prepared to handle the result.
+     */
+    private ActivityResultLauncher<Intent> bluetoothEnableLauncher;
 
     @Override
     public void onCreate(Bundle savedState) {
@@ -81,6 +89,22 @@ public class TaskActivity extends ThemedActivity implements NavigationView.OnNav
                 });
             }
         }
+        //define what to happen when a bluetooth enable request finishes
+        bluetoothEnableLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if(result.getResultCode() == RESULT_OK) { //the user chose to turn on bluetooth
+                        LearnJavaBluetooth.getInstance().turnOnBluetooth();
+
+                        //show the user that he should try again now
+                        Snackbar.make(findViewById(R.id.taskComponents), getString(R.string.clip_sync_bluetooth_try_again),
+                                Snackbar.LENGTH_LONG).show();
+                    } else { //complain
+                        Snackbar.make(findViewById(R.id.taskComponents), getString(R.string.clip_sync_bluetooth_cancelled),
+                                Snackbar.LENGTH_LONG).show();
+                    }
+                }
+        );
     }
 
     private void setUpUI(Task passedTask) {
@@ -198,30 +222,6 @@ public class TaskActivity extends ThemedActivity implements NavigationView.OnNav
     }
 
     /**
-     * Called when an activity started from here finished. For example the user deciding about
-     * bluetooth is handled here.
-     * @param requestCode Identifies what activity finished.
-     * @param resultCode Stores the result.
-     * @param data Extra information.
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == ClipSyncActivity.REQUEST_ENABLE_BT) { //the user has decided about bluetooth
-            if(resultCode == RESULT_OK) { //the user chose to turn on bluetooth
-                LearnJavaBluetooth.getInstance().turnOnBluetooth();
-
-                //show the user that he should try again now
-                Snackbar.make(findViewById(R.id.taskComponents), getString(R.string.clip_sync_bluetooth_try_again),
-                        Snackbar.LENGTH_LONG).show();
-            } else { //complain
-                Snackbar.make(findViewById(R.id.taskComponents), getString(R.string.clip_sync_bluetooth_cancelled),
-                        Snackbar.LENGTH_LONG).show();
-            }
-        }
-    }
-
-    /**
      * This is the result of the user deciding to allow location permission or not. On rare cases it is possible
      * that the user has to enable location permission in this activity for bluetooth.
      * @param requestCode The identifier of this request.
@@ -255,5 +255,13 @@ public class TaskActivity extends ThemedActivity implements NavigationView.OnNav
 
     public void setDisplayedTask(Task displayedTask) {
         this.displayedTask = displayedTask;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActivityResultLauncher<Intent> getBluetoothEnableLauncher() {
+        return bluetoothEnableLauncher;
     }
 }

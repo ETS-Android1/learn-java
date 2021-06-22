@@ -38,7 +38,7 @@ public class Formatter {
         //find comments and color them
         res = RegexConstants.COMMENT_REGEX.matcher(res).replaceAll("<font color=\"" + FormatColor.COMMENT_COLOR + "\">$1</font>");
         //replace tabs and line breaks with their HTML tags
-        res = res.replaceAll("\t", "\t&nbsp;&nbsp;&nbsp;&nbsp;").
+        res = res.replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;").
                 replaceAll("(\r\n|\n)", "$1<br/>");
 
         res = clean(res); //clean formatting from where it is not needed.

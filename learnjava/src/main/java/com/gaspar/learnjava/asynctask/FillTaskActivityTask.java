@@ -82,14 +82,14 @@ public class FillTaskActivityTask extends LjAsyncTask<TaskActivity> {
             //set up recycler view of components
             RecyclerView componentsView = activity.findViewById(R.id.taskComponents);
             //create adapter from components
-            ComponentAdapter adapter = new ComponentAdapter(activity.getDisplayedTask().getDescriptionComponents(), activity);
+            ComponentAdapter<TaskActivity> adapter = new ComponentAdapter<>(activity.getDisplayedTask().getDescriptionComponents(), activity);
             //attach adapter
             componentsView.setAdapter(adapter);
             //set up recycler view of components
 
             RecyclerView solutionView = activity.findViewById(R.id.solutionComponents);
             //create adapter from components
-            ComponentAdapter solutionAdapter = new ComponentAdapter(activity.getDisplayedTask().getSolutionComponents(), activity);
+            ComponentAdapter<TaskActivity> solutionAdapter = new ComponentAdapter<>(activity.getDisplayedTask().getSolutionComponents(), activity);
             //attach adapter
             solutionView.setAdapter(solutionAdapter);
 

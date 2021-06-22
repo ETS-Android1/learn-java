@@ -8,6 +8,8 @@ import androidx.annotation.WorkerThread;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.gaspar.learnjava.curriculum.Chapter;
 import com.gaspar.learnjava.curriculum.Course;
@@ -33,8 +35,8 @@ import java.util.List;
  * A singleton class representing the app database. All methods of this class should only
  * be used in background threads.
  */
-@Database(entities = {CourseStatus.class, ChapterStatus.class, TaskStatus.class, ExamStatus.class},
-        version = 1, exportSchema = false)
+@Database(entities = {CourseStatus.class, ChapterStatus.class, TaskStatus.class, ExamStatus.class, PlaygroundFile.class},
+        version = 2, exportSchema = false)
 @WorkerThread
 public abstract class LearnJavaDatabase extends RoomDatabase {
 
@@ -51,6 +53,7 @@ public abstract class LearnJavaDatabase extends RoomDatabase {
     public static LearnJavaDatabase getInstance(@NonNull Context context) {
         if(instance == null) {
             instance = Room.databaseBuilder(context, LearnJavaDatabase.class, "learn_java_database")
+                    .addMigrations(MIGRATION_1_2)
                     .build();
         }
         return instance;
@@ -75,6 +78,11 @@ public abstract class LearnJavaDatabase extends RoomDatabase {
      * @return An object which is used to modify the exam table.
      */
     public abstract ExamDao getExamDao();
+
+    /**
+     * @return An object which is used to modify the playground files table.
+     */
+    public abstract PlaygroundFileDao getPlaygroundFileDao();
 
     /**
      * Goes through all asset files and checks if the curriculum elements (course, task, ...)
@@ -152,20 +160,26 @@ public abstract class LearnJavaDatabase extends RoomDatabase {
         database.getChapterDao().deleteRecords();
         database.getExamDao().deleteRecords();
         database.getTaskDao().deleteRecords();
+        database.getPlaygroundFileDao().deleteRecords();
         CourseStatus.initCourseCount(0, context); //also reset course counter variable
     }
 
     /*
      * ----------------------------- MIGRATIONS ----------------------------------------------------
      */
-    /*
+
+    /**
+     * Migration from database version 1 to version 2. In this migration, the new table represented by
+     * {@link PlaygroundFile} was added.
+     */
     private static final Migration MIGRATION_1_2 = new Migration(1,2) {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
-
+            database.execSQL("CREATE TABLE `playground_files` (`file_name` TEXT NOT NULL, `content` TEXT NOT NULL, PRIMARY KEY (`file_name`))");
         }
     };
 
+    /*
     private static final Migration MIGRATION_2_3 = new Migration(2,3) {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {

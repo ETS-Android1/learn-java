@@ -20,6 +20,8 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +33,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.gaspar.learnjava.curriculum.components.CodeComponent;
+import com.gaspar.learnjava.curriculum.components.CodeHostingActivity;
 import com.gaspar.learnjava.utils.DrawerUtils;
 import com.gaspar.learnjava.utils.LearnJavaBluetooth;
 import com.gaspar.learnjava.utils.ThemeUtils;
@@ -48,7 +51,7 @@ import java.util.Optional;
  * local network, but most of the activity's code is about bluetooth as that is much harder to initialize.
  */
 public class ClipSyncActivity extends ThemedActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, CodeHostingActivity {
 
     /**
      * This constant is used to ask the user to turn on bluetooth.
@@ -123,6 +126,11 @@ public class ClipSyncActivity extends ThemedActivity
      */
     private KProgressHUD pairingDialog;
 
+    /**
+     * This object can start bluetooth enable requests, and is prepared to handle the result.
+     */
+    private ActivityResultLauncher<Intent> bluetoothEnableLauncher;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,6 +152,24 @@ public class ClipSyncActivity extends ThemedActivity
                 .setCancellable(false)
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f);
+        //register what to happen when a bluetooth request is finished
+        bluetoothEnableLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK) { //the user chose to turn on bluetooth
+                        LearnJavaBluetooth.getInstance().turnOnBluetooth();
+                        //check if the desktop app is paired
+                        if (LearnJavaBluetooth.getInstance().queryPairedDevices().isPresent()) { //desktop app is paired!
+                            saveBluetoothClipSync();
+                        } else { //the desktop app is not yet discovered
+                            handleDevicePairing();
+                        }
+                    } else { //complain
+                        Snackbar.make(findViewById(R.id.testCodeSample), getString(R.string.clip_sync_bluetooth_cancelled),
+                                Snackbar.LENGTH_SHORT).show();
+                    }
+                }
+        );
     }
 
     @Override
@@ -249,7 +275,7 @@ public class ClipSyncActivity extends ThemedActivity
                 //ask the user about turning on bluetooth. Update preferences only if he allows it.
                 //see the onActivityResultMethod.
                 Intent intentBtEnabled = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                startActivityForResult(intentBtEnabled, REQUEST_ENABLE_BT);
+                bluetoothEnableLauncher.launch(intentBtEnabled);
             }
         }
     }
@@ -346,30 +372,6 @@ public class ClipSyncActivity extends ThemedActivity
     }
 
     /**
-     * Called when the user decides about turning on bluetooth.
-     * @param requestCode Request code for bluetooth turn on, {@link #REQUEST_ENABLE_BT}.
-     * @param resultCode Depends on the user decision.
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_ENABLE_BT) { //the user has decided about bluetooth
-            if (resultCode == RESULT_OK) { //the user chose to turn on bluetooth
-                LearnJavaBluetooth.getInstance().turnOnBluetooth();
-                //check if the desktop app is paired
-                if (LearnJavaBluetooth.getInstance().queryPairedDevices().isPresent()) { //desktop app is paired!
-                    saveBluetoothClipSync();
-                } else { //the desktop app is not yet discovered
-                    handleDevicePairing();
-                }
-            } else { //complain
-                Snackbar.make(findViewById(R.id.testCodeSample), getString(R.string.clip_sync_bluetooth_cancelled),
-                        Snackbar.LENGTH_SHORT).show();
-            }
-        }
-    }
-
-    /**
      * This is the result of the user deciding to allow location permission or not.
      * @param requestCode The identifier of this request.
      * @param permissions Array of requested permissions, only contains locations.
@@ -425,5 +427,13 @@ public class ClipSyncActivity extends ThemedActivity
                 Snackbar.make(view, context.getString(R.string.using_network_clip_sync), Snackbar.LENGTH_SHORT).show();
             }
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActivityResultLauncher<Intent> getBluetoothEnableLauncher() {
+        return bluetoothEnableLauncher;
     }
 }

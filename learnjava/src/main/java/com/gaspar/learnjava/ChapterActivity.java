@@ -9,6 +9,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -19,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.gaspar.learnjava.asynctask.FillChapterActivityTask;
 import com.gaspar.learnjava.curriculum.Chapter;
 import com.gaspar.learnjava.curriculum.Exam;
+import com.gaspar.learnjava.curriculum.components.CodeHostingActivity;
 import com.gaspar.learnjava.utils.DrawerUtils;
 import com.gaspar.learnjava.utils.LearnJavaBluetooth;
 import com.gaspar.learnjava.utils.LogUtils;
@@ -31,7 +34,7 @@ import com.google.android.material.snackbar.Snackbar;
 /**
  * An activity that displays all components of one chapter.
  */
-public class ChapterActivity extends ThemedActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class ChapterActivity extends ThemedActivity implements NavigationView.OnNavigationItemSelectedListener, CodeHostingActivity {
 
     /**
      * The chapter that was passed with the intent. It has no components when extracted from the intent (because the
@@ -54,6 +57,11 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
      * confirm method ({@link Chapter#markChapterAsCompleted(Context)} will not be called again.
      */
     private boolean confirmedWithScrolling;
+
+    /**
+     * This object can start bluetooth enable requests, and is prepared to handle the result.
+     */
+    private ActivityResultLauncher<Intent> bluetoothEnableLauncher;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -87,6 +95,22 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
                 }
             });
         }
+        //define what to happen when a bluetooth enable request happens
+        bluetoothEnableLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if(result.getResultCode() == RESULT_OK) { //the user chose to turn on bluetooth
+                    LearnJavaBluetooth.getInstance().turnOnBluetooth();
+
+                    //show the user that he should try again now
+                    Snackbar.make(findViewById(R.id.chapterComponents), getString(R.string.clip_sync_bluetooth_try_again),
+                            Snackbar.LENGTH_LONG).show();
+                } else { //complain
+                    Snackbar.make(findViewById(R.id.chapterComponents), getString(R.string.clip_sync_bluetooth_cancelled),
+                            Snackbar.LENGTH_LONG).show();
+                }
+            }
+        );
     }
 
     private void setUpUI(Chapter receivedChapter) {
@@ -177,30 +201,6 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
     }
 
     /**
-     * Called when an activity started from here finished. For example the user deciding about
-     * bluetooth is handled here.
-     * @param requestCode Identifies what activity finished.
-     * @param resultCode Stores the result.
-     * @param data Extra information.
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == ClipSyncActivity.REQUEST_ENABLE_BT) { //the user has decided about bluetooth
-            if(resultCode == RESULT_OK) { //the user chose to turn on bluetooth
-                LearnJavaBluetooth.getInstance().turnOnBluetooth();
-
-                //show the user that he should try again now
-                Snackbar.make(findViewById(R.id.chapterComponents), getString(R.string.clip_sync_bluetooth_try_again),
-                        Snackbar.LENGTH_LONG).show();
-            } else { //complain
-                Snackbar.make(findViewById(R.id.chapterComponents), getString(R.string.clip_sync_bluetooth_cancelled),
-                        Snackbar.LENGTH_LONG).show();
-            }
-        }
-    }
-
-    /**
      * This is the result of the user deciding to allow location permission or not. On rare cases it is possible
      * that the user has to enable location permission in this activity for bluetooth.
      * @param requestCode The identifier of this request.
@@ -228,6 +228,14 @@ public class ChapterActivity extends ThemedActivity implements NavigationView.On
 
     public void setPassedChapter(Chapter passedChapter) {
         this.passedChapter = passedChapter;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActivityResultLauncher<Intent> getBluetoothEnableLauncher() {
+        return bluetoothEnableLauncher;
     }
 
     /**

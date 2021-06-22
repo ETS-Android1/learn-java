@@ -15,6 +15,7 @@ import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.curriculum.components.AdvancedComponent;
 import com.gaspar.learnjava.curriculum.components.BoxedComponent;
 import com.gaspar.learnjava.curriculum.components.CodeComponent;
+import com.gaspar.learnjava.curriculum.components.CodeHostingActivity;
 import com.gaspar.learnjava.curriculum.components.Component;
 import com.gaspar.learnjava.curriculum.components.ImageComponent;
 import com.gaspar.learnjava.curriculum.components.InteractiveComponent;
@@ -40,8 +41,9 @@ import java.util.function.Function;
  * <p>
  * It's possible to specify a version of this which inserts a 'footer' at the end of the recycler view,
  * for example a button. For this, use the {@link #ComponentAdapter(List, AppCompatActivity, Function, BiConsumer)} constructor.
+ * @param <T> The type of the activity that contains this adapter.
  */
-public class ComponentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class ComponentAdapter<T extends AppCompatActivity & CodeHostingActivity> extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     /**
      * View type of the footer. This must not match any of the {@link com.gaspar.learnjava.curriculum.components.Component.ComponentType} constants.
@@ -60,7 +62,7 @@ public class ComponentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
      * An activity in which this adapter displays its contents.
      */
     @NonNull
-    private final AppCompatActivity activity;
+    private final T activity;
 
     /**
      * Used by the footer view to get the recycler view which belong to it. Basically a version of {@link #createViewHolder(ViewGroup, int)}.
@@ -79,7 +81,7 @@ public class ComponentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
      * @param components The list of components.
      * @param activity An activity in which this adapter displays its contents.
      */
-    public ComponentAdapter(@NonNull List<Component> components, @NonNull AppCompatActivity activity) {
+    public ComponentAdapter(@NonNull List<Component> components, @NonNull T activity) {
         this.components = components;
         this.activity = activity;
         footerViewHolderGenerator = null;
@@ -94,7 +96,7 @@ public class ComponentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
      * @param footerViewHolderBinder Used by the footer view to bind its data to the view. Basically a version of {@link #bindViewHolder(RecyclerView.ViewHolder, int)}.
      */
     public ComponentAdapter(@NonNull List<Component> components,
-                            @NonNull AppCompatActivity activity,
+                            @NonNull T activity,
                             @NonNull Function<ViewGroup, RecyclerView.ViewHolder> footerViewHolderGenerator,
                             @NonNull BiConsumer<RecyclerView.ViewHolder, Integer> footerViewHolderBinder) {
         this.components = components;

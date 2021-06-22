@@ -20,7 +20,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
-import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -66,7 +65,6 @@ public class CodeComponent extends Component {
     /**
      * The amount of font size (in pixels) that the zoom buttons increase/decrease.
      */
-    @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
     public static final int ZOOM_SIZE_CHANGE = 10;
 
     /**
@@ -139,9 +137,10 @@ public class CodeComponent extends Component {
     /**
      * Executed when the user clicks the copy icon under a code example. What happens depends on the clip
      * sync method selected.
-     * @param codeArea The text view whose content will be copied.
+     * @param codeArea The text view whose content will be copied. Interestingly, this works for {@link android.widget.EditText}
+     *                 as well, which is a subclass of {@link TextView}.
      */
-    public void copyOnClick(@NonNull final TextView codeArea, @NonNull final AppCompatActivity activity) {
+    public <T extends AppCompatActivity & CodeHostingActivity> void copyOnClick(@NonNull final TextView codeArea, @NonNull final T activity) {
         ClipboardManager clipboard = (ClipboardManager)activity.getSystemService(Context.CLIPBOARD_SERVICE);
         if(clipboard != null) { //copy to local clipboard
             ClipData clip = ClipData.newPlainText(COPY_LABEL, codeArea.getText());
@@ -188,7 +187,7 @@ public class CodeComponent extends Component {
                     }
                 } else { //bluetooth is off, ask user to turn on and cancel operation, result is handled in the activity
                     Intent intentBtEnabled = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                    activity.startActivityForResult(intentBtEnabled, ClipSyncActivity.REQUEST_ENABLE_BT);
+                    activity.getBluetoothEnableLauncher().launch(intentBtEnabled);
                 }
                 break;
             case ClipSyncActivity.ClipSyncMode.NETWORK:

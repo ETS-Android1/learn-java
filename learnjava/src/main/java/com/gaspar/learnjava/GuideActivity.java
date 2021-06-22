@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.VisibleForTesting;
@@ -17,6 +19,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.gaspar.learnjava.asynctask.FillGuideActivityTask;
+import com.gaspar.learnjava.curriculum.components.CodeHostingActivity;
 import com.gaspar.learnjava.utils.DrawerUtils;
 import com.gaspar.learnjava.utils.LearnJavaBluetooth;
 import com.gaspar.learnjava.utils.ThemeUtils;
@@ -27,7 +30,7 @@ import com.google.android.material.snackbar.Snackbar;
 /**
  * Activity where the application guide is displayed.
  */
-public class GuideActivity extends ThemedActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class GuideActivity extends ThemedActivity implements NavigationView.OnNavigationItemSelectedListener, CodeHostingActivity {
 
     /**
      * The constant used to find if the user read the guide in the preferences.
@@ -40,6 +43,11 @@ public class GuideActivity extends ThemedActivity implements NavigationView.OnNa
      */
     public volatile boolean successfulLoad;
 
+    /**
+     * This object can start bluetooth enable requests, and is prepared to handle the result.
+     */
+    private ActivityResultLauncher<Intent> bluetoothEnableLauncher;
+
     @Override
     public void onCreate(Bundle savedState) {
         super.onCreate(savedState);
@@ -48,6 +56,22 @@ public class GuideActivity extends ThemedActivity implements NavigationView.OnNa
         //the guide was opened, save this information
         final SharedPreferences preferences = getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
         preferences.edit().putBoolean(GUIDE_READ_PREFERENCE, true).apply();
+        //set up bluetooth request handling
+        bluetoothEnableLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if(result.getResultCode() == RESULT_OK) { //the user chose to turn on bluetooth
+                    LearnJavaBluetooth.getInstance().turnOnBluetooth();
+
+                    //show the user that he should try again now
+                    Snackbar.make(findViewById(R.id.chapterComponents), getString(R.string.clip_sync_bluetooth_try_again),
+                            Snackbar.LENGTH_LONG).show();
+                } else { //complain
+                    Snackbar.make(findViewById(R.id.chapterComponents), getString(R.string.clip_sync_bluetooth_cancelled),
+                            Snackbar.LENGTH_LONG).show();
+                }
+            }
+        );
     }
 
     private void setUpUI() {
@@ -86,30 +110,6 @@ public class GuideActivity extends ThemedActivity implements NavigationView.OnNa
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         DrawerUtils.handleDrawerOnClick(this, item, R.id.drawer_layout_guide_root);
         return true;
-    }
-
-    /**
-     * Called when an activity started from here finished. For example the user deciding about
-     * bluetooth is handled here.
-     * @param requestCode Identifies what activity finished.
-     * @param resultCode Stores the result.
-     * @param data Extra information.
-     */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == ClipSyncActivity.REQUEST_ENABLE_BT) { //the user has decided about bluetooth
-            if(resultCode == RESULT_OK) { //the user chose to turn on bluetooth
-                LearnJavaBluetooth.getInstance().turnOnBluetooth();
-
-                //show the user that he should try again now
-                Snackbar.make(findViewById(R.id.guideComponents), getString(R.string.clip_sync_bluetooth_try_again),
-                        Snackbar.LENGTH_LONG).show();
-            } else { //complain
-                Snackbar.make(findViewById(R.id.guideComponents), getString(R.string.clip_sync_bluetooth_cancelled),
-                        Snackbar.LENGTH_LONG).show();
-            }
-        }
     }
 
     /**
@@ -183,5 +183,13 @@ public class GuideActivity extends ThemedActivity implements NavigationView.OnNa
                     })
                     .show();
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ActivityResultLauncher<Intent> getBluetoothEnableLauncher() {
+        return bluetoothEnableLauncher;
     }
 }

@@ -1,6 +1,5 @@
 package com.gaspar.learnjava.asynctask;
 
-import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,17 +18,23 @@ import com.gaspar.learnjava.parsers.CourseParser;
 import com.gaspar.learnjava.utils.LogUtils;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 /**
- * Loads components into the guide activities scroll view.
+ * Loads components into the {@link GuideActivity}.
  */
-public class FillGuideActivityTask extends AsyncTask<GuideActivity, Void, FillGuideActivityTask.Result> {
+public class FillGuideActivityTask extends LjAsyncTask<FillGuideActivityTask.Result> {
 
+    /**
+     * Loads the contents of the guide from XML.
+     * @param objects Expected to be {@link GuideActivity}.
+     * @return The result.
+     */
     @Override
-    protected Result doInBackground(@Size(1) GuideActivity... guideActivities) {
-        GuideActivity activity = guideActivities[0];
+    protected Result doInBackground(@Size(1) Object... objects) {
+        GuideActivity activity = (GuideActivity) objects[0];
         List<Component> components = null;
         activity.successfulLoad = true;
         try {
@@ -58,7 +63,7 @@ public class FillGuideActivityTask extends AsyncTask<GuideActivity, Void, FillGu
                 footerHolder.closeButton.setOnClickListener(result.activity::closeButtonOnClick);
             };
             //create adapter from components
-            ComponentAdapter adapter = new ComponentAdapter(result.components, result.activity,
+            ComponentAdapter<GuideActivity> adapter = new ComponentAdapter<>(Objects.requireNonNull(result.components), result.activity,
                     footerHolderGenerator, footerHolderBinder);
             //attach adapter
             componentsView.setAdapter(adapter);
@@ -71,6 +76,9 @@ public class FillGuideActivityTask extends AsyncTask<GuideActivity, Void, FillGu
         }
     }
 
+    /**
+     * Helper class to hold the result of the background task.
+     */
     static class Result {
         private final GuideActivity activity;
         private final List<Component> components;
