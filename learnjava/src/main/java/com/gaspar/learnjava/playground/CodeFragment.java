@@ -37,6 +37,8 @@ import com.gaspar.learnjava.utils.LogUtils;
 import com.gaspar.learnjava.utils.ThemeUtils;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -165,6 +167,8 @@ public class CodeFragment extends Fragment {
             PlaygroundFile mainJavaFile = new PlaygroundFile(MAIN_JAVA_FILE_NAME, buildMainJavaTemplate());
             playgroundFiles.add(mainJavaFile);
         }
+        //send files to activity
+        EventBus.getDefault().post(playgroundFiles);
         //this will be passed to the adapter
         List<String> spinnerList = new ArrayList<>(playgroundFiles.size() + 1);
         for(PlaygroundFile playgroundFile: playgroundFiles) {
@@ -182,7 +186,7 @@ public class CodeFragment extends Fragment {
         fileSelectorSpinner.setOnTouchListener(listener);
         //set up code area listener
         final EditText codeArea = getView().findViewById(R.id.playgroundCodeArea);
-        codeAreaTextWatcher = new CodeAreaTextWatcher(codeArea);
+        codeAreaTextWatcher = new CodeAreaTextWatcher(this, codeArea);
         codeArea.addTextChangedListener(codeAreaTextWatcher);
         //spinner filled and set up, start on Main.java
         switchToPlaygroundFile(MAIN_JAVA_FILE_NAME);
@@ -458,13 +462,6 @@ public class CodeFragment extends Fragment {
     }
 
     /**
-     * @return The {@link PlaygroundFile}s stored by this code fragment.
-     */
-    public List<PlaygroundFile> getPlaygroundFiles() {
-        return playgroundFiles;
-    }
-
-    /**
      * Creates a string that is used as the default content of Main.java file. I tried to extract this
      * to the string resources, but the formatting and special characters are very hard to manage there.
      * @return The content of Main.java
@@ -578,11 +575,18 @@ public class CodeFragment extends Fragment {
         private Timer timer;
 
         /**
+         * The code fragment that is watched by the text watcher.
+         */
+        private final CodeFragment codeFragment;
+
+        /**
          * Create a code are text watcher.
+         * @param codeFragment The code fragment that is watched by the text watcher.
          * @param codeArea The edit text of the code area.
          */
-        public CodeAreaTextWatcher(EditText codeArea) {
+        public CodeAreaTextWatcher(@NonNull CodeFragment codeFragment, @NonNull EditText codeArea) {
             this.codeArea = codeArea;
+            this.codeFragment = codeFragment;
             formatter = new Formatter();
             playgroundFile = null;
             timer = null;
@@ -604,7 +608,12 @@ public class CodeFragment extends Fragment {
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
-                    LearnJavaExecutor.getInstance().executeOnUiThread(() -> formatCodeArea(codeArea.getText()));
+                    LearnJavaExecutor.getInstance().executeOnUiThread(() -> {
+                        //format code, this updates playground file list
+                        formatCodeArea(codeArea.getText());
+                        //send updated files to activity
+                        EventBus.getDefault().post(codeFragment.playgroundFiles);
+                    });
                 }
             }, CODE_FORMAT_INTERVAL);
         }

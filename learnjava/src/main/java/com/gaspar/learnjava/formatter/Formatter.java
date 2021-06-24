@@ -55,7 +55,7 @@ public class Formatter {
      * @return The content where it's only formatted where it is necessary.
      */
     private String clean(@NonNull String formattedContent) {
-        //Now there maybe are cases where words inside comments were formatted (primitve names, class names, ect).
+        //Now there maybe are cases where words inside comments were formatted (primitive names, class names, ect).
         Matcher commentMatcher = RegexConstants.COMMENT_REGEX.matcher(formattedContent);
         while(commentMatcher.find()) {
             String comment = commentMatcher.group(); //this is the comment the matcher found

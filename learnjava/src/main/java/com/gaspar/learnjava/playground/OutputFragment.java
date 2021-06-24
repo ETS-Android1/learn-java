@@ -8,11 +8,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.formatter.Formatter;
 import com.gaspar.learnjava.utils.LogUtils;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * A {@link Fragment} that displays the output of the program to the user in {@link PlaygroundActivity}.
@@ -50,6 +55,13 @@ public class OutputFragment extends Fragment {
         }
         */
         formatter = new Formatter();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     @Override
@@ -76,6 +88,18 @@ public class OutputFragment extends Fragment {
         exceptionZoomIn.setOnClickListener(view -> CodeFragment.playgroundZoomInOnClick(exceptionZoomIn, exceptionZoomOut, exception));
         exceptionZoomOut.setOnClickListener(view -> CodeFragment.playgroundZoomOutOnClick(exceptionZoomIn, exceptionZoomOut, exception));
         return outputView;
+    }
+
+    /**
+     * Called when the {@link com.gaspar.learnjava.asynctask.RunCodeTask} finishes its work and the results of the
+     * program are received.
+     * @param programResponse The program response, containing the stdout, stderr and exceptions.
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(@NonNull ProgramResponse programResponse) {
+        setStdout(programResponse.stdout);
+        setStderr(programResponse.stderr);
+        setExceptions(programResponse.error);
     }
 
     /**

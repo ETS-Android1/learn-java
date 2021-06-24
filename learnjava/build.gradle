@@ -5,6 +5,9 @@ if(project.hasProperty("AndroidProjects.signing")
   apply from: project.property("AndroidProjects.signing") + "androidsigning.gradle"
 }
 
+/*
+ * Contains not only ad related data, but also API keys.
+ */
 if(project.hasProperty("AndroidProjects.ads")
         && new File(project.property("AndroidProjects.ads") + "learnjava_ads.gradle").exists()) {
     apply from: project.property("AndroidProjects.ads") + "learnjava_ads.gradle"
@@ -28,6 +31,7 @@ android {
             resValue "bool", "load_ads", "true"
             resValue "bool", "playground_enabled", "true"
 			//real signing configs and ad IDs are only present on my computer
+            //real API keys are only present on my computer
         }
         debug { //ONLY I CAN BUILD this variant: debug mode which loads debug ads.
             debuggable true
@@ -36,6 +40,7 @@ android {
             resValue "bool", "playground_enabled", "true"
             signingConfig signingConfigs.debug
 			//real signing configs and ad IDs are only present on my computer
+            //real API keys are only present on my computer
         }
         noads { //EVERYBODY can build this variant. Same as debug, but with no ads at all.
             debuggable true
@@ -52,6 +57,10 @@ android {
             resValue "string", "ad_unit_id_interstitial_test", "fake_id"
             resValue "string", "ad_unit_id_interstitial_chapter", "fake_id"
             resValue "string", "ad_unit_id_interstitial_task", "fake_id"
+            //fake API keys
+            resValue "string", "run_api_key_1", "mock_api_key"
+            resValue "string", "run_api_key_2", "mock_api_key"
+            resValue "string", "run_api_key_3", "mock_api_key"
         }
     }
     compileOptions {
@@ -77,6 +86,8 @@ dependencies {
     implementation 'com.google.android.gms:play-services-ads:20.2.0'
     implementation 'com.kaopiz:kprogresshud:1.0.2'
     implementation 'com.techyourchance:threadposter:1.0.1'
+    implementation "com.squareup.retrofit2:converter-moshi:2.4.0"
+    implementation 'org.greenrobot:eventbus:3.2.0'
 
     // ------------------ TEST dependencies
     testImplementation 'junit:junit:4.13.2'

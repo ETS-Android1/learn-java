@@ -1,6 +1,8 @@
 package com.gaspar.learnjava.playground;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +12,13 @@ import android.widget.ImageButton;
 import androidx.fragment.app.Fragment;
 
 import com.gaspar.learnjava.R;
+import com.gaspar.learnjava.asynctask.LearnJavaExecutor;
 import com.gaspar.learnjava.utils.LogUtils;
+
+import org.greenrobot.eventbus.EventBus;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * A {@link Fragment} which provides the user with ways to enter input, inside {@link PlaygroundActivity}.
@@ -58,6 +66,9 @@ public class InputFragment extends Fragment {
 
         ImageButton deleteButton = inputView.findViewById(R.id.inputDeleteButton);
         deleteButton.setOnClickListener(view -> inputArea.setText(""));
+
+        //set text watcher
+        inputArea.addTextChangedListener(new InputAreaTextWatcher(this));
         return inputView;
     }
 
@@ -72,5 +83,60 @@ public class InputFragment extends Fragment {
         }
         EditText inputArea = getView().findViewById(R.id.playgroundInputArea);
         return inputArea.getText().toString();
+    }
+
+    /**
+     * Monitors text inside the input area. When changes are detected, the new input is sent to
+     * {@link PlaygroundActivity}.
+     */
+    static class InputAreaTextWatcher implements TextWatcher {
+
+        /**
+         * When the user has not typed anything in the last this much milliseconds,
+         * the input is sent.
+         */
+        private static final int INPUT_UPDATE_INTERVAL = 1000;
+
+        /**
+         * Measures when the user finished typing.
+         */
+        private Timer timer;
+
+        /**
+         * The input fragment that this text watcher is watching.
+         */
+        private final InputFragment inputFragment;
+
+        /**
+         * Creates an input text watcher.
+         * @param inputFragment The input fragment that this text watcher is watching.
+         */
+        public InputAreaTextWatcher(InputFragment inputFragment) {
+            this.inputFragment = inputFragment;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            //cancel timer, a new one will be started
+            if(timer != null) timer.cancel();
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    LearnJavaExecutor.getInstance().executeOnUiThread(() -> {
+                        String input = inputFragment.getInput();
+                        EventBus.getDefault().post(input); //send to activity
+                    });
+                }
+            }, INPUT_UPDATE_INTERVAL);
+        }
+
     }
 }

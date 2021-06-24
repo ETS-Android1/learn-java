@@ -1,22 +1,28 @@
 package com.gaspar.learnjava.playground;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.DragEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.gaspar.learnjava.ClipSyncActivity;
 import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.SettingsActivity;
 import com.gaspar.learnjava.ThemedActivity;
+import com.gaspar.learnjava.asynctask.RunCodeTask;
 import com.gaspar.learnjava.curriculum.components.CodeHostingActivity;
 import com.gaspar.learnjava.database.PlaygroundFile;
 import com.gaspar.learnjava.utils.LearnJavaBluetooth;
@@ -27,6 +33,12 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.squareup.moshi.JsonAdapter;
+import com.squareup.moshi.Moshi;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.List;
 import java.util.Objects;
@@ -37,6 +49,13 @@ import java.util.Objects;
  * {@link ViewPager2} and a {@link TabLayout}.
  */
 public class PlaygroundActivity extends ThemedActivity implements CodeHostingActivity {
+
+    /**
+     * Stores if the API calls should be mocked. If this is true the {@link RunApi#compileAndRunCodeMock(ProgramPayload)} will be
+     * called instead of {@link RunApi#compileAndRunCode(ProgramPayload, String)}. The API will also be mocked when a non real,
+     * mock API key is received (this happens in some build variants).
+     */
+    public static boolean mockRunApi = false;
 
     /**
      * X position of the draggable floating action button.
@@ -52,6 +71,16 @@ public class PlaygroundActivity extends ThemedActivity implements CodeHostingAct
      * This object can start bluetooth enable requests, and is prepared to handle the result.
      */
     private ActivityResultLauncher<Intent> bluetoothEnableLauncher;
+
+    /**
+     * A list of {@link PlaygroundFile}s, which come from the {@link CodeFragment}.
+     */
+    private List<PlaygroundFile> playgroundFiles;
+
+    /**
+     * The input of the program, which comes from the {@link InputFragment}.
+     */
+    private String input;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +116,13 @@ public class PlaygroundActivity extends ThemedActivity implements CodeHostingAct
                     .setCancelable(false)
                     .show();
         }
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 
     /**
@@ -115,9 +151,10 @@ public class PlaygroundActivity extends ThemedActivity implements CodeHostingAct
             }
         }).attach();
         //start on code tab
-        viewPager.setCurrentItem(PlaygroundTab.TAB_CODE);
+        viewPager.setCurrentItem(PlaygroundTab.TAB_CODE, false);
         //disables scrolling. TABS CAN STILL BE USED
         viewPager.setUserInputEnabled(false);
+        viewPager.setOffscreenPageLimit(3);
         //hide loading and show views
         findViewById(R.id.loadingIndicator).setVisibility(View.GONE);
         tabLayout.setVisibility(View.VISIBLE);
@@ -127,8 +164,6 @@ public class PlaygroundActivity extends ThemedActivity implements CodeHostingAct
         runButton.setVisibility(View.VISIBLE);
         setUpFloatingActionButton(runButton);
     }
-
-
 
     /**
      * Initializes the floating action button so it responds to clicks, and becomes draggable.
@@ -170,54 +205,62 @@ public class PlaygroundActivity extends ThemedActivity implements CodeHostingAct
     }
 
     /**
+     * Called when the {@link InputFragment} sends a new input.
+     * @param input The input.
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(String input) {
+        this.input = input;
+    }
+
+    /**
+     * Called when the {@link CodeFragment} sends the list of {@link PlaygroundFile}s.
+     * @param playgroundFiles The list of files.
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(@NonNull List<PlaygroundFile> playgroundFiles) {
+        this.playgroundFiles = playgroundFiles;
+    }
+
+    /**
      * Called when the floating action button, run, was clicked.
      * @param fab The floating action button.
      */
     private void onRunClicked(@NonNull View fab) {
         LogUtils.log("Sending program to run:");
-        InputFragment inputFragment = getInputFragment();
-        String input;
-        if(inputFragment != null) {
-            input = inputFragment.getInput();
-        } else {
-            input = "";
-            LogUtils.logError("Input fragment was null, sending empty input!");
+        if(input == null) {
+            LogUtils.logError("Input was null, not sending input!");
         }
-        LogUtils.log("With input:\n" + input);
-        CodeFragment codeFragment = getCodeFragment();
-        List<PlaygroundFile> playgroundFiles;
-        if(codeFragment != null) {
-           playgroundFiles = codeFragment.getPlaygroundFiles();
-        } else {
-            LogUtils.logError("Code fragment was null, returning!");
-            return;
-        }
+        LogUtils.log("With input:\n" + (input != null ? input : "not sending input"));
         LogUtils.log("With playground files: " + playgroundFiles.toString());
-        //TODO: create JSON, call REST API
+        //create program payload
+        ProgramPayload programPayload = new ProgramPayload();
+        if(input != null) programPayload.stdin = input;
+        programPayload.files = PlaygroundFile.createCleanedPlaygroundFiles(playgroundFiles);
+        //log what we send
+        Moshi moshi = new Moshi.Builder().build();
+        JsonAdapter<ProgramPayload> programPayloadAdapter = moshi.adapter(ProgramPayload.class);
+        LogUtils.log("Sending the following JSON as request body:\n" + programPayloadAdapter.toJson(programPayload));
+        //launch task
+        fab.setEnabled(false);
+        displayLoadingDialog();
+        new RunCodeTask(programPayload).execute(this);
     }
 
     /**
-     * @return The {@link InputFragment} displayed in this activity.
+     * Moves the activity's view pager to the output fragment, with a smooth scroll.
      */
-    @Nullable
-    private InputFragment getInputFragment() {
-        return (InputFragment)getSupportFragmentManager().findFragmentByTag("f" + PlaygroundTab.TAB_INPUT);
+    public void moveToOutputFragment() {
+        ViewPager2 viewPager = findViewById(R.id.playgroundViewPager);
+        viewPager.setCurrentItem(PlaygroundTab.TAB_OUTPUT, true);
     }
 
     /**
-     * @return The {@link CodeFragment} displayed in this activity.
+     * Sends program output data to the {@link OutputFragment}, which will display this.
+     * @param programResponse The program response, containing the stdout, stderr and exceptions.
      */
-    @Nullable
-    private CodeFragment getCodeFragment() {
-        return (CodeFragment)getSupportFragmentManager().findFragmentByTag("f" + PlaygroundTab.TAB_CODE);
-    }
-
-    /**
-     * @return The {@link OutputFragment} displayed in this activity.
-     */
-    @Nullable
-    private OutputFragment getOutputFragment() {
-        return (OutputFragment)getSupportFragmentManager().findFragmentByTag("f" + PlaygroundTab.TAB_OUTPUT);
+    public void sendDataToOutputFragment(@NonNull ProgramResponse programResponse) {
+        EventBus.getDefault().post(programResponse);
     }
 
     /**
@@ -275,6 +318,61 @@ public class PlaygroundActivity extends ThemedActivity implements CodeHostingAct
                 Snackbar.make(findViewById(R.id.chapterComponents), getString(R.string.clip_sync_bluetooth_try_again),
                         Snackbar.LENGTH_LONG).show();
             }
+        }
+    }
+
+    /**
+     * View of the loading dialog. This is null, if the loading dialog is currently not visible.
+     */
+    @Nullable
+    private View loadingDialogView;
+
+    /**
+     * The loading dialog. This is null, if the loading dialog is currently not visible.
+     */
+    private AlertDialog loadingDialog;
+
+    /**
+     * Shows the loading dialog.
+     */
+    @SuppressLint("InflateParams")
+    public void displayLoadingDialog() {
+        //null is fine here, this is a dialog root
+        loadingDialogView = LayoutInflater.from(this).inflate(R.layout.dialog_playground_in_progress, null, false);
+        //build dialog
+        loadingDialog = new MaterialAlertDialogBuilder(this, ThemeUtils.getThemedDialogStyle())
+                .setView(loadingDialogView)
+                .create();
+        //add listeners
+        Button okButton = loadingDialogView.findViewById(R.id.loadingDialogOkButton);
+        okButton.setOnClickListener(view -> loadingDialog.dismiss());
+        //show
+        loadingDialog.show();
+    }
+
+    /**
+     * Updates the loading dialog, so that it displays a message and an ok button.
+     * @param message The message to be displayed.
+     */
+    public void setLoadingDialogMessage(@NonNull String message) {
+        if(loadingDialog == null || loadingDialogView == null) {
+            LogUtils.logError("Loading dialog not found when calling setLoadingDialogMessage!");
+            return;
+        }
+        //hide loading and show error layout
+        loadingDialogView.findViewById(R.id.loadingDialogProgress).setVisibility(View.GONE);
+        loadingDialogView.findViewById(R.id.loadingDialogErrorLayout).setVisibility(View.VISIBLE);
+        //set message
+        TextView messageTextView = loadingDialogView.findViewById(R.id.loadingDialogMessageTextView);
+        messageTextView.setText(message);
+    }
+
+    /**
+     * Dismisses the loading dialog.
+     */
+    public void hideLoadingDialog() {
+        if(loadingDialog != null) {
+            loadingDialog.dismiss();
         }
     }
 }
