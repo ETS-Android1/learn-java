@@ -243,5 +243,13 @@
     <string name="playground_500_code">Error: internal server error.</string>
     <string name="playground_misc_code">Error: unknown error with code %1$s</string>
     <string name="playground_timeout">Error: the connection timed out.</string>
+    <string name="playground_countdown">Please wait a bit before sending code to run again.</string>
+    <string name="playground_countdown_over">You can now run the program again.</string>
+    <string name="playground_info">
+        You can create and run simple programs here. Please note that this has limitations and is not
+        nearly as powerful as a development environment on a PC.
+    </string>
+    <string name="playground_dont_show_again">Don\'t show this again.</string>
+    <string name="playground_no_connection">An internet connection is required to run the program.</string>
 
 </resources>

@@ -224,7 +224,6 @@ public class Chapter implements Serializable {
      */
     @WorkerThread
     public static void validateChapterStatus(int chapterId, Context context) {
-        LogUtils.log("Validating chapter " + chapterId);
         ChapterStatus status = LearnJavaDatabase.getInstance(context).getChapterDao().queryChapterStatus(chapterId);
         if(status == null) { //not found in the database
             LogUtils.log("This chapter was not in the database, adding...");

@@ -75,7 +75,9 @@ public class RunCodeTask extends LjAsyncTask<RunCodeTask.Result> {
                     LogUtils.log("Received successful response from run API.");
                 } else {
                     LogUtils.logError("HTTP error response from API: " + apiResponse.code());
-                    LogUtils.logError(apiResponse.errorBody().string());
+                    if(apiResponse.errorBody() != null) {
+                        LogUtils.logError(apiResponse.errorBody().string());
+                    }
                     //fail HTTP code
                     if(apiResponse.code() >= 500) {
                         errorMessage = activity.getString(R.string.playground_500_code);
@@ -110,7 +112,7 @@ public class RunCodeTask extends LjAsyncTask<RunCodeTask.Result> {
         if(result.errorMessage != null) {
             //there was an error of some kind
             result.activity.setLoadingDialogMessage(result.errorMessage);
-        } else {
+        } else if(result.programResponse != null) {
             //completed successfully
             result.activity.hideLoadingDialog();
             //go to output fragment
@@ -118,6 +120,10 @@ public class RunCodeTask extends LjAsyncTask<RunCodeTask.Result> {
             result.activity.getSupportFragmentManager().executePendingTransactions();
             //set text
             result.activity.sendDataToOutputFragment(result.programResponse);
+            //save current time as code last run time
+            result.activity.registerCodeRunTime(System.currentTimeMillis());
+        } else {
+            LogUtils.logError("Invalid state after getting response from run API!");
         }
     }
 

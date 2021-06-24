@@ -1,8 +1,11 @@
 package com.gaspar.learnjava.playground;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
@@ -19,6 +22,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.gaspar.learnjava.ClipSyncActivity;
+import com.gaspar.learnjava.LearnJavaActivity;
 import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.SettingsActivity;
 import com.gaspar.learnjava.ThemedActivity;
@@ -28,6 +32,7 @@ import com.gaspar.learnjava.database.PlaygroundFile;
 import com.gaspar.learnjava.utils.LearnJavaBluetooth;
 import com.gaspar.learnjava.utils.LogUtils;
 import com.gaspar.learnjava.utils.ThemeUtils;
+import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -43,6 +48,8 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.util.List;
 import java.util.Objects;
 
+import cn.iwgang.countdownview.CountdownView;
+
 /**
  * Activity of the playground, where the user can edit and run code samples. This is a tabbed activity, where
  * the 3 main parts are the input (left), code (center) and output (right). This is managed by a
@@ -56,6 +63,12 @@ public class PlaygroundActivity extends ThemedActivity implements CodeHostingAct
      * mock API key is received (this happens in some build variants).
      */
     public static boolean mockRunApi = false;
+
+    /**
+     * The time in milliseconds that must pass between two code runs. If the user attempts to run code
+     * faster, a dialog is shown: {@link #showCountdownDialog(long)}.
+     */
+    private static final long CODE_RUN_INTERVAL = 60000;
 
     /**
      * X position of the draggable floating action button.
@@ -104,6 +117,8 @@ public class PlaygroundActivity extends ThemedActivity implements CodeHostingAct
                         }
                     }
             );
+            //show info dialog
+            showPlaygroundInfoDialogIfNeeded();
         } else {
             //playground is not enabled
             new MaterialAlertDialogBuilder(this, ThemeUtils.getThemedDialogStyle())
@@ -223,10 +238,31 @@ public class PlaygroundActivity extends ThemedActivity implements CodeHostingAct
     }
 
     /**
-     * Called when the floating action button, run, was clicked.
+     * Called when the floating action button, run, was clicked. Takes into account the last time
+     * when code was run, {@link #codeLastRunAt()}.
      * @param fab The floating action button.
      */
     private void onRunClicked(@NonNull View fab) {
+        //check connectivity
+        if(!isNetworkConnected()) {
+            new MaterialAlertDialogBuilder(this, ThemeUtils.getThemedDialogStyle())
+                    .setMessage(R.string.playground_no_connection)
+                    .setPositiveButton(R.string.ok, (dialogInterface, i) -> dialogInterface.dismiss())
+                    .show();
+            return;
+        }
+        //check time
+        long lastRunAt = codeLastRunAt();
+        if(lastRunAt != -1) {
+            //there was a code run in the past, check if it was in the interval
+            long currentTime = System.currentTimeMillis();
+            long timePassed = currentTime - lastRunAt;
+            if(timePassed < CODE_RUN_INTERVAL) {
+                //the user is attempting to run code too soon
+                showCountdownDialog(CODE_RUN_INTERVAL - timePassed);
+                return;
+            }
+        }
         LogUtils.log("Sending program to run:");
         if(input == null) {
             LogUtils.logError("Input was null, not sending input!");
@@ -322,7 +358,7 @@ public class PlaygroundActivity extends ThemedActivity implements CodeHostingAct
     }
 
     /**
-     * View of the loading dialog. This is null, if the loading dialog is currently not visible.
+     * View of the loading dialog. This is null, if there is no loading dialog.
      */
     @Nullable
     private View loadingDialogView;
@@ -330,6 +366,7 @@ public class PlaygroundActivity extends ThemedActivity implements CodeHostingAct
     /**
      * The loading dialog. This is null, if the loading dialog is currently not visible.
      */
+    @Nullable
     private AlertDialog loadingDialog;
 
     /**
@@ -344,8 +381,11 @@ public class PlaygroundActivity extends ThemedActivity implements CodeHostingAct
                 .setView(loadingDialogView)
                 .create();
         //add listeners
-        Button okButton = loadingDialogView.findViewById(R.id.loadingDialogOkButton);
-        okButton.setOnClickListener(view -> loadingDialog.dismiss());
+        Button okButton;
+        if (loadingDialogView != null) {
+            okButton = loadingDialogView.findViewById(R.id.loadingDialogOkButton);
+            okButton.setOnClickListener(view -> loadingDialog.dismiss());
+        }
         //show
         loadingDialog.show();
     }
@@ -374,5 +414,118 @@ public class PlaygroundActivity extends ThemedActivity implements CodeHostingAct
         if(loadingDialog != null) {
             loadingDialog.dismiss();
         }
+    }
+
+    /**
+     * Displays the countdown dialog which shows the user how much they have to wait before the next
+     * code run is available.
+     * @param timeRemaining The time that the user need to wait before running code again, in milliseconds.
+     */
+    private void showCountdownDialog(long timeRemaining) {
+        @SuppressLint("InflateParams") //null is ok, this is a dialog root
+        View countdownDialogView = LayoutInflater.from(this).inflate(R.layout.dialog_playground_countdown, null, false);
+
+        final Button okButton = countdownDialogView.findViewById(R.id.playgroundCountdownOkButton);
+        final TextView countdownTextView = countdownDialogView.findViewById(R.id.playgroundCountdownTextView);
+        final CountdownView countdownView = countdownDialogView.findViewById(R.id.playgroundCountdownView);
+
+        final AlertDialog countdownDialog = new MaterialAlertDialogBuilder(this, ThemeUtils.getThemedDialogStyle())
+                .setView(countdownDialogView)
+                .setOnCancelListener(dialogInterface -> countdownView.stop())
+                .create();
+        countdownDialog.setOnShowListener(dialogInterface -> countdownView.start(timeRemaining));
+
+        //when countdown ends, show a different text
+        countdownView.setOnCountdownEndListener(cv -> {
+            countdownView.stop();
+            countdownView.setVisibility(View.GONE);
+            countdownTextView.setText(R.string.playground_countdown_over);
+        });
+
+        //ok button closes dialog
+        okButton.setOnClickListener(view -> {
+            countdownView.stop();
+            countdownDialog.dismiss();
+        });
+
+        countdownDialog.show();
+    }
+
+    /**
+     * The timestamp when code was last run can be found in the preferences with this key. If there is
+     * no value with this key, that means there never was a code run.
+     */
+    private static final String PLAYGROUND_COUNTDOWN_PREF_NAME = "playground_countdown";
+
+    /**
+     * @return The timestamp when the user last run code from the {@link PlaygroundActivity}. If there was
+     * no run, -1 is returned.
+     */
+    private long codeLastRunAt() {
+        final SharedPreferences preferences = getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
+        if(preferences.contains(PLAYGROUND_COUNTDOWN_PREF_NAME)) {
+            //there was a code run
+            return preferences.getLong(PLAYGROUND_COUNTDOWN_PREF_NAME, -1);
+        } else {
+            //there never was a code run
+            return -1;
+        }
+    }
+
+    /**
+     * Saves a timestamp when code was last run.
+     * @param codeRunAt The timestamp.
+     */
+    public void registerCodeRunTime(long codeRunAt) {
+        final SharedPreferences preferences = getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
+        preferences.edit().putLong(PLAYGROUND_COUNTDOWN_PREF_NAME, codeRunAt).apply();
+    }
+
+    /**
+     * This key is used to find in the preferences if the playground information dialog should be shown.
+     */
+    private static final String PLAYGROUND_SHOW_INFO_PREF_NAME = "playground_show_info";
+
+    /**
+     * Shows the playground info dialog, if the value {@link #PLAYGROUND_SHOW_INFO_PREF_NAME} in the preferences
+     * is true, or not present. IF it is not present, that means this is the first time the activity is started.
+     */
+    private void showPlaygroundInfoDialogIfNeeded() {
+        final SharedPreferences preferences = getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
+        boolean showDialog;
+        if(preferences.contains(PLAYGROUND_SHOW_INFO_PREF_NAME)) {
+            //preference found, show value
+            showDialog = preferences.getBoolean(PLAYGROUND_SHOW_INFO_PREF_NAME, true);
+        } else {
+            //preference not found, this is the first time the activity launches, so the dialog is shown
+            showDialog = true;
+            //save it for later, with true value
+            preferences.edit().putBoolean(PLAYGROUND_SHOW_INFO_PREF_NAME, true).apply();
+        }
+        if(showDialog) { //should show the dialog
+            @SuppressLint("InflateParams") //null is ok, this is a dialog root
+            View infoView = LayoutInflater.from(this).inflate(R.layout.dialog_playground_info, null, false);
+            final MaterialCheckBox infoCheckBox = infoView.findViewById(R.id.playgroundInfoCheckbox);
+
+            new MaterialAlertDialogBuilder(this, ThemeUtils.getThemedDialogStyle())
+                    .setView(infoView)
+                    .setPositiveButton(R.string.ok, (dialogInterface, i) -> {
+                        if(infoCheckBox.isChecked()) {
+                            //user clicked dont show again
+                            preferences.edit().putBoolean(PLAYGROUND_SHOW_INFO_PREF_NAME, false).apply();
+                        }
+                        dialogInterface.dismiss();
+                    })
+                    .show();
+        }
+    }
+
+    /**
+     * Checks if the device is connected to the internet.
+     * @return True if it is connected.
+     */
+    private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
     }
 }

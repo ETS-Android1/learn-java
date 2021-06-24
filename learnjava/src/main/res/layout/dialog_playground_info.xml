@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="start">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin"
+        android:text="@string/playground_info"
+        android:textStyle="bold"
+        android:textSize="@dimen/small_text_size"/>
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/playgroundInfoCheckbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin"
+        android:textSize="@dimen/small_text_size"
+        android:text="@string/playground_dont_show_again"/>
+
+</LinearLayout>

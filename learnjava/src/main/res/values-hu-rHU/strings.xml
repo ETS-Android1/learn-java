@@ -230,5 +230,13 @@
     <string name="playground_500_code">Hiba: belső szerverhiba.</string>
     <string name="playground_misc_code">Hiba: ismeretlen hiba, kód: %1$s</string>
     <string name="playground_timeout">Hiba: időtúllépés.</string>
+    <string name="playground_countdown">Kérlek várj, mielőtt újra programot futtatnál.</string>
+    <string name="playground_countdown_over">Most már újra futtathatod a programot.</string>
+    <string name="playground_info">
+        Itt egyszerű programokat készíthetsz és futtathatsz. Vedd figyelembe, hogy ennek megvannak a korlátai
+        és egy valódi fejlesztőkörnyezet használata sokkal hatékonyabb.
+    </string>
+    <string name="playground_dont_show_again">Ne mutasd újra.</string>
+    <string name="playground_no_connection">A program futtatásához internetkapcsolat kell.</string>
 
 </resources>

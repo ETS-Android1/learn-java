@@ -139,7 +139,7 @@ public class LearnJavaActivity extends ThemedActivity
     }
 
     private void setUpUI() {
-        toolbar = findViewById(R.id.toolbarExam);
+        toolbar = findViewById(R.id.toolbarLearnJava);
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout_learn_java_root);
         NavigationView navigationView = findViewById(R.id.nav_view);
