@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
+import android.app.Service;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -36,6 +38,7 @@ import com.gaspar.learnjava.utils.AnimationUtils;
 import com.gaspar.learnjava.utils.LogUtils;
 import com.gaspar.learnjava.utils.ThemeUtils;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -91,6 +94,11 @@ public class CodeFragment extends Fragment {
      */
     private CodeAreaTextWatcher codeAreaTextWatcher;
 
+    /**
+     * Name of the file that is showing in the fragment.
+     */
+    private String currentDisplayedFileName;
+
     public CodeFragment() { } // Required empty public constructor
 
     /**
@@ -128,15 +136,28 @@ public class CodeFragment extends Fragment {
         ImageButton zoomInButton = codeFragmentView.findViewById(R.id.playgroundZoomInButton);
         ImageButton zoomOutButton = codeFragmentView.findViewById(R.id.playgroundZoomOutButton);
         EditText codeArea = codeFragmentView.findViewById(R.id.playgroundCodeArea);
-        TextView fileNameTextView = codeFragmentView.findViewById(R.id.fileNameTextView);
         AppCompatSpinner spinner = codeFragmentView.findViewById(R.id.fileSelectorSpinner);
 
         zoomInButton.setOnClickListener(view -> playgroundZoomInOnClick(zoomInButton, zoomOutButton, codeArea));
         zoomOutButton.setOnClickListener(view -> playgroundZoomOutOnClick(zoomInButton, zoomOutButton, codeArea));
         ImageButton deleteButton = codeFragmentView.findViewById(R.id.playgroundDeleteButton);
-        deleteButton.setOnClickListener(view -> playgroundDeleteOnClick(fileNameTextView, spinner));
+        deleteButton.setOnClickListener(view -> playgroundDeleteOnClick(spinner));
         ImageButton copyButton = codeFragmentView.findViewById(R.id.playgroundCopyButton);
         copyButton.setOnClickListener(view -> playgroundCopyOnClick(codeArea));
+
+        //send event to activity on focus change
+        codeArea.setOnFocusChangeListener((view, isFocused) -> {
+            PlaygroundActivity.ShowHideFab showHideFab = new PlaygroundActivity.ShowHideFab();
+            showHideFab.show = !isFocused;
+            EventBus.getDefault().post(showHideFab);
+            if(isFocused) {
+                view.postDelayed(() -> {
+                    if(!view.isFocused()) {
+                        view.requestFocus();
+                    }
+                },300);
+            }
+        });
         return codeFragmentView;
     }
 
@@ -229,7 +250,6 @@ public class CodeFragment extends Fragment {
                     .setOnCancelListener(dialogInterface -> {
                         //cancelled, go back go what was originally shown on the spinner
                         //the name of the file currently displayed. this is NOT what is shown by the spinner, the spinner is showing "create new..."
-                        String currentDisplayedFileName = ((TextView)getView().findViewById(R.id.fileNameTextView)).getText().toString();
                         int pos = fileSelectorAdapter.getPosition(currentDisplayedFileName);
                         spinner.setSelection(pos);
                     })
@@ -264,14 +284,12 @@ public class CodeFragment extends Fragment {
                     .setPositiveButton(R.string.ok, (dialogInterface, i) -> {
                         //go back go what was originally shown on the spinner
                         //the name of the file currently displayed. this is NOT what is shown by the spinner, the spinner is showing "create new..."
-                        String currentDisplayedFileName = ((TextView)getView().findViewById(R.id.fileNameTextView)).getText().toString();
                         int pos = fileSelectorAdapter.getPosition(currentDisplayedFileName);
                         spinner.setSelection(pos);
                     })
                     .setOnCancelListener(dialogInterface -> {
                         //cancelled, go back go what was originally shown on the spinner
                         //the name of the file currently displayed. this is NOT what is shown by the spinner, the spinner is showing "create new..."
-                        String currentDisplayedFileName = ((TextView)getView().findViewById(R.id.fileNameTextView)).getText().toString();
                         int pos = fileSelectorAdapter.getPosition(currentDisplayedFileName);
                         spinner.setSelection(pos);
                     })
@@ -311,9 +329,7 @@ public class CodeFragment extends Fragment {
             LogUtils.logError("Fragment view was not created when calling switchToPlaygroundFile!");
             return;
         }
-        //display it
-        TextView fileNameTextView = getView().findViewById(R.id.fileNameTextView);
-        fileNameTextView.setText(fileName);
+        currentDisplayedFileName = fileName;
         //content needs to be formatted first
         String formattedCode = formatter.formatContent(selectedFile.getContent());
         TextView codeArea = getView().findViewById(R.id.playgroundCodeArea);
@@ -393,48 +409,48 @@ public class CodeFragment extends Fragment {
     /**
      * Called when the code sample delete button is clicked. For Main.java, it resets the contents to
      * the default, for other playground files, they will get deleted.
-     * @param fileNameTextView Used to find which is the currently displayed file.
      * @param spinner The file selector spinner.
      */
-    private void playgroundDeleteOnClick(@NonNull final TextView fileNameTextView, @NonNull final AppCompatSpinner spinner) {
-        String selectedFileName = fileNameTextView.getText().toString();
-        if(selectedFileName.isEmpty()) { //this can probably happen if the user clicks on the button before the files are loaded
+    private void playgroundDeleteOnClick(@NonNull final AppCompatSpinner spinner) {
+        if(currentDisplayedFileName == null || currentDisplayedFileName.isEmpty()) { //this can probably happen if the user clicks on the button before the files are loaded
             LogUtils.logError("No selected file when clicking delete!");
             return;
         }
         int position = 0;
         for(PlaygroundFile playgroundFile: playgroundFiles) {
-            if(playgroundFile.getFileName().equals(selectedFileName)) {
+            if(playgroundFile.getFileName().equals(currentDisplayedFileName)) {
                 break;
             }
             position++;
         }
         final int fixedPosition = position;
-        if(selectedFileName.equals(MAIN_JAVA_FILE_NAME)) {
+        if(currentDisplayedFileName.equals(MAIN_JAVA_FILE_NAME)) {
             //Main.java needs to reset
-            new MaterialAlertDialogBuilder(fileNameTextView.getContext(), ThemeUtils.getThemedDialogStyle())
+            new MaterialAlertDialogBuilder(spinner.getContext(), ThemeUtils.getThemedDialogStyle())
                     .setMessage(R.string.playground_delete_main)
                     .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
                         //confirmed, replace
                         playgroundFiles.get(fixedPosition).setContent(buildMainJavaTemplate());
                         switchToPlaygroundFile(MAIN_JAVA_FILE_NAME); //this will reformat it
+                        Snackbar.make(spinner, R.string.playground_main_reset, Snackbar.LENGTH_LONG).show();
                     })
                     .setNegativeButton(R.string.cancel, (dialogInterface, i) -> dialogInterface.dismiss())
                     .show();
         } else {
-            new MaterialAlertDialogBuilder(fileNameTextView.getContext(), ThemeUtils.getThemedDialogStyle())
+            new MaterialAlertDialogBuilder(spinner.getContext(), ThemeUtils.getThemedDialogStyle())
                     .setMessage(R.string.playground_delete_normal_file)
                     .setPositiveButton(R.string.yes, (dialogInterface, i) -> {
+                        //delete from list
+                        playgroundFiles.remove(fixedPosition);
+                        //delete from spinner
+                        fileSelectorAdapter.remove(currentDisplayedFileName);
+                        fileSelectorAdapter.notifyDataSetChanged();
                         //move to main
                         switchToPlaygroundFile(MAIN_JAVA_FILE_NAME);
                         //set spinner to main as well
                         int spinnerPos = fileSelectorAdapter.getPosition(MAIN_JAVA_FILE_NAME);
                         spinner.setSelection(spinnerPos);
-                        //delete from list
-                        playgroundFiles.remove(fixedPosition);
-                        //delete from spinner
-                        fileSelectorAdapter.remove(selectedFileName);
-                        fileSelectorAdapter.notifyDataSetChanged();
+                        Snackbar.make(spinner, R.string.playground_file_deleted, Snackbar.LENGTH_LONG).show();
                     })
                     .setNegativeButton(R.string.cancel, (dialogInterface, i) -> dialogInterface.dismiss())
                     .show();
@@ -469,9 +485,9 @@ public class CodeFragment extends Fragment {
     private static String buildMainJavaTemplate() {
         return "public class Main {\n" +
                 "\n" +
-                "\tpublic static void main(String[] args) {\n" +
-                "\t\tSystem.out.println(\"hello!\");\n" +
-                "\t}\n" +
+                "   public static void main(String[] args) {\n" +
+                "      System.out.println(\"hello!\");\n" +
+                "   }\n" +
                 "\n" +
                 "}";
     }
@@ -580,6 +596,26 @@ public class CodeFragment extends Fragment {
         private final CodeFragment codeFragment;
 
         /**
+         * Detects if the user only typed spaces. No reformatting is needed in this case.
+         */
+        private boolean onlySpace;
+
+        /**
+         * Stores the position of the selector every time the text is updated.
+         */
+        private int typingStartPosition;
+
+        /**
+         * Stores if the user is currently typing.
+         */
+        private boolean typingStarted;
+
+        /**
+         * Stores how much the selector moved from {@link #typingStartPosition}.
+         */
+        private int selectionOffset;
+
+        /**
          * Create a code are text watcher.
          * @param codeFragment The code fragment that is watched by the text watcher.
          * @param codeArea The edit text of the code area.
@@ -593,12 +629,35 @@ public class CodeFragment extends Fragment {
         }
 
         @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) { }
+        public void beforeTextChanged(CharSequence charSequence, int start, int count, int after) {
+            if(!typingStarted) {
+                typingStartPosition = codeArea.getSelectionStart();
+                typingStarted = true;
+            }
+            //"after" is the amount of characters added (if characters are deleted, it is 0)
+            //"count" is the amount of characters removed (if characters are added, it is 0)
+            if(after > 0) {
+                //characters were added
+                selectionOffset += after;
+            } else {
+                //characters were removed
+                selectionOffset -= count;
+            }
+
+        }
 
         @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        public void onTextChanged(CharSequence charSequence, int start, int before, int count) {
             //cancel timer, a new one will be started
             if(timer != null) timer.cancel();
+            //check for only space
+            onlySpace = true;
+            for(int i = start; i < start + count; i++) {
+                if(charSequence.charAt(i) != ' ') {
+                    onlySpace = false;
+                    break;
+                }
+            }
         }
 
         //it is allowed to make modifications to the edit text content here
@@ -609,8 +668,23 @@ public class CodeFragment extends Fragment {
                 @Override
                 public void run() {
                     LearnJavaExecutor.getInstance().executeOnUiThread(() -> {
+                        if(playgroundFile != null) playgroundFile.setContent(codeArea.getText().toString());
                         //format code, this updates playground file list
                         formatCodeArea(codeArea.getText());
+                        codeArea.post(() -> {
+                            //focus
+                            codeArea.requestFocus();
+                            InputMethodManager imm = (InputMethodManager) codeArea.getContext().getSystemService(Service.INPUT_METHOD_SERVICE);
+                            if(imm != null) imm.showSoftInput(codeArea, 0);
+                            //reapply selection
+                            LogUtils.log("Typing started at position: " + typingStartPosition);
+                            LogUtils.log("Typing offset: " + selectionOffset);
+                            int typingEndPosition = typingStartPosition + selectionOffset;
+                            LogUtils.log("Typing ended at position: " + typingEndPosition);
+                            codeArea.setSelection(Math.max(0, typingEndPosition));
+                            selectionOffset = 0;
+                            typingStarted = false;
+                        });
                         //send updated files to activity
                         EventBus.getDefault().post(codeFragment.playgroundFiles);
                     });
@@ -624,18 +698,19 @@ public class CodeFragment extends Fragment {
          * @param editable The editable from the code area.
          */
         private void formatCodeArea(@NonNull Editable editable) {
+            if(onlySpace) { //no need to format only space input
+                return;
+            }
             //do not trigger callback during replacement
             codeArea.removeTextChangedListener(this);
-            //get where the user is typing inside the code area
-            int selection = codeArea.getSelectionStart();
             String unformatted = editable.toString();
-            //save to playground file
-            if(playgroundFile != null) playgroundFile.setContent(unformatted);
+            LogUtils.log("\n"+unformatted);
             //set new text
             String formatted = formatter.formatContent(unformatted);
+            //codeArea.getText().clear();
             codeArea.setText(Html.fromHtml(formatted, Html.FROM_HTML_MODE_COMPACT));
-            //reapply selected position
-            codeArea.setSelection(selection);
+            String afterFormatting = codeArea.getText().toString();
+            LogUtils.log("\n"+afterFormatting);
             //reattach listener
             codeArea.addTextChangedListener(this);
         }

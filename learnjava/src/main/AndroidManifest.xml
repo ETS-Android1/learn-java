@@ -100,7 +100,8 @@
         <activity
             android:name=".playground.PlaygroundActivity"
             android:label="@string/playground"
-            android:launchMode="singleTask"/>
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"/>
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"

@@ -23,6 +23,8 @@ public class Formatter {
         content = " " + content; //this space is necessary
         //Replace < with its HTML symbol. Must be called first, as otherwise it would match generated tags
         String res = content.replaceAll("<", "&lt;");
+        //replace spaces and line breaks with their HTML tags and characters
+        res = formatWhitespaces(res);
         //find strings and color them
         res = RegexConstants.TEXT_LITERAL_REGEX.matcher(res).replaceAll("<font color=\"" + FormatColor.TEXT_LITERAL_COLOR + "\">$1</font>");
         //find numeric literals and color them
@@ -41,11 +43,9 @@ public class Formatter {
         res = RegexConstants.ANNOTATION_REGEX.matcher(res).replaceAll("$1<font color=\"" + FormatColor.ANNOTATION_COLOR + "\">$2</font>$3");
         //find comments and color them
         res = RegexConstants.COMMENT_REGEX.matcher(res).replaceAll("<font color=\"" + FormatColor.COMMENT_COLOR + "\">$1</font>");
-        //replace tabs and line breaks with their HTML tags
-        res = formatWhitespaces(res);
 
         res = clean(res); //clean formatting from where it is not needed.
-        res = res.substring(1); //remove space that was added for regex-es
+        res = res.replaceFirst("&nbsp;", " "); //remove space that was added for regex-es
         return res;
     }
 
@@ -100,7 +100,7 @@ public class Formatter {
      * @return The formatted string.
      */
     public String formatWhitespaces(@NonNull String content) {
-        return content.replaceAll("\t", "&nbsp;&nbsp;&nbsp;&nbsp;").
-                replaceAll("(\r\n|\n)", "$1<br/>");
+        return content.replaceAll("(\r\n|\n)", "<br/>")
+                .replaceAll(" ", "&nbsp;");
     }
 }

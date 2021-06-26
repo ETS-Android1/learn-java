@@ -226,18 +226,21 @@
     <string name="playground_too_many_files">Too many files! Please delete some of them before creating more.</string>
     <string name="playground_delete_main">Main.java can\'t be deleted! Do you want to restore its original contents?</string>
     <string name="playground_delete_normal_file">Are you sure you want to delete this source file?</string>
+    <string name="playground_main_reset">Main.java was reset!</string>
+    <string name="playground_file_deleted">File deleted!</string>
     <string name="playground_input_info">
         Anything you type here will be sent to the standard input (System.in), in the order it appears here. There is currently no way
         to enter command line arguments.
     </string>
     <string name="playground_input_hint">Enter input here…</string>
     <string name="playground_input_delete">Delete all input</string>
+    <string name="playground_input_deleted">All input deleted!</string>
     <string name="playground_stdout_info">Everything your program writes to the standard output (System.out) appears here.</string>
     <string name="playground_stdout_hint">Nothing on System.out</string>
-    <string name="playground_stderr_info">Everything your program writes to the standard error channel (System.err) appears here.</string>
+    <string name="playground_stderr_info">Everything your program writes to the standard error channel (System.err) appears here, including exceptions.</string>
     <string name="playground_stderr_hint">Nothing on System.err</string>
-    <string name="playground_exception_info">Any exceptions or errors that happen are be logged here.</string>
-    <string name="playground_exception_hint">No errors or exceptions</string>
+    <string name="playground_exit_code_info">Exit code information. An exit code of 0 means success, all other values indicate some error.</string>
+    <string name="playground_exit_code_hint">No exit code.</string>
     <string name="playground_in_progress">Compiling and running…</string>
     <string name="playground_401_code">Error: failed authorization.</string>
     <string name="playground_500_code">Error: internal server error.</string>

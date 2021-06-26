@@ -4,6 +4,6 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     tools:text="File name or 'create new file'"
-    android:background="?colorSurface"
+    android:background="?colorPrimary"
     android:textStyle="bold"
     android:textSize="@dimen/big_text_size"/>

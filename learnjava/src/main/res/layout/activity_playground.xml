@@ -92,7 +92,9 @@
             app:rippleColor="@android:color/white"
             app:fabSize="normal"
             tools:visibility="visible"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            android:focusable="false"
+            android:focusableInTouchMode="false"/>
 
         <ProgressBar
             android:id="@+id/loadingIndicator"

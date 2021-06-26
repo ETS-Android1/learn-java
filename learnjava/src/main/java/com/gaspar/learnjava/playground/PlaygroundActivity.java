@@ -187,6 +187,8 @@ public class PlaygroundActivity extends ThemedActivity implements CodeHostingAct
     private void setUpFloatingActionButton(@NonNull final FloatingActionButton fab) {
         //add action to perform on short click
         fab.setOnClickListener(this::onRunClicked);
+        fab.setFocusable(false);
+        fab.setFocusableInTouchMode(false);
         //dragging will begin on long click
         fab.setOnLongClickListener(v -> {
             View.DragShadowBuilder myShadow = new View.DragShadowBuilder(fab);
@@ -527,5 +529,28 @@ public class PlaygroundActivity extends ThemedActivity implements CodeHostingAct
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
+    }
+
+    /**
+     * Handles the event when the floating action button, run, needs to change visibility.
+     * @param showHideFab Determines if the button must appear or disappear.
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(@NonNull ShowHideFab showHideFab) {
+        LogUtils.log("Floating action button visibility event!");
+        FloatingActionButton fab = findViewById(R.id.playgroundRunButton);
+        if(showHideFab.show) {
+            fab.show();
+        } else {
+            fab.hide();
+        }
+    }
+
+    /**
+     * Message class.
+     * @see #onMessageEvent(ShowHideFab)
+     */
+    public static class ShowHideFab {
+        public boolean show;
     }
 }

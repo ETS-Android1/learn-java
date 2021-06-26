@@ -6,6 +6,7 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import com.gaspar.learnjava.utils.LogUtils;
 import com.squareup.moshi.Json;
 
 import java.util.ArrayList;
@@ -95,19 +96,25 @@ public class PlaygroundFile {
      * @return The cleaned content.
      */
     public String getCleanedContent() {
+        LogUtils.log("Content before clean:\n" + content);
         StringBuilder builder = new StringBuilder();
         boolean insideLiteral = false;
         for(char contentChar: content.toCharArray()) {
             if(contentChar == '\"') { //moving in or out of a literal
                 insideLiteral = !insideLiteral;
             }
-            //found not wanted character outside of literal, ignore
-            if(('\t' == contentChar || '\n' == contentChar || '\u00a0' == contentChar) && !insideLiteral) {
+            /*
+            The &nbsp; becomes this character after converting back to string. The Java compiler
+            does not like this character, replace it with simple space.
+             */
+            if('\u00a0' == contentChar && !insideLiteral) {
+                builder.append(" ");
                 continue;
             }
             //append
             builder.append(contentChar);
         }
+        LogUtils.log("Content after clean:\n" + builder.toString());
         return builder.toString();
     }
 

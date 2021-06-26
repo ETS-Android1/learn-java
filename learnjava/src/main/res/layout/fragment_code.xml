@@ -1,36 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    tools:context=".playground.CodeFragment">
-
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/fileSelectorSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin"/>
+    tools:context=".playground.CodeFragment"
+    android:fillViewport="true"
+    android:isScrollContainer="true">
 
     <!-- Layout for actual code: can displays multiple files -->
     <RelativeLayout
         android:id="@+id/fileDisplayerLayout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:background="@drawable/code_component_background"
         android:elevation="@dimen/elevation"
         android:layout_margin="@dimen/margin">
 
-        <TextView
-            android:id="@+id/fileNameTextView"
-            android:layout_width="match_parent"
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/fileSelectorSpinner"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin"
             tools:text="FileName.java"
             android:textSize="@dimen/big_text_size"
             android:layout_marginStart="@dimen/margin"
+            android:layout_marginEnd="@dimen/margin"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true" />
@@ -39,45 +36,42 @@
             android:id="@+id/sep1"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_below="@id/fileNameTextView"
+            android:layout_below="@id/fileSelectorSpinner"
             android:layout_width="match_parent"
             android:layout_height="@dimen/separator_height"
             android:background="?android:colorAccent"/>
 
         <!-- Layout where actual code is displayed. -->
-        <ScrollView
+        <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_below="@id/sep1"
             android:layout_above="@id/fileDisplayerButtonBar"
-            android:fillViewport="true"
             android:padding="@dimen/padding">
 
-            <HorizontalScrollView
+            <EditText
+                android:id="@+id/playgroundCodeArea"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fillViewport="true">
+                android:layout_height="match_parent"
+                tools:text="Formatted code here"
+                android:textSize="@dimen/code_text_size"
+                android:padding="@dimen/padding"
+                android:inputType="textMultiLine|textNoSuggestions"
+                android:gravity="top|start"
+                android:textColor="@color/code_text_color"
+                android:background="@drawable/code_area_background"
+                tools:ignore="ScrollViewSize"
+                android:importantForAutofill="no"
+                android:hint="@string/playground_code_area_hint"
+                android:cursorVisible="true"
+                android:imeOptions="actionNone"/>
 
-                <EditText
-                    android:id="@+id/playgroundCodeArea"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    tools:text="Formatted code here"
-                    android:textSize="@dimen/code_text_size"
-                    android:padding="@dimen/padding"
-                    android:inputType="textMultiLine|textNoSuggestions"
-                    android:gravity="top|start"
-                    android:textColor="@color/code_text_color"
-                    android:background="@drawable/code_area_background"
-                    tools:ignore="ScrollViewSize"
-                    android:importantForAutofill="no"
-                    android:hint="@string/playground_code_area_hint"/>
-
-            </HorizontalScrollView>
-
-        </ScrollView>
+        </HorizontalScrollView>
 
         <LinearLayout
             android:id="@+id/fileDisplayerButtonBar"
@@ -133,4 +127,4 @@
 
     </RelativeLayout>
 
-</LinearLayout>
+</ScrollView>

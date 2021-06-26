@@ -51,6 +51,7 @@
                     android:gravity="start|top"
                     android:padding="@dimen/padding"
                     android:textColor="@color/code_text_color"
+                    android:textColorHint="@color/code_text_color"
                     android:textSize="@dimen/code_text_size"
                     android:importantForAutofill="no"/>
 

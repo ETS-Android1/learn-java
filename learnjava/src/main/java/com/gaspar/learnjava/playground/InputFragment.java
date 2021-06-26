@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.gaspar.learnjava.R;
 import com.gaspar.learnjava.asynctask.LearnJavaExecutor;
 import com.gaspar.learnjava.utils.LogUtils;
+import com.google.android.material.snackbar.Snackbar;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -65,10 +66,21 @@ public class InputFragment extends Fragment {
         zoomOutButton.setOnClickListener(view -> CodeFragment.playgroundZoomOutOnClick(zoomInButton, zoomOutButton, inputArea));
 
         ImageButton deleteButton = inputView.findViewById(R.id.inputDeleteButton);
-        deleteButton.setOnClickListener(view -> inputArea.setText(""));
+        deleteButton.setOnClickListener(view -> {
+            inputArea.setText("");
+            Snackbar.make(deleteButton, R.string.playground_input_deleted, Snackbar.LENGTH_LONG).show();
+        });
 
         //set text watcher
         inputArea.addTextChangedListener(new InputAreaTextWatcher(this));
+
+        //send event to activity on focus change
+        inputArea.setOnFocusChangeListener((view, isFocused) -> {
+            PlaygroundActivity.ShowHideFab showHideFab = new PlaygroundActivity.ShowHideFab();
+            showHideFab.show = !isFocused;
+            EventBus.getDefault().post(showHideFab);
+        });
+
         return inputView;
     }
 
