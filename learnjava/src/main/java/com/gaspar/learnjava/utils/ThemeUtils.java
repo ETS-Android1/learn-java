@@ -105,7 +105,7 @@ public abstract class ThemeUtils {
      * @return The style resource of the currently selected theme.
      */
     @StyleRes
-    public static int getTheme() {
+    public static int getThemeStyleRes() {
         if (selectedTheme == Themes.ORANGE) {
             return R.style.AppTheme;
         } else if(selectedTheme == Themes.DARK) { //dark
@@ -202,7 +202,7 @@ public abstract class ThemeUtils {
                     .setPositiveButton(R.string.dark_theme_accepted, (dialog, which) -> {
                         dialog.dismiss();
                         ThemeUtils.updateSelectedTheme(activity, Themes.DARK); //update
-                        activity.setTheme(ThemeUtils.getTheme());
+                        activity.setTheme(ThemeUtils.getThemeStyleRes());
                         activity.recreate();
                     })
                     .setNegativeButton(R.string.dark_theme_denied, (dialog, which) -> dialog.dismiss())
@@ -236,7 +236,7 @@ public abstract class ThemeUtils {
                                 //the user wants to turn on application dark mode
                                 dialog.dismiss();
                                 ThemeUtils.updateSelectedTheme(activity, Themes.DARK); //update
-                                activity.setTheme(ThemeUtils.getTheme());
+                                activity.setTheme(ThemeUtils.getThemeStyleRes());
                                 activity.recreate();
                             })
                             .setNegativeButton(R.string.dark_theme_denied, (dialog, which) -> {

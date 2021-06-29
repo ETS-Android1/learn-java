@@ -1,6 +1,7 @@
 package com.gaspar.learnjava;
 
 import android.app.Activity;
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -65,14 +66,17 @@ public class ExamActivity extends ThemedActivity {
         super.onCreate(savedState);
         setContentView(R.layout.activity_exam);
         examFinished = false;
-        if(getIntent().getExtras() == null) { //should not happen
+        Bundle extras = getIntent().getExtras();
+        if(extras == null) { //should not happen
             LogUtils.logError("Incorrect behaviour: No extras passed!");
             finish();
+            return;
         }
-        exam = (Exam)getIntent().getExtras().getSerializable(Exam.EXAM_PREFERENCE_STRING);
+        exam = (Exam)extras.getSerializable(Exam.EXAM_PREFERENCE_STRING);
         if(exam == null) {
             LogUtils.logError("Incorrect behaviour: No exam passed in extras!");
             finish();
+            return;
         } else {
             setUpUI();
         }
@@ -317,7 +321,9 @@ public class ExamActivity extends ThemedActivity {
         String text = ongoing ? getString(R.string.ongoing_exam_detail) : getString(R.string.exam_time_expired);
 
         Intent intent = new Intent(this, getClass());
-        PendingIntent pi = PendingIntent.getActivity(this, NOTIFICATION_REQUEST_CODE, intent, 0);
+        intent.setFlags(Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT);
+        PendingIntent pIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, ExamNotificationReceiver.NOTIFICATION_CHANNEL_ID)
                 .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.mipmap.learn_java_icon_round))
                 .setSmallIcon(R.drawable.exam_icon)
@@ -326,19 +332,23 @@ public class ExamActivity extends ThemedActivity {
                 .setColorized(true)
                 .setColor(ContextCompat.getColor(this, ThemeUtils.getBackgroundColor()))
                 .setAutoCancel(true);
-        mBuilder.setContentIntent(pi);
+        mBuilder.setContentIntent(pIntent);
         mBuilder.setLights(ContextCompat.getColor(this, ThemeUtils.getPrimaryColor()), 500, 500);
+
         if(notificationManager == null) notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         if(notificationManager == null) { //system service may return null
             LogUtils.logError("Can't exam post notification, system service is null!");
         } else {
-            notificationManager.notify(NOTIFICATION_REQUEST_CODE, mBuilder.build());
+            Notification notification = mBuilder.build();
+            notification.flags = Notification.FLAG_ONGOING_EVENT;
+            notificationManager.notify(NOTIFICATION_REQUEST_CODE, notification);
             notificationVisible = true;
         }
     }
 
     /**
-     * Cancels the ongoing exam warning. (called when the user returns to the activity)
+     * Cancels the ongoing exam warning. (called when the user returns to the activity), or when it forcefully
+     * stops. while the notification is visible.
      */
     private void cancelExamNotification() {
         notificationVisible = false;
@@ -359,6 +369,12 @@ public class ExamActivity extends ThemedActivity {
         super.onPause();
         //Starts the 'ongoing exam notification' if necessary.
         if(!examFinished) showExamNotification(true);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        cancelExamNotification();
     }
 
     public boolean isLoadSuccessful() {

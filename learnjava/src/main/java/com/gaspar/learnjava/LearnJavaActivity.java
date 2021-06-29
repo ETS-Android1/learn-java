@@ -65,7 +65,8 @@ public class LearnJavaActivity extends ThemedActivity
     public static final String APP_PREFERENCES_NAME = "learn_java_prefs";
 
     /**
-     * The constant used to find the active (last started) chapter ID in the preferences.
+     * The constant used to find the active (last started) chapter ID in the preferences. If there was no
+     * chapter started, this will be -1.
      */
     public static final String ACTIVE_CHAPTER_ID_PREFERENCE = "active_chapter_pref";
 

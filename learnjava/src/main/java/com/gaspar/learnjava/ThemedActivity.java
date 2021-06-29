@@ -40,14 +40,14 @@ public class ThemedActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ThemeUtils.initSelectedTheme(this); //initialize themes. wont do anything if already initialized
-        themeId = ThemeUtils.getTheme(); //save current theme
+        themeId = ThemeUtils.getThemeStyleRes(); //save current theme
         setTheme(themeId);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        int newTheme = ThemeUtils.getTheme();
+        int newTheme = ThemeUtils.getThemeStyleRes();
         if(themeId != newTheme) { //theme was updated while activity was hidden
             recreate();
         }

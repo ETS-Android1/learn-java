@@ -39,17 +39,20 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
     /**
      * Constant for the 'exam notifications enabled' preference.
      */
-    private static final String EXAM_NOTIFICATIONS_PREF_NAME = "exam_notification_pref_name";
+    @VisibleForTesting
+    public static final String EXAM_NOTIFICATIONS_PREF_NAME = "exam_notification_pref_name";
 
     /**
      * Constant for the 'app difficulty' preference.
      */
+    @VisibleForTesting
     public static final String DIFFICULTY_PREF_NAME = "difficulty";
 
     /**
      * Constant for the 'keep screen on' preference.
      */
-    private static final String KEEP_AWAKE_PREF_NAME = "keep_awake_pref_name";
+    @VisibleForTesting
+    public static final String KEEP_AWAKE_PREF_NAME = "keep_awake_pref_name";
 
     /**
      * Constant for the 'automatically slide unlocked content open' preference.
@@ -100,7 +103,7 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
             throw new RuntimeException("Unknown theme selector button!");
         }
         ThemeUtils.updateSelectedTheme(SettingsActivity.this, newTheme); //update
-        setTheme(ThemeUtils.getTheme()); //restyle settings activity
+        setTheme(ThemeUtils.getThemeStyleRes()); //restyle settings activity
         recreate();
     }
 
@@ -190,6 +193,8 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
             LearnJavaExecutor.getInstance().executeOnBackgroundThread(() -> {
                 LearnJavaDatabase.resetDatabase(SettingsActivity.this);
                 LearnJavaDatabase.validateDatabase(SettingsActivity.this);
+                //also delete "last started chapter" preference
+                prefs.edit().putInt(LearnJavaActivity.ACTIVE_CHAPTER_ID_PREFERENCE, -1).apply();
             });
             Snackbar.make(resetButton, R.string.reset_successful, Snackbar.LENGTH_SHORT).show();
         });
@@ -248,8 +253,9 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
     /**
      * Checks if all the settings preferences are present. If not, adds them with the default value. This is called when the
      * application is launched.
+     * @param context Context.
      */
-    public static void initSettings(Context context) {
+    public static void initSettings(@NonNull Context context) {
         final SharedPreferences prefs = context.getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = prefs.edit();
         if(!prefs.contains(EXAM_NOTIFICATIONS_PREF_NAME)) {
@@ -267,4 +273,20 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
         editor.apply();
     }
 
+    /**
+     * Resets all {@link SharedPreferences} values related to settings, to their default values.
+     * @param context Context.
+     */
+    @VisibleForTesting
+    public static void resetSettings(@NonNull final Context context) {
+        final SharedPreferences prefs = context.getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = prefs.edit();
+        editor.remove(EXAM_NOTIFICATIONS_PREF_NAME);
+        editor.remove(DIFFICULTY_PREF_NAME);
+        editor.remove(KEEP_AWAKE_PREF_NAME);
+        editor.remove(AUTO_SLIDE_OPEN_PREF_NAME);
+        editor.apply();
+        //reinitialize
+        initSettings(context);
+    }
 }
