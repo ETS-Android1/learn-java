@@ -2,6 +2,7 @@ package com.gaspar.learnjava.playground;
 
 import android.os.Bundle;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,6 +88,13 @@ public class OutputFragment extends Fragment {
         TextView exception = outputView.findViewById(R.id.playgroundException);
         exceptionZoomIn.setOnClickListener(view -> CodeFragment.playgroundZoomInOnClick(exceptionZoomIn, exceptionZoomOut, exception));
         exceptionZoomOut.setOnClickListener(view -> CodeFragment.playgroundZoomOutOnClick(exceptionZoomIn, exceptionZoomOut, exception));
+
+        //set powered by
+        TextView poweredByView = outputView.findViewById(R.id.poweredByTextView);
+        String poweredBy = outputView.getContext().getString(R.string.playground_powered_by);
+        poweredBy = poweredBy + " <a href=\"https://glot.io/\">Glot.io</a>";
+        poweredByView.setText(Html.fromHtml(poweredBy, Html.FROM_HTML_MODE_COMPACT));
+        poweredByView.setMovementMethod(LinkMovementMethod.getInstance());
         return outputView;
     }
 

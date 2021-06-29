@@ -35,6 +35,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Activity that displays all courses. They can be opened to display the chapters.
@@ -104,7 +105,7 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
                         if(updateViews.length == 0) return; //should not happen
                         ImageView icon = updateViews[0].findViewById(R.id.chapterStatusIcon);
                         Intent data = result.getData();
-                        Chapter chapter = (Chapter) data.getExtras().getSerializable(Chapter.CHAPTER_PREFERENCE_STRING);
+                        Chapter chapter = (Chapter) Objects.requireNonNull(data).getExtras().getSerializable(Chapter.CHAPTER_PREFERENCE_STRING);
                         if(chapter == null) return;
                         chapter.queryAndDisplayStatus(icon, CoursesActivity.this);
                         if(!data.getExtras().containsKey(Exam.EXAM_PREFERENCE_STRING)) return; //no exam, stop updating
@@ -123,7 +124,7 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
                         if(updateViews.length == 0) return; //should not happen
                         Intent data = result.getData();
                         ImageView taskIcon = updateViews[0].findViewById(R.id.taskStatusIcon);
-                        Task task = (Task)data.getExtras().getSerializable(Task.TASK_PREFERENCE_STRING);
+                        Task task = (Task) Objects.requireNonNull(data).getExtras().getSerializable(Task.TASK_PREFERENCE_STRING);
                         if(task == null) return;
                         task.queryAndDisplayStatus(taskIcon, CoursesActivity.this);
                     }
@@ -136,7 +137,7 @@ public class CoursesActivity extends ThemedActivity implements NavigationView.On
                     if(result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
                         if(updateViews.length == 0) return; //should not happen
-                        Exam examData = (Exam)data.getExtras().getSerializable(Exam.EXAM_PREFERENCE_STRING);
+                        Exam examData = (Exam) Objects.requireNonNull(data).getExtras().getSerializable(Exam.EXAM_PREFERENCE_STRING);
                         if(examData == null) return;
                         examData.queryAndDisplayStatus(updateViews[0], CoursesActivity.this); //update view will be the exam view
                         updateNextCourseDisplay(examData.getId()); //if there is a next course, and it's unlocked, update it

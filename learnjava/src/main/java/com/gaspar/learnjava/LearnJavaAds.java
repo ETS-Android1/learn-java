@@ -27,14 +27,16 @@ abstract class LearnJavaAds {
      * Constant that determines if ads will or won't be test(debug) ads. This only has a real effect if {@link #LOAD_ADS}
      * is true.
      * <p>
-     * DO NOT SET THIS HERE, it's set automatically from the build variant.
+     * DO NOT SET THIS HERE, it's set automatically from the build variant. In case of testing, this value
+     * can be changed.
      */
     static boolean DEBUG_ADS;
 
     /**
      * A constant that determines if ads will be loaded or not.
      * <p>
-     * DO NOT SET THIS HERE, it's set automatically from the build variant.
+     * DO NOT SET THIS HERE, it's set automatically from the build variant. In case of testing, this value
+     * can be changed.
      */
     static boolean LOAD_ADS;
 
@@ -59,7 +61,6 @@ abstract class LearnJavaAds {
     /**
      * Loads a banner ad, then adds it to the given parent view, according to debug preferences: {@link #DEBUG_ADS}
      * and {@link #LOAD_ADS}.
-     *
      * @param id The id of the ad unit.
      * @param parent The parent view to which the ad view will be added. It is displaying some text
      *               that indicates the ad is loading.
@@ -68,6 +69,7 @@ abstract class LearnJavaAds {
     static AdView loadBannerAd(@StringRes int id, ViewGroup parent) {
         Context context = parent.getContext();
         AdView adView = new AdView(context);
+        adView.setId(R.id.ad_view_banner_id); //id is used in tests
         adView.setAdSize(AdSize.BANNER);
         adView.setAdUnitId(context.getString(id));
         if (LOAD_ADS) {

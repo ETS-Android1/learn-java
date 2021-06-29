@@ -241,5 +241,6 @@
     </string>
     <string name="playground_dont_show_again">Ne mutasd újra.</string>
     <string name="playground_no_connection">A program futtatásához internetkapcsolat kell.</string>
+    <string name="playground_powered_by">Java futtatást meghajtja:</string>
 
 </resources>

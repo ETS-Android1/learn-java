@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:gravity="start">
 
@@ -11,8 +11,16 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin"
         android:text="@string/playground_info"
-        android:textStyle="bold"
         android:textSize="@dimen/small_text_size"/>
+
+    <TextView
+        android:id="@+id/dialogPoweredByTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Powered by: Glot.io"
+        android:textStyle="bold"
+        android:textSize="@dimen/medium_text_size"
+        android:textAlignment="center"/>
 
     <com.google.android.material.checkbox.MaterialCheckBox
         android:id="@+id/playgroundInfoCheckbox"

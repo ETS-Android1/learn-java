@@ -12,6 +12,16 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/poweredByTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin"
+            android:textSize="@dimen/medium_text_size"
+            android:textStyle="bold"
+            tools:text="Powered by: Glot.io"
+            android:textAlignment="center"/>
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/playground_stdout_info"
@@ -110,7 +120,7 @@
                     android:textSize="@dimen/small_text_size"
                     android:textColor="@android:color/holo_red_light"
                     android:textColorHint="@android:color/holo_red_light"
-                    android:background="@drawable/code_area_background"
+                    android:background="@android:color/black"
                     android:padding="@dimen/padding" />
 
             </HorizontalScrollView>
@@ -181,7 +191,7 @@
                     android:textSize="@dimen/small_text_size"
                     android:textColor="@color/code_text_color"
                     android:textColorHint="@color/code_text_color"
-                    android:background="@android:color/black"
+                    android:background="@drawable/code_area_background"
                     android:padding="@dimen/padding" />
 
             </HorizontalScrollView>

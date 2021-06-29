@@ -71,7 +71,7 @@
     <string name="dummy_code_sample" translatable="false">
         <![CDATA[
      <font color="#E65100">public static</font> <font color="#DF7401">void</font> <font color="#ADD8E6">main</font>(<font color="#999900">String</font>[] args) {
-<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">"ClipSync!"</font>);
+<br/>	&nbsp;&nbsp;&nbsp;&nbsp;<font color="#999900">System</font>.<font color="#ADD8E6">out</font>.<font color="#ADD8E6">println</font>(<font color="#2E8B57">&quot;ClipSync!&quot;</font>);
 <br/>}
         ]]>
     </string>
@@ -254,5 +254,6 @@
     </string>
     <string name="playground_dont_show_again">Don\'t show this again.</string>
     <string name="playground_no_connection">An internet connection is required to run the program.</string>
+    <string name="playground_powered_by">Java running powered by:</string>
 
 </resources>

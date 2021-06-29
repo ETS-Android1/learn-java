@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -508,6 +510,12 @@ public class PlaygroundActivity extends ThemedActivity implements CodeHostingAct
             @SuppressLint("InflateParams") //null is ok, this is a dialog root
             View infoView = LayoutInflater.from(this).inflate(R.layout.dialog_playground_info, null, false);
             final MaterialCheckBox infoCheckBox = infoView.findViewById(R.id.playgroundInfoCheckbox);
+
+            TextView poweredByView = infoView.findViewById(R.id.dialogPoweredByTextView);
+            String poweredBy = getString(R.string.playground_powered_by);
+            poweredBy = poweredBy + " <a href=\"https://glot.io/\">Glot.io</a>";
+            poweredByView.setText(Html.fromHtml(poweredBy, Html.FROM_HTML_MODE_COMPACT));
+            poweredByView.setMovementMethod(LinkMovementMethod.getInstance());
 
             new MaterialAlertDialogBuilder(this, ThemeUtils.getThemedDialogStyle())
                     .setView(infoView)

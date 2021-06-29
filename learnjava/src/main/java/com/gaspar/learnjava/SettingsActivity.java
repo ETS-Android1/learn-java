@@ -11,6 +11,7 @@ import android.widget.RadioGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringDef;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -53,6 +54,7 @@ public class SettingsActivity extends ThemedActivity implements NavigationView.O
     /**
      * Constant for the 'automatically slide unlocked content open' preference.
      */
+    @VisibleForTesting
     public static final String AUTO_SLIDE_OPEN_PREF_NAME = "auto_slide_open_pref_name";
 
     @Override
