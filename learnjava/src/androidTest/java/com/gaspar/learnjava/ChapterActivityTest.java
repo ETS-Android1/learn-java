@@ -33,6 +33,7 @@ import org.junit.Test;
 import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
 
+import java.util.Objects;
 import java.util.function.Predicate;
 
 import static androidx.test.espresso.Espresso.onView;
@@ -149,7 +150,7 @@ public class ChapterActivityTest {
             Chapter parsedChapter = activity.getPassedChapter();
             RecyclerView componentsView = activity.findViewById(R.id.chapterComponents);
             //the +1 is needed, since the layout contains one extra view: the "confirm" view, with the confirm button
-            Assert.assertEquals(parsedChapter.getComponents().size() + 1, componentsView.getAdapter().getItemCount());
+            Assert.assertEquals(parsedChapter.getComponents().size() + 1, Objects.requireNonNull(componentsView.getAdapter()).getItemCount());
         });
     }
 
@@ -270,7 +271,7 @@ public class ChapterActivityTest {
     public void testChapterCompletionWithScroll() throws InterruptedException {
         rule.getScenario().onActivity(activity -> {
             RecyclerView recyclerView = activity.findViewById(R.id.chapterComponents);
-            recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
+            recyclerView.smoothScrollToPosition(Objects.requireNonNull(recyclerView.getAdapter()).getItemCount() - 1);
         });
         //allow time for database to update
         Thread.sleep(1500);

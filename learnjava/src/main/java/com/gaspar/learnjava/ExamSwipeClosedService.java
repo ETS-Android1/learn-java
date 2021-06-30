@@ -8,7 +8,8 @@ import android.os.IBinder;
 import androidx.annotation.Nullable;
 
 /**
- * A helper service that detects if the activity was swiped from the recent list.
+ * A helper service that detects if the {@link ExamActivity} was swiped from the recents list. In this
+ * case, the "ongoing exam" notification must be removed.
  */
 public class ExamSwipeClosedService extends Service {
 

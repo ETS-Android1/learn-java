@@ -73,6 +73,7 @@ android:fitsSystemWindows="true">
                     android:text="@string/get_started_info_1"/>
 
                 <Button
+                    android:id="@+id/clipSyncDownloadButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

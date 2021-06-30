@@ -9,6 +9,7 @@ import androidx.annotation.Size;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gaspar.learnjava.R;
+import com.gaspar.learnjava.utils.LearnJavaBluetooth;
 import com.gaspar.learnjava.utils.LogUtils;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -53,10 +54,20 @@ public class BluetoothExchangeTask extends LjAsyncTask<BluetoothExchangeTask.Res
      */
     private boolean timedOut;
 
+    /**
+     * Stores if the message is a handshake. In this case, we don't care about the response. A handshake
+     * is only for the pairing process.
+     */
+    private final boolean handshakeMessage;
+
     public BluetoothExchangeTask(@NonNull String data, @NonNull final BluetoothSocket socket) {
         this.data = data;
         this.socket = socket;
         timedOut = false;
+        handshakeMessage = data.equals(LearnJavaBluetooth.HANDSHAKE_MESSAGE);
+        if(handshakeMessage) {
+            LogUtils.log("This is a handshake message!");
+        }
     }
 
     /**
@@ -92,7 +103,7 @@ public class BluetoothExchangeTask extends LjAsyncTask<BluetoothExchangeTask.Res
     @Override
     protected BluetoothExchangeTask.Result doInBackground(@Size(1) Object... objects) {
         final AppCompatActivity activity = (AppCompatActivity) objects[0];
-        activity.runOnUiThread(()-> { //cant do i pre execute, as we don't have activity reference there
+        activity.runOnUiThread(()-> { //cant do it pre execute, as we don't have activity reference there
             final View loadingIndicator = activity.findViewById(R.id.loadingIndicator); //show loading icon
             if(loadingIndicator != null) loadingIndicator.setVisibility(View.VISIBLE);
         });
@@ -109,6 +120,7 @@ public class BluetoothExchangeTask extends LjAsyncTask<BluetoothExchangeTask.Res
             socket.close();
             return new Result(activity, true);
         } catch (IOException | UncheckedIOException e) {
+            LogUtils.logError("Failed to send bluetooth data!", e);
             //failed to connect
             return new Result(activity, false);
         }
@@ -119,13 +131,17 @@ public class BluetoothExchangeTask extends LjAsyncTask<BluetoothExchangeTask.Res
         String message;
         if(result.success && !timedOut) { //if transfer succeeded
             message = result.activity.getString(R.string.clip_sync_success);
-        } else { //fail
+        } else if(!result.success && timedOut){ //fail because time out
+            message = result.activity.getString(R.string.clip_sync_fail_time_out);
+        } else { //other fail
             message = result.activity.getString(R.string.clip_sync_fail);
         }
         final View loadingIndicator = result.activity.findViewById(R.id.loadingIndicator); //hide loading icon
         if(loadingIndicator != null) {
             loadingIndicator.setVisibility(View.GONE);
-            Snackbar.make(loadingIndicator, message, Snackbar.LENGTH_SHORT).show();
+            if(!handshakeMessage) { //only show snackbar if this is a normal message, not a handshake
+                Snackbar.make(loadingIndicator, message, Snackbar.LENGTH_SHORT).show();
+            }
         }
     }
 

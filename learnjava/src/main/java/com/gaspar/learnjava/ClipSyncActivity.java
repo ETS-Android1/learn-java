@@ -36,6 +36,7 @@ import com.gaspar.learnjava.curriculum.components.CodeComponent;
 import com.gaspar.learnjava.curriculum.components.CodeHostingActivity;
 import com.gaspar.learnjava.utils.DrawerUtils;
 import com.gaspar.learnjava.utils.LearnJavaBluetooth;
+import com.gaspar.learnjava.utils.LogUtils;
 import com.gaspar.learnjava.utils.ThemeUtils;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.navigation.NavigationView;
@@ -49,14 +50,12 @@ import java.util.Optional;
 /**
  * Activity that allows the user to set up and test clip sync. There are two ways for this, bluetooth and
  * local network, but most of the activity's code is about bluetooth as that is much harder to initialize.
+ * <p>
+ * For a detailed description about what permissions are needed for bluetooth usage, see {@link LearnJavaBluetooth}.
+ * @see LearnJavaBluetooth
  */
 public class ClipSyncActivity extends ThemedActivity
         implements NavigationView.OnNavigationItemSelectedListener, CodeHostingActivity {
-
-    /**
-     * This constant is used to ask the user to turn on bluetooth.
-     */
-    public static final int REQUEST_ENABLE_BT = 11;
 
     /**
      * The constant is used to ask the user to allow the app to access location. Needed for bluetooth.
@@ -79,19 +78,24 @@ public class ClipSyncActivity extends ThemedActivity
     private List<BluetoothDevice> deviceList;
 
     /**
-     * This object listens to the discovered devices, from the pairing process. Also listens
-     * to found UUID-s. IF it finds the server then a handshake connection is initiated.
+     * Stores if the app is currently looking for the server.
+     */
+    private boolean pairingOngoing;
+
+    /**
+     * This object listens to bluetooth pairing related events, such as finding discoverable devices,
+     * found UUID-s and result of pairing. IF it finds the server then a handshake connection is initiated.
      */
     private final BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            if (BluetoothDevice.ACTION_FOUND.equals(action)) { //found a device, add to list
+            if (BluetoothDevice.ACTION_FOUND.equals(action) && pairingOngoing) { //found a device, add to list
                 BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 deviceList.add(device);
-            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) { //finished scan, can start gathering UUID-s
+            } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action) && pairingOngoing) { //finished scan, can start gathering UUID-s
                 queryDeviceForUuid();
-            } else if (BluetoothDevice.ACTION_UUID.equals(action)) { //the UUID-s have been found for a device
+            } else if (BluetoothDevice.ACTION_UUID.equals(action) && pairingOngoing) { //the UUID-s have been found for a device
                 BluetoothDevice deviceExtra = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                 assert(deviceExtra!=null);
                 Parcelable[] uuidExtra = intent.getParcelableArrayExtra(BluetoothDevice.EXTRA_UUID);
@@ -106,8 +110,8 @@ public class ClipSyncActivity extends ThemedActivity
                                 int result = ContextCompat.checkSelfPermission(ClipSyncActivity.this, Manifest.permission.ACCESS_FINE_LOCATION);
                                 if(result == PackageManager.PERMISSION_GRANTED) {
                                     //it should be granted here, because the pairing is already underway
-                                    LearnJavaBluetooth.getInstance().sendData(
-                                            LearnJavaBluetooth.HANDSHAKE_MESSAGE, connResult.get(), ClipSyncActivity.this);
+                                    //send handshake
+                                    LearnJavaBluetooth.getInstance().sendHandshakeMessage(connResult.get(), ClipSyncActivity.this);
                                 }
                             } else {
                                 Snackbar.make(ClipSyncActivity.this.findViewById(R.id.testCodeSample), ClipSyncActivity.this.getString(R.string.clip_sync_misc_error), Snackbar.LENGTH_LONG).show();
@@ -117,6 +121,28 @@ public class ClipSyncActivity extends ThemedActivity
                     }
                 }
                 queryDeviceForUuid(); //start another query, if possible
+            } else if(BluetoothDevice.ACTION_BOND_STATE_CHANGED.equals(action)) {
+                LogUtils.log("Bond state change broadcast was received!");
+                //this event means that the pairing process is updated
+                Bundle extras = intent.getExtras();
+                if(extras != null) {
+                    //get previous paired status and current paired status
+                    int prevStatus = extras.getInt(BluetoothDevice.EXTRA_PREVIOUS_BOND_STATE);
+                    int status = extras.getInt(BluetoothDevice.EXTRA_BOND_STATE);
+                    //handle case where pairing SUCCEEDED
+                    if(prevStatus == BluetoothDevice.BOND_BONDING && status == BluetoothDevice.BOND_BONDED) {
+                        pairingOngoing = false;
+                        LogUtils.log("Pairing succeeded!");
+                        //handle case where pairing SUCCEEDED
+                        saveBluetoothClipSync();
+                    } else if(prevStatus == BluetoothDevice.BOND_BONDING && status == BluetoothDevice.BOND_NONE) {
+                        pairingOngoing = false;
+                        //handle case where pairing failed: the system shows a toast, dont have to notify user
+                        LogUtils.logError("Pairing failed, not updating anything!");
+                    }
+                } else {
+                    LogUtils.log("Pairing update: no extras, ignoring...");
+                }
             }
         }
     };
@@ -140,9 +166,11 @@ public class ClipSyncActivity extends ThemedActivity
         IntentFilter filter1 = new IntentFilter(BluetoothDevice.ACTION_FOUND);
         IntentFilter filter2 = new IntentFilter(BluetoothDevice.ACTION_UUID);
         IntentFilter filter3 = new IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+        IntentFilter filter4 = new IntentFilter(BluetoothDevice.ACTION_BOND_STATE_CHANGED);
         registerReceiver(receiver, filter1);
         registerReceiver(receiver, filter2);
         registerReceiver(receiver, filter3);
+        registerReceiver(receiver, filter4);
         deviceList = new ArrayList<>();
         setUpUi();
         pairingDialog = KProgressHUD.create(ClipSyncActivity.this)
@@ -348,6 +376,7 @@ public class ClipSyncActivity extends ThemedActivity
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 //the result of this is handled in the RECEIVER, or in the countdown timer below, if it times out
                 LearnJavaBluetooth.getInstance().initiateDiscoveryProcess();
+                pairingOngoing = true;
             }
         }));
         builder.create().show();
@@ -363,6 +392,8 @@ public class ClipSyncActivity extends ThemedActivity
             pairingDialog.setDetailsLabel(getString(R.string.scanning_device) + device.getName());
             device.fetchUuidsWithSdp();
         } else { //no success in finding the server
+            pairingOngoing = false;
+            if(pairingDialog != null) pairingDialog.dismiss();
             MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, ThemeUtils.getThemedDialogStyle());
             builder.setMessage(R.string.clip_sync_misc_error);
             builder.setIcon(R.drawable.problem_icon);
@@ -392,8 +423,8 @@ public class ClipSyncActivity extends ThemedActivity
     }
 
     /**
-     * Displays a dialog that indicates everything is find with bluetooth clip sync. This is called
-     * when the user selects bluetooth clip sync (and every permission is granted).
+     * Displays a dialog that indicates everything is fine with bluetooth clip sync. This is called
+     * when the user selects bluetooth clip sync (and every permission is granted, pairing is in order).
      */
     public void saveBluetoothClipSync() {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(this, ThemeUtils.getThemedDialogStyle());
@@ -435,5 +466,13 @@ public class ClipSyncActivity extends ThemedActivity
     @Override
     public ActivityResultLauncher<Intent> getBluetoothEnableLauncher() {
         return bluetoothEnableLauncher;
+    }
+
+    /**
+     * Can be used to find out if the activity is currently running pairing or not.
+     * @return True if there is no pairing.
+     */
+    public boolean isPairingNotOngoing() {
+        return !pairingOngoing;
     }
 }

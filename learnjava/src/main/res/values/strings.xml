@@ -77,16 +77,17 @@
     </string>
     <string name="clip_sync_bluetooth_try_again">Bluetooth is on! Please try again now.</string>
     <string name="clip_sync_success">Synced with other device!</string>
-    <string name="clip_sync_fail">ClipSync failed: time out.</string>
-    <string name="clip_sync_bluetooth_cancelled">You can\'t use Bluetooth ClipSync without Bluetooth…</string>
+    <string name="clip_sync_fail_time_out">ClipSync failed: time out.</string>
+    <string name="clip_sync_fail">ClipSync failed!</string>
+    <string name="clip_sync_bluetooth_cancelled">Must be turned on…</string>
     <string name="clip_sync_pairing">Pairing</string>
     <string name="clip_sync_pairing_info">Searching for nearby devices…</string>
     <string name="clip_sync_pairing_description">Bluetooth must find the ClipSync desktop app, which may take some time. This only needs to be performed once.</string>
     <string name="clip_sync_pairing_handshake">Desktop app found! Pairing…</string>
     <string name="clip_sync_not_paired">No paired app found. Please pair in the ClipSync menu!</string>
     <string name="clip_sync_misc_error">Could not locate desktop app! Make sure it\'s on, you selected Bluetooth mode, and that it\'s showing a green tick!</string>
-    <string name="clip_sync_location">Bluetooth usage requires location permission. Please allow it!</string>
-    <string name="clip_sync_location_denied">Can\'t use bluetooth without permission!</string>
+    <string name="clip_sync_location">Bluetooth usage requires some permissions. Please allow them in the next dialog!</string>
+    <string name="clip_sync_location_denied">Bluetooth needs permission!</string>
     <string name="scanning_device">Scanning device </string>
     <string name="clip_sync_open_on_computer">You should open this link on your computer! Do you want to open it here anyways?</string>
 

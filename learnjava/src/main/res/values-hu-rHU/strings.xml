@@ -69,16 +69,17 @@
     <string name="clip_sync_test_description">Ezen a teszt kódmintán kipróbálhatod, hogy minden rendben van-e:</string>
     <string name="clip_sync_bluetooth_try_again">Bluetooth bekapcsolva. Próbáld újra most.</string>
     <string name="clip_sync_success">Szinkronizálva a másik eszközzel!</string>
-    <string name="clip_sync_fail">Sikertelen szinkronizálás: időtúllépés.</string>
-    <string name="clip_sync_bluetooth_cancelled">Nem használhatod a Bluetooth-is módot a Bluetooth engedélyezése nélkül…</string>
+    <string name="clip_sync_fail_time_out">Sikertelen szinkronizálás: időtúllépés.</string>
+    <string name="clip_sync_fail">Sikertelen szinkronizálás!</string>
+    <string name="clip_sync_bluetooth_cancelled">Be kell kapcsolni…</string>
     <string name="clip_sync_pairing">Párosítás</string>
     <string name="clip_sync_pairing_info">Keresés a közeli eszközök között…</string>
     <string name="clip_sync_pairing_description">A Bluetooth-nak meg kell találnia az eszközt, amin a segéd alkalmazás van. Ezt csak egyszer kell elvégezni.</string>
     <string name="clip_sync_pairing_handshake">A segéd alkalmazás megtalálva! Párosítás…</string>
     <string name="clip_sync_not_paired">Nem találtam párosított eszközt. Kérlek kezd el a párosítást a ClipSync menüben!</string>
     <string name="clip_sync_misc_error">Nem találtam a segéd alkalmazást! Ellenőrizd, hogy elindítottad a számítógépeden, kiválaszottad a Bluetooth módot, és zöld pipát mutat!</string>
-    <string name="clip_sync_location">Ez az engedély szükséges a Bluetooth-os adatküldéshez! Kérlek engedélyezd.</string>
-    <string name="clip_sync_location_denied">Enélkül az engedély nélkül nem lehet használni a Bluetooth-os módot!</string>
+    <string name="clip_sync_location">A bluetooth használatához kell néhány engedély. Kérlek add meg őket a következő ablakban.</string>
+    <string name="clip_sync_location_denied">Ez az engedély szükséges!</string>
     <string name="scanning_device">Eszköz szkennelése</string>
     <string name="clip_sync_open_on_computer">Ezt a linket a számítógépeden nyisd meg! Meg akarod nyitni itt is?</string>
 

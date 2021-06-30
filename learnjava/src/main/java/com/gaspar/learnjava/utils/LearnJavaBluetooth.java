@@ -22,6 +22,39 @@ import java.util.UUID;
 /**
  * A singleton class that handles bluetooth related tasks. These include turning
  * on bluetooth if needed and sending/receiving data.
+ * <p>
+ * TODO: on apps targeting API level 12 (S), the permissions required to perform bluetooth tasks (pairing, sending) are changed.
+ * Instead of ACCESS_FINE_LOCATION, the broadcast receiver will require these permissions:
+ * <ul>
+ *     <li>For {@link BluetoothDevice#ACTION_FOUND}: no permissions.</li>
+ *     <li>For {@link BluetoothDevice#ACTION_UUID}: permission BLUETOOTH_CONNECT, new in API 12.</li>
+ *     <li>For {@link BluetoothDevice#ACTION_BOND_STATE_CHANGED}: permission BLUETOOTH_CONNECT, new in API 12.</li>
+ *     <li>For {@link BluetoothAdapter#ACTION_DISCOVERY_FINISHED}: permission BLUETOOTH_SCAN, new in API 12.</li>
+ * </ul>
+ * In total 2 new permissions, BLUETOOTH_CONNECT, BLUETOOTH_SCAN replace the ACCESS_FINE_LOCATION, like so:
+ * <pre>
+ * {@code
+ *     <!-- Request legacy Bluetooth permissions on older devices. -->
+ *     <uses-permission android:name="android.permission.BLUETOOTH"
+ *                      android:maxSdkVersion="30" />
+ *     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"
+ *                      android:maxSdkVersion="30" />
+ *
+ *     <!-- Needed only if your app looks for Bluetooth devices: YES. -->
+ *     <uses-permission android:name="android.permission.BLUETOOTH_SCAN"
+ *                      android:usesPermissionFlags="neverForLocation"/>
+ *
+ *     <!-- Not sure if this is needed, most likely no. -->
+ *     <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+ *
+ *     <!-- Needed only if your app communicates with already-paired Bluetooth devices: YES. -->
+ *     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+ * }
+ * </pre>
+ * More about this at <a href="https://developer.android.com/about/versions/12/features/bluetooth-permissions">here</a>.
+ * TODO: handle permissions for version S and higher, in {@link com.gaspar.learnjava.ClipSyncActivity} and other activities that use ClipSync.
+ * TODO: update ClipSyncActivityTest class permissions.
+ * @see com.gaspar.learnjava.ClipSyncActivity
  */
 public class LearnJavaBluetooth {
 
@@ -117,11 +150,26 @@ public class LearnJavaBluetooth {
      * Sends a string to the desktop app. This will start an async task and is used to
      * interface with the bluetooth adapter in the chapter activities.
      * @param data The string.
+     * @param socket The bluetooth socket of the clip sync server.
+     * @param activity The activity currently displayed.
      */
     @UiThread
     @RequiresPermission(Manifest.permission.ACCESS_FINE_LOCATION)
     public void sendData(@NonNull String data, @NonNull BluetoothSocket socket, @NonNull final AppCompatActivity activity) {
         turnOnBluetooth(); //maybe it's turned off
         new BluetoothExchangeTask(data, socket).execute(activity);
+    }
+
+    /**
+     * Sends a handshake message ({@link #HANDSHAKE_MESSAGE}) to the discovered clip sync server. This message
+     * initiates the pairing process. The result of this special message is not important.
+     * @param socket The bluetooth socket of the clip sync server.
+     * @param activity The activity currently displayed.
+     */
+    @UiThread
+    @RequiresPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+    public void sendHandshakeMessage(@NonNull BluetoothSocket socket, @NonNull final AppCompatActivity activity) {
+        turnOnBluetooth();
+        new BluetoothExchangeTask(HANDSHAKE_MESSAGE, socket).execute(activity);
     }
 }
