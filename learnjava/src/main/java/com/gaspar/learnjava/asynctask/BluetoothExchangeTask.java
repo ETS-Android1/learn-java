@@ -6,6 +6,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Size;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.gaspar.learnjava.R;
@@ -32,7 +33,8 @@ public class BluetoothExchangeTask extends LjAsyncTask<BluetoothExchangeTask.Res
      * Determines how long the async task will attempt to exchange data. After this the task
      * is cancelled and the result is handled in the onCancel callback.
      */
-    static final int TIMEOUT_MILLIS = 10000;
+    @VisibleForTesting(otherwise = VisibleForTesting.PACKAGE_PRIVATE)
+    public static final int TIMEOUT_MILLIS = 10000;
 
     /**
      * This marks the end of the data exchanged. Should not be used in code samples.

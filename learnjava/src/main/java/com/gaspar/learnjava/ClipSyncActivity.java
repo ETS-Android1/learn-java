@@ -180,6 +180,7 @@ public class ClipSyncActivity extends ThemedActivity
                 .setCancellable(false)
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f);
+        pairingOngoing = false;
         //register what to happen when a bluetooth request is finished
         bluetoothEnableLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(),
@@ -373,10 +374,10 @@ public class ClipSyncActivity extends ThemedActivity
         builder.setPositiveButton(R.string.ok, ((dialogInterface, i) -> {
             dialogInterface.dismiss();
             pairingDialog.show(); //show indeterminate progress dialog
+            pairingOngoing = true;
             if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
                 //the result of this is handled in the RECEIVER, or in the countdown timer below, if it times out
                 LearnJavaBluetooth.getInstance().initiateDiscoveryProcess();
-                pairingOngoing = true;
             }
         }));
         builder.create().show();
@@ -468,11 +469,9 @@ public class ClipSyncActivity extends ThemedActivity
         return bluetoothEnableLauncher;
     }
 
-    /**
-     * Can be used to find out if the activity is currently running pairing or not.
-     * @return True if there is no pairing.
-     */
+    /*
     public boolean isPairingNotOngoing() {
         return !pairingOngoing;
     }
+    */
 }

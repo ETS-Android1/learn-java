@@ -3,7 +3,6 @@ package com.gaspar.learnjava;
 import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 
-import androidx.test.espresso.IdlingRegistry;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -13,19 +12,23 @@ import androidx.test.uiautomator.UiObject;
 import androidx.test.uiautomator.UiObjectNotFoundException;
 import androidx.test.uiautomator.UiSelector;
 
+import com.gaspar.learnjava.asynctask.BluetoothExchangeTask;
+
+import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.function.Predicate;
-
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.scrollTo;
+import static androidx.test.espresso.action.ViewActions.swipeRight;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.RootMatchers.isDialog;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertFalse;
@@ -68,6 +71,9 @@ public class ClipSyncActivityTest {
             Thread.sleep(500);
         }
     }
+
+    @After
+    public void tearDown() { }
 
     @Test
     public void testClipSyncActivityVisible() {
@@ -189,48 +195,33 @@ public class ClipSyncActivityTest {
         testPairingInformationDialog();
         //press ok
         onView(withId(AndroidTestUtils.DialogButtonId.POSITIVE.getId())).perform(click());
-        //pairing is ongoing, wait for it to time out with idling resource
-        Predicate<ActivityScenarioRule<?>> pairingPredicate = new Predicate<ActivityScenarioRule<?>>() {
-            private boolean isIdle;
-            @Override
-            public boolean test(ActivityScenarioRule<?> rule) {
-                rule.getScenario().onActivity(activity -> {
-                    ClipSyncActivity clipSyncActivity = (ClipSyncActivity) activity;
-                    isIdle = clipSyncActivity.isPairingNotOngoing();
-                });
-                return isIdle;
-            }
-        };
-        AndroidTestUtils.LoadingIdlingResource pairingIdlingResource = new AndroidTestUtils.LoadingIdlingResource(pairingPredicate, rule);
-        IdlingRegistry.getInstance().register(pairingIdlingResource);
+        //the pairing process should take some time
+        Thread.sleep(15000);
         //a fail dialog is showing
         onView(withText(R.string.clip_sync_misc_error)).inRoot(isDialog()).check(matches(isDisplayed()));
         onView(withId(AndroidTestUtils.DialogButtonId.POSITIVE.getId())).perform(click());
-        //unregister
-        IdlingRegistry.getInstance().unregister(pairingIdlingResource);
     }
 
-    //THIS METHOD ASSUMES THAT THE CLIP SYNC SERVER IS NOT PAIRED but PRESENT AND READY TO ACCEPT CONNECTION, TODO: ignore
+    /*
+    These tests are for actual Clip sync data send.
+     */
+
+    /*
+    THIS TEST ASSUMES THE FOLLOWING:
+    - Remote device is running Learn Java Clip Sync server, in Bluetooth mode.
+    - Remote device is not paired yet.
+    - Remote device is in range.
+    - Remote device will accept pairing request when prompted, in about 1-2 seconds.
+     */
     @Test
+    @Ignore("This test passes, but only when the preconditions listed above are fulfilled.")
     public void testPairingProgress() throws InterruptedException {
         //bring up and validate pairing information dialog
         testPairingInformationDialog();
         //press ok
         onView(withId(AndroidTestUtils.DialogButtonId.POSITIVE.getId())).perform(click());
-        //pairing is ongoing, wait for it to time out with idling resource
-        Predicate<ActivityScenarioRule<?>> pairingPredicate = new Predicate<ActivityScenarioRule<?>>() {
-            private boolean isIdle;
-            @Override
-            public boolean test(ActivityScenarioRule<?> rule) {
-                rule.getScenario().onActivity(activity -> {
-                    ClipSyncActivity clipSyncActivity = (ClipSyncActivity) activity;
-                    isIdle = clipSyncActivity.isPairingNotOngoing();
-                });
-                return isIdle;
-            }
-        };
-        AndroidTestUtils.LoadingIdlingResource pairingIdlingResource = new AndroidTestUtils.LoadingIdlingResource(pairingPredicate, rule);
-        IdlingRegistry.getInstance().register(pairingIdlingResource);
+        //the pairing process should take some time
+        Thread.sleep(15000);
         //there is a system pairing dialog, press ok on it
         UiDevice device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation());
         UiObject allowButton = device.findObject(new UiSelector()
@@ -239,15 +230,135 @@ public class ClipSyncActivityTest {
                 .index(ALLOW_BUTTON_INDEX));
         if (allowButton.exists()) {
             try {
+                //This accepts the pairing for the Android device, but the the remote device that is paired
+                //must also accept. This is assumed.
                 allowButton.click();
-                //the remote device that is paired must also accept. This is assumed.
-                //unregister
-                IdlingRegistry.getInstance().unregister(pairingIdlingResource);
+                Thread.sleep(5000);
+                //now there is a success dialog
+                onView(withText(R.string.clip_sync_remember_description)).inRoot(isDialog()).check(matches(isDisplayed()));
+                onView(withId(AndroidTestUtils.DialogButtonId.POSITIVE.getId())).perform(click());
             } catch (UiObjectNotFoundException e) {
                 e.printStackTrace();
             }
         } else {
             System.out.println("The system pairing dialog was not found!");
         }
+    }
+
+    /*
+     THIS TEST ASSUMES THE FOLLOWING:
+    - Remote device is running Learn Java Clip Sync server, in Bluetooth mode.
+    - Remote device is in range.
+    - Remote device is paired.
+     */
+    @Test
+    @Ignore("This test passes, but only when the preconditions listed above are fulfilled.")
+    public void testBluetoothClipSync() throws InterruptedException{
+        //set bluetooth mode
+        if(!BluetoothAdapter.getDefaultAdapter().isEnabled()) {
+            BluetoothAdapter.getDefaultAdapter().enable();
+            Thread.sleep(1000);
+        }
+        //both bluetooth and permission is ready
+        onView(withId(R.id.bluetoothIcon)).perform(scrollTo(), click());
+        //dialog about the app remembering
+        onView(withText(R.string.clip_sync_remember_description)).inRoot(isDialog()).check(matches(isDisplayed()));
+        onView(withId(AndroidTestUtils.DialogButtonId.POSITIVE.getId())).perform(click());
+        //swipe away snackbar
+        onView(withId(com.google.android.material.R.id.snackbar_text)).perform(swipeRight());
+        //click copy button
+        onView(withContentDescription(R.string.copy_content)).perform(scrollTo());
+        //for some reason, this wait is necessary for the click to work
+        Thread.sleep(1000);
+        onView(withContentDescription(R.string.copy_content)).perform(click());
+        //should be loading
+        onView(withId(R.id.loadingIndicator)).check(matches(isDisplayed()));
+        //wait for it to complete
+        Thread.sleep(1500);
+        //there should be a snackbar
+        onView(withId(com.google.android.material.R.id.snackbar_text)).check(matches(withText(R.string.clip_sync_success)));
+    }
+
+    /*
+    THIS TEST ASSUMES THE FOLLOWING:
+    - Remote device is in range.
+    - Remote device is paired.
+    - The learn java clip sync server cannot accept bluetooth response.
+     */
+    @Test
+    @Ignore("This test passes, but only when the preconditions listed above are fulfilled.")
+    public void testClipSyncBluetoothFailed() throws InterruptedException {
+        if(!BluetoothAdapter.getDefaultAdapter().isEnabled()) {
+            BluetoothAdapter.getDefaultAdapter().enable();
+            Thread.sleep(1000);
+        }
+        //click mode
+        onView(withId(R.id.bluetoothIcon)).perform(scrollTo(), click());
+        //dialog about the app remembering
+        onView(withText(R.string.clip_sync_remember_description)).inRoot(isDialog()).check(matches(isDisplayed()));
+        onView(withId(AndroidTestUtils.DialogButtonId.POSITIVE.getId())).perform(click());
+        //swipe away snackbar
+        onView(withId(com.google.android.material.R.id.snackbar_text)).perform(swipeRight());
+        //click copy button
+        onView(withContentDescription(R.string.copy_content)).perform(scrollTo());
+        //for some reason, this wait is necessary for the click to work
+        Thread.sleep(1000);
+        onView(withContentDescription(R.string.copy_content)).perform(click());
+        //wait for fail
+        Thread.sleep(200);
+        onView(withId(R.id.loadingIndicator)).check(matches(isDisplayed()));
+        Thread.sleep(1000);
+        //snackbar notifying about fail
+        onView(withId(com.google.android.material.R.id.snackbar_text)).check(matches(withText(R.string.clip_sync_fail)));
+    }
+
+    /*
+     THIS TEST ASSUMES THE FOLLOWING:
+    - Remote device is running Learn Java Clip Sync server, in network mode.
+    - Android device and remote device are on the same local network.
+    - Android device is not the WiFi hotspot of this network.
+     */
+    @Test
+    @Ignore("This test passes, but only when the preconditions listed above are fulfilled.")
+    public void testClipSyncNetwork() throws InterruptedException {
+        //click mode
+        onView(withId(R.id.networkIcon)).perform(scrollTo(), click());
+        //dialog about the app remembering
+        onView(withText(R.string.clip_sync_remember_description)).inRoot(isDialog()).check(matches(isDisplayed()));
+        onView(withId(AndroidTestUtils.DialogButtonId.POSITIVE.getId())).perform(click());
+        //swipe away snackbar
+        onView(withId(com.google.android.material.R.id.snackbar_text)).perform(swipeRight());
+        //click copy button
+        onView(withContentDescription(R.string.copy_content)).perform(scrollTo());
+        //for some reason, this wait is necessary for the click to work
+        Thread.sleep(1000);
+        onView(withContentDescription(R.string.copy_content)).perform(click());
+        //wait for it to complete
+        Thread.sleep(500);
+        //there should be a snackbar
+        onView(withId(com.google.android.material.R.id.snackbar_text)).check(matches(withText(R.string.clip_sync_success)));
+    }
+
+    //does not require the clip sync server to respond
+    @Test
+    public void testClipSyncNetworkTimeout() throws InterruptedException {
+        //click mode
+        onView(withId(R.id.networkIcon)).perform(scrollTo(), click());
+        //dialog about the app remembering
+        onView(withText(R.string.clip_sync_remember_description)).inRoot(isDialog()).check(matches(isDisplayed()));
+        onView(withId(AndroidTestUtils.DialogButtonId.POSITIVE.getId())).perform(click());
+        //swipe away snackbar
+        onView(withId(com.google.android.material.R.id.snackbar_text)).perform(swipeRight());
+        //click copy button
+        onView(withContentDescription(R.string.copy_content)).perform(scrollTo());
+        //for some reason, this wait is necessary for the click to work
+        Thread.sleep(1000);
+        onView(withContentDescription(R.string.copy_content)).perform(click());
+        //wait for timeout
+        Thread.sleep(200);
+        onView(withId(R.id.loadingIndicator)).check(matches(isDisplayed()));
+        Thread.sleep(BluetoothExchangeTask.TIMEOUT_MILLIS);
+        //snackbar notifying about timeout
+        onView(withId(com.google.android.material.R.id.snackbar_text)).check(matches(withText(R.string.clip_sync_fail_time_out)));
     }
 }

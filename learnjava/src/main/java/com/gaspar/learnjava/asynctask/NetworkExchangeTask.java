@@ -166,9 +166,11 @@ public class NetworkExchangeTask extends LjAsyncTask<BluetoothExchangeTask.Resul
     @Override
     protected void onPostExecute(BluetoothExchangeTask.Result result) {
         String message;
-        if(result.success && !timedOut) {
+        if(result.success && !timedOut) { //if transfer succeeded
             message = result.activity.getString(R.string.clip_sync_success);
-        } else { //fail
+        } else if(!result.success && timedOut){ //fail because time out
+            message = result.activity.getString(R.string.clip_sync_fail_time_out);
+        } else { //other fail
             message = result.activity.getString(R.string.clip_sync_fail);
         }
         final View loadingIndicator = result.activity.findViewById(R.id.loadingIndicator); //hide loading icon
