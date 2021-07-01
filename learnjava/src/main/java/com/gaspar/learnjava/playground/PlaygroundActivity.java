@@ -20,6 +20,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -70,7 +71,8 @@ public class PlaygroundActivity extends ThemedActivity implements CodeHostingAct
      * The time in milliseconds that must pass between two code runs. If the user attempts to run code
      * faster, a dialog is shown: {@link #showCountdownDialog(long)}.
      */
-    private static final long CODE_RUN_INTERVAL = 60000;
+    @VisibleForTesting
+    public static final long CODE_RUN_INTERVAL = 60000;
 
     /**
      * X position of the draggable floating action button.
@@ -459,7 +461,8 @@ public class PlaygroundActivity extends ThemedActivity implements CodeHostingAct
      * The timestamp when code was last run can be found in the preferences with this key. If there is
      * no value with this key, that means there never was a code run.
      */
-    private static final String PLAYGROUND_COUNTDOWN_PREF_NAME = "playground_countdown";
+    @VisibleForTesting
+    public static final String PLAYGROUND_COUNTDOWN_PREF_NAME = "playground_countdown";
 
     /**
      * @return The timestamp when the user last run code from the {@link PlaygroundActivity}. If there was
@@ -486,9 +489,22 @@ public class PlaygroundActivity extends ThemedActivity implements CodeHostingAct
     }
 
     /**
+     * Used in testing to force the info dialog to appear.
+     */
+    @VisibleForTesting
+    public static boolean forceShowInfoDialog = false;
+
+    /**
+     * Used in testing to force the info dialog to not appear.
+     */
+    @VisibleForTesting
+    public static boolean forceHideInfoDialog = false;
+
+    /**
      * This key is used to find in the preferences if the playground information dialog should be shown.
      */
-    private static final String PLAYGROUND_SHOW_INFO_PREF_NAME = "playground_show_info";
+    @VisibleForTesting
+    public static final String PLAYGROUND_SHOW_INFO_PREF_NAME = "playground_show_info";
 
     /**
      * Shows the playground info dialog, if the value {@link #PLAYGROUND_SHOW_INFO_PREF_NAME} in the preferences
@@ -497,7 +513,12 @@ public class PlaygroundActivity extends ThemedActivity implements CodeHostingAct
     private void showPlaygroundInfoDialogIfNeeded() {
         final SharedPreferences preferences = getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
         boolean showDialog;
-        if(preferences.contains(PLAYGROUND_SHOW_INFO_PREF_NAME)) {
+        if(forceShowInfoDialog) {
+            showDialog = true;
+            preferences.edit().putBoolean(PLAYGROUND_SHOW_INFO_PREF_NAME, true).apply();
+        } else if(forceHideInfoDialog) {
+            showDialog = false;
+        } else if(preferences.contains(PLAYGROUND_SHOW_INFO_PREF_NAME)) {
             //preference found, show value
             showDialog = preferences.getBoolean(PLAYGROUND_SHOW_INFO_PREF_NAME, true);
         } else {
@@ -560,5 +581,20 @@ public class PlaygroundActivity extends ThemedActivity implements CodeHostingAct
      */
     public static class ShowHideFab {
         public boolean show;
+    }
+
+    /**
+     * @return The input currently saved by the activity.
+     */
+    public String getInput() {
+        return input;
+    }
+
+    /**
+     * @return The amount of {@link PlaygroundFile}s managed by the activity.
+     */
+    public int getPlaygroundFileAmount() {
+        if(playgroundFiles == null) return 0;
+        return playgroundFiles.size();
     }
 }

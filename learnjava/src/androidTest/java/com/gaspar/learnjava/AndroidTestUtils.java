@@ -11,14 +11,22 @@ import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.IdlingResource;
+import androidx.test.espresso.UiController;
+import androidx.test.espresso.ViewAction;
 import androidx.test.espresso.matcher.BoundedMatcher;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
+
+import com.google.android.material.tabs.TabLayout;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
 import java.util.function.Predicate;
+
+import static androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static org.hamcrest.Matchers.allOf;
 
 /**
  * Utility methods for instrumentation testing.
@@ -33,7 +41,7 @@ public abstract class AndroidTestUtils {
      * @param value The value of the preference. Pass in null to remove this preference.
      * @param <T> Type of the value.
      */
-    public static <T> void modifySharedPreferenceValue(ActivityScenario<? extends Activity> scenario, String key, T value) {
+    public static <T> void modifySharedPreferenceValue(@NonNull ActivityScenario<? extends Activity> scenario, String key, T value) {
         scenario.onActivity(activity -> {
             final SharedPreferences preferences = activity.getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
             final SharedPreferences.Editor editor = preferences.edit();
@@ -57,7 +65,7 @@ public abstract class AndroidTestUtils {
      * id's like android.R.id.button1, and so. This enum converts them to more readable format, such as
      * positive and negative buttons.
      */
-    enum DialogButtonId {
+    public enum DialogButtonId {
 
         POSITIVE(android.R.id.button1),
         NEGATIVE(android.R.id.button2),
@@ -209,6 +217,39 @@ public abstract class AndroidTestUtils {
                 return parentMatcher.matches(parent)
                         && parent.getChildCount() > childPosition
                         && parent.getChildAt(childPosition).equals(view);
+            }
+        };
+    }
+
+    /**
+     * Creates a view action that can navigate to a {@link TabLayout}'s certain position.
+     * @param position The position.
+     * @return The view action.
+     * @see <a href="https://stackoverflow.com/a/51262525/4925616">Source: stackoverflow answer</a>
+     */
+    @NonNull
+    public static ViewAction selectTabAtPosition(final int position) {
+        return new ViewAction() {
+            @Override
+            public Matcher<View> getConstraints() {
+                return allOf(isDisplayed(), isAssignableFrom(TabLayout.class));
+            }
+
+            @Override
+            public String getDescription() {
+                return "with tab at index" + String.valueOf(position);
+            }
+
+            @Override
+            public void perform(UiController uiController, View view) {
+                if (view instanceof TabLayout) {
+                    TabLayout tabLayout = (TabLayout) view;
+                    TabLayout.Tab tab = tabLayout.getTabAt(position);
+
+                    if (tab != null) {
+                        tab.select();
+                    }
+                }
             }
         };
     }

@@ -23,6 +23,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.fragment.app.Fragment;
@@ -60,7 +61,8 @@ public class CodeFragment extends Fragment {
     /**
      * Name of the default {@link PlaygroundFile} which is always present in the code fragment.
      */
-    private static final String MAIN_JAVA_FILE_NAME = "Main.java";
+    @VisibleForTesting
+    public static final String MAIN_JAVA_FILE_NAME = "Main.java";
 
     /**
      * This regex matches conventional Java class names, simply by validating they begin with upper
@@ -71,7 +73,8 @@ public class CodeFragment extends Fragment {
     /**
      * The amount of files the code fragment will allow to create.
      */
-    private static final int MAX_FILES = 6;
+    @VisibleForTesting
+    public static final int MAX_FILES = 6;
 
     /**
      * Controls what is displayed inside the file selector {@link AppCompatSpinner}.

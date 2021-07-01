@@ -83,9 +83,9 @@ public class OutputFragment extends Fragment {
         stderrZoomIn.setOnClickListener(view -> CodeFragment.playgroundZoomInOnClick(stderrZoomIn, stderrZoomOut, stderr));
         stderrZoomOut.setOnClickListener(view -> CodeFragment.playgroundZoomOutOnClick(stderrZoomIn, stderrZoomOut, stderr));
 
-        ImageView exceptionZoomIn = outputView.findViewById(R.id.exceptionZoomIn);
-        ImageView exceptionZoomOut = outputView.findViewById(R.id.exceptionZoomOut);
-        TextView exception = outputView.findViewById(R.id.playgroundException);
+        ImageView exceptionZoomIn = outputView.findViewById(R.id.exitCodeZoomIn);
+        ImageView exceptionZoomOut = outputView.findViewById(R.id.exitCodeZoomOut);
+        TextView exception = outputView.findViewById(R.id.playgroundExitCode);
         exceptionZoomIn.setOnClickListener(view -> CodeFragment.playgroundZoomInOnClick(exceptionZoomIn, exceptionZoomOut, exception));
         exceptionZoomOut.setOnClickListener(view -> CodeFragment.playgroundZoomOutOnClick(exceptionZoomIn, exceptionZoomOut, exception));
 
@@ -147,7 +147,7 @@ public class OutputFragment extends Fragment {
             LogUtils.logError("View was null when calling setExceptions! Not setting anything.");
             return;
         }
-        TextView exceptions = getView().findViewById(R.id.playgroundException);
+        TextView exceptions = getView().findViewById(R.id.playgroundExitCode);
         String formattedExceptions = formatter.formatWhitespaces(exceptionsContent);
         exceptions.setText(Html.fromHtml(formattedExceptions, Html.FROM_HTML_MODE_COMPACT));
     }

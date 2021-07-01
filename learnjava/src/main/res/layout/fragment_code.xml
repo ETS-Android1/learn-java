@@ -7,7 +7,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".playground.CodeFragment"
     android:fillViewport="true"
-    android:isScrollContainer="true">
+    android:isScrollContainer="true"
+    android:id="@+id/fragment_code_root">
 
     <!-- Layout for actual code: can displays multiple files -->
     <RelativeLayout

@@ -21,6 +21,11 @@ import retrofit2.http.POST;
 public interface RunApi {
 
     /**
+     * The amount of milliseconds the mock API call waits.
+     */
+    int MOCK_TIME = 3000;
+
+    /**
      * Timeout amounts for the API calls, in seconds.
      */
     int TIMEOUT = 5;
@@ -55,6 +60,21 @@ public interface RunApi {
     Call<ProgramResponse> compileAndRunCode(@NonNull @Body ProgramPayload programPayload, @Header("Authorization") String apiKey);
 
     /**
+     * The mock API call returns this stdout.
+     */
+    String MOCK_STDOUT = "Mock stdout!";
+
+    /**
+     * The mock API call returns this stderr.
+     */
+    String MOCK_STDERR = "Mock stderr!";
+
+    /**
+     * The mock API call returns this exit code.
+     */
+    String MOCK_EXIT_CODE = "Mock exit code 0!";
+
+    /**
      * A method that mocks the actual API call, {@link #compileAndRunCode(ProgramPayload, String)}. This is used in testing, and
      * when the build variant 'noads' is active.
      * @param programPayload Won't be used, a mock response will be returned.
@@ -63,12 +83,12 @@ public interface RunApi {
     static ProgramResponse compileAndRunCodeMock(@NonNull ProgramPayload programPayload) {
         //simulate waiting
         try {
-            Thread.sleep(3000);
+            Thread.sleep(MOCK_TIME);
         } catch (InterruptedException ignored) {}
         ProgramResponse programResponse = new ProgramResponse();
-        programResponse.stdout = "Mock stdout!";
-        programResponse.stderr = "Mock stderr!";
-        programResponse.error = "Mock error!";
+        programResponse.stdout = MOCK_STDOUT;
+        programResponse.stderr = MOCK_STDERR;
+        programResponse.error = MOCK_EXIT_CODE;
         return programResponse;
     }
 }
