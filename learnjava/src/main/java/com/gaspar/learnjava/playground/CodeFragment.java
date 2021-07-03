@@ -41,6 +41,8 @@ import com.gaspar.learnjava.utils.ThemeUtils;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.snackbar.Snackbar;
 
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
+
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
@@ -148,11 +150,18 @@ public class CodeFragment extends Fragment {
         ImageButton copyButton = codeFragmentView.findViewById(R.id.playgroundCopyButton);
         copyButton.setOnClickListener(view -> playgroundCopyOnClick(codeArea));
 
-        //send event to activity on focus change
+        //send event to activity on soft keyboard change
+        KeyboardVisibilityEvent.setEventListener(
+                getActivity(),
+                getViewLifecycleOwner(),
+                isVisible -> {
+                    PlaygroundActivity.ShowHideFab showHideFab = new PlaygroundActivity.ShowHideFab();
+                    showHideFab.show = !isVisible;
+                    EventBus.getDefault().post(showHideFab);
+                }
+        );
+        //playing around with focus, otherwise the code area seems to lose it
         codeArea.setOnFocusChangeListener((view, isFocused) -> {
-            PlaygroundActivity.ShowHideFab showHideFab = new PlaygroundActivity.ShowHideFab();
-            showHideFab.show = !isFocused;
-            EventBus.getDefault().post(showHideFab);
             if(isFocused) {
                 view.postDelayed(() -> {
                     if(!view.isFocused()) {

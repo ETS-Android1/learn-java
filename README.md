@@ -25,6 +25,7 @@ Features:
 - Interactive code samples with missing parts (mini-tasks).
 - Clip sync with your computer (bluetooth or local network).
 - Notifications: get alerted when you can take a failed exam again.
+- Playground: edit and run simple Java programs (powered by [Glot.io](https://glot.io/).
 
 ## Built in clipsync
 

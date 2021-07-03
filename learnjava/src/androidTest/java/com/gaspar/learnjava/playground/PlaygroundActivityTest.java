@@ -20,6 +20,7 @@ import org.junit.rules.TestName;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.RootMatchers.isDialog;
@@ -110,6 +111,10 @@ public class PlaygroundActivityTest {
         onView(withId(R.id.playgroundCodeArea)).perform(typeText("test"));
         //should be hidden
         onView(withId(R.id.playgroundRunButton)).check(matches(not(isDisplayed())));
+        //close keyboard
+        onView(withId(R.id.playgroundCodeArea)).perform(closeSoftKeyboard());
+        //should be visible again
+        onView(withId(R.id.playgroundRunButton)).check(matches(isDisplayed()));
     }
 
     @Test
