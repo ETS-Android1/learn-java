@@ -1,4 +1,55 @@
+See below for english.
+
+# Learn Java android alkalmazás
+
+Ez az alkalmazás Java programozás tanulására használható.
+
+Megtalálható a Play Store-ban, [itt](https://play.google.com/store/apps/details?id=com.gaspar.learnjava) 
+Az áruházi adatlapon láthatóak képernyőképek.
+
+## Build folyamat
+
+Ez a projekt inportálható Android Studio-ba. Három build variáns van, ezek a **release**, **debug** és **noads**. 
+Tulajdonságaik:
+	- Release: Ez az éles változat, ami a Play Store-ban is metalálható. Valódi reklámok és 
+	API hívások vannak benne. Mivel érzékeny információ kell hozzá ami nincsen GitHub-ra feltöltve, 
+	ezért ezt csak én tudom buildelni.
+	- Debug: A fejlesztői változat, amiben teszt hirdetések és API hívások vannak. Mivel érzékeny információ kell hozzá ami nincsen GitHub-ra feltöltve, 
+	ezért ezt csak én tudom buildelni.
+	- Noads: Ez egy olyan változat, amiben szándékosan semmilyen hirdetés vagy API hívás sincs, ezért 
+	bárki tudja buildelni. Egyes funkciók, például a hirdetések és a Java futtató nem használhatóak benne.
+
+A megfelelő build variáns az Android Studio felületén keresztül lehet kiválasztani.
+
+## Java oktató anyagok
+
+A tananyagról:
+- Kurzusokból áll, amiket fejezetekre bontottam tovább.
+- Vizsgák minden kurzushoz, ahová egy kérdéshalmazból kerülnek be a kérdések, véletlenszerűen.
+- Feladatok, amik lényegében kis önálló projektek, referencia megoldásokkal.
+
+## Alkalmazás funkciók
+
+- Több alkalmazás téma, köztük sötét téma.
+- Másolható, megosztható és formázott kódminták a tananyagban.
+- Interaktív kódminták, amik egyfajta mini feladatokként működnek.
+- ClipSync, azaz kódminták tartalmának megosztása a számítógéppel (lásd lent).
+- Játszótér, ahol Java kódot lehet írni és futtatni ([Glot.io](https://glot.io/) API segítségével).
+
+## ClipSync
+
+Ezzel a funkcióval megoszthatók a kódminták az okos eszköz és a számítógép közt. Szükséges 
+hozzá a ClipSync szerver programom, ami [innen](https://gtomika.github.io/learn-java-clipsync/) 
+szerezhető be.
+
+## Kódminták formázása
+
+A kódmintákat egy saját segédprogrammal formáztam meg, így adva nekik egységes színezést és 
+tabulálást az alkalmazáson belül. A formázó program megtekinthető 
+[itt](https://github.com/Gtomika/learn-java-code-formatter).
+
 # Learn Java android application
+
 An android application that teaches Java programming.
 
 It is already published in the playstore, see it [here](https://play.google.com/store/apps/details?id=com.gaspar.learnjava) 

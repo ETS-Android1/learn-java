@@ -282,7 +282,7 @@
         <text>What does the break statement do?</text>
         <answer>Updates the value of the iterator variable.</answer>
         <answer>Immediately stops a loop.</answer>
-        <answer>Skips the the next iteration of the loop.</answer>
+        <answer>Skips to the next iteration of the loop.</answer>
         <correct>1</correct>
     </question>
     <question type="text">
@@ -294,7 +294,7 @@
         <answer>Used after a break statement, it restarts the loop.</answer>
         <answer>Updates the value of the iterator variable.</answer>
         <answer>Immediately stops a loop.</answer>
-        <answer>Skips the the next iteration of the loop.</answer>
+        <answer>Skips to the next iteration of the loop.</answer>
         <correct>3</correct>
     </question>
     <question type="text">

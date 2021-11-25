@@ -1,13 +1,19 @@
 package com.gaspar.learnjava.utils;
 
 import android.content.Context;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
+import androidx.transition.Fade;
+import androidx.transition.Slide;
+import androidx.transition.Transition;
+import androidx.transition.TransitionManager;
 
 import com.gaspar.learnjava.R;
 
@@ -112,5 +118,47 @@ public abstract class AnimationUtils {
         v.startAnimation(animation);
     }
 
+    /**
+     * Fade animation.
+     */
+    public static final int FADE = 0;
 
+    /**
+     * Slide down animation.
+     */
+    public static final int SLIDE_BOTTOM = 1;
+
+    /**
+     * Slide up animation.
+     */
+    public static final int SLIDE_TOP = 2;
+
+    /**
+     * Uses the selected animation to show or hide a view.
+     * @param show Set to true to animate in, set to false to hide a view and animate out.
+     * @param view The view.
+     * @param parent The parent of the view.
+     * @param animation One of the animation constants, {@link #FADE}, {@link #SLIDE_BOTTOM},
+     *                  {@link #SLIDE_TOP}.
+     */
+    public static void animateViewVisibility(boolean show, View view, ViewGroup parent, int animation) {
+        Transition transition;
+        switch (animation) {
+            case FADE:
+                transition = new Fade();
+                break;
+            case SLIDE_BOTTOM:
+                transition = new Slide(Gravity.BOTTOM);
+                break;
+            case SLIDE_TOP:
+                transition = new Slide(Gravity.TOP);
+                break;
+            default:
+                throw new RuntimeException("Invalid animation constant!");
+        }
+        transition.setDuration(600);
+        transition.addTarget(view);
+        TransitionManager.beginDelayedTransition(parent, transition);
+        view.setVisibility(show ? View.VISIBLE: View.GONE);
+    }
 }

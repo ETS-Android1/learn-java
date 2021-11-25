@@ -2,6 +2,7 @@ package com.gaspar.learnjava.asynctask;
 
 import android.content.Context;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import androidx.annotation.Size;
@@ -16,6 +17,7 @@ import com.gaspar.learnjava.database.ChapterStatus;
 import com.gaspar.learnjava.database.CourseStatus;
 import com.gaspar.learnjava.database.LearnJavaDatabase;
 import com.gaspar.learnjava.parsers.CourseParser;
+import com.gaspar.learnjava.utils.AnimationUtils;
 import com.gaspar.learnjava.utils.LogUtils;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -112,14 +114,15 @@ public class InitStarterViewTask extends LjAsyncTask<LearnJavaActivity> {
         View startedView = activity.findViewById(R.id.startedView);
         View notStartedView =  activity.findViewById(R.id.notStartedView);
         View loadingView = activity.findViewById(R.id.loadingView);
+        ViewGroup parent = activity.findViewById(R.id.learnJavaMainView);
         loadingView.setVisibility(View.GONE); //don't show loading anymore
         if(started) {
             notStartedView.setVisibility(View.GONE);
-            startedView.setVisibility(View.VISIBLE);
             button.setText(activity.getStartedChapter().getName());
+            AnimationUtils.animateViewVisibility(true, startedView, parent, AnimationUtils.FADE);
         } else {
             startedView.setVisibility(View.GONE);
-            notStartedView.setVisibility(View.VISIBLE);
+            AnimationUtils.animateViewVisibility(true, notStartedView, parent, AnimationUtils.FADE);
         }
         //the user completed all chapters, but the next course it locked: he needs to take an exam
         //this prompt shows where he can open the drawer to start an exam.

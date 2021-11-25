@@ -1,5 +1,7 @@
 package com.gaspar.learnjava;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.View;
 
 import androidx.test.core.app.ApplicationProvider;
@@ -15,6 +17,7 @@ import com.gaspar.learnjava.parsers.RawParser;
 import junit.framework.AssertionFailedError;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -199,6 +202,14 @@ public class LearnJavaActivityTest {
         onView(withId(R.id.backgroundImagesLayout)).check(matches(hasChildCount(amount)));
     }
 
+    @Test
+    public void testFirstStartPreference() {
+        //after loading the first start preference should be present
+        rule.getScenario().onActivity(activity -> {
+            SharedPreferences prefs = activity.getSharedPreferences(LearnJavaActivity.APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
+            Assert.assertTrue(prefs.contains(LearnJavaActivity.FIRST_START));
+        });
+    }
 
     @Test
     public void testSwipeRightOnImage() throws InterruptedException {

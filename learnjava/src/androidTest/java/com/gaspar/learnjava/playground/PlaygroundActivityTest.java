@@ -106,7 +106,7 @@ public class PlaygroundActivityTest {
     }
 
     @Test
-    public void testRunButtonDisappear() throws InterruptedException {
+    public void testRunButtonDisappear() {
         //focusing code area hides run button
         onView(withId(R.id.playgroundCodeArea)).perform(typeText("test"));
         //should be hidden

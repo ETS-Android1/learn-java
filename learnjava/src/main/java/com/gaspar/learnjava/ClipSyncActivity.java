@@ -17,6 +17,8 @@ import android.os.Parcelable;
 import android.text.Html;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -34,6 +36,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.gaspar.learnjava.curriculum.components.CodeComponent;
 import com.gaspar.learnjava.curriculum.components.CodeHostingActivity;
+import com.gaspar.learnjava.utils.AnimationUtils;
 import com.gaspar.learnjava.utils.DrawerUtils;
 import com.gaspar.learnjava.utils.LearnJavaBluetooth;
 import com.gaspar.learnjava.utils.LogUtils;
@@ -324,7 +327,10 @@ public class ClipSyncActivity extends ThemedActivity
         prefs.edit().putInt(CLIP_SYNC_PREF_NAME, ClipSyncMode.NETWORK).apply();
         final TextView statusDisplayer = findViewById(R.id.clipSyncStatusDisplayer);
         statusDisplayer.setText(getString(R.string.clip_sync_network_selected));
-        findViewById(R.id.deselectButton).setVisibility(View.VISIBLE);
+        //animate show deselect
+        Button deselectButton = findViewById(R.id.deselectButton);
+        ViewGroup parent = findViewById(R.id.deselectLayout);
+        AnimationUtils.animateViewVisibility(true, deselectButton, parent, AnimationUtils.FADE);
     }
 
     /**
@@ -334,7 +340,10 @@ public class ClipSyncActivity extends ThemedActivity
         prefs.edit().putInt(CLIP_SYNC_PREF_NAME, ClipSyncMode.NOT_SELECTED).apply(); //update preference
         final TextView statusDisplayer = findViewById(R.id.clipSyncStatusDisplayer); //update displayer
         statusDisplayer.setText(getString(R.string.clip_sync_mode_not_selected));
-        findViewById(R.id.deselectButton).setVisibility(View.GONE);
+        //animated hide
+        Button deselectButton = findViewById(R.id.deselectButton);
+        ViewGroup parent = findViewById(R.id.deselectLayout);
+        AnimationUtils.animateViewVisibility(false, deselectButton, parent, AnimationUtils.FADE);
         Snackbar.make(view, getString(R.string.clip_sync_disabled), Snackbar.LENGTH_SHORT).show();
     }
 
@@ -439,7 +448,10 @@ public class ClipSyncActivity extends ThemedActivity
         prefs.edit().putInt(CLIP_SYNC_PREF_NAME, ClipSyncMode.BLUETOOTH).apply();
         final TextView displayer = findViewById(R.id.clipSyncStatusDisplayer);
         displayer.setText(getString(R.string.clip_sync_bluetooth_selected));
-        findViewById(R.id.deselectButton).setVisibility(View.VISIBLE);
+        //animate show deselect
+        Button deselectButton = findViewById(R.id.deselectButton);
+        ViewGroup parent = findViewById(R.id.deselectLayout);
+        AnimationUtils.animateViewVisibility(true, deselectButton, parent, AnimationUtils.FADE);
     }
 
     /**

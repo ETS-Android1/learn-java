@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.VisibleForTesting;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -154,7 +155,13 @@ public class LearnJavaActivity extends ThemedActivity
     }
 
     private int visibleCodeIndex; //helper for the swipe background
-    private static final String SHOW_SWIPE = "show_swipe";
+
+    /**
+     * If the applications shared preferences DOES NOT contain this key at start, that means the
+     * application is starting for the first time.
+     */
+    @VisibleForTesting
+    public static final String FIRST_START = "first_start";
 
     /**
      * Creates and fills the layout for background code images. User can swipe between backgrounds.
@@ -203,14 +210,15 @@ public class LearnJavaActivity extends ThemedActivity
         backgroundLayout.getChildAt(visibleCodeIndex).setVisibility(View.VISIBLE);
 
         SharedPreferences prefs = getSharedPreferences(APP_PREFERENCES_NAME, Context.MODE_PRIVATE);
-        if(!prefs.contains(SHOW_SWIPE)) { //on first start show swiping function
-            prefs.edit().putBoolean(SHOW_SWIPE, false).apply();
+        if(!prefs.contains(FIRST_START)) { //on first start show swiping function
+            prefs.edit().putBoolean(FIRST_START, false).apply();
             animateTouchIcon();
         }
     }
 
     /**
-     * Moves the swipe icon first right, then left.
+     * Moves the swipe icon first left to right, to notify the user that they can change backgrounds
+     * by swiping.
      */
     private void animateTouchIcon() {
         ImageView touchIcon = findViewById(R.id.touchIcon);

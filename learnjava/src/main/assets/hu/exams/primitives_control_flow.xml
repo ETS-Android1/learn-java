@@ -38,7 +38,7 @@
     <question type="text">
         <text>Mi a neve azoknak az osztályoknak, amelyek a primitívek további funkcionalitását biztosítják?</text>
         <correct>wrapper</correct>
-        <correct>wrapper class</correct>
+        <correct>wrapper osztály</correct>
         <ignoreCase/>
     </question>
     <question type="text">
