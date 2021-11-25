@@ -11,11 +11,12 @@ Az áruházi adatlapon láthatóak képernyőképek.
 
 Ez a projekt inportálható Android Studio-ba. Három build variáns van, ezek a **release**, **debug** és **noads**. 
 Tulajdonságaik:
+
 	- Release: Ez az éles változat, ami a Play Store-ban is metalálható. Valódi reklámok és 
 	API hívások vannak benne. Mivel érzékeny információ kell hozzá ami nincsen GitHub-ra feltöltve, 
-	ezért ezt csak én tudom buildelni.
+	ezért ezt **csak én** tudom buildelni.
 	- Debug: A fejlesztői változat, amiben teszt hirdetések és API hívások vannak. Mivel érzékeny információ kell hozzá ami nincsen GitHub-ra feltöltve, 
-	ezért ezt csak én tudom buildelni.
+	ezért ezt **csak én** tudom buildelni.
 	- Noads: Ez egy olyan változat, amiben szándékosan semmilyen hirdetés vagy API hívás sincs, ezért 
 	bárki tudja buildelni. Egyes funkciók, például a hirdetések és a Java futtató nem használhatóak benne.
 
